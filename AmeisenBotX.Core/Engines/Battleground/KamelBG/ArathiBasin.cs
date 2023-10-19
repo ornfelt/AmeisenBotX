@@ -80,6 +80,8 @@ namespace AmeisenBotX.Core.Engines.Battleground.KamelBG
 
         public void Execute()
         {
+            if (Bot.Player.IsGhost)
+                return;
             Combat();
 
             IWowGameobject FlagNode = Bot.Objects.All

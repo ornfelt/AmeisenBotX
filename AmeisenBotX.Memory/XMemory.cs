@@ -94,7 +94,7 @@ namespace AmeisenBotX.Memory
                 {
                     if (AllocationPools[i].Reserve((int)size, out address))
                     {
-                        AmeisenLogger.I.Log("XMemory", $"Reserved {size} bytes in Pool[{i}] at: 0x{address:X}");
+                        //AmeisenLogger.I.Log("XMemory", $"Reserved {size} bytes in Pool[{i}] at: 0x{address:X}");
                         return true;
                     }
                 }
@@ -112,7 +112,7 @@ namespace AmeisenBotX.Memory
 
                     if (pool.Reserve((int)size, out address))
                     {
-                        AmeisenLogger.I.Log("XMemory", $"Reserved {size} bytes in Pool[{AllocationPools.Count - 1}] at: 0x{address:X}");
+                        //AmeisenLogger.I.Log("XMemory", $"Reserved {size} bytes in Pool[{AllocationPools.Count - 1}] at: 0x{address:X}");
                         return true;
                     }
                 }
@@ -181,7 +181,7 @@ namespace AmeisenBotX.Memory
                     if (AllocationPools[i].Free(address, out int size)
                         && ZeroMemory(address, size))
                     {
-                        AmeisenLogger.I.Log("XMemory", $"Freed {size} bytes in Pool[{i}] at: 0x{address:X}");
+                        //AmeisenLogger.I.Log("XMemory", $"Freed {size} bytes in Pool[{i}] at: 0x{address:X}");
 
                         // if (AllocationPools[i].Allocations.Count == 0 &&
                         // VirtualFreeEx(ProcessHandle, AllocationPools[i].Address, 0,
