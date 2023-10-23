@@ -18,8 +18,15 @@ using System.Text.Json.Serialization;
 
 namespace AmeisenBotX.Core.Engines.Battleground.Jannis.Profiles
 {
+    /// <summary>
+    /// Represents a profile for the Warsong Gulch battleground.
+    /// </summary>
     public class WarsongGulchProfile : IBattlegroundProfile
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="WarsongGulchProfile"/> class.
+        /// </summary>
+        /// <param name="bot">The bot instance.</param>
         public WarsongGulchProfile(AmeisenBotInterfaces bot)
         {
             Bot = bot;
@@ -127,47 +134,108 @@ namespace AmeisenBotX.Core.Engines.Battleground.Jannis.Profiles
             );
         }
 
+        /// <summary>
+        /// Represents a dataset interface for Warsong Gulch battleground.
+        /// </summary>
         private interface IWsgDataset
         {
+            /// <summary>
+            /// A static list of Buff Display IDs used for various purposes.
+            /// </summary>
             static readonly List<int> BuffDisplayIds = new() { 5991, 5995, 5931 };
 
+            /// <summary>
+            /// Gets the position of the enemy base.
+            /// </summary>
             Vector3 EnemyBasePosition { get; }
 
+            /// <summary>
+            /// Gets the map coordinates of the enemy base.
+            /// </summary>
             Vector3 EnemyBasePositionMapCoords { get; }
 
+            /// <summary>
+            /// Gets the position of the enemy graveyard.
+            /// </summary>
             Vector3 EnemyGraveyardPosition { get; }
 
+            /// <summary>
+            /// Gets the position of the flag hiding spot.
+            /// </summary>
             Vector3 FlagHidingSpot { get; }
 
+            /// <summary>
+            /// Gets the position of the gate.
+            /// </summary>
             Vector3 GatePosition { get; }
 
+            /// <summary>
+            /// Gets the position of the own base.
+            /// </summary>
             Vector3 OwnBasePosition { get; }
 
+            /// <summary>
+            /// Gets the map coordinates of the own base.
+            /// </summary>
             Vector3 OwnBasePositionMapCoords { get; }
 
+            /// <summary>
+            /// Gets the position of the own graveyard.
+            /// </summary>
             Vector3 OwnGraveyardPosition { get; }
         }
 
+        /// <summary>
+        /// Gets the behavior tree used for decision-making in the Warsong Gulch battleground.
+        /// </summary>
         public BehaviorTree<CtfBlackboard> BehaviorTree { get; }
 
+        /// <summary>
+        /// Gets the selector responsible for handling flag-related decisions in the battleground.
+        /// </summary>
         public DualSelector<CtfBlackboard> FlagSelector { get; }
 
+        /// <summary>
+        /// Gets or sets the blackboard used to store and exchange information within the profile.
+        /// </summary>
         public CtfBlackboard JBgBlackboard { get; set; }
 
+        /// <summary>
+        /// Gets the main selector for executing battleground-related behaviors.
+        /// </summary>
         public Selector<CtfBlackboard> MainSelector { get; }
 
+        /// <summary>
+        /// Gets the event timer for triggering specific actions within the profile.
+        /// </summary>
         private TimegatedEvent ActionEvent { get; }
 
+        /// <summary>
+        /// Gets the reference to the bot interface for interacting with the game world.
+        /// </summary>
         private AmeisenBotInterfaces Bot { get; }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the player character is in line of sight (LOS) of a target.
+        /// </summary>
         private bool InLos { get; set; }
 
+        /// <summary>
+        /// Gets the selector responsible for making decisions related to killing the enemy flag carrier.
+        /// </summary>
         private Selector<CtfBlackboard> KillEnemyFlagCarrierSelector { get; }
 
+        /// <summary>
+        /// Gets the event timer for checking line of sight (LOS) conditions.
+        /// </summary>
         private TimegatedEvent LosCheckEvent { get; }
 
+        /// <summary>
+        /// Gets or sets the dataset containing positional information specific to Warsong Gulch battleground.
+        /// </summary>
         private IWsgDataset WsgDataset { get; set; }
 
+        /// <inheritdoc />
         public void Execute()
         {
             if (WsgDataset == null)
@@ -178,11 +246,22 @@ namespace AmeisenBotX.Core.Engines.Battleground.Jannis.Profiles
             BehaviorTree.Tick();
         }
 
+        /// <summary>
+        /// Determines whether the player character is near their own flag carrier.
+        /// </summary>
+        /// <param name="blackboard">The blackboard containing relevant information.</param>
+        /// <returns><c>true</c> if the player character is near their own flag carrier; otherwise, <c>false</c>.</returns>
         private bool AmINearOwnFlagCarrier(CtfBlackboard blackboard)
         {
             return Bot.GetNearEnemies<IWowUnit>(blackboard.MyTeamFlagCarrier.Position, 48.0f).Any(e => !e.IsDead);
         }
 
+        /// <summary>
+        /// Determines whether the player character is one of the closest members to their own flag carrier.
+        /// </summary>
+        /// <param name="blackboard">The blackboard containing relevant information.</param>
+        /// <param name="memberCount">The number of closest members to consider.</param>
+        /// <returns><c>true</c> if the player character is one of the closest members; otherwise, <c>false</c>.</returns>
         private bool AmIOneOfTheClosestToOwnFlagCarrier(CtfBlackboard blackboard, int memberCount)
         {
             if (memberCount <= 0 || blackboard.MyTeamFlagCarrier == null)
@@ -200,6 +279,11 @@ namespace AmeisenBotX.Core.Engines.Battleground.Jannis.Profiles
             return index > -1 && index <= memberCount;
         }
 
+        /// <summary>
+        /// Initiates an attack on the nearest enemy player with the lowest health.
+        /// </summary>
+        /// <param name="blackboard">The blackboard containing relevant information.</param>
+        /// <returns>The status of the behavior tree node execution.</returns>
         private BtStatus AttackNearWeakestEnemy(CtfBlackboard blackboard)
         {
             IWowPlayer weakestPlayer = Bot.GetNearEnemies<IWowPlayer>(Bot.Player.Position, 20.0f).OrderBy(e => e.Health).FirstOrDefault();
@@ -213,6 +297,11 @@ namespace AmeisenBotX.Core.Engines.Battleground.Jannis.Profiles
             return BtStatus.Failed;
         }
 
+        /// <summary>
+        /// Defends the player's own base by either moving to a target or initiating combat with nearby enemies.
+        /// </summary>
+        /// <param name="blackboard">The blackboard containing relevant information.</param>
+        /// <returns>The status of the behavior tree node execution.</returns>
         private BtStatus DefendOwnBase(CtfBlackboard blackboard)
         {
             if (!CommonRoutines.MoveToTarget(Bot, WsgDataset.OwnBasePosition, 16.0f))
@@ -228,6 +317,11 @@ namespace AmeisenBotX.Core.Engines.Battleground.Jannis.Profiles
             return BtStatus.Ongoing;
         }
 
+        /// <summary>
+        /// Determines whether the player's team outnumbers the enemy team within a certain radius.
+        /// </summary>
+        /// <param name="blackboard">The blackboard containing relevant information.</param>
+        /// <returns><c>true</c> if the player's team outnumbers the enemy team; otherwise, <c>false</c>.</returns>
         private bool DoWeOutnumberOurEnemies(CtfBlackboard blackboard)
         {
             if (blackboard.MyTeamFlagCarrier != null && blackboard.MyTeamFlagCarrier.Guid == Bot.Wow.PlayerGuid)
@@ -241,11 +335,20 @@ namespace AmeisenBotX.Core.Engines.Battleground.Jannis.Profiles
             return enemies > 0 && friends >= enemies;
         }
 
+        /// <summary>
+        /// Determines whether there are enemies near the flag carrier of the player's team.
+        /// </summary>
+        /// <param name="blackboard">The blackboard containing relevant information.</param>
+        /// <returns><c>true</c> if there are enemies near the flag carrier; otherwise, <c>false</c>.</returns>
         private bool EnemiesNearFlagCarrier(CtfBlackboard blackboard)
         {
             return blackboard.MyTeamFlagCarrier.Position.GetDistance(Bot.Player.Position) < 32.0;
         }
 
+        /// <summary>
+        /// Attempts to flee from nearby enemies by moving away from the nearest enemy player.
+        /// </summary>
+        /// <returns>The status of the behavior tree node execution.</returns>
         private BtStatus FleeFromComingEnemies()
         {
             IWowUnit nearestEnemy = Bot.GetNearEnemies<IWowUnit>(Bot.Player.Position, 48.0f).OrderBy(e => e.Position.GetDistance(Bot.Player.Position)).FirstOrDefault();
@@ -259,6 +362,10 @@ namespace AmeisenBotX.Core.Engines.Battleground.Jannis.Profiles
             return BtStatus.Success;
         }
 
+        /// <summary>
+        /// Initiates combat with a specified unit, either by changing the target or moving into combat range.
+        /// </summary>
+        /// <param name="unit">The unit to initiate combat with.</param>
         private void InitiateCombat(IWowUnit unit)
         {
             if (Bot.Target == null)
@@ -278,17 +385,30 @@ namespace AmeisenBotX.Core.Engines.Battleground.Jannis.Profiles
             }
         }
 
+        /// <summary>
+        /// Determines whether there is any usable buff object near the player character, and no other party members are using it.
+        /// </summary>
+        /// <param name="distance">The maximum distance to search for a buff object.</param>
+        /// <returns><c>true</c> if there is a usable buff object near the player character; otherwise, <c>false</c>.</returns>
         private bool IsAnyBuffNearMeAndNoOneElseUsingIt(float distance)
         {
             IWowGameobject buff = Bot.GetClosestGameObjectByDisplayId(Bot.Player.Position, IWsgDataset.BuffDisplayIds);
             return buff != null && buff.Position.GetDistance(Bot.Player.Position) < distance && !Bot.GetNearPartyMembers<IWowPlayer>(buff.Position, 8.0f).Any();
         }
 
+        /// <summary>
+        /// Determines whether a flag object is near the player character.
+        /// </summary>
+        /// <returns><c>true</c> if a flag object is near; otherwise, <c>false</c>.</returns>
         private bool IsFlagNear()
         {
             return JBgBlackboard.NearFlags != null && JBgBlackboard.NearFlags.Any(e => e.Position.GetDistance(Bot.Player.Position) < 8.0);
         }
 
+        /// <summary>
+        /// Determines whether the gate to the player's base is open.
+        /// </summary>
+        /// <returns><c>true</c> if the gate is open; otherwise, <c>false</c>.</returns>
         private bool IsGateOpen()
         {
             if (Bot.Player.IsAlliance())
@@ -307,6 +427,11 @@ namespace AmeisenBotX.Core.Engines.Battleground.Jannis.Profiles
             }
         }
 
+        /// <summary>
+        /// Attempts to kill the enemy flag carrier by initiating combat with them.
+        /// </summary>
+        /// <param name="blackboard">The blackboard containing relevant information.</param>
+        /// <returns>The status of the behavior tree node execution.</returns>
         private BtStatus KillEnemyFlagCarrier(CtfBlackboard blackboard)
         {
             if (JBgBlackboard.EnemyTeamFlagCarrier == null)
@@ -318,6 +443,11 @@ namespace AmeisenBotX.Core.Engines.Battleground.Jannis.Profiles
             return BtStatus.Ongoing;
         }
 
+        /// <summary>
+        /// Moves the player character to the enemy base to retrieve the flag.
+        /// </summary>
+        /// <param name="blackboard">The blackboard containing relevant information.</param>
+        /// <returns>The status of the behavior tree node execution.</returns>
         private BtStatus MoveToEnemyBaseAndGetFlag(CtfBlackboard blackboard)
         {
             return !CommonRoutines.MoveToTarget(Bot, WsgDataset.EnemyBasePosition, 2.0f) && JBgBlackboard.NearFlags != null
@@ -325,6 +455,11 @@ namespace AmeisenBotX.Core.Engines.Battleground.Jannis.Profiles
                 : BtStatus.Ongoing;
         }
 
+        /// <summary>
+        /// Moves the player character to the nearest buff object.
+        /// </summary>
+        /// <param name="blackboard">The blackboard containing relevant information.</param>
+        /// <returns>The status of the behavior tree node execution.</returns>
         private BtStatus MoveToNearestBuff(CtfBlackboard blackboard)
         {
             IWowGameobject buffObject = Bot.GetClosestGameObjectByDisplayId(Bot.Player.Position, IWsgDataset.BuffDisplayIds);
@@ -332,6 +467,10 @@ namespace AmeisenBotX.Core.Engines.Battleground.Jannis.Profiles
             return buffObject == null || !CommonRoutines.MoveToTarget(Bot, buffObject.Position, 3.0f) ? BtStatus.Failed : BtStatus.Ongoing;
         }
 
+        /// <summary>
+        /// Moves the player character to their own flag carrier to provide assistance.
+        /// </summary>
+        /// <returns>The status of the behavior tree node execution.</returns>
         private BtStatus MoveToOwnFlagCarrierAndHelp()
         {
             if (JBgBlackboard.MyTeamFlagCarrier == null)
@@ -355,6 +494,12 @@ namespace AmeisenBotX.Core.Engines.Battleground.Jannis.Profiles
             return BtStatus.Ongoing;
         }
 
+        /// <summary>
+        /// Moves the player character to a specified position with optional minimum distance.
+        /// </summary>
+        /// <param name="position">The position to move to.</param>
+        /// <param name="minDistance">The minimum distance to maintain from the position (default is 3.5).</param>
+        /// <returns>The status of the behavior tree node execution.</returns>
         private BtStatus MoveToPosition(Vector3 position, float minDistance = 3.5f)
         {
             double distance = Bot.Player.Position.GetDistance(position);
@@ -382,6 +527,9 @@ namespace AmeisenBotX.Core.Engines.Battleground.Jannis.Profiles
             return BtStatus.Success;
         }
 
+        /// <summary>
+        /// Updates the information about the battleground state, including scores, flag positions, and flag carriers.
+        /// </summary>
         private void UpdateBattlegroundInfo()
         {
             try
@@ -444,6 +592,11 @@ namespace AmeisenBotX.Core.Engines.Battleground.Jannis.Profiles
             }
         }
 
+        /// <summary>
+        /// Uses the nearest flag object if available and moves towards it.
+        /// </summary>
+        /// <param name="blackboard">The blackboard containing relevant information.</param>
+        /// <returns>The status of the behavior tree node execution.</returns>
         private BtStatus UseNearestFlag(CtfBlackboard blackboard)
         {
             IWowGameobject nearestFlag = JBgBlackboard.NearFlags.OrderBy(e => e.Position.GetDistance(Bot.Player.Position)).FirstOrDefault();
@@ -462,41 +615,63 @@ namespace AmeisenBotX.Core.Engines.Battleground.Jannis.Profiles
             return BtStatus.Failed;
         }
 
+        /// <summary>
+        /// Represents a dataset specific to the Alliance faction in Warsong Gulch battleground.
+        /// </summary>
         private class AllianceWsgDataset : IWsgDataset
         {
+            /// <inheritdoc />
             public Vector3 EnemyBasePosition { get; } = new(916, 1434, 346);
 
+            /// <inheritdoc />
             public Vector3 EnemyBasePositionMapCoords { get; } = new(53, 90, 0);
 
+            /// <inheritdoc />
             public Vector3 EnemyGraveyardPosition { get; } = new(1415, 1555, 343);
 
+            /// <inheritdoc />
             public Vector3 FlagHidingSpot { get; } = new(1519, 1467, 374);
 
+            /// <inheritdoc />
             public Vector3 GatePosition { get; } = new(1494, 1457 + (float)((new Random().NextDouble() * 16.0f) - 8.0f), 343);
 
+            /// <inheritdoc />
             public Vector3 OwnBasePosition { get; } = new(1539, 1481, 352);
 
+            /// <inheritdoc />
             public Vector3 OwnBasePositionMapCoords { get; } = new(49, 15, 0);
 
+            /// <inheritdoc />
             public Vector3 OwnGraveyardPosition { get; } = new(1029, 1387, 340);
         }
 
+        /// <summary>
+        /// Represents a dataset specific to the Horde faction in Warsong Gulch battleground.
+        /// </summary>
         private class HordeWsgDataset : IWsgDataset
         {
+            /// <inheritdoc />
             public Vector3 EnemyBasePosition { get; } = new(1539, 1481, 352);
 
+            /// <inheritdoc />
             public Vector3 EnemyBasePositionMapCoords { get; } = new(49, 15, 0);
 
+            /// <inheritdoc />
             public Vector3 EnemyGraveyardPosition { get; } = new(1029, 1387, 340);
 
+            /// <inheritdoc />
             public Vector3 FlagHidingSpot { get; } = new(949, 1449, 367);
 
+            /// <inheritdoc />
             public Vector3 GatePosition { get; private set; } = new(951, 1459 + (float)((new Random().NextDouble() * 16.0f) - 8.0f), 342);
 
+            /// <inheritdoc />
             public Vector3 OwnBasePosition { get; } = new(916, 1434, 346);
 
+            /// <inheritdoc />
             public Vector3 OwnBasePositionMapCoords { get; } = new(53, 90, 0);
 
+            /// <inheritdoc />
             public Vector3 OwnGraveyardPosition { get; } = new(1415, 1555, 343);
         }
     }

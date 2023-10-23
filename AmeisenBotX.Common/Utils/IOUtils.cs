@@ -3,6 +3,9 @@ using System.Runtime.CompilerServices;
 
 namespace AmeisenBotX.Common.Utils
 {
+    /// <summary>
+    /// Utility class providing methods to assist with input/output operations.
+    /// </summary>
     public static class IOUtils
     {
         /// <summary>

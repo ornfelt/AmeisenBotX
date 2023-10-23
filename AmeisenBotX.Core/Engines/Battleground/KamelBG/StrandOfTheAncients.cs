@@ -9,8 +9,15 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Battleground.KamelBG
 {
+    /// <summary>
+    /// Represents an implementation of the <see cref="IBattlegroundEngine"/> interface for the Strand of the Ancients battleground.
+    /// </summary>
     internal class StrandOfTheAncients : IBattlegroundEngine
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="StrandOfTheAncients"/> class.
+        /// </summary>
+        /// <param name="bot">The AmeisenBotInterfaces instance.</param>
         public StrandOfTheAncients(AmeisenBotInterfaces bot)
         {
             Bot = bot;
@@ -18,21 +25,36 @@ namespace AmeisenBotX.Core.Engines.Battleground.KamelBG
             CombatEvent = new(TimeSpan.FromSeconds(2));
         }
 
+        /// <inheritdoc />
         public string Author => "Lukas";
 
+        /// <summary>
+        /// Gets the AmeisenBotInterfaces instance.
+        /// </summary>
         public AmeisenBotInterfaces Bot { get; }
 
+        /// <inheritdoc />
         public string Description => "Strand of the Ancients";
 
+        /// <inheritdoc />
         public string Name => "Strand of the Ancients";
 
+        /// <summary>
+        /// Gets the right path waypoints for the Strand of the Ancients battleground.
+        /// </summary>
         public List<Vector3> PathRight { get; } = new()
         {
             new(1403, 69, 30)
         };
 
+        /// <summary>
+        /// Represents a time-gated event for combat actions.
+        /// </summary>
         private TimegatedEvent CombatEvent { get; }
 
+        /// <summary>
+        /// Handles combat logic for the Strand of the Ancients battleground.
+        /// </summary>
         public void Combat()
         {
             IWowPlayer weakestPlayer = Bot.GetNearEnemies<IWowPlayer>(Bot.Player.Position, 30.0f).OrderBy(e => e.Health).FirstOrDefault();
@@ -57,10 +79,12 @@ namespace AmeisenBotX.Core.Engines.Battleground.KamelBG
             }
         }
 
+        /// <inheritdoc />
         public void Enter()
         {
         }
 
+        /// <inheritdoc />
         public void Execute()
         {
             Combat();
@@ -93,6 +117,7 @@ namespace AmeisenBotX.Core.Engines.Battleground.KamelBG
             }
         }
 
+        /// <inheritdoc />
         public void Reset()
         {
         }

@@ -8,9 +8,18 @@ using System.Threading.Tasks;
 
 namespace AmeisenBotX.Common.Utils
 {
+    /// <summary>
+    /// Utility class providing various helper methods for bot operations.
+    /// </summary>
     public static class BotUtils
     {
+        /// <summary>
+        /// Constant value representing the WM_KEYDOWN Windows message.
+        /// </summary>
         private const uint WM_KEYDOWN = 0x100;
+        /// <summary>
+        /// Constant value representing the WM_KEYUP Windows message.
+        /// </summary>
         private const uint WM_KEYUP = 0x101;
 
         /// <summary>
@@ -159,6 +168,14 @@ namespace AmeisenBotX.Common.Utils
             SendMessage(windowHandle, WM_KEYUP, key, IntPtr.Zero);
         }
 
+        /// <summary>
+        /// Sends a Windows message to a specified window handle.
+        /// </summary>
+        /// <param name="windowHandle">The handle of the window to send the message to.</param>
+        /// <param name="msg">The message to send.</param>
+        /// <param name="param">Additional message-specific information.</param>
+        /// <param name="parameter">Additional message-specific information.</param>
+        /// <returns>The result of the message processing, which is dependent on the message sent.</returns>
         [DllImport("user32", SetLastError = true)]
         private static extern IntPtr SendMessage(IntPtr windowHandle, uint msg, IntPtr param, IntPtr parameter);
     }

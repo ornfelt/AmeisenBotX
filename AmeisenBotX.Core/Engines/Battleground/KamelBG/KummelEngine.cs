@@ -7,32 +7,75 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Battleground.KamelBG
 {
+    /// <summary>
+    /// Represents an implementation of the <see cref="IBattlegroundEngine"/> interface for the Kummel battleground.
+    /// </summary>
     internal class KummelEngine : IBattlegroundEngine
     {
+        /// <summary>
+        /// Represents the own team flag value.
+        /// </summary>
         private const int OWN_TEAM_FLAG = 2;
 
+        /// <summary>
+        /// Represents the flag state when picked up.
+        /// </summary>
         private const int PICKED_UP = 1;
 
+        /// <summary>
+        /// Represents the coordinates of the allied exit point.
+        /// </summary>
         private Vector3 ausgangAlly = new(1055, 1395, 340);
 
+        /// <summary>
+        /// Represents the coordinates of the Horde exit point.
+        /// </summary>
         private Vector3 ausgangHord = new(1051, 1398, 340);
 
+        /// <summary>
+        /// Represents the coordinates of the allied base.
+        /// </summary>
         private Vector3 baseAlly = new(1539, 1481, 352);
 
+        /// <summary>
+        /// Represents the coordinates of the Horde base.
+        /// </summary>
         private Vector3 baseHord = new(916, 1434, 346);
 
+        /// <summary>
+        /// Represents the flag carrier unit.
+        /// </summary>
         private IWowUnit FlagCarrier;
 
+        /// <summary>
+        /// Represents the flag object.
+        /// </summary>
         private IWowObject FlagObject;
 
+        /// <summary>
+        /// Represents the flag state.
+        /// </summary>
         private int FlagState = 0;
 
+        /// <summary>
+        /// Represents a flag indicating whether the character has a flag.
+        /// </summary>
         private bool hasFlag = false;
 
+        /// <summary>
+        /// Represents a flag indicating whether there has been a state change.
+        /// </summary>
         private bool hasStateChanged = true;
 
+        /// <summary>
+        /// Represents the starting position.
+        /// </summary>
         private Vector3 startPosition;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="KummelEngine"/> class.
+        /// </summary>
+        /// <param name="bot">The AmeisenBotInterfaces instance.</param>
         public KummelEngine(AmeisenBotInterfaces bot)
         {
             Bot = bot;
@@ -41,18 +84,26 @@ namespace AmeisenBotX.Core.Engines.Battleground.KamelBG
             bot.Wow.Events.Subscribe("CHAT_MSG_BG_SYSTEM_NEUTRAL", OnFlagAlliance);
         }
 
+        /// <inheritdoc />
         public string Author => "Kamel";
 
+        /// <inheritdoc />
         public string Description => "...";
 
+        /// <inheritdoc />
         public string Name => "Kummel Engine";
 
+        /// <summary>
+        /// Gets the AmeisenBotInterfaces instance.
+        /// </summary>
         private AmeisenBotInterfaces Bot { get; }
 
+        /// <inheritdoc />
         public void Enter()
         {
         }
 
+        /// <inheritdoc />
         public void Execute()
         {
             Bot.CombatClass?.OutOfCombatExecute();
@@ -167,10 +218,15 @@ namespace AmeisenBotX.Core.Engines.Battleground.KamelBG
             }
         }
 
+        /// <inheritdoc />
         public void Reset()
         {
         }
 
+        /// <summary>
+        /// Retrieves the flag carrier unit.
+        /// </summary>
+        /// <returns>The flag carrier unit or null if none found.</returns>
         private IWowUnit GetFlagCarrier()
         {
             List<IWowUnit> flagCarrierList = Bot.Objects.All.OfType<IWowUnit>().Where(e => e.Guid != Bot.Wow.PlayerGuid && e.Auras != null && e.Auras.Any(en => Bot.Db.GetSpellName(en.SpellId).Contains("Flag") || Bot.Db.GetSpellName(en.SpellId).Contains("flag"))).ToList();
@@ -184,6 +240,10 @@ namespace AmeisenBotX.Core.Engines.Battleground.KamelBG
             }
         }
 
+        /// <summary>
+        /// Retrieves the flag object based on the current flag state.
+        /// </summary>
+        /// <returns>The flag object or null if none found.</returns>
         private IWowObject GetFlagObject()
         {
             WowGameObjectDisplayId targetFlag = hasFlag
@@ -205,6 +265,11 @@ namespace AmeisenBotX.Core.Engines.Battleground.KamelBG
             }
         }
 
+        /// <summary>
+        /// Event handler for flag-related chat messages.
+        /// </summary>
+        /// <param name="timestamp">The timestamp of the chat message.</param>
+        /// <param name="args">The list of arguments from the chat message.</param>
         private void OnFlagAlliance(long timestamp, List<string> args)
         {
             hasStateChanged = true;

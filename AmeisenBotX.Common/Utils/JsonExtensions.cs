@@ -3,8 +3,17 @@ using System.Text.Json;
 
 namespace AmeisenBotX.Common.Utils
 {
+    /// <summary>
+    /// Extension methods for JSON related operations, especially for JsonElement manipulation.
+    /// </summary>
     public static class JsonExtensions
     {
+        /// <summary>
+        /// Deserializes a JsonElement to a specified type.
+        /// </summary>
+        /// <typeparam name="T">The target type to deserialize to.</typeparam>
+        /// <param name="element">The JsonElement to deserialize.</param>
+        /// <returns>The deserialized object of type T.</returns>
         public static T To<T>(this JsonElement element)
         {
             return JsonSerializer.Deserialize<T>(element.GetRawText());
@@ -14,7 +23,7 @@ namespace AmeisenBotX.Common.Utils
         /// Convert a JsonElement to a dynamic dictionary.
         /// </summary>
         /// <param name="element"></param>
-        /// <returns></returns>
+        /// <returns>A dynamic dictionary representing the JSON structure.</returns>
         public static Dictionary<string, dynamic> ToDyn(this JsonElement element)
         {
             Dictionary<string, JsonElement> dict = JsonSerializer.Deserialize<Dictionary<string, JsonElement>>(element.GetRawText());

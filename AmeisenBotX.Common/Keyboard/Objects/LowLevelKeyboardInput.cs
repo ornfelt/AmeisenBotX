@@ -4,6 +4,14 @@ using System.Runtime.InteropServices;
 
 namespace AmeisenBotX.Common.Keyboard.Objects
 {
+    /// <summary>
+    /// Represents the low-level data provided by the keyboard when a key is pressed or released.
+    /// </summary>
+    /// <remarks>
+    /// This structure is typically used in conjunction with low-level keyboard input events.
+    /// It provides detailed information about the key event, including virtual key codes,
+    /// hardware scan codes, flags indicating key states, and additional associated data.
+    /// </remarks>
     [StructLayout(LayoutKind.Sequential)]
     public struct LowLevelKeyboardInput
     {

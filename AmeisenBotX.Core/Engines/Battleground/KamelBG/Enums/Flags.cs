@@ -1,5 +1,8 @@
 ﻿namespace AmeisenBotX.Core.Engines.Battleground.KamelBG.Enums
 {
+    /// <summary>
+    /// Enumeration of flag IDs used in various battlegrounds.
+    /// </summary>
     public enum Flags
     {
         //ArathiBasin
@@ -14,6 +17,9 @@
         NetherstormFlag = 7153,
     }
 
+    /// <summary>
+    /// Enumeration of flag IDs specific to the Alliance faction in battlegrounds.
+    /// </summary>
     public enum FlagsAlli
     {
         NeutralFlags = 6271,
@@ -21,6 +27,9 @@
         AlliFlagsAktivate = 6252
     }
 
+    /// <summary>
+    /// Enumeration of flag IDs specific to the Horde faction in battlegrounds.
+    /// </summary>
     public enum FlagsHord
     {
         NeutralFlags = 6271,

@@ -2,6 +2,12 @@
 
 namespace AmeisenBotX.Common.Keyboard.Enums
 {
+    /// <summary>
+    /// Represents a set of key codes returned by the event. 
+    /// </summary>
+    /// <remarks>
+    /// Some of these values map to ASCII values as per the Virtual-Key Codes documentation.
+    /// </remarks>
     [Flags]
     public enum KeyCode // todo: rewrite, messy
     {

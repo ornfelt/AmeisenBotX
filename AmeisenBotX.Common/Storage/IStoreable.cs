@@ -3,16 +3,26 @@ using System.Text.Json;
 
 namespace AmeisenBotX.Common.Storage
 {
+    /// <summary>
+    /// Defines a contract for objects that can be serialized to and deserialized from a JSON representation.
+    /// Classes or structs that implement this interface should be able to convert their internal state 
+    /// to a dictionary representation for saving and should also be able to populate their internal state 
+    /// from a dictionary representation when loading.
+    /// </summary>
     public interface IStoreable
     {
-        /// <summary> Load all values from json into a dictionary. Convert the JsonElement to any
-        /// object using the To<T>() or ToDyn() extension. </summary> <param name="objects">Loaded objects.</param>
+        /// <summary>
+        /// Loads the values from a JSON representation into a dictionary. 
+        /// Convert the JsonElement values to the desired object type using the To<T>() or ToDyn() extension methods.
+        /// </summary>
+        /// <param name="objects">A dictionary where each key-value pair represents a field or property and its corresponding JsonElement.</param>
         void Load(Dictionary<string, JsonElement> objects);
 
         /// <summary>
-        /// Should return all object that you want to save.
+        /// Returns a dictionary of objects that need to be saved.
+        /// The dictionary should contain field or property names as keys, and their current values as values.
         /// </summary>
-        /// <returns>Objects to save.</returns>
+        /// <returns>A dictionary containing objects to be saved.</returns>
         Dictionary<string, object> Save();
     }
 }

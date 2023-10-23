@@ -8,32 +8,75 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Battleground.einTyp
 {
+    /// <summary>
+    /// Represents an engine responsible for the battleground behavior.
+    /// </summary>
     public class RunBoyRunEngine : IBattlegroundEngine
     {
+        /// <summary>
+        /// Provides access to various bot functionalities and interfaces.
+        /// </summary>
         private readonly AmeisenBotInterfaces Bot;
 
+        /// <summary>
+        /// The base position for the Alliance team.
+        /// </summary>
         private Vector3 baseAlly = new(1539, 1481, 352);
 
+        /// <summary>
+        /// The base position for the Horde team.
+        /// </summary>
         private Vector3 baseHord = new(916, 1434, 346);
 
+        /// <summary>
+        /// Represents the enemy's flag object.
+        /// </summary>
         private IWowObject enemyFlag;
 
+        /// <summary>
+        /// Unique identifier for the enemy's flag carrier.
+        /// </summary>
         private ulong EnemyFlagCarrierGuid;
 
+        /// <summary>
+        /// Indicates whether the enemy team possesses the flag.
+        /// </summary>
         private bool enemyTeamHasFlag = false;
 
+        /// <summary>
+        /// Indicates whether the bot has the flag.
+        /// </summary>
         private bool hasFlag = false;
 
+        /// <summary>
+        /// Indicates whether the bot's state has changed.
+        /// </summary>
         private bool hasStateChanged = true;
 
+        /// <summary>
+        /// Indicates whether the bot's faction is Horde.
+        /// </summary>
         private bool isHorde = false;
 
+        /// <summary>
+        /// Represents the player's own flag object.
+        /// </summary>
         private IWowObject ownFlag;
 
+        /// <summary>
+        /// Indicates whether the bot's team possesses the flag.
+        /// </summary>
         private bool ownTeamHasFlag = false;
 
+        /// <summary>
+        /// Unique identifier for the bot's team flag carrier.
+        /// </summary>
         private ulong TeamFlagCarrierGuid;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RunBoyRunEngine"/> class.
+        /// </summary>
+        /// <param name="bot">The bot interface providing various bot capabilities.</param>
         public RunBoyRunEngine(AmeisenBotInterfaces bot)
         {
             Bot = bot;
@@ -47,17 +90,22 @@ namespace AmeisenBotX.Core.Engines.Battleground.einTyp
             }
         }
 
+        /// <inheritdoc/>
         public string Author => "einTyp";
 
+        /// <inheritdoc/>
         public string Description => "...";
 
+        /// <inheritdoc/>
         public string Name => "RunBoyRunEngine";
 
+        /// <inheritdoc/>
         public void Enter()
         {
             isHorde = Bot.Player.IsHorde();
         }
 
+        /// <inheritdoc/>
         public void Execute()
         {
             if (!IsGateOpen())
@@ -313,10 +361,15 @@ namespace AmeisenBotX.Core.Engines.Battleground.einTyp
             }
         }
 
+        /// <inheritdoc/>
         public void Reset()
         {
         }
 
+        /// <summary>
+        /// Retrieves the enemy flag carrier.
+        /// </summary>
+        /// <returns>The enemy unit carrying the flag or null if none found.</returns>
         private IWowUnit GetEnemyFlagCarrier()
         {
             List<IWowUnit> flagCarrierList = Bot.Objects.All.OfType<IWowUnit>().Where(e =>
@@ -337,6 +390,10 @@ namespace AmeisenBotX.Core.Engines.Battleground.einTyp
             }
         }
 
+        /// <summary>
+        /// Retrieves the enemy flag game object based on player's faction.
+        /// </summary>
+        /// <returns>The enemy flag game object or null if not found.</returns>
         private IWowObject GetEnemyFlagObject()
         {
             WowGameObjectDisplayId targetFlag = Bot.Player.IsHorde()
@@ -357,6 +414,10 @@ namespace AmeisenBotX.Core.Engines.Battleground.einTyp
             }
         }
 
+        /// <summary>
+        /// Retrieves the bot's team flag game object based on player's faction.
+        /// </summary>
+        /// <returns>The team's flag game object or null if not found.</returns>
         private IWowObject GetOwnFlagObject()
         {
             WowGameObjectDisplayId targetFlag = Bot.Player.IsHorde()
@@ -377,6 +438,10 @@ namespace AmeisenBotX.Core.Engines.Battleground.einTyp
             }
         }
 
+        /// <summary>
+        /// Retrieves the bot's team flag carrier.
+        /// </summary>
+        /// <returns>The friendly unit carrying the flag or null if none found.</returns>
         private IWowUnit GetTeamFlagCarrier()
         {
             List<IWowUnit> flagCarrierList = Bot.Objects.All.OfType<IWowUnit>().Where(e => (Bot.Db.GetReaction(Bot.Player, e) == WowUnitReaction.Friendly || Bot.Db.GetReaction(Bot.Player, e) == WowUnitReaction.Neutral) && !e.IsDead && e.Guid != Bot.Wow.PlayerGuid && e.Auras != null && e.Auras.Any(en => Bot.Db.GetSpellName(en.SpellId).Contains("Flag") || Bot.Db.GetSpellName(en.SpellId).Contains("flag"))).ToList();
@@ -390,16 +455,29 @@ namespace AmeisenBotX.Core.Engines.Battleground.einTyp
             }
         }
 
+        /// <summary>
+        /// Checks if the bot is close to a specific position.
+        /// </summary>
+        /// <param name="position">The position to check against.</param>
+        /// <returns>True if the bot is close to the given position, otherwise false.</returns>
         private bool IsAtPosition(Vector3 position)
         {
             return Bot.Player.Position.GetDistance(position) < (Bot.Player.CombatReach * 0.75f);
         }
 
+        /// <summary>
+        /// Checks if an enemy is in close proximity to the bot.
+        /// </summary>
+        /// <returns>True if an enemy is close, otherwise false.</returns>
         private bool IsEnemyClose()
         {
             return Bot.Objects.All.OfType<IWowUnit>() != null && Bot.Objects.All.OfType<IWowUnit>().Any(e => Bot.Player.Position.GetDistance(e.Position) < 49 && !e.IsDead && !(e.Health < 1) && Bot.Db.GetReaction(Bot.Player, e) != WowUnitReaction.Friendly && Bot.Db.GetReaction(Bot.Player, e) != WowUnitReaction.Neutral);
         }
 
+        /// <summary>
+        /// Determines if the gate is open based on the bot's faction.
+        /// </summary>
+        /// <returns>True if the gate is open, otherwise false.</returns>
         private bool IsGateOpen()
         {
             if (Bot.Player.IsAlliance())
@@ -420,11 +498,21 @@ namespace AmeisenBotX.Core.Engines.Battleground.einTyp
             }
         }
 
+        /// <summary>
+        /// Checks if a given position is within the bot's combat reach.
+        /// </summary>
+        /// <param name="position">The position to check against.</param>
+        /// <returns>True if the position is within combat reach, otherwise false.</returns>
         private bool IsInCombatReach(Vector3 position)
         {
             return Bot.Player.Position.GetDistance(position) < 50;
         }
 
+        /// <summary>
+        /// Handles events related to the Alliance's flag.
+        /// </summary>
+        /// <param name="timestamp">The timestamp of the event.</param>
+        /// <param name="args">The arguments associated with the event.</param>
         private void OnFlagAlliance(long timestamp, List<string> args)
         {
             hasStateChanged = true;

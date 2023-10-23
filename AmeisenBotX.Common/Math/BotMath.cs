@@ -4,12 +4,32 @@ using System.Runtime.CompilerServices;
 
 namespace AmeisenBotX.Common.Math
 {
+    /// <summary>
+    /// Provides mathematical utilities tailored for bot movement and positioning calculations in a 3D space.
+    /// </summary>
     public static class BotMath
     {
+        /// <summary>
+        /// Represents half of Pi.
+        /// </summary>
         public const float HALF_PI = MathF.PI / 2.0f;
+        /// <summary>
+        /// Represents the reciprocal of the square root of 2.
+        /// </summary>
         public const float M_SQRT1_2 = 0.707106781186547524401f;
+        /// <summary>
+        /// Represents the square root of 2.
+        /// </summary>
         public const float M_SQRT2 = 1.41421356237309504880f;
 
+        /// <summary>
+        /// Calculates a new position relative to the specified position, at a given angle and distance.
+        /// </summary>
+        /// <param name="position">Reference position.</param>
+        /// <param name="rotation">Current rotation.</param>
+        /// <param name="angle">Angle of deviation.</param>
+        /// <param name="distance">Distance from the reference position.</param>
+        /// <returns>New position.</returns>
         public static Vector3 CalculatePositionAround(Vector3 position, float rotation, float angle, float distance = 2.0f)
         {
             float x = position.X + MathF.Cos(rotation + angle) * distance;
@@ -17,6 +37,13 @@ namespace AmeisenBotX.Common.Math
             return new Vector3(x, y, position.Z);
         }
 
+        /// <summary>
+        /// Calculates a position directly behind the given position at a specified distance.
+        /// </summary>
+        /// <param name="position">Reference position.</param>
+        /// <param name="rotation">Current rotation.</param>
+        /// <param name="distanceToMove">Distance to move behind.</param>
+        /// <returns>New position behind the reference.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 CalculatePositionBehind(Vector3 position, float rotation, float distanceToMove = 2.0f)
         {
@@ -66,6 +93,13 @@ namespace AmeisenBotX.Common.Math
             return meanPosition / count;
         }
 
+        /// <summary>
+        /// Calculates the slope between two points in a 3D space.
+        /// </summary>
+        /// <param name="startPoint">Starting point.</param>
+        /// <param name="endPoint">Ending point.</param>
+        /// <param name="toPercentage">If set to true, the slope is returned as a percentage.</param>
+        /// <returns>Slope between two points.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float GetSlope(Vector3 startPoint, Vector3 endPoint, bool toPercentage = false)
         {
@@ -81,6 +115,14 @@ namespace AmeisenBotX.Common.Math
             return (rise / run) * 100.0f;
         }
 
+        /// <summary>
+        /// Determines if the position is facing the target position within a certain angular threshold.
+        /// </summary>
+        /// <param name="position">Current position.</param>
+        /// <param name="rotation">Current rotation.</param>
+        /// <param name="targetPosition">Target position.</param>
+        /// <param name="maxAngleDiff">Maximum allowable angular difference.</param>
+        /// <returns>True if facing the target, otherwise false.</returns>
         public static bool IsFacing(Vector3 position, float rotation, Vector3 targetPosition, float maxAngleDiff = 1.5f)
         {
             float facingAngle = GetFacingAngle(position, targetPosition);
@@ -88,6 +130,11 @@ namespace AmeisenBotX.Common.Math
             return angleDiff <= maxAngleDiff;
         }
 
+        /// <summary>
+        /// Ensures an angle is clamped between 0 and Tau (2 * Pi).
+        /// </summary>
+        /// <param name="angle">The angle to clamp.</param>
+        /// <returns>The clamped angle.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float ClampAngle(float angle)
         {
@@ -121,6 +168,12 @@ namespace AmeisenBotX.Common.Math
             return value / (float)max * 100.0f;
         }
 
+        /// <summary>
+        /// Calculates the angle of a gradient between two points in a 3D space.
+        /// </summary>
+        /// <param name="startPoint">Starting point.</param>
+        /// <param name="endPoint">Ending point.</param>
+        /// <returns>Gradient angle in degrees.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double SlopeGradientAngle(Vector3 startPoint, Vector3 endPoint)
         {

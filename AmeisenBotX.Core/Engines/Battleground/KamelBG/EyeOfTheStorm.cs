@@ -9,8 +9,15 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Battleground.KamelBG
 {
+    /// <summary>
+    /// Represents an implementation of the <see cref="IBattlegroundEngine"/> interface for the Eye of the Storm battleground.
+    /// </summary>
     internal class EyeOfTheStorm : IBattlegroundEngine
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="EyeOfTheStorm"/> class.
+        /// </summary>
+        /// <param name="bot">The AmeisenBotInterfaces instance.</param>
         public EyeOfTheStorm(AmeisenBotInterfaces bot)
         {
             Bot = bot;
@@ -19,12 +26,18 @@ namespace AmeisenBotX.Core.Engines.Battleground.KamelBG
             CombatEvent = new(TimeSpan.FromSeconds(2));
         }
 
+        /// <inheritdoc />
         public string Author => "Lukas";
 
+        /// <inheritdoc />
         public string Description => "Eye of the Storm";
 
+        /// <inheritdoc />
         public string Name => "Eye of the Storm";
 
+        /// <summary>
+        /// Gets the base path waypoints for the Eye of the Storm battleground.
+        /// </summary>
         public List<Vector3> PathBase { get; } = new List<Vector3>()
         {
             new Vector3(2284, 1731, 1189),//Mage Tower
@@ -33,21 +46,42 @@ namespace AmeisenBotX.Core.Engines.Battleground.KamelBG
             new Vector3(2043, 1729, 1189)//Fel Reaver Ruins
         };
 
+        /// <summary>
+        /// Gets the flag path waypoints for the Eye of the Storm battleground.
+        /// </summary>
         public List<Vector3> PathFlag { get; } = new List<Vector3>()
         {
             new Vector3(2176, 1570, 1159)//Flag
         };
 
+        /// <summary>
+        /// Gets the AmeisenBotInterfaces instance used by the Eye of the Storm engine.
+        /// </summary>
         private AmeisenBotInterfaces Bot { get; }
 
+        /// <summary>
+        /// Gets the time-gated event for capturing the flag.
+        /// </summary>
         private TimegatedEvent CaptureFlagEvent { get; }
 
+        /// <summary>
+        /// Gets the time-gated event for combat actions.
+        /// </summary>
         private TimegatedEvent CombatEvent { get; }
 
+        /// <summary>
+        /// Gets or sets the current node counter used for navigating the base path waypoints.
+        /// </summary>
         private int CurrentNodeCounter { get; set; }
 
+        /// <summary>
+        /// Gets or sets the faction flag state (e.g., "Alliance Controlled" or "Horde Controlled").
+        /// </summary>
         private string FactionFlagState { get; set; }
 
+        /// <summary>
+        /// Handles combat logic for the Eye of the Storm battleground.
+        /// </summary>
         public void Combat()
         {
             IWowPlayer weakestPlayer = Bot.GetNearEnemies<IWowPlayer>(Bot.Player.Position, 30.0f).OrderBy(e => e.Health).FirstOrDefault();
@@ -72,11 +106,14 @@ namespace AmeisenBotX.Core.Engines.Battleground.KamelBG
             }
         }
 
+
+        /// <inheritdoc />
         public void Enter()
         {
             Faction();
         }
 
+        /// <inheritdoc />
         public void Execute()
         {
             Combat();
@@ -186,6 +223,9 @@ namespace AmeisenBotX.Core.Engines.Battleground.KamelBG
             }
         }
 
+        /// <summary>
+        /// Determines the faction's flag state.
+        /// </summary>
         public void Faction()
         {
             if (!Bot.Player.IsHorde())
@@ -198,6 +238,7 @@ namespace AmeisenBotX.Core.Engines.Battleground.KamelBG
             }
         }
 
+        /// <inheritdoc />
         public void Reset()
         {
         }

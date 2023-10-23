@@ -6,7 +6,8 @@
     <UseWPF>true</UseWPF>
     <ApplicationIcon>icon.ico</ApplicationIcon>    
     <ApplicationManifest>app.manifest</ApplicationManifest>    
-    <StartupObject>AmeisenBotX.App</StartupObject>
+    <StartupObject>AmeisenBotX.App</StartupObject>    
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
