@@ -21,6 +21,9 @@ namespace AmeisenBotX.Core.Managers.Character
 {
     public class DefaultCharacterManager : ICharacterManager
     {
+        /// <summary>
+        /// Initializes a new instance of the DefaultCharacterManager class.
+        /// </summary>
         public DefaultCharacterManager(IWowInterface wowInterface, WowMemoryApi memory, AmeisenBotConfig config)
         {
             Wow = wowInterface;
@@ -36,30 +39,71 @@ namespace AmeisenBotX.Core.Managers.Character
             ItemSlotsToSkip = new();
         }
 
+        /// <summary>
+        /// Gets the equipment of the character.
+        /// </summary>
         public CharacterEquipment Equipment { get; }
 
+        /// <summary>
+        /// Gets the CharacterInventory that holds the items for this character.
+        /// </summary>
         public CharacterInventory Inventory { get; }
 
+        /// <summary>
+        /// Gets or sets the item comparator.
+        /// </summary>
         public IItemComparator ItemComparator { get; set; }
 
+        /// <summary>
+        /// Gets or sets the list of WowEquipmentSlots that should be skipped when processing items.
+        /// </summary>
         public List<WowEquipmentSlot> ItemSlotsToSkip { get; set; }
 
+        /// <summary>
+        /// Gets or sets the last level trained.
+        /// </summary>
         public int LastLevelTrained { get; set; }
 
+        /// <summary>
+        /// Gets or sets the amount of money.
+        /// </summary>
         public int Money { get; private set; }
 
+        /// <summary>
+        /// Gets or sets the collection of WowMount objects.
+        /// </summary>
         public IEnumerable<WowMount> Mounts { get; private set; }
 
+        /// <summary>
+        /// Gets or sets the dictionary of skills associated with their respective counts.
+        /// </summary>
         public Dictionary<string, (int, int)> Skills { get; private set; }
 
+        /// <summary>
+        /// Gets or sets the spell book.
+        /// </summary>
         public SpellBook SpellBook { get; }
 
+        /// <summary>
+        /// Gets or sets the Talent Manager object.
+        /// </summary>
         public TalentManager TalentManager { get; }
 
+        /// <summary>
+        /// Gets or sets the WowMemoryApi object for accessing the memory of the Wow application.
+        /// </summary>
         private WowMemoryApi MemoryApi { get; }
 
+        /// <summary>
+        /// Gets the private member Wow which is an instance of the IWowInterface interface.
+        /// </summary>
         private IWowInterface Wow { get; }
 
+        /// <summary>
+        /// Retrieves the consumables from the inventory and returns them as a dictionary,
+        /// where the key represents the ID of the consumable and the value represents the total count of that consumable.
+        /// </summary>
+        /// <returns>A dictionary containing the consumables and their counts.</returns>
         public Dictionary<int, int> GetConsumables()
         {
             return Inventory.Items.OfType<WowConsumable>()
@@ -67,11 +111,22 @@ namespace AmeisenBotX.Core.Managers.Character
                 .ToDictionary(e => e.Key, e => e.Count());
         }
 
+        /// <summary>
+        /// Checks if the bag has an item of the specified type.
+        /// </summary>
+        /// <typeparam name="T">The type of item to check for</typeparam>
+        /// <param name="needsToBeUseable">Flag indicating whether the item needs to be usable</param>
+        /// <returns>True if there is an item of the specified type in the bag, otherwise false</returns>
         public bool HasItemTypeInBag<T>(bool needsToBeUseable = false)
         {
             return Inventory.Items.Any(e => Enum.IsDefined(typeof(T), e.Id));
         }
 
+        ///<summary>
+        ///Determines if the character is able to use the specified armor.
+        ///</summary>
+        ///<param name="item">The armor item to check.</param>
+        ///<returns>True if the character is able to use the armor, false otherwise.</returns>
         public bool IsAbleToUseArmor(WowArmor item)
         {
             return item?.ArmorType switch
@@ -99,12 +154,22 @@ namespace AmeisenBotX.Core.Managers.Character
             };
         }
 
+        /// <summary>
+        /// Determines if the player is able to use the given item in the World of Warcraft inventory.
+        /// </summary>
+        /// <param name="item">The item to check.</param>
+        /// <returns>Returns true if the player is able to use the item, false otherwise.</returns>
         public bool IsAbleToUseItem(IWowInventoryItem item)
         {
             return string.Equals(item.Type, "Armor", StringComparison.OrdinalIgnoreCase) && IsAbleToUseArmor((WowArmor)item)
                    || string.Equals(item.Type, "Weapon", StringComparison.OrdinalIgnoreCase) && IsAbleToUseWeapon((WowWeapon)item);
         }
 
+        /// <summary>
+        /// Determines if the player is able to use the specified weapon.
+        /// </summary>
+        /// <param name="item">The weapon to check.</param>
+        /// <returns>True if the player is able to use the weapon, false otherwise.</returns>
         public bool IsAbleToUseWeapon(WowWeapon item)
         {
             return item?.WeaponType switch
@@ -145,6 +210,12 @@ namespace AmeisenBotX.Core.Managers.Character
             };
         }
 
+        /// <summary>
+        /// Determines if the given item is an improvement and finds the item in the inventory that should be replaced.
+        /// </summary>
+        /// <param name="item">The item to check.</param>
+        /// <param name="itemToReplace">The item in the inventory that should be replaced.</param>
+        /// <returns>True if the item is an improvement and there is an item to replace, false otherwise.</returns>
         public bool IsItemAnImprovement(IWowInventoryItem item, out IWowInventoryItem itemToReplace)
         {
             itemToReplace = null;
@@ -180,17 +251,29 @@ namespace AmeisenBotX.Core.Managers.Character
             return false;
         }
 
+        /// <summary>
+        /// Executes a jump action by sending a key press for the Spacebar.
+        /// </summary>
         public void Jump()
         {
             AmeisenLogger.I.Log("Movement", $"Jumping", LogLevel.Verbose);
             Task.Run(() => BotUtils.SendKey(MemoryApi.Process.MainWindowHandle, new IntPtr((int)KeyCode.Space), 500, 1000));
         }
 
+        /// <summary>
+        /// Moves the object to a given position using the ClickToMove method.
+        /// </summary>
+        /// <param name="pos">The desired position to move to.</param>
+        /// <param name="turnSpeed">The speed at which the object will turn while moving (default is 20.9f).</param>
+        /// <param name="distance">The minimum distance between the object and the target position to consider the movement complete (default is 0.1f).</param>
         public void MoveToPosition(Vector3 pos, float turnSpeed = 20.9f, float distance = 0.1f)
         {
             Wow.ClickToMove(pos, 0, WowClickToMoveType.Move, turnSpeed, distance);
         }
 
+        /// <summary>
+        /// Updates all the necessary components and properties of the character, including the inventory, equipment, spellbook, talent manager, mounts, skills, and money.
+        /// </summary>
         public void UpdateAll()
         {
             AmeisenLogger.I.Log("CharacterManager", $"Updating full character", LogLevel.Verbose);
@@ -205,6 +288,9 @@ namespace AmeisenBotX.Core.Managers.Character
             Money = Wow.GetMoney();
         }
 
+        /// <summary>
+        /// Updates the bags by equipping a container item from the inventory if there is an available equipment slot.
+        /// </summary>
         public void UpdateBags()
         {
             IEnumerable<IWowInventoryItem> container = Inventory.Items.Where(item =>
@@ -229,6 +315,9 @@ namespace AmeisenBotX.Core.Managers.Character
             }
         }
 
+        /// <summary>
+        /// Updates the gear of the character by equipping the best available items in each equipment slot.
+        /// </summary>
         public void UpdateGear()
         {
             IList equipmentSlots = Enum.GetValues(typeof(WowEquipmentSlot));
@@ -296,6 +385,11 @@ namespace AmeisenBotX.Core.Managers.Character
             }
         }
 
+        /// <summary>
+        /// Converts a slot number to the corresponding equip location.
+        /// </summary>
+        /// <param name="slot">The slot number to convert.</param>
+        /// <returns>The equip location for the given slot number.</returns>
         private static string SlotToEquipLocation(int slot)
         {
             return slot switch
@@ -328,6 +422,13 @@ namespace AmeisenBotX.Core.Managers.Character
             };
         }
 
+        ///<summary>
+        ///Gets items by equipment location.
+        ///</summary>
+        ///<param name="equipLocation">The equipment location.</param>
+        ///<param name="matchedItems">The matched items.</param>
+        ///<param name="expectedItemCount">The expected item count.</param>
+        ///<returns>True if successful, false otherwise.</returns>
         private bool GetItemsByEquipLocation(string equipLocation, out List<IWowInventoryItem> matchedItems, out int expectedItemCount)
         {
             expectedItemCount = 1;
@@ -368,6 +469,9 @@ namespace AmeisenBotX.Core.Managers.Character
             return true;
         }
 
+        /// <summary>
+        /// Tries to add all bags to the matched items list and updates the expected item count to 4.
+        /// </summary>
         private void TryAddAllBags(List<IWowInventoryItem> matchedItems, ref int expectedItemCount)
         {
             TryAddItem(WowEquipmentSlot.CONTAINER_BAG_1, matchedItems);
@@ -378,6 +482,11 @@ namespace AmeisenBotX.Core.Managers.Character
             expectedItemCount = 4;
         }
 
+        /// <summary>
+        /// Tries to add an item from the specified equipment slot to the list of matched items.
+        /// </summary>
+        /// <param name="slot">The equipment slot to check for an item.</param>
+        /// <param name="matchedItems">The list of matched items to add the item to.</param>
         private void TryAddItem(WowEquipmentSlot slot, List<IWowInventoryItem> matchedItems)
         {
             if (Equipment.Items.TryGetValue(slot, out IWowInventoryItem ammoItem))
@@ -386,6 +495,10 @@ namespace AmeisenBotX.Core.Managers.Character
             }
         }
 
+        /// <summary>
+        /// Adds the specified list of matched items to the rings inventory slots.
+        /// The expected item count is set to 2.
+        /// </summary>
         private void TryAddRings(List<IWowInventoryItem> matchedItems, ref int expectedItemCount)
         {
             TryAddItem(WowEquipmentSlot.INVSLOT_RING1, matchedItems);
@@ -394,6 +507,9 @@ namespace AmeisenBotX.Core.Managers.Character
             expectedItemCount = 2;
         }
 
+        /// <summary>
+        /// Tries to add trinkets to the matched items list and updates the expected item count accordingly.
+        /// </summary>
         private void TryAddTrinkets(List<IWowInventoryItem> matchedItems, ref int expectedItemCount)
         {
             TryAddItem(WowEquipmentSlot.INVSLOT_TRINKET1, matchedItems);
@@ -402,6 +518,10 @@ namespace AmeisenBotX.Core.Managers.Character
             expectedItemCount = 2;
         }
 
+        /// <summary>
+        /// Tries to add mainhand and offhand weapons to the list of matched items.
+        /// Updates the expected item count to 2.
+        /// </summary>
         private void TryAddWeapons(List<IWowInventoryItem> matchedItems, ref int expectedItemCount)
         {
             TryAddItem(WowEquipmentSlot.INVSLOT_MAINHAND, matchedItems);

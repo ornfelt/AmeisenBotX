@@ -12,21 +12,39 @@ namespace AmeisenBotX
 {
     public partial class LoadConfigWindow : Window
     {
+        /// <summary>
+        /// Initializes a new instance of the LoadConfigWindow class.
+        /// </summary>
         public LoadConfigWindow()
         {
             ConfigToLoad = string.Empty;
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Gets or sets the configuration to be loaded.
+        /// </summary>
         public string ConfigToLoad { get; set; }
 
+        /// <summary>
+        /// Gets the path where the data is stored for the AmeisenBotX profiles in the Application Data folder.
+        /// </summary>
         private string DataPath { get; } = $"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\\AmeisenBotX\\profiles\\";
 
+        /// <summary>
+        /// Event handler for the ButtonClose Click event.
+        /// Closes the current window.
+        /// </summary>
         private void ButtonClose_Click(object sender, RoutedEventArgs e)
         {
             Close();
         }
 
+        /// <summary>
+        /// Event handler for the SelectionChanged event of the ComboboxSelectedConfig control.
+        /// </summary>
+        /// <param name="sender">The sender of the event.</param>
+        /// <param name="e">The SelectionChangedEventArgs associated with the event.</param>
         private void ComboboxSelectedConfig_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (comboboxSelectedConfig.SelectedItem == null)
@@ -66,6 +84,9 @@ namespace AmeisenBotX
             Close();
         }
 
+        /// <summary>
+        /// Event handler for when the window is loaded.
+        /// </summary>
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             // check for older data folder that users need to migrate to the new location
@@ -101,6 +122,10 @@ namespace AmeisenBotX
             }
         }
 
+        /// <summary>
+        /// Event handler for when the left mouse button is pressed down on the window.
+        /// Allows the window to be dragged around.
+        /// </summary>
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             DragMove();

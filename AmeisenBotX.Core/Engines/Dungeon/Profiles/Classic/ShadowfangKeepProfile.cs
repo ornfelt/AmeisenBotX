@@ -8,22 +8,50 @@ namespace AmeisenBotX.Core.Engines.Dungeon.Profiles.Classic
 {
     public class ShadowfangKeepProfile : IDungeonProfile
     {
+        /// <summary>
+        /// Gets the author of the code.
+        /// </summary>
         public string Author { get; } = "Jannis";
 
+        /// <summary>
+        /// Gets or sets the description of the profile for the Dungeon in The Silverpine Forest, made for Level 22 to 30.
+        /// </summary>
         public string Description { get; } = "Profile for the Dungeon in The Silverpine Forest, made for Level 22 to 30.";
 
+        /// <summary>
+        /// Gets the exit coordinates of the dungeon.
+        /// </summary>
         public Vector3 DungeonExit { get; } = new(-231, 2106, 77);
 
+        /// <summary>
+        /// Gets or sets the faction type for the dungeon.
+        /// </summary>
         public DungeonFactionType FactionType { get; } = DungeonFactionType.Neutral;
 
+        /// <summary>
+        /// Gets the size of the group.
+        /// </summary>
         public int GroupSize { get; } = 5;
 
+        /// <summary>
+        /// Gets the map ID for the Shadowfang Keep in World of Warcraft.
+        /// </summary>
         public WowMapId MapId { get; } = WowMapId.ShadowfangKeep;
 
+        /// <summary>
+        /// Gets the maximum level value, which is set to 30.
+        /// </summary>
         public int MaxLevel { get; } = 30;
 
+        /// <summary>
+        /// Gets the name of the location as "[22-30] Shadowfang Keep".
+        /// </summary>
         public string Name { get; } = "[22-30] Shadowfang Keep";
 
+        /// <summary>
+        /// A list of DungeonNodes representing the nodes in the dungeon.
+        /// Each node contains a position (x, y, z).
+        /// </summary>
         public List<DungeonNode> Nodes { get; } = new()
         {
             new(new(-229, 2109, 77)),
@@ -261,14 +289,29 @@ namespace AmeisenBotX.Core.Engines.Dungeon.Profiles.Classic
             new(new(-82, 2158, 156)),
         };
 
+        /// <summary>
+        /// Gets the list of priority units.
+        /// </summary>
         public List<int> PriorityUnits { get; } = new();
 
+        /// <summary>
+        /// Gets the required item level.
+        /// </summary>
         public int RequiredItemLevel { get; } = 10;
 
+        /// <summary>
+        /// Gets the required level.
+        /// </summary>
         public int RequiredLevel { get; } = 22;
 
+        /// <summary>
+        /// Gets the world entry vector in 3D space.
+        /// </summary>
         public Vector3 WorldEntry { get; } = new(-232, -1569, 77);
 
+        /// <summary>
+        /// Gets the World Entry Map ID for the WoW Map.
+        /// </summary>
         public WowMapId WorldEntryMapId { get; } = WowMapId.EasternKingdoms;
     }
 }

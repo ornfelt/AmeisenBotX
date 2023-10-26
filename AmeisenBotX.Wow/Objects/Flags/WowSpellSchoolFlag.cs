@@ -2,6 +2,47 @@
 
 namespace AmeisenBotX.Wow.Objects.Flags
 {
+    /// <summary>
+    /// Flags for the different spell schools in World of Warcraft.
+    /// Each flag represents a different spell school.
+    /// <para>
+    /// Possible values:
+    /// </para>
+    /// <list type="table">
+    /// <item>
+    /// <term>None</term>
+    /// <description>No school</description>
+    /// </item>
+    /// <item>
+    /// <term>Physical</term>
+    /// <description>Physical school</description>
+    /// </item>
+    /// <item>
+    /// <term>Holy</term>
+    /// <description>Holy school</description>
+    /// </item>
+    /// <item>
+    /// <term>Fire</term>
+    /// <description>Fire school</description>
+    /// </item>
+    /// <item>
+    /// <term>Nature</term>
+    /// <description>Nature school</description>
+    /// </item>
+    /// <item>
+    /// <term>Frost</term>
+    /// <description>Frost school</description>
+    /// </item>
+    /// <item>
+    /// <term>Shadow</term>
+    /// <description>Shadow school</description>
+    /// </item>
+    /// <item>
+    /// <term>Arcane</term>
+    /// <description>Arcane school</description>
+    /// </item>
+    /// </list>
+    /// </summary>
     [Flags]
     public enum WowSpellSchoolFlag
     {

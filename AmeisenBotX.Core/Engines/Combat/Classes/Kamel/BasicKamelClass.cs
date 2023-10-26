@@ -15,56 +15,91 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
 {
     public abstract class BasicKamelClass : ICombatClass
     {
+        /// <summary>
+        /// Race spell for Troll: Berserking.
+        /// </summary>
         #region Race Spells
 
         //Race (Troll)
         private const string BerserkingSpell = "Berserking";
 
+        ///<summary>
+        ///The name of the spell "Every Man for Himself" used by the Human race.
+        ///</summary>
         //Race (Human)
         private const string EveryManforHimselfSpell = "Every Man for Himself";
 
+        /// <summary>
+        /// Represents the Race Draenei and its special ability "Gift of the Naaru".
+        /// </summary>
         //Race (Draenei)
         private const string giftOfTheNaaruSpell = "Gift of the Naaru";
 
+        /// <summary>
+        /// The constant representing the spell "Stoneform" for the Dwarf race.
+        /// </summary>
         //Race (Dwarf)
         private const string StoneformSpell = "Stoneform";
 
+        /// <summary>
+        /// The spell used by Shamans to bring an ally back to life with a portion of their health.
+        /// </summary>
         #endregion Race Spells
 
         #region Shaman
 
         public const string ancestralSpiritSpell = "Ancestral Spirit";
 
+        /// <summary>
+        /// The name of the redemption spell for a Paladin.
+        /// </summary>
         #endregion Shaman
 
         #region Paladin
 
         public const string redemptionSpell = "Redemption";
 
+        /// <summary>
+        /// The name of the resurrection spell used by a Priest.
+        /// </summary>
         #endregion Paladin
 
         #region Priest
 
         public const string resurrectionSpell = "Resurrection";
 
+        /// <summary>
+        /// A dictionary that stores the cooldown time for each spell.
+        /// The key is the name of the spell, and the value is the time when the spell will be available again.
+        /// </summary>
         #endregion Priest
 
         public readonly Dictionary<string, DateTime> spellCoolDown = new();
 
+        ///<summary>
+        ///Array of integers representing the IDs of useable healing items.
+        ///The array includes IDs for potions and healthstones.
+        ///</summary>
         private readonly int[] useableHealingItems = new int[]
-        {
+                {
             // potions
             118, 929, 1710, 2938, 3928, 4596, 5509, 13446, 22829, 33447,
             // healthstones
             5509, 5510, 5511, 5512, 9421, 19013, 22103, 36889, 36892,
-        };
+                };
 
+        /// <summary>
+        /// Array of integers representing useable mana items.
+        /// </summary>
         private readonly int[] useableManaItems = new int[]
-        {
+                {
             // potions
             2245, 3385, 3827, 6149, 13443, 13444, 33448, 22832,
-        };
+                };
 
+        /// <summary>
+        /// Constructor for the BasicKamelClass.
+        /// </summary>
         protected BasicKamelClass()
         {
             //Revive Spells
@@ -92,50 +127,127 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
             PriorityTargetDisplayIds = new List<int>();
         }
 
+        /// <summary>
+        /// Gets or sets the name of the author.
+        /// </summary>
         public abstract string Author { get; }
 
+        /// <summary>
+        /// Gets or sets the TimegatedEvent for the AutoAttackEvent property. 
+        /// </summary>
         public TimegatedEvent AutoAttackEvent { get; private set; }
 
+        /// <summary>
+        /// Gets or sets the collection of blacklisted target display IDs.
+        /// </summary>
         public IEnumerable<int> BlacklistedTargetDisplayIds { get; set; }
 
+        /// <summary>
+        /// Gets or sets the interface for the AmeisenBot.
+        /// </summary>
         public AmeisenBotInterfaces Bot { get; internal set; }
 
+        /// <summary>
+        /// Gets or sets the dictionary of strings and dynamic values.
+        /// </summary>
         public abstract Dictionary<string, dynamic> C { get; set; }
 
+        /// <summary>
+        /// Gets or sets the collection of configurable items represented by a dictionary.
+        /// The keys of the dictionary are strings, and the values can be of any dynamic type.
+        /// </summary>
         public Dictionary<string, dynamic> Configureables { get; set; }
 
+        /// <summary>
+        /// Gets the description of the item.
+        /// </summary>
         public abstract string Description { get; }
 
+        /// <summary>
+        /// Gets the display name for the object.
+        /// </summary>
         public abstract string DisplayName { get; }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether this code handles facing.
+        /// </summary>
+        /// <returns>Always returns false.</returns>
         public bool HandlesFacing => false;
 
+        /// <summary>
+        /// Gets a value indicating whether this class handles movement.
+        /// </summary>
+        /// <returns>True if this class handles movement; otherwise, false.</returns>
         public abstract bool HandlesMovement { get; }
 
+        /// <summary>
+        /// Gets a value indicating whether this instance is a melee character.
+        /// </summary>
         public abstract bool IsMelee { get; }
 
+        /// <summary>
+        /// Gets or sets the item comparator used to compare items.
+        /// </summary>
         public abstract IItemComparator ItemComparator { get; set; }
 
+        /// <summary>
+        /// Gets or sets the collection of priority target display IDs.
+        /// </summary>
+        /// <returns>
+        /// An enumerable collection of integer values representing the priority target display IDs.
+        /// </returns>
         public IEnumerable<int> PriorityTargetDisplayIds { get; set; }
 
+        /// <summary>
+        /// Gets or sets the revive player event that is time-gated.
+        /// </summary>
         public TimegatedEvent RevivePlayerEvent { get; private set; }
 
+        /// <summary>
+        /// Gets the WowRole of the object.
+        /// </summary>
         public abstract WowRole Role { get; }
 
+        /// <summary>
+        /// Gets the talent tree associated with the instance.
+        /// </summary>
         public abstract TalentTree Talents { get; }
 
+        /// <summary>
+        /// Gets a value indicating whether the target is in the line of sight of the bot.
+        /// </summary>
         public bool TargetInLineOfSight => Bot.Objects.IsTargetInLineOfSight;
 
+        /// <summary>
+        /// Gets or sets the TimegatedEvent for selecting a target.
+        /// </summary>
         public TimegatedEvent TargetSelectEvent { get; private set; }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether this character uses automated attacks.
+        /// </summary>
         public abstract bool UseAutoAttacks { get; }
 
+        /// <summary>
+        /// Gets the version of the object.
+        /// </summary>
         public abstract string Version { get; }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the character can walk behind an enemy.
+        /// </summary>
         public abstract bool WalkBehindEnemy { get; }
 
+        /// <summary>
+        /// Gets the instance of the WowClass.
+        /// </summary>
         public abstract WowClass WowClass { get; }
 
+        /// <summary>
+        /// Attacks the target if it is within 3.0 units of the player's position. 
+        /// Stops click to move, resets movement, and interacts with the target if close enough. 
+        /// Otherwise, sets movement action to move towards the target's position.
+        /// </summary>
         //follow the target
         public void AttackTarget()
         {
@@ -157,6 +269,9 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
             }
         }
 
+        /// <summary>
+        /// Change the target to attack if the current target is too far away.
+        /// </summary>
         //Change target if target to far away
         public void ChangeTargetToAttack()
         {
@@ -175,6 +290,13 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
             }
         }
 
+        /// <summary>
+        /// Checks if a weapon slot has a specific enchantment.
+        /// </summary>
+        /// <param name="slot">The weapon slot to check.</param>
+        /// <param name="enchantmentName">The name of the enchantment to search for.</param>
+        /// <param name="spellToCastEnchantment">The spell to cast the enchantment.</param>
+        /// <returns>True if the weapon slot does not have the specified enchantment and casting the spell is possible; otherwise, false.</returns>
         public bool CheckForWeaponEnchantment(WowEquipmentSlot slot, string enchantmentName, string spellToCastEnchantment)
         {
             if (Bot.Character.Equipment.Items.ContainsKey(slot))
@@ -211,6 +333,14 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
             return false;
         }
 
+        /// <summary>
+        /// Casts a mana spell with the given spell name and optional flag to cast it on self.
+        /// </summary>
+        /// <param name="spellName">The name of the spell to be cast.</param>
+        /// <param name="castOnSelf">Optional flag indicating whether the spell should be cast on self. Default is false.</param>
+        /// <returns>
+        /// Returns true if the spell was successfully cast, otherwise false.
+        /// </returns>
         //Mana Spells
         public bool CustomCastSpellMana(string spellName, bool castOnSelf = false)
         {
@@ -248,6 +378,9 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
             return false;
         }
 
+        /// <summary>
+        /// Executes the actions for the bot.
+        /// </summary>
         public void Execute()
         {
             ExecuteCC();
@@ -297,8 +430,16 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
             }
         }
 
+        /// <summary>
+        /// Executes the command center.
+        /// </summary>
         public abstract void ExecuteCC();
 
+        /// <summary>
+        /// Checks if a spell is ready by comparing the current time with the cooldown time of the specified spell.
+        /// </summary>
+        /// <param name="spellName">The name of the spell to check.</param>
+        /// <returns>True if the spell is ready to use, false otherwise.</returns>
         public bool IsSpellReady(string spellName)
         {
             if (DateTime.Now > spellCoolDown[spellName])
@@ -310,13 +451,23 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
             return false;
         }
 
+        /// <summary>
+        /// Loads the dictionary of JSON objects into the Configureables property.
+        /// </summary>
         public void Load(Dictionary<string, JsonElement> objects)
         {
             Configureables = objects["Configureables"].ToDyn();
         }
 
+        /// <summary>
+        /// This method is used to perform an action when the character is out of combat.
+        /// </summary>
         public abstract void OutOfCombatExecute();
 
+        /// <summary>
+        /// Revives a party member using a specified revive spell.
+        /// </summary>
+        /// <param name="reviveSpellName">The name of the revive spell.</param>
         public void RevivePartyMember(string reviveSpellName)
         {
             List<IWowUnit> partyMemberToHeal = new(Bot.Objects.Partymembers)
@@ -333,6 +484,9 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
             }
         }
 
+        /// <summary>
+        /// Saves the dictionary of configureables.
+        /// </summary>
         public Dictionary<string, object> Save()
         {
             return new()
@@ -341,6 +495,9 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
             };
         }
 
+        /// <summary>
+        /// Selects a target for the bot to attack.
+        /// </summary>
         public void Targetselection()
         {
             if (TargetSelectEvent.Run())
@@ -366,6 +523,9 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
             }
         }
 
+        /// <summary>
+        /// Method to select a target for tanking.
+        /// </summary>
         public void TargetselectionTank()
         {
             if (TargetSelectEvent.Run())
@@ -412,11 +572,19 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
             }
         }
 
+        /// <summary>
+        /// Returns a string representation of the current object, including the WowClass, Role, DisplayName, and Author.
+        /// </summary>
         public override string ToString()
         {
             return $"[{WowClass}] [{Role}] {DisplayName} ({Author})";
         }
 
+        /// <summary>
+        /// Checks if the character has all four elemental totems (Earth, Air, Water, Fire) in their inventory using a case-insensitive comparison,
+        /// or if the character has any item equipped in their ranged slot.
+        /// </summary>
+        /// <returns>True if the character has all four totems or an item equipped in the ranged slot, otherwise false.</returns>
         public bool TotemItemCheck()
         {
             return (Bot.Character.Inventory.Items.Any(e => e.Name.Equals("Earth Totem", StringComparison.OrdinalIgnoreCase)) &&

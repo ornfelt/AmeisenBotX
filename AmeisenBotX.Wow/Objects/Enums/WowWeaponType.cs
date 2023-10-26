@@ -1,5 +1,8 @@
 ﻿namespace AmeisenBotX.Wow.Objects.Enums
 {
+    /// <summary>
+    /// Represents the different types of weapons in the World of Warcraft game.
+    /// </summary>
     public enum WowWeaponType
     {
         None = -1,

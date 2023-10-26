@@ -6,6 +6,12 @@ namespace AmeisenBotX.Core.Logic.Routines
 {
     public static class SpeakToClassTrainerRoutine
     {
+        /// <summary>
+        /// Runs the AmeisenBot with the specified bot and selected unit parameters.
+        /// </summary>
+        /// <param name="bot">The AmeisenBotInterfaces object representing the bot.</param>
+        /// <param name="selectedUnit">The IWowUnit object representing the selected unit.</param>
+        /// <returns>Returns true if the AmeisenBot successfully runs, otherwise false.</returns>
         public static bool Run(AmeisenBotInterfaces bot, IWowUnit selectedUnit)
         {
             if (bot == null || selectedUnit == null)

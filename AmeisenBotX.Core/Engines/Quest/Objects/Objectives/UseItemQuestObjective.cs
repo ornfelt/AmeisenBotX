@@ -3,10 +3,19 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Quest.Objects.Objectives
 {
+    /// <summary>
+    /// Delegate representing a boolean condition to determine if an objective of a UseItem quest has been completed.
+    /// </summary>
     public delegate bool UseItemQuestObjectiveCondition();
 
     public class UseItemQuestObjective : IQuestObjective
     {
+        /// <summary>
+        /// Initializes a new instance of the UseItemQuestObjective class.
+        /// </summary>
+        /// <param name="bot">The bot instance to use for completing the objective.</param>
+        /// <param name="itemId">The ID of the item to use for completing the objective.</param>
+        /// <param name="condition">The condition for completing the objective.</param>
         public UseItemQuestObjective(AmeisenBotInterfaces bot, int itemId, UseItemQuestObjectiveCondition condition)
         {
             Bot = bot;
@@ -14,16 +23,35 @@ namespace AmeisenBotX.Core.Engines.Quest.Objects.Objectives
             Condition = condition;
         }
 
+        /// <summary>
+        /// Gets a value indicating whether the task is finished.
+        /// </summary>
         public bool Finished => Progress == 100.0;
 
+        /// <summary>
+        /// Returns the progress as a percentage.
+        /// If the condition is true, it returns 100.0; otherwise, it returns 0.0.
+        /// </summary>
         public double Progress => Condition() ? 100.0 : 0.0;
 
+        /// <summary>
+        /// Gets or sets the reference to the AmeisenBotInterfaces instance.
+        /// </summary>
         private AmeisenBotInterfaces Bot { get; }
 
+        /// <summary>
+        /// Gets the condition for the UseItemQuestObjective.
+        /// </summary>
         private UseItemQuestObjectiveCondition Condition { get; }
 
+        /// <summary>
+        /// Gets the item ID.
+        /// </summary>
         private int ItemId { get; }
 
+        /// <summary>
+        /// Executes the action if it meets the specified conditions.
+        /// </summary>
         public void Execute()
         {
             if (Finished || Bot.Player.IsCasting) { return; }

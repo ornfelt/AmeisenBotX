@@ -22,6 +22,10 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Bia10
 {
     public abstract class BasicCombatClassBia10 : ICombatClass
     {
+        /// <summary>
+        /// Initializes a new instance of the BasicCombatClassBia10 class with the specified bot.
+        /// </summary>
+        /// <param name="bot">The bot instance to be used.</param>
         protected BasicCombatClassBia10(AmeisenBotInterfaces bot)
         {
             Bot = bot;
@@ -44,64 +48,155 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Bia10
             };
         }
 
+        /// <summary>
+        /// Gets the name of the author.
+        /// </summary>
         public string Author => "Bia10";
 
+        /// <summary>
+        /// Gets or sets the collection of blacklisted target display IDs.
+        /// </summary>
         public IEnumerable<int> BlacklistedTargetDisplayIds { get; set; }
 
+        /// <summary>
+        /// Gets or sets the dictionary of configureable items, where the key is a string and the value is dynamic.
+        /// </summary>
         public Dictionary<string, dynamic> Configureables { get; set; }
 
+        /// <summary>
+        /// Gets or sets the CooldownManager object used for managing cooldowns.
+        /// </summary>
         public CooldownManager CooldownManager { get; private set; }
 
+        /// <summary>
+        /// Gets or sets the description of the object.
+        /// </summary>
         public abstract string Description { get; }
 
+        /// <summary>
+        /// Gets or sets the display name.
+        /// </summary>
         public abstract string DisplayName { get; }
 
+        /// <summary>
+        /// Gets or sets the TimegatedEvent used for checking the event's facing.
+        /// </summary>
         public TimegatedEvent EventCheckFacing { get; set; }
 
+        /// <summary>
+        /// Gets or sets the GroupAuraManager instance used to manage group auras.
+        /// </summary>
         public GroupAuraManager GroupAuraManager { get; private set; }
 
+        /// <summary>
+        /// Determines if the facing is handled.
+        /// </summary>
         public bool HandlesFacing => true;
 
+        /// <summary>
+        /// Gets a value indicating whether this object handles movement.
+        /// </summary>
         public abstract bool HandlesMovement { get; }
 
+        /// <summary>
+        /// Gets the InterruptManager object and allows for private setting
+        /// </summary>
         public InterruptManager InterruptManager { get; private set; }
 
+        /// <summary>
+        /// Gets a value indicating whether this object uses melee attacks.
+        /// </summary>
         public abstract bool IsMelee { get; }
 
+        /// Gets or sets the item comparator used for comparing items.
         public abstract IItemComparator ItemComparator { get; set; }
 
+        /// Gets or sets the AuraManager object that manages auras.
         public AuraManager MyAuraManager { get; private set; }
 
+        /// <summary>
+        /// Gets or sets the display IDs of priority targets.
+        /// </summary>
+        /// <value>
+        /// An enumerable collection of integers representing the display IDs of priority targets.
+        /// </value>
         public IEnumerable<int> PriorityTargetDisplayIds { get; set; }
 
+        /// <summary>
+        /// Gets or sets a dictionary of resurrection targets, where the keys are the targets' names and the values are the resurrection timestamps.
+        /// </summary>
         public Dictionary<string, DateTime> ResurrectionTargets { get; private set; }
 
+        /// <summary>
+        /// Gets the role for the Wow object.
+        /// </summary>
         public abstract WowRole Role { get; }
 
+        /// <summary>
+        /// Gets the talent tree associated with the instance.
+        /// </summary>
+        /// <returns>The talent tree.</returns>
         public abstract TalentTree Talents { get; }
 
+        /// <summary>
+        /// Gets the target AuraManager instance.
+        /// </summary>
         public AuraManager TargetAuraManager { get; private set; }
 
+        /// <summary>
+        /// Gets or sets the target provider used for DPS (Domain Print Services).
+        /// </summary>
         public ITargetProvider TargetProviderDps { get; private set; }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the entity should use auto-attacks.
+        /// </summary>
         public abstract bool UseAutoAttacks { get; }
 
+        /// <summary>
+        /// Gets the version of the object.
+        /// </summary>
         public abstract string Version { get; }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the character has the ability to walk behind enemies.
+        /// </summary>
         public abstract bool WalkBehindEnemy { get; }
 
+        /// <summary>
+        /// Gets the wow class.
+        /// </summary>
+        /// <returns>The wow class.</returns>
         public abstract WowClass WowClass { get; }
 
+        /// <summary>
+        /// Gets or sets the instance of the AmeisenBotInterfaces class that represents the bot.
+        /// </summary>
         protected AmeisenBotInterfaces Bot { get; }
 
+        /// <summary>
+        /// Gets or sets the date and time when the last spell was cast.
+        /// </summary>
         protected DateTime LastSpellCast { get; private set; }
 
+        /// <summary>
+        /// Gets or sets the list of functions used to determine if a spell should be aborted.
+        /// </summary>
         protected List<Func<bool>> SpellAbortFunctions { get; }
 
+        /// <summary>
+        /// Gets or sets the time it took to compute the greatest common divisor (GCD).
+        /// </summary>
         private double GCDTime { get; set; }
 
+        /// <summary>
+        /// Gets or sets the last updated date and time for the GCD (Greatest Common Divisor) calculation.
+        /// </summary>
         private DateTime LastGCD { get; set; }
 
+        /// <summary>
+        /// Method for attacking the target.
+        /// </summary>
         public virtual void AttackTarget()
         {
             IWowUnit target = Bot.Target;
@@ -157,6 +252,26 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Bia10
             }
         }
 
+        /// <summary>
+        /// This method executes the main logic for the character's actions. It
+        /// first checks if the character is currently casting a spell and if
+        /// the target is not in line of sight or if any of the spell abort
+        /// functions return true, it stops casting and returns.  Then, it
+        /// checks if there is a target and if the event check facing function
+        /// returns true, it calls the check facing method for the target.
+        /// After that, it attacks the target.  Next, it checks for buffs,
+        /// debuffs, and interrupts. If either the personal aura manager or
+        /// group aura manager ticks, it returns.  If there is a target and the
+        /// target aura manager ticks for the target's auras, it returns.  If
+        /// the interrupt manager ticks for nearby enemies, it returns.  After
+        /// that, it switches based on the player's race and performs
+        /// race-specific actions. For example, if the player's race is Human
+        /// and they are dazed, fleeing, influenced, or possessed, it tries to
+        /// cast the Every Man For Himself racial ability.  The same logic
+        /// applies for other races, each with their own specific conditions
+        /// and racial abilities.  Finally, if none of the race cases match the
+        /// player's race, it throws an ArgumentOutOfRangeException.
+        /// </summary>
         public virtual void Execute()
         {
             if (Bot.Player.IsCasting && (!Bot.Objects.IsTargetInLineOfSight
@@ -281,11 +396,18 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Bia10
             }
         }
 
+        /// <summary>
+        /// Loads the objects into the Configureables property, if the "Configureables" key exists in the dictionary.
+        /// </summary>
+        /// <param name="objects">A dictionary containing string keys and JsonElement values.</param>
         public virtual void Load(Dictionary<string, JsonElement> objects)
         {
             if (objects.ContainsKey("Configureables")) { Configureables = objects["Configureables"].ToDyn(); }
         }
 
+        /// <summary>
+        /// Executes the code when the player is out of combat.
+        /// </summary>
         public virtual void OutOfCombatExecute()
         {
             if (Bot.Player.IsCasting)
@@ -302,16 +424,30 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Bia10
             GroupAuraManager.Tick();
         }
 
+        /// <summary>
+        /// Saves the configureables and returns it as a dictionary of string and object. 
+        /// </summary>
         public virtual Dictionary<string, object> Save()
         {
             return new() { { "Configureables", Configureables } };
         }
 
+        /// <summary>
+        /// Returns a string representation of the object in the format:
+        /// [WowClass] [Role] DisplayName (Author)
+        /// </summary>
+        /// <returns>The string representation of the object.</returns>
         public override string ToString()
         {
             return $"[{WowClass}] [{Role}] {DisplayName} ({Author})";
         }
 
+        /// <summary>
+        /// Validates a spell by checking if it is known and if the target is in line of sight, as well as if the spell is on cooldown or if the global cooldown is active.
+        /// </summary>
+        /// <param name="spellName">The name of the spell to validate.</param>
+        /// <param name="checkGCD">A flag indicating whether to also check the global cooldown.</param>
+        /// <returns>True if the spell is valid, otherwise false.</returns>
         public bool ValidateSpell(string spellName, bool checkGCD)
         {
             if (!Bot.Character.SpellBook.IsSpellKnown(spellName) || !Bot.Objects.IsTargetInLineOfSight)
@@ -327,6 +463,13 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Bia10
             return !Bot.Player.IsCasting;
         }
 
+        /// <summary>
+        /// Checks if a weapon has a specific enchantment and casts a spell to apply it if not.
+        /// </summary>
+        /// <param name="slot">The equipment slot containing the weapon.</param>
+        /// <param name="enchantmentName">The name of the enchantment to check for.</param>
+        /// <param name="spellToCastEnchantment">The name of the spell to cast for applying the enchantment.</param>
+        /// <returns>True if the enchantment is not found and the spell is successfully cast; otherwise, false.</returns>
         protected bool CheckForWeaponEnchantment(WowEquipmentSlot slot, string enchantmentName, string spellToCastEnchantment)
         {
             if (!Bot.Character.Equipment.Items.ContainsKey(slot))
@@ -351,6 +494,11 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Bia10
                    && TryCastSpell(spellToCastEnchantment, 0, true);
         }
 
+        /// <summary>
+        /// Handles dead party members by attempting to resurrect them with a specified spell.
+        /// </summary>
+        /// <param name="spellName">The name of the spell to use for resurrection.</param>
+        /// <returns>Returns true if a party member was successfully resurrected, otherwise returns false.</returns>
         protected bool HandleDeadPartyMembers(string spellName)
         {
             Managers.Character.Spells.Objects.Spell spell = Bot.Character.SpellBook.GetSpellByName(spellName);
@@ -392,6 +540,12 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Bia10
             return TryCastSpell(spellName, player.Guid, true);
         }
 
+        /// <summary>
+        /// Checks if the specified unit is within the range of the given spell.
+        /// </summary>
+        /// <param name="unit">The unit to check the range against.</param>
+        /// <param name="spellName">The name of the spell.</param>
+        /// <returns>True if the unit is within the spell's range, false otherwise.</returns>
         protected bool IsInSpellRange(IWowUnit unit, string spellName)
         {
             if (string.IsNullOrEmpty(spellName))
@@ -419,6 +573,14 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Bia10
             return distance >= spell.MinRange && distance <= spell.MaxRange - 1.0;
         }
 
+        /// <summary>
+        /// Tries to cast a spell with the given parameters.
+        /// </summary>
+        /// <param name="spellName">The name of the spell to cast.</param>
+        /// <param name="guid">The identifier of the target.</param>
+        /// <param name="needsResource">Specify whether the spell requires a resource.</param>
+        /// <param name="GCD">The global cooldown time for casting the spell.</param>
+        /// <returns>Returns true if the spell is successfully cast, otherwise false.</returns>
         protected bool TryCastSpell(string spellName, ulong guid, bool needsResource = true, double GCD = 1.5)
         {
             Managers.Character.Spells.Objects.Spell spell = Bot.Character.SpellBook.GetSpellByName(spellName);
@@ -515,6 +677,13 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Bia10
             return true;
         }
 
+        /// <summary>
+        /// This method casts a spell with the given spell name and target
+        /// type. It executes a Lua script to perform the spell cast and
+        /// retrieves the result. If the cast is successful, it logs the
+        /// casting information and returns true. If the cast fails or
+        /// encounters any errors, it returns false.
+        /// </summary>
         private bool CastSpell(string spellName, bool castOnSelf)
         {
             // spits out stuff like this "1;300" (1 or 0 whether the cast was successful or
@@ -561,6 +730,7 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Bia10
             return false;
         }
 
+        /// Checks if the target needs to be faced and faces the target if necessary.
         private void CheckFacing(IWowObject target)
         {
             if (target == null || target.Guid == Bot.Wow.PlayerGuid)
@@ -588,17 +758,25 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Bia10
             }
         }
 
+        ///<summary>
+        ///Checks if the time difference between LastGCD and current time is less than GCDTime.
+        ///Returns true if the time difference is less than GCDTime, otherwise false.
+        ///</summary>
         private bool IsGCD()
         {
             return DateTime.Now.Subtract(LastGCD).TotalSeconds < GCDTime;
         }
 
+        /// <summary>
+        /// Sets the value of the GCDTime property to the specified value and updates the LastGCD property with the current date and time.
+        /// </summary>
         private void SetGCD(double gcdInSec)
         {
             GCDTime = gcdInSec;
             LastGCD = DateTime.Now;
         }
 
+        /// Validates the target based on the provided GUID and returns the result along with the target object and a flag indicating if switching targets is needed.
         private bool ValidateTarget(ulong guid, out IWowUnit target, out bool needToSwitchTargets)
         {
             if (guid == Bot.Player.Guid)

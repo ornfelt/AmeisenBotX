@@ -1,5 +1,8 @@
 ﻿namespace AmeisenBotX.Wow.Objects.Enums
 {
+    ///<summary>
+    ///Enumeration for the map IDs in World of Warcraft.
+    ///</summary>
     public enum WowMapId
     {
         AhnkahetTheOldKingdom = 619,

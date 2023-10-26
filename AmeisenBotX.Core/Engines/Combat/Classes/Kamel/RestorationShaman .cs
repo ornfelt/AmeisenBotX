@@ -11,51 +11,124 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
 {
     internal class RestorationShaman : BasicKamelClass
     {
+        /// <summary>
+        /// This is a private constant string with the value "Bloodlust".
+        /// </summary>
         private const string Bloodlust = "Bloodlust";
 
+        /// <summary>
+        /// Represents the name of the spell "Call of the Elements".
+        /// </summary>
         private const string CalloftheElementsSpell = "Call of the Elements";
 
+        /// <summary>
+        /// The name of the chain heal spell.
+        /// </summary>
         private const string chainHealSpell = "Chain Heal";
 
+        /// <summary>
+        /// The name of the Earthliving buff.
+        /// </summary>
         private const string earthlivingBuff = "Earthliving ";
 
+        /// <summary>
+        /// The constant representing the spell name for Earthliving Weapon.
+        /// </summary>
         private const string earthlivingWeaponSpell = "Earthliving Weapon";
 
+        /// <summary>
+        /// Represents the name of the Earth Shield spell.
+        /// </summary>
         private const string earthShieldSpell = "Earth Shield";
 
+        /// <summary>
+        /// Represents the name of the Earth Shock spell.
+        /// </summary>
         private const string earthShockSpell = "Earth Shock";
 
+        /// <summary>
+        /// Represents the name of the spell "Flame Shock".
+        /// </summary>
         private const string flameShockSpell = "Flame Shock";
 
+        /// <summary>
+        /// Represents the Gift of the Naaru spell for the Draenei race.
+        /// </summary>
         //Race (Draenei)
         private const string giftOfTheNaaruSpell = "Gift of the Naaru";
 
+        /// <summary>
+        /// The healing wave spell.
+        /// </summary>
         //Spells
         private const string healingWaveSpell = "Healing Wave";
 
+        /// <summary>
+        /// Represents the name of the heroism spell.
+        /// </summary>
         private const string heroismSpell = "Heroism";
+        /// <summary>
+        /// Represents the name of the lesser healing wave spell.
+        /// </summary>
         private const string lesserHealingWaveSpell = "Lesser Healing Wave";
 
+        /// <summary>
+        /// Represents the Lightning Bolt spell.
+        /// </summary>
         //Spells / DMG
         private const string LightningBoltSpell = "Lightning Bolt";
 
+        /// <summary>
+        /// The constant representing the Lightning Shield spell.
+        /// </summary>
         private const string LightningShieldSpell = "Lightning Shield";
+        /// <summary>
+        /// The name of the Mana Spring Totem spell.
+        /// </summary>
         private const string ManaSpringTotemSpell = "Mana Spring Totem";
+        /// <summary>
+        /// Represents the spell name for Mana Tide Totem.
+        /// </summary>
         private const string ManaTideTotemSpell = "Mana Tide Totem";
 
+        /// <summary>
+        /// The constant string representing the spell "Nature's Swiftness"
+        /// </summary>
         //CD|Buffs
         private const string naturesswiftSpell = "Nature's Swiftness";
 
+        /// <summary>
+        /// The name of the constant riptide spell.
+        /// </summary>
         private const string riptideSpell = "Riptide";
+        /// <summary>
+        /// Represents the name of the "Strength of Earth Totem" spell.
+        /// </summary>
         private const string StrengthofEarthTotemSpell = "Strength of Earth Totem";
+        /// <summary>
+        /// Represents the name of the tidal force spell.
+        /// </summary>
         private const string tidalForceSpell = "Tidal Force";
+        /// <summary>
+        /// The name of the water shield spell.
+        /// </summary>
         private const string watershieldSpell = "Water shield";
 
+        /// <summary>
+        /// The name of the Windfury Totem spell.
+        /// </summary>
         //Totem
         private const string WindfuryTotemSpell = "Windfury Totem";
 
+        /// <summary>
+        /// Constant representing the name of the spell "Wind Shear".
+        /// </summary>
         private const string windShearSpell = "Wind Shear";
 
+        /// <summary>
+        /// Constructor for the RestorationShaman class.
+        /// </summary>
+        /// <param name="bot">The AmeisenBotInterfaces object used for communication with the bot.</param>
         public RestorationShaman(AmeisenBotInterfaces bot) : base()
         {
             Bot = bot;
@@ -99,27 +172,67 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
             TotemcastEvent = new(TimeSpan.FromSeconds(4));
         }
 
+        /// <summary>
+        /// Gets the author name of the code.
+        /// </summary>
+        /// <returns>The name of the author, which is Lukas.</returns>
         public override string Author => "Lukas";
 
+        /// <summary>
+        /// Gets or sets the dictionary of string keys and dynamic values.
+        /// </summary>
         public override Dictionary<string, dynamic> C { get; set; } = new Dictionary<string, dynamic>();
 
+        /// <summary>
+        /// Gets the description of the Resto Shaman.
+        /// </summary>
+        /// <returns>
+        /// The description of the Resto Shaman as a string.
+        /// </returns>
         public override string Description => "Resto Shaman";
 
+        /// <summary>
+        /// Gets the display name for the Shaman Restoration class.
+        /// </summary>
         public override string DisplayName => "Shaman Restoration";
 
+        /// <summary>
+        /// Represents a time event for Earth Shield.
+        /// </summary>
         //Time event
         public TimegatedEvent EarthShieldEvent { get; private set; }
 
+        /// <summary>
+        /// Gets a value indicating whether this component handles movement.
+        /// </summary>
+        /// <returns>Always returns false.</returns>
         public override bool HandlesMovement => false;
 
+        /// <summary>
+        /// Gets a value indicating whether the character is a melee fighter.
+        /// </summary>
+        /// <returns>False, indicating the character is not a melee fighter.</returns>
         public override bool IsMelee => false;
 
+        /// <summary>
+        /// Gets or sets the item comparator for the current object.
+        /// </summary>
         public override IItemComparator ItemComparator { get; set; } = new BasicSpiritComparator(new() { WowArmorType.Shield }, new() { WowWeaponType.Sword, WowWeaponType.Mace, WowWeaponType.Axe });
 
+        /// <summary>
+        /// Gets or sets the TimegatedEvent for the ManaTideTotem event.
+        /// </summary>
         public TimegatedEvent ManaTideTotemEvent { get; private set; }
 
+        /// <summary>
+        /// Gets the role of the character as a healer.
+        /// </summary>
         public override WowRole Role => WowRole.Heal;
 
+        /// <summary>
+        /// Gets the TalentTree object containing the talent tree configuration.
+        /// </summary>
+        /// <returns>The TalentTree object.</returns>
         public override TalentTree Talents { get; } = new()
         {
             Tree1 = new(),
@@ -155,20 +268,50 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
             },
         };
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the target is in range.
+        /// </summary>
         public bool TargetIsInRange { get; set; }
 
+        /// <summary>
+        /// Represents a timegated event for casting a totem.
+        /// </summary>
         public TimegatedEvent TotemcastEvent { get; private set; }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the character should use auto attacks.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if the character should use auto attacks; otherwise, <c>false</c>.
+        /// </value>
         public override bool UseAutoAttacks => false;
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the spell can only be used during combat.
+        /// </summary>
         public bool UseSpellOnlyInCombat { get; private set; }
 
+        /// <summary>
+        /// Gets the version of the code.
+        /// </summary>
         public override string Version => "2.1";
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the character can walk behind an enemy.
+        /// </summary>
+        /// <returns>
+        ///   <c>false</c> as the character cannot walk behind an enemy. 
+        /// </returns>
         public override bool WalkBehindEnemy => false;
 
+        /// <summary>
+        /// Gets or sets the WowClass of this character as Shaman.
+        /// </summary>
         public override WowClass WowClass => WowClass.Shaman;
 
+        /// <summary>
+        /// Executes the CC ability. Sets the flag to use spells only in combat, then performs shield and starts healing.
+        /// </summary>
         public override void ExecuteCC()
         {
             UseSpellOnlyInCombat = true;
@@ -176,6 +319,9 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
             StartHeal();
         }
 
+        /// <summary>
+        /// Executes the specified actions when the player character is out of combat.
+        /// </summary>
         public override void OutOfCombatExecute()
         {
             RevivePartyMember(ancestralSpiritSpell);
@@ -189,6 +335,9 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
             StartHeal();
         }
 
+        /// <summary>
+        /// Activates the Water Shield aura for the bot's player character if it is not already active, and there is sufficient mana to cast the associated spell.
+        /// </summary>
         private void Shield()
         {
             if (!Bot.Player.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == "Water Shield") && CustomCastSpellMana(watershieldSpell))
@@ -197,6 +346,9 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
             }
         }
 
+        /// <summary>
+        /// Method to start healing process.
+        /// </summary>
         private void StartHeal()
         {
             // List<IWowUnit> partyMemberToHeal = Bot.ObjectManager.Partymembers.Where(e =>

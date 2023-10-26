@@ -7,10 +7,14 @@ namespace AmeisenBotX.Core.Engines.Quest.Quests.Grinder
 {
     internal class QDurotarGrindToLevel6 : GrindingBotQuest
     {
+        /// <summary>
+        /// Constructor for the QDurotarGrindToLevel6 quest. Sets the quest name and objectives.
+        /// </summary>
+        /// <param name="bot">An instance of the AmeisenBotInterfaces class.</param>
         public QDurotarGrindToLevel6(AmeisenBotInterfaces bot)
-            : base("DurotarGrindToLevel6",
-                new List<IQuestObjective>()
-                {
+                    : base("DurotarGrindToLevel6",
+                        new List<IQuestObjective>()
+                        {
                     new QuestObjectiveChain(new List<IQuestObjective>()
                     {
                         new GrindingObjective(bot, 6, new List<List<Vector3>>
@@ -43,7 +47,7 @@ namespace AmeisenBotX.Core.Engines.Quest.Quests.Grinder
                             new(-565.428f, -4214.2f, 41.59f)
                         }),
                     })
-                })
+                        })
         { }
     }
 }

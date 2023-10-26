@@ -5,8 +5,15 @@ namespace AmeisenBotX.Core.Logic.StaticDeathRoutes
 {
     public class ForgeOfSoulsDeathRoute : StaticPathDeathRoute
     {
+        /// <summary>
+        /// Gets the death point for the object.
+        /// </summary>
         protected override Vector3 DeathPoint { get; } = new(5670, 2003, -100000);
 
+        /// <summary>
+        /// Gets the path for the code.
+        /// </summary>
+        /// <returns>A list of Vector3 objects representing the path.</returns>
         protected override List<Vector3> Path { get; } = new()
         {
             new(6447, 2061, 564),

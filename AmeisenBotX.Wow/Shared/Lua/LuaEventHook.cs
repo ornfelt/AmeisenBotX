@@ -2,6 +2,14 @@
 {
     public static class LuaEventHook
     {
+        /// <summary>
+        /// Retrieves data from a frame, table, handler function, and output string.
+        /// </summary>
+        /// <param name="frame">The frame to get data from.</param>
+        /// <param name="table">The table to store data in.</param>
+        /// <param name="handlerFn">The handler function for events.</param>
+        /// <param name="output">The output string to store the final result.</param>
+        /// <returns>A formatted JSON-like string representing the data.</returns>
         public static string Get(string frame, string table, string handlerFn, string output)
         {
             return @$"

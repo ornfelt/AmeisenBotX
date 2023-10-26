@@ -16,6 +16,9 @@ namespace AmeisenBotX.Core.Engines.Jobs
 {
     public class DefaultJobEngine : IJobEngine
     {
+        /// <summary>
+        /// Initializes a new instance of the DefaultJobEngine class with the given bot and config.
+        /// </summary>
         public DefaultJobEngine(AmeisenBotInterfaces bot, AmeisenBotConfig config)
         {
             AmeisenLogger.I.Log("JobEngine", $"Initializing", LogLevel.Verbose);
@@ -30,38 +33,83 @@ namespace AmeisenBotX.Core.Engines.Jobs
             NodeBlacklist = new();
         }
 
+        /// <summary>
+        /// Gets or sets the list of node IDs that are blacklisted.
+        /// </summary>
         public List<ulong> NodeBlacklist { get; set; }
 
+        /// <summary>
+        /// Gets or sets the job profile.
+        /// </summary>
         public IJobProfile Profile { get; set; }
 
+        /// <summary>
+        /// Gets or sets the BlacklistEvent which represents a timegated event.
+        /// </summary>
         private TimegatedEvent BlacklistEvent { get; }
 
+        /// <summary>
+        /// Gets or sets the instance of the AmeisenBotInterfaces that represents the bot.
+        /// </summary>
         private AmeisenBotInterfaces Bot { get; }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the path is currently being checked for recovery.
+        /// </summary>
         private bool CheckForPathRecovering { get; set; }
 
+        /// <summary>
+        /// Gets the configuration instance for the AmeisenBot.
+        /// </summary>
         private AmeisenBotConfig Config { get; }
 
+        /// <summary>
+        /// Gets or sets the current count of the node.
+        /// </summary>
         private int CurrentNodeCounter { get; set; }
 
+        /// <summary>
+        /// Gets or sets the timegated event for when a mail is sent.
+        /// </summary>
         private TimegatedEvent MailSentEvent { get; }
 
+        /// <summary>
+        /// Gets the private TimegatedEvent MiningEvent.
+        /// </summary>
         private TimegatedEvent MiningEvent { get; }
 
+        /// <summary>
+        /// Gets or sets the number of attempts made to access a node.
+        /// </summary>
         private int NodeTryCounter { get; set; }
 
+        /// <summary>
+        /// Gets or sets the selected Guid value.
+        /// </summary>
         private ulong SelectedGuid { get; set; }
 
+        /// <summary>
+        /// Gets or sets the selected position represented by a Vector3 object.
+        /// </summary>
         private Vector3 SelectedPosition { get; set; }
 
+        /// <summary>
+        /// Gets or sets the number of sell actions needed.
+        /// </summary>
         private int SellActionsNeeded { get; set; }
 
+        ///<summary>
+        ///Logs the entry of the job engine and sets the CheckForPathRecovering flag to true.
+        ///</summary>
         public void Enter()
         {
             AmeisenLogger.I.Log("JobEngine", $"Entering JobEngine", LogLevel.Verbose);
             CheckForPathRecovering = true;
         }
 
+        /// <summary>
+        /// Executes the corresponding method based on the job type specified in the profile.
+        /// </summary>
         public void Execute()
         {
             if (Profile != null)
@@ -75,11 +123,18 @@ namespace AmeisenBotX.Core.Engines.Jobs
             }
         }
 
+        /// <summary>
+        /// Resets the job engine.
+        /// </summary>
         public void Reset()
         {
             AmeisenLogger.I.Log("JobEngine", $"Resetting JobEngine", LogLevel.Verbose);
         }
 
+        /// <summary>
+        /// Executes the mining action based on the provided mining profile.
+        /// </summary>
+        /// <param name="miningProfile">The mining profile to use for mining.</param>
         private void ExecuteMining(IMiningProfile miningProfile)
         {
             if (Bot.Player.IsCasting)

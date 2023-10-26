@@ -12,6 +12,10 @@ namespace AmeisenBotX.Core.Engines.Combat.Helpers.Targets.Logics.Tank
 {
     public class SimpleTankTargetSelectionLogic : BasicTargetSelectionLogic
     {
+        /// <summary>
+        /// Initializes a new instance of the SimpleTankTargetSelectionLogic class with the specified AmeisenBotInterfaces object.
+        /// Adds various TargetValidator objects and a DungeonTargetPrioritizer to the target selection logic for a simple tank.
+        /// </summary>
         public SimpleTankTargetSelectionLogic(AmeisenBotInterfaces bot) : base(bot)
         {
             TargetValidator.Add(new IsAttackableTargetValidator(bot));
@@ -25,6 +29,11 @@ namespace AmeisenBotX.Core.Engines.Combat.Helpers.Targets.Logics.Tank
             TargetPrioritizer.Add(new DungeonTargetPrioritizer(bot));
         }
 
+        /// <summary>
+        /// This method selects a target for the bot to engage with. It returns a boolean indicating if a target was successfully selected.
+        /// </summary>
+        /// <param name="possibleTargets">An output parameter that will contain the collection of possible targets.</param>
+        /// <returns>True if a target was selected, otherwise false.</returns>
         public override bool SelectTarget(out IEnumerable<IWowUnit> possibleTargets)
         {
             possibleTargets = null;

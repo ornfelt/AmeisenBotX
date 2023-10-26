@@ -7,10 +7,16 @@ namespace AmeisenBotX.Core.Engines.Quest.Quests.Grinder
 {
     internal class QSilithusGrindToLevel60 : GrindingBotQuest
     {
+        /// <summary>
+        /// Initializes a new instance of the QSilithusGrindToLevel60 class with the specified AmeisenBotInterfaces object.
+        /// Specifies the quest name as "SilithusGrindToLevel60" and sets a list of quest objectives.
+        /// The quest objective consists of a quest objective chain, which contains a grinding objective with the specified 
+        /// bot, level, and a list of vectors representing the waypoints for grinding in Silithus.
+        /// </summary>
         public QSilithusGrindToLevel60(AmeisenBotInterfaces bot)
-            : base("SilithusGrindToLevel60",
-                new List<IQuestObjective>()
-                {
+                    : base("SilithusGrindToLevel60",
+                        new List<IQuestObjective>()
+                        {
                     new QuestObjectiveChain(new List<IQuestObjective>()
                     {
                         new GrindingObjective(bot, 60, new List<List<Vector3>> {
@@ -31,7 +37,7 @@ namespace AmeisenBotX.Core.Engines.Quest.Quests.Grinder
                             },
                         }),
                     })
-                })
+                        })
         { }
     }
 }

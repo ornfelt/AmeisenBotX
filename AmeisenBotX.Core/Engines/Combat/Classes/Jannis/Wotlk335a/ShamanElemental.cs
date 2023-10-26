@@ -10,6 +10,11 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 {
     public class ShamanElemental : BasicCombatClass
     {
+        /// <summary>
+        /// Constructor for the ShamanElemental class.
+        /// Initializes the jobs for MyAuraManager and TargetAuraManager, and sets the interrupt spells for InterruptManager.
+        /// </summary>
+        /// <param name="bot">The bot instance.</param>
         public ShamanElemental(AmeisenBotInterfaces bot) : base(bot)
         {
             MyAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, Shaman335a.LightningShield, () => Bot.Player.ManaPercentage > 60.0 && TryCastSpell(Shaman335a.LightningShield, 0, true)));
@@ -24,18 +29,71 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
             };
         }
 
+        /// <summary>
+        /// Gets the description of the FCFS based CombatClass for the Elemental Shaman spec.
+        /// </summary>
         public override string Description => "FCFS based CombatClass for the Elemental Shaman spec.";
 
+        /// <summary>
+        /// Gets the display name for a Shaman Elemental character.
+        /// </summary>
         public override string DisplayName2 => "Shaman Elemental";
 
+        /// <summary>
+        /// Specifies that this method does not handle movement.
+        /// </summary>
         public override bool HandlesMovement => false;
 
+        /// <summary>
+        /// Gets a value indicating whether the object is not a melee type.
+        /// </summary>
         public override bool IsMelee => false;
 
+        /// <summary>
+        /// Gets or sets the item comparator for comparing items.
+        /// The default comparator is set to BasicIntellectComparator with the specified weapon types.
+        /// </summary>
         public override IItemComparator ItemComparator { get; set; } = new BasicIntellectComparator(null, new() { WowWeaponType.AxeTwoHand, WowWeaponType.MaceTwoHand, WowWeaponType.SwordTwoHand });
 
+        /// <summary>
+        /// Gets the role of the WoW character, which is Damage per Second (DPS).
+        /// </summary>
         public override WowRole Role => WowRole.Dps;
 
+        /// <summary>
+        /// The talent tree for the character.
+        /// 
+        /// Tree 1:
+        /// - Talent 1: Increases a certain attribute by 3.
+        /// - Talent 2: Increases a certain attribute by 5.
+        /// - Talent 3: Increases a certain attribute by 3.
+        /// - Talent 7: Increases a certain attribute by 1.
+        /// - Talent 8: Increases a certain attribute by 5.
+        /// - Talent 9: Increases a certain attribute by 2.
+        /// - Talent 10: Increases a certain attribute by 3.
+        /// - Talent 11: Increases a certain attribute by 2.
+        /// - Talent 12: Increases a certain attribute by 1.
+        /// - Talent 13: Increases a certain attribute by 3.
+        /// - Talent 14: Increases a certain attribute by 3.
+        /// - Talent 15: Increases a certain attribute by 5.
+        /// - Talent 16: Increases a certain attribute by 1.
+        /// - Talent 17: Increases a certain attribute by 3.
+        /// - Talent 18: Increases a certain attribute by 2.
+        /// - Talent 19: Increases a certain attribute by 2.
+        /// - Talent 20: Increases a certain attribute by 3.
+        /// - Talent 22: Increases a certain attribute by 1.
+        /// - Talent 23: Increases a certain attribute by 3.
+        /// - Talent 24: Increases a certain attribute by 5.
+        /// - Talent 25: Increases a certain attribute by 1.
+        /// 
+        /// Tree 2:
+        /// - Talent 3: Increases a certain attribute by 5.
+        /// - Talent 5: Increases a certain attribute by 5.
+        /// - Talent 8: Increases a certain attribute by 3.
+        /// - Talent 9: Increases a certain attribute by 1.
+        /// 
+        /// Tree 3: Empty talent tree.
+        /// </summary>
         public override TalentTree Talents { get; } = new()
         {
             Tree1 = new()
@@ -72,18 +130,42 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
             Tree3 = new(),
         };
 
+        /// <summary>
+        /// Gets or sets a value indicating whether this character should use auto attacks.
+        /// </summary>
+        /// <value>
+        ///   <c>false</c> if auto attacks should not be used; otherwise, <c>true</c>.
+        /// </value>
         public override bool UseAutoAttacks => false;
 
+        /// <summary>
+        /// Gets the version of the object.
+        /// </summary>
         public override string Version => "1.0";
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the enemy can be walked behind.
+        /// </summary>
         public override bool WalkBehindEnemy => false;
 
+        /// <summary>
+        /// Gets or sets the <see cref="WowClass"/> of the character as a Shaman.
+        /// </summary>
         public override WowClass WowClass => WowClass.Shaman;
 
+        /// <summary>
+        /// Gets the WOW version as WotLK335a.
+        /// </summary>
         public override WowVersion WowVersion => WowVersion.WotLK335a;
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the target is hexed.
+        /// </summary>
         private bool HexedTarget { get; set; }
 
+        /// <summary>
+        /// Executes the specified code.
+        /// </summary>
         public override void Execute()
         {
             base.Execute();
@@ -126,6 +208,9 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
             }
         }
 
+        /// <summary>
+        /// Executes the specified code block when the player is out of combat.
+        /// </summary>
         public override void OutOfCombatExecute()
         {
             base.OutOfCombatExecute();

@@ -9,6 +9,7 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 {
     public class DruidFeralCat : BasicCombatClass
     {
+        /// This constructor initializes a DruidFeralCat object and sets up various jobs and spell configurations for the bot. It takes in a parameter 'bot' of type AmeisenBotInterfaces to provide access to necessary functionalities.
         public DruidFeralCat(AmeisenBotInterfaces bot) : base(bot)
         {
             MyAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, Druid335a.MarkOfTheWild, () => TryCastSpell(Druid335a.MarkOfTheWild, Bot.Wow.PlayerGuid, true, 0, true)));
@@ -27,18 +28,74 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
             GroupAuraManager.SpellsToKeepActiveOnParty.Add((Druid335a.MarkOfTheWild, (spellName, guid) => TryCastSpell(spellName, guid, true)));
         }
 
+        /// <summary>
+        /// Gets the description of the FCFS based CombatClass for the Feral (Cat) Druid spec.
+        /// </summary>
         public override string Description => "FCFS based CombatClass for the Feral (Cat) Druid spec.";
 
+        /// <summary>
+        /// Gets the display name for a Druid Feral Cat.
+        /// </summary>
         public override string DisplayName2 => "Druid Feral Cat";
 
+        /// This property indicates that the current code does not handle movement.
         public override bool HandlesMovement => false;
 
+        /// <summary>
+        /// Gets a value indicating whether the character is a melee fighter.
+        /// </summary>
         public override bool IsMelee => true;
 
+        /// <summary>
+        /// Gets or sets the item comparator for the code, initialized with a BasicAgilityComparator object that compares items with shield armor type and sword, mace, and axe weapon types.
+        /// </summary>
         public override IItemComparator ItemComparator { get; set; } = new BasicAgilityComparator(new() { WowArmorType.Shield }, new() { WowWeaponType.Sword, WowWeaponType.Mace, WowWeaponType.Axe });
 
+        /// <summary>
+        /// Gets or sets the role of the character in the World of Warcraft game, which is a damage-per-second (DPS) role.
+        /// </summary>
         public override WowRole Role => WowRole.Dps;
 
+        /// <summary>
+        /// Overrides the Talents property and initializes it with a new instance of the TalentTree class.
+        /// The Talents property consists of three trees: Tree1, Tree2, and Tree3.
+        /// Tree1 is empty.
+        /// 
+        /// Tree2 consists of multiple key-value pairs. Each key represents a specific talent node and each value represents the attributes of that talent node.
+        /// The attributes include the tree ID, the talent ID, and the number of points invested in the talent.
+        /// The talent nodes in Tree2 are as follows:
+        /// 1. Talent ID: 2, Tree ID: 1, Points: 5
+        /// 2. Talent ID: 2, Tree ID: 2, Points: 5
+        /// 3. Talent ID: 2, Tree ID: 4, Points: 2
+        /// 4. Talent ID: 2, Tree ID: 6, Points: 2
+        /// 5. Talent ID: 2, Tree ID: 7, Points: 1
+        /// 6. Talent ID: 2, Tree ID: 8, Points: 3
+        /// 7. Talent ID: 2, Tree ID: 9, Points: 2
+        /// 8. Talent ID: 2, Tree ID: 10, Points: 3
+        /// 9. Talent ID: 2, Tree ID: 11, Points: 2
+        /// 10. Talent ID: 2, Tree ID: 12, Points: 2
+        /// 11. Talent ID: 2, Tree ID: 14, Points: 1
+        /// 12. Talent ID: 2, Tree ID: 17, Points: 5
+        /// 13. Talent ID: 2, Tree ID: 18, Points: 3
+        /// 14. Talent ID: 2, Tree ID: 19, Points: 1
+        /// 15. Talent ID: 2, Tree ID: 20, Points: 2
+        /// 16. Talent ID: 2, Tree ID: 23, Points: 3
+        /// 17. Talent ID: 2, Tree ID: 25, Points: 3
+        /// 18. Talent ID: 2, Tree ID: 26, Points: 1
+        /// 19. Talent ID: 2, Tree ID: 28, Points: 5
+        /// 20. Talent ID: 2, Tree ID: 29, Points: 1
+        /// 21. Talent ID: 2, Tree ID: 30, Points: 1
+        /// 
+        /// Tree3 consists of multiple key-value pairs. Each key represents a specific talent node and each value represents the attributes of that talent node.
+        /// The attributes include the tree ID, the talent ID, and the number of points invested in the talent.
+        /// The talent nodes in Tree3 are as follows:
+        /// 1. Talent ID: 3, Tree ID: 1, Points: 2
+        /// 2. Talent ID: 3, Tree ID: 3, Points: 5
+        /// 3. Talent ID: 3, Tree ID: 4, Points: 5
+        /// 4. Talent ID: 3, Tree ID: 6, Points: 3
+        /// 5. Talent ID: 3, Tree ID: 8, Points: 1
+        /// 6. Talent ID: 3, Tree ID: 9, Points: 2
+        /// </summary>
         public override TalentTree Talents { get; } = new()
         {
             Tree1 = new(),
@@ -77,16 +134,31 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
             },
         };
 
+        /// This property specifies that auto attacks can be used in this context.
         public override bool UseAutoAttacks => true;
 
+        /// <summary>
+        /// Gets the version of the code.
+        /// </summary>
+        /// <value>The version string.</value>
         public override string Version => "1.0";
 
+        /// Determines if the player character can walk behind enemy characters. Returns true.
         public override bool WalkBehindEnemy => true;
 
+        /// <summary>
+        /// Gets or sets the <see cref="WowClass"/> of the character as a Druid.
+        /// </summary>
         public override WowClass WowClass => WowClass.Druid;
 
+        /// <summary>
+        /// Gets or sets the version of World of Warcraft to WotLK 3.3.5a.
+        /// </summary>
         public override WowVersion WowVersion => WowVersion.WotLK335a;
 
+        /// <summary>
+        /// Executes a series of actions based on the current state of the player and target.
+        /// </summary>
         public override void Execute()
         {
             base.Execute();
@@ -140,6 +212,9 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
             }
         }
 
+        /// <summary>
+        /// Executes the out of combat behavior, including healing if necessary.
+        /// </summary>
         public override void OutOfCombatExecute()
         {
             base.OutOfCombatExecute();
@@ -150,6 +225,7 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
             }
         }
 
+        /// Determines if the player needs to heal themselves based on their current health percentage and available spells.
         private bool NeedToHealMySelf()
         {
             if (Bot.Player.HealthPercentage < 60

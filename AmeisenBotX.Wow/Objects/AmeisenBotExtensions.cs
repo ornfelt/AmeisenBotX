@@ -7,6 +7,11 @@ namespace AmeisenBotX.Wow.Objects
     /// </summary>
     public static class AmeisenBotExtensions
     {
+        /// <summary>
+        /// Returns the color code corresponding to the specified item quality.
+        /// </summary>
+        /// <param name="itemQuality">The quality of the item.</param>
+        /// <returns>The color code.</returns>
         public static string GetColor(this WowItemQuality itemQuality)
         {
             return itemQuality switch
@@ -24,6 +29,9 @@ namespace AmeisenBotX.Wow.Objects
             };
         }
 
+        /// <summary>
+        /// Determines if the specified map is a battleground map.
+        /// </summary>
         public static bool IsBattlegroundMap(this WowMapId map)
         {
             return map is WowMapId.AlteracValley
@@ -33,6 +41,12 @@ namespace AmeisenBotX.Wow.Objects
                 or WowMapId.StrandOfTheAncients;
         }
 
+        /// <summary>
+        /// Determines if the given zone is a capital city zone based on the specified faction.
+        /// </summary>
+        /// <param name="zone">The WowZoneId to check.</param>
+        /// <param name="isAlliance">A boolean value indicating if the faction is Alliance or not.</param>
+        /// <returns>True if the zone is a capital city for the specified faction, otherwise false.</returns>
         public static bool IsCapitalCityZone(this WowZoneId zone, bool isAlliance)
         {
             return isAlliance
@@ -46,6 +60,13 @@ namespace AmeisenBotX.Wow.Objects
                     or WowZoneId.SilvermoonCity;
         }
 
+        ///<summary>
+        ///Checks if the given WowMapId is a dungeon map.
+        ///</summary>
+        ///<param name="map">The WowMapId to check.</param>
+        ///<returns>
+        ///True if the map is a dungeon map, false otherwise.
+        ///</returns>
         public static bool IsDungeonMap(this WowMapId map)
         {
             // classic
@@ -68,6 +89,9 @@ namespace AmeisenBotX.Wow.Objects
                 or WowMapId.PitOfSaron;
         }
 
+        /// <summary>
+        /// Determines if the given map is a raid map.
+        /// </summary>
         public static bool IsRaidMap(this WowMapId map)
         {
             // classic

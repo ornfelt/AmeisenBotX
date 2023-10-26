@@ -8,22 +8,56 @@ namespace AmeisenBotX.Core.Engines.Dungeon.Profiles.WotLK
 {
     public class ForgeOfSoulsProfile : IDungeonProfile
     {
+        /// <summary>
+        /// Gets or sets the author of the code.
+        /// </summary>
         public string Author { get; } = "Jannis & Kamel";
 
+        /// <summary>
+        /// Gets the description of the Dungeon in Icecrown.
+        /// </summary>
+        /// <remarks>
+        /// This profile is specifically made for Level 80 characters.
+        /// </remarks>
+        /// <returns>
+        /// The description of the Dungeon in Icecrown.
+        /// </returns>
         public string Description { get; } = "Profile for the Dungeon in Icecrown, made for Level 80.";
 
+        /// <summary>
+        /// Gets the position of the dungeon exit as a Vector3.
+        /// </summary>
         public Vector3 DungeonExit { get; } = new(4926, 2170, 639);
 
+        /// <summary>
+        /// Gets the faction type of the dungeon, which is always neutral.
+        /// </summary>
         public DungeonFactionType FactionType { get; } = DungeonFactionType.Neutral;
 
+        /// <summary>
+        /// Gets the size of the group.
+        /// </summary>
         public int GroupSize { get; } = 5;
 
+        /// <summary>
+        /// Gets the map ID for the instance "The Forge of Souls".
+        /// </summary>
         public WowMapId MapId { get; } = WowMapId.TheForgeOfSouls;
 
+        /// <summary>
+        /// Gets the maximum level allowed.
+        /// </summary>
         public int MaxLevel { get; } = 80;
 
+        /// <summary>
+        /// Gets the name of the forge of souls.
+        /// </summary>
         public string Name { get; } = "[80+] Forge of Souls";
 
+        /// <summary>
+        /// Gets the list of DungeonNodes.
+        /// </summary>
+        /// <returns>A list of DungeonNode objects.</returns>
         public List<DungeonNode> Nodes { get; } = new()
         {
             new(new(4921, 2177, 639)),
@@ -219,14 +253,30 @@ namespace AmeisenBotX.Core.Engines.Dungeon.Profiles.WotLK
             new(new(5664, 2510, 709)),
         };
 
+        /// <summary>
+        /// Gets the list of priority units.
+        /// </summary>
         public List<int> PriorityUnits { get; } = new() { 30270 };
 
+        /// <summary>
+        /// Gets the required item level.
+        /// </summary>
         public int RequiredItemLevel { get; } = 200;
 
+        /// <summary>
+        /// Gets the required level for this code, which is set to 80.
+        /// </summary>
         public int RequiredLevel { get; } = 80;
 
+        ///<summary>
+        ///Gets the world entry point as a Vector3.
+        ///The entry point coordinates are set to (5675, 1997, 798).
+        ///</summary>
         public Vector3 WorldEntry { get; } = new(5675, 1997, 798);
 
+        /// <summary>
+        /// Gets the WorldEntryMapId property value.
+        /// </summary>
         public WowMapId WorldEntryMapId { get; } = WowMapId.Northrend;
     }
 }

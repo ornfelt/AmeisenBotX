@@ -8,22 +8,52 @@ namespace AmeisenBotX.Core.Engines.Dungeon.Profiles.Classic
 {
     public class WailingCavernsProfile : IDungeonProfile
     {
+        /// <summary>
+        /// Gets the author of the code.
+        /// </summary>
         public string Author { get; } = "Jannis";
 
+        /// <summary>
+        /// Gets the description of the profile for the Dungeon in The Barrens, made for Level 17 to 24.
+        /// </summary>
         public string Description { get; } = "Profile for the Dungeon in The Barrens, made for Level 17 to 24.";
 
+        /// <summary>
+        /// Represents the position of the dungeon exit in a 3D space.
+        /// The coordinates for the dungeon exit are (-167, 134, -73).
+        /// </summary>
         public Vector3 DungeonExit { get; } = new(-167, 134, -73);
 
+        /// <summary>
+        /// Gets the faction type of the dungeon, which is set to Neutral.
+        /// </summary>
         public DungeonFactionType FactionType { get; } = DungeonFactionType.Neutral;
 
+        /// <summary>
+        /// Gets the size of the group. The value is read-only and set to 5 by default.
+        /// </summary>
         public int GroupSize { get; } = 5;
 
+        /// <summary>
+        /// Gets the map ID for the WowMapId property.
+        /// The map ID is set to WowMapId.WailingCaverns.
+        /// </summary>
         public WowMapId MapId { get; } = WowMapId.WailingCaverns;
 
+        /// <summary>
+        /// Gets the maximum level.
+        /// </summary>
         public int MaxLevel { get; } = 24;
 
+        /// <summary>
+        /// Gets the name of the location.
+        /// </summary>
         public string Name { get; } = "[17-24] Wailing Caverns";
 
+        /// <summary>
+        /// Represents a list of DungeonNodes.
+        /// </summary>
+        /// <value>A list of DungeonNodes.</value>
         public List<DungeonNode> Nodes { get; } = new()
         {
             new(new(-163, 133, -74)),
@@ -630,14 +660,30 @@ namespace AmeisenBotX.Core.Engines.Dungeon.Profiles.Classic
             // DungeonNodeType.Protect, "4216"),
         };
 
+        /// <summary>
+        /// Gets the list of priority units.
+        /// </summary>
         public List<int> PriorityUnits { get; } = new();
 
+        /// <summary>
+        /// Gets the required item level.
+        /// </summary>
         public int RequiredItemLevel { get; } = 10;
 
+        ///<summary>
+        ///Gets the required level.
+        ///</summary>
         public int RequiredLevel { get; } = 17;
 
+        /// <summary>
+        /// Gets the world entry coordinates in a 3D vector.
+        /// </summary>
         public Vector3 WorldEntry { get; } = new(-743, -2213, 16);
 
+        /// <summary>
+        /// Gets the WorldEntryMapId property.
+        /// </summary>
+        /// <returns>The value of the WorldEntryMapId property, which is set to WowMapId.Kalimdor.</returns>
         public WowMapId WorldEntryMapId { get; } = WowMapId.Kalimdor;
     }
 }

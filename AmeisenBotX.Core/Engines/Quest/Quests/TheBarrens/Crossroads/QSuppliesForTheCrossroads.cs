@@ -7,12 +7,15 @@ namespace AmeisenBotX.Core.Engines.Quest.Quests.TheBarrens.Crossroads
 {
     internal class QSuppliesForTheCrossroads : BotQuest
     {
+        /// <summary>
+        /// Initializes a new instance of the QSuppliesForTheCrossroads class with the specified bot, quest ID, quest name, quest level, quest group, quest giver and starting position, and quest objectives.
+        /// </summary>
         public QSuppliesForTheCrossroads(AmeisenBotInterfaces bot)
-            : base(bot, 5041, "Supplies for the Crossroads", 9, 1,
-                () => (bot.GetClosestQuestGiverByNpcId(bot.Player.Position, new List<int> { 3429 }), new Vector3(-473.20f, -2595.70f, 103.81f)),
-                () => (bot.GetClosestQuestGiverByNpcId(bot.Player.Position, new List<int> { 3429 }), new Vector3(-473.20f, -2595.70f, 103.81f)),
-                new List<IQuestObjective>()
-                {
+                    : base(bot, 5041, "Supplies for the Crossroads", 9, 1,
+                        () => (bot.GetClosestQuestGiverByNpcId(bot.Player.Position, new List<int> { 3429 }), new Vector3(-473.20f, -2595.70f, 103.81f)),
+                        () => (bot.GetClosestQuestGiverByNpcId(bot.Player.Position, new List<int> { 3429 }), new Vector3(-473.20f, -2595.70f, 103.81f)),
+                        new List<IQuestObjective>()
+                        {
                     new QuestObjectiveChain(new List<IQuestObjective>()
                     {
                         new CollectQuestObjective(bot, 12708, 1, new List<int> { 175708 }, new List<Vector3> {
@@ -22,7 +25,7 @@ namespace AmeisenBotX.Core.Engines.Quest.Quests.TheBarrens.Crossroads
                             new Vector3(-69.64f, -3390.97f, 92.34f),
                         }),
                     })
-                })
+                        })
         { }
     }
 }

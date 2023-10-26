@@ -6,6 +6,14 @@ namespace AmeisenBotX.Core.Logic.Routines
 {
     public static class SpeakToMerchantRoutine
     {
+        /// <summary>
+        /// Checks if the provided AmeisenBotInterfaces bot and IWowUnit selectedUnit are valid.
+        /// Changes the target of the bot to the selectedUnit if it is different from the bot's current target.
+        /// Faces the selectedUnit if the bot is not already facing it.
+        /// Interacts with the selectedUnit if the GossipFrame and MerchantFrame UIs are not visible.
+        /// Selects the appropriate gossip option (vendor or repair) if the GossipFrame UI is visible.
+        /// Returns true if all conditions are met, otherwise returns false.
+        /// </summary>
         public static bool Run(AmeisenBotInterfaces bot, IWowUnit selectedUnit)
         {
             if (bot == null || selectedUnit == null)

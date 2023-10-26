@@ -1,5 +1,8 @@
 ﻿namespace AmeisenBotX.Wow.Objects.Enums
 {
+    /// <summary>
+    /// Represents the power types in World of Warcraft.
+    /// </summary>
     public enum WowPowerType
     {
         Health = -2,

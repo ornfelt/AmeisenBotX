@@ -73,32 +73,79 @@ namespace AmeisenBotX.Core.Engines.Combat.Helpers.Healing
             Bot.CombatLog.OnHeal += OnHeal;
         }
 
+        /// <summary>
+        /// Represents the number of seconds to monitor for damage.
+        /// </summary>
         public int DamageMonitorSeconds { get; set; }
 
+        /// <summary>
+        /// Gets or sets the weight modifier for health.
+        /// </summary>
         public float HealthWeightMod { get; set; }
 
+        /// <summary>
+        /// Gets or sets the modifier for incoming damage.
+        /// </summary>
         public float IncomingDamageMod { get; set; }
 
+        /// <summary>
+        /// Gets or sets the maximum amount of overhealing as a floating point value.
+        /// </summary>
         public float MaxOverheal { get; set; }
 
+        ///<summary>
+        ///Gets or sets the threshold value at which overhealing should stop for a given entity.
+        ///</summary>
         public float OverhealingStopThreshold { get; set; }
 
+        /// <summary>
+        /// Gets or sets the dictionary of spell healing, where the key is a string representing the spell
+        /// and the value is an integer representing the amount of healing provided by the spell.
+        /// </summary>
         public Dictionary<string, int> SpellHealing { get; set; }
 
+        /// <summary>
+        /// Gets or sets the number of seconds until the target dies.
+        /// </summary>
         public int TargetDyingSeconds { get; set; }
 
+        /// <summary>
+        /// Gets the AmeisenBotInterfaces object representing the Bot.
+        /// </summary>
         private AmeisenBotInterfaces Bot { get; }
 
+        /// <summary>
+        /// Gets the list of healing spells along with their spell types.
+        /// </summary>
         private List<(Spell, HealSpellType)> HealingSpells { get; }
 
+        /// <summary>
+        /// Gets or sets the dictionary that tracks incoming damage.
+        /// Key is the unique identifier of the target, value is the amount of damage.
+        /// </summary>
         private Dictionary<ulong, int> IncomingDamage { get; }
 
+        /// <summary>
+        /// Represents a private dictionary that stores incoming damage information for each entity.
+        /// The keys of the dictionary are of type ulong, representing the entity's unique identifier.
+        /// The values of the dictionary are of type Queue containing tuples of DateTime and int,
+        /// representing the time stamp and damage amount of incoming damage events.
+        /// </summary>
         private Dictionary<ulong, Queue<(DateTime, int)>> IncomingDamageBuffer { get; }
 
+        /// <summary>
+        /// Gets the private TimegatedEvent MeasurementEvent.
+        /// </summary>
         private TimegatedEvent MeasurementEvent { get; }
 
+        /// <summary>
+        /// The collection that stores a dictionary of spell names as keys and queues of healing values as values.
+        /// </summary>
         private Dictionary<string, Queue<int>> SpellHealingBuffer { get; }
 
+        /// <summary>
+        /// Gets or sets the action delegate used for trying to cast a spell.
+        /// </summary>
         private Func<string, ulong, bool> TryCastSpellAction { get; }
 
         /// <summary>
@@ -119,6 +166,10 @@ namespace AmeisenBotX.Core.Engines.Combat.Helpers.Healing
             }
         }
 
+        /// <summary>
+        /// Loads data from a dictionary into specific properties of the object.
+        /// </summary>
+        /// <param name="s">The dictionary containing the data to be loaded.</param>
         public void Load(Dictionary<string, JsonElement> s)
         {
             if (s.TryGetValue("SpellHealing", out JsonElement j)) { SpellHealing = j.To<Dictionary<string, int>>(); }
@@ -130,6 +181,17 @@ namespace AmeisenBotX.Core.Engines.Combat.Helpers.Healing
             if (s.TryGetValue("TargetDyingSeconds", out j)) { TargetDyingSeconds = j.To<int>(); }
         }
 
+        /// <summary>
+        /// Returns a dictionary containing the saved values.
+        /// The dictionary includes the following key-value pairs:
+        /// - "SpellHealing" : the spell healing value
+        /// - "DamageMonitorSeconds" : the damage monitor seconds value
+        /// - "HealthWeight" : the health weight modifier value
+        /// - "DamageWeight" : the incoming damage modifier value
+        /// - "OverhealingStopThreshold" : the overhealing stop threshold value
+        /// - "MaxOverheal" : the maximum overheal value
+        /// - "TargetDyingSeconds" : the target dying seconds value
+        /// </summary>
         public Dictionary<string, object> Save()
         {
             return new()

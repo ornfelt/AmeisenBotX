@@ -14,18 +14,50 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.einTyp
 {
     public class WarriorFury : ICombatClass
     {
+        /// <summary>
+        /// Represents a reference to the <see cref="AmeisenBotInterfaces"/> interface object.
+        /// </summary>
         private readonly AmeisenBotInterfaces Bot;
+        /// <summary>
+        /// This field represents an array of running emotes.
+        /// </summary>
         private readonly string[] runningEmotes = { "/train", "/cackle", "/silly" };
+        /// <summary>
+        /// The readonly field that holds the Warrior's Fury spells.
+        /// </summary>
         private readonly WarriorFurySpells spells;
+        /// <summary>
+        /// Array of standing emotes.
+        /// </summary>
         private readonly string[] standingEmotes = { "/shimmy", "/dance", "/twiddle", "/highfive" };
+        /// <summary>
+        /// Gets or sets a value indicating whether a new route will be computed.
+        /// </summary>
         private bool computeNewRoute = false;
+        /// <summary>
+        /// Represents the distance from the current object to the target.
+        /// </summary>
         private double distanceToTarget = 0;
 
+        /// <summary>
+        /// The distance traveled.
+        /// </summary>
         private double distanceTraveled = 0;
 
+        /// <summary>
+        /// Indicates whether there are multiple targets.
+        /// </summary>
         private bool multipleTargets = false;
+        /// <summary>
+        /// Represents the current standing status.
+        /// </summary>
         private bool standing = false;
 
+        /// <summary>
+        /// Constructor for the WarriorFury class.
+        /// Initializes a new instance of the class and sets the bot and spells.
+        /// </summary>
+        /// <param name="bot">The bot object implementing the AmeisenBotInterfaces.</param>
         public WarriorFury(AmeisenBotInterfaces bot)
         {
             Bot = bot;
@@ -33,28 +65,75 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.einTyp
             spells = new WarriorFurySpells(bot);
         }
 
+        /// <summary>
+        /// Gets the author of the code.
+        /// </summary>
+        /// <returns>The name of the author, which is "einTyp".</returns>
         public string Author => "einTyp";
 
+        /// <summary>
+        /// Gets or sets the collection of blacklisted target display IDs.
+        /// </summary>
         public IEnumerable<int> BlacklistedTargetDisplayIds { get; set; }
 
+        /// <summary>
+        /// Gets or sets the dictionary of configureables.
+        /// </summary>
+        /// <value>
+        /// The dictionary of configureables.
+        /// </value>
         public Dictionary<string, dynamic> Configureables { get; set; } = new Dictionary<string, dynamic>();
 
+        /// <summary>
+        /// Gets or sets the description of the object.
+        /// </summary>
         public string Description => "...";
 
+        /// <summary>
+        /// Gets the display name for the Fury Warrior class.
+        /// </summary>
         public string DisplayName => "Fury Warrior";
 
+        /// <summary>
+        /// Gets a value indicating whether this code handles facing.
+        /// </summary>
         public bool HandlesFacing => false;
 
+        /// <summary>
+        /// Gets or sets a value indicating whether this object handles movement.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if this object handles movement; otherwise, <c>false</c>.
+        /// </value>
         public bool HandlesMovement => true;
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the character is a melee fighter.
+        /// </summary>
         public bool IsMelee => true;
 
+        /// <summary>
+        /// Gets the item comparator for the bot.
+        /// </summary>
         public IItemComparator ItemComparator => new FuryItemComparator(Bot);
 
+        /// <summary>
+        /// Gets or sets the collection of priority target display IDs.
+        /// </summary>
         public IEnumerable<int> PriorityTargetDisplayIds { get; set; }
 
+        /// <summary>
+        /// Gets the Role property which represents the World of Warcraft role assigned to a character,
+        /// and returns the value "Dps" which stands for Damage per Second.
+        /// </summary>
         public WowRole Role => WowRole.Dps;
 
+        /// <summary>
+        /// Gets a collection of talent trees.
+        /// </summary>
+        /// <value>
+        /// The talent trees available.
+        /// </value>
         public TalentTree Talents { get; } = new()
         {
             Tree1 = new()
@@ -89,18 +168,44 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.einTyp
             Tree3 = new()
         };
 
+        /// <summary>
+        /// Gets the version of the code.
+        /// </summary>
         public string Version => "1.0";
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the player can walk behind an enemy.
+        /// </summary>
+        /// <value>
+        ///   <c>false</c> indicating that the player cannot walk behind an enemy; otherwise, <c>true</c> if the player can walk behind an enemy.
+        /// </value>
         public bool WalkBehindEnemy => false;
 
+        /// <summary>
+        /// Gets or sets the selected WoW class, which is currently set to Warrior.
+        /// </summary>
         public WowClass WowClass => WowClass.Warrior;
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the person is currently dancing.
+        /// </summary>
         private bool Dancing { get; set; }
 
+        /// <summary>
+        /// Gets or sets the last known position of the player in a three-dimensional space.
+        /// </summary>
         private Vector3 LastPlayerPosition { get; set; }
 
+        /// <summary>
+        /// Gets or sets the last target position in 3D space.
+        /// </summary>
         private Vector3 LastTargetPosition { get; set; }
 
+        /// <summary>
+        /// Attacks the target unit. If there is no target, the method returns. 
+        /// If the target is within a distance of 3.0, the bot stops click-to-move, resets movement,
+        /// and interacts with the target unit. Otherwise, the bot sets a movement action to move towards the target.
+        /// </summary>
         public void AttackTarget()
         {
             IWowUnit target = Bot.Target;
@@ -121,6 +226,9 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.einTyp
             }
         }
 
+        /// <summary>
+        /// Executes the action specified in this method.
+        /// </summary>
         public void Execute()
         {
             computeNewRoute = false;
@@ -168,11 +276,18 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.einTyp
             }
         }
 
+        /// <summary>
+        /// Loads the specified objects into the Configureables property.
+        /// </summary>
+        /// <param name="objects">A dictionary containing the objects to load.</param>
         public void Load(Dictionary<string, JsonElement> objects)
         {
             Configureables = objects["Configureables"].ToDyn();
         }
 
+        /// <summary>
+        /// Executes actions when the character is out of combat.
+        /// </summary>
         public void OutOfCombatExecute()
         {
             computeNewRoute = false;
@@ -229,6 +344,9 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.einTyp
             }
         }
 
+        /// <summary>
+        /// Saves the dictionary of configureables.
+        /// </summary>
         public Dictionary<string, object> Save()
         {
             return new()
@@ -237,6 +355,10 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.einTyp
             };
         }
 
+        /// <summary>
+        /// Handles attacking a target in World of Warcraft.
+        /// </summary>
+        /// <param name="target">The target to be attacked.</param>
         private void HandleAttacking(IWowUnit target)
         {
             Bot.Wow.ChangeTarget(target.Guid);
@@ -247,6 +369,10 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.einTyp
             }
         }
 
+        /// <summary>
+        /// Handles movement for the provided target in the game.
+        /// </summary>
+        /// <param name="target">The target to move towards.</param>
         private void HandleMovement(IWowUnit target)
         {
             if (target == null)
@@ -270,6 +396,12 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.einTyp
             }
         }
 
+        /// <summary>
+        /// Searches for a new target to attack.
+        /// </summary>
+        /// <param name="target">Reference to the current target.</param>
+        /// <param name="grinding">Flag indicating if the player is grinding.</param>
+        /// <returns>True if a new target is found, false otherwise.</returns>
         private bool SearchNewTarget(ref IWowUnit target, bool grinding)
         {
             if (Bot.Wow.TargetGuid != 0 && target != null && !(target.IsDead || target.Health < 1 || target.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId).Contains("Spirit of Redem"))))
@@ -328,27 +460,90 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.einTyp
 
         private class WarriorFurySpells
         {
+            /// <summary>
+            /// The name of the Battle Shout ability.
+            /// </summary>
             private static readonly string BattleShout = "Battle Shout";
+            /// <summary>
+            /// Represents the battle stance string constant.
+            /// </summary>
             private static readonly string BattleStance = "Battle Stance";
+            /// <summary>
+            /// Represents the name of the ability "Berserker Rage".
+            /// </summary>
             private static readonly string BerserkerRage = "Berserker Rage";
+            /// <summary>
+            /// The name of the berserker stance.
+            /// </summary>
             private static readonly string BerserkerStance = "Berserker Stance";
+            /// <summary>
+            /// The name of the ability "Bloodthirst".
+            /// </summary>
             private static readonly string Bloodthirst = "Bloodthirst";
+            /// <summary>
+            /// Represents a string constant named "Charge".
+            /// </summary>
             private static readonly string Charge = "Charge";
+            /// <summary>
+            /// Represents the constant string "Death Wish" that is readonly and private.
+            /// </summary>
             private static readonly string DeathWish = "Death Wish";
+            /// <summary>
+            /// The private static constant string representing the ability "Enraged Regeneration".
+            /// </summary>
             private static readonly string EnragedRegeneration = "Enraged Regeneration";
+            /// <summary>
+            /// Represents the constant variable for "Execute".
+            /// </summary>
             private static readonly string Execute = "Execute";
+            /// <summary>
+            /// A readonly string representing the value "Hamstring".
+            /// </summary>
             private static readonly string Hamstring = "Hamstring";
+            /// <summary>
+            /// Represents the name of the Heroic Strike ability.
+            /// </summary>
             private static readonly string HeroicStrike = "Heroic Strike";
+            /// <summary>
+            /// Represents the constant value for the heroic throw ability.
+            /// </summary>
             private static readonly string HeroicThrow = "Heroic Throw";
+            /// <summary>
+            /// The constant string representing the intercept value.
+            /// </summary>
             private static readonly string Intercept = "Intercept";
+            /// <summary>
+            /// The name of the constant string "Recklessness".
+            /// </summary>
             private static readonly string Recklessness = "Recklessness";
+            /// <summary>
+            /// Represents the constant value for "Retaliation".
+            /// </summary>
             private static readonly string Retaliation = "Retaliation";
+            /// <summary>
+            /// This field represents the string value "Shattering Throw".
+            /// </summary>
             private static readonly string ShatteringThrow = "Shattering Throw";
+            /// <summary>
+            /// Private static readonly string variable Slam with value "Slam".
+            /// </summary>
             private static readonly string Slam = "Slam";
+            /// <summary>
+            /// Represents a constant string named "Whirlwind".
+            /// </summary>
             private static readonly string Whirlwind = "Whirlwind";
 
+            /// <summary>
+            /// Represents a reference to the <see cref="AmeisenBotInterfaces"/> interface object.
+            /// </summary>
+            /// <summary>
+            /// Private readonly field that represents an instance of the AmeisenBotInterfaces class.
+            /// </summary>
             private readonly AmeisenBotInterfaces Bot;
 
+            /// <summary>
+            /// Dictionary that stores the next action time for various skills.
+            /// </summary>
             private readonly Dictionary<string, DateTime> nextActionTime = new()
             {
                 { BattleShout, DateTime.Now },
@@ -371,9 +566,19 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.einTyp
                 { HeroicStrike, DateTime.Now }
             };
 
+            /// <summary>
+            /// Indicates whether a heal has been requested.
+            /// </summary>
             private bool askedForHeal = false;
+            /// <summary>
+            /// Indicates whether help has been asked for.
+            /// </summary>
             private bool askedForHelp = false;
 
+            /// <summary>
+            /// Initializes a new instance of the WarriorFurySpells class.
+            /// </summary>
+            /// <param name="bot">The AmeisenBotInterfaces instance.</param>
             public WarriorFurySpells(AmeisenBotInterfaces bot)
             {
                 Bot = bot;
@@ -384,16 +589,37 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.einTyp
                 NextCast = DateTime.Now;
             }
 
+            /// <summary>
+            /// Gets or sets a value indicating whether the character is in Berserker Stance.
+            /// </summary>
             private bool IsInBerserkerStance { get; set; }
 
+            /// <summary>
+            /// Gets or sets the next cast date and time.
+            /// </summary>
             private DateTime NextCast { get; set; }
 
+            /// <summary>
+            /// Gets or sets the date and time for the next GCDSpell.
+            /// </summary>
             private DateTime NextGCDSpell { get; set; }
 
+            /// <summary>
+            /// Gets or sets the next stance date and time.
+            /// </summary>
             private DateTime NextStance { get; set; }
 
+            /// <summary>
+            /// Gets or sets the Wow player.
+            /// </summary>
             private IWowPlayer Player { get; set; }
 
+            /// <summary>
+            /// Casts the next spell based on the distance to the target, the target's health percentage, and the player's rage level.
+            /// </summary>
+            /// <param name="distanceToTarget">The distance to the target.</param>
+            /// <param name="target">The target to cast the spell on.</param>
+            /// <param name="multipleTargets">A boolean value indicating whether there are multiple targets.</param>
             public void CastNextSpell(double distanceToTarget, IWowUnit target, bool multipleTargets)
             {
                 if (!IsReady(NextCast) || !IsReady(NextGCDSpell))
@@ -572,17 +798,28 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.einTyp
                 }
             }
 
+            /// <summary>
+            /// Resets the next action time for Hamstring and Heroic Strike after target's death.
+            /// </summary>
             public void ResetAfterTargetDeath()
             {
                 nextActionTime[Hamstring].AddSeconds(-15.0);
                 nextActionTime[HeroicStrike].AddSeconds(-3.6);
             }
 
+            /// <summary>
+            /// Determines if the specified date and time for the next action has already passed.
+            /// </summary>
+            /// <param name="nextAction">The date and time for the next action.</param>
+            /// <returns>True if the current date and time is later than the specified next action, otherwise false.</returns>
             private static bool IsReady(DateTime nextAction)
             {
                 return DateTime.Now > nextAction;
             }
 
+            /// <summary>
+            /// Casts a specified spell, deducts rage points, updates cooldown time and triggers global cooldown if necessary.
+            /// </summary>
             private void CastSpell(string spell, ref int rage, int rageCosts, double cooldown, bool gcd)
             {
                 Bot.Wow.CastSpell(spell);
@@ -598,6 +835,11 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.einTyp
                 }
             }
 
+            /// <summary>
+            /// Changes the current stance to the specified stance and updates the rage value.
+            /// </summary>
+            /// <param name="stance">The new stance to change to.</param>
+            /// <param name="rage">The updated rage value.</param>
             private void ChangeToStance(string stance, out int rage)
             {
                 Bot.Wow.CastSpell(stance);
@@ -606,6 +848,11 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.einTyp
                 IsInBerserkerStance = stance == BerserkerStance;
             }
 
+            /// <summary>
+            /// Determines if a given spell is ready to be used.
+            /// </summary>
+            /// <param name="spell">The name of the spell to check.</param>
+            /// <returns>True if the spell is ready, otherwise false.</returns>
             private bool IsReady(string spell)
             {
                 bool result = true; // begin with neutral element of AND
@@ -619,6 +866,9 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.einTyp
                 return result;
             }
 
+            /// <summary>
+            /// Updates the rage level of the player and returns it.
+            /// </summary>
             private int UpdateRage()
             {
                 Player = Bot.Player;

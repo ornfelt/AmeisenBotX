@@ -9,6 +9,12 @@ namespace AmeisenBotX.Core.Engines.Grinding.Profiles.Horde
 {
     public class DurotarGrindTo11 : IGrindingProfile
     {
+        ///<summary>
+        ///A list of non-player characters (NPCs) that are of interest.
+        ///</summary>
+        ///<value>
+        ///The list of NPCs of interest.
+        ///</value>
         public List<Npc> NpcsOfInterest { get; } = new()
         {
             new Npc("Trayexir", 10369,
@@ -33,10 +39,22 @@ namespace AmeisenBotX.Core.Engines.Grinding.Profiles.Horde
                 NpcType.ProfessionTrainer, NpcSubType.FishingTrainer)
         };
 
+        /// <summary>
+        /// Gets or sets the list of objects of interest that can be interacted with.
+        /// </summary>
         public List<InteractableObject> ObjectsOfInterest { get; }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the spots should be randomized.
+        /// </summary>
+        /// <value>
+        ///   <c>false</c> to keep the spots in their current order; otherwise, <c>true</c> to randomize them.
+        /// </value>
         public bool RandomizeSpots => false;
 
+        /// <summary>
+        /// Generates a list of GrindingSpots.
+        /// </summary>
         public List<GrindingSpot> Spots { get; } = new()
         {
             // scorpids/boars
@@ -48,6 +66,10 @@ namespace AmeisenBotX.Core.Engines.Grinding.Profiles.Horde
             new GrindingSpot(new Vector3(-968, -4703, 21), 55.0f, 5, 11)
         };
 
+        /// <summary>
+        /// Converts the object to a string representation.
+        /// </summary>
+        /// <returns>A string representation of the object.</returns>
         public override string ToString()
         {
             return "[H][Durotar] 5 To 11 Grinding";

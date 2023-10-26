@@ -8,22 +8,51 @@ namespace AmeisenBotX.Core.Engines.Dungeon.Profiles.WotLK
 {
     public class UtgardeKeepProfile : IDungeonProfile
     {
+        /// <summary>
+        /// Gets the name of the author.
+        /// </summary>
         public string Author { get; } = "Jannis";
 
+        /// <summary>
+        /// Gets the description for the Dungeon in the Howling Fjord.
+        /// This profile is designed for Level 68 to 80.
+        /// </summary>
         public string Description { get; } = "Profile for the Dungeon in the Howling Fjord, made for Level 68 to 80.";
 
+        /// <summary>
+        /// Gets the dungeon exit position as a Vector3.
+        /// </summary>
         public Vector3 DungeonExit { get; } = new(148, -87, 13);
 
+        /// <summary>
+        /// Gets or sets the faction type of the dungeon.
+        /// </summary>
         public DungeonFactionType FactionType { get; } = DungeonFactionType.Neutral;
 
+        /// <summary>
+        /// Gets the size of the group.
+        /// </summary>
         public int GroupSize { get; } = 5;
 
+        /// <summary>
+        /// Gets or sets the WowMapId of the Utgarde Keep map.
+        /// </summary>
         public WowMapId MapId { get; } = WowMapId.UtgardeKeep;
 
+        /// <summary>
+        /// Gets the maximum level value which is set to 80.
+        /// </summary>
         public int MaxLevel { get; } = 80;
 
+        /// <summary>
+        /// Gets the name of the instance as "[68-80] Utgarde Keep".
+        /// </summary>
         public string Name { get; } = "[68-80] Utgarde Keep";
 
+        /// <summary>
+        /// The list of DungeonNodes in the current dungeon.
+        /// </summary>
+        /// <value>A list of DungeonNodes.</value>
         public List<DungeonNode> Nodes { get; private set; } = new()
         {
             new(new(157, -85, 13)),
@@ -319,14 +348,29 @@ namespace AmeisenBotX.Core.Engines.Dungeon.Profiles.WotLK
             new(new(241, -325, 180)),
         };
 
+        /// <summary>
+        /// Gets the list of priority units.
+        /// </summary>
         public List<int> PriorityUnits { get; } = new();
 
+        /// <summary>
+        /// Gets the required item level.
+        /// </summary>
         public int RequiredItemLevel { get; } = 100;
 
+        /// <summary>
+        /// Gets the required level for accessing this property.
+        /// </summary>
         public int RequiredLevel { get; } = 68;
 
+        /// <summary>
+        /// Gets the world entry point as a Vector3.
+        /// </summary>
         public Vector3 WorldEntry { get; } = new(1238, -4860, 41);
 
+        /// <summary>
+        /// Gets the World Entry Map ID for the WowMapId property which is set to WowMapId.Northrend.
+        /// </summary>
         public WowMapId WorldEntryMapId { get; } = WowMapId.Northrend;
     }
 }

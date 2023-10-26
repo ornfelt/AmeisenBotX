@@ -8,22 +8,55 @@ namespace AmeisenBotX.Core.Engines.Dungeon.Profiles.TBC
 {
     public class TheBloodFurnaceProfile : IDungeonProfile
     {
+        /// <summary>
+        /// Gets the value of the Author property, which is set to "Jannis".
+        /// </summary>
         public string Author { get; } = "Jannis";
 
+        /// <summary>
+        /// Gets the description of the profile for the Dungeon in Outland, made for Level 59 to 63.
+        /// </summary>
         public string Description { get; } = "Profile for the Dungeon in Outland, made for Level 59 to 63.";
 
+        /// <summary>
+        /// Gets the position of the dungeon exit in 3D space.
+        /// The position is set to (0, 24, -45) by default.
+        /// </summary>
         public Vector3 DungeonExit { get; } = new(0, 24, -45);
 
+        /// <summary>
+        /// Gets the faction type of the dungeon,
+        /// which is neutral by default.
+        /// </summary>
         public DungeonFactionType FactionType { get; } = DungeonFactionType.Neutral;
 
+        /// <summary>
+        /// Represents the size of the group.
+        /// </summary>
         public int GroupSize { get; } = 5;
 
+        /// <summary>
+        /// Gets the map ID for The Blood Furnace.
+        /// </summary>
         public WowMapId MapId { get; } = WowMapId.TheBloodFurnace;
 
+        /// <summary>
+        /// Gets the maximum level.
+        /// </summary>
         public int MaxLevel { get; } = 63;
 
+        /// <summary>
+        /// Gets the name of the Blood Furnace dungeon.
+        /// </summary>
         public string Name { get; } = "[59-63] The Blood Furnace";
 
+        /// <summary>
+        /// Gets or sets a list of DungeonNodes.
+        /// </summary>
+        /// <remarks>
+        /// The list is initially populated with a series of DungeonNode objects, with each object representing a specific location in the dungeon.
+        /// The DungeonNodes are arranged in a specific pattern throughout the dungeon.
+        /// </remarks>
         public List<DungeonNode> Nodes { get; private set; } = new()
         {
             new(new(-4, 15, -45)),
@@ -264,14 +297,29 @@ namespace AmeisenBotX.Core.Engines.Dungeon.Profiles.TBC
             new(new(323, -90, -25)),
         };
 
+        /// <summary>
+        /// Gets the list of priority units.
+        /// </summary>
         public List<int> PriorityUnits { get; } = new();
 
+        /// <summary>
+        /// Gets the required item level.
+        /// </summary>
         public int RequiredItemLevel { get; } = 62;
 
+        /// <summary>
+        /// Gets the required level for this code.
+        /// </summary>
         public int RequiredLevel { get; } = 59;
 
+        /// <summary>
+        /// Gets or sets the world entry position.
+        /// </summary>
         public Vector3 WorldEntry { get; } = new(-305, 3167, 31);
 
+        /// <summary>
+        /// Gets the World Entry Map Id for the Outland.
+        /// </summary>
         public WowMapId WorldEntryMapId { get; } = WowMapId.Outland;
     }
 }

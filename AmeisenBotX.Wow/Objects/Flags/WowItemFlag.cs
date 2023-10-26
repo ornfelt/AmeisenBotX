@@ -2,6 +2,9 @@
 
 namespace AmeisenBotX.Wow.Objects.Flags
 {
+    /// <summary>
+    /// Represents various flags that can be applied to a World of Warcraft item.
+    /// </summary>
     [Flags]
     public enum WowItemFlag : uint
     {

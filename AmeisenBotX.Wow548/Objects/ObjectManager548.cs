@@ -6,11 +6,18 @@ namespace AmeisenBotX.Wow548.Objects
 {
     public class ObjectManager548 : ObjectManager<WowObject548, WowUnit548, WowPlayer548, WowGameobject548, WowDynobject548, WowItem548, WowCorpse548, WowContainer548>
     {
+        /// <summary>
+        /// Initializes a new instance of the ObjectManager548 class.
+        /// </summary>
+        /// <param name="memory">The WowMemoryApi object to use for memory operations.</param>
         public ObjectManager548(WowMemoryApi memory)
-            : base(memory)
+                    : base(memory)
         {
         }
 
+        /// <summary>
+        /// Reads party information and updates party-related properties.
+        /// </summary>
         protected override void ReadParty()
         {
             if (ReadPartyPointer(out IntPtr party)
@@ -33,6 +40,11 @@ namespace AmeisenBotX.Wow548.Objects
             }
         }
 
+        /// <summary>
+        /// Reads the GUIDs of party members.
+        /// </summary>
+        /// <param name="party">A pointer to the party.</param>
+        /// <returns>An enumerable collection of party member GUIDs.</returns>
         private IEnumerable<ulong> ReadPartymemberGuids(IntPtr party)
         {
             List<ulong> partymemberGuids = new();
@@ -54,6 +66,10 @@ namespace AmeisenBotX.Wow548.Objects
             return partymemberGuids.Where(e => e != 0 && e != PlayerGuid).Distinct();
         }
 
+        /// <summary>
+        /// Reads the party pointer from memory and assigns it to the out parameter party.
+        /// Returns true if the party pointer is successfully read and is not null, false otherwise.
+        /// </summary>
         private bool ReadPartyPointer(out IntPtr party)
         {
             return Memory.Read(Memory.Offsets.PartyLeader, out party) && party != IntPtr.Zero;

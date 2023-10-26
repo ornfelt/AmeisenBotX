@@ -67,6 +67,9 @@ namespace AmeisenBotX.Core
 {
     public class AmeisenBot
     {
+        /// <summary>
+        /// Represents the current execution time in milliseconds.
+        /// </summary>
         private float currentExecutionMs;
 
         /// <summary>
@@ -310,22 +313,49 @@ namespace AmeisenBotX.Core
         /// </summary>
         public IEnumerable<IQuestProfile> QuestProfiles { get; private set; }
 
+        /// <summary>
+        /// The event that is triggered when the bag is updated.
+        /// </summary>
         private TimegatedEvent BagUpdateEvent { get; set; }
 
+        /// <summary>
+        /// Gets or sets the current execution count.
+        /// </summary>
         private int CurrentExecutionCount { get; set; }
 
+        /// <summary>
+        /// Gets or sets the TimegatedEvent for equipment update.
+        /// </summary>
         private TimegatedEvent EquipmentUpdateEvent { get; set; }
 
+        /// <summary>
+        /// Gets the Stopwatch object used for measuring the execution time in milliseconds.
+        /// </summary>
         private Stopwatch ExecutionMsStopwatch { get; }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the RCON client needs to be set up.
+        /// </summary>
         private bool NeedToSetupRconClient { get; set; }
 
+        /// <summary>
+        /// The private property that represents the time-gated event for caching points of interest.
+        /// </summary>
         private TimegatedEvent PoiCacheEvent { get; }
 
+        /// <summary>
+        /// Gets or sets the private TimegatedEvent RconEvent property.
+        /// </summary>
         private TimegatedEvent RconEvent { get; }
 
+        /// <summary>
+        /// Gets or sets the locked timer for the state machine.
+        /// </summary>
         private LockedTimer StateMachineTimer { get; set; }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the talent update is running.
+        /// </summary>
         private bool TalentUpdateRunning { get; set; }
 
         /// <summary>
@@ -472,12 +502,23 @@ namespace AmeisenBotX.Core
             }
         }
 
+        /// <summary>
+        /// Loads a class by its name from a given collection of profiles.
+        /// </summary>
+        /// <typeparam name="T">The type of class to load.</typeparam>
+        /// <param name="profiles">The collection of profiles to search in.</param>
+        /// <param name="profileName">The name of the profile to load.</param>
+        /// <returns>The class with the given name, if found; otherwise, the default value of the class.</returns>
         private static T LoadClassByName<T>(IEnumerable<T> profiles, string profileName)
         {
             AmeisenLogger.I.Log("AmeisenBot", $"Loading {typeof(T).Name,-24} {profileName}", LogLevel.Verbose);
             return profiles.FirstOrDefault(e => e.ToString().Equals(profileName, StringComparison.OrdinalIgnoreCase));
         }
 
+        /// <summary>
+        /// Compiles a custom combat class based on the specified parameters and returns an instance of the compiled assembly.
+        /// </summary>
+        /// <returns>The compiled custom combat class.</returns>
         private ICombatClass CompileCustomCombatClass()
         {
             CompilerParameters parameters = new()
@@ -510,6 +551,7 @@ namespace AmeisenBotX.Core
             return (ICombatClass)results.CompiledAssembly.CreateInstance(typeof(ICombatClass).ToString());
         }
 
+        /// Initializes the battleground engines by creating a new list of IBattlegroundEngine instances with specific implementations and assigns it to the BattlegroundEngines property.
         private void InitBattlegroundEngines()
         {
             // add battleground engines here
@@ -523,6 +565,9 @@ namespace AmeisenBotX.Core
             };
         }
 
+        ///<summary>
+        /// Initializes the combat classes for the bot.
+        ///</summary>
         private void InitCombatClasses()
         {
             string combatClassNamespace = "AmeisenBotX.Core.Engines.Combat.Classes";
@@ -537,6 +582,7 @@ namespace AmeisenBotX.Core
                 .Select(x => (ICombatClass)Activator.CreateInstance(x, Bot));
         }
 
+        /// Initializes the grinding profiles by adding various profiles for grinding levels.
         private void InitGrindingProfiles()
         {
             // add grinding profiles here
@@ -550,6 +596,9 @@ namespace AmeisenBotX.Core
             };
         }
 
+        /// <summary>
+        /// Initializes the job profiles by adding specific job profiles to the list.
+        /// </summary>
         private void InitJobProfiles()
         {
             // add job profiles here
@@ -561,6 +610,9 @@ namespace AmeisenBotX.Core
             };
         }
 
+        /// <summary>
+        /// This method is responsible for initializing the quest profiles.
+        /// </summary>
         private void InitQuestProfiles()
         {
             // add quest profiles here
@@ -572,6 +624,9 @@ namespace AmeisenBotX.Core
             };
         }
 
+        /// <summary>
+        /// Loads a custom combat class if the specified file exists, otherwise loads the default combat class.
+        /// </summary>
         private void LoadCustomCombatClass()
         {
             AmeisenLogger.I.Log("AmeisenBot", $"Loading custom CombatClass: {Config.CustomCombatClassFile}", LogLevel.Debug);
@@ -599,6 +654,9 @@ namespace AmeisenBotX.Core
             }
         }
 
+        /// <summary>
+        /// This method is used to load profiles for various functionalities in the bot. It checks if the bot is configured to use the built-in combat class and sets the combat class accordingly. If not, it loads a custom combat class. If a combat class has specified an item comparator, it sets the character's item comparator to the one specified by the combat class. If the combat class is also storeable, it registers it in the bot's storage. It then loads the battleground engine, grinding profile, job profile, and quest profile based on the configurations provided.
+        /// </summary>
         private void LoadProfiles()
         {
             if (Config.UseBuiltInCombatClass)
@@ -627,6 +685,12 @@ namespace AmeisenBotX.Core
             Bot.Quest.Profile = LoadClassByName(QuestProfiles, Config.QuestProfile);
         }
 
+        /// <summary>
+        /// Handles the event triggered when the bag is changed. 
+        /// Automatically updates the character's inventory and equipment. 
+        /// Then updates the character's gear and bags. 
+        /// If the WoW version is MoP548, it opens all dungeon reward bags automatically.
+        /// </summary>
         private void OnBagChanged(long timestamp, List<string> args)
         {
             if (BagUpdateEvent.Run())
@@ -650,11 +714,18 @@ namespace AmeisenBotX.Core
             }
         }
 
+        /// <summary>
+        /// Handles the event when the battleground status is changed.
+        /// </summary>
+        /// <param name="s">The new status of the battleground.</param>
         private void OnBattlegroundStatusChanged(string s)
         {
             AmeisenLogger.I.Log("AmeisenBot", $"OnBattlegroundStatusChanged: {s}");
         }
 
+        /// <summary>
+        /// Triggers whenever the class trainer is shown. If the configuration allows and the bot has a target and the target is not a class trainer and not a profession trainer, the bot runs the routine to train all spells and updates the last trained level.
+        /// </summary>
         private void OnClassTrainerShow(long timestamp, List<string> args)
         {
             if (Config.TrainSpells && Bot.Target != null && !Bot.Target.IsClassTrainer && !Bot.Target.IsProfessionTrainer)
@@ -664,6 +735,11 @@ namespace AmeisenBotX.Core
             }
         }
 
+        /// <summary>
+        /// Handles the event when the equipment is changed.
+        /// </summary>
+        /// <param name="timestamp">The timestamp of the event.</param>
+        /// <param name="args">The arguments associated with the event.</param>
         private void OnEquipmentChanged(long timestamp, List<string> args)
         {
             if (EquipmentUpdateEvent.Run())
@@ -672,6 +748,7 @@ namespace AmeisenBotX.Core
             }
         }
 
+        /// Executes the necessary actions when the LfgProposalShow event is triggered, including automatic joining of LFG if configured and clicking the appropriate UI element based on the WoW version.
         private void OnLfgProposalShow(long timestamp, List<string> args)
         {
             if (Config.AutojoinLfg)
@@ -687,6 +764,11 @@ namespace AmeisenBotX.Core
             }
         }
 
+        /// <summary>
+        /// Shows the LFG role check
+        /// </summary>
+        /// <param name="timestamp">The timestamp</param>
+        /// <param name="args">The list of strings</param>
         private void OnLfgRoleCheckShow(long timestamp, List<string> args)
         {
             if (Config.AutojoinLfg)
@@ -695,6 +777,7 @@ namespace AmeisenBotX.Core
             }
         }
 
+        /// This method is called when a loot roll is started. It takes in a timestamp and a list of strings as parameters. The method first tries to parse the first string in the list as an integer rollId. If successful, it retrieves the item link and JSON representation of the item using methods from the Bot.Wow class. It then builds a WowBasicItem object based on the parsed item JSON. If the item has a name equal to "0", it retrieves the item ID from the item link, constructs a new item JSON for parsing, and rebuilds the WowBasicItem object.
         private void OnLootRollStarted(long timestamp, List<string> args)
         {
             if (int.TryParse(args[0], out int rollId))
@@ -742,6 +825,11 @@ namespace AmeisenBotX.Core
             Bot.Wow.RollOnLoot(rollId, WowRollType.Pass);
         }
 
+        /// <summary>
+        /// Opens the loot window and loots money and quest items only if the "LootOnlyMoneyAndQuestitems" configuration is set to true. Otherwise, loots everything.
+        /// </summary>
+        /// <param name="timestamp">The timestamp of when the loot window is opened.</param>
+        /// <param name="args">The list of additional arguments.</param>
         private void OnLootWindowOpened(long timestamp, List<string> args)
         {
             if (Config.LootOnlyMoneyAndQuestitems)
@@ -754,6 +842,9 @@ namespace AmeisenBotX.Core
             }
         }
 
+        /// <summary>
+        /// Handles the event when the merchant window is shown. Performs automatic repairs if enabled and the target is a repairer. Also runs the routine to sell items if automatic selling is enabled.
+        /// </summary>
         private void OnMerchantShow(long timestamp, List<string> args)
         {
             if (Config.AutoRepair && Bot.Target != null && Bot.Target.IsRepairer)
@@ -767,6 +858,7 @@ namespace AmeisenBotX.Core
             }
         }
 
+        /// This method is called when an update for objects in the game is complete. It checks if caching points of interest is enabled and if the PoiCacheEvent should run. If so, it retrieves the IEnumerable of IWowGameobjects and IWowUnits from the given IEnumerable of IWowObjects. It then iterates over the IWowGameobjects to cache the positions of Ore and Herb objects for farming. Afterwards, it iterates over the IWowGameobjects again to cache the positions of Mailbox objects. Next, it iterates over the IWowUnits to cache the positions of Auctioneer objects. Then, it iterates over the IWowGameobjects to cache the positions of FishingHole and FishingBobber objects, taking into account the proximity to other existing points of interest. Finally, it iterates over the IWowUnits to cache the positions of Vendor and Repair objects.
         private void OnObjectUpdateComplete(IEnumerable<IWowObject> wowObjects)
         {
             if (Config.CachePointsOfInterest && PoiCacheEvent.Run())
@@ -823,6 +915,10 @@ namespace AmeisenBotX.Core
             }
         }
 
+        /// <summary>
+        /// Handles the event of receiving a party invitation.
+        /// If the bot is not in Only Friends mode or if the first argument is a name in the Friends list, it accepts the party invitation.
+        /// </summary>
         private void OnPartyInvitation(long timestamp, List<string> args)
         {
             if (!Config.OnlyFriendsMode || (args.Count >= 1 && Config.Friends.Split(',').Any(e => e.Equals(args[0], StringComparison.OrdinalIgnoreCase))))
@@ -831,6 +927,9 @@ namespace AmeisenBotX.Core
             }
         }
 
+        /// <summary>
+        /// Called when the PvP queue is shown. If autojoin for battlegrounds is enabled and the number of arguments is 1 with a value of "1", the bot will accept the battleground invite.
+        /// </summary>
         private void OnPvpQueueShow(long timestamp, List<string> args)
         {
             if (Config.AutojoinBg && args.Count == 1 && args[0] == "1")
@@ -839,6 +938,7 @@ namespace AmeisenBotX.Core
             }
         }
 
+        /// Executes the confirmation for accepting a quest automatically if the Config.AutoAcceptQuests setting is enabled.
         private void OnQuestAcceptConfirm(long timestamp, List<string> args)
         {
             if (Config.AutoAcceptQuests)
@@ -847,6 +947,10 @@ namespace AmeisenBotX.Core
             }
         }
 
+        /// <summary>
+        /// Executes actions when a quest greeting occurs. If Config.AutoAcceptQuests is true,
+        /// calls the AcceptQuests method in the Bot.Wow class.
+        /// </summary>
         private void OnQuestGreeting(long timestamp, List<string> args)
         {
             if (Config.AutoAcceptQuests)
@@ -855,6 +959,9 @@ namespace AmeisenBotX.Core
             }
         }
 
+        /// <summary>
+        /// Handles quest progress and automatically accepts quests if configured to do so.
+        /// </summary>
         private void OnQuestProgress(long timestamp, List<string> args)
         {
             if (Config.AutoAcceptQuests)
@@ -863,11 +970,20 @@ namespace AmeisenBotX.Core
             }
         }
 
+        /// <summary>
+        /// Method that is called when a ready check is performed.
+        /// </summary>
+        /// <param name="timestamp">The timestamp of the ready check.</param>
+        /// <param name="args">A list of arguments.</param>
         private void OnReadyCheck(long timestamp, List<string> args)
         {
             Bot.Wow.CofirmReadyCheck(true);
         }
 
+        /// <summary>
+        /// This method is called when the quest frame is shown. If the AutoAcceptQuests flag is set in the Config,
+        /// the AcceptQuest Lua function is called.
+        /// </summary>
         private void OnShowQuestFrame(long timestamp, List<string> args)
         {
             if (Config.AutoAcceptQuests)
@@ -876,6 +992,7 @@ namespace AmeisenBotX.Core
             }
         }
 
+        /// Method used to handle static popups based on different types and perform corresponding actions.
         private void OnStaticPopup(string s)
         {
             AmeisenLogger.I.Log("AmeisenBot", $"OnStaticPopup: {s}");
@@ -921,11 +1038,20 @@ namespace AmeisenBotX.Core
             }
         }
 
+        /// <summary>
+        /// Method for handling a summon request by accepting it in World of Warcraft.
+        /// </summary>
+        /// <param name="timestamp">The timestamp of the summon request.</param>
+        /// <param name="args">The arguments related to the summon request.</param>
         private void OnSummonRequest(long timestamp, List<string> args)
         {
             Bot.Wow.AcceptSummon();
         }
 
+        /// <summary>
+        /// This method is called when the talent points change.
+        /// It updates the talent manager with the latest talents and selects talents based on the combat class and unspent talent points.
+        /// </summary>
         private void OnTalentPointsChange(long timestamp, List<string> args)
         {
             if (Bot.CombatClass != null && Bot.CombatClass.Talents != null && !TalentUpdateRunning)
@@ -937,11 +1063,19 @@ namespace AmeisenBotX.Core
             }
         }
 
+        /// <summary>
+        /// Event handler for updating the trade acceptance.
+        /// </summary>
+        /// <param name="timestamp">The timestamp of the update.</param>
+        /// <param name="args">The list of arguments.</param>
         private void OnTradeAcceptUpdate(long timestamp, List<string> args)
         {
             Bot.Wow.LuaDoString("AcceptTrade()");
         }
 
+        /// <summary>
+        /// Handles the logic for sending data and images to Rcon, and processing pending actions.
+        /// </summary>
         private void RconClientTimerTick()
         {
             if (IsRunning && Bot.Rcon != null && RconEvent.Run())
@@ -1031,6 +1165,9 @@ namespace AmeisenBotX.Core
             }
         }
 
+        /// <summary>
+        /// Saves the position of the "World of Warcraft" window if the "AutoPositionWow" configuration value is set to false.
+        /// </summary>
         private void SaveWowWindowPosition()
         {
             if (!Config.AutoPositionWow)
@@ -1046,6 +1183,9 @@ namespace AmeisenBotX.Core
             }
         }
 
+        /// <summary>
+        /// Sets up the RCON client when an object update is complete.
+        /// </summary>
         private void SetupRconClient()
         {
             Bot.Objects.OnObjectUpdateComplete += delegate
@@ -1068,6 +1208,12 @@ namespace AmeisenBotX.Core
             };
         }
 
+        /// <summary>        
+        /// This method is called when the state machine timer ticks. 
+        /// It checks if the state machine is running and if so, 
+        /// restarts the execution stopwatch, calls the Tick method of the logic, 
+        /// and updates the current execution milliseconds and count.        
+        /// </summary>
         private void StateMachineTimerTick()
         {
             if (IsRunning)
@@ -1079,6 +1225,9 @@ namespace AmeisenBotX.Core
             }
         }
 
+        /// <summary>
+        /// Subscribes to various World of Warcraft events such as party invitations, loot/item events, merchant events, PvP events, dungeon events, quest events, trading events, chat events, miscellaneous events, and NPC events.
+        /// </summary>
         private void SubscribeToWowEvents()
         {
             BagUpdateEvent = new(TimeSpan.FromSeconds(1));

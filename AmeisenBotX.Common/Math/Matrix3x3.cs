@@ -35,22 +35,49 @@
         /// </summary>
         public Vector3 FirstCol => new(X1, Y1, Z1);
 
+        /// <summary>
+        /// Gets or sets the X1 value.
+        /// </summary>
         public float X1 { get; set; }
 
+        /// <summary>
+        /// Gets or sets the value of X2, which represents a float number.
+        /// </summary>
         public float X2 { get; set; }
 
+        /// <summary>
+        /// Gets or sets the X3 value.
+        /// </summary>
         public float X3 { get; set; }
 
+        /// <summary>
+        /// Gets or sets the Y1 coordinate.
+        /// </summary>
         public float Y1 { get; set; }
 
+        /// <summary>
+        /// Gets or sets the Y2 coordinate.
+        /// </summary>
         public float Y2 { get; set; }
 
+        /// <summary>
+        /// Gets or sets the Y3 value.
+        /// </summary>
         public float Y3 { get; set; }
 
+        /// <summary>
+        /// Gets or sets the value of Z1.
+        /// </summary>
         public float Z1 { get; set; }
 
+        /// <summary>
+        /// Gets or sets the Z2 value.
+        /// </summary>
         public float Z2 { get; set; }
 
+        /// <summary>
+        /// Gets or sets the value of Z3.
+        /// </summary>
         public float Z3 { get; set; }
 
         /// <summary>

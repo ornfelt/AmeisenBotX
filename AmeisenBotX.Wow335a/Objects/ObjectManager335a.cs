@@ -10,11 +10,18 @@ namespace AmeisenBotX.Wow335a.Objects
 {
     public class ObjectManager335a : ObjectManager<WowObject335a, WowUnit335a, WowPlayer335a, WowGameobject335a, WowDynobject335a, WowItem335a, WowCorpse335a, WowContainer335a>
     {
+        /// <summary>
+        /// Initializes a new instance of the ObjectManager335a class.
+        /// </summary>
+        /// <param name="memory">The WowMemoryApi object to be used for communication with the game's memory.</param>
         public ObjectManager335a(WowMemoryApi memory)
-            : base(memory)
+                    : base(memory)
         {
         }
 
+        /// <summary>
+        /// Reads the party information, including the party leader's GUID, the party member GUIDs, and the party pets.
+        /// </summary>
         protected override void ReadParty()
         {
             PartyleaderGuid = ReadLeaderGuid();
@@ -38,6 +45,10 @@ namespace AmeisenBotX.Wow335a.Objects
             }
         }
 
+        /// <summary>
+        /// Reads the leader's GUID in the raid or party.
+        /// </summary>
+        /// <returns>The leader's GUID if successful; otherwise, returns 0.</returns>
         private ulong ReadLeaderGuid()
         {
             if (Memory.Read(Memory.Offsets.RaidLeader, out ulong partyleaderGuid))
@@ -54,6 +65,10 @@ namespace AmeisenBotX.Wow335a.Objects
             return 0;
         }
 
+        /// <summary>
+        /// Reads the GUIDs of the party members and raid members.
+        /// </summary>
+        /// <returns>An enumerable collection of ulong values representing the party member GUIDs.</returns>
         private IEnumerable<ulong> ReadPartymemberGuids()
         {
             List<ulong> partymemberGuids = new();

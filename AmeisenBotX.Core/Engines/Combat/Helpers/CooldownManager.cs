@@ -6,6 +6,11 @@ namespace AmeisenBotX.Core.Engines.Combat.Helpers
 {
     public class CooldownManager
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CooldownManager"/> class with the provided collection of spells.
+        /// The cooldowns dictionary is created and populated with spell names as keys and their corresponding current time in UTC as values.
+        /// </summary>
+        /// <param name="spells">The collection of spells to be used for initializing the cooldowns.</param>
         public CooldownManager(IEnumerable<Spell> spells)
         {
             Cooldowns = new();
@@ -22,8 +27,18 @@ namespace AmeisenBotX.Core.Engines.Combat.Helpers
             }
         }
 
+        /// <summary>
+        /// Gets or sets the collection of cooldowns for each string key.
+        /// The keys are strings and the values are DateTimes representing the expiration time of the cooldown.
+        /// </summary>
+        /// <returns>A Dictionary of string keys and DateTime values.</returns>
         public Dictionary<string, DateTime> Cooldowns { get; }
 
+        /// <summary>
+        /// Retrieves the remaining cooldown time in milliseconds for a given spell.
+        /// </summary>
+        /// <param name="spellname">The name of the spell.</param>
+        /// <returns>The remaining cooldown time in milliseconds for the given spell. If the spell name is null, empty, or whitespace, 0 is returned.</returns>
         public int GetSpellCooldown(string spellname)
         {
             if (string.IsNullOrWhiteSpace(spellname))
@@ -41,6 +56,11 @@ namespace AmeisenBotX.Core.Engines.Combat.Helpers
             return 0;
         }
 
+        /// <summary>
+        /// Checks if a spell is currently on cooldown.
+        /// </summary>
+        /// <param name="spellname">The name of the spell.</param>
+        /// <returns>True if the spell is on cooldown, false otherwise.</returns>
         public bool IsSpellOnCooldown(string spellname)
         {
             if (string.IsNullOrWhiteSpace(spellname))
@@ -56,6 +76,12 @@ namespace AmeisenBotX.Core.Engines.Combat.Helpers
             return false;
         }
 
+        /// <summary>
+        /// Sets the cooldown for a spell with the specified name.
+        /// </summary>
+        /// <param name="spellname">The name of the spell.</param>
+        /// <param name="cooldownLeftMs">The remaining cooldown time in milliseconds.</param>
+        /// <returns>True if the cooldown was successfully set, otherwise false.</returns>
         public bool SetSpellCooldown(string spellname, int cooldownLeftMs)
         {
             if (string.IsNullOrWhiteSpace(spellname))

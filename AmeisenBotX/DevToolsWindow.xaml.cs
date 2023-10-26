@@ -18,12 +18,19 @@ namespace AmeisenBotX
 {
     public partial class DevToolsWindow
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DevToolsWindow"/> class.
+        /// </summary>
+        /// <param name="ameisenBot">The <see cref="AmeisenBot"/> used for this instance of the <see cref="DevToolsWindow"/>.</param>
         public DevToolsWindow(AmeisenBot ameisenBot)
         {
             AmeisenBot = ameisenBot;
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Represents the main tabs in the application.
+        /// </summary>
         private enum MainTab
         {
             CachePoi = 0,
@@ -39,6 +46,9 @@ namespace AmeisenBotX
             ClientPatches
         }
 
+        /// <summary>
+        /// Represents the possible tabs for displaying near World of Warcraft objects.
+        /// </summary>
         private enum NearWowObjectsTab
         {
             Unselected = -1,
@@ -53,8 +63,15 @@ namespace AmeisenBotX
             AreaTriggers
         }
 
+        /// <summary>
+        /// Gets the private instance of the AmeisenBot class.
+        /// </summary>
         private AmeisenBot AmeisenBot { get; }
 
+        /// <summary>
+        /// Copies the data of the nearest object from the given ListView.
+        /// </summary>
+        /// <param name="listView">The ListView from which to copy the data.</param>
         private static void CopyDataOfNearestObject(ItemsControl listView)
         {
             ItemCollection listItems = listView.Items;
@@ -93,43 +110,69 @@ namespace AmeisenBotX
             Clipboard.SetDataObject(entryId + ", " + finalPosStr);
         }
 
+        /// <summary>
+        /// Clears the text in the textboxEventResult.
+        /// </summary>
         private void ButtonEventClear_Click(object sender, RoutedEventArgs e)
         {
             textboxEventResult.Text = string.Empty;
         }
 
+        /// <summary>
+        /// Subscribes to a WoW event using the specified event name and callback method.
+        /// </summary>
         private void ButtonEventSubscribe_Click(object sender, RoutedEventArgs e)
         {
             AmeisenBot.Bot.Wow.Events.Subscribe(textboxEventName.Text, OnWowEventFired);
         }
 
+        /// <summary>
+        /// Handles the click event of the ButtonEventUnsubscribe control and unsubscribes from the specified WoW event.
+        /// </summary>
         private void ButtonEventUnsubscribe_Click(object sender, RoutedEventArgs e)
         {
             AmeisenBot.Bot.Wow.Events.Unsubscribe(textboxEventName.Text, OnWowEventFired);
         }
 
+        /// <summary>
+        /// Event handler for the click event of the ButtonExit button.
+        /// Unsubscribes the OnLog event handler from the AmeisenLogger.I instance and hides the current form.
+        /// </summary>
         private void ButtonExit_Click(object sender, RoutedEventArgs e)
         {
             AmeisenLogger.I.OnLog -= OnLog;
             Hide();
         }
 
+        /// <summary>
+        /// Executes Lua code and updates the result in the TextBox. 
+        /// If successful, the result is displayed in the TextBox; otherwise, "Failed to execute LUA..." is displayed.
+        /// </summary>
         private void ButtonLuaExecute_Click(object sender, RoutedEventArgs e)
         {
             textboxLuaResult.Text = AmeisenBot.Bot.Wow.ExecuteLuaAndRead(BotUtils.ObfuscateLua(textboxLuaCode.Text), out string result)
                 ? result : "Failed to execute LUA...";
         }
 
+        /// <summary>
+        /// Event handler for the click event of the "Copy" button. Executes the Lua code specified in the input text box using AmeisenBot.Bot.Wow.LuaDoString method.
+        /// </summary>
         private void ButtonLuaExecute_Copy_Click(object sender, RoutedEventArgs e)
         {
             AmeisenBot.Bot.Wow.LuaDoString(textboxLuaCode.Text);
         }
 
+        /// <summary>
+        /// Event handler for the Refresh button click event. Calls the RefreshActiveData method to update the active data.
+        /// </summary>
         private void ButtonRefresh_Click(object sender, RoutedEventArgs e)
         {
             RefreshActiveData();
         }
 
+        /// <summary>
+        /// Method for climbing steep slopes. It reads the player's base memory address and performs multi-level pointer redirection to find the appropriate memory location to write the climb angle. The current implementation is messy and needs improvement.
+        /// </summary>
         private void ClimbSteepSlopesChecked(object sender, RoutedEventArgs e)
         {
             // Todo: find a better way, multi-level pointer redirection very messy
@@ -139,6 +182,10 @@ namespace AmeisenBotX
             AmeisenBot.Bot.Memory.Write<float>(IntPtr.Add(PlayerBase, (int)AmeisenBot.Bot.Memory.Offsets.ClimbAngle), 255);
         }
 
+        /// <summary>
+        /// Method for climbing steep slopes in the game.
+        /// This method reads the player's base address from memory and adjusts the climb angle to enable climbing steep slopes.
+        /// </summary>
         private void ClimbSteepSlopesUnchecked(object sender, RoutedEventArgs e)
         {
             AmeisenBot.Bot.Memory.Read<IntPtr>(AmeisenBot.Bot.Memory.Offsets.PlayerBase, out IntPtr PlayerBase1);
@@ -147,26 +194,41 @@ namespace AmeisenBotX
             AmeisenBot.Bot.Memory.Write<float>(IntPtr.Add(PlayerBase, (int)AmeisenBot.Bot.Memory.Offsets.ClimbAngle), 1);
         }
 
+        /// <summary>
+        /// Disables collisions between M2 objects when checked.
+        /// </summary>
         private void DisableM2CollisionsChecked(object sender, RoutedEventArgs e)
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Disables M2 collisions without checking for collision type.
+        /// </summary>
         private void DisableM2CollisionsUnchecked(object sender, RoutedEventArgs e)
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Disables WMOCollisions when checked.
+        /// </summary>
         private void DisableWMOCollisionsChecked(object sender, RoutedEventArgs e)
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Disables the collisions for the Windows Mixed Reality object unchecked.
+        /// </summary>
         private void DisableWMOCollisionsUnchecked(object sender, RoutedEventArgs e)
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Handles the KeyDown event for the ListViewNearWowObjects. If the pressed key is not 'C', it returns. Otherwise, it performs a switch statement based on the selected tab in the tab control. Performs different actions based on the selected tab.
+        /// </summary>
         private void ListViewNearWowObjects_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key != Key.C)
@@ -218,6 +280,9 @@ namespace AmeisenBotX
             }
         }
 
+        /// <summary>
+        /// Handles logging based on the specified log level and log message.
+        /// </summary>
         private void OnLog(LogLevel loglevel, string log)
         {
             Dispatcher.InvokeAsync(() =>
@@ -236,6 +301,11 @@ namespace AmeisenBotX
             });
         }
 
+        /// <summary>
+        /// Invoked when the Wow event is fired.
+        /// </summary>
+        /// <param name="timestamp">The timestamp of the event.</param>
+        /// <param name="args">The arguments of the event.</param>
         private void OnWowEventFired(long timestamp, List<string> args)
         {
             Dispatcher.Invoke(() =>
@@ -244,6 +314,10 @@ namespace AmeisenBotX
             });
         }
 
+        /// <summary>
+        /// Refreshes the active data based on the selected main tab in the UI.
+        /// Clears the items in the corresponding list view based on the selected main tab, and adds new items based on the data from the AmeisenBot database.
+        /// </summary>
         private void RefreshActiveData()
         {
             switch ((MainTab)tabcontrolMain.SelectedIndex)
@@ -482,11 +556,18 @@ namespace AmeisenBotX
             }
         }
 
+        /// <summary>
+        /// Event handler for when the selection in the TabControlMain changes.
+        /// Refreshes the active data.
+        /// </summary>
         private void TabControlMain_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             RefreshActiveData();
         }
 
+        ///<summary>
+        ///Event handler for when the window is loaded.
+        ///</summary>
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             foreach (LogLevel l in Enum.GetValues(typeof(LogLevel)))
@@ -498,6 +579,10 @@ namespace AmeisenBotX
             AmeisenLogger.I.OnLog += OnLog;
         }
 
+        /// <summary>
+        /// Event handler for the mouse left button down event on the window.
+        /// This method allows the window to be dragged when the left mouse button is pressed.
+        /// </summary>
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             DragMove();

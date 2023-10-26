@@ -5,6 +5,9 @@ namespace AmeisenBotX.Core.Managers.Character.Comparators
 {
     public class BasicAgilityComparator : BasicComparator
     {
+        /// <summary>
+        /// Initializes a new instance of the BasicAgilityComparator class with optional armor and weapon type blacklists.
+        /// </summary>
         public BasicAgilityComparator(List<WowArmorType> armorTypeBlacklist = null, List<WowWeaponType> weaponTypeBlacklist = null) : base(armorTypeBlacklist, weaponTypeBlacklist)
         {
             GearscoreFactory = new(new()

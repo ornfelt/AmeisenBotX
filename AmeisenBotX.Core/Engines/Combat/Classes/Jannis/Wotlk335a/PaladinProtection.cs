@@ -9,6 +9,13 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 {
     public class PaladinProtection : BasicCombatClass
     {
+        /// <summary>
+        /// Initializes a new instance of the PaladinProtection class.
+        /// Adds jobs to the MyAuraManager to keep certain auras active.
+        /// Sets up the InterruptManager with the HammerOfJustice spell as an interrupt.
+        /// Adds a spell to keep active on the party using the GroupAuraManager.
+        /// </summary>
+        /// <param name="bot">The AmeisenBotInterfaces object.</param>
         public PaladinProtection(AmeisenBotInterfaces bot) : base(bot)
         {
             MyAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, Paladin335a.DevotionAura, () => TryCastSpell(Paladin335a.DevotionAura, 0, true)));
@@ -24,18 +31,70 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
             GroupAuraManager.SpellsToKeepActiveOnParty.Add((Paladin335a.BlessingOfKings, (spellName, guid) => TryCastSpell(spellName, guid, true)));
         }
 
+        /// <summary>
+        /// Gets the description of the FCFS based CombatClass for the Protection Paladin spec.
+        /// </summary>
         public override string Description => "FCFS based CombatClass for the Protection Paladin spec.";
 
+        /// <summary>
+        /// Gets the display name for a Paladin Protection.
+        /// </summary>
         public override string DisplayName2 => "Paladin Protection";
 
+        /// <summary>
+        /// Gets or sets a value indicating whether this object handles movement.
+        /// </summary>
+        /// <value>
+        ///   <c>false</c> if this object does not handle movement; otherwise, <c>true</c>.
+        /// </value>
         public override bool HandlesMovement => false;
 
+        /// <summary>
+        /// Gets a value indicating whether the object is a melee weapon.
+        /// </summary>
         public override bool IsMelee => true;
 
+        /// <summary>
+        /// Gets or sets the item comparator used for comparing items.
+        /// </summary>
         public override IItemComparator ItemComparator { get; set; } = new BasicArmorComparator(null, new() { WowWeaponType.SwordTwoHand, WowWeaponType.MaceTwoHand, WowWeaponType.AxeTwoHand });
 
+        /// <summary>
+        /// Gets or sets the role of the WoW character as a Tank.
+        /// </summary>
         public override WowRole Role => WowRole.Tank;
 
+        /// Initializes a new instance of the TalentTree class, with the following configuration:
+        /// 
+        /// Tree1: An empty tree
+        /// Tree2: Contains the following talents:
+        /// - Talent at index 2 with values (2, 2, 5)
+        /// - Talent at index 5 with values (2, 5, 5)
+        /// - Talent at index 6 with values (2, 6, 1)
+        /// - Talent at index 7 with values (2, 7, 3)
+        /// - Talent at index 8 with values (2, 8, 5)
+        /// - Talent at index 9 with values (2, 9, 2)
+        /// - Talent at index 11 with values (2, 11, 3)
+        /// - Talent at index 12 with values (2, 12, 1)
+        /// - Talent at index 14 with values (2, 14, 2)
+        /// - Talent at index 15 with values (2, 15, 3)
+        /// - Talent at index 16 with values (2, 16, 1)
+        /// - Talent at index 17 with values (2, 17, 1)
+        /// - Talent at index 18 with values (2, 18, 3)
+        /// - Talent at index 19 with values (2, 19, 3)
+        /// - Talent at index 20 with values (2, 20, 3)
+        /// - Talent at index 21 with values (2, 21, 3)
+        /// - Talent at index 22 with values (2, 22, 1)
+        /// - Talent at index 23 with values (2, 23, 2)
+        /// - Talent at index 24 with values (2, 24, 3)
+        /// - Talent at index 25 with values (2, 25, 2)
+        /// - Talent at index 26 with values (2, 26, 1)
+        /// Tree3: Contains the following talents:
+        /// - Talent at index 1 with values (3, 1, 5)
+        /// - Talent at index 3 with values (3, 3, 2)
+        /// - Talent at index 4 with values (3, 4, 3)
+        /// - Talent at index 7 with values (3, 7, 5)
+        /// - Talent at index 12 with values (3, 12, 3)
         public override TalentTree Talents { get; } = new()
         {
             Tree1 = new(),
@@ -73,18 +132,57 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
             },
         };
 
+        /// <summary>
+        /// Specifies that auto attacks should be used.
+        /// </summary>
         public override bool UseAutoAttacks => true;
 
+        /// <summary>
+        /// Gets the version of the code.
+        /// </summary>
+        /// <returns>The version of the code.</returns>
         public override string Version => "1.0";
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the character can walk behind enemy.
+        /// </summary>
         public override bool WalkBehindEnemy => false;
 
+        /// <summary>
+        /// Gets or sets the WowClass property to Paladin.
+        /// </summary>
         public override WowClass WowClass => WowClass.Paladin;
 
+        /// <summary>
+        /// Gets or sets the World of Warcraft version as Wrath of the Lich King 3.3.5a.
+        /// </summary>
         public override WowVersion WowVersion => WowVersion.WotLK335a;
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the 9-second spell should be used.
+        /// </summary>
         private bool Use9SecSpell { get; set; }
 
+        ///<summary>
+        /// This method is responsible for executing the paladin's combat rotation. 
+        /// It first calls the base Execute method from the parent class. 
+        /// 
+        /// If the target is found, it checks the player's health percentage and tries to use the Lay On Hands spell if the health is below 10%. 
+        /// If that fails, it checks for a health percentage below 20% and tries to use the Flash of Light spell. 
+        /// If that also fails, it checks for a health percentage below 35% and tries to use the Holy Light spell. 
+        /// 
+        /// Then, it tries to cast the Sacred Shield spell or the Divine Plea spell. 
+        /// 
+        /// If there is a target, it checks if the target is not targeting the player and tries to use the Hand of Reckoning spell. 
+        /// 
+        /// Then, it checks for the Avenger's Shield spell or the Hammer of Wrath spell if the target's health is below 20%. 
+        /// 
+        /// If the Use9SecSpell flag is true, it tries to use the Judgement of Light spell if the player has either the Seal of Vengeance or the Seal of Wisdom buff. 
+        /// If that fails, it tries to use the Consecration spell or the Holy Shield spell. 
+        /// If none of those conditions are met, it tries to use the Shield of the Righteousness spell or the Hammer of the Righteous spell. 
+        /// 
+        /// The flag Use9SecSpell is toggled based on whether the Shield of the Righteousness spell or the Hammer of the Righteous spell is used. 
+        ///</summary>
         public override void Execute()
         {
             base.Execute();
@@ -147,6 +245,9 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
             }
         }
 
+        /// <summary>
+        /// Sets the Use9SecSpell variable to true and calls the base class's OutOfCombatExecute method.
+        /// </summary>
         public override void OutOfCombatExecute()
         {
             Use9SecSpell = true;

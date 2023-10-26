@@ -1,5 +1,8 @@
 ﻿namespace AmeisenBotX.Wow.Objects.Enums
 {
+    /// <summary>
+    /// Represents the sub-classes of World of Warcraft items.
+    /// </summary>
     public enum WowItemSubClass
     {
         Consumable = 0,

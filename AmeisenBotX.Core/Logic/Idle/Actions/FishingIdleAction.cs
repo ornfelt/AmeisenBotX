@@ -13,40 +13,92 @@ namespace AmeisenBotX.Core.Logic.Idle.Actions
 {
     public class FishingIdleAction : IIdleAction
     {
+        /// <summary>
+        /// Initializes a new instance of the FishingIdleAction class.
+        /// </summary>
+        /// <param name="bot">The bot object.</param>
         public FishingIdleAction(AmeisenBotInterfaces bot)
         {
             Bot = bot;
             Rnd = new Random();
         }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the system is set to autopilot only mode.
+        /// </summary>
         public bool AutopilotOnly => true;
 
+        /// <summary>
+        /// Gets or sets the interface for controlling the AmeisenBot.
+        /// </summary>
         public AmeisenBotInterfaces Bot { get; }
 
+        /// <summary>
+        /// Gets or sets the cooldown time.
+        /// </summary>
         public DateTime Cooldown { get; set; }
 
+        /// <summary>
+        /// Gets or sets the start time of cooldown.
+        /// </summary>
         public DateTime CooldownStart { get; set; }
 
+        /// <summary>
+        /// Gets or sets the current spot of the Vector3 object.
+        /// </summary>
         public Vector3 CurrentSpot { get; set; }
 
+        /// <summary>
+        /// Gets or sets the duration of the specified TimeSpan.
+        /// </summary>
         public TimeSpan Duration { get; set; }
 
+        /// <summary>
+        /// Gets the maximum cooldown in milliseconds.
+        /// </summary>
         public int MaxCooldown => 12 * 60 * 1000;
 
+        /// <summary>
+        /// Gets the maximum duration in milliseconds.
+        /// </summary>
         public int MaxDuration { get; } = 20 * 60 * 1000;
 
+        /// <summary>
+        /// Gets the minimum cooldown in milliseconds.
+        /// </summary>
         public int MinCooldown => 7 * 60 * 1000;
 
+        /// <summary>
+        /// Gets the minimum duration in milliseconds.
+        /// </summary>
         public int MinDuration { get; } = 10 * 60 * 1000;
 
+        /// <summary>
+        /// Gets or sets the duration of the spot.
+        /// </summary>
         public TimeSpan SpotDuration { get; set; }
 
+        /// <summary>
+        /// Gets or sets the date and time when a spot is selected.
+        /// </summary>
         public DateTime SpotSelected { get; set; }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the process has started.
+        /// </summary>
         public bool Started { get; set; }
 
+        /// <summary>
+        /// Gets the instance of the random number generator.
+        /// </summary>
         private Random Rnd { get; }
 
+        /// <summary>
+        /// Checks if the player can enter the fishing mode by evaluating several conditions.
+        /// Conditions include verifying if the player is swimming or flying, if they possess the fishing skill,
+        /// if they have a fishing pole in their inventory or equipped, and if there are any fishing spots nearby.
+        /// If all conditions are met, the function adds the mainhand and offhand item slots to skip and returns true.
+        /// </summary>
         public bool Enter()
         {
             bool fishingPoleEquipped = IsFishingRodEquipped();
@@ -69,6 +121,9 @@ namespace AmeisenBotX.Core.Logic.Idle.Actions
             return status;
         }
 
+        /// <summary>
+        /// Executes the fishing action if conditions are met.
+        /// </summary>
         public void Execute()
         {
             if ((CurrentSpot == default || SpotSelected + SpotDuration <= DateTime.UtcNow)
@@ -140,11 +195,18 @@ namespace AmeisenBotX.Core.Logic.Idle.Actions
             }
         }
 
+        /// <summary>
+        /// Overrides the ToString method and returns a string representation of the object.
+        /// The returned string includes the text "Go Fishing" and an optional emoji of a robot if the AutopilotOnly property is true.
+        /// </summary>
         public override string ToString()
         {
             return $"{(AutopilotOnly ? "(🤖) " : "")}Go Fishing";
         }
 
+        /// <summary>
+        /// Checks if a fishing rod is currently equipped by the character.
+        /// </summary>
         private bool IsFishingRodEquipped()
         {
             return (Bot.Character.Equipment.Items[WowEquipmentSlot.INVSLOT_MAINHAND] != null

@@ -16,6 +16,10 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 {
     public class DruidRestoration : BasicCombatClass
     {
+        /// <summary>
+        /// Initializes a new instance of the DruidRestoration class, with the specified bot.
+        /// </summary>
+        /// <param name="bot">The bot instance.</param>
         public DruidRestoration(AmeisenBotInterfaces bot) : base(bot)
         {
             MyAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, Druid335a.TreeOfLife, () => Bot.Objects.PartymemberGuids.Any() && TryCastSpell(Druid335a.TreeOfLife, Bot.Wow.PlayerGuid, true)));
@@ -49,31 +53,53 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
             SwiftmendEvent = new(TimeSpan.FromSeconds(15));
         }
 
+        /// <summary>
+        /// Overrides the Description property and returns the string "FCFS based CombatClass for the Druid Restoration spec."
+        /// </summary>
         public override string Description => "FCFS based CombatClass for the Druid Restoration spec.";
 
+        /// <summary>
+        /// Gets or sets the display name for the Druid in Restoration Spec.
+        /// </summary>
         public override string DisplayName2 => "Druid Restoration";
 
+        /// <summary>
+        /// Gets a value indicating whether this object handles movement.
+        /// </summary>
+        /// <value>
+        ///   <c>false</c> indicating that this object does not handle movement.
+        /// </value>
         public override bool HandlesMovement => false;
 
+        /// <summary>
+        /// Gets a value indicating whether the object is a melee weapon.
+        /// </summary>
         public override bool IsMelee => false;
 
+        /// <summary>
+        /// Gets or sets the item comparator for comparing attributes of items.
+        /// </summary>
         public override IItemComparator ItemComparator { get; set; } = new BasicComparator
-        (
-            new() { WowArmorType.Shield },
-            new() { WowWeaponType.Sword, WowWeaponType.Mace, WowWeaponType.Axe },
-            new Dictionary<string, double>()
-            {
+                (
+                    new() { WowArmorType.Shield },
+                    new() { WowWeaponType.Sword, WowWeaponType.Mace, WowWeaponType.Axe },
+                    new Dictionary<string, double>()
+                    {
                 { "ITEM_MOD_CRIT_RATING_SHORT", 1.2 },
                 { "ITEM_MOD_INTELLECT_SHORT", 1.0 },
                 { "ITEM_MOD_SPELL_POWER_SHORT", 1.6 },
                 { "ITEM_MOD_HASTE_RATING_SHORT", 1.8 },
                 { "ITEM_MOD_SPIRIT_SHORT ", 1.4 },
                 { "ITEM_MOD_POWER_REGEN0_SHORT", 1.4 },
-            }
-        );
+                    }
+                );
 
+        /// <summary>
+        /// Gets or sets the role of the character as a healer in the World of Warcraft game.
+        /// </summary>
         public override WowRole Role => WowRole.Heal;
 
+        /// This code initializes the `Talents` property with a new `TalentTree` object. The `TalentTree` object contains three properties: `Tree1`, `Tree2`, and `Tree3`. 
         public override TalentTree Talents { get; } = new()
         {
             Tree1 = new()
@@ -111,20 +137,34 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
             },
         };
 
+        /// This property overrides the base class's "UseAutoAttacks" property and sets it to false.
         public override bool UseAutoAttacks => false;
 
+        /// <summary>
+        /// Gets the version number of the code.
+        /// </summary>
         public override string Version => "1.1";
 
+        /// Indicates that the enemy cannot be walked behind.
         public override bool WalkBehindEnemy => false;
 
+        /// <summary>
+        /// Gets or sets the WoW class, which is a Druid.
+        /// </summary>
         public override WowClass WowClass => WowClass.Druid;
 
+        /// <summary>
+        /// Gets or sets the WoW version for the code, which is set to World of Warcraft: Wrath of the Lich King (3.3.5a).
+        /// </summary>
         public override WowVersion WowVersion => WowVersion.WotLK335a;
 
+        /// Gets the private instance of the HealingManager class.
         private HealingManager HealingManager { get; }
 
+        /// Gets the TimegatedEvent for Swiftmend.
         private TimegatedEvent SwiftmendEvent { get; }
 
+        /// This method executes a series of actions based on the current state of the game. It first checks if the player's mana percentage is below 30.0 and if the Innervate spell can be cast, it returns. If the player's health percentage is below 50.0 and the Barkskin spell can be cast, it returns. If there are party members present who are not dead, it checks if healing is needed and returns if true. If the player is solo and their health percentage is below 75.0, it checks if healing is needed and returns if true. If a target is found, it checks if the target does not have the Moonfire aura, and if so, it tries to cast the Moonfire spell on the target and returns. It then tries to cast the Starfire spell on the target and returns if successful. Finally, it tries to cast the Wrath spell on the target and returns if successful.
         public override void Execute()
         {
             base.Execute();
@@ -177,6 +217,10 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
             }
         }
 
+        /// <summary>
+        /// Loads the specified objects into the current instance.
+        /// </summary>
+        /// <param name="objects">The dictionary of objects to load.</param>
         public override void Load(Dictionary<string, JsonElement> objects)
         {
             base.Load(objects);
@@ -187,6 +231,10 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
             }
         }
 
+        /// Executes the OutOfCombatExecute() method.
+        ///
+        /// If there is a need to heal someone or handle dead party members,
+        /// the method will return without further execution.
         public override void OutOfCombatExecute()
         {
             base.OutOfCombatExecute();
@@ -198,6 +246,10 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
             }
         }
 
+        /// <summary>
+        /// Saves the state of the HealingManager and returns a dictionary containing the saved data.
+        /// </summary>
+        /// <returns>A dictionary with the saved data.</returns>
         public override Dictionary<string, object> Save()
         {
             Dictionary<string, object> s = base.Save();
@@ -205,6 +257,7 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
             return s;
         }
 
+        ///<summary>Checks if there is a need to heal someone.</summary>
         private bool NeedToHealSomeone()
         {
             if (TargetProviderHeal.Get(out IEnumerable<IWowUnit> unitsToHeal))

@@ -7,12 +7,15 @@ namespace AmeisenBotX.Core.Engines.Quest.Quests.TheBarrens.Crossroads
 {
     internal class QTheDisruptionEnds : BotQuest
     {
+        ///<summary>
+        ///Constructor for the "The Disruption Ends" quest.
+        ///</summary>
         public QTheDisruptionEnds(AmeisenBotInterfaces bot)
-            : base(bot, 872, "The Disruption Ends", 9, 1,
-                () => (bot.GetClosestQuestGiverByNpcId(bot.Player.Position, new List<int> { 3429 }), new Vector3(-473.20f, -2595.70f, 103.81f)),
-                () => (bot.GetClosestQuestGiverByNpcId(bot.Player.Position, new List<int> { 3429 }), new Vector3(-473.20f, -2595.70f, 103.81f)),
-                new List<IQuestObjective>()
-                {
+                    : base(bot, 872, "The Disruption Ends", 9, 1,
+                        () => (bot.GetClosestQuestGiverByNpcId(bot.Player.Position, new List<int> { 3429 }), new Vector3(-473.20f, -2595.70f, 103.81f)),
+                        () => (bot.GetClosestQuestGiverByNpcId(bot.Player.Position, new List<int> { 3429 }), new Vector3(-473.20f, -2595.70f, 103.81f)),
+                        new List<IQuestObjective>()
+                        {
                     new QuestObjectiveChain(new List<IQuestObjective>()
                     {
                         new KillAndLootQuestObjective(bot, new List<int> { 3269 }, 8, 0, new List<List<Vector3>> {
@@ -77,7 +80,7 @@ namespace AmeisenBotX.Core.Engines.Quest.Quests.TheBarrens.Crossroads
                             },
                         }),
                     })
-                })
+                        })
         { }
     }
 }

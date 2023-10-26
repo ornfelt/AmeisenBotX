@@ -10,6 +10,12 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Bia10
 {
     public class ShamanElemental : BasicCombatClassBia10
     {
+        /// <summary>
+        /// Initializes a new instance of the ShamanElemental class with the specified bot. 
+        /// Adds jobs to the MyAuraManager and TargetAuraManager to keep active auras.
+        /// Sets the interrupt spells for the InterruptManager.
+        /// </summary>
+        /// <param name="bot">The bot instance.</param>
         public ShamanElemental(AmeisenBotInterfaces bot) : base(bot)
         {
             MyAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, Shaman335a.LightningShield, () =>
@@ -33,24 +39,49 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Bia10
             };
         }
 
+        /// <summary>
+        /// Gets the description for the CombatClass of the Elemental Shaman spec.
+        /// </summary>
         public override string Description => "CombatClass for the Elemental Shaman spec.";
 
+        /// <summary>
+        /// Gets the display name for a Shaman Elemental character.
+        /// </summary>
         public override string DisplayName => "Shaman Elemental";
 
+        /// <summary>
+        /// Gets a value indicating whether this object handles movement.
+        /// </summary>
+        /// <value>
+        /// Always returns false.
+        /// </value>
         public override bool HandlesMovement => false;
 
+        /// <summary>
+        /// Gets a value indicating whether this entity is a melee entity.
+        /// </summary>
+        /// <returns>Always returns false as the entity is not melee.</returns>
         public override bool IsMelee => false;
 
+        /// <summary>
+        /// Gets or sets the item comparator for ShamanElementalComparator.
+        /// </summary>
         public override IItemComparator ItemComparator { get; set; } =
-            new ShamanElementalComparator(null, new List<WowWeaponType>
-            {
+                    new ShamanElementalComparator(null, new List<WowWeaponType>
+                    {
                 WowWeaponType.AxeTwoHand,
                 WowWeaponType.MaceTwoHand,
                 WowWeaponType.SwordTwoHand
-            });
+                    });
 
+        /// <summary>
+        /// Gets or sets the role of the character in the World of Warcraft game, which is set to Damage Per Second (DPS).
+        /// </summary>
         public override WowRole Role => WowRole.Dps;
 
+        /// <summary>
+        /// Gets or sets the talents of the talent tree.
+        /// </summary>
         public override TalentTree Talents { get; } = new()
         {
             Tree1 = new Dictionary<int, Talent>(),
@@ -58,14 +89,27 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Bia10
             Tree3 = new Dictionary<int, Talent>(),
         };
 
+        /// <summary>
+        /// Returns true if the character should use auto attacks; otherwise, returns false.
+        /// </summary>
         public override bool UseAutoAttacks => true;
 
+        /// <summary>
+        /// Gets the version of the code.
+        /// </summary>
         public override string Version => "1.0";
 
+        /// This property indicates that the character cannot walk behind enemies.
         public override bool WalkBehindEnemy => false;
 
+        /// <summary>
+        /// Gets or sets the WoW class of type Shaman.
+        /// </summary>
         public override WowClass WowClass => WowClass.Shaman;
 
+        /// <summary>
+        /// Overrides the base Execute method. Selects a spell by assigning a spell name to the variable spellName and obtaining the target's GUID. Tries to cast the selected spell on the target with the specified GUID.
+        /// </summary>
         public override void Execute()
         {
             base.Execute();
@@ -74,6 +118,9 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Bia10
             TryCastSpell(spellName, targetGuid);
         }
 
+        /// <summary>
+        /// Executes the specified code block when the character is out of combat.
+        /// </summary>
         public override void OutOfCombatExecute()
         {
             base.OutOfCombatExecute();
@@ -87,6 +134,11 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Bia10
             CheckForWeaponEnchantment(WowEquipmentSlot.INVSLOT_MAINHAND, enchantName, enchSpellName);
         }
 
+        /// <summary>
+        /// Determines the weapon enchantment based on the spells known by the character.
+        /// </summary>
+        /// <param name="enchantName">Outputs the name of the weapon enchantment.</param>
+        /// <returns>The name of the chosen weapon enchantment, or an empty string if no enchantment is chosen.</returns>
         private string DecideWeaponEnchantment(out string enchantName)
         {
             if (Bot.Character.SpellBook.IsSpellKnown(Shaman335a.FlametongueWeapon))
@@ -104,6 +156,11 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Bia10
             return string.Empty;
         }
 
+        /// <summary>
+        /// Selects the appropriate spell based on certain conditions and assigns the target's GUID to the 'targetGuid' parameter.
+        /// </summary>
+        /// <param name="targetGuid">The GUID of the target enemy or the player.</param>
+        /// <returns>The spell to be used or an empty string if no spell is suitable.</returns>
         private string SelectSpell(out ulong targetGuid)
         {
             if (Bot.Player.HealthPercentage < DataConstants.HealSelfPercentage

@@ -1,5 +1,8 @@
 ﻿namespace AmeisenBotX.Wow.Objects.Enums
 {
+    ///<summary>
+    ///Enum representing Wow Game Object Display Ids.
+    ///</summary>
     public enum WowGameObjectDisplayId
     {
         CookingCampfire = 192,

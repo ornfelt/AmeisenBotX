@@ -13,6 +13,13 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 {
     public class WarlockDemonology : BasicCombatClass
     {
+        /// <summary>
+        /// Creates a new instance of the WarlockDemonology class, inheriting from the base class.
+        /// Initializes the PetManager with a specified bot, time interval, condition for summoning a demon, and condition for re-summoning a demon.
+        /// Initializes the MyAuraManager with the bot's database and a list of active auras to be kept on the warlock.
+        /// Initializes the TargetAuraManager with the bot's database and a list of target-exclusive auras to be kept on the warlock's target.
+        /// </summary>
+        /// <param name="bot">The AmeisenBotInterfaces bot instance.</param>
         public WarlockDemonology(AmeisenBotInterfaces bot) : base(bot)
         {
             PetManager = new PetManager
@@ -44,20 +51,52 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
             TargetAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, Warlock335a.Immolate, () => TryCastSpell(Warlock335a.Immolate, Bot.Wow.TargetGuid, true)));
         }
 
+        /// <summary>
+        /// Gets the description of the FCFS based CombatClass for the Demonology Warlock spec.
+        /// </summary>
         public override string Description => "FCFS based CombatClass for the Demonology Warlock spec.";
 
+        /// <summary>
+        /// Gets the display name of the character as "Warlock Demonology".
+        /// </summary>
         public override string DisplayName2 => "Warlock Demonology";
 
+        /// <summary>
+        /// Gets or sets a value indicating whether this object handles movement.
+        /// </summary>
+        /// <value>
+        ///   <c>false</c> if this object does not handle movement; otherwise, <c>true</c>.
+        /// </value>
         public override bool HandlesMovement => false;
 
+        /// <summary>
+        /// Gets a value indicating whether the character is a melee type.
+        /// </summary>
+        /// <returns>Always returns false as the character is not a melee type.</returns>
         public override bool IsMelee => false;
 
+        /// <summary>
+        /// Gets or sets the ItemComparator property for the current object. It represents the comparer used to compare items.
+        /// </summary>
         public override IItemComparator ItemComparator { get; set; } = new BasicIntellectComparator(new() { WowArmorType.Shield });
 
+        /// <summary>
+        /// Gets or sets the instance of the PetManager class.
+        /// </summary>
         public PetManager PetManager { get; private set; }
 
+        /// <summary>
+        /// Gets or sets the role of the character in the World of Warcraft game.
+        /// This property is overridden and set to WowRole.Dps for increased damage output.
+        /// </summary>
         public override WowRole Role => WowRole.Dps;
 
+        /// <summary>
+        /// Returns the talent tree for this character.
+        /// </summary>
+        /// <returns>
+        /// The talent tree for this character, which includes talents for Tree1, Tree2, and Tree3.
+        /// </returns>
         public override TalentTree Talents { get; } = new()
         {
             Tree1 = new(),
@@ -93,18 +132,40 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
             },
         };
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the object should use auto attacks.
+        /// </summary>
+        /// <returns>Always returns false.</returns>
         public override bool UseAutoAttacks => false;
 
+        /// <summary>
+        /// Gets the version of the object.
+        /// </summary>
         public override string Version => "1.0";
 
+        /// <summary>
+        /// Gets or sets whether the character can walk behind an enemy.
+        /// </summary>
         public override bool WalkBehindEnemy => false;
 
+        /// <summary>
+        /// Gets or sets the WoW class of the character as a Warlock.
+        /// </summary>
         public override WowClass WowClass => WowClass.Warlock;
 
+        /// <summary>
+        /// Gets or sets the version of World of Warcraft to be used, which is WotLK335a.
+        /// </summary>
         public override WowVersion WowVersion => WowVersion.WotLK335a;
 
+        /// <summary>
+        /// Gets or sets the last time a fear attempt was made.
+        /// </summary>
         private DateTime LastFearAttempt { get; set; }
 
+        /// <summary>
+        /// Executes the specified action and returns void.
+        /// </summary>
         public override void Execute()
         {
             base.Execute();
@@ -173,6 +234,9 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
             }
         }
 
+        /// <summary>
+        /// Executes the OutOfCombatExecute method.
+        /// </summary>
         public override void OutOfCombatExecute()
         {
             base.OutOfCombatExecute();

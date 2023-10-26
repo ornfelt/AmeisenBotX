@@ -8,22 +8,50 @@ namespace AmeisenBotX.Core.Engines.Dungeon.Profiles.WotLK
 {
     public class HallsOfLightningProfile : IDungeonProfile
     {
+        /// <summary>
+        /// Gets the author of the code.
+        /// </summary>
         public string Author { get; } = "Jannis";
 
+        /// <summary>
+        /// Gets the description of the Dungeon profile for the Dungeon near Ulduar, made for Level 75 to 80.
+        /// </summary>
         public string Description { get; } = "Profile for the Dungeon near Ulduar, made for Level 75 to 80.";
 
+        /// <summary>
+        /// Gets the position of the dungeon exit.
+        /// </summary>
         public Vector3 DungeonExit { get; } = new(1331, 275, 53);
 
+        /// <summary>
+        /// Gets the faction type of the dungeon.
+        /// </summary>
         public DungeonFactionType FactionType { get; } = DungeonFactionType.Neutral;
 
+        /// <summary>
+        /// Gets the size of the group.
+        /// </summary>
         public int GroupSize { get; } = 5;
 
+        /// <summary>
+        /// Gets or sets the World of Warcraft map ID for Halls of Lightning.
+        /// </summary>
         public WowMapId MapId { get; } = WowMapId.HallsOfLighting;
 
+        /// <summary>
+        /// Gets the maximum level value, which is set as 80.
+        /// </summary>
         public int MaxLevel { get; } = 80;
 
+        /// <summary>
+        /// Gets the name of the location, which is set as "[75-80] Utgarde Keep".
+        /// </summary>
         public string Name { get; } = "[75-80] Utgarde Keep";
 
+        /// <summary>
+        /// Gets or sets the list of DungeonNodes.
+        /// </summary>
+        /// <value>The list of DungeonNodes.</value>
         public List<DungeonNode> Nodes { get; private set; } = new()
         {
             new(new(1331, 237, 53)),
@@ -251,14 +279,30 @@ namespace AmeisenBotX.Core.Engines.Dungeon.Profiles.WotLK
             new(new(1243, 34, 58)),
         };
 
+        /// <summary>
+        /// Gets the list of priority units.
+        /// </summary>
         public List<int> PriorityUnits { get; } = new();
 
+        /// <summary>
+        /// Gets the required item level.
+        /// </summary>
         public int RequiredItemLevel { get; } = 120;
 
+        /// <summary>
+        /// Gets the required level for the property.
+        /// </summary>
         public int RequiredLevel { get; } = 75;
 
+        /// <summary>
+        /// Gets the world entry position as a Vector3.
+        /// The default entry position is set to (9186, -1387, 1110).
+        /// </summary>
         public Vector3 WorldEntry { get; } = new(9186, -1387, 1110);
 
+        /// <summary>
+        /// Gets or sets the unique identifier of the world entry map in Northrend.
+        /// </summary>
         public WowMapId WorldEntryMapId { get; } = WowMapId.Northrend;
     }
 }

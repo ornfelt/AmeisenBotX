@@ -9,6 +9,10 @@ namespace AmeisenBotX.Core.Engines.Combat.Helpers.Aura
 {
     public class GroupAuraManager
     {
+        /// <summary>
+        /// Initializes a new instance of the GroupAuraManager class.
+        /// </summary>
+        /// <param name="bot">The AmeisenBotInterfaces instance to be assigned to the Bot property.</param>
         public GroupAuraManager(AmeisenBotInterfaces bot)
         {
             Bot = bot;
@@ -17,16 +21,38 @@ namespace AmeisenBotX.Core.Engines.Combat.Helpers.Aura
             LastBuffed = new();
         }
 
+        /// <summary>
+        /// Delegate to cast a spell on a unit.
+        /// </summary>
+        /// <param name="spellName">The name of the spell to cast.</param>
+        /// <param name="guid">The unique identifier of the target unit.</param>
+        /// <returns>Returns true if the spell was successfully cast; otherwise, false.</returns>
         public delegate bool CastSpellOnUnit(string spellName, ulong guid);
 
+        /// <summary>
+        /// Gets or sets the list of spells used to remove bad auras from the unit.
+        /// </summary>
         public List<((string, WowDispelType), CastSpellOnUnit)> RemoveBadAurasSpells { get; private set; }
 
+        /// <summary>
+        /// Gets or sets the list of spells to keep active on the party.
+        /// </summary>
         public List<(string, CastSpellOnUnit)> SpellsToKeepActiveOnParty { get; private set; }
 
+        /// <summary>
+        /// Gets or sets the instance of the AmeisenBotInterfaces that represents the bot.
+        /// </summary>
         private AmeisenBotInterfaces Bot { get; }
 
+        /// <summary>
+        /// Gets the dictionary of last buffed events, where the keys are of type ulong and represent unique identifiers,
+        /// and the values are of type TimegatedEvent and represent the last buffed events.
+        /// </summary>
         private Dictionary<ulong, TimegatedEvent> LastBuffed { get; }
 
+        /// <summary>
+        /// Executes actions related to maintaining active spells on party members.
+        /// </summary>
         public bool Tick()
         {
             if (SpellsToKeepActiveOnParty?.Count > 0)

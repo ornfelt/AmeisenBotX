@@ -7,14 +7,30 @@ namespace AmeisenBotX.Core.Engines.Jobs.Profiles.Gathering.Jannis
 {
     public class ElwynnRedridgeMining : IMiningProfile
     {
+        /// <summary>
+        /// Gets a value indicating whether this path is circular.
+        /// </summary>
         public bool IsCirclePath { get; } = true;
 
+        /// <summary>
+        /// Gets the JobType of the job, which is set to Mining by default.
+        /// </summary>
         public JobType JobType { get; } = JobType.Mining;
 
+        /// <summary>
+        /// Gets the list of mailbox nodes.
+        /// </summary>
         public List<Vector3> MailboxNodes { get; } = new() { new(-9456, 47, 57), new(-9250, -2145, 64) };
 
+        /// <summary>
+        /// Gets the list of different ore types that includes Copper, Tin, Silver, and Iron.
+        /// </summary>
         public List<WowOreId> OreTypes { get; } = new() { WowOreId.Copper, WowOreId.Tin, WowOreId.Silver, WowOreId.Iron };
 
+        /// <summary>
+        /// Represents the path for an object in 3D space.
+        /// </summary>
+        /// <value>The list of Vector3 positions defining the path.</value>
         public List<Vector3> Path { get; } = new()
         {
             new(-9289, -197, 69),
@@ -998,6 +1014,9 @@ namespace AmeisenBotX.Core.Engines.Jobs.Profiles.Gathering.Jannis
             new(-9278, -189, 69),
         };
 
+        /// <summary>
+        /// Returns a string representation of the object.
+        /// </summary>
         public override string ToString()
         {
             return "[20+][Mining] Elwynn Forest - Redridge Mountains (Jannis)";

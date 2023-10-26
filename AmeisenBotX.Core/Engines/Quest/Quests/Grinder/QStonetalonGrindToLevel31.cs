@@ -7,10 +7,14 @@ namespace AmeisenBotX.Core.Engines.Quest.Quests.Grinder
 {
     internal class QStonetalonGrindToLevel31 : GrindingBotQuest
     {
+        /// <summary>
+        /// Constructor for the QStonetalonGrindToLevel31 quest. Grinds to level 31 in Stonetalon.
+        /// </summary>
+        /// <param name="bot">The AmeisenBotInterfaces object.</param>
         public QStonetalonGrindToLevel31(AmeisenBotInterfaces bot)
-            : base("StonetalonGrindToLevel31",
-                new List<IQuestObjective>()
-                {
+                    : base("StonetalonGrindToLevel31",
+                        new List<IQuestObjective>()
+                        {
                     new QuestObjectiveChain(new List<IQuestObjective>()
                     {
                         new GrindingObjective(bot, 31, new List<List<Vector3>> {
@@ -37,7 +41,7 @@ namespace AmeisenBotX.Core.Engines.Quest.Quests.Grinder
                             },
                         }),
                     })
-                })
+                        })
         { }
     }
 }

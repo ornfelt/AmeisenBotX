@@ -9,6 +9,7 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 {
     public class DeathknightFrost : BasicCombatClass
     {
+        /// Constructor for a DeathknightFrost object that takes in a bot object and initializes various AuraManager and InterruptManager jobs.
         public DeathknightFrost(AmeisenBotInterfaces bot) : base(bot)
         {
             MyAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, Deathknight335a.BloodPresence, () => TryCastSpellDk(Deathknight335a.BloodPresence, 0)));
@@ -24,18 +25,45 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
             };
         }
 
+        /// <summary>
+        /// Gets the description for the FCFS based CombatClass for the Frost Deathknight spec.
+        /// </summary>
         public override string Description => "FCFS based CombatClass for the Frost Deathknight spec.";
 
+        /// <summary>
+        /// Gets or sets the display name for a Deathknight Frost.
+        /// </summary>
         public override string DisplayName2 => "Deathknight Frost";
 
+        /// <summary>
+        /// Gets or sets a value indicating whether this instance handles movement.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if this instance handles movement; otherwise, <c>false</c>.
+        /// </value>
         public override bool HandlesMovement => false;
 
+        /// <summary>
+        /// Gets a value indicating whether the character is a melee character.
+        /// </summary>
+        /// <returns>True if the character is a melee character; otherwise, false.</returns>
         public override bool IsMelee => true;
 
+        /// <summary>
+        /// Gets or sets the item comparator used for comparing items. 
+        /// The default value is a BasicStrengthComparator that only compares items of type WowArmorType.Shield.
+        /// </summary>
         public override IItemComparator ItemComparator { get; set; } = new BasicStrengthComparator(new() { WowArmorType.Shield });
 
+        /// <summary>
+        /// Gets or sets the role of the player character in World of Warcraft, which is Damage per Second (DPS).
+        /// </summary>
         public override WowRole Role => WowRole.Dps;
 
+        /// Returns the TalentTree instance for the code, which consists of three trees (Tree1, Tree2, Tree3) with 
+        /// different talent configurations. Each tree is represented by a dictionary, where the key is the talent node 
+        /// index and the value is an instance of the Talent class, which contains three talents (talent1, talent2, talent3) 
+        /// represented by integers.
         public override TalentTree Talents { get; } = new()
         {
             Tree1 = new()
@@ -75,16 +103,28 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
             },
         };
 
+        /// The property determines whether the object can use auto attacks. It returns true.
         public override bool UseAutoAttacks => true;
 
+        /// <summary>
+        /// Gets the version of the object.
+        /// </summary>
         public override string Version => "1.0";
 
+        /// This property indicates that the character cannot walk behind enemies.
         public override bool WalkBehindEnemy => false;
 
+        /// <summary>
+        /// Gets or sets the WowClass of a Death Knight.
+        /// </summary>
         public override WowClass WowClass => WowClass.Deathknight;
 
+        /// <summary>
+        /// Gets the World of Warcraft version as WotLK 3.3.5a.
+        /// </summary>
         public override WowVersion WowVersion => WowVersion.WotLK335a;
 
+        /// This method executes a series of actions for a Death Knight character in World of Warcraft. It first calls the base Execute method. Then, it checks if a target can be found using the TargetProviderDps, and if so, it attempts to cast the Dark Command spell on the target. If that fails or the target has the Chains of Ice aura, it attempts to cast the Chains of Ice spell on the target if the target is not in close proximity to the player. If the target has the Chains of Ice aura, it also attempts to cast the Chains of Ice spell on the target. Then, it tries to cast the Empower Rune Weapon spell with a rune count of 0. After that, it evaluates several conditions for different spells to cast based on the player's health percentage, available resources, and the target's status.
         public override void Execute()
         {
             base.Execute();

@@ -11,53 +11,123 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
 {
     internal class PriestHoly : BasicKamelClass
     {
+        /// <summary>
+        /// Represents the name of the Circle of Healing spell.
+        /// </summary>
         private const string CircleOfHealingSpell = "Circle of Healing";
 
+        /// <summary>
+        /// Represents the name of the "Desperate Prayer" spell.
+        /// </summary>
         private const string DesperatePrayerSpell = "Desperate Prayer";
 
+        /// <summary>
+        /// The name of the Divine Hymn spell.
+        /// </summary>
         private const string DivineHymnSpell = "Divine Hymn";
 
+        /// <summary>
+        /// The constant string representing the name of the "Divine Spirit" spell.
+        /// </summary>
         //Buffs
         private const string DivineSpiritSpell = "Divine Spirit";
 
+        /// <summary>
+        /// The spell "Every Man for Himself" grants the user the ability to escape from any root, snare, or stun effect by removing them instantly.
+        /// </summary>
         //Spells Race
         private const string EveryManforHimselfSpell = "Every Man for Himself";
 
+        /// <summary>
+        /// The name of the fade spell.
+        /// </summary>
         private const string FadeSpell = "Fade";
 
+        /// <summary>
+        /// The name of the Fear Ward spell.
+        /// </summary>
         private const string FearWardSpell = "Fear Ward";
 
+        /// <summary>
+        /// The constant string representing the Flash Heal spell.
+        /// </summary>
         private const string FlashHealSpell = "Flash Heal";
 
+        /// <summary>
+        /// The name of the greater heal spell.
+        /// </summary>
         private const string GreaterHealSpell = "Greater Heal";
 
+        /// <summary>
+        /// Represents the name of the "Guardian Spirit" spell.
+        /// </summary>
         private const string GuardianSpiritSpell = "Guardian Spirit";
 
+        /// <summary>
+        /// Represents the name of the Holy Fire spell.
+        /// </summary>
         private const string HolyFireSpell = "Holy Fire";
 
+        /// <summary>
+        /// The constant string representing the spell "Hymn of Hope".
+        /// </summary>
         private const string HymnofHopeSpell = "Hymn of Hope";
 
+        ///<summary>
+        /// Represents the constant string value of "Inner Fire".
+        ///</summary>
         private const string InnerFireSpell = "Inner Fire";
 
+        /// <summary>
+        /// Represents the spell "Power Word: Fortitude".
+        /// </summary>
         private const string PowerWordFortitudeSpell = "Power Word: Fortitude";
 
+        /// <summary>
+        /// Represents the power word shield spell.
+        /// </summary>
         private const string PowerWordShieldSpell = "Power Word: Shield";
 
+        /// <summary>
+        /// The name of the prayer of fortitude.
+        /// </summary>
         private const string PrayerofFortitude = "Prayer of Fortitude";
 
+        /// <summary>
+        /// The name of the spell "Prayer of Healing".
+        /// </summary>
         private const string PrayerofHealingSpell = "Prayer of Healing";
 
+        /// <summary>
+        /// Represents the name of the "Prayer of Mending" spell.
+        /// </summary>
         private const string PrayerofMendingSpell = "Prayer of Mending";
 
+        /// <summary>
+        /// The constant string representing the prayer of shadow protection.
+        /// </summary>
         private const string PrayerofShadowProtection = "Prayer of Shadow Protection";
 
+        /// <summary>
+        /// The name of the spell to renew.
+        /// </summary>
         private const string RenewSpell = "Renew";
 
+        ///<summary>
+        ///Constant string representing the name of the shadow protection spell.
+        ///</summary>
         private const string ShadowProtectionSpell = "Shadow Protection";
 
+        /// <summary>
+        /// The name of the spell is "Smite".
+        /// </summary>
         //Spells / dmg
         private const string SmiteSpell = "Smite";
 
+        ///<summary>
+        ///Constructor for the PriestHoly class.
+        ///Initializes the spell cooldowns for the PriestHoly class.
+        ///</summary>
         public PriestHoly(AmeisenBotInterfaces bot) : base()
         {
             Bot = bot;
@@ -93,22 +163,57 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
             spellCoolDown.Add(PrayerofShadowProtection, DateTime.Now);
         }
 
+        /// <summary>
+        /// Gets or sets the author of the code.
+        /// </summary>
+        /// <value>
+        /// The author.
+        /// </value>
         public override string Author => "Lukas";
 
+        /// <summary>
+        /// Gets or sets the dictionary of strings and dynamic values.
+        /// </summary>
+        /// <returns>A dictionary of strings and dynamic values.</returns>
         public override Dictionary<string, dynamic> C { get; set; } = new Dictionary<string, dynamic>();
 
+        /// <summary>
+        /// Gets the description of the Priest Holy.
+        /// </summary>
+        /// <returns>
+        /// The description string "Priest Holy".
+        /// </returns>
         public override string Description => "Priest Holy";
 
+        /// <summary>
+        /// Gets the display name of the Priest Holy.
+        /// </summary>
         public override string DisplayName => "Priest Holy";
 
+        /// <summary>
+        /// Gets a value indicating whether or not this code handles movement.
+        /// </summary>
+        /// <returns>Always returns false.</returns>
         public override bool HandlesMovement => false;
 
+        /// <summary>
+        /// Gets a value indicating whether this object is a melee attack.
+        /// </summary>
         public override bool IsMelee => false;
 
+        /// <summary>
+        /// Gets or sets the ItemComparator.
+        /// </summary>
         public override IItemComparator ItemComparator { get; set; } = new BasicSpiritComparator(new() { WowArmorType.Shield }, new() { WowWeaponType.Sword, WowWeaponType.Mace, WowWeaponType.Axe });
 
+        /// <summary>
+        /// Gets the role of this class, which is "Heal".
+        /// </summary>
         public override WowRole Role => WowRole.Heal;
 
+        /// <summary>
+        /// Gets or sets the talent tree.
+        /// </summary>
         public override TalentTree Talents { get; } = new()
         {
             Tree1 = new(),
@@ -144,18 +249,45 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
             },
         };
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the target is in range.
+        /// </summary>
         public bool TargetIsInRange { get; set; }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether auto attacks should be used.
+        /// By default, auto attacks are disabled.
+        /// </summary>
         public override bool UseAutoAttacks => false;
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the spell can only be used in combat.
+        /// </summary>
         public bool UseSpellOnlyInCombat { get; private set; }
 
+        /// <summary>
+        /// Gets the version of the code, which is always "1.0".
+        /// </summary>
         public override string Version => "1.0";
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the character can walk behind enemies.
+        /// </summary>
+        /// <returns>Always returns false.</returns>
         public override bool WalkBehindEnemy => false;
 
+        /// <summary>
+        /// Gets or sets the WowClass property, which represents the class of a character in World of Warcraft.
+        /// The current class is set to Priest.
+        /// </summary>
         public override WowClass WowClass => WowClass.Priest;
 
+        /// <summary>
+        /// Executes the command 'ExecuteCC'.
+        /// Sets 'UseSpellOnlyInCombat' to true.
+        /// Calls the 'BuffManager' method.
+        /// Calls the 'StartHeal' method.
+        /// </summary>
         public override void ExecuteCC()
         {
             UseSpellOnlyInCombat = true;
@@ -163,6 +295,9 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
             StartHeal();
         }
 
+        ///<summary>
+        ///Executes the specified actions when the character is out of combat.
+        ///</summary>
         public override void OutOfCombatExecute()
         {
             RevivePartyMember(resurrectionSpell);
@@ -171,6 +306,9 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
             StartHeal();
         }
 
+        /// <summary>
+        /// Manages casting buffs on party members.
+        /// </summary>
         private void BuffManager()
         {
             if (TargetSelectEvent.Run())
@@ -230,6 +368,12 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
             //}
         }
 
+        /// <summary>
+        /// Custom method to cast a spell with the specified name.
+        /// </summary>
+        /// <param name="spellName">The name of the spell to cast.</param>
+        /// <param name="castOnSelf">Optional parameter to determine if the spell should be cast on self. Default is false.</param>
+        /// <returns>Returns true if the spell was successfully cast, otherwise false.</returns>
         private bool CustomCastSpell(string spellName, bool castOnSelf = false)
         {
             if (Bot.Character.SpellBook.IsSpellKnown(spellName))
@@ -266,6 +410,13 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
             return false;
         }
 
+        /// <summary>
+        /// Begins the healing process by selecting party members to heal and prioritizing them based on health percentage. 
+        /// Checks if the current target is a party member to heal and changes target if necessary. 
+        /// Ensures the target is within range and in line of sight before casting any spells. 
+        /// Considers various conditions and cast spells accordingly to heal party members efficiently. 
+        /// If no party members to heal, it checks for nearby enemies to attack. 
+        /// </summary>
         private void StartHeal()
         {
             List<IWowUnit> partyMemberToHeal = new(Bot.Objects.Partymembers)

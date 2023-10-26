@@ -11,16 +11,41 @@ namespace AmeisenBotX.Wow.Combatlog
     public class DefaultCombatlogParser<T> : ICombatlogParser
         where T : ICombatlogFields, new()
     {
+        /// <summary>
+        /// Event that is triggered when damage is inflicted.
+        /// </summary>
         public event Action<ulong, ulong, int, int, int> OnDamage;
 
+        /// <summary>
+        /// Event triggered when a heal action occurs.
+        /// The parameters represent the amount of health restored:
+        /// - The first parameter represents the initial health value.
+        /// - The second parameter represents the final health value.
+        /// - The third, fourth, and fifth parameters represent additional information related to the heal.
+        /// </summary>
         public event Action<ulong, ulong, int, int, int> OnHeal;
 
+        /// <summary>
+        /// Event that is triggered when a party kill occurs.
+        /// The event provides two parameters, both of type ulong, representing the ID of the killer and the ID of the killed party.
+        /// </summary>
         public event Action<ulong, ulong> OnPartyKill;
 
+        /// <summary>
+        /// Represents an event that is raised when a unit dies.
+        /// </summary>
         public event Action<ulong> OnUnitDied;
 
+        /// <summary>
+        /// Gets or sets the combat log fields.
+        /// </summary>
         protected T CombatlogFields { get; } = new T();
 
+        /// <summary>
+        /// Parses a combat log entry based on the provided timestamp and arguments.
+        /// </summary>
+        /// <param name="timestamp">The timestamp of the combat log entry.</param>
+        /// <param name="args">The list of arguments for the combat log entry.</param>
         public void Parse(long timestamp, List<string> args)
         {
             if (BasicCombatlogEntry.TryParse(CombatlogFields, args, out BasicCombatlogEntry entry))

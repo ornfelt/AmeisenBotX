@@ -13,16 +13,31 @@ namespace AmeisenBotX.Core.Logic.CombatClasses.Shino
 {
     public abstract class TemplateCombatClass : BasicCombatClass
     {
+        /// <summary>
+        /// Initializes a new instance of the TemplateCombatClass class with the specified AmeisenBotInterfaces instance.
+        /// </summary>
+        /// <param name="bot">The AmeisenBotInterfaces instance to use.</param>
         public TemplateCombatClass(AmeisenBotInterfaces bot) : base(bot)
         {
             //this line cause a bug because it run out of index
             //Bot.EventHookManager.Subscribe("UI_ERROR_MESSAGE", (t, a) => OnUIErrorMessage(a[0]));
         }
 
+        /// <summary>
+        /// Gets the author name.
+        /// </summary>
         public new string Author { get; } = "Shino";
 
+        /// <summary>
+        /// Gets or sets the date and time of the last failed opener operation.
+        /// </summary>
         private DateTime LastFailedOpener { get; set; } = DateTime.Now;
 
+        /// <summary>
+        /// Attack the target. If there is no target, return.
+        /// If the target is attackable, cast the opening spell and stop movement.
+        /// If the target is not attackable, move towards the target if within range or if no movement action is currently active.
+        /// </summary>
         public override void AttackTarget()
         {
             IWowUnit target = Bot.Target;
@@ -45,6 +60,11 @@ namespace AmeisenBotX.Core.Logic.CombatClasses.Shino
             }
         }
 
+        /// <summary>
+        /// Checks if a target is attackable.
+        /// </summary>
+        /// <param name="target">The target to check.</param>
+        /// <returns>True if the target is attackable, false otherwise.</returns>
         public bool IsTargetAttackable(IWowUnit target)
         {
             Spell openingSpell = GetOpeningSpell();
@@ -68,6 +88,9 @@ namespace AmeisenBotX.Core.Logic.CombatClasses.Shino
                     && Bot.Wow.IsInLineOfSight(posYLeft, target.Position);
         }
 
+        /// <summary>
+        /// Updates the LastFailedOpener property with the current timestamp if the provided message is "target not in line of sight" (case insensitive).
+        /// </summary>
         public void OnUIErrorMessage(string message)
         {
             if (string.Equals(message, "target not in line of sight", StringComparison.InvariantCultureIgnoreCase))
@@ -76,13 +99,26 @@ namespace AmeisenBotX.Core.Logic.CombatClasses.Shino
             }
         }
 
+        /// <summary>
+        /// Overrides the default ToString() method and returns a string representation of the object.
+        /// The string includes the WowClass, Role, DisplayName, and Author properties enclosed in square brackets, with the DisplayName 
+        /// followed by the Author's name in parentheses.
+        /// </summary>
         public override string ToString()
         {
             return $"[{WowClass}] [{Role}] {DisplayName} ({Author})";
         }
 
+        /// <summary>
+        /// Retrieves the opening spell that must be implemented by subclasses.
+        /// </summary>
         protected abstract Spell GetOpeningSpell();
 
+        /// <summary>
+        /// Selects a target for the bot to attack.
+        /// </summary>
+        /// <param name="target">The selected target.</param>
+        /// <returns>True if a target is successfully selected, otherwise false.</returns>
         protected bool SelectTarget(out IWowUnit target)
         {
             IWowUnit currentTarget = Bot.Target;

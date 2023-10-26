@@ -9,14 +9,28 @@ namespace AmeisenBotX.Views
 {
     public partial class ItemDisplay : UserControl
     {
+        ///<summary>
+        /// Constructor for the ItemDisplay class.
+        ///</summary>
+        ///<param name="wowItem">The WowInventoryItem object to be displayed.</param>
         public ItemDisplay(IWowInventoryItem wowItem)
         {
             WowItem = wowItem;
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Gets or sets the private property WowItem, which represents an inventory item in the Wow game.
+        /// </summary>
         private IWowInventoryItem WowItem { get; }
 
+        /// <summary>
+        /// Event handler for when the UserControl is loaded.
+        /// Sets the content of the labelItemName and labelItemId to the Name and Id of the WowItem, respectively.
+        /// Sets the content of the labelIcon based on the type of the WowItem.
+        /// Sets the content of the labelItemType to display the Type, Subtype, ItemLevel, Durability, and MaxDurability of the WowItem.
+        /// Sets the foreground color of the labelItemName based on the ItemQuality of the WowItem.
+        /// </summary>
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             labelItemName.Content = WowItem.Name;

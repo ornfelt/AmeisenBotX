@@ -14,6 +14,10 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 {
     public class HunterMarksmanship : BasicCombatClass
     {
+        /// <summary>
+        /// Initializes a new instance of the HunterMarksmanship class with the provided bot.
+        /// </summary>
+        /// <param name="bot">The AmeisenBotInterfaces instance to use for the hunter.</param>
         public HunterMarksmanship(AmeisenBotInterfaces bot) : base(bot)
         {
             PetManager = new PetManager
@@ -41,18 +45,40 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
             };
         }
 
+        /// <summary>
+        /// Gets the description of the FCFS based CombatClass for the Marksmanship Hunter spec.
+        /// </summary>
         public override string Description => "FCFS based CombatClass for the Marksmanship Hunter spec.";
 
+        /// <summary>
+        /// Gets or sets the display name for the Hunter Marksmanship.
+        /// </summary>
         public override string DisplayName2 => "Hunter Marksmanship";
 
+        /// <summary>
+        /// Indicates that this method does not handle movement.
+        /// </summary>
         public override bool HandlesMovement => false;
 
+        /// <summary>
+        /// Gets a value indicating whether the character is not a melee character.
+        /// </summary>
         public override bool IsMelee => false;
 
+        /// <summary>
+        /// Gets or sets the item comparator for comparing items. The default value is a BasicIntellectComparator
+        /// with a single WowArmorType.Shield.
+        /// </summary>
         public override IItemComparator ItemComparator { get; set; } = new BasicIntellectComparator(new() { WowArmorType.Shield });
 
+        /// <summary>
+        /// Gets or sets the role of the World of Warcraft character as a Dps (Damage per Second).
+        /// </summary>
         public override WowRole Role => WowRole.Dps;
 
+        /// <summary>
+        /// Gets or sets the talent tree for a character.
+        /// </summary>
         public override TalentTree Talents { get; } = new()
         {
             Tree1 = new()
@@ -90,22 +116,44 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
             },
         };
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the character should use auto attacks.
+        /// </summary>
         public override bool UseAutoAttacks => true;
 
+        /// <summary>
+        /// Gets or sets the version number.
+        /// </summary>
+        /// <value>The version number.</value>
         public override string Version => "1.0";
 
+        /// This property indicates that the enemy cannot be walked behind.
         public override bool WalkBehindEnemy => false;
 
+        /// <summary>
+        /// Gets or sets the <see cref="WowClass"/> property to WowClass.Hunter.
+        /// </summary>
         public override WowClass WowClass => WowClass.Hunter;
 
+        /// <summary>
+        /// Gets or sets the version of the World of Warcraft as WotLK (Wrath of the Lich King) 3.3.5a.
+        /// </summary>
         public override WowVersion WowVersion => WowVersion.WotLK335a;
 
+        /// <summary>
+        /// Gets or sets the private PetManager.
+        /// </summary>
         private PetManager PetManager { get; set; }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the object is ready to disengage.
+        /// </summary>
         private bool ReadyToDisengage { get; set; } = false;
 
+        /// Gets or sets a value indicating whether the target should be slowed down when possible. Default value is false.
         private bool SlowTargetWhenPossible { get; set; } = false;
 
+        /// This method is used to execute the logic for the Hunter335a class. It first calls the base Execute() method. It then checks if the target can be found using the TargetProviderDps and if the PetManager Tick() method returns true. It then retrieves the target unit based on its GUID and calculates the distance to the target. If the target is within a certain distance, various actions are performed such as setting a movement action to flee, using spells like FeignDeath, FrostTrap, Deterrence, RaptorStrike, and MongooseBite. If the target is further away, other actions are performed such as using Disengage, KillShot, KillCommand, RapidFire, MultiShot, ChimeraShot, AimedShot, ArcaneShot, and SteadyShot based on certain conditions.
         public override void Execute()
         {
             base.Execute();
@@ -198,6 +246,9 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
             }
         }
 
+        /// <summary>
+        /// Executes the code when the character is out of combat.
+        /// </summary>
         public override void OutOfCombatExecute()
         {
             ReadyToDisengage = false;

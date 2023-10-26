@@ -6,13 +6,26 @@ namespace AmeisenBotX.Core.Managers.Character.Comparators
 {
     public class ArmsItemComparator : IItemComparator
     {
+        /// <summary>
+        /// Represents a private readonly field of type AmeisenBotInterfaces that refers to the bot.
+        /// </summary>
         private readonly AmeisenBotInterfaces Bot;
 
+        /// <summary>
+        /// Initializes a new instance of the ArmsItemComparator class.
+        /// </summary>
+        /// <param name="bot">The AmeisenBotInterfaces object used by the comparator.</param>
         public ArmsItemComparator(AmeisenBotInterfaces bot)
         {
             Bot = bot;
         }
 
+        /// <summary>
+        /// Determines if the specified item is better than the current item.
+        /// </summary>
+        /// <param name="current">The current item.</param>
+        /// <param name="item">The item to compare.</param>
+        /// <returns>True if the item is better, otherwise false.</returns>
         public bool IsBetter(IWowInventoryItem current, IWowInventoryItem item)
         {
             if (item == null)
@@ -37,11 +50,21 @@ namespace AmeisenBotX.Core.Managers.Character.Comparators
             return currentRating < newItemRating;
         }
 
+        /// <summary>
+        /// Checks if the provided World of Warcraft inventory item is blacklisted.
+        /// Returns false indicating that the item is not blacklisted.
+        /// </summary>
         public bool IsBlacklistedItem(IWowInventoryItem item)
         {
             return false;
         }
 
+        /// <summary>
+        /// Calculates the rating of an item based on its type and equipment slot.
+        /// </summary>
+        /// <param name="item">The item to calculate the rating for.</param>
+        /// <param name="slot">The equipment slot of the item.</param>
+        /// <returns>The rating value of the item.</returns>
         private double GetRating(IWowInventoryItem item, WowEquipmentSlot slot)
         {
             double rating = 0;

@@ -2,6 +2,9 @@
 
 namespace AmeisenBotX.Wow335a.Objects.Flags
 {
+    /// <summary>
+    /// Represents the dynamic flags for a World of Warcraft unit in patch 3.3.5a.
+    /// </summary>
     [Flags]
     public enum WowUnitDynamicFlags335a
     {

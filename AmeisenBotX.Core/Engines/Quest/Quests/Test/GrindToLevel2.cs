@@ -7,10 +7,14 @@ namespace AmeisenBotX.Core.Engines.Quest.Quests.Test
 {
     internal class GrindToLevel2 : GrindingBotQuest
     {
+        /// <summary>
+        /// Initializes a new instance of the GrindToLevel2 class.
+        /// This class is used to create a bot that will grind boars in the Valley of Strength.
+        /// </summary>
         public GrindToLevel2(AmeisenBotInterfaces bot)
-            : base("Test Grind Boars in Valley of Strength",
-                new List<IQuestObjective>()
-                {
+                    : base("Test Grind Boars in Valley of Strength",
+                        new List<IQuestObjective>()
+                        {
                     new QuestObjectiveChain(new List<IQuestObjective>()
                     {
                         new GrindingObjective(bot, 2, new List<List<Vector3>> {
@@ -37,7 +41,7 @@ namespace AmeisenBotX.Core.Engines.Quest.Quests.Test
                             }
                         }),
                     })
-                })
+                        })
         { }
     }
 }

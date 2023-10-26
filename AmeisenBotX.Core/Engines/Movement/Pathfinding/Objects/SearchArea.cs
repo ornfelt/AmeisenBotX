@@ -7,6 +7,10 @@ namespace AmeisenBotX.Core.Engines.Movement.Pathfinding.Objects
 {
     internal class SearchArea
     {
+        /// <summary>
+        /// Initializes a new instance of the SearchArea class with the given search area.
+        /// </summary>
+        /// <param name="searchArea">The list of Vector3 representing the search area.</param>
         public SearchArea(List<Vector3> searchArea)
         {
             Area = searchArea;
@@ -14,14 +18,31 @@ namespace AmeisenBotX.Core.Engines.Movement.Pathfinding.Objects
             CalculateSearchPath();
         }
 
+        /// <summary>
+        /// Gets or sets the list of Vector3 objects representing the area.
+        /// </summary>
         private List<Vector3> Area { get; }
 
+        /// <summary>
+        /// Gets or sets the index of the current search path.
+        /// </summary>
         private int CurrentSearchPathIndex { get; set; }
 
+        /// <summary>
+        /// Gets or sets the list of Vector3 elements representing the searched path.
+        /// </summary>
         private List<Vector3> SearchPath { get; set; }
 
+        /// <summary>
+        /// Gets the visibility radius of an object.
+        /// </summary>
         private float VisibilityRadius { get; } = 30.0f;
 
+        /// <summary>
+        /// Checks if the given position is inside the polygon defined by the Area points using the Ray Casting algorithm.
+        /// </summary>
+        /// <param name="position">The position to check.</param>
+        /// <returns>True if the position is inside the polygon, false otherwise.</returns>
         public bool ContainsPosition(Vector3 position)
         {
             if (Area.Count <= 1)
@@ -50,6 +71,13 @@ namespace AmeisenBotX.Core.Engines.Movement.Pathfinding.Objects
             return inside;
         }
 
+        /// <summary>
+        /// Gets the closest entry point within the specified area for the given bot.
+        /// </summary>
+        /// <param name="bot">The bot for which to find the closest entry point.</param>
+        /// <returns>
+        /// The closest entry point within the specified area.
+        /// </returns>
         public Vector3 GetClosestEntry(AmeisenBotInterfaces bot)
         {
             if (Area.Count == 1)
@@ -140,11 +168,23 @@ namespace AmeisenBotX.Core.Engines.Movement.Pathfinding.Objects
             return entryPosition;
         }
 
+        /// <summary>
+        /// Calculates the closest distance between the given position and all vertices in the Area.
+        /// </summary>
+        /// <param name="position">The position to compare distances with.</param>
+        /// <returns>The minimum distance between the given position and all vertices in the Area.</returns>
         public float GetClosestVertexDistance(Vector3 position)
         {
             return Area.Select(pos => pos.GetDistance(position)).Min();
         }
 
+        /// <summary>
+        /// Returns the next position to search in the search path.
+        /// If there is only one position in the area or the search path is empty,
+        /// the first position in the area is returned.
+        /// Otherwise, the next position in the search path is returned and
+        /// the current search path index is updated to the next index in a circular manner.
+        /// </summary>
         public Vector3 GetNextSearchPosition()
         {
             if (Area.Count == 1 || SearchPath.Count == 0)
@@ -157,11 +197,17 @@ namespace AmeisenBotX.Core.Engines.Movement.Pathfinding.Objects
             return position;
         }
 
+        /// <summary>
+        /// Checks if the current search path index is at the beginning.
+        /// </summary>
         public bool IsAtTheBeginning()
         {
             return CurrentSearchPathIndex == 0;
         }
 
+        /// <summary>
+        /// Calculates the search path for the given area.
+        /// </summary>
         private void CalculateSearchPath()
         {
             if (Area.Count <= 1)

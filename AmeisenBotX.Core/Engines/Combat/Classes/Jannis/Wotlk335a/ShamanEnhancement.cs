@@ -9,6 +9,17 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 {
     public class ShamanEnhancement : BasicCombatClass
     {
+        ///<summary>
+        ///Constructor for ShamanEnhancement class.
+        ///Initializes the AuraManager with two KeepActiveAuraJobs: one for Lightning Shield and one for Water Shield.
+        ///The Lightning Shield job is added if the player's mana percentage is greater than 60.0 and the TryCastSpell method returns true for casting Lightning Shield.
+        ///The Water Shield job is added if the player's mana percentage is less than 20.0 and the TryCastSpell method returns true for casting Water Shield.
+        ///Initializes the TargetAuraManager with a KeepActiveAuraJob for Flame Shock.
+        ///The Flame Shock job is added if the TryCastSpell method returns true for casting Flame Shock on the target.
+        ///Sets the InterruptSpells dictionary of the InterruptManager with two entries:
+        ///Entry 0 maps to the TryCastSpell method for casting Wind Shear with the target's GUID as the parameter.
+        ///Entry 1 maps to the TryCastSpell method for casting Hex with the target's GUID as the parameter.
+        ///</summary>
         public ShamanEnhancement(AmeisenBotInterfaces bot) : base(bot)
         {
             MyAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, Shaman335a.LightningShield, () => Bot.Player.ManaPercentage > 60.0 && TryCastSpell(Shaman335a.LightningShield, 0, true)));
@@ -23,18 +34,70 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
             };
         }
 
+        /// <summary>
+        /// Gets the description of the FCFS based CombatClass for the Enhancement Shaman spec.
+        /// </summary>
         public override string Description => "FCFS based CombatClass for the Enhancement Shaman spec.";
 
+        /// <summary>
+        /// Gets or sets the display name for the Shaman Enhancement.
+        /// </summary>
         public override string DisplayName2 => "Shaman Enhancement";
 
+        /// <summary>
+        /// Gets or sets a value indicating whether this object handles movement.
+        /// </summary>
         public override bool HandlesMovement => false;
 
+        /// <summary>
+        /// Gets a value indicating whether this object is a melee type.
+        /// </summary>
         public override bool IsMelee => true;
 
+        /// <summary>
+        /// Gets or sets the item comparator for the current object.
+        /// </summary>
         public override IItemComparator ItemComparator { get; set; } = new BasicIntellectComparator(new() { WowArmorType.Shield }, new() { WowWeaponType.AxeTwoHand, WowWeaponType.MaceTwoHand, WowWeaponType.SwordTwoHand });
 
+        /// <summary>
+        /// Gets or sets the role of the character in the game "World of Warcraft" which is "Damage Per Second" (DPS).
+        /// </summary>
         public override WowRole Role => WowRole.Dps;
 
+        /// <summary>
+        /// The available talent trees for this object.
+        /// 
+        /// - Tree1: Represents the first talent tree, with the following talents:
+        ///     - Talent 2: Requires 1 point, has a rank of 2, and costs 5 resources.
+        ///     - Talent 3: Requires 1 point, has a rank of 3, and costs 3 resources.
+        ///     - Talent 5: Requires 1 point, has a rank of 5, and costs 3 resources.
+        ///     - Talent 8: Requires 1 point, has a rank of 8, and costs 5 resources.
+        /// 
+        /// - Tree2: Represents the second talent tree, with various talents:
+        ///     - Talent 3: Requires 2 points, has a rank of 3, and costs 5 resources.
+        ///     - Talent 5: Requires 2 points, has a rank of 5, and costs 5 resources.
+        ///     - Talent 7: Requires 2 points, has a rank of 7, and costs 3 resources.
+        ///     - Talent 8: Requires 2 points, has a rank of 8, and costs 3 resources.
+        ///     - Talent 9: Requires 2 points, has a rank of 9, and costs 1 resource.
+        ///     - Talent 11: Requires 2 points, has a rank of 11, and costs 5 resources.
+        ///     - Talent 13: Requires 2 points, has a rank of 13, and costs 2 resources.
+        ///     - Talent 14: Requires 2 points, has a rank of 14, and costs 1 resource.
+        ///     - Talent 15: Requires 2 points, has a rank of 15, and costs 3 resources.
+        ///     - Talent 16: Requires 2 points, has a rank of 16, and costs 3 resources.
+        ///     - Talent 17: Requires 2 points, has a rank of 17, and costs 3 resources.
+        ///     - Talent 19: Requires 2 points, has a rank of 19, and costs 3 resources.
+        ///     - Talent 20: Requires 2 points, has a rank of 20, and costs 1 resource.
+        ///     - Talent 21: Requires 2 points, has a rank of 21, and costs 1 resource.
+        ///     - Talent 22: Requires 2 points, has a rank of 22, and costs 3 resources.
+        ///     - Talent 23: Requires 2 points, has a rank of 23, and costs 1 resource.
+        ///     - Talent 24: Requires 2 points, has a rank of 24, and costs 2 resources.
+        ///     - Talent 25: Requires 2 points, has a rank of 25, and costs 3 resources.
+        ///     - Talent 26: Requires 2 points, has a rank of 26, and costs 1 resource.
+        ///     - Talent 28: Requires 2 points, has a rank of 28, and costs 5 resources.
+        ///     - Talent 29: Requires 2 points, has a rank of 29, and costs 1 resource.
+        /// 
+        /// - Tree3: Represents the third talent tree, which is empty.
+        /// </summary>
         public override TalentTree Talents { get; } = new()
         {
             Tree1 = new()
@@ -71,18 +134,42 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
             Tree3 = new(),
         };
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the character should use auto attacks.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if the character should use auto attacks; otherwise, <c>false</c>.
+        /// </value>
         public override bool UseAutoAttacks => true;
 
+        /// <summary>
+        /// Gets the version of the code.
+        /// </summary>
         public override string Version => "1.0";
 
+        /// <summary>
+        /// Gets or sets a value indicating whether this character can walk behind enemy units.
+        /// </summary>
         public override bool WalkBehindEnemy => false;
 
+        /// <summary>
+        /// Gets or sets the WowClass property, specifying that the class is Shaman.
+        /// </summary>
         public override WowClass WowClass => WowClass.Shaman;
 
+        /// <summary>
+        /// Gets or sets the World of Warcraft version to Wrath of the Lich King 3.3.5a.
+        /// </summary>
         public override WowVersion WowVersion => WowVersion.WotLK335a;
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the target is hexed.
+        /// </summary>
         private bool HexedTarget { get; set; }
 
+        /// <summary>
+        /// Method for executing the specified logic.
+        /// </summary>
         public override void Execute()
         {
             base.Execute();
@@ -131,6 +218,9 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
             }
         }
 
+        /// <summary>
+        /// Executes actions when the character is out of combat.
+        /// </summary>
         public override void OutOfCombatExecute()
         {
             base.OutOfCombatExecute();

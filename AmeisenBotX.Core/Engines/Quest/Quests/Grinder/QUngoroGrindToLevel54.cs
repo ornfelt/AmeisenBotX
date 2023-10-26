@@ -7,10 +7,14 @@ namespace AmeisenBotX.Core.Engines.Quest.Quests.Grinder
 {
     internal class QUngoroGrindToLevel54 : GrindingBotQuest
     {
+        /// <summary>
+        /// Represents a quest objective to grind in the zone of Ungoro to reach level 54.
+        /// </summary>
+        /// <param name="bot">The AmeisenBotInterfaces object used for bot functionalities.</param>
         public QUngoroGrindToLevel54(AmeisenBotInterfaces bot)
-            : base("UngoroGrindToLevel54",
-                new List<IQuestObjective>()
-                {
+                    : base("UngoroGrindToLevel54",
+                        new List<IQuestObjective>()
+                        {
                     new QuestObjectiveChain(new List<IQuestObjective>()
                     {
                         new GrindingObjective(bot, 54, new List<List<Vector3>> {
@@ -32,7 +36,7 @@ namespace AmeisenBotX.Core.Engines.Quest.Quests.Grinder
                             },
                         }),
                     })
-                })
+                        })
         { }
     }
 }

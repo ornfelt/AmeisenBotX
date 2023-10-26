@@ -7,12 +7,16 @@ namespace AmeisenBotX.Core.Engines.Quest.Quests.Durotar.ValleyOfStrength
 {
     internal class QGalgarCactusAppleSurprise : BotQuest
     {
+        /// <summary>
+        /// Initializes a new instance of the QGalgarCactusAppleSurprise class with the specified bot and quest details.
+        /// </summary>
+        /// <param name="bot">The bot object to use for interacting with the game.</param>
         public QGalgarCactusAppleSurprise(AmeisenBotInterfaces bot)
-            : base(bot, 4402, "Galgar's Cactus Apple Surprise", 1, 1,
-                () => (bot.GetClosestQuestGiverByNpcId(bot.Player.Position, new List<int> { 9796 }), new Vector3(-561.63f, -4221.80f, 41.67f)),
-                () => (bot.GetClosestQuestGiverByNpcId(bot.Player.Position, new List<int> { 9796 }), new Vector3(-561.63f, -4221.80f, 41.67f)),
-                new List<IQuestObjective>()
-                {
+                    : base(bot, 4402, "Galgar's Cactus Apple Surprise", 1, 1,
+                        () => (bot.GetClosestQuestGiverByNpcId(bot.Player.Position, new List<int> { 9796 }), new Vector3(-561.63f, -4221.80f, 41.67f)),
+                        () => (bot.GetClosestQuestGiverByNpcId(bot.Player.Position, new List<int> { 9796 }), new Vector3(-561.63f, -4221.80f, 41.67f)),
+                        new List<IQuestObjective>()
+                        {
                     new QuestObjectiveChain(new List<IQuestObjective>()
                     {
                         new CollectQuestObjective(bot, 11583, 6, new List<int> { 171938 }, new List<Vector3> {
@@ -63,7 +67,7 @@ namespace AmeisenBotX.Core.Engines.Quest.Quests.Durotar.ValleyOfStrength
                             new Vector3(-696.94f, -4355.80f, 54.18f),
                         }),
                     })
-                })
+                        })
         { }
     }
 }

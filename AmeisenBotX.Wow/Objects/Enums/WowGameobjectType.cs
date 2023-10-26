@@ -1,5 +1,8 @@
 ﻿namespace AmeisenBotX.Wow.Objects.Enums
 {
+    /// <summary>
+    /// Represents the different types of objects in the game world that can be interacted with.
+    /// </summary>
     public enum WowGameObjectType
     {
         Door = 0,

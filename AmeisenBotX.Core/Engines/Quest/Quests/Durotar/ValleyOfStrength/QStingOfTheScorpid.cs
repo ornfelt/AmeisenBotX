@@ -7,12 +7,16 @@ namespace AmeisenBotX.Core.Engines.Quest.Quests.Durotar.ValleyOfStrength
 {
     internal class QStingOfTheScorpid : BotQuest
     {
+        /// <summary>
+        /// Constructor for the "Sting of the Scorpid" quest. 
+        /// Initializes the quest with the given bot and parameters. 
+        /// </summary>
         public QStingOfTheScorpid(AmeisenBotInterfaces bot)
-            : base(bot, 789, "Sting of the Scorpid", 1, 1,
-                () => (bot.GetClosestQuestGiverByNpcId(bot.Player.Position, new List<int> { 3143 }), new Vector3(-600.13f, -4186.19f, 41.27f)),
-                () => (bot.GetClosestQuestGiverByNpcId(bot.Player.Position, new List<int> { 3143 }), new Vector3(-600.13f, -4186.19f, 41.27f)),
-                new List<IQuestObjective>()
-                {
+                    : base(bot, 789, "Sting of the Scorpid", 1, 1,
+                        () => (bot.GetClosestQuestGiverByNpcId(bot.Player.Position, new List<int> { 3143 }), new Vector3(-600.13f, -4186.19f, 41.27f)),
+                        () => (bot.GetClosestQuestGiverByNpcId(bot.Player.Position, new List<int> { 3143 }), new Vector3(-600.13f, -4186.19f, 41.27f)),
+                        new List<IQuestObjective>()
+                        {
                     new QuestObjectiveChain(new List<IQuestObjective>()
                     {
                         new KillAndLootQuestObjective(bot, new List<int> { 3124,3281 }, 8, 4862, new List<List<Vector3>> {
@@ -54,7 +58,7 @@ namespace AmeisenBotX.Core.Engines.Quest.Quests.Durotar.ValleyOfStrength
                             },
                         }),
                     })
-                })
+                        })
         { }
     }
 }

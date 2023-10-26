@@ -8,22 +8,52 @@ namespace AmeisenBotX.Core.Engines.Dungeon.Profiles.WotLK
 {
     public class AzjolNerubProfile : IDungeonProfile
     {
+        /// <summary>
+        /// Gets the author of the code.
+        /// </summary>
         public string Author { get; } = "Jannis";
 
+        /// <summary>
+        /// Gets the description of the Dungeon profile.
+        /// </summary>
+        /// <value>
+        /// Profile description.
+        /// </value>
         public string Description { get; } = "Profile for the Dungeon in Dragonblight, made for Level 70 to 80.";
 
+        /// <summary>
+        /// Gets the position of the dungeon exit.
+        /// </summary>
         public Vector3 DungeonExit { get; } = new(406, 800, 832);
 
+        /// <summary>
+        /// Gets the faction type of the dungeon.
+        /// </summary>
         public DungeonFactionType FactionType { get; } = DungeonFactionType.Neutral;
 
+        /// <summary>
+        /// Gets or sets the size of the group. The default value is 5.
+        /// </summary>
         public int GroupSize { get; } = 5;
 
+        /// <summary>
+        /// Gets the MapId of WowMapId.AzjolNerub.
+        /// </summary>
         public WowMapId MapId { get; } = WowMapId.AzjolNerub;
 
+        /// <summary>
+        /// Gets the maximum level which is set to 80.
+        /// </summary>
         public int MaxLevel { get; } = 80;
 
+        /// <summary>
+        /// Gets the name of the location, which is "[70-80] Azjol Nerub".
+        /// </summary>
         public string Name { get; } = "[70-80] Azjol Nerub";
 
+        /// <summary>
+        /// Gets or sets the list of DungeonNodes in the code.
+        /// </summary>
         public List<DungeonNode> Nodes { get; private set; } = new()
         {
             new(new(413, 796, 831)),
@@ -212,14 +242,30 @@ namespace AmeisenBotX.Core.Engines.Dungeon.Profiles.WotLK
             new(new(413, 58, 249)),
         };
 
+        /// <summary>
+        /// Gets the list of priority units.
+        /// </summary>
         public List<int> PriorityUnits { get; } = new();
 
+        /// <summary>
+        /// Gets the required item level.
+        /// </summary>
         public int RequiredItemLevel { get; } = 100;
 
+        /// <summary>
+        /// Gets the required level for a certain action or attribute.
+        /// </summary>
         public int RequiredLevel { get; } = 70;
 
+        /// <summary>
+        /// Gets the world entry point as a Vector3.
+        /// The default value is set to (3672, 2170, 36).
+        /// </summary>
         public Vector3 WorldEntry { get; } = new(3672, 2170, 36);
 
+        ///<summary>
+        ///Gets or sets the World Entry Map ID for the current WowMapId.
+        ///</summary>
         public WowMapId WorldEntryMapId { get; } = WowMapId.Northrend;
     }
 }

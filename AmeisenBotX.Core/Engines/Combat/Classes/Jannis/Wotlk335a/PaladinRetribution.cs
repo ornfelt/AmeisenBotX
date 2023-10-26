@@ -9,6 +9,10 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 {
     public class PaladinRetribution : BasicCombatClass
     {
+        /// <summary>
+        /// Constructor for the PaladinRetribution class. Initializes the PaladinRetribution object with the provided bot interface.
+        /// </summary>
+        /// <param name="bot">The AmeisenBotInterfaces object used for communication with the bot.</param>
         public PaladinRetribution(AmeisenBotInterfaces bot) : base(bot)
         {
             MyAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, Paladin335a.BlessingOfMight, () => TryCastSpell(Paladin335a.BlessingOfMight, Bot.Wow.PlayerGuid, true)));
@@ -23,18 +27,43 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
             GroupAuraManager.SpellsToKeepActiveOnParty.Add((Paladin335a.BlessingOfMight, (spellName, guid) => TryCastSpell(spellName, guid, true)));
         }
 
+        /// <summary>
+        /// Gets the description of the FCFS based CombatClass for the Retribution Paladin spec.
+        /// </summary>
         public override string Description => "FCFS based CombatClass for the Retribution Paladin spec.";
 
+        /// <summary>
+        /// Gets or sets the display name for a retribution Paladin.
+        /// </summary>
         public override string DisplayName2 => "Paladin Retribution";
 
+        /// <summary>
+        /// Gets or sets a value indicating whether this object handles movement. 
+        /// </summary>
         public override bool HandlesMovement => false;
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the character is a melee fighter.
+        /// </summary>
         public override bool IsMelee => true;
 
+        /// <summary>
+        /// Gets or sets the item comparator for the class. Overrides the base class implementation. 
+        /// The item comparator is set to a BasicStrengthComparator with a shield armor type and axe, mace, and sword weapon types.
+        /// </summary>
         public override IItemComparator ItemComparator { get; set; } = new BasicStrengthComparator(new() { WowArmorType.Shield }, new() { WowWeaponType.Axe, WowWeaponType.Mace, WowWeaponType.Sword });
 
+        /// <summary>
+        /// Gets or sets the role of a character in the World of Warcraft game, specifically the character is a DPS (damage per second) role.
+        /// </summary>
         public override WowRole Role => WowRole.Dps;
 
+        /// Represents a collection of talent trees.
+        /// Each talent tree is identified by a unique string key (e.g. Tree1, Tree2, etc.).
+        /// The talent tree consists of a dictionary where the key is an integer representing the talent index,
+        /// and the value is an instance of the Talent class.
+        /// The Talent class represents a specific talent within the talent tree,
+        /// and contains properties for the talent's index, row, column, and tier.
         public override TalentTree Talents { get; } = new()
         {
             Tree1 = new()
@@ -74,16 +103,34 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
             },
         };
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the character should use auto attacks.
+        /// </summary>
         public override bool UseAutoAttacks => true;
 
+        /// <summary>
+        /// Gets the version of the code as a string.
+        /// </summary>
         public override string Version => "1.0";
 
+        /// <summary>
+        /// Gets or sets whether the character can walk behind an enemy.
+        /// </summary>
         public override bool WalkBehindEnemy => false;
 
+        /// <summary>
+        /// Gets or sets the WoW class of type Paladin.
+        /// </summary>
         public override WowClass WowClass => WowClass.Paladin;
 
+        /// <summary>
+        /// Gets or sets the version of World of Warcraft as Wrath of the Lich King (3.3.5a).
+        /// </summary>
         public override WowVersion WowVersion => WowVersion.WotLK335a;
 
+        /// <summary>
+        /// Executes the specified action for the Paladin335a bot.
+        /// </summary>
         public override void Execute()
         {
             base.Execute();
@@ -123,6 +170,9 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
             }
         }
 
+        /// <summary>
+        /// Executes the OutOfCombatExecute method by calling the base implementation.
+        /// </summary>
         public override void OutOfCombatExecute()
         {
             base.OutOfCombatExecute();

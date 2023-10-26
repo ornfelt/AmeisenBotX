@@ -6,6 +6,11 @@ namespace AmeisenBotX.Core.Engines.Quest.Profiles.Shino
 {
     internal class Horde1To60GrinderProfile : IQuestProfile
     {
+        /// <summary>
+        /// Constructor for Horde1To60GrinderProfile, which sets up the list of quests to be completed.
+        /// Each quest is added to the Quests queue, with the corresponding bot and level.
+        /// </summary>
+        /// <param name="bot">The AmeisenBotInterfaces instance to use for the quests</param>
         public Horde1To60GrinderProfile(AmeisenBotInterfaces bot)
         {
             Quests = new Queue<List<IBotQuest>>();
@@ -53,8 +58,17 @@ namespace AmeisenBotX.Core.Engines.Quest.Profiles.Shino
             });
         }
 
+        /// <summary>
+        /// Gets or sets the queue of lists of IBotQuest objects.
+        /// </summary>
         public Queue<List<IBotQuest>> Quests { get; }
 
+        /// <summary>
+        /// Returns a string representation of the current object.
+        /// </summary>
+        /// <returns>
+        /// A string that represents the current object.
+        /// </returns>
         public override string ToString()
         {
             return $"[1-60] Horde1To60GrinderProfile (Shino)";

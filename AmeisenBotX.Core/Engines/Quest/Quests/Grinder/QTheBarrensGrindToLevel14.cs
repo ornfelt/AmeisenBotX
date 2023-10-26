@@ -7,10 +7,14 @@ namespace AmeisenBotX.Core.Engines.Quest.Quests.Grinder
 {
     internal class QTheBarrensGrindToLevel14 : GrindingBotQuest
     {
+        /// <summary>
+        /// Creates a new instance of the QTheBarrensGrindToLevel14 class, which represents a quest for grinding to level 14 in The Barrens.
+        /// </summary>
+        /// <param name="bot">An instance of the AmeisenBotInterfaces class used for interacting with the game bot.</param>
         public QTheBarrensGrindToLevel14(AmeisenBotInterfaces bot)
-            : base("TheBarrensGrindToLevel14",
-                new List<IQuestObjective>()
-                {
+                    : base("TheBarrensGrindToLevel14",
+                        new List<IQuestObjective>()
+                        {
                     new QuestObjectiveChain(new List<IQuestObjective>()
                     {
                         new GrindingObjective(bot, 14, new List<List<Vector3>> {
@@ -27,7 +31,7 @@ namespace AmeisenBotX.Core.Engines.Quest.Quests.Grinder
                             },
                         }),
                     })
-                })
+                        })
         { }
     }
 }

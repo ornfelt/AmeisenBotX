@@ -14,6 +14,10 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 {
     public class WarriorProtection : BasicCombatClass
     {
+        /// <summary>
+        /// Initializes a new instance of the WarriorProtection class with the specified bot.
+        /// </summary>
+        /// <param name="bot">The bot to use for the WarriorProtection class.</param>
         public WarriorProtection(AmeisenBotInterfaces bot) : base(bot)
         {
             MyAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, Warrior335a.CommandingShout, () => TryCastSpell(Warrior335a.CommandingShout, 0, true)));
@@ -29,14 +33,34 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
             HeroicStrikeEvent = new(TimeSpan.FromSeconds(2));
         }
 
+        /// <summary>
+        /// Returns the description for the Protection Warrior spec CombatClass. 
+        /// This CombatClass is specifically designed for leveling and is suitable for Dungeons and Questing.
+        /// </summary>
         public override string Description => "Leveling ready CombatClass for the Protection Warrior spec. For Dungeons and Questing";
 
+        /// <summary>
+        /// Gets or sets the display name for the Warrior Protection class.
+        /// </summary>
         public override string DisplayName2 => "Warrior Protection";
 
+        /// <summary>
+        /// Gets or sets a value indicating whether this object handles movement.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if this object handles movement; otherwise, <c>false</c>.
+        /// </value>
         public override bool HandlesMovement => true;
 
+        /// <summary>
+        /// Gets a value indicating whether this character is a melee fighter.
+        /// </summary>
+        /// <returns>True, indicating that this character is a melee fighter.</returns>
         public override bool IsMelee => true;
 
+        /// <summary>
+        /// Gets or sets the item comparator. The item comparator is used to compare items based on their stats.
+        /// </summary>
         public override IItemComparator ItemComparator { get; set; } = new BasicStaminaComparator(new()
         {
             WowArmorType.Idol,
@@ -58,8 +82,17 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
             WowWeaponType.Dagger
         });
 
+        /// <summary>
+        /// Gets the role of the character as a tank in the World of Warcraft.
+        /// </summary>
         public override WowRole Role => WowRole.Tank;
 
+        /// <summary>
+        /// Gets or sets the talent tree.
+        /// </summary>
+        /// <value>
+        /// The talent tree.
+        /// </value>
         public override TalentTree Talents { get; } = new()
         {
             Tree1 = new()
@@ -100,18 +133,45 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
             },
         };
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the object can use auto attacks.
+        /// </summary>
+        /// <returns>True if the object can use auto attacks; otherwise, False.</returns>
         public override bool UseAutoAttacks => true;
 
+        /// <summary>
+        /// Gets the version of the code.
+        /// </summary>
+        /// <returns>The version string, "1.1".</returns>
         public override string Version => "1.1";
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the character can walk behind an enemy.
+        /// </summary>
+        /// <value>
+        /// <c>false</c> indicating that the character cannot walk behind an enemy; otherwise, <c>true</c>.
+        /// </value>
         public override bool WalkBehindEnemy => false;
 
+        /// <summary>
+        /// Gets or sets the WoW class of type Warrior.
+        /// </summary>
         public override WowClass WowClass => WowClass.Warrior;
 
+        /// <summary>
+        /// Gets the World of Warcraft version, which is set to Wrath
+        /// of the Lich King 3.3.5a (WotLK335a).
+        /// </summary>
         public override WowVersion WowVersion => WowVersion.WotLK335a;
 
+        /// <summary>
+        /// Gets or sets the TimegatedEvent object representing the Heroic Strike event.
+        /// </summary>
         private TimegatedEvent HeroicStrikeEvent { get; }
 
+        ///<summary>
+        /// Executes the warrior's combat rotation for tanking.
+        ///</summary>
         public override void Execute()
         {
             base.Execute();

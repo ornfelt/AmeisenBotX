@@ -11,6 +11,10 @@ namespace AmeisenBotX.Core.Engines.Tactic.Dungeon.PitOfSaron
 {
     public class IckAndKrickTactic : ITactic
     {
+        /// <summary>
+        /// Initializes a new instance of the IckAndKrickTactic class.
+        /// </summary>
+        /// <param name="bot">The AmeisenBotInterfaces instance.</param>
         public IckAndKrickTactic(AmeisenBotInterfaces bot)
         {
             Bot = bot;
@@ -21,22 +25,57 @@ namespace AmeisenBotX.Core.Engines.Tactic.Dungeon.PitOfSaron
             };
         }
 
+        /// <summary>
+        /// Gets the Vector3 representing the area with coordinates (823, 110, 509).
+        /// </summary>
         public Vector3 Area { get; } = new(823, 110, 509);
 
+        /// <summary>
+        /// Gets the area radius.
+        /// </summary>
         public float AreaRadius { get; } = 150.0f;
 
+        /// <summary>
+        /// Gets or sets the date and time when the chasing is activated.
+        /// </summary>
         public DateTime ChasingActivated { get; private set; }
 
+        /// <summary>
+        /// Gets or sets the configurables dictionary.
+        /// </summary>
+        /// <value>
+        /// The configurables dictionary.
+        /// </value>
         public Dictionary<string, dynamic> Configurables { get; private set; }
 
+        /// <summary>
+        /// Gets the map ID for the Pit of Saron.
+        /// </summary>
         public WowMapId MapId { get; } = WowMapId.PitOfSaron;
 
+        /// <summary>
+        /// Gets or sets the list of integer values for IckDisplayId.
+        /// </summary>
         private static List<int> IckDisplayId { get; } = new List<int> { 30347 };
 
+        /// <summary>
+        /// Gets or sets the instance of the AmeisenBotInterfaces that represents the bot.
+        /// </summary>
         private AmeisenBotInterfaces Bot { get; }
 
+        /// <summary>
+        /// Determines if the chasing is currently active by checking if the chasing activation time plus 14 seconds is greater than the current UTC time.
+        /// </summary>
         private bool ChasingActive => (ChasingActivated + TimeSpan.FromSeconds(14)) > DateTime.UtcNow;
 
+        /// <summary>
+        /// Executes a tactic based on the role, melee status, and quest giver information.
+        /// </summary>
+        /// <param name="role">The role of the player in the game.</param>
+        /// <param name="isMelee">A boolean indicating if the player is in melee range.</param>
+        /// <param name="preventMovement">An out parameter that determines if movement should be prevented.</param>
+        /// <param name="allowAttacking">An out parameter that determines if attacking should be allowed.</param>
+        /// <returns>A boolean indicating if a tactic was executed.</returns>
         public bool ExecuteTactic(WowRole role, bool isMelee, out bool preventMovement, out bool allowAttacking)
         {
             preventMovement = false;

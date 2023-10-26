@@ -12,51 +12,139 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
 {
     internal class WarriorArms : BasicKamelClass
     {
+        /// <summary>
+        /// Represents the name of the "Battle Shout" spell.
+        /// </summary>
         private const string battleShoutSpell = "Battle Shout";
 
+        /// <summary>
+        /// The spell name for battle stance.
+        /// </summary>
         private const string battleStanceSpell = "Battle Stance";
 
+        /// <summary>
+        /// The name of the Berserker Rage spell.
+        /// </summary>
         private const string berserkerRageSpell = "Berserker Rage";
 
+        ///<summary>
+        /// The name of the berserker stance spell.
+        ///</summary>
         private const string berserkerStanceSpell = "Berserker Stance";
 
+        /// <summary>
+        /// Represents the name of the Bladestorm spell.
+        /// </summary>
         private const string BladestormSpell = "Bladestorm";
 
+        /// <summary>
+        /// Represents the spell name "Bloodrage".
+        /// </summary>
         private const string bloodrageSpell = "Bloodrage";
 
+        /// <summary>
+        /// The constant string for the spell "Charge".
+        /// </summary>
         //Spells
         private const string chargeSpell = "Charge";
 
+        /// <summary>
+        /// Represents the name of the cleave spell.
+        /// </summary>
         private const string cleaveSpell = "Cleave";
 
+        /// <summary>
+        /// The name of the commanding shout spell.
+        /// </summary>
         private const string commandingShoutSpell = "Commanding Shout";
 
+        /// <summary>
+        /// Represents the name of the "Death Wish" spell.
+        /// </summary>
         private const string deathWishSpell = "Death Wish";
 
+        /// <summary>
+        /// The spell used for activating the defensive stance.
+        /// </summary>
         //Stances
         private const string defensiveStanceSpell = "Defensive Stance";
 
+        /// <summary>
+        /// Constant string representing the "Disarm" spell.
+        /// </summary>
         private const string disarmSpell = "Disarm";
+        /// <summary>
+        /// The name of the Enraged Regeneration spell.
+        /// </summary>
         private const string enragedregenerationSpell = "Enraged Regeneration";
+        /// <summary>
+        /// Represents the name of the spell to be executed.
+        /// </summary>
         private const string executeSpell = "Execute";
+        /// <summary>
+        /// Represents the name of the hamstring spell.
+        /// </summary>
         private const string hamstringSpell = "Hamstring";
+        /// <summary>
+        /// Represents the name of the heroic fury spell.
+        /// </summary>
         private const string heroicFurySpell = "Heroic Fury";
+        /// <summary>
+        /// The name of the heroic strike spell.
+        /// </summary>
         private const string heroicStrikeSpell = "Heroic Strike";
+        /// <summary>
+        /// The name of the heroic throw spell.
+        /// </summary>
         private const string heroicThrowSpell = "Heroic Throw";
+        /// <summary>
+        /// Represents the name of the intercept spell.
+        /// </summary>
         private const string interceptSpell = "Intercept";
+        /// <summary>
+        /// The name of the intimidating shout spell.
+        /// </summary>
         private const string intimidatingShoutSpell = "Intimidating Shout";
+        /// <summary>
+        /// The name of the spell "Mortal Strike".
+        /// </summary>
         private const string MortalStrikeSpell = "Mortal Strike";
+        /// <summary>
+        /// The name of the overpower spell.
+        /// </summary>
         private const string OverpowerSpell = "Overpower";
+        /// <summary>
+        /// The name of the pummel spell.
+        /// </summary>
         private const string pummelSpell = "Pummel";
+        /// <summary>
+        /// The constant string representing the spell "Recklessness".
+        /// </summary>
         private const string recklessnessSpell = "Recklessness";
+        /// <summary>
+        /// The constant string representation of the spell "Rend".
+        /// </summary>
         private const string rendSpell = "Rend";
 
+        /// <summary>
+        /// The name of the retaliation spell for buffs, defensive, and enrage.
+        /// </summary>
         //Buffs||Defensive||Enrage
         private const string retaliationSpell = "Retaliation";
 
+        /// <summary>
+        /// Represents the name of the Slam spell.
+        /// </summary>
         private const string slamSpell = "Slam";
+        /// <summary>
+        /// Represents the victory rush spell.
+        /// </summary>
         private const string victoryRushSpell = "Victory Rush";
 
+        /// <summary>
+        /// Initializes a new instance of the WarriorArms class with the specified bot.
+        /// </summary>
+        /// <param name="bot">The bot object that the WarriorArms instance will interact with.</param>
         public WarriorArms(AmeisenBotInterfaces bot) : base()
         {
             Bot = bot;
@@ -99,29 +187,73 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
             ExecuteEvent = new(TimeSpan.FromSeconds(1));
         }
 
+        /// <summary>
+        /// Gets or sets the author of the code.
+        /// </summary>
+        /// <value>
+        /// The author of the code.
+        /// </value>
         public override string Author => "Lukas";
 
+        /// <summary>
+        /// Gets or sets the dictionary of strings and dynamic values.
+        /// </summary>
         public override Dictionary<string, dynamic> C { get; set; } = new Dictionary<string, dynamic>();
 
+        /// <summary>
+        /// Gets the description of the warrior's arms.
+        /// </summary>
+        /// <returns>The description of the arms as a string.</returns>
         public override string Description => "Warrior Arms";
 
+        /// <summary>
+        /// Gets or sets the display name for the Warrior Arms Beta.
+        /// </summary>
         public override string DisplayName => "Warrior Arms Beta";
 
+        /// <summary>
+        /// Gets or sets the event representing the execution of a time-gated event.
+        /// </summary>
         public TimegatedEvent ExecuteEvent { get; private set; }
 
+        /// <summary>
+        /// This property indicates that the class does not handle movement.
+        /// </summary>
         public override bool HandlesMovement => false;
 
+        /// <summary>
+        /// Gets or sets the timegated event for performing a heroic strike.
+        /// </summary>
         public TimegatedEvent HeroicStrikeEvent { get; private set; }
 
+        /// <summary>
+        /// Gets a value indicating whether the character is a melee character.
+        /// </summary>
         public override bool IsMelee => true;
 
+        /// <summary>
+        /// Gets or sets the item comparator used for comparing items.
+        /// The default value is a BasicStrengthComparator initialized with WowArmorType.Shield and WowWeaponType.Sword, WowWeaponType.Mace, WowWeaponType.Axe, WowWeaponType.Staff, WowWeaponType.Dagger.
+        /// </summary>
         public override IItemComparator ItemComparator { get; set; } = new BasicStrengthComparator(new() { WowArmorType.Shield }, new() { WowWeaponType.Sword, WowWeaponType.Mace, WowWeaponType.Axe, WowWeaponType.Staff, WowWeaponType.Dagger });
 
+        /// <summary>
+        /// Time event property that represents a time-gated event.
+        /// </summary>
         //Time event
         public TimegatedEvent RendEvent { get; private set; }
 
+        /// <summary>
+        /// Gets the role of the character as a DPS (Damage Per Second) role.
+        /// </summary>
         public override WowRole Role => WowRole.Dps;
 
+        /// <summary>
+        /// Gets the talents for the TalentTree.
+        /// </summary>
+        /// <value>
+        /// The TalentTree object that contains the talent data.
+        /// </value>
         public override TalentTree Talents { get; } = new()
         {
             Tree1 = new()
@@ -162,27 +294,57 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
             Tree3 = new(),
         };
 
+        /// <summary>
+        /// Gets or sets a value indicating whether this character is able to use auto attacks.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if the character is able to use auto attacks; otherwise, <c>false</c>.
+        /// </value>
         public override bool UseAutoAttacks => true;
 
+        /// <summary>
+        /// Gets the version string of the code.
+        /// </summary>
         public override string Version => "1.0";
 
+        /// <summary>
+        /// Gets or sets the TimegatedEvent for the VictoryRushEvent.
+        /// </summary>
         public TimegatedEvent VictoryRushEvent { get; private set; }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether or not the character can walk behind an enemy.
+        /// </summary>
         public override bool WalkBehindEnemy => false;
 
+        /// <summary>
+        /// Gets or sets the WowClass property, specifying that the class is a Warrior.
+        /// </summary>
         public override WowClass WowClass => WowClass.Warrior;
 
+        /// <summary>
+        /// Executes the ExecuteCC method.
+        /// </summary>
         public override void ExecuteCC()
         {
             StartAttack();
         }
 
+        /// <summary>
+        /// Executes the out-of-combat actions.
+        /// </summary>
         public override void OutOfCombatExecute()
         {
             Targetselection();
             StartAttack();
         }
 
+        /// <summary>
+        /// Custom method to cast a spell with the given spell name and stance. By default, the stance is set to "Battle Stance".
+        /// </summary>
+        /// <param name="spellName">The name of the spell to cast.</param>
+        /// <param name="stance">The stance to be in while casting the spell (default value: "Battle Stance").</param>
+        /// <returns>Returns true if the spell is successfully cast, otherwise returns false.</returns>
         private bool CustomCastSpell(string spellName, string stance = "Battle Stance")
         {
             if (Bot.Character.SpellBook.IsSpellKnown(spellName))
@@ -211,6 +373,9 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
             return false;
         }
 
+        /// <summary>
+        /// Method to initiate attack on the target.
+        /// </summary>
         private void StartAttack()
         {
             if (Bot.Wow.TargetGuid != 0 && Bot.Target != null)

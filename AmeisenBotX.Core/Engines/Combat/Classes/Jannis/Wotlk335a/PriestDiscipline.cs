@@ -11,6 +11,14 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 {
     public class PriestDiscipline : BasicCombatClass
     {
+        /// <summary>
+        /// Constructor for the PriestDiscipline class.
+        /// Initializes the PriestDiscipline object, setting the bot parameter to the provided value.
+        /// Adds jobs to the MyAuraManager to keep the PowerWordFortitude and InnerFire auras active.
+        /// Initializes the SpellUsageHealDict dictionary with key-value pairs representing spell usage thresholds and corresponding spell names.
+        /// Adds the PowerWordFortitude spell to the SpellsToKeepActiveOnParty list in the GroupAuraManager.
+        /// </summary>
+        /// <param name="bot">The AmeisenBotInterfaces object used as a parameter for the base constructor.</param>
         public PriestDiscipline(AmeisenBotInterfaces bot) : base(bot)
         {
             MyAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, Priest335a.PowerWordFortitude, () => TryCastSpell(Priest335a.PowerWordFortitude, Bot.Wow.PlayerGuid, true)));
@@ -27,18 +35,46 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
             GroupAuraManager.SpellsToKeepActiveOnParty.Add((Priest335a.PowerWordFortitude, (spellName, guid) => TryCastSpell(spellName, guid, true)));
         }
 
+        /// <summary>
+        /// Gets the description of the FCFS based CombatClass for the Discipline Priest spec.
+        /// </summary>
         public override string Description => "FCFS based CombatClass for the Discipline Priest spec.";
 
+        /// <summary>
+        /// Gets or sets the display name of the Priest Discipline.
+        /// </summary>
         public override string DisplayName2 => "Priest Discipline";
 
+        /// <summary>
+        /// Gets or sets a value indicating whether this object handles movement.
+        /// </summary>
+        /// <value>
+        ///   <c>false</c> indicating that this object does not handle movement.
+        /// </value>
         public override bool HandlesMovement => false;
 
+        /// <summary>
+        /// Gets a value indicating whether the object is a melee type.
+        /// It always returns false as the overridden behavior.
+        /// </summary>
         public override bool IsMelee => false;
 
+        /// <summary>
+        /// Gets or sets the item comparator for this instance.
+        /// </summary>
         public override IItemComparator ItemComparator { get; set; } = new BasicSpiritComparator(new() { WowArmorType.Shield }, new() { WowWeaponType.Sword, WowWeaponType.Mace, WowWeaponType.Axe });
 
+        /// <summary>
+        /// Gets the role of the character as a healer.
+        /// </summary>
         public override WowRole Role => WowRole.Heal;
 
+        /// <summary>
+        /// Gets or sets the talent tree object with individual talents and their respective values.
+        /// </summary>
+        /// <value>
+        /// The talent tree object.
+        /// </value>
         public override TalentTree Talents { get; } = new()
         {
             Tree1 = new()
@@ -76,18 +112,52 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
             Tree3 = new(),
         };
 
+        /// <summary>
+        /// Overrides the UseAutoAttacks property and returns false, indicating that auto attacks should not be used.
+        /// </summary>
         public override bool UseAutoAttacks => false;
 
+        /// <summary>
+        /// Gets the version number.
+        /// </summary>
         public override string Version => "1.0";
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the character can walk behind enemy.
+        /// </summary>
+        /// <returns>Always returns false.</returns>
         public override bool WalkBehindEnemy => false;
 
+        /// <summary>
+        /// Gets or sets the WowClass property of the current object to WowClass.Priest.
+        /// </summary>
         public override WowClass WowClass => WowClass.Priest;
 
+        /// <summary>
+        /// Gets the World of Warcraft version, which is set to Wrath of the Lich King 3.3.5a.
+        /// </summary>
         public override WowVersion WowVersion => WowVersion.WotLK335a;
 
+        /// <summary>
+        /// Gets or sets a private dictionary that stores the usage and healing values of spells.
+        /// The keys of the dictionary are integers representing the spell IDs, while the values are strings representing the amount of healing provided by each spell.
+        /// </summary>
         private Dictionary<int, string> SpellUsageHealDict { get; }
 
+        /// <summary>
+        /// Executes the code block and performs various actions based on certain conditions.
+        /// If the player's health is below 75% or there are party members that need healing,
+        /// the method will return and not perform any further actions.
+        /// If there are no party members or the player's mana percentage is above 50,
+        /// the method will attempt to find a target using the TargetProviderDps and cast
+        /// the ShadowWordPain spell on the target. If successful, the method will return.
+        /// If casting ShadowWordPain is not possible, the method will attempt to cast
+        /// the Smite spell on the target. If successful, the method will return.
+        /// If casting Smite is not possible, the method will attempt to cast the HolyShock
+        /// spell on the target. If successful, the method will return.
+        /// If casting HolyShock is not possible, the method will attempt to cast the Consecration
+        /// spell on the target. If successful, the method will return.
+        /// </summary>
         public override void Execute()
         {
             base.Execute();
@@ -123,6 +193,11 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
             }
         }
 
+        /// <summary>
+        /// Executes the action when the character is out of combat.
+        /// Checks if there is a need to heal someone or handle dead party members.
+        /// If either condition is met, returns without further execution.
+        /// </summary>
         public override void OutOfCombatExecute()
         {
             base.OutOfCombatExecute();
@@ -134,6 +209,9 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
             }
         }
 
+        ///<summary>
+        /// Checks if there is a need to heal someone.
+        ///</summary>
         private bool NeedToHealSomeone()
         {
             if (TargetProviderHeal.Get(out IEnumerable<IWowUnit> unitsToHeal))

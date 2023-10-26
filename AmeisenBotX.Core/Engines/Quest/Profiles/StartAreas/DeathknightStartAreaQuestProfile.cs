@@ -11,6 +11,10 @@ namespace AmeisenBotX.Core.Engines.Quest.Profiles.StartAreas
 {
     public class DeathknightStartAreaQuestProfile : IQuestProfile
     {
+        /// <summary>
+        /// Initializes a new instance of the DeathknightStartAreaQuestProfile class.
+        /// </summary>
+        /// <param name="bot">The AmeisenBotInterfaces bot.</param>
         public DeathknightStartAreaQuestProfile(AmeisenBotInterfaces bot)
         {
             Quests = new Queue<List<IBotQuest>>();
@@ -283,17 +287,41 @@ namespace AmeisenBotX.Core.Engines.Quest.Profiles.StartAreas
             );
         }
 
+        /// <summary>
+        /// Gets or sets the queue of lists of IBotQuests representing the quests.
+        /// </summary>
         public Queue<List<IBotQuest>> Quests { get; }
 
+        /// <summary>
+        /// Gets or sets a boolean array indicating whether a spell has been casted.
+        /// </summary>
         private bool[] CastedSpell { get; } = new bool[4];
 
+        /// <summary>
+        /// Gets or sets an array indicating whether each casting has started.
+        /// </summary>
+        /// <value>
+        /// The array of booleans indicating whether each casting has started.
+        /// </value>
         private bool[] StartedCasting { get; } = new bool[4];
 
+        /// <summary>
+        /// Converts the object to its string representation.
+        /// Returns "[55-59] Deathknight Start Area (Jannis)".
+        /// </summary>
         public override string ToString()
         {
             return $"[55-59] Deathknight Start Area (Jannis)";
         }
 
+        /// <summary>
+        /// Checks the eye casting state for a given player.
+        /// </summary>
+        /// <param name="bot">The bot interface.</param>
+        /// <param name="id">The player ID.</param>
+        /// <param name="positionToCast">The position to cast.</param>
+        /// <param name="distance">The casting distance.</param>
+        /// <returns>True if the spell has been casted, false otherwise.</returns>
         private bool CheckEyeCastingState(AmeisenBotInterfaces bot, int id, Vector3 positionToCast, double distance)
         {
             if (CastedSpell[id])

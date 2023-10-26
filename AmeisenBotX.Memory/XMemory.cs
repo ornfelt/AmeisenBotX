@@ -15,21 +15,46 @@ namespace AmeisenBotX.Memory
 {
     public unsafe class XMemory : IMemoryApi
     {
+        /// <summary>
+        /// FASM configuration. If encountering a fasm error, consider increasing the values.
+        /// </summary>
         // FASM configuration, if you encounter fasm error, try to increase the values
         private const int FASM_MEMORY_SIZE = 8192;
 
+        /// <summary>
+        /// The number of passes for the FASM process.
+        /// </summary>
         private const int FASM_PASSES = 100;
 
+        /// <summary>
+        /// The initial size of the memory pool.
+        /// </summary>
         // initial memory pool size
         private const int INITIAL_POOL_SIZE = 0; // 16384;
 
+        /// <summary>
+        /// The lock needs to be static because FASM isn't thread safe.
+        /// </summary>
         // lock needs to be static as FASM isn't thread safe
         private static readonly object fasmLock = new();
 
+        /// <summary>
+        /// Represents the private readonly object used as a lock for allocation operations.
+        /// </summary>
         private readonly object allocLock = new();
+        /// <summary>
+        /// Represents the number of RPM (Revolutions Per Minute) calls.
+        /// </summary>
         private ulong rpmCalls;
+        /// <summary>
+        /// Private variable to store the number of calls to a method.
+        /// </summary>
         private ulong wpmCalls;
 
+        /// <summary>
+        /// Initializes a new instance of the XMemory class.
+        /// </summary>
+        /// <exception cref="FileNotFoundException">Thrown if the mandatory "FASM.dll" file could not be found on the system. Please download it from the Flat Assembler forum.</exception>
         public XMemory()
         {
             if (!File.Exists("FASM.dll"))
@@ -78,6 +103,9 @@ namespace AmeisenBotX.Memory
             }
         }
 
+        /// <summary>
+        /// Gets or sets the list of allocation pools.
+        /// </summary>
         private List<AllocationPool> AllocationPools { get; set; }
 
         ///<inheritdoc cref="IMemoryApi.AllocateMemory"/>
@@ -226,6 +254,9 @@ namespace AmeisenBotX.Memory
             return rect;
         }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the Initialized property has been set.
+        /// </summary>
         private bool Initialized { get; set; }
 
         ///<inheritdoc cref="IMemoryApi.Init"/>

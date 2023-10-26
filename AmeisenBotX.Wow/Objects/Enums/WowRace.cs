@@ -1,5 +1,8 @@
 ﻿namespace AmeisenBotX.Wow.Objects.Enums
 {
+    /// <summary>
+    /// Represents the playable races in the World of Warcraft game.
+    /// </summary>
     public enum WowRace
     {
         Unknown = -1,

@@ -9,6 +9,10 @@ namespace AmeisenBotX.Core.Engines.Quest
 {
     public class DefaultQuestEngine : IQuestEngine
     {
+        /// <summary>
+        /// Initializes a new instance of the DefaultQuestEngine class.
+        /// </summary>
+        /// <param name="bot">The AmeisenBotInterfaces object that represents the bot.</param>
         public DefaultQuestEngine(AmeisenBotInterfaces bot)
         {
             Bot = bot;
@@ -17,22 +21,46 @@ namespace AmeisenBotX.Core.Engines.Quest
             QueryCompletedQuestsEvent = new(TimeSpan.FromSeconds(2));
         }
 
+        /// <summary>
+        /// Gets or sets the list of completed quests.
+        /// </summary>
         public List<int> CompletedQuests { get; private set; }
 
+        /// <summary>
+        /// Gets or sets the quest profile.
+        /// </summary>
         public IQuestProfile Profile { get; set; }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the completed quests have been updated.
+        /// </summary>
         public bool UpdatedCompletedQuests { get; set; }
 
+        /// <summary>
+        /// Gets the Bot interface.
+        /// </summary>
         private AmeisenBotInterfaces Bot { get; }
 
+        /// <summary>
+        /// Gets or sets the last time a quest was abandoned, represented in UTC.
+        /// </summary>
         private DateTime LastAbandonQuestTime { get; set; } = DateTime.UtcNow;
 
+        /// <summary>
+        /// Gets the private timegated event for querying completed quests.
+        /// </summary>
         private TimegatedEvent QueryCompletedQuestsEvent { get; }
 
+        ///<summary>
+        ///This method is used to perform an action when entering a specific state.
+        ///</summary>
         public void Enter()
         {
         }
 
+        /// <summary>
+        /// Executes a series of actions related to completing quests based on the current profile.
+        /// </summary>
         public void Execute()
         {
             if (Profile == null)
@@ -115,6 +143,10 @@ namespace AmeisenBotX.Core.Engines.Quest
             CompletedQuests = CompletedQuests.Distinct().ToList();
         }
 
+        /// <summary>
+        /// Clears the list of completed quests and updates it with the completed quests obtained from the World of Warcraft bot.
+        /// Sets a flag indicating that the completed quests have been updated.
+        /// </summary>
         private void OnGetQuestsCompleted(long timestamp, List<string> args)
         {
             Bot.Quest.CompletedQuests.Clear();

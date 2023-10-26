@@ -9,82 +9,93 @@ namespace AmeisenBotX.Test
     [TestClass]
     public class CharacterManagerTests
     {
+        /// <summary>
+        /// Represents a test item with various properties.
+        /// </summary>
         public string testItem =
-            "{" +
-                "\"id\": \"1337\"," +
-                "\"count\": \"1\"," +
-                "\"quality\": \"1\"," +
-                "\"curDurability\": \"10\"," +
-                "\"maxDurability\": \"20\"," +
-                "\"cooldownStart\": \"5\"," +
-                "\"cooldownEnd\": \"8\"," +
-                "\"name\": \"TestItem\"," +
-                "\"link\": \"[TestItem]\"," +
-                "\"level\": \"69\"," +
-                "\"minLevel\": \"64\"," +
-                "\"type\": \"MISCELLANEOUS\"," +
-                "\"subtype\": \"NONE\"," +
-                "\"maxStack\": \"1\"," +
-                "\"equiplocation\": \"NOT_EQUIPABLE\"," +
-                "\"sellprice\": \"650\"" +
-            "}";
+                    "{" +
+                        "\"id\": \"1337\"," +
+                        "\"count\": \"1\"," +
+                        "\"quality\": \"1\"," +
+                        "\"curDurability\": \"10\"," +
+                        "\"maxDurability\": \"20\"," +
+                        "\"cooldownStart\": \"5\"," +
+                        "\"cooldownEnd\": \"8\"," +
+                        "\"name\": \"TestItem\"," +
+                        "\"link\": \"[TestItem]\"," +
+                        "\"level\": \"69\"," +
+                        "\"minLevel\": \"64\"," +
+                        "\"type\": \"MISCELLANEOUS\"," +
+                        "\"subtype\": \"NONE\"," +
+                        "\"maxStack\": \"1\"," +
+                        "\"equiplocation\": \"NOT_EQUIPABLE\"," +
+                        "\"sellprice\": \"650\"" +
+                    "}";
 
+        /// <summary>
+        /// Represents a list of test items.
+        /// </summary>
         public string testItemList =
-            "[{" +
-                "\"id\": \"1337\"," +
-                "\"count\": \"1\"," +
-                "\"quality\": \"1\"," +
-                "\"curDurability\": \"10\"," +
-                "\"maxDurability\": \"20\"," +
-                "\"cooldownStart\": \"5\"," +
-                "\"cooldownEnd\": \"8\"," +
-                "\"name\": \"TestItem\"," +
-                "\"link\": \"[TestItem]\"," +
-                "\"level\": \"69\"," +
-                "\"minLevel\": \"64\"," +
-                "\"type\": \"MISCELLANEOUS\"," +
-                "\"subtype\": \"NONE\"," +
-                "\"maxStack\": \"1\"," +
-                "\"equiplocation\": \"NOT_EQUIPABLE\"," +
-                "\"sellprice\": \"650\"" +
-            "}," +
-            "{" +
-                "\"id\": \"1338\"," +
-                "\"count\": \"1\"," +
-                "\"quality\": \"1\"," +
-                "\"curDurability\": \"10\"," +
-                "\"maxDurability\": \"20\"," +
-                "\"cooldownStart\": \"5\"," +
-                "\"cooldownEnd\": \"8\"," +
-                "\"name\": \"TestItem1\"," +
-                "\"link\": \"[TestItem1]\"," +
-                "\"level\": \"69\"," +
-                "\"minLevel\": \"64\"," +
-                "\"type\": \"ARMOR\"," +
-                "\"subtype\": \"CLOTH\"," +
-                "\"maxStack\": \"1\"," +
-                "\"equiplocation\": \"INVSLOT_CHEST\"," +
-                "\"sellprice\": \"6500\"" +
-            "}," +
-            "{" +
-                "\"id\": \"1339\"," +
-                "\"count\": \"1\"," +
-                "\"quality\": \"1\"," +
-                "\"curDurability\": \"10\"," +
-                "\"maxDurability\": \"20\"," +
-                "\"cooldownStart\": \"5\"," +
-                "\"cooldownEnd\": \"8\"," +
-                "\"name\": \"TestItem2\"," +
-                "\"link\": \"[TestItem2]\"," +
-                "\"level\": \"69\"," +
-                "\"minLevel\": \"64\"," +
-                "\"type\": \"WEAPON\"," +
-                "\"subtype\": \"GUNS\"," +
-                "\"maxStack\": \"1\"," +
-                "\"equiplocation\": \"INVSLOT_RANGED\"," +
-                "\"sellprice\": \"65\"" +
-            "}]";
+                    "[{" +
+                        "\"id\": \"1337\"," +
+                        "\"count\": \"1\"," +
+                        "\"quality\": \"1\"," +
+                        "\"curDurability\": \"10\"," +
+                        "\"maxDurability\": \"20\"," +
+                        "\"cooldownStart\": \"5\"," +
+                        "\"cooldownEnd\": \"8\"," +
+                        "\"name\": \"TestItem\"," +
+                        "\"link\": \"[TestItem]\"," +
+                        "\"level\": \"69\"," +
+                        "\"minLevel\": \"64\"," +
+                        "\"type\": \"MISCELLANEOUS\"," +
+                        "\"subtype\": \"NONE\"," +
+                        "\"maxStack\": \"1\"," +
+                        "\"equiplocation\": \"NOT_EQUIPABLE\"," +
+                        "\"sellprice\": \"650\"" +
+                    "}," +
+                    "{" +
+                        "\"id\": \"1338\"," +
+                        "\"count\": \"1\"," +
+                        "\"quality\": \"1\"," +
+                        "\"curDurability\": \"10\"," +
+                        "\"maxDurability\": \"20\"," +
+                        "\"cooldownStart\": \"5\"," +
+                        "\"cooldownEnd\": \"8\"," +
+                        "\"name\": \"TestItem1\"," +
+                        "\"link\": \"[TestItem1]\"," +
+                        "\"level\": \"69\"," +
+                        "\"minLevel\": \"64\"," +
+                        "\"type\": \"ARMOR\"," +
+                        "\"subtype\": \"CLOTH\"," +
+                        "\"maxStack\": \"1\"," +
+                        "\"equiplocation\": \"INVSLOT_CHEST\"," +
+                        "\"sellprice\": \"6500\"" +
+                    "}," +
+                    "{" +
+                        "\"id\": \"1339\"," +
+                        "\"count\": \"1\"," +
+                        "\"quality\": \"1\"," +
+                        "\"curDurability\": \"10\"," +
+                        "\"maxDurability\": \"20\"," +
+                        "\"cooldownStart\": \"5\"," +
+                        "\"cooldownEnd\": \"8\"," +
+                        "\"name\": \"TestItem2\"," +
+                        "\"link\": \"[TestItem2]\"," +
+                        "\"level\": \"69\"," +
+                        "\"minLevel\": \"64\"," +
+                        "\"type\": \"WEAPON\"," +
+                        "\"subtype\": \"GUNS\"," +
+                        "\"maxStack\": \"1\"," +
+                        "\"equiplocation\": \"INVSLOT_RANGED\"," +
+                        "\"sellprice\": \"65\"" +
+                    "}]";
 
+        /// <summary>
+        /// This method tests the parsing of a list of WoW basic items.
+        /// It verifies that the parsed items are of the correct type and that the count is correct.
+        /// It also tests the building of specific items and checks the equip slot, armor type, and weapon type for each item.
+        /// </summary>
         [TestMethod]
         public void TestItemListParsing()
         {
@@ -106,6 +117,9 @@ namespace AmeisenBotX.Test
             Assert.AreEqual(WowWeaponType.Gun, ((WowWeapon)item2).WeaponType);
         }
 
+        /// <summary>
+        /// This is a unit test to verify the correctness of the item parsing functionality.
+        /// </summary>
         [TestMethod]
         public void TestItemParsing()
         {

@@ -5,29 +5,76 @@ using System.Globalization;
 
 namespace AmeisenBotX.Wow.Combatlog.Objects
 {
+    /// <summary>
+    /// Represents a basic combat log entry.
+    /// </summary>
+    /// <remarks>
+    /// This class is used for storing information about a combat log entry.
+    /// It contains properties for various attributes of the combat log entry, such as args, destination GUID, 
+    /// destination name, flags, source GUID, source name, subtype, target flags, timestamp, and type.
+    /// </remarks>
     [Serializable]
     public record BasicCombatlogEntry
     {
+        /// <summary>
+        /// Gets or sets the list of string arguments.
+        /// </summary>
         public List<string> Args { get; set; }
 
+        /// <summary>
+        /// Gets or sets the destination globally unique identifier (GUID).
+        /// </summary>
         public ulong DestinationGuid { get; set; }
 
+        /// <summary>
+        /// Gets or sets the name of the destination.
+        /// </summary>
         public string DestinationName { get; set; }
 
+        /// <summary>
+        /// Gets or sets the flags of the object.
+        /// </summary>
         public int Flags { get; set; }
 
+        /// <summary>
+        /// Gets or sets the SourceGuid property, which represents the globally unique identifier (GUID) 
+        /// for the source. It is a 64-bit unsigned integer value.
+        /// </summary>
         public ulong SourceGuid { get; set; }
 
+        /// <summary>
+        /// Gets or sets the source name.
+        /// </summary>
         public string SourceName { get; set; }
 
+        /// <summary>
+        /// Gets or sets the subtype of the combat log entry.
+        /// </summary>
         public CombatlogEntrySubtype Subtype { get; set; }
 
+        /// <summary>
+        /// Gets or sets the target flags.
+        /// </summary>
         public int TargetFlags { get; set; }
 
+        /// <summary>
+        /// The timestamp of the object.
+        /// </summary>
         public DateTime Timestamp { get; set; }
 
+        /// <summary>
+        /// Gets or sets the combat log entry type.
+        /// </summary>
         public CombatlogEntryType Type { get; set; }
 
+        /// <summary>
+        /// Parses a list of event arguments and populates a BasicCombatlogEntry object with the parsed values.
+        /// Returns true if the parsing is successful, otherwise returns false.
+        /// </summary>
+        /// <param name="fields">The fields object that maps indices of event arguments.</param>
+        /// <param name="eventArgs">The list of event arguments to parse.</param>
+        /// <param name="basicCombatLogEntry">The output BasicCombatlogEntry object that will be populated with the parsed values.</param>
+        /// <returns>True if the parsing is successful, otherwise false.</returns>
         public static bool TryParse(ICombatlogFields fields, List<string> eventArgs, out BasicCombatlogEntry basicCombatLogEntry)
         {
             basicCombatLogEntry = new BasicCombatlogEntry();
@@ -112,6 +159,10 @@ namespace AmeisenBotX.Wow.Combatlog.Objects
             return true;
         }
 
+        /// <summary>
+        /// Overrides the default ToString method and returns a string representation of the object,
+        /// including the Type, Subtype, SourceName, and DestinationName.
+        /// </summary>
         public override string ToString()
         {
             return $"{Type}_{Subtype} {SourceName} -> {DestinationName}";

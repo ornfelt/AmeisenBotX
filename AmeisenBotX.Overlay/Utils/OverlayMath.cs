@@ -8,6 +8,9 @@ namespace AmeisenBotX.Overlay.Utils
 {
     public static class OverlayMath
     {
+        /// <summary>
+        /// A constant value representing the conversion factor from degrees to radians.
+        /// </summary>
         public const float DEG_TO_RAD = MathF.PI / 180.0f;
 
         /// <summary>

@@ -14,6 +14,10 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 {
     public class HunterSurvival : BasicCombatClass
     {
+        /// <summary>
+        /// Constructor for the HunterSurvival class that initializes a new instance with the provided bot.
+        /// </summary>
+        /// <param name="bot">The AmeisenBotInterfaces bot to initialize with.</param>
         public HunterSurvival(AmeisenBotInterfaces bot) : base(bot)
         {
             PetManager = new PetManager
@@ -42,18 +46,41 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
             };
         }
 
+        /// <summary>
+        /// Gets the description of the FCFS based CombatClass for the Survival Hunter spec.
+        /// </summary>
         public override string Description => "FCFS based CombatClass for the Survival Hunter spec.";
 
+        /// <summary>
+        /// Gets or sets the display name for Hunter Survival.
+        /// </summary>
         public override string DisplayName2 => "Hunter Survival";
 
+        /// <summary>
+        /// Gets a value indicating whether this implementation handles movement.
+        /// </summary>
+        /// <value>
+        ///   <c>false</c> since this implementation does not handle movement.
+        /// </value>
         public override bool HandlesMovement => false;
 
+        /// <summary>
+        /// Gets a value indicating whether the character is a melee character.
+        /// </summary>
+        /// <returns>Always returns false.</returns>
         public override bool IsMelee => false;
 
+        /// <summary>
+        /// Gets or sets the item comparator used for comparing items in terms of their intellect, applying a basic intellect comparison logic. The default comparator is initialized with a list containing only the WowArmorType.Shield type.
+        /// </summary>
         public override IItemComparator ItemComparator { get; set; } = new BasicIntellectComparator(new() { WowArmorType.Shield });
 
+        /// <summary>
+        /// Gets or sets the role of the character as a damage per second (DPS) role.
+        /// </summary>
         public override WowRole Role => WowRole.Dps;
 
+        /// This code defines an override for the `Talents` property in the base class. The property is of type `TalentTree` and is initialized with a new instance of `TalentTree`. The `TalentTree` instance is populated with data for three different trees: `Tree1`, `Tree2`, and `Tree3`. Each tree is assigned a collection of key-value pairs, where the keys are integers and the values are instances of a class with three integer parameters.
         public override TalentTree Talents { get; } = new()
         {
             Tree1 = new(),
@@ -89,22 +116,43 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
             },
         };
 
+        /// This property indicates that the object should use auto attacks. The value is set to true.
         public override bool UseAutoAttacks => true;
 
+        /// <summary>
+        /// Gets the version number of the object.
+        /// </summary>
         public override string Version => "1.0";
 
+        /// This property represents whether or not the character can walk behind an enemy. It is set to false, indicating that the character cannot walk behind enemies.
         public override bool WalkBehindEnemy => false;
 
+        /// <summary>
+        /// Gets or sets the WowClass value, which represents the class of a hunter in World of Warcraft.
+        /// </summary>
         public override WowClass WowClass => WowClass.Hunter;
 
+        /// <summary>
+        /// Gets or sets the version of World of Warcraft to WotLK335a.
+        /// </summary>
         public override WowVersion WowVersion => WowVersion.WotLK335a;
 
+        /// <summary>
+        /// Gets or sets the private instance of the PetManager class.
+        /// </summary>
         private PetManager PetManager { get; set; }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the code is ready to disengage.
+        /// </summary>
         private bool ReadyToDisengage { get; set; } = false;
 
+        /// <summary>
+        /// Gets or sets a value indicating whether to target slowly when possible.
+        /// </summary>
         private bool SlowTargetWhenPossible { get; set; } = false;
 
+        /// This method is responsible for executing the logic of the DPS (Damage Per Second) strategy for the Hunter335a class. It first calls the base.Execute() method to execute the base logic, then it checks if a target is found using the TryFindTarget() method from the TargetProviderDps class. If a target is found, it performs a series of actions based on the distance to the target and the player's health percentage. The logic includes making distance from the target, using defensive spells like Feign Death and Deterrence, and using offensive spells like Raptor Strike, Mongoose Bite, KillShot, KillCommand, RapidFire, MultiShot, ExplosiveShot, AimedShot, and SteadyShot.
         public override void Execute()
         {
             base.Execute();
@@ -194,6 +242,9 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
             }
         }
 
+        /// <summary>
+        /// Executes the code when the entity is out of combat.
+        /// </summary>
         public override void OutOfCombatExecute()
         {
             ReadyToDisengage = false;

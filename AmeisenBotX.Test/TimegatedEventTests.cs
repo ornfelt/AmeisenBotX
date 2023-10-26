@@ -8,6 +8,9 @@ namespace AmeisenBotX.Test
     [TestClass]
     public class TimegatedEventTests
     {
+        /// <summary>
+        /// Tests the functionality of the TimegateTest method.
+        /// </summary>
         [TestMethod]
         public void TimegateTest()
         {

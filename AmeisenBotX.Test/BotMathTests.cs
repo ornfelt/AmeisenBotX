@@ -7,6 +7,9 @@ namespace AmeisenBotX.Test
     [TestClass]
     public class BotMathTests
     {
+        /// <summary>
+        /// Tests the calculation of the facing angle using different positions.
+        /// </summary>
         [TestMethod]
         public void AngleCalculationTest()
         {
@@ -29,6 +32,10 @@ namespace AmeisenBotX.Test
             Assert.AreEqual(MathF.Round(MathF.PI, 4), MathF.Round(facingAngle, 4));
         }
 
+        /// <summary>
+        /// Tests the ClampAngles method in the BotMath class.
+        /// It clamps the given angle between 0 and 2π (Tau) and returns the clamped value.
+        /// </summary>
         [TestMethod]
         public void ClampAnglesTest()
         {
@@ -39,6 +46,9 @@ namespace AmeisenBotX.Test
             Assert.IsTrue(clampedB >= 0.0f && clampedB <= MathF.Tau);
         }
 
+        /// <summary>
+        /// Tests the IsFacing method in the BotMath class.
+        /// </summary>
         [TestMethod]
         public void IsFacingTest()
         {

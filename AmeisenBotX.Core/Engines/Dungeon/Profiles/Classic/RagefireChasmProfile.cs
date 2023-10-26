@@ -8,22 +8,54 @@ namespace AmeisenBotX.Core.Engines.Dungeon.Profiles.Classic
 {
     public class RagefireChasmProfile : IDungeonProfile
     {
+        /// <summary>
+        /// Gets the author of the code.
+        /// </summary>
         public string Author { get; } = "Jannis";
 
+        /// <summary>
+        /// Gets the description of the Dungeon Profile.
+        /// </summary>
+        /// <value>
+        /// A string representing the description of the Dungeon Profile.
+        /// </value>
         public string Description { get; } = "Profile for the Dungeon in Orgrimmar, made for Level 13 to 18.";
 
+        /// <summary>
+        /// Gets the vector representing the position of the dungeon exit.
+        /// </summary>
         public Vector3 DungeonExit { get; } = new(3, -4, -16);
 
+        /// <summary>
+        /// Gets the faction type of the dungeon.
+        /// </summary>
         public DungeonFactionType FactionType { get; } = DungeonFactionType.Horde;
 
+        /// <summary>
+        /// Gets the size of the group.
+        /// </summary>
         public int GroupSize { get; } = 5;
 
+        /// <summary>
+        /// Gets the Map ID for the Ragefire Chasm.
+        /// </summary>
         public WowMapId MapId { get; } = WowMapId.RagefireChasm;
 
+        /// <summary>
+        /// Gets the maximum level.
+        /// </summary>
         public int MaxLevel { get; } = 18;
 
+        /// <summary>
+        /// Gets the name of the instance called "[13-18] Ragefire Chasm".
+        /// </summary>
         public string Name { get; } = "[13-18] Ragefire Chasm";
 
+        /// <summary>
+        /// A list of DungeonNode objects representing various nodes in a dungeon.
+        /// Each DungeonNode object is initialized with a set of coordinates.
+        /// The list is pre-populated with a set of DungeonNode objects.
+        /// </summary>
         public List<DungeonNode> Nodes { get; } = new()
         {
             new(new(4, -15, -18)),
@@ -212,14 +244,29 @@ namespace AmeisenBotX.Core.Engines.Dungeon.Profiles.Classic
             new(new(-386, 147, 8)),
         };
 
+        /// <summary>
+        /// Gets the list of priority units.
+        /// </summary>
         public List<int> PriorityUnits { get; } = new();
 
+        /// <summary>
+        /// Gets the required item level.
+        /// </summary>
         public int RequiredItemLevel { get; } = 10;
 
+        /// <summary>
+        /// Gets the required level.
+        /// </summary>
         public int RequiredLevel { get; } = 13;
 
+        /// <summary>
+        /// Gets the world entry position in a Vector3 format.
+        /// </summary>
         public Vector3 WorldEntry { get; } = new(1816, -4422, -19);
 
+        /// <summary>
+        /// Gets the WorldEntryMapId of the public WowMapId property.
+        /// </summary>
         public WowMapId WorldEntryMapId { get; } = WowMapId.Kalimdor;
     }
 }

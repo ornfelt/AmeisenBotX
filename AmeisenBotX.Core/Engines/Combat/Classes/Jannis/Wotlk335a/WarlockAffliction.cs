@@ -13,6 +13,10 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 {
     public class WarlockAffliction : BasicCombatClass
     {
+        ///<summary>
+        /// Initializes a new instance of the WarlockAffliction class.
+        ///</summary>
+        ///<param name="bot">The AmeisenBotInterfaces to use for the WarlockAffliction class.</param>
         public WarlockAffliction(AmeisenBotInterfaces bot) : base(bot)
         {
             PetManager = new PetManager
@@ -45,20 +49,49 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
             TargetAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, Warlock335a.Haunt, () => TryCastSpell(Warlock335a.Haunt, Bot.Wow.TargetGuid, true)));
         }
 
+        /// <summary>
+        /// Represents a First-Come-First-Serve (FCFS) based CombatClass for the Affliction Warlock spec.
+        /// </summary>
         public override string Description => "FCFS based CombatClass for the Affliction Warlock spec.";
 
+        /// <summary>
+        /// Gets or sets the display name for a Warlock Affliction.
+        /// </summary>
         public override string DisplayName2 => "Warlock Affliction";
 
+        /// <summary>
+        /// Indicates that this method does not handle movement.
+        /// </summary>
         public override bool HandlesMovement => false;
 
+        /// <summary>
+        /// Gets a value indicating whether this instance is a melee weapon.
+        /// </summary>
+        /// <returns><c>false</c> since this instance is not a melee weapon.</returns>
         public override bool IsMelee => false;
 
+        /// <summary>
+        /// Gets or sets the item comparator for this class.
+        /// The comparator is used to compare items based on their properties.
+        /// </summary>
         public override IItemComparator ItemComparator { get; set; } = new BasicIntellectComparator(new() { WowArmorType.Shield });
 
+        /// <summary>
+        /// Gets or sets the instance of the PetManager class.
+        /// </summary>
         public PetManager PetManager { get; private set; }
 
+        /// <summary>
+        /// Gets the role of the character as a DPS (Damage Per Second) role in the World of Warcraft game.
+        /// </summary>
         public override WowRole Role => WowRole.Dps;
 
+        /// <summary>
+        /// The talent tree for the character.
+        /// </summary>
+        /// <returns>
+        /// The character's talent tree.
+        /// </returns>
         public override TalentTree Talents { get; } = new()
         {
             Tree1 = new()
@@ -93,18 +126,42 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
             },
         };
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the character should use auto attacks.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if the character should use auto attacks; otherwise, <c>false</c>.
+        /// </value>
         public override bool UseAutoAttacks => false;
 
+        /// <summary>
+        /// Gets the version of the object.
+        /// </summary>
         public override string Version => "1.0";
 
+        /// <summary>
+        /// Returns false indicating that the player cannot walk behind the enemy.
+        /// </summary>
         public override bool WalkBehindEnemy => false;
 
+        /// <summary>
+        /// Gets or sets the WowClass for a specific instance of the Warlock class.
+        /// </summary>
         public override WowClass WowClass => WowClass.Warlock;
 
+        /// <summary>
+        /// Gets or sets the World of Warcraft version to Wrath of the Lich King, patch 3.3.5a.
+        /// </summary>
         public override WowVersion WowVersion => WowVersion.WotLK335a;
 
+        /// <summary>
+        /// Gets or sets the last date and time of a fear attempt.
+        /// </summary>
         private DateTime LastFearAttempt { get; set; }
 
+        /// <summary>
+        /// Executes the specified logic for the Warlock character.
+        /// </summary>
         public override void Execute()
         {
             base.Execute();
@@ -155,6 +212,10 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
             }
         }
 
+        /// <summary>
+        /// Overrides the OutOfCombatExecute method and performs additional logic.
+        /// Checks if the PetManager Tick method returns true and returns if it does.
+        /// </summary>
         public override void OutOfCombatExecute()
         {
             base.OutOfCombatExecute();

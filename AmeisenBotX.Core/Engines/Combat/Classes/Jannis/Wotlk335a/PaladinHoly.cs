@@ -17,6 +17,10 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 {
     public class PaladinHoly : BasicCombatClass
     {
+        /// <summary>
+        /// Initializes a new instance of the PaladinHoly class with the specified bot.
+        /// </summary>
+        /// <param name="bot">The bot instance to use.</param>
         public PaladinHoly(AmeisenBotInterfaces bot) : base(bot)
         {
             Configurables.TryAdd("AttackInGroups", true);
@@ -66,29 +70,52 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
             ChangeBeaconEvent = new(TimeSpan.FromSeconds(1));
         }
 
+        /// <summary>
+        /// Represents a Half-Smart CombatClass for the Holy Paladin spec.
+        /// </summary>
         public override string Description => "Half-Smart CombatClass for the Holy Paladin spec.";
 
+        /// <summary>
+        /// Gets or sets the display name for the Paladin Holy.
+        /// </summary>
         public override string DisplayName2 => "Paladin Holy";
 
+        /// This property indicates that this object does not handle movement.
         public override bool HandlesMovement => false;
 
+        /// <summary>
+        /// Gets a value indicating whether the object is not melee.
+        /// </summary>
         public override bool IsMelee => false;
 
+        /// <summary>
+        /// Gets or sets the item comparator used to compare items for sorting.
+        /// </summary>
         public override IItemComparator ItemComparator { get; set; } = new BasicComparator
-        (
-            null,
-            new() { WowWeaponType.AxeTwoHand, WowWeaponType.MaceTwoHand, WowWeaponType.SwordTwoHand },
-            new Dictionary<string, double>()
-            {
+                (
+                    null,
+                    new() { WowWeaponType.AxeTwoHand, WowWeaponType.MaceTwoHand, WowWeaponType.SwordTwoHand },
+                    new Dictionary<string, double>()
+                    {
                 { "ITEM_MOD_CRIT_RATING_SHORT", 0.88 },
                 { "ITEM_MOD_INTELLECT_SHORT", 0.2 },
                 { "ITEM_MOD_SPELL_POWER_SHORT", 0.68 },
                 { "ITEM_MOD_HASTE_RATING_SHORT", 0.71},
-            }
-        );
+                    }
+                );
 
+        /// <summary>
+        /// Gets or sets the role of the WoW character as a healer.
+        /// </summary>
         public override WowRole Role => WowRole.Heal;
 
+        /// This code initializes and sets the Talents property with a new instance of TalentTree class.
+        /// The Talents property is an override property which returns a TalentTree object.
+        /// The TalentTree object is initialized with three properties: Tree1, Tree2, and Tree3.
+        /// Tree1 is initialized with a dictionary containing key-value pairs where the key is an integer and the value is an instance of the Talent class.
+        /// Tree2 is initialized with a dictionary containing a single key-value pair.
+        /// Tree3 is initialized with a dictionary containing multiple key-value pairs.
+        /// The key in each dictionary corresponds to a specific talent index, while the value is an instance of the Talent class with specific parameter values.
         public override TalentTree Talents { get; } = new()
         {
             Tree1 = new()
@@ -125,20 +152,66 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
             },
         };
 
+        /// <summary>
+        /// Gets or sets a value indicating whether auto attacks should be used.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if auto attacks should not be used; otherwise, <c>false</c>.
+        /// </value>
         public override bool UseAutoAttacks => false;
 
+        /// <summary>
+        /// Gets the version as a string.
+        /// </summary>
         public override string Version => "1.1";
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the character can walk behind enemy entities.
+        /// </summary>
+        /// <value>
+        /// Returns false, indicating that the character cannot walk behind enemy entities.
+        /// </value>
         public override bool WalkBehindEnemy => false;
 
+        /// <summary>
+        /// Gets or sets the WowClass property for this Paladin instance.
+        /// </summary>
         public override WowClass WowClass => WowClass.Paladin;
 
+        /// <summary>
+        /// Gets or sets the World of Warcraft version for the game, which is set to Wrath of the Lich King (version 3.3.5a).
+        /// </summary>
         public override WowVersion WowVersion => WowVersion.WotLK335a;
 
+        /// Gets or sets the TimegatedEvent for changing the beacon event.
         private TimegatedEvent ChangeBeaconEvent { get; }
 
+        /// Gets the private instance of the HealingManager class.
         private HealingManager HealingManager { get; }
 
+        /// This method is responsible for executing a sequence of actions for the Paladin335a class. 
+        /// It first calls the base Execute method. 
+        /// Then, it checks if the player's mana percentage is below the specified DivineIlluminationManaUntil value 
+        ///     and above the specified DivineIlluminationManaAbove value. If both conditions are met, it tries to cast the DivineIllumination spell. 
+        /// If that succeeds, the method returns. 
+        /// Next, it checks if the player's mana percentage is below the specified DivinePleaMana value. 
+        ///     If so, it tries to cast the DivinePlea spell. If that succeeds, the method returns. 
+        /// If the ChangeBeaconEvent is ready, the method checks if the player's health percentage is below the specified BeaconOfLightSelfHealth value. 
+        ///     If so, it checks if the player does not have the BeaconOfLight aura and tries to cast the BeaconOfLight spell on the player. 
+        ///     If that succeeds, it runs the ChangeBeaconEvent and returns. 
+        /// Otherwise, if there are more than one healable targets, the method finds the second lowest target with health percentage below the specified BeaconOfLightPartyHealth value. 
+        ///     If such a target exists and it does not have the BeaconOfLight aura, the method tries to cast the BeaconOfLight spell on that target. 
+        ///     If that succeeds, it runs the ChangeBeaconEvent and returns. 
+        /// If the NeedToHealSomeone method returns true, the method returns. 
+        /// Otherwise, if the player is alone or the AttackInGroups configuration value is true and the player's mana percentage is below the specified AttackInGroupsUntilManaPercent value, 
+        ///     the method tries to find a target using the TargetProviderDps and if it succeeds, it continues with the following actions. 
+        /// If the player has either the SealOfVengeance or SealOfWisdom aura, it tries to cast the JudgementOfLight spell on the target. 
+        /// If that succeeds, the method returns. 
+        /// Then, it tries to cast the Exorcism spell on the target. If that succeeds, the method returns. 
+        /// If the player is alone or the AttackInGroupsCloseCombat configuration value is true, 
+        ///     it checks if the player is not auto-attacking, is in melee range of the target, and successfully runs the EventAutoAttack. 
+        ///     If all conditions are met, the method starts the auto-attack and returns. 
+        /// Otherwise, the method sets the movement action to Move and the target position and returns.
         public override void Execute()
         {
             base.Execute();
@@ -230,6 +303,11 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
             }
         }
 
+        /// <summary>
+        /// Loads a dictionary of <c>objects</c> into the current object.
+        /// If the dictionary contains a key "HealingManager", the healing manager will be loaded with the corresponding value.
+        /// </summary>
+        /// <param name="objects">A dictionary containing string keys and JsonElement values to be loaded.</param>
         public override void Load(Dictionary<string, JsonElement> objects)
         {
             base.Load(objects);
@@ -240,6 +318,10 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
             }
         }
 
+        /// <summary>
+        /// Executes the code when the character is out of combat.
+        /// If there is a need to heal someone, it returns without further execution.
+        /// </summary>
         public override void OutOfCombatExecute()
         {
             base.OutOfCombatExecute();
@@ -250,6 +332,10 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
             }
         }
 
+        /// <summary>
+        /// Overrides the Save method to add the HealingManager information to the saved data.
+        /// </summary>
+        /// <returns>A dictionary containing the saved data.</returns>
         public override Dictionary<string, object> Save()
         {
             Dictionary<string, object> s = base.Save();
@@ -257,6 +343,7 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
             return s;
         }
 
+        /// Determines if someone needs to be healed.
         private bool NeedToHealSomeone()
         {
             // TODO: bugged need to figure out why cooldown is always wrong if

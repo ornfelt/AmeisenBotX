@@ -12,6 +12,11 @@ namespace AmeisenBotX.Core.Engines.Combat.Helpers.Targets.Logics.Dps
 {
     public class SimpleDpsTargetSelectionLogic : BasicTargetSelectionLogic
     {
+        /// <summary>
+        /// Initializes a new instance of the SimpleDpsTargetSelectionLogic class with the specified bot.
+        /// Sets up the target validators and prioritizers for selecting the target.
+        /// </summary>
+        /// <param name="bot">The bot used for validating and prioritizing targets.</param>
         public SimpleDpsTargetSelectionLogic(AmeisenBotInterfaces bot) : base(bot)
         {
             TargetValidator.Add(new IsAttackableTargetValidator(bot));
@@ -24,6 +29,10 @@ namespace AmeisenBotX.Core.Engines.Combat.Helpers.Targets.Logics.Dps
             TargetPrioritizer.Add(new DungeonTargetPrioritizer(bot));
         }
 
+        /// <summary>
+        /// Selects a target for the bot by filtering and ordering a collection of possible targets based on various criteria.
+        /// Returns whether a target was successfully selected.
+        /// </summary>
         public override bool SelectTarget(out IEnumerable<IWowUnit> possibleTargets)
         {
             possibleTargets = Bot.Objects.All.OfType<IWowUnit>()

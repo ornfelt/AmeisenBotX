@@ -7,12 +7,17 @@ namespace AmeisenBotX.Core.Engines.Quest.Quests.Durotar.ValleyOfStrength
 {
     internal class QCuttingTeeth : BotQuest
     {
+        /// <summary>
+        /// Constructor for the QCuttingTeeth class.
+        /// </summary>
+        /// <param name="bot">The AmeisenBotInterfaces object.</param>
+        /// <returns>A new instance of the QCuttingTeeth class.</returns>
         public QCuttingTeeth(AmeisenBotInterfaces bot)
-            : base(bot, 788, "Cutting Teeth", 1, 1,
-                () => (bot.GetClosestQuestGiverByNpcId(bot.Player.Position, new List<int> { 3143 }), new Vector3(-600.13f, -4186.19f, 41.27f)),
-                () => (bot.GetClosestQuestGiverByNpcId(bot.Player.Position, new List<int> { 3143 }), new Vector3(-600.13f, -4186.19f, 41.27f)),
-                new List<IQuestObjective>()
-                {
+                    : base(bot, 788, "Cutting Teeth", 1, 1,
+                        () => (bot.GetClosestQuestGiverByNpcId(bot.Player.Position, new List<int> { 3143 }), new Vector3(-600.13f, -4186.19f, 41.27f)),
+                        () => (bot.GetClosestQuestGiverByNpcId(bot.Player.Position, new List<int> { 3143 }), new Vector3(-600.13f, -4186.19f, 41.27f)),
+                        new List<IQuestObjective>()
+                        {
                     new QuestObjectiveChain(new List<IQuestObjective>()
                     {
                         new KillAndLootQuestObjective(bot, new List<int> { 3098 }, 8, 0, new List<List<Vector3>> {
@@ -39,7 +44,7 @@ namespace AmeisenBotX.Core.Engines.Quest.Quests.Durotar.ValleyOfStrength
                             }
                         }),
                     })
-                })
+                        })
         { }
     }
 }

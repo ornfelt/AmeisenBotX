@@ -2,6 +2,9 @@
 
 namespace AmeisenBotX.Wow.Objects.Flags
 {
+    /// <summary>
+    /// Represents the flags for various NPC roles in the game World of Warcraft.
+    /// </summary>
     [Flags]
     public enum WowUnitNpcFlag
     {

@@ -8,22 +8,49 @@ namespace AmeisenBotX.Core.Engines.Dungeon.Profiles.WotLK
 {
     public class PitOfSaronProfile : IDungeonProfile
     {
+        /// <summary>
+        /// Gets the author of the code.
+        /// </summary>
         public string Author { get; } = "Jannis & Kamel";
 
+        /// <summary>
+        /// Gets the description of the Dungeon in Icecrown, made for Level 80.
+        /// </summary>
         public string Description { get; } = "Profile for the Dungeon in Icecrown, made for Level 80.";
 
+        /// <summary>
+        /// Gets the coordinates of the dungeon exit.
+        /// </summary>
         public Vector3 DungeonExit { get; } = new(425, 212, 529);
 
+        /// <summary>
+        /// Gets the faction type of the dungeon.
+        /// </summary>
         public DungeonFactionType FactionType { get; } = DungeonFactionType.Neutral;
 
+        /// <summary>
+        /// Gets the size of the group.
+        /// </summary>
         public int GroupSize { get; } = 5;
 
+        /// <summary>
+        /// Gets the map ID for the Forge of Souls.
+        /// </summary>
         public WowMapId MapId { get; } = WowMapId.TheForgeOfSouls;
 
+        /// <summary>
+        /// Gets the maximum level, which is set as 80.
+        /// </summary>
         public int MaxLevel { get; } = 80;
 
+        /// <summary>
+        /// Gets or sets the name of the location, which is set to "[80+] Pit Of Saron".
+        /// </summary>
         public string Name { get; } = "[80+] Pit Of Saron";
 
+        /// <summary>
+        /// Represents a list of DungeonNodes.
+        /// </summary>
         public List<DungeonNode> Nodes { get; } = new()
         {
             new(new(433, 212, 529)),
@@ -271,14 +298,30 @@ namespace AmeisenBotX.Core.Engines.Dungeon.Profiles.WotLK
             new(new(1025, 163, 628)),
         };
 
+        /// <summary>
+        /// Gets the list of priority units.
+        /// </summary>
         public List<int> PriorityUnits { get; } = new();
 
+        /// <summary>
+        /// Gets the required item level.
+        /// </summary>
         public int RequiredItemLevel { get; } = 200;
 
+        /// <summary>
+        /// Gets the required level for a certain task.
+        /// </summary>
         public int RequiredLevel { get; } = 80;
 
+        /// <summary>
+        /// Gets the world entry vector in 3D space.
+        /// The default value is (5587, 2005, 798).
+        /// </summary>
         public Vector3 WorldEntry { get; } = new(5587, 2005, 798);
 
+        /// <summary>
+        /// The WorldEntryMapId property represents the map ID for the Northrend zone.
+        /// </summary>
         public WowMapId WorldEntryMapId { get; } = WowMapId.Northrend;
     }
 }

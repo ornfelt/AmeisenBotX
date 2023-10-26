@@ -49,30 +49,72 @@ namespace AmeisenBotX
             ErrorBorderBrush.Freeze();
         }
 
+        /// <summary>
+        /// Gets or sets the instance of the AmeisenBot class.
+        /// </summary>
         public AmeisenBot AmeisenBot { get; private set; }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the action should be canceled.
+        /// </summary>
         public bool Cancel { get; set; }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether something has changed.
+        /// </summary>
         public bool ChangedSomething { get; set; }
 
+        /// <summary>
+        /// Gets or sets the configuration for the AmeisenBot.
+        /// </summary>
         public AmeisenBotConfig Config { get; private set; }
 
+        /// <summary>
+        /// Gets or sets the configuration name.
+        /// </summary>
         public string ConfigName { get; private set; }
 
+        /// <summary>
+        /// Gets the directory where the data is stored.
+        /// </summary>
         public string DataDir { get; }
 
+        /// <summary>
+        /// Gets or sets the list of IdleActionWrapper items.
+        /// </summary>
         public List<IdleActionWrapper> IdleActionItems { get; set; }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether a new configuration is being used.
+        /// </summary>
         public bool NewConfig { get; }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the config should be saved.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if the config should be saved; otherwise, <c>false</c>.
+        /// </value>
         public bool SaveConfig { get; private set; }
 
+        /// <summary>
+        /// Gets or sets the value indicating whether the window has been loaded.
+        /// </summary>
         public bool WindowLoaded { get; set; }
 
+        /// <summary>
+        /// Gets or sets the solid color brush used for the error border.
+        /// </summary>
         private SolidColorBrush ErrorBorderBrush { get; }
 
+        /// <summary>
+        /// Gets the SolidColorBrush used for the normal border of an element.
+        /// </summary>
         private SolidColorBrush NormalBorderBrush { get; }
 
+        /// <summary>
+        /// Adds all the available battleground engines to the combobox and sets the default selection to "None".
+        /// </summary>
         private void AddBattlegroundEngines()
         {
             comboboxBattlegroundEngine.Items.Add("None");
@@ -85,6 +127,11 @@ namespace AmeisenBotX
             comboboxBattlegroundEngine.SelectedIndex = 0;
         }
 
+        /// <summary>
+        /// Adds the available combat classes to the combobox.
+        /// The "None" option is added first, followed by the
+        /// built-in combat classes.
+        /// </summary>
         private void AddCombatClasses()
         {
             comboboxBuiltInCombatClass.Items.Add("None");
@@ -97,6 +144,11 @@ namespace AmeisenBotX
             comboboxBuiltInCombatClass.SelectedIndex = 0;
         }
 
+        /// <summary>
+        /// Event handler for the ButtonDone Click event.
+        /// Validates the fields and saves the configuration settings.
+        /// Closes the current window if validation is successful.
+        /// </summary>
         private void ButtonDone_Click(object sender, RoutedEventArgs e)
         {
             if (ValidateFields())
@@ -220,6 +272,11 @@ namespace AmeisenBotX
             }
         }
 
+        /// <summary>
+        /// Handles the click event of the Exit button. If a change has been made, a confirmation window is shown,
+        /// asking the user if they want to cancel. If the user clicks 'Yes', the Cancel flag is set to true and
+        /// the current window is closed. If the user clicks 'No', the method returns without any further action.
+        /// </summary>
         private void ButtonExit_Click(object sender, RoutedEventArgs e)
         {
             if (ChangedSomething)
@@ -237,6 +294,12 @@ namespace AmeisenBotX
             Close();
         }
 
+        /// <summary>
+        /// Event handler for when the "Open Combat Class File" button is clicked.
+        /// Displays an open file dialog and allows the user to select a C# file.
+        /// If a file is selected, the filepath is displayed in the combat class file textbox
+        /// and a flag to indicate that something has changed is set to true.
+        /// </summary>
         private void ButtonOpenCombatClassFile_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new()
@@ -251,6 +314,9 @@ namespace AmeisenBotX
             }
         }
 
+        /// <summary>
+        /// Event handler for the ButtonOpenImage click event. Opens a file dialog to select an image file (PNG or JPEG), and if a file is chosen, sets the content of the textboxRconImage to the base64 encoded string of the selected image file. It also sets the ChangedSomething flag to true.
+        /// </summary>
         private void ButtonOpenImage_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new()
@@ -265,6 +331,9 @@ namespace AmeisenBotX
             }
         }
 
+        /// <summary>
+        /// Event handler for when the "Open WoW Exe" button is clicked. Opens a file dialog to allow the user to select the WoW executable file. If a file is selected, updates the text in the "WowPath" textbox with the selected file path and sets the "ChangedSomething" flag to true.
+        /// </summary>
         private void ButtonOpenWowExe_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new()
@@ -279,6 +348,11 @@ namespace AmeisenBotX
             }
         }
 
+        /// <summary>
+        /// Event handler for when the CheckboxAutoStartWow is checked. 
+        /// If the WindowLoaded flag is true, it enables the textboxWowPath and buttonOpenWowExe controls
+        /// and sets the ChangedSomething flag to true.
+        /// </summary>
         private void CheckboxAutoStartWow_Checked(object sender, RoutedEventArgs e)
         {
             if (WindowLoaded)
@@ -289,6 +363,11 @@ namespace AmeisenBotX
             }
         }
 
+        /// <summary>
+        /// Event handler for when the CheckboxAutoStartWow is unchecked.
+        /// It disables the textboxWowPath, sets its text to empty, disables the buttonOpenWowExe,
+        /// and sets the ChangedSomething flag to true if the WindowLoaded flag is true.
+        /// </summary>
         private void CheckboxAutoStartWow_Unchecked(object sender, RoutedEventArgs e)
         {
             if (WindowLoaded)
@@ -300,6 +379,11 @@ namespace AmeisenBotX
             }
         }
 
+        /// <summary>
+        /// Event handler for when the checkbox for the built-in combat class is checked.
+        /// Hides the open combat class file button, the combat class textbox, and shows the built-in combat class combobox.
+        /// Sets the ChangedSomething variable to true.
+        /// </summary>
         private void CheckboxBuiltinCombatClass_Checked(object sender, RoutedEventArgs e)
         {
             if (WindowLoaded)
@@ -311,6 +395,9 @@ namespace AmeisenBotX
             }
         }
 
+        /// <summary>
+        /// Event handler for when the CheckboxCustomCombatClass is checked.
+        /// </summary>
         private void CheckboxCustomCombatClass_Checked(object sender, RoutedEventArgs e)
         {
             if (WindowLoaded)
@@ -322,6 +409,10 @@ namespace AmeisenBotX
             }
         }
 
+        /// <summary>
+        /// Event handler for when the checkbox "CheckboxFollowSpecificCharacter" is checked.
+        /// If the window is loaded, enables the textbox "textboxFollowSpecificCharacterName" and sets the "ChangedSomething" flag to true.
+        /// </summary>
         private void CheckboxFollowSpecificCharacter_Checked(object sender, RoutedEventArgs e)
         {
             if (WindowLoaded)
@@ -331,6 +422,11 @@ namespace AmeisenBotX
             }
         }
 
+        /// <summary>
+        /// Event handler for when the CheckboxFollowSpecificCharacter is unchecked.
+        /// If the window is loaded, the textboxFollowSpecificCharacterName is disabled,
+        /// its text is cleared, and the ChangedSomething flag is set to true.
+        /// </summary>
         private void CheckboxFollowSpecificCharacter_Unchecked(object sender, RoutedEventArgs e)
         {
             if (WindowLoaded)
@@ -341,6 +437,10 @@ namespace AmeisenBotX
             }
         }
 
+        /// <summary>
+        /// Event handler for when the CheckboxOnlyFriendsMode is checked.
+        /// Enables the textboxFriends and sets the ChangedSomething flag to true.
+        /// </summary>
         private void CheckboxOnlyFriendsMode_Checked(object sender, RoutedEventArgs e)
         {
             if (textboxFriends != null)
@@ -350,6 +450,9 @@ namespace AmeisenBotX
             }
         }
 
+        /// <summary>
+        /// Event that is triggered when the CheckboxOnlyFriendsMode is unchecked. Disables the textboxFriends control and sets the ChangedSomething flag to true.
+        /// </summary>
         private void CheckboxOnlyFriendsMode_Unchecked(object sender, RoutedEventArgs e)
         {
             if (textboxFriends != null)
@@ -359,6 +462,9 @@ namespace AmeisenBotX
             }
         }
 
+        /// <summary>
+        /// Enables the textboxMounts when the CheckboxOnlySpecificMounts is checked, only if the window is loaded.
+        /// </summary>
         private void CheckboxOnlySpecificMounts_Checked(object sender, RoutedEventArgs e)
         {
             if (WindowLoaded)
@@ -367,6 +473,10 @@ namespace AmeisenBotX
             }
         }
 
+        /// <summary>
+        /// Event handler for when the CheckboxOnlySpecificMounts is unchecked.
+        /// Disables the textboxMounts control if WindowLoaded flag is true.
+        /// </summary>
         private void CheckboxOnlySpecificMounts_Unchecked(object sender, RoutedEventArgs e)
         {
             if (WindowLoaded)
@@ -375,6 +485,11 @@ namespace AmeisenBotX
             }
         }
 
+        /// <summary>
+        /// Event handler for the selection changed event of the ComboboxBattlegroundEngine control.
+        /// </summary>
+        /// <param name="sender">The object that triggered the event.</param>
+        /// <param name="e">The event arguments containing information about the selection change.</param>
         private void ComboboxBattlegroundEngine_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             if (WindowLoaded)
@@ -397,6 +512,11 @@ namespace AmeisenBotX
             }
         }
 
+        /// <summary>
+        /// Event handler for when the GridViewColumnHeader is loaded.
+        /// </summary>
+        /// <param name="sender">The object that triggered the event.</param>
+        /// <param name="e">The event arguments.</param>
         private void GridViewColumnHeader_Loaded(object sender, RoutedEventArgs e)
         {
             GridViewColumnHeader columnHeader = sender as GridViewColumnHeader;
@@ -422,6 +542,9 @@ namespace AmeisenBotX
             }
         }
 
+        /// <summary>
+        /// Loads the configuration values to the user interface.
+        /// </summary>
         private void LoadConfigToUi()
         {
             checkboxAutoAcceptQuests.IsChecked = Config.AutoAcceptQuests;
@@ -550,12 +673,22 @@ namespace AmeisenBotX
             ChangedSomething = false;
         }
 
+        /// <summary>
+        /// Handles the event of validating input for numbers only in a text box.
+        /// </summary>
+        /// <param name="sender">The object that raised the event.</param>
+        /// <param name="e">The TextCompositionEventArgs that contains information about the input.</param>
         private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
         {
             Regex regex = new("[^0-9]+");
             e.Handled = regex.IsMatch(e.Text);
         }
 
+        /// <summary>
+        /// Event handler for when the value of the SliderAssistRange is changed.
+        /// If the window is loaded, updates the content of labelGroupAssistRange with the new value rounded to the nearest whole number,
+        /// and sets ChangedSomething to true.
+        /// </summary>
         private void SliderAssistRange_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (WindowLoaded)
@@ -565,6 +698,9 @@ namespace AmeisenBotX
             }
         }
 
+        /// <summary>
+        /// Event handler for when the SliderDrinkStart value is changed.
+        /// </summary>
         private void SliderDrinkStart_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (WindowLoaded)
@@ -574,6 +710,11 @@ namespace AmeisenBotX
             }
         }
 
+        /// <summary>
+        /// Event handler for when the value of the SliderDrinkUntil changes.
+        /// Updates the content of the labelDrinkUntil with the new value rounded to the nearest whole number followed by a percentage sign.
+        /// Sets the ChangedSomething flag to true.
+        /// </summary>
         private void SliderDrinkUntil_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (WindowLoaded)
@@ -583,6 +724,11 @@ namespace AmeisenBotX
             }
         }
 
+        /// <summary>
+        /// Event handler for the ValueChanged event of the SliderEatDrinkPartyFollowAbort Slider. 
+        /// Updates the labelEatDrinkPartyFollowAbort content with the new value in meters rounded to the nearest whole number. 
+        /// Sets the ChangedSomething flag to true if the WindowLoaded flag is true.
+        /// </summary>
         private void SliderEatDrinkPartyFollowAbort_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (WindowLoaded)
@@ -592,6 +738,9 @@ namespace AmeisenBotX
             }
         }
 
+        /// <summary>
+        /// Event handler for when the value of the SliderEatStart is changed.
+        /// </summary>
         private void SliderEatStart_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (WindowLoaded)
@@ -601,6 +750,10 @@ namespace AmeisenBotX
             }
         }
 
+        /// <summary>
+        /// Event handler for when the "SliderEatUntil" value changes.
+        /// Changes the content of "labelEatUntil" to display the new value as a percentage and sets the "ChangedSomething" flag to true.
+        /// </summary>
         private void SliderEatUntil_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (WindowLoaded)
@@ -610,6 +763,11 @@ namespace AmeisenBotX
             }
         }
 
+        /// <summary>
+        /// Handles the event when the value of the SliderLootRadius changes.
+        /// If the window has finished loading, updates the labelLootRadius content to display the new loot radius value rounded to the nearest whole number.
+        /// Sets the ChangedSomething flag to true.
+        /// </summary>
         private void SliderLootRadius_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (WindowLoaded)
@@ -619,6 +777,9 @@ namespace AmeisenBotX
             }
         }
 
+        /// <summary>
+        /// Event handler for when the SliderMaxFollowDistance value is changed.
+        /// </summary>
         private void SliderMaxFollowDistance_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (WindowLoaded)
@@ -628,6 +789,11 @@ namespace AmeisenBotX
             }
         }
 
+        /// <summary>
+        /// Event handler for the ValueChanged event of the SliderMaxFps control.
+        /// Sets the content of the labelMaxFps to the rounded value of the changed slider value,
+        /// and sets the ChangedSomething flag to true.
+        /// </summary>
         private void SliderMaxFps_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (WindowLoaded)
@@ -637,6 +803,10 @@ namespace AmeisenBotX
             }
         }
 
+        /// <summary>
+        /// Event handler for when the SliderMaxFpsCombat value changes.
+        /// Updates the labelMaxFpsCombat content with the new value and sets ChangedSomething to true.
+        /// </summary>
         private void SliderMaxFpsCombat_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (WindowLoaded)
@@ -646,6 +816,9 @@ namespace AmeisenBotX
             }
         }
 
+        /// <summary>
+        /// Event handler for when the SliderMaxSteeringCombat value changes.
+        /// </summary>
         private void SliderMaxSteeringCombat_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (WindowLoaded)
@@ -655,6 +828,11 @@ namespace AmeisenBotX
             }
         }
 
+        /// <summary>
+        /// Event handler for when the SliderMaxSteeringNormal value is changed.
+        /// </summary>
+        /// <param name="sender">The object that triggered the event.</param>
+        /// <param name="e">The event arguments containing the new value.</param>
         private void SliderMaxSteeringNormal_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (WindowLoaded)
@@ -664,6 +842,11 @@ namespace AmeisenBotX
             }
         }
 
+        /// <summary>
+        /// Event handler for the SliderMaxVelocity_ValueChanged event.
+        /// Updates the labelMaxVelocity.Content based on the new value of the Slider.
+        /// Sets the ChangedSomething flag to true.
+        /// </summary>
         private void SliderMaxVelocity_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (WindowLoaded)
@@ -673,6 +856,11 @@ namespace AmeisenBotX
             }
         }
 
+        ///<summary>
+        ///Handles the event when the value of the SliderMerchantSearchRadius is changed.
+        ///If the window is loaded, it sets the content of labelMerchantSearchRadius to the new search radius value, rounded to the nearest whole number.
+        ///It also sets ChangedSomething to true.
+        ///</summary>
         private void SliderMerchantSearchRadius_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (WindowLoaded)
@@ -682,6 +870,10 @@ namespace AmeisenBotX
             }
         }
 
+        /// <summary>
+        /// Event handler for the ValueChanged event of the SliderMinFollowDistance control.
+        /// Updates the labelMinFollowDistance content with the new value and sets ChangedSomething to true if the WindowLoaded flag is true.
+        /// </summary>
         private void SliderMinFollowDistance_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (WindowLoaded)
@@ -691,6 +883,11 @@ namespace AmeisenBotX
             }
         }
 
+        /// <summary>
+        /// Event handler for when the value of the SliderMinFreeBagSlots changes.
+        /// Updates the content of the labelMinFreeBagSlots with the new value rounded to the nearest integer,
+        /// and sets the ChangedSomething flag to true.
+        /// </summary>
         private void SliderMinFreeBagSlots_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (WindowLoaded)
@@ -700,6 +897,9 @@ namespace AmeisenBotX
             }
         }
 
+        /// <summary>
+        /// Event handler for when the SliderPlayerSeperationDistance value changes.
+        /// </summary>
         private void SliderPlayerSeperationDistance_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (WindowLoaded)
@@ -709,6 +909,11 @@ namespace AmeisenBotX
             }
         }
 
+        /// <summary>
+        /// Event handler for the ValueChanged event of the SliderRepair object.
+        /// Updates the content of labelRepairThreshold with the rounded value of e.NewValue and sets ChangedSomething to true.
+        /// Only executes if WindowLoaded is true.
+        /// </summary>
         private void SliderRepair_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (WindowLoaded)
@@ -718,6 +923,10 @@ namespace AmeisenBotX
             }
         }
 
+        /// <summary>
+        /// Event handler for the ValueChanged event of the SliderWaypointThreshold.
+        /// Updates the labelWaypointThreshold content with the rounded value of the new slider value (e.NewValue) and sets ChangedSomething to true.
+        /// </summary>
         private void SliderWaypointThreshold_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (WindowLoaded)
@@ -727,6 +936,10 @@ namespace AmeisenBotX
             }
         }
 
+        /// <summary>
+        /// Event handler for when the value of the SliderWaypointThresholdMount changes.
+        /// Updates the label displaying the waypoint threshold for Mount and sets the ChangedSomething flag to true.
+        /// </summary>
         private void SliderWaypointThresholdMount_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (WindowLoaded)
@@ -736,6 +949,11 @@ namespace AmeisenBotX
             }
         }
 
+        /// <summary>
+        /// Validates the auto login fields and sets the border brush for each field accordingly.
+        /// </summary>
+        /// <param name="failed">A boolean indicating whether the validation failed or not.</param>
+        /// <returns>A boolean indicating whether the validation failed or not.</returns>
         private bool ValidateAutoLogin(bool failed)
         {
             if (checkboxAutoLogin.IsChecked.GetValueOrDefault(false))
@@ -777,6 +995,10 @@ namespace AmeisenBotX
             return failed;
         }
 
+        /// <summary>
+        /// Validates the autostart for Wow.
+        /// </summary>
+        /// <param name="failed">A boolean value indicating if the validation failed.</param>
         private bool ValidateAutostartWow(bool failed)
         {
             if (checkboxAutoStartWow.IsChecked.GetValueOrDefault(false))
@@ -795,6 +1017,11 @@ namespace AmeisenBotX
             return failed;
         }
 
+        /// <summary>
+        /// Validates the config name.
+        /// </summary>
+        /// <param name="failed">A boolean indicating the validation status.</param>
+        /// <returns>A boolean indicating whether the validation was successful or not.</returns>
         private bool ValidateConfigName(bool failed)
         {
             Regex regex = new("^([a-zA-Z]:)?(\\\\[^<>:\"/\\\\|?*]+)+\\\\?$");
@@ -813,6 +1040,10 @@ namespace AmeisenBotX
             return failed;
         }
 
+        /// <summary>
+        /// Validates all the fields.
+        /// </summary>
+        /// <returns>Returns true if all the fields are valid, otherwise false.</returns>
         private bool ValidateFields()
         {
             bool failed = false;
@@ -824,6 +1055,11 @@ namespace AmeisenBotX
             return !failed;
         }
 
+        /// <summary>
+        /// Validates the Navmesh Server IP address and port number.
+        /// </summary>
+        /// <param name="failed">Indicates whether validation has failed.</param>
+        /// <returns>Returns true if the validation failed, false otherwise.</returns>
         private bool ValidateNavmeshServer(bool failed)
         {
             if (textboxNavmeshServerIp.Text.Length == 0
@@ -853,6 +1089,12 @@ namespace AmeisenBotX
             return failed;
         }
 
+        /// <summary>
+        /// Validates if the specific follow checkbox is checked and if the specific character name textbox is empty.
+        /// Sets the border color of the textbox based on the validation.
+        /// </summary>
+        /// <param name="failed">Indicates if the validation failed.</param>
+        /// <returns>True if the validation failed, otherwise false.</returns>
         private bool ValidateSpecificFollow(bool failed)
         {
             if (checkboxFollowSpecificCharacter.IsChecked.GetValueOrDefault(false))
@@ -871,6 +1113,9 @@ namespace AmeisenBotX
             return failed;
         }
 
+        /// <summary>
+        /// Event handler for when the Window is loaded.
+        /// </summary>
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             WindowLoaded = true;
@@ -928,6 +1173,9 @@ namespace AmeisenBotX
             LoadConfigToUi();
         }
 
+        /// <summary>
+        /// Handles the event of left mouse button being pressed down on the window. Initiates window dragging.
+        /// </summary>
         private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             DragMove();

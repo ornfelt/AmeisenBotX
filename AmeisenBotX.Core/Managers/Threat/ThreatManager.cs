@@ -12,14 +12,25 @@ namespace AmeisenBotX.Core.Managers.Threat
     /// </summary>
     public class ThreatManager
     {
+        /// <summary>
+        /// Initializes a new instance of the ThreatManager class.
+        /// </summary>
+        /// <param name="bot">The AmeisenBotInterfaces object representing the bot.</param>
+        /// <param name="config">The AmeisenBotConfig object representing the bot's configuration.</param>
         public ThreatManager(AmeisenBotInterfaces bot, AmeisenBotConfig config)
         {
             Bot = bot;
             Config = config;
         }
 
+        /// <summary>
+        /// Gets or sets the private member variable Bot, which represents the AmeisenBotInterfaces.
+        /// </summary>
         private AmeisenBotInterfaces Bot { get; }
 
+        /// <summary>
+        /// Gets the configuration settings for the AmeisenBot.
+        /// </summary>
         private AmeisenBotConfig Config { get; }
 
         /// <summary>

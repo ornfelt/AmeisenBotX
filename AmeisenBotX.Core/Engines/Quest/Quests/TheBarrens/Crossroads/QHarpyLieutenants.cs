@@ -7,12 +7,16 @@ namespace AmeisenBotX.Core.Engines.Quest.Quests.TheBarrens.Crossroads
 {
     internal class QHarpyLieutenants : BotQuest
     {
+        /// <summary>
+        /// Constructor for the QHarpyLieutenants quest.
+        /// </summary>
+        /// <param name="bot">The AmeisenBotInterfaces instance used for the quest.</param>
         public QHarpyLieutenants(AmeisenBotInterfaces bot)
-            : base(bot, 875, "Harpy Lieutenants", 12, 1,
-                () => (bot.GetClosestQuestGiverByNpcId(bot.Player.Position, new List<int> { 3449 }), new Vector3(-474.89f, -2607.74f, 127.89f)),
-                () => (bot.GetClosestQuestGiverByNpcId(bot.Player.Position, new List<int> { 3449 }), new Vector3(-474.89f, -2607.74f, 127.89f)),
-                new List<IQuestObjective>()
-                {
+                    : base(bot, 875, "Harpy Lieutenants", 12, 1,
+                        () => (bot.GetClosestQuestGiverByNpcId(bot.Player.Position, new List<int> { 3449 }), new Vector3(-474.89f, -2607.74f, 127.89f)),
+                        () => (bot.GetClosestQuestGiverByNpcId(bot.Player.Position, new List<int> { 3449 }), new Vector3(-474.89f, -2607.74f, 127.89f)),
+                        new List<IQuestObjective>()
+                        {
                     new QuestObjectiveChain(new List<IQuestObjective>()
                     {
                         new KillAndLootQuestObjective(bot, new List<int> { 3278 }, 6, 5065, new List<List<Vector3>> {
@@ -32,7 +36,7 @@ namespace AmeisenBotX.Core.Engines.Quest.Quests.TheBarrens.Crossroads
                             },
                         }),
                     })
-                })
+                        })
         { }
     }
 }

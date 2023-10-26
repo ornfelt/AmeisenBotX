@@ -1,5 +1,9 @@
 ﻿namespace AmeisenBotX.Wow.Objects.Enums
 {
+    /// <summary>
+    /// Enumeration representing different zone IDs in World of Warcraft.
+    /// Each zone ID corresponds to a specific zone in the game.
+    /// </summary>
     public enum WowZoneId
     {
         DunMorogh = 1,

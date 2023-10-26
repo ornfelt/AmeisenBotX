@@ -11,6 +11,10 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 {
     public class DruidBalance : BasicCombatClass
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DruidBalance"/> class.
+        /// </summary>
+        /// <param name="bot">The <see cref="AmeisenBotInterfaces"/> instance to use.</param>
         public DruidBalance(AmeisenBotInterfaces bot) : base(bot)
         {
             MyAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, Druid335a.MoonkinForm, () => TryCastSpell(Druid335a.MoonkinForm, 0, true)));
@@ -31,24 +35,56 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
             LunarEclipse = true;
         }
 
+        /// <summary>
+        /// The description of the FCFS based CombatClass for the Balance (Owl) Druid spec.
+        /// </summary>
         public override string Description => "FCFS based CombatClass for the Balance (Owl) Druid spec.";
 
+        /// <summary>
+        /// Gets the display name for a balance druid.
+        /// </summary>
+        /// <returns>
+        /// The display name, which is "Druid Balance".
+        /// </returns>
         public override string DisplayName2 => "Druid Balance";
 
+        /// This property indicates that this class does not handle movement.
         public override bool HandlesMovement => false;
 
+        /// <summary>
+        /// Gets a value indicating whether the code represents a melee attack or not.
+        /// </summary>
+        /// <returns>Always returns false.</returns>
         public override bool IsMelee => false;
 
+        /// <summary>
+        /// Gets or sets the item comparator for the player character.
+        /// The default value is a BasicIntellectComparator that compares items based on
+        /// WowArmorType.Shield and WowWeaponType.Sword, WowWeaponType.Mace, WowWeaponType.Axe.
+        /// </summary>
         public override IItemComparator ItemComparator { get; set; } = new BasicIntellectComparator(new() { WowArmorType.Shield }, new() { WowWeaponType.Sword, WowWeaponType.Mace, WowWeaponType.Axe });
 
+        /// <summary>
+        /// Gets or sets the last time the eclipse check was performed.
+        /// </summary>
         public DateTime LastEclipseCheck { get; private set; }
 
+        /// Gets or sets a value indicating whether a lunar eclipse occurs.
         public bool LunarEclipse { get; set; }
 
+        /// <summary>
+        /// Gets or sets the role of the character in the World of Warcraft game. The role is set to Dps, indicating that the character is a damage-dealer.
+        /// </summary>
         public override WowRole Role => WowRole.Dps;
 
+        /// <summary>
+        /// Gets or sets a value indicating whether a solar eclipse is happening.
+        /// </summary>
         public bool SolarEclipse { get; set; }
 
+        ///<summary>
+        ///The TalentTree object representing the talent trees for a character.
+        ///</summary>
         public override TalentTree Talents { get; } = new()
         {
             Tree1 = new()
@@ -88,16 +124,31 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
             },
         };
 
+        /// This property indicates that the character does not use auto attacks.
         public override bool UseAutoAttacks => false;
 
+        /// <summary>
+        /// Gets or sets the version of the code.
+        /// </summary>
         public override string Version => "1.0";
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the player can walk behind enemies. 
+        /// In this case, it is set to false, indicating that the player cannot walk behind the enemy.
+        /// </summary>
         public override bool WalkBehindEnemy => false;
 
+        /// <summary>
+        /// Gets or sets the wow class of the character as a Druid.
+        /// </summary>
         public override WowClass WowClass => WowClass.Druid;
 
+        /// <summary>
+        /// Gets or sets the WoW version to Wrath of the Lich King 3.3.5a.
+        /// </summary>
         public override WowVersion WowVersion => WowVersion.WotLK335a;
 
+        /// This method is used to execute the specified code. It first calls the base.Execute() method, then checks for Eclipse procs. If the method is successful in finding a target, it attempts to cast NaturesGrasp. If the distance between the target and player is less than 12.0 and the target has the EntanglingRoots aura, it tries to cast EntanglingRoots. If the player needs to heal themselves, the method returns. If the player's mana percentage is less than 30, it tries to cast Innervate. If the player's health percentage is less than 70, it tries to cast Barkskin. If LunarEclipse is active, it tries to cast Starfire. If SolarEclipse is active, it tries to cast Wrath. If there are less than 4 non-combat units within a 35 unit radius of the player, it tries to cast Starfall. Finally, it tries to cast ForceOfNature and clicks on the terrain.
         public override void Execute()
         {
             base.Execute();
@@ -146,6 +197,9 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
             }
         }
 
+        /// <summary>
+        /// Method to execute when out of combat. Calls the base method first and checks if there is a need to heal.
+        /// </summary>
         public override void OutOfCombatExecute()
         {
             base.OutOfCombatExecute();
@@ -156,6 +210,13 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
             }
         }
 
+        /// <summary>
+        /// Checks if there are any Eclipse procs active on the player.
+        /// If Eclipse Lunar proc is active, sets SolarEclipse to false and LunarEclipse to true.
+        /// If Eclipse Solar proc is active, sets SolarEclipse to true and LunarEclipse to false.
+        /// Updates the LastEclipseCheck variable to the current UTC time.
+        /// Returns false.
+        /// </summary>
         private bool CheckForEclipseProcs()
         {
             if (Bot.Player.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == Druid335a.EclipseLunar))
@@ -173,6 +234,7 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
             return false;
         }
 
+        /// Checks if the player needs to heal themselves based on their current health percentage and available healing spells. Returns true if healing is needed, false otherwise.
         private bool NeedToHealMySelf()
         {
             if (Bot.Player.HealthPercentage < 60

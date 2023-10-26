@@ -1,5 +1,8 @@
 ﻿namespace AmeisenBotX.Wow.Objects.Enums
 {
+    /// <summary>
+    /// Represents the different types of armor in the game World of Warcraft.
+    /// </summary>
     public enum WowArmorType
     {
         None = -1,

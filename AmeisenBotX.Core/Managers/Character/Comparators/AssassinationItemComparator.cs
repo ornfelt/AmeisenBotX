@@ -6,6 +6,12 @@ namespace AmeisenBotX.Core.Managers.Character.Comparators
 {
     public class AssassinationItemComparator : IItemComparator
     {
+        /// <summary>
+        /// Determines if the provided item is better than the current item in the inventory.
+        /// </summary>
+        /// <param name="current">The current item in the inventory.</param>
+        /// <param name="item">The item to compare.</param>
+        /// <returns>True if the provided item is better, false otherwise.</returns>
         public bool IsBetter(IWowInventoryItem current, IWowInventoryItem item)
         {
             if (item == null)
@@ -30,11 +36,22 @@ namespace AmeisenBotX.Core.Managers.Character.Comparators
             return currentRating < newItemRating;
         }
 
+        /// <summary>
+        /// Determines if the provided item is blacklisted.
+        /// </summary>
+        /// <param name="item">The item to check.</param>
+        /// <returns>True if the item is blacklisted, false otherwise.</returns>
         public bool IsBlacklistedItem(IWowInventoryItem item)
         {
             return false;
         }
 
+        /// <summary>
+        /// Calculates the rating of an item based on its stats and equipment slot.
+        /// </summary>
+        /// <param name="item">The item to calculate the rating for.</param>
+        /// <param name="slot">The equipment slot of the item.</param>
+        /// <returns>The rating of the item.</returns>
         private static double GetRating(IWowInventoryItem item, WowEquipmentSlot slot)
         {
             double rating = 0;

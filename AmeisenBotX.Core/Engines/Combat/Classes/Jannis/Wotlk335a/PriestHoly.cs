@@ -11,6 +11,11 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 {
     public class PriestHoly : BasicCombatClass
     {
+        /// <summary>
+        /// Constructor for the PriestHoly class.
+        /// Initializes the PriestHoly object with the specified bot.
+        /// </summary>
+        /// <param name="bot">The bot object.</param>
         public PriestHoly(AmeisenBotInterfaces bot) : base(bot)
         {
             MyAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, Priest335a.PowerWordFortitude, () => TryCastSpell(Priest335a.PowerWordFortitude, Bot.Wow.PlayerGuid, true)));
@@ -26,18 +31,45 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
             GroupAuraManager.SpellsToKeepActiveOnParty.Add((Priest335a.PowerWordFortitude, (spellName, guid) => TryCastSpell(spellName, guid, true)));
         }
 
+        /// <summary>
+        /// Gets the description for the FCFS based CombatClass of the Holy Priest spec.
+        /// </summary>
         public override string Description => "FCFS based CombatClass for the Holy Priest spec.";
 
+        /// <summary>
+        /// Gets or sets the display name of the Priest Holy.
+        /// </summary>
         public override string DisplayName2 => "Priest Holy";
 
+        /// <summary>
+        /// Gets a value indicating whether this object handles movement.
+        /// </summary>
+        /// <returns>Always returns false.</returns>
         public override bool HandlesMovement => false;
 
+        /// <summary>
+        /// Gets a value indicating whether the character is a melee character.
+        /// </summary>
+        /// <returns>False always.</returns>
         public override bool IsMelee => false;
 
+        /// <summary>
+        /// Gets or sets the item comparator for the current object.
+        /// The item comparator is set to a new instance of the BasicSpiritComparator class,
+        /// which includes a list of WowArmorType.Shield and a list of WowWeaponType.Sword,
+        /// WowWeaponType.Mace, and WowWeaponType.Axe.
+        /// </summary>
         public override IItemComparator ItemComparator { get; set; } = new BasicSpiritComparator(new() { WowArmorType.Shield }, new() { WowWeaponType.Sword, WowWeaponType.Mace, WowWeaponType.Axe });
 
+        /// <summary>
+        /// Gets the role of the Wow character which is Heal.
+        /// </summary>
         public override WowRole Role => WowRole.Heal;
 
+        /// <summary>
+        /// The TalentTree property overrides the base class's TalentTree property.
+        /// It represents the talent trees of a character and holds the talent tree objects.
+        /// </summary>
         public override TalentTree Talents { get; } = new()
         {
             Tree1 = new()
@@ -73,18 +105,42 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
             Tree3 = new(),
         };
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the object uses auto attacks.
+        /// </summary>
+        /// <returns>False, as the object does not use auto attacks.</returns>
         public override bool UseAutoAttacks => false;
 
+        /// <summary>
+        /// Gets or sets the version of the object.
+        /// </summary>
         public override string Version => "1.0";
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the character can walk behind enemy.
+        /// </summary>
+        /// <returns>Always returns <c>false</c> indicating that the character cannot walk behind enemy.</returns>
         public override bool WalkBehindEnemy => false;
 
+        /// <summary>
+        /// Gets or sets the WoW class of the character, which is set to Priest.
+        /// </summary>
         public override WowClass WowClass => WowClass.Priest;
 
+        /// <summary>
+        /// Gets or sets the World of Warcraft version to WotLK 3.3.5a.
+        /// </summary>
         public override WowVersion WowVersion => WowVersion.WotLK335a;
 
+        /// <summary>
+        /// Gets the dictionary of spell usage for healing, where the key represents the spell identifier
+        /// and the value represents the corresponding healing spell name.
+        /// </summary>
         private Dictionary<int, string> SpellUsageHealDict { get; }
 
+        /// <summary>
+        /// Executes the logic for the Priest335a class.
+        /// </summary>
         public override void Execute()
         {
             base.Execute();
@@ -116,6 +172,10 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
             }
         }
 
+        /// <summary>
+        /// Executes the code when the character is out of combat. 
+        /// Checks if someone needs healing or if there are dead party members to resurrect and returns.
+        /// </summary>
         public override void OutOfCombatExecute()
         {
             base.OutOfCombatExecute();
@@ -127,6 +187,9 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
             }
         }
 
+        /// <summary>
+        /// Determines if there is a need to heal someone.
+        /// </summary>
         private bool NeedToHealSomeone()
         {
             if (TargetProviderHeal.Get(out IEnumerable<IWowUnit> unitsToHeal))

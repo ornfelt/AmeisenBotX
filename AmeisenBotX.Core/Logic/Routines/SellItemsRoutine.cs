@@ -7,6 +7,16 @@ namespace AmeisenBotX.Core.Logic.Routines
 {
     public static class SellItemsRoutine
     {
+        /// <summary>
+        /// This method is used to sell items from the bot's inventory.
+        /// It creates a copy of items to prevent updates while selling.
+        /// It iterates through each item in the inventory and checks if it should be sold based on the configured item sell blacklist 
+        /// and the item quality settings in the AmeisenBotConfig object.
+        /// If the item is an improvement for the character, it equips the new item and sells the previous one.
+        /// If the bot's class is a Hunter and the item to sell is a WowProjectile, it skips to the next item.
+        /// Finally, it uses the container item and confirms the static popup for each item to sell.
+        /// After selling all items, it clears the current target.
+        /// </summary>
         public static void Run(AmeisenBotInterfaces bot, AmeisenBotConfig config)
         {
             // create a copy of items here to prevent updates while selling

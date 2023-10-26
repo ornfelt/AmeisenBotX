@@ -8,14 +8,32 @@ namespace AmeisenBotX.Wow548.Objects
     [Serializable]
     public unsafe class WowItem548 : WowObject548, IWowItem
     {
+        /// <summary>
+        /// Gets or sets the protected ItemDescriptor of type WowItemDescriptor548.
+        /// </summary>
         protected WowItemDescriptor548? ItemDescriptor;
 
+        /// <summary>
+        /// Gets the count of the stack for the item descriptor.
+        /// </summary>
         public int Count => GetItemDescriptor().StackCount;
 
+        /// <summary>
+        /// Gets or sets the list of item enchantments.
+        /// </summary>
         public List<ItemEnchantment> ItemEnchantments { get; private set; }
 
+        /// <summary>
+        /// Gets the owner of the item descriptor.
+        /// </summary>
         public ulong Owner => GetItemDescriptor().Owner;
 
+        /// <summary>
+        /// Retrieves a collection of strings representing the enchantments associated with an item.
+        /// </summary>
+        /// <returns>
+        /// An IEnumerable containing the enchantment strings.
+        /// </returns>
         public IEnumerable<string> GetEnchantmentStrings()
         {
             List<string> enchantments = new();
@@ -31,11 +49,15 @@ namespace AmeisenBotX.Wow548.Objects
             return enchantments;
         }
 
+        ///<summary>Returns a string representing the current object in the format: Item: [Guid] (EntryId) Owner: Owner Count: Count.</summary>
         public override string ToString()
         {
             return $"Item: [{Guid}] ({EntryId}) Owner: {Owner} Count: {Count}";
         }
 
+        /// <summary>
+        /// Updates the object and its item enchantments.
+        /// </summary>
         public override void Update()
         {
             base.Update();
@@ -46,6 +68,13 @@ namespace AmeisenBotX.Wow548.Objects
             // objPtr.Enchantment11, objPtr.Enchantment12, };
         }
 
+        /// <summary>
+        /// Retrieves the WowItemDescriptor548 associated with the current instance.
+        /// If the ItemDescriptor is not null, it returns the existing ItemDescriptor.
+        /// Otherwise, it reads the memory at the DescriptorAddress plus the size of WowObjectDescriptor548,
+        /// assigns the result to ItemDescriptor, and returns it. If the memory reading fails,
+        /// it creates a new instance of WowItemDescriptor548 and returns it.
+        /// </summary>
         protected WowItemDescriptor548 GetItemDescriptor()
         {
             return ItemDescriptor ??= Memory.Read(DescriptorAddress + sizeof(WowObjectDescriptor548), out WowItemDescriptor548 objPtr) ? objPtr : new();

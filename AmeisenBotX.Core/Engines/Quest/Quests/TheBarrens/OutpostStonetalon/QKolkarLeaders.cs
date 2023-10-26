@@ -7,12 +7,16 @@ namespace AmeisenBotX.Core.Engines.Quest.Quests.TheBarrens.OutpostStonetalon
 {
     internal class QKolkarLeaders : BotQuest
     {
+        /// <summary>
+        /// Initializes a new instance of the QKolkarLeaders class.
+        /// </summary>
+        /// <param name="bot">The bot instance.</param>
         public QKolkarLeaders(AmeisenBotInterfaces bot)
-            : base(bot, 850, "Kolkar Leaders", 11, 1,
-                () => (bot.GetClosestQuestGiverByNpcId(bot.Player.Position, new List<int> { 3389 }), new Vector3(-307.14f, -1971.95f, 96.48f)),
-                () => (bot.GetClosestQuestGiverByNpcId(bot.Player.Position, new List<int> { 3389 }), new Vector3(-307.14f, -1971.95f, 96.48f)),
-                new List<IQuestObjective>()
-                {
+                    : base(bot, 850, "Kolkar Leaders", 11, 1,
+                        () => (bot.GetClosestQuestGiverByNpcId(bot.Player.Position, new List<int> { 3389 }), new Vector3(-307.14f, -1971.95f, 96.48f)),
+                        () => (bot.GetClosestQuestGiverByNpcId(bot.Player.Position, new List<int> { 3389 }), new Vector3(-307.14f, -1971.95f, 96.48f)),
+                        new List<IQuestObjective>()
+                        {
                     new QuestObjectiveChain(new List<IQuestObjective>()
                     {
                         new KillAndLootQuestObjective(bot, new List<int> { 3394 }, 1, 5022, new List<List<Vector3>> {
@@ -22,7 +26,7 @@ namespace AmeisenBotX.Core.Engines.Quest.Quests.TheBarrens.OutpostStonetalon
                             },
                         }),
                     })
-                })
+                        })
         { }
     }
 }

@@ -1,5 +1,8 @@
 ﻿namespace AmeisenBotX.Wow.Objects.Enums
 {
+    /// <summary>
+    /// Represents the equipment slots available in World of Warcraft.
+    /// </summary>
     public enum WowEquipmentSlot
     {
         NOT_EQUIPABLE = -1,

@@ -5,8 +5,17 @@ namespace AmeisenBotX.Core.Logic.StaticDeathRoutes
 {
     public class PitOfSaronDeathRoute : StaticPathDeathRoute
     {
+        /// <summary>
+        /// Gets or sets the death point for the character.
+        /// </summary>
+        /// <value>
+        /// The death point represented by a Vector3 object.
+        /// </value>
         protected override Vector3 DeathPoint { get; } = new(5592, 2010, 514);
 
+        /// <summary>
+        /// The path for the object, represented by a list of Vector3 coordinates.
+        /// </summary>
         protected override List<Vector3> Path { get; } = new()
         {
             new(6447, 2061, 564),

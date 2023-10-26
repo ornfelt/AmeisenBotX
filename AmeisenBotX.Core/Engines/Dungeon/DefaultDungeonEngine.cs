@@ -21,6 +21,11 @@ namespace AmeisenBotX.Core.Engines.Dungeon
 {
     public class DefaultDungeonEngine : IDungeonEngine
     {
+        /// <summary>
+        /// Constructs a DefaultDungeonEngine object with the provided bot and config.
+        /// </summary>
+        /// <param name="bot">The AmeisenBotInterfaces object to use for the dungeon engine.</param>
+        /// <param name="config">The AmeisenBotConfig object to use for the dungeon engine.</param>
         public DefaultDungeonEngine(AmeisenBotInterfaces bot, AmeisenBotConfig config)
         {
             Bot = bot;
@@ -82,28 +87,64 @@ namespace AmeisenBotX.Core.Engines.Dungeon
         ///<inheritdoc cref="IDungeonEngine.Profile"/>
         public IDungeonProfile Profile { get; private set; }
 
+        /// <summary>
+        /// Gets or sets the BehaviorTree property.
+        /// </summary>
         private Tree BehaviorTree { get; }
 
+        /// <summary>
+        /// Gets the Bot object.
+        /// </summary>
         private AmeisenBotInterfaces Bot { get; }
 
+        /// <summary>
+        /// Gets the private AmeisenBotConfig property.
+        /// </summary>
         private AmeisenBotConfig Config { get; }
 
+        /// <summary>
+        /// Gets or sets the current nodes in the dungeon.
+        /// </summary>
         private Queue<DungeonNode> CurrentNodes { get; set; }
 
+        /// <summary>
+        /// Gets or sets the position where the object was last declared dead.
+        /// </summary>
         private Vector3 DeathPosition { get; set; }
 
+        /// <summary>
+        /// Represents the time-gated event for exiting the dungeon.
+        /// </summary>
         private TimegatedEvent ExitDungeonEvent { get; set; }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the entity has died.
+        /// </summary>
         private bool IDied { get; set; }
 
+        /// <summary>
+        /// Gets or sets the time-gated InteractionEvent.
+        /// </summary>
         private TimegatedEvent InteractionEvent { get; set; }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the program is currently waiting for a group.
+        /// </summary>
         private bool IsWaitingForGroup { get; set; }
 
+        /// <summary>
+        /// Gets or sets the offset for the follower from the leader's position.
+        /// </summary>
         private Vector3 LeaderFollowOffset { get; set; }
 
+        /// <summary>
+        /// Gets or sets the progress value.
+        /// </summary>
         private double Progress { get; set; }
 
+        /// <summary>
+        /// Gets the root selector for the code.
+        /// </summary>
         private Selector RootSelector { get; }
 
         ///<inheritdoc cref="IDungeonEngine.Execute"/>
@@ -167,6 +208,13 @@ namespace AmeisenBotX.Core.Engines.Dungeon
             };
         }
 
+        /// <summary>
+        /// Checks if all players are present within a certain distance and if it's time to start running.
+        /// Returns true if all players are present or if the bot is waiting for the group to catch up, false otherwise.
+        /// </summary>
+        /// <param name="distance">The distance within which to check for nearby players.</param>
+        /// <param name="distanceToStartRunning">The distance at which the bot should start running.</param>
+        /// <returns>True if all players are present or if the bot is waiting for the group to catch up, false otherwise.</returns>
         private bool AreAllPlayersPresent(float distance, float distanceToStartRunning)
         {
             if (!Bot.Objects.Partymembers.Any())
@@ -193,6 +241,13 @@ namespace AmeisenBotX.Core.Engines.Dungeon
             }
         }
 
+        /// <summary>
+        /// Function to exit the current dungeon.
+        /// If the ExitDungeonEvent returns true, checks if the bot is in a LFG group.
+        /// If it is, uses a Lua string to teleport using the LFGTeleport function.
+        /// If it is not, moves the bot to the position of the first node in the current profile.
+        /// Returns BtStatus.Success.
+        /// </summary>
         private BtStatus ExitDungeon()
         {
             if (ExitDungeonEvent.Run())
@@ -210,6 +265,21 @@ namespace AmeisenBotX.Core.Engines.Dungeon
             return BtStatus.Success;
         }
 
+        /// <summary>
+        /// Follows the path defined by the CurrentNodes and performs actions based on the type of each node.
+        /// If the player is currently casting, returns BtStatus.Ongoing.
+        /// If the player is within range of the current node and the node is of type Use or Door, interacts with the nearest
+        /// game object that meets the criteria and returns BtStatus.Ongoing.
+        /// If the node is of type Jump, the character jumps.
+        /// If the node is of type Collect and the character does not have the item specified in the Extra field of the node,
+        /// interacts with the nearest game object that meets the criteria and loots everything. If the character's inventory is
+        /// full, deletes the most worthless item according to predetermined criteria. Returns BtStatus.Ongoing.
+        /// If none of the above conditions are met, moves the character to the position of the current node with a specified
+        /// distance threshold and updates the CurrentNodes queue accordingly. Returns the status of the movement.
+        /// If the CurrentNodes queue is empty, moves the character to the dungeon exit position with a specified distance
+        /// threshold and returns the status of the movement.
+        /// </summary>
+        /// <returns>The status of the behavior tree node.</returns>
         private BtStatus FollowNodePath()
         {
             if (CurrentNodes.Any())
@@ -306,6 +376,10 @@ namespace AmeisenBotX.Core.Engines.Dungeon
             }
         }
 
+        /// <summary>
+        /// Loads the specified dungeon profile.
+        /// </summary>
+        /// <param name="profile">The dungeon profile to load.</param>
         private void LoadProfile(IDungeonProfile profile)
         {
             Profile = profile;
@@ -327,6 +401,13 @@ namespace AmeisenBotX.Core.Engines.Dungeon
             }
         }
 
+        /// <summary>
+        /// Moves the bot to a specified position.
+        /// </summary>
+        /// <param name="position">The position to move to.</param>
+        /// <param name="minDistance">The minimum distance required before considering the movement complete.</param>
+        /// <param name="movementAction">The type of movement action to perform.</param>
+        /// <returns>The status of the movement.</returns>
         private BtStatus MoveToPosition(Vector3 position, float minDistance = 2.5f, MovementAction movementAction = MovementAction.Move)
         {
             float distance = Bot.Player.Position.GetDistance(position);

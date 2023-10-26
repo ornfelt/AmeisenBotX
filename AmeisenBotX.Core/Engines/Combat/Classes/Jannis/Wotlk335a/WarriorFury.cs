@@ -12,6 +12,10 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 {
     public class WarriorFury : BasicCombatClass
     {
+        /// <summary>
+        /// Initializes a new instance of the WarriorFury class with the specified bot.
+        /// </summary>
+        /// <param name="bot">The AmeisenBotInterfaces object representing the bot.</param>
         public WarriorFury(AmeisenBotInterfaces bot) : base(bot)
         {
             MyAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, Warrior335a.BattleShout, () => TryCastSpell(Warrior335a.BattleShout, 0, true)));
@@ -28,18 +32,39 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
             HeroicStrikeEvent = new(TimeSpan.FromSeconds(2));
         }
 
+        /// <summary>
+        /// Gets the description of the FCFS based CombatClass for the Fury Warrior spec.
+        /// </summary>
         public override string Description => "FCFS based CombatClass for the Fury Warrior spec.";
 
+        /// <summary>
+        /// Gets the display name for the Warrior Fury.
+        /// </summary>
         public override string DisplayName2 => "Warrior Fury";
 
+        /// <summary>
+        /// Indicates that this implementation does not handle movement.
+        /// </summary>
         public override bool HandlesMovement => false;
 
+        /// <summary>
+        /// Gets a value indicating whether the object is for melee combat.
+        /// </summary>
         public override bool IsMelee => true;
 
+        /// <summary>
+        /// Gets or sets the item comparator for comparing items.
+        /// </summary>
         public override IItemComparator ItemComparator { get; set; } = new BasicStrengthComparator(new() { WowArmorType.Shield }, new() { WowWeaponType.Sword, WowWeaponType.Mace, WowWeaponType.Axe });
 
+        /// <summary>
+        /// Gets the role of the character as a Dps (damage per second) role in the World of Warcraft game.
+        /// </summary>
         public override WowRole Role => WowRole.Dps;
 
+        /// <summary>
+        /// Gets or sets the talent tree for the character.
+        /// </summary>
         public override TalentTree Talents { get; } = new()
         {
             Tree1 = new()
@@ -76,18 +101,40 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
             Tree3 = new(),
         };
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the character should use auto attacks.
+        /// </summary>
         public override bool UseAutoAttacks => true;
 
+        /// <summary>
+        /// Gets the version of the code.
+        /// </summary>
         public override string Version => "1.0";
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the player can walk behind an enemy.
+        /// </summary>
+        /// <returns>Always false, indicating that the player cannot walk behind an enemy.</returns>
         public override bool WalkBehindEnemy => false;
 
+        /// <summary>
+        /// Gets or sets the WowClass property, overriding the base WowClass property and specifying it as Warrior.
+        /// </summary>
         public override WowClass WowClass => WowClass.Warrior;
 
+        /// <summary>
+        /// Gets or sets the World of Warcraft version for WotLK (Wrath of the Lich King), patch 3.3.5a.
+        /// </summary>
         public override WowVersion WowVersion => WowVersion.WotLK335a;
 
+        /// <summary>
+        /// Gets the private TimegatedEvent property HeroicStrikeEvent.
+        /// </summary>
         private TimegatedEvent HeroicStrikeEvent { get; }
 
+        /// <summary>
+        /// Executes the overridden method.
+        /// </summary>
         public override void Execute()
         {
             base.Execute();

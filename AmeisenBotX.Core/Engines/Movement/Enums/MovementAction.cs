@@ -1,5 +1,8 @@
 ﻿namespace AmeisenBotX.Core.Engines.Movement.Enums
 {
+    /// <summary>
+    /// Enumeration representing different movement actions.
+    /// </summary>
     public enum MovementAction
     {
         None,

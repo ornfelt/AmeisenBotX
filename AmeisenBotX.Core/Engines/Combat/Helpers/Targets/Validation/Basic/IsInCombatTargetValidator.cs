@@ -5,13 +5,29 @@ namespace AmeisenBotX.Core.Engines.Combat.Helpers.Targets.Validation.Basic
 {
     public class IsThreatTargetValidator : ITargetValidator
     {
+        ///<summary>
+        ///Creates a new instance of the IsThreatTargetValidator class.
+        ///</summary>
+        ///<param name="bot">The AmeisenBotInterfaces instance to be used for validating threat targets.</param>
         public IsThreatTargetValidator(AmeisenBotInterfaces bot)
         {
             Bot = bot;
         }
 
+        /// <summary>
+        /// Gets the Bot interface.
+        /// </summary>
         private AmeisenBotInterfaces Bot { get; }
 
+        /// <summary>
+        /// Determines whether the specified unit is considered valid based on the following conditions:
+        /// - The unit is tagged by me or my group
+        /// - The unit has no target
+        /// - The unit is targeting me, my group members, or pets
+        /// - My group members or pets are targeting the unit
+        /// </summary>
+        /// <param name="unit">The unit to be validated</param>
+        /// <returns>True if the unit is considered valid, otherwise false</returns>
         public bool IsValid(IWowUnit unit)
         {
             // is tagged by me or my group

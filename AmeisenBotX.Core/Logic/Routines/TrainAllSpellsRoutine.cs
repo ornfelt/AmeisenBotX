@@ -2,6 +2,11 @@
 {
     public static class TrainAllSpellsRoutine
     {
+        /// <summary>
+        /// Executes the Run method to perform actions on the bot and config. 
+        /// Note: This can fail for numerous reasons such as insufficient funds or bugs with the NPC or trainer frame.
+        /// Please ensure a stable trainer frame is open and an unlimited cash supply is available before executing this method.
+        /// </summary>
         public static void Run(AmeisenBotInterfaces bot, AmeisenBotConfig config)
         {
             // this can fail for myriad of reasons like not having enough money to buy service, or

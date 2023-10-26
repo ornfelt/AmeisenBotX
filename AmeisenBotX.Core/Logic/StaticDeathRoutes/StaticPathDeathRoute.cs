@@ -21,6 +21,9 @@ namespace AmeisenBotX.Core.Logic.StaticDeathRoutes
         /// </summary>
         protected abstract List<Vector3> Path { get; }
 
+        /// <summary>
+        /// Gets or sets the current node position.
+        /// </summary>
         private int CurrentNode { get; set; } = 0;
 
         /// <inheritdoc cref="IStaticDeathRoute.GetNextPoint(Vector3)"/>

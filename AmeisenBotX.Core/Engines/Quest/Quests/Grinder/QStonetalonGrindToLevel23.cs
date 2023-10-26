@@ -7,10 +7,14 @@ namespace AmeisenBotX.Core.Engines.Quest.Quests.Grinder
 {
     internal class QStonetalonGrindToLevel23 : GrindingBotQuest
     {
+        /// <summary>
+        /// Constructor for the QStonetalonGrindToLevel23 class.
+        /// </summary>
+        /// <param name="bot">An instance of the AmeisenBotInterfaces class.</param>
         public QStonetalonGrindToLevel23(AmeisenBotInterfaces bot)
-            : base("StonetalonGrindToLevel23",
-                new List<IQuestObjective>()
-                {
+                    : base("StonetalonGrindToLevel23",
+                        new List<IQuestObjective>()
+                        {
                     new QuestObjectiveChain(new List<IQuestObjective>()
                     {
                         new GrindingObjective(bot, 23, new List<List<Vector3>> {
@@ -42,7 +46,7 @@ namespace AmeisenBotX.Core.Engines.Quest.Quests.Grinder
                             },
                         }),
                     })
-                })
+                        })
         { }
     }
 }

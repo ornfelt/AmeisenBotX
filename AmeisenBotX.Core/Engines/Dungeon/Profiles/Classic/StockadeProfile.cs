@@ -8,22 +8,50 @@ namespace AmeisenBotX.Core.Engines.Dungeon.Profiles.Classic
 {
     public class StockadeProfile : IDungeonProfile
     {
+        /// <summary>
+        /// Gets the author name.
+        /// </summary>
         public string Author { get; } = "Jannis";
 
+        /// <summary>
+        /// Gets the description of the profile for the Dungeon in Stormwind, made for Level 24 to 31.
+        /// </summary>
         public string Description { get; } = "Profile for the Dungeon in Stormwind, made for Level 24 to 31.";
 
+        /// <summary>
+        /// Gets the position of the exit in the dungeon.
+        /// </summary>
         public Vector3 DungeonExit { get; } = new(45, 1, -16);
 
+        /// <summary>
+        /// Gets the faction type of the Dungeon.
+        /// </summary>
         public DungeonFactionType FactionType { get; } = DungeonFactionType.Neutral;
 
+        /// <summary>
+        /// Gets the size of the group.
+        /// </summary>
         public int GroupSize { get; } = 5;
 
+        /// <summary>
+        /// Gets or sets the map ID for the Stormwind Stockade.
+        /// </summary>
         public WowMapId MapId { get; } = WowMapId.StormwindStockade;
 
+        /// <summary>
+        /// Gets the maximum level, which is a constant value of 31.
+        /// </summary>
         public int MaxLevel { get; } = 31;
 
+        /// <summary>
+        /// Gets the name of the stockade, which is "[24-31] Stockade".
+        /// </summary>
         public string Name { get; } = "[24-31] Stockade";
 
+        /// <summary>
+        /// Gets the list of DungeonNodes.
+        /// </summary>
+        /// <value>The list of DungeonNodes.</value>
         public List<DungeonNode> Nodes { get; } = new()
         {
             new(new(54, 0, -18)),
@@ -121,14 +149,29 @@ namespace AmeisenBotX.Core.Engines.Dungeon.Profiles.Classic
             new(new(69, 1, -24)),
         };
 
+        /// <summary>
+        /// Gets the list of priority units.
+        /// </summary>
         public List<int> PriorityUnits { get; } = new();
 
+        /// <summary>
+        /// Gets or sets the required item level.
+        /// </summary>
         public int RequiredItemLevel { get; } = 10;
 
+        /// <summary>
+        /// Gets the required level.
+        /// </summary>
         public int RequiredLevel { get; } = 24;
 
+        /// <summary>
+        /// Gets the entry point in world coordinates.
+        /// </summary>
         public Vector3 WorldEntry { get; } = new(-8765, 846, 88);
 
+        /// <summary>
+        /// Gets the World Entry Map ID for the WowMapId property.
+        /// </summary>
         public WowMapId WorldEntryMapId { get; } = WowMapId.EasternKingdoms;
     }
 }

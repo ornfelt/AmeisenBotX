@@ -2,6 +2,9 @@
 
 namespace AmeisenBotX.Wow.Objects.Flags
 {
+    /// <summary>
+    /// Represents flags for the WowUnit2 enum.
+    /// </summary>
     [Flags]
     public enum WowUnit2Flag
     {

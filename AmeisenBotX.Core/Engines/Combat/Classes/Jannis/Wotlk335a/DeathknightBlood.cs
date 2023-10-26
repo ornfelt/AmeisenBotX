@@ -12,6 +12,13 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 {
     public class DeathknightBlood : BasicCombatClass
     {
+        /// <summary>
+        /// Constructor for the DeathknightBlood class.
+        /// Initializes and adds active aura jobs for Blood Presence and Horn of Winter to the MyAuraManager.
+        /// Initializes and adds active aura jobs for Frost Fever and Blood Plague to the TargetAuraManager.
+        /// Sets the interrupt spells for the InterruptManager.
+        /// Sets the BloodBoilEvent to a TimeSpan of 2 seconds.
+        /// </summary>
         public DeathknightBlood(AmeisenBotInterfaces bot) : base(bot)
         {
             MyAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, Deathknight335a.BloodPresence, () => TryCastSpellDk(Deathknight335a.BloodPresence, 0)));
@@ -29,18 +36,42 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
             BloodBoilEvent = new(TimeSpan.FromSeconds(2));
         }
 
+        /// <summary>
+        /// Gets the description of the FCFS based CombatClass for the Blood Deathknight spec.
+        /// </summary>
         public override string Description => "FCFS based CombatClass for the Blood Deathknight spec.";
 
+        /// <summary>
+        /// Gets or sets the display name for a Deathknight Blood.
+        /// </summary>
         public override string DisplayName2 => "Deathknight Blood";
 
+        /// This property indicates that the class does not handle movement.
         public override bool HandlesMovement => false;
 
+        /// <summary>
+        /// Gets a value indicating whether this object is considered to be melee.
+        /// </summary>
+        /// <returns>True, indicating that this object is considered to be melee.</returns>
         public override bool IsMelee => true;
 
+        /// <summary>
+        /// Gets or sets the item comparator for comparing items.
+        /// </summary>
         public override IItemComparator ItemComparator { get; set; } = new BasicStrengthComparator(new() { WowArmorType.Shield });
 
+        /// <summary>
+        /// Gets or sets the role of the character as a Dps (damage per second) in the game World of Warcraft.
+        /// </summary>
         public override WowRole Role => WowRole.Dps;
 
+        /// Represents a collection of talent trees available for a character.
+        ///
+        /// The "Talents" property is an override property of the base class "TalentTree".
+        /// It returns a new instance of "TalentTree" with three talent trees: "Tree1", "Tree2", and "Tree3".
+        /// Each talent tree is initialized with a dictionary of key-value pairs, where the key represents the talent level
+        /// and the value represents a new instance of the "Talent" class with specific attribute values.
+        /// The "Tree1" talent tree contains 22 key-value pairs, "Tree2" contains 2 key-value pairs, and "Tree3" contains 2 key-value pairs.
         public override TalentTree Talents { get; } = new()
         {
             Tree1 = new()
@@ -78,18 +109,36 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
             },
         };
 
+        /// <summary>
+        /// Gets or sets a value indicating whether this entity can use auto attacks.
+        /// </summary>
         public override bool UseAutoAttacks => true;
 
+        /// <summary>
+        /// Gets the version of the code.
+        /// </summary>
+        /// <returns>The version.</returns>
         public override string Version => "1.0";
 
+        /// Gets or sets a value indicating whether the character can walk behind an enemy. Returns false as the character cannot walk behind an enemy.
         public override bool WalkBehindEnemy => false;
 
+        /// <summary>
+        /// Gets or sets the WowClass for a Death Knight.
+        /// </summary>
         public override WowClass WowClass => WowClass.Deathknight;
 
+        /// <summary>
+        /// Gets or sets the version of World of Warcraft as Wrath of the Lich King (3.3.5a).
+        /// </summary>
         public override WowVersion WowVersion => WowVersion.WotLK335a;
 
+        /// <summary>
+        /// Gets the TimegatedEvent for BloodBoil.
+        /// </summary>
         private TimegatedEvent BloodBoilEvent { get; }
 
+        /// This method overrides the Execute method and executes a series of actions based on certain conditions. It checks if a target can be found using the TargetProviderDps, and if so, it performs several actions such as casting spells, checking target distance, and checking player health percentage. Additionally, it counts the number of near enemies and performs actions based on the result.
         public override void Execute()
         {
             base.Execute();

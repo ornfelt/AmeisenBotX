@@ -9,6 +9,13 @@ namespace AmeisenBotX.Core.Engines.Grinding.Profiles.Horde
 {
     public class DurotarGrindTo6 : IGrindingProfile
     {
+        /// <summary>
+        /// A list of NPCs of interest in the Valley of Trials area of Kalimdor.
+        /// </summary>
+        /// <remarks>
+        /// This list includes NPCs that serve as vendors and buy/sell items to players, as well as class trainers
+        /// for various classes such as Priest, Shaman, Warrior, and Mage.
+        /// </remarks>
         public List<Npc> NpcsOfInterest { get; } = new()
         {
             new Npc("Duokna", 3158,
@@ -29,6 +36,9 @@ namespace AmeisenBotX.Core.Engines.Grinding.Profiles.Horde
                 NpcType.ClassTrainer, NpcSubType.MageTrainer)
         };
 
+        /// <summary>
+        /// Gets a list of interactable objects of interest.
+        /// </summary>
         public List<InteractableObject> ObjectsOfInterest { get; } = new()
         {
             new InteractableObject(3084,
@@ -36,8 +46,21 @@ namespace AmeisenBotX.Core.Engines.Grinding.Profiles.Horde
                 InteractableObjectType.Fire)
         };
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the spots should be randomized.
+        /// </summary>
         public bool RandomizeSpots => true;
 
+        /// <summary>
+        /// Represents a list of GrindingSpots.
+        /// </summary>
+        /// <remarks>
+        /// The list includes GrindingSpots for pigs and scorpids. 
+        /// The GrindingSpots for pigs have a Vector3 position of (-546, -4308, 38), (-450, -4258, 48) with a distance of 45.0f,
+        /// and a minimumLevel of 1 and maximumLevel of 3.
+        /// The GrindingSpots for scorpids have a Vector3 position of (-435, -4154, 52), (-379, -4096, 49), (-399, -4116, 50),
+        /// (-284, -4179, 51) with a distance of 55.0f, and a minimumLevel of 2 and maximumLevel of 7.
+        /// </remarks>
         public List<GrindingSpot> Spots { get; } = new()
         {
             // pigs
@@ -50,6 +73,10 @@ namespace AmeisenBotX.Core.Engines.Grinding.Profiles.Horde
             new GrindingSpot(new Vector3(-284, -4179, 51), 55.0f, 2, 7),
         };
 
+        /// <summary>
+        /// Overrides the ToString method to return the specified string representation.
+        /// The returned string is "[H][Durotar] 1 To 6 Grinding".
+        /// </summary>
         public override string ToString()
         {
             return "[H][Durotar] 1 To 6 Grinding";

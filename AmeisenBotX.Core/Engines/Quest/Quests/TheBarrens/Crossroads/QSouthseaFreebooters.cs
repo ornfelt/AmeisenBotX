@@ -7,12 +7,16 @@ namespace AmeisenBotX.Core.Engines.Quest.Quests.TheBarrens.Crossroads
 {
     internal class QSouthseaFreebooters : BotQuest
     {
+        /// <summary>
+        /// Creates a new instance of the QSouthseaFreebooters class.
+        /// </summary>
+        /// <param name="bot">The AmeisenBotInterfaces object.</param>
         public QSouthseaFreebooters(AmeisenBotInterfaces bot)
-            : base(bot, 887, "Southsea Freebooters", 9, 1,
-                () => (bot.GetClosestQuestGiverByNpcId(bot.Player.Position, new List<int> { 3391 }), new Vector3(-835.56f, -3728.66f, 26.37f)),
-                () => (bot.GetClosestQuestGiverByNpcId(bot.Player.Position, new List<int> { 3391 }), new Vector3(-835.56f, -3728.66f, 26.37f)),
-                new List<IQuestObjective>()
-                {
+                    : base(bot, 887, "Southsea Freebooters", 9, 1,
+                        () => (bot.GetClosestQuestGiverByNpcId(bot.Player.Position, new List<int> { 3391 }), new Vector3(-835.56f, -3728.66f, 26.37f)),
+                        () => (bot.GetClosestQuestGiverByNpcId(bot.Player.Position, new List<int> { 3391 }), new Vector3(-835.56f, -3728.66f, 26.37f)),
+                        new List<IQuestObjective>()
+                        {
                     new QuestObjectiveChain(new List<IQuestObjective>()
                     {
                         new KillAndLootQuestObjective(bot, new List<int> { 3381 }, 12, 0, new List<List<Vector3>> {
@@ -40,7 +44,7 @@ namespace AmeisenBotX.Core.Engines.Quest.Quests.TheBarrens.Crossroads
                             },
                         }),
                     })
-                })
+                        })
         { }
     }
 }

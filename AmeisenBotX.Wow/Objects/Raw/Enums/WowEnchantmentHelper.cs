@@ -4,6 +4,9 @@ namespace AmeisenBotX.Wow.Objects.Raw.Enums
 {
     public static class WowEnchantmentHelper
     {
+        /// <summary>
+        /// Dictionary containing the enchantments and their corresponding IDs.
+        /// </summary>
         private static readonly Dictionary<int, string> EnchantmentDict = new()
         {
             { 1, "Rockbiter 3" },
@@ -2654,6 +2657,12 @@ namespace AmeisenBotX.Wow.Objects.Raw.Enums
             { 3884, "+24 Stamina and +24 Agility" }
         };
 
+        /// <summary>
+        /// Tries to look up the specified enchantment by its id and assigns its corresponding text value to the out parameter.
+        /// </summary>
+        /// <param name="id">The id of the enchantment.</param>
+        /// <param name="text">The text value of the enchantment.</param>
+        /// <returns>True if the enchantment is found and its text value is assigned to the out parameter; otherwise, false.</returns>
         public static bool TryLookupEnchantment(int id, out string text)
         {
             if (EnchantmentDict.ContainsKey(id))

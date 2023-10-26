@@ -8,6 +8,12 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 {
     public class PriestShadow : BasicCombatClass
     {
+        /// <summary>
+        /// Initializes a new instance of the PriestShadow class.
+        /// Adds jobs to the MyAuraManager and TargetAuraManager to keep certain auras active.
+        /// Also adds a spell to be kept active on the party members through the GroupAuraManager.
+        /// </summary>
+        /// <param name="bot">The AmeisenBotInterfaces object used for interaction with the bot.</param>
         public PriestShadow(AmeisenBotInterfaces bot) : base(bot)
         {
             MyAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, Priest335a.Shadowform, () => TryCastSpell(Priest335a.Shadowform, Bot.Wow.PlayerGuid, true)));
@@ -22,18 +28,48 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
             GroupAuraManager.SpellsToKeepActiveOnParty.Add((Priest335a.PowerWordFortitude, (spellName, guid) => TryCastSpell(spellName, guid, true)));
         }
 
+        /// <summary>
+        /// Gets the description of the FCFS based CombatClass for the Shadow Priest spec.
+        /// </summary>
         public override string Description => "FCFS based CombatClass for the Shadow Priest spec.";
 
+        /// <summary>
+        /// Gets or sets the display name of the Priest Shadow.
+        /// </summary>
         public override string DisplayName2 => "Priest Shadow";
 
+        /// <summary>
+        /// Gets or sets a value indicating whether this object handles movement.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if this object handles movement; otherwise, <c>false</c>.
+        /// </value>
         public override bool HandlesMovement => false;
 
+        ///<summary>
+        /// Gets or sets a value indicating whether the character is a melee or ranged combatant.
+        ///</summary>
         public override bool IsMelee => false;
 
+        /// <summary>
+        /// Gets or sets the item comparator for the current object. The item comparator is set to a new instance of BasicIntellectComparator with specified armor and weapon types.
+        /// </summary>
         public override IItemComparator ItemComparator { get; set; } = new BasicIntellectComparator(new() { WowArmorType.Shield }, new() { WowWeaponType.Sword, WowWeaponType.Mace, WowWeaponType.Axe });
 
+        /// <summary>
+        /// Gets or sets the role of the player character as a damage dealer (DPS) in the game World of Warcraft.
+        /// </summary>
         public override WowRole Role => WowRole.Dps;
 
+        /// <summary>
+        /// Gets or sets the TalentTree property.
+        /// </summary>
+        /// <remarks>
+        /// The TalentTree property represents the available talent trees for an object.
+        /// </remarks>
+        /// <value>
+        /// The TalentTree property is a dictionary that contains the different talent trees.
+        /// </value>
         public override TalentTree Talents { get; } = new()
         {
             Tree1 = new()
@@ -71,16 +107,36 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
             },
         };
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the character can use auto attacks.
+        /// </summary>
+        /// <returns><c>true</c> if the character can use auto attacks; otherwise, <c>false</c>.</returns>
         public override bool UseAutoAttacks => true;
 
+        /// <summary>
+        /// Gets or sets the version of the code.
+        /// </summary>
         public override string Version => "1.1";
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the player is able to walk behind an enemy.
+        /// </summary>
+        /// <returns>Always returns false.</returns>
         public override bool WalkBehindEnemy => false;
 
+        /// <summary>
+        /// Gets or sets the WowClass of the character as Priest.
+        /// </summary>
         public override WowClass WowClass => WowClass.Priest;
 
+        /// <summary>
+        /// Gets or sets the World of Warcraft version to WotLK335a.
+        /// </summary>
         public override WowVersion WowVersion => WowVersion.WotLK335a;
 
+        /// <summary>
+        /// Method that executes a series of conditional spell casts based on the current state of the player character.
+        /// </summary>
         public override void Execute()
         {
             base.Execute();
@@ -118,6 +174,9 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
             }
         }
 
+        /// <summary>
+        /// Executes the OutOfCombatExecute method.
+        /// </summary>
         public override void OutOfCombatExecute()
         {
             base.OutOfCombatExecute();

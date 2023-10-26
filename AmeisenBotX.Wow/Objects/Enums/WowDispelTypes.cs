@@ -1,5 +1,8 @@
 ﻿namespace AmeisenBotX.Wow.Objects.Enums
 {
+    /// <summary>
+    /// Represents the different types of dispels in the World of Warcraft game.
+    /// </summary>
     public enum WowDispelType
     {
         None = 0,

@@ -7,12 +7,16 @@ namespace AmeisenBotX.Core.Engines.Quest.Quests.Durotar.ValleyOfStrength
 {
     internal class QVileFamiliars : BotQuest
     {
+        /// <summary>
+        /// Initializes a new instance of the QVileFamiliars class.
+        /// </summary>
+        /// <param name="bot">The bot instance.</param>
         public QVileFamiliars(AmeisenBotInterfaces bot)
-            : base(bot, 792, "Vile Familiars", 2, 1,
-                () => (bot.GetClosestQuestGiverByNpcId(bot.Player.Position, new List<int> { 3145 }), new Vector3(-629.05f, -4228.06f, 38.23f)),
-                () => (bot.GetClosestQuestGiverByNpcId(bot.Player.Position, new List<int> { 3145 }), new Vector3(-629.05f, -4228.06f, 38.23f)),
-                new List<IQuestObjective>()
-                {
+                    : base(bot, 792, "Vile Familiars", 2, 1,
+                        () => (bot.GetClosestQuestGiverByNpcId(bot.Player.Position, new List<int> { 3145 }), new Vector3(-629.05f, -4228.06f, 38.23f)),
+                        () => (bot.GetClosestQuestGiverByNpcId(bot.Player.Position, new List<int> { 3145 }), new Vector3(-629.05f, -4228.06f, 38.23f)),
+                        new List<IQuestObjective>()
+                        {
                     new QuestObjectiveChain(new List<IQuestObjective>()
                     {
                         new KillAndLootQuestObjective(bot, new List<int> { 3101 }, 8, 0, new List<List<Vector3>> {
@@ -30,7 +34,7 @@ namespace AmeisenBotX.Core.Engines.Quest.Quests.Durotar.ValleyOfStrength
                             },
                         }),
                     })
-                })
+                        })
         { }
     }
 }

@@ -11,7 +11,13 @@ namespace AmeisenBotX.Wow.Hook.Structs
     [StructLayout(LayoutKind.Sequential)]
     public struct GameInfo
     {
+        /// <summary>
+        /// Represents a boolean value indicating if the subject is outdoors.
+        /// </summary>
         public bool isOutdoors;
+        /// <summary>
+        /// Represents the result of a line of sight check.
+        /// </summary>
         public int losCheckResult;
     }
 }

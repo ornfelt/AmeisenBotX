@@ -1,5 +1,8 @@
 ﻿namespace AmeisenBotX.Wow548.Objects.Flags
 {
+    /// <summary>
+    /// Represents the dynamic flags for a WoW unit with the identifier 548.
+    /// </summary>
     [Flags]
     public enum WowUnitDynamicFlags548
     {

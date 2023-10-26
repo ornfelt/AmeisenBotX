@@ -6,12 +6,26 @@ namespace AmeisenBotX.Core.Engines.Grinding.Profiles.Alliance.Group
 {
     public class UltimateGrinding1To80 : IGrindingProfile
     {
+        /// <summary>
+        /// Gets or sets the list of Npcs of interest.
+        /// </summary>
+        /// <returns>The list of Npcs of interest.</returns>
         public List<Npc> NpcsOfInterest { get; }
 
+        /// <summary>
+        /// Gets the list of interactable objects that are of interest.
+        /// </summary>
         public List<InteractableObject> ObjectsOfInterest { get; }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the spots should be randomized.
+        /// </summary>
         public bool RandomizeSpots => true;
 
+        /// <summary>
+        /// Gets a list of GrindingSpots.
+        /// Each GrindingSpot contains a position (x, y, z), a radius, a minimum level, and a maximum level.
+        /// </summary>
         public List<GrindingSpot> Spots { get; } = new()
         {
             new(new(-9039, -265, 74), 32.0f, 1, 3),
@@ -40,6 +54,9 @@ namespace AmeisenBotX.Core.Engines.Grinding.Profiles.Alliance.Group
             new(new(-10006, -3555, 22), 56.0f, 35, 80),
         };
 
+        /// <summary>
+        /// Returns a string representation of the object, which consists of the location and description of the grinding activity.
+        /// </summary>
         public override string ToString()
         {
             return "[A][Elwynn Forest] 1 To 80 Ultimate Grinding";

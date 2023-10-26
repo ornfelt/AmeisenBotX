@@ -2,6 +2,22 @@
 {
     public static class LuaLogin
     {
+        /// <summary>
+        /// This method is used to navigate through the different screens and perform login actions in the game client.
+        /// It checks if the Account Login UI is visible and shows it if it's not.
+        /// If the Server Alert Frame is shown, it hides it.
+        /// If the Connection Help Frame is shown, it hides it and shows the Account Login UI.
+        /// If the Cinematic Frame is shown, it stops the cinematic.
+        /// If the Terms of Service Frame is shown, it enables and accepts it.
+        /// If the Script Errors Frame is shown, it hides it.
+        /// If the Glue Dialog Frame is shown, it checks if the dialog type is "OKAY" and clicks the button if it is.
+        /// If the Character Create Randomize Button is visible, it goes back to the previous screen.
+        /// If the Realm List Frame is visible, it searches for the specified realm and changes to it if found.
+        /// If the Character Select UI is visible, it checks if the server name includes the specified realm and selects the character slot if it does.
+        /// It then clicks the CharSelectEnterWorldButton to enter the game.
+        /// If the Realm List Frame is not visible, it clicks the CharSelectChangeRealmButton.
+        /// If the Account Login UI is visible, it performs the login action using the provided username and password.
+        /// </summary>
         public static string Get(string user, string pass, string realm, int characterslot)
         {
             // CharacterSelect_EnterWorld() got replaced by CharSelectEnterWorldButton:Click() for
@@ -45,7 +61,7 @@
                     end
                 elseif CharacterSelectUI and CharacterSelectUI:IsVisible() then
                     if string.find(string.lower(GetServerName()), string.lower(""{realm}"")) then
-                        CharacterSelect_SelectCharacter({ characterslot + 1})
+                        CharacterSelect_SelectCharacter({characterslot + 1})
                         CharSelectEnterWorldButton:Click()
                     elseif RealmList and not RealmList:IsVisible() then
                          CharSelectChangeRealmButton:Click()

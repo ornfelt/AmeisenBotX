@@ -1,5 +1,8 @@
 ﻿namespace AmeisenBotX.Wow.Objects.Enums
 {
+    /// <summary>
+    /// Represents the faction ID used in the World of Warcraft game.
+    /// </summary>
     internal enum WowFactionID
     {
         None = 0,

@@ -12,6 +12,10 @@ namespace AmeisenBotX.Core.Engines.Tactic.Bosses.Naxxramas10
 {
     public class AnubRekhan10Tactic : SimpleConfigurable, ITactic
     {
+        /// <summary>
+        /// Initializes a new instance of the AnubRekhan10Tactic class.
+        /// </summary>
+        /// <param name="bot">The AmeisenBotInterfaces object.</param>
         public AnubRekhan10Tactic(AmeisenBotInterfaces bot)
         {
             Bot = bot;
@@ -20,26 +24,64 @@ namespace AmeisenBotX.Core.Engines.Tactic.Bosses.Naxxramas10
             Configurables.TryAdd("isOffTank", false);
         }
 
+        /// <summary>
+        /// Represents the area defined by a three-dimensional vector.
+        /// The default value is set to (3273, -3476, 287).
+        /// </summary>
         public Vector3 Area { get; } = new(3273, -3476, 287);
 
+        /// <summary>
+        /// Gets the area radius.
+        /// </summary>
         public float AreaRadius { get; } = 120.0f;
 
+        /// <summary>
+        /// Gets or sets the date and time when the locust swarm was activated.
+        /// </summary>
         public DateTime LocustSwarmActivated { get; private set; }
 
+        /// <summary>
+        /// Gets or sets the unique identifier for the Naxxramas map in the World of Warcraft.
+        /// </summary>
         public WowMapId MapId { get; } = WowMapId.Naxxramas;
 
+        /// <summary>
+        /// Gets or sets the list of display ids that will be used for addition.
+        /// </summary>
+        /// <value>
+        /// The list of display ids.
+        /// </value>
         private static List<int> AddsDisplayIds { get; } = new() { 14698, 27943 };
 
+        /// <summary>
+        /// Gets the display IDs for Anub'Rekhan.
+        /// </summary>
         private static List<int> AnubRekhanDisplayId { get; } = new() { 15931 };
 
+        /// <summary>
+        /// Gets or sets the Bot instance.
+        /// </summary>
         private AmeisenBotInterfaces Bot { get; }
 
+        /// <summary>
+        /// Gets or sets the position for impale dodge in 3D space.
+        /// </summary>
         private Vector3 ImpaleDodgePos { get; set; }
 
+        ///<summary>
+        ///Checks if the Locust Swarm is currently active by comparing the activation time
+        ///with the current time plus 20 seconds.
+        ///</summary>
         private bool LocustSwarmActive => (LocustSwarmActivated + TimeSpan.FromSeconds(20)) > DateTime.UtcNow;
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the melee DPS is moving towards the middle.
+        /// </summary>
         private bool MeleeDpsIsMovingToMid { get; set; }
 
+        /// <summary>
+        /// Route used for tanking and kiting. Consists of a list of Vector3 coordinates.
+        /// </summary>
         private List<Vector3> TankingKitingRouteA { get; } = new()
         {
             new Vector3(3323, -3497, 287),
@@ -52,6 +94,9 @@ namespace AmeisenBotX.Core.Engines.Tactic.Bosses.Naxxramas10
             new Vector3(3220, -3484, 287),
         };
 
+        /// <summary>
+        /// TankingKitingRouteB is a list of Vector3 coordinates that represent a route for tanking and kiting.
+        /// </summary>
         private List<Vector3> TankingKitingRouteB { get; } = new()
         {
             new Vector3(3223, -3455, 287),
@@ -64,16 +109,40 @@ namespace AmeisenBotX.Core.Engines.Tactic.Bosses.Naxxramas10
             new Vector3(3326, -3465, 287),
         };
 
+        /// <summary>
+        /// Gets or sets the private queue of Vector3 objects representing the tanking path.
+        /// </summary>
         private Queue<Vector3> TankingPathQueue { get; }
 
+        /// <summary>
+        /// The coordinates of Tanking Spot A.
+        /// </summary>
         private Vector3 TankingSpotA { get; } = new(3325, -3486, 287);
 
+        /// <summary>
+        /// The coordinates of the designated tanking spot for the tank object.
+        /// The tanking spot is located at x = 3222, y = -3464, and z = 287.
+        /// </summary>
         private Vector3 TankingSpotB { get; } = new(3222, -3464, 287);
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the tank is currently kiting.
+        /// </summary>
         private bool TankIsKiting { get; set; }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the tank is using A.
+        /// </summary>
         private bool TankIsUsingA { get; set; } = true;
 
+        /// <summary>
+        /// Executes a tactic based on the specified role in World of Warcraft.
+        /// </summary>
+        /// <param name="role">The role of the player character.</param>
+        /// <param name="isMelee">Specifies if the player character is a melee role.</param>
+        /// <param name="handlesMovement">Output parameter indicating if the tactic handles movement.</param>
+        /// <param name="allowAttacking">Output parameter indicating if attacking is allowed in the tactic.</param>
+        /// <returns>A boolean value indicating the success of the tactic execution.</returns>
         public bool ExecuteTactic(WowRole role, bool isMelee, out bool handlesMovement, out bool allowAttacking)
         {
             return role switch
@@ -84,6 +153,13 @@ namespace AmeisenBotX.Core.Engines.Tactic.Bosses.Naxxramas10
             };
         }
 
+        /// <summary>
+        /// Performs a DPS heal strategy for Anub'Rekhan encounter.
+        /// </summary>
+        /// <param name="isMelee">Specifies if the player is a melee DPS.</param>
+        /// <param name="handlesMovement">Outputs a value indicating whether the function handles movement.</param>
+        /// <param name="allowAttacking">Outputs a value indicating whether attacking is allowed.</param>
+        /// <returns>True if a specific action is taken, otherwise false.</returns>
         private bool DoDpsHeal(bool isMelee, out bool handlesMovement, out bool allowAttacking)
         {
             IWowUnit anubrekhan = Bot.GetClosestQuestGiverByDisplayId(Bot.Player.Position, AnubRekhanDisplayId, false);
@@ -159,6 +235,12 @@ namespace AmeisenBotX.Core.Engines.Tactic.Bosses.Naxxramas10
             return false;
         }
 
+        /// <summary>
+        /// Performs tank actions in combat, including movement and attacking.
+        /// </summary>
+        /// <param name="handlesMovement">Indicates if the tank is responsible for movement.</param>
+        /// <param name="allowAttacking">Indicates if the tank is allowed to attack.</param>
+        /// <returns>Returns true if tank actions are successfully performed, otherwise false.</returns>
         private bool DoTank(out bool handlesMovement, out bool allowAttacking)
         {
             handlesMovement = false;

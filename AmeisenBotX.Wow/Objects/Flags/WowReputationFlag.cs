@@ -2,6 +2,9 @@
 
 namespace AmeisenBotX.Wow.Objects.Flags
 {
+    ///<summary>
+    ///Flags for various reputation properties.
+    ///</summary>
     [Flags]
     public enum WowReputationFlag : short
     {

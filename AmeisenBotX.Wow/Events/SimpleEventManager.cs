@@ -13,6 +13,11 @@ namespace AmeisenBotX.Wow.Events
     /// </summary>
     public class SimpleEventManager : IEventManager
     {
+        ///<summary>
+        /// Creates a new instance of the SimpleEventManager class.
+        ///</summary>
+        ///<param name="luaDoString">The LuaDoString function to be used by the SimpleEventManager.</param>
+        ///<param name="frameName">The name of the frame.</param>
         public SimpleEventManager(Func<string, bool> luaDoString, string frameName)
         {
             LuaDoString = luaDoString;
@@ -36,8 +41,15 @@ namespace AmeisenBotX.Wow.Events
         ///<inheritdoc cref="IEventManager.UnsubscribeQueue"/>
         public Queue<(string, Action<long, List<string>>)> UnsubscribeQueue { get; private set; }
 
+        /// <summary>
+        /// Gets or sets the LuaDoString function that takes a string as an input parameter
+        /// and returns a boolean value indicating the success of executing the Lua script.
+        /// </summary>
         private Func<string, bool> LuaDoString { get; }
 
+        /// <summary>
+        /// Gets or sets the queue of Lua code strings that are pending execution.
+        /// </summary>
         private Queue<string> PendingLuaToExecute { get; set; }
 
         ///<inheritdoc cref="IEventManager.OnEventPush(string)"/>
@@ -125,6 +137,9 @@ namespace AmeisenBotX.Wow.Events
             UnsubscribeQueue.Enqueue((eventName, onEventFired));
         }
 
+        /// <summary>
+        /// Handles the sub event queue by processing the queued events and registering them if necessary.
+        /// </summary>
         private void HandleSubEventQueue()
         {
             if (IsActive && SubscribeQueue.Count > 0)
@@ -155,6 +170,9 @@ namespace AmeisenBotX.Wow.Events
             }
         }
 
+        /// <summary>
+        /// Handles the event unsubscription queue.
+        /// </summary>
         private void HandleUnsubEventQueue()
         {
             if (IsActive && UnsubscribeQueue.Count > 0)
@@ -185,6 +203,9 @@ namespace AmeisenBotX.Wow.Events
             }
         }
 
+        /// <summary>
+        /// Resets the state of the object by setting IsActive to false and initializing all queues and the pending Lua execution.
+        /// </summary>
         private void Reset()
         {
             IsActive = false;

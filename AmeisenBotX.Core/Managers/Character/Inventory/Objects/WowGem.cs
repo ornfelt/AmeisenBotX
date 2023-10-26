@@ -2,6 +2,9 @@
 {
     public class WowGem : WowBasicItem
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="WowGem"/> class with the specified <see cref="IWowInventoryItem"/>.
+        /// </summary>
         public WowGem(IWowInventoryItem wowBasicItem) : base(wowBasicItem)
         {
         }

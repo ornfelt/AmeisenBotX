@@ -7,16 +7,28 @@ namespace AmeisenBotX.Core.Engines.Jobs.Profiles.Gathering
 {
     public class CopperElwynnForestProfile : IMiningProfile
     {
+        /// <summary>
+        /// Gets a value indicating whether the path is a circle.
+        /// </summary>
         public bool IsCirclePath => false;
 
+        /// <summary>
+        /// Gets the job type which is set to "Mining".
+        /// </summary>
         public JobType JobType => JobType.Mining;
 
+        /// <summary>
+        /// Gets or sets the list of mailbox nodes in the scene.
+        /// </summary>
         public List<Vector3> MailboxNodes { get; private set; } = new()
         {
             new(-9456, 48, 56),
             //new(-9249, -2144, 64)
         };
 
+        ///<summary>
+        ///Gets the list of ore types.
+        ///</summary>
         //public List<MailBox> MailBoxes { get; } = new List<MailBox>()
         //{
         //    MailBox.MailboxGoldShire
@@ -27,6 +39,9 @@ namespace AmeisenBotX.Core.Engines.Jobs.Profiles.Gathering
             WowOreId.Copper
         };
 
+        /// <summary>
+        /// Represents a list of Vector3 points that define a path.
+        /// </summary>
         public List<Vector3> Path { get; } = new()
         {
             new(-9159, 357, 89),
@@ -498,6 +513,10 @@ namespace AmeisenBotX.Core.Engines.Jobs.Profiles.Gathering
             new(-9242, -631, 63),
         };
 
+        /// <summary>
+        /// Overrides the default ToString() method and returns a string with the format 
+        /// "[JobType] (Copper) Elwynn Forest (Kamel)".
+        /// </summary>
         public override string ToString()
         {
             return $"[{JobType}] (Copper) Elwynn Forest (Kamel)";

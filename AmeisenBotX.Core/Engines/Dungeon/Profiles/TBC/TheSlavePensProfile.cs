@@ -8,22 +8,52 @@ namespace AmeisenBotX.Core.Engines.Dungeon.Profiles.TBC
 {
     public class TheSlavePensProfile : IDungeonProfile
     {
+        /// <summary>
+        /// Gets the author of the code.
+        /// </summary>
         public string Author { get; } = "Jannis";
 
+        /// <summary>
+        /// Gets the description of the profile for the Dungeon in Outland, made for Level 60 to 64.
+        /// </summary>
         public string Description { get; } = "Profile for the Dungeon in Outland, made for Level 60 to 64.";
 
+        /// <summary>
+        /// Gets the position of the dungeon exit in a 3D coordinate system.
+        /// </summary>
         public Vector3 DungeonExit { get; } = new(119, 136, -1);
 
+        /// <summary>
+        /// Gets the faction type of the dungeon. It is set to Neutral by default.
+        /// </summary>
         public DungeonFactionType FactionType { get; } = DungeonFactionType.Neutral;
 
+        /// <summary>
+        /// Gets the group size.
+        /// </summary>
         public int GroupSize { get; } = 5;
 
+        /// <summary>
+        /// Gets the ID for the map "The Slave Pens" in World of Warcraft.
+        /// </summary>
         public WowMapId MapId { get; } = WowMapId.TheSlavePens;
 
+        /// <summary>
+        /// Gets the maximum level allowed.
+        /// </summary>
         public int MaxLevel { get; } = 64;
 
+        /// <summary>
+        /// Gets the name of the instance, which is set to "[60-64] The Slave Pens".
+        /// </summary>
         public string Name { get; } = "[60-64] The Slave Pens";
 
+        /// <summary>
+        /// Gets or sets the list of DungeonNodes.
+        /// </summary>
+        /// <value>
+        /// The list of DungeonNodes.
+        /// </value>
         public List<DungeonNode> Nodes { get; private set; } = new()
         {
             new(new(120, -132, -1)),
@@ -349,14 +379,29 @@ namespace AmeisenBotX.Core.Engines.Dungeon.Profiles.TBC
             new(new(-191, -798, 44), DungeonNodeType.Use),
         };
 
+        /// <summary>
+        /// Gets the list of priority units.
+        /// </summary>
         public List<int> PriorityUnits { get; } = new();
 
+        /// <summary>
+        /// Gets the required item level.
+        /// </summary>
         public int RequiredItemLevel { get; } = 65;
 
+        /// <summary>
+        /// Gets the required level for this item.
+        /// </summary>
         public int RequiredLevel { get; } = 60;
 
+        /// <summary>
+        /// Gets the world entry point as a Vector3 object.
+        /// </summary>
         public Vector3 WorldEntry { get; } = new(737, 7017, -71);
 
+        /// <summary>
+        /// Gets the map ID of the World Entry for the WowMapId. The map ID is set to WowMapId.Outland.
+        /// </summary>
         public WowMapId WorldEntryMapId { get; } = WowMapId.Outland;
     }
 }

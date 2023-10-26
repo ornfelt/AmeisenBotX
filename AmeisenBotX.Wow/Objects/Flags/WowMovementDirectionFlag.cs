@@ -2,6 +2,12 @@
 
 namespace AmeisenBotX.Wow.Objects.Flags
 {
+    /// <summary>
+    /// This enum represents the possible movement directions for a WowMovementDirectionFlag.
+    /// </summary>
+    /// <remarks>
+    /// The flag values are in hexadecimal (HEX) and decimal (DEC) formats.
+    /// </remarks>
     [Flags]
     public enum WowMovementDirectionFlag
     {

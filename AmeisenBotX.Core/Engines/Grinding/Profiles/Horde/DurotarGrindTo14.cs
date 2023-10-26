@@ -9,6 +9,9 @@ namespace AmeisenBotX.Core.Engines.Grinding.Profiles.Horde
 {
     public class DurotarGrindTo14 : IGrindingProfile
     {
+        /// <summary>
+        /// List of NPCs that are of interest.
+        /// </summary>
         public List<Npc> NpcsOfInterest { get; } = new()
         {
             new Npc("Wuark", 3167,
@@ -33,6 +36,9 @@ namespace AmeisenBotX.Core.Engines.Grinding.Profiles.Horde
                 NpcType.ProfessionTrainer, NpcSubType.FirstAidTrainer)
         };
 
+        /// <summary>
+        /// A list of InteractableObjects that represent objects of interest.
+        /// </summary>
         public List<InteractableObject> ObjectsOfInterest { get; } = new()
         {
             new InteractableObject(143981,
@@ -50,8 +56,18 @@ namespace AmeisenBotX.Core.Engines.Grinding.Profiles.Horde
                 InteractableObjectType.Container)
         };
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the spots should be randomized.
+        /// </summary>
+        /// <value>
+        ///   <c>false</c> if the spots should not be randomized; otherwise, <c>true</c>.
+        /// </value>
         public bool RandomizeSpots => false;
 
+        /// <summary>
+        /// This list stores the grinding spots for razormane/scorpids/reptiles.
+        /// Each grinding spot is represented by a GrindingSpot object that contains its position, maximum distance, and minimum and maximum level range.
+        /// </summary>
         public List<GrindingSpot> Spots { get; } = new()
         {
             // razormane/scorpids/reptiles
@@ -62,6 +78,10 @@ namespace AmeisenBotX.Core.Engines.Grinding.Profiles.Horde
             new GrindingSpot(new Vector3(504, -4300, 21), 50.0f, 6, 14)
         };
 
+        /// <summary>
+        /// Converts the object to its string representation.
+        /// Returns the string "[H][Durotar] 10 To 14 Grinding".
+        /// </summary>
         public override string ToString()
         {
             return "[H][Durotar] 10 To 14 Grinding";

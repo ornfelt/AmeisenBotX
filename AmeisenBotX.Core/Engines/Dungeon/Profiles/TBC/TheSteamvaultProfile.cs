@@ -8,22 +8,49 @@ namespace AmeisenBotX.Core.Engines.Dungeon.Profiles.TBC
 {
     public class TheSteamvaultProfile : IDungeonProfile
     {
+        /// <summary>
+        /// Gets the name of the author.
+        /// </summary>
         public string Author { get; } = "Jannis";
 
+        /// <summary>
+        /// Gets the description of the Dungeon profile for the Dungeon in Outland, made for Level 62 to 66.
+        /// </summary>
         public string Description { get; } = "Profile for the Dungeon in Outland, made for Level 62 to 66.";
 
+        /// <summary>
+        /// Gets the position of the dungeon exit.
+        /// </summary>
         public Vector3 DungeonExit { get; } = new(-25, 5, -4);
 
+        /// <summary>
+        /// Gets the faction type of the dungeon.
+        /// </summary>
         public DungeonFactionType FactionType { get; } = DungeonFactionType.Neutral;
 
+        /// <summary>
+        /// Gets the size of the group.
+        /// </summary>
         public int GroupSize { get; } = 5;
 
+        /// <summary>
+        /// Gets or sets the unique identifier for the Steamvault map.
+        /// </summary>
         public WowMapId MapId { get; } = WowMapId.TheSteamvault;
 
+        /// <summary>
+        /// Gets the maximum level, which is set to 66.
+        /// </summary>
         public int MaxLevel { get; } = 66;
 
+        /// <summary>
+        /// Gets the name of the location, which is set to "[62-66] The Steamvault".
+        /// </summary>
         public string Name { get; } = "[62-66] The Steamvault";
 
+        /// <summary>
+        /// Gets or sets a list of DungeonNodes.
+        /// </summary>
         public List<DungeonNode> Nodes { get; private set; } = new()
         {
             new(new(-14, 7, -4)),
@@ -239,14 +266,29 @@ namespace AmeisenBotX.Core.Engines.Dungeon.Profiles.TBC
             new(new(-96, -563, 8)),
         };
 
+        /// <summary>
+        /// Gets the list of priority units.
+        /// </summary>
         public List<int> PriorityUnits { get; } = new();
 
+        /// <summary>
+        /// Gets the required item level.
+        /// </summary>
         public int RequiredItemLevel { get; } = 70;
 
+        /// <summary>
+        /// The required level for this code is set to 62.
+        /// </summary>
         public int RequiredLevel { get; } = 62;
 
+        /// <summary>
+        /// Gets the world entry point as a Vector3. The default entry point is set to (818, 6947, -81).
+        /// </summary>
         public Vector3 WorldEntry { get; } = new(818, 6947, -81);
 
+        /// <summary>
+        /// Gets the map ID of the World Entry in the WowMapId enumeration, which is set to WowMapId.Outland.
+        /// </summary>
         public WowMapId WorldEntryMapId { get; } = WowMapId.Outland;
     }
 }

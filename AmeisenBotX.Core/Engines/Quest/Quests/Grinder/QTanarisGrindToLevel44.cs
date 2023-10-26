@@ -7,10 +7,14 @@ namespace AmeisenBotX.Core.Engines.Quest.Quests.Grinder
 {
     internal class QTanarisGrindToLevel44 : GrindingBotQuest
     {
+        /// <summary>
+        /// Constructor for the QTanarisGrindToLevel44 class.
+        /// </summary>
+        /// <param name="bot">An AmeisenBotInterfaces object representing the bot.</param>
         public QTanarisGrindToLevel44(AmeisenBotInterfaces bot)
-            : base("TanarisGrindToLevel44",
-                new List<IQuestObjective>()
-                {
+                    : base("TanarisGrindToLevel44",
+                        new List<IQuestObjective>()
+                        {
                     new QuestObjectiveChain(new List<IQuestObjective>()
                     {
                         new GrindingObjective(bot, 44, new List<List<Vector3>> {
@@ -69,7 +73,7 @@ namespace AmeisenBotX.Core.Engines.Quest.Quests.Grinder
                             },
                         }),
                     })
-                })
+                        })
         { }
     }
 }

@@ -15,20 +15,46 @@ namespace AmeisenBotX.Wow.Hook
 {
     public class GenericEndSceneHook
     {
+        /// <summary>
+        /// Represents the size of memory allocation in bytes for executing a program.
+        /// </summary>
         private const int MEM_ALLOC_EXECUTION_SIZE = 4096;
+        /// <summary>
+        /// Represents the size of the memory allocation gateway.
+        /// </summary>
         private const int MEM_ALLOC_GATEWAY_SIZE = 24;
+        /// <summary>
+        /// Represents the size of a memory allocation routine, which is constant and set to 256.
+        /// </summary>
         private const int MEM_ALLOC_ROUTINE_SIZE = 256;
+        /// <summary>
+        /// Represents a lock object used for synchronization purposes.
+        /// </summary>
         private readonly object hookLock = new();
 
+        /// <summary>
+        /// Represents the number of hook calls.
+        /// </summary>
         private int hookCalls;
 
+        /// <summary>
+        /// Initializes a new instance of the GenericEndSceneHook class.
+        /// </summary>
+        /// <param name="memory">The WowMemoryApi object to be used for memory operations.</param>
         public GenericEndSceneHook(WowMemoryApi memory)
         {
             Memory = memory;
         }
 
+        /// <summary>
+        /// Event that is triggered when a new GameInfo object is pushed.
+        /// </summary>
         public event Action<GameInfo> OnGameInfoPush;
 
+        /// <summary>
+        /// Gets the number of times a hook call has been made and resets the count to zero.
+        /// </summary>
+        /// <returns>The number of hook calls made.</returns>
         public int HookCallCount
         {
             get
@@ -42,8 +68,17 @@ namespace AmeisenBotX.Wow.Hook
             }
         }
 
+        /// <summary>
+        /// Checks if WowEndSceneAddress is not equal to IntPtr.Zero 
+        /// and if Memory.Read returns true with WowEndSceneAddress as the address and 
+        /// if the value at WowEndSceneAddress is equal to 0xE9, 
+        /// returns true; otherwise, returns false.
+        /// </summary>
         public bool IsWoWHooked => WowEndSceneAddress != IntPtr.Zero && Memory.Read(WowEndSceneAddress, out byte c) && c == 0xE9;
 
+        /// <summary>
+        /// Gets or sets the protected WowMemoryApi object.
+        /// </summary>
         protected WowMemoryApi Memory { get; }
 
         /// <summary>
@@ -128,6 +163,11 @@ namespace AmeisenBotX.Wow.Hook
             Memory.Write(OverrideWorldCheckAddress, status ? 1 : 0);
         }
 
+        /// <summary>
+        /// Executes the game info tick, updating game information and notifying subscribed modules.
+        /// </summary>
+        /// <param name="player">The player unit.</param>
+        /// <param name="target">The target unit.</param>
         public void GameInfoTick(IWowUnit player, IWowUnit target)
         {
             if (Memory.Read(GameInfoExecuteAddress, out int executeStatus)
@@ -177,6 +217,12 @@ namespace AmeisenBotX.Wow.Hook
             }
         }
 
+        /// <summary>
+        /// Hooks into the EndScene function and injects code to be executed.
+        /// </summary>
+        /// <param name="hookSize">The size of the hook.</param>
+        /// <param name="hookModules">The list of hook modules to be injected.</param>
+        /// <returns>True if the hook was successful, false otherwise.</returns>
         public bool Hook(int hookSize, List<IHookModule> hookModules)
         {
             if (hookSize < 0x5) { throw new ArgumentOutOfRangeException(nameof(hookSize), "cannot be smaller than 5"); }
@@ -360,12 +406,24 @@ namespace AmeisenBotX.Wow.Hook
             return IsWoWHooked;
         }
 
+        ///<summary>
+        ///Injects and executes the given assembly.
+        ///</summary>
+        ///<param name="asm">The collection of assembly strings.</param>
+        ///<returns>Returns a boolean indicating the success of the injection and execution process.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool InjectAndExecute(IEnumerable<string> asm)
         {
             return InjectAndExecute(asm, false, out _);
         }
 
+        /// <summary>
+        /// Injects and executes a collection of assemblies in the current process.
+        /// </summary>
+        /// <param name="asm">A collection of assembly strings to inject.</param>
+        /// <param name="returns">A boolean indicating whether the method should return a value.</param>
+        /// <param name="returnAddress">An out parameter to store the memory address of the return value.</param>
+        /// <returns>A boolean indicating whether the injection and execution was successful.</returns>
         public bool InjectAndExecute(IEnumerable<string> asm, bool returns, out IntPtr returnAddress)
         {
             if (!IsWoWHooked)
@@ -420,6 +478,9 @@ namespace AmeisenBotX.Wow.Hook
             return false;
         }
 
+        /// <summary>
+        /// Unhooks the EndScene hook if the WoW process is currently hooked.
+        /// </summary>
         public void Unhook()
         {
             if (IsWoWHooked)
@@ -436,6 +497,10 @@ namespace AmeisenBotX.Wow.Hook
             }
         }
 
+        /// <summary>
+        /// Allocates code caves for various purposes within the program.
+        /// </summary>
+        /// <returns>Returns true if all code caves are successfully allocated, false otherwise.</returns>
         private unsafe bool AllocateCodeCaves()
         {
             AmeisenLogger.I.Log("HookManager", "Allocating Codecaves", LogLevel.Verbose);
@@ -515,6 +580,9 @@ namespace AmeisenBotX.Wow.Hook
             return true;
         }
 
+        /// <summary>
+        /// Retrieves the address of the EndScene function in the game's memory.
+        /// </summary>
         private IntPtr GetEndScene()
         {
             if (Memory.Read(Memory.Offsets.EndSceneStaticDevice, out IntPtr pDevice)

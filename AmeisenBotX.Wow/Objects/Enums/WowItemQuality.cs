@@ -1,5 +1,8 @@
 ﻿namespace AmeisenBotX.Wow.Objects.Enums
 {
+    /// <summary>
+    /// Represents the quality of a World of Warcraft item.
+    /// </summary>
     public enum WowItemQuality
     {
         Unique = -1,

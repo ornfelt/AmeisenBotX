@@ -2,6 +2,9 @@
 {
     public class WowConsumable : WowBasicItem
     {
+        /// <summary>
+        /// Initializes a new instance of the WowConsumable class with the specified WowInventoryItem object as a base.
+        /// </summary>
         public WowConsumable(IWowInventoryItem wowBasicItem) : base(wowBasicItem)
         {
         }

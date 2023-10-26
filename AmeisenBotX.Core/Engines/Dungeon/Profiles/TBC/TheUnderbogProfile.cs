@@ -8,22 +8,49 @@ namespace AmeisenBotX.Core.Engines.Dungeon.Profiles.TBC
 {
     public class TheUnderbogProfile : IDungeonProfile
     {
+        /// <summary>
+        /// Gets the name of the author.
+        /// </summary>
         public string Author { get; } = "Jannis";
 
+        /// <summary>
+        /// Gets the description of the Dungeon profile for the Dungeon in Outland, made for Levels 61 to 65.
+        /// </summary>
         public string Description { get; } = "Profile for the Dungeon in Outland, made for Level 61 to 65.";
 
+        /// <summary>
+        /// Gets the position of the dungeon exit in the form of a Vector3 object.
+        /// </summary>
         public Vector3 DungeonExit { get; } = new(5, -14, -3);
 
+        /// <summary>
+        /// Gets the faction type of the dungeon.
+        /// </summary>
         public DungeonFactionType FactionType { get; } = DungeonFactionType.Neutral;
 
+        ///<summary>
+        /// Gets the size of the group.
+        ///</summary>
         public int GroupSize { get; } = 5;
 
+        /// <summary>
+        /// Gets the map ID for The Underbog.
+        /// </summary>
         public WowMapId MapId { get; } = WowMapId.TheUnderbog;
 
+        /// <summary>
+        /// Gets the maximum level allowed, which is 65.
+        /// </summary>
         public int MaxLevel { get; } = 65;
 
+        ///<summary> 
+        ///Gets the name of the area, which is "[61-65] The Underbog"
+        ///</summary>
         public string Name { get; } = "[61-65] The Underbog";
 
+        /// <summary>
+        /// Gets or sets the list of DungeonNodes in the current Dungeon.
+        /// </summary>
         public List<DungeonNode> Nodes { get; private set; } = new()
         {
             new(new(10, -16, -3)),
@@ -333,14 +360,30 @@ namespace AmeisenBotX.Core.Engines.Dungeon.Profiles.TBC
             new(new(22, -29, -3)),
         };
 
+        /// <summary>
+        /// Gets or sets the list of priority units.
+        /// </summary>
         public List<int> PriorityUnits { get; } = new();
 
+        /// <summary>
+        /// Gets the required item level.
+        /// </summary>
         public int RequiredItemLevel { get; } = 65;
 
+        /// <summary>
+        /// Gets the required level for the code. It is initialized to 61.
+        /// </summary>
         public int RequiredLevel { get; } = 61;
 
+        /// <summary>
+        /// Gets the world entry position in vector3 format.
+        /// The position is set to a specific set of coordinates (782, 6746, -73).
+        /// </summary>
         public Vector3 WorldEntry { get; } = new(782, 6746, -73);
 
+        /// <summary>
+        /// Gets the World Entry Map ID for the Outland.
+        /// </summary>
         public WowMapId WorldEntryMapId { get; } = WowMapId.Outland;
     }
 }

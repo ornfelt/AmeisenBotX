@@ -7,12 +7,16 @@ namespace AmeisenBotX.Core.Engines.Quest.Quests.Durotar.RazorHill
 {
     internal class QVanquishTheBetrayers : BotQuest
     {
+        /// <summary>
+        /// Constructor for the "Vanquish the Betrayers" quest.
+        /// </summary>
+        /// <param name="bot">The AmeisenBotInterfaces object.</param>
         public QVanquishTheBetrayers(AmeisenBotInterfaces bot)
-            : base(bot, 784, "Vanquish the Betrayers", 3, 1,
-                () => (bot.GetClosestQuestGiverByNpcId(bot.Player.Position, new List<int> { 3139 }), new Vector3(274.99f, -4709.30f, 17.57f)),
-                () => (bot.GetClosestQuestGiverByNpcId(bot.Player.Position, new List<int> { 3139 }), new Vector3(274.99f, -4709.30f, 17.57f)),
-                new List<IQuestObjective>()
-                {
+                    : base(bot, 784, "Vanquish the Betrayers", 3, 1,
+                        () => (bot.GetClosestQuestGiverByNpcId(bot.Player.Position, new List<int> { 3139 }), new Vector3(274.99f, -4709.30f, 17.57f)),
+                        () => (bot.GetClosestQuestGiverByNpcId(bot.Player.Position, new List<int> { 3139 }), new Vector3(274.99f, -4709.30f, 17.57f)),
+                        new List<IQuestObjective>()
+                        {
                     new QuestObjectiveChain(new List<IQuestObjective>()
                     {
                         new KillAndLootQuestObjective(bot, new List<int> { 3128 }, 10, 0, new List<List<Vector3>> {
@@ -50,7 +54,7 @@ namespace AmeisenBotX.Core.Engines.Quest.Quests.Durotar.RazorHill
                             },
                         }),
                     })
-                })
+                        })
         { }
     }
 }

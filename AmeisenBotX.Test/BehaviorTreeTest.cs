@@ -9,6 +9,15 @@ namespace AmeisenBotX.Test
     [TestClass]
     public class BehaviorTreeTest
     {
+        /// <summary>
+        /// Tests the behavior of a DualSelector tree.
+        /// The tree has four leaf nodes: treeResult00, treeResult10, treeResult01, and treeResult11.
+        /// The tree selects between two nodes based on the values of FirstNode and SecondFirstNode in the testBlackboard.
+        /// If FirstNode is false, it selects treeResult00 and treeResult01.
+        /// If SecondFirstNode is false, it selects treeResult00 and treeResult10.
+        /// If both FirstNode and SecondFirstNode are true, it selects all four nodes.
+        /// The test checks the values of treeResult variables after each tick of the tree.
+        /// </summary>
         [TestMethod]
         public void DualSelectorTreeTest()
         {
@@ -101,6 +110,9 @@ namespace AmeisenBotX.Test
             Assert.AreEqual(1, treeResult11);
         }
 
+        /// <summary>
+        /// Tests the functionality of inverting the behavior tree.
+        /// </summary>
         [TestMethod]
         public void InverterTreeTest()
         {
@@ -151,6 +163,9 @@ namespace AmeisenBotX.Test
             Assert.AreEqual(0, treeResult1);
         }
 
+        /// <summary>
+        /// Tests the behavior of a nested tree.
+        /// </summary>
         [TestMethod]
         public void NestedTreeTest()
         {
@@ -224,6 +239,9 @@ namespace AmeisenBotX.Test
             Assert.AreEqual(1, treeResult01);
         }
 
+        /// <summary>
+        /// Tests the behavior of the ongoing tree.
+        /// </summary>
         [TestMethod]
         public void OngoingTreeTest()
         {
@@ -322,6 +340,9 @@ namespace AmeisenBotX.Test
             Assert.AreEqual(5, treeResult2);
         }
 
+        /// <summary>
+        /// Tests the behavior of resuming an ongoing behavior tree.
+        /// </summary>
         [TestMethod]
         public void OngoingTreeTestResume()
         {
@@ -440,6 +461,9 @@ namespace AmeisenBotX.Test
             Assert.AreEqual(null, tree.OngoingNode);
         }
 
+        /// <summary>
+        /// This method tests the behavior of the Sequence tree in a specific scenario.
+        /// </summary>
         [TestMethod]
         public void SequenceTreeTest()
         {
@@ -514,6 +538,9 @@ namespace AmeisenBotX.Test
             Assert.AreEqual(1, treeResult2);
         }
 
+        /// <summary>
+        /// XML comment for the SimpleTreeTest method.
+        /// </summary>
         [TestMethod]
         public void SimpleTreeTest()
         {
@@ -564,6 +591,9 @@ namespace AmeisenBotX.Test
             Assert.AreEqual(2, treeResult1);
         }
 
+        /// <summary>
+        /// This is a unit test method for testing the WaterfallTree.
+        /// </summary>
         [TestMethod]
         public void WaterfallTreeTest()
         {
@@ -641,9 +671,18 @@ namespace AmeisenBotX.Test
 
     public class TestBlackboard : IBlackboard
     {
+        /// <summary>
+        /// Gets or sets a value indicating whether this is the first node.
+        /// </summary>
         public bool FirstNode;
+        /// <summary>
+        /// Represents the boolean value indicating whether the second first node is present.
+        /// </summary>
         public bool SecondFirstNode;
 
+        /// <summary>
+        /// This method updates a particular element.
+        /// </summary>
         public void Update()
         {
         }

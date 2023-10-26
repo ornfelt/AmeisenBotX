@@ -1,5 +1,8 @@
 ﻿namespace AmeisenBotX.Wow.Objects.Enums
 {
+    /// <summary>
+    /// Represents the different difficulty modes for World of Warcraft raids.
+    /// </summary>
     public enum WowRaidDifficulty
     {
         Normal10 = 0,

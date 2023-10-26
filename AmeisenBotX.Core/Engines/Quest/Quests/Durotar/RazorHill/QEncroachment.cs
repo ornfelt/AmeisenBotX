@@ -7,12 +7,16 @@ namespace AmeisenBotX.Core.Engines.Quest.Quests.Durotar.RazorHill
 {
     internal class QEncroachment : BotQuest
     {
+        /// <summary>
+        /// Initializes a new instance of the QEncroachment class.
+        /// </summary>
+        /// <param name="bot">The AmeisenBotInterfaces object.</param>
         public QEncroachment(AmeisenBotInterfaces bot)
-            : base(bot, 837, "Encroachment", 6, 1,
-                () => (bot.GetClosestQuestGiverByNpcId(bot.Player.Position, new List<int> { 3139 }), new Vector3(274.99f, -4709.30f, 17.57f)),
-                () => (bot.GetClosestQuestGiverByNpcId(bot.Player.Position, new List<int> { 3139 }), new Vector3(274.99f, -4709.30f, 17.57f)),
-                new List<IQuestObjective>()
-                {
+                    : base(bot, 837, "Encroachment", 6, 1,
+                        () => (bot.GetClosestQuestGiverByNpcId(bot.Player.Position, new List<int> { 3139 }), new Vector3(274.99f, -4709.30f, 17.57f)),
+                        () => (bot.GetClosestQuestGiverByNpcId(bot.Player.Position, new List<int> { 3139 }), new Vector3(274.99f, -4709.30f, 17.57f)),
+                        new List<IQuestObjective>()
+                        {
                     new QuestObjectiveChain(new List<IQuestObjective>()
                     {
                         new KillAndLootQuestObjective(bot, new List<int> { 3111 }, 4, 0, new List<List<Vector3>> {
@@ -115,7 +119,7 @@ namespace AmeisenBotX.Core.Engines.Quest.Quests.Durotar.RazorHill
                             },
                         }),
                     })
-                })
+                        })
         { }
     }
 }

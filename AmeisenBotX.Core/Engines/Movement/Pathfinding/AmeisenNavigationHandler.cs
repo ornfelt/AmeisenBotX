@@ -9,6 +9,9 @@ namespace AmeisenBotX.Core.Engines.Movement.Pathfinding
 {
     public class AmeisenNavigationHandler : IPathfindingHandler
     {
+        /// <summary>
+        /// Initializes a new instance of the AmeisenNavigationHandler class with the specified IP address and port.
+        /// </summary>
         public AmeisenNavigationHandler(string ip, int port)
         {
             Client = new(ip, port);
@@ -16,12 +19,28 @@ namespace AmeisenBotX.Core.Engines.Movement.Pathfinding
             ConnectionWatchdog.Start();
         }
 
+        /// <summary>
+        /// Gets the private AnTcpClient object used for communication.
+        /// </summary>
         private AnTcpClient Client { get; }
 
+        /// <summary>
+        /// Gets or sets the connection watchdog Thread object. 
+        /// </summary>
         private Thread ConnectionWatchdog { get; }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the program should exit.
+        /// </summary>
         private bool ShouldExit { get; set; }
 
+        /// <summary>
+        /// Retrieves a path from the current client's location to a specified target location on a specified map.
+        /// </summary>
+        /// <param name="mapId">The ID of the map on which the path is requested.</param>
+        /// <param name="origin">The starting location of the path.</param>
+        /// <param name="target">The target location to reach.</param>
+        /// <returns>An IEnumerable of Vector3 objects representing the path from the origin to the target. If the client is not connected, an empty array is returned.</returns>
         public IEnumerable<Vector3> GetPath(int mapId, Vector3 origin, Vector3 target)
         {
             try
@@ -34,6 +53,12 @@ namespace AmeisenBotX.Core.Engines.Movement.Pathfinding
             }
         }
 
+        /// <summary>
+        /// This method returns a random point on the map.
+        /// If the client is connected, it sends a message of type RANDOM_POINT and returns the received data as a Vector3.
+        /// If the client is not connected, it returns Vector3.Zero.
+        /// If an exception occurs, it returns Vector3.Zero.
+        /// </summary>
         public Vector3 GetRandomPoint(int mapId)
         {
             try
@@ -46,6 +71,13 @@ namespace AmeisenBotX.Core.Engines.Movement.Pathfinding
             }
         }
 
+        /// <summary>
+        /// Gets a random point around the specified origin within a maximum radius on the specified map.
+        /// </summary>
+        /// <param name="mapId">The ID of the map.</param>
+        /// <param name="origin">The origin point.</param>
+        /// <param name="maxRadius">The maximum radius.</param>
+        /// <returns>A Vector3 representing the random point around the origin, or Vector3.Zero if an exception occurs.</returns>
         public Vector3 GetRandomPointAround(int mapId, Vector3 origin, float maxRadius)
         {
             try
@@ -58,6 +90,9 @@ namespace AmeisenBotX.Core.Engines.Movement.Pathfinding
             }
         }
 
+        ///<summary>
+        ///Moves an object along the surface of a map from its origin to a target location.
+        ///</summary>
         public Vector3 MoveAlongSurface(int mapId, Vector3 origin, Vector3 target)
         {
             try
@@ -70,12 +105,18 @@ namespace AmeisenBotX.Core.Engines.Movement.Pathfinding
             }
         }
 
+        /// <summary>
+        /// Stops the process by setting the ShouldExit property to true and joining the ConnectionWatchdog thread.
+        /// </summary>
         public void Stop()
         {
             ShouldExit = true;
             ConnectionWatchdog.Join();
         }
 
+        /// <summary>
+        /// Periodically checks if the client is connected and attempts to connect if not.
+        /// </summary>
         private void ObserveConnection()
         {
             while (!ShouldExit)

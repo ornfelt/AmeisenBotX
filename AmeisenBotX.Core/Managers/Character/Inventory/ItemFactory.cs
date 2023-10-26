@@ -9,6 +9,11 @@ namespace AmeisenBotX.Core.Managers.Character.Inventory
 {
     public static class ItemFactory
     {
+        /// <summary>
+        /// Builds a specific item based on the type of the basic item.
+        /// </summary>
+        /// <param name="basicItem">The basic item to build a specific item from.</param>
+        /// <returns>A specific item based on the type of the basic item.</returns>
         public static WowBasicItem BuildSpecificItem(WowBasicItem basicItem)
         {
             if (basicItem == null)
@@ -41,6 +46,11 @@ namespace AmeisenBotX.Core.Managers.Character.Inventory
             };
         }
 
+        /// <summary>
+        /// Parses a JSON string into a WowBasicItem object using JsonSerializer.
+        /// </summary>
+        /// <param name="json">The JSON string to parse.</param>
+        /// <returns>The parsed WowBasicItem object.</returns>
         public static WowBasicItem ParseItem(string json)
         {
             return JsonSerializer.Deserialize<WowBasicItem>(json, new JsonSerializerOptions
@@ -50,6 +60,11 @@ namespace AmeisenBotX.Core.Managers.Character.Inventory
             });
         }
 
+        /// <summary>
+        /// Parses a JSON string into a list of WowBasicItem objects.
+        /// </summary>
+        /// <param name="json">The JSON string to parse.</param>
+        /// <returns>A list of WowBasicItem objects.</returns>
         public static List<WowBasicItem> ParseItemList(string json)
         {
             return JsonSerializer.Deserialize<List<WowBasicItem>>(json, new JsonSerializerOptions

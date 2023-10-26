@@ -57,10 +57,19 @@ namespace AmeisenBotX.Common.Math
         {
         }
 
+        /// <summary>
+        /// Gets or sets the X coordinate.
+        /// </summary>
         public float X { get; set; }
 
+        ///<summary>
+        /// Gets or sets the Y coordinate.
+        ///</summary>
         public float Y { get; set; }
 
+        /// <summary>
+        /// Gets or sets the value of Z, a float variable.
+        /// </summary>
         public float Z { get; set; }
 
         /// <summary>

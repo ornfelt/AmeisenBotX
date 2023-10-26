@@ -2,6 +2,9 @@
 
 namespace AmeisenBotX.Wow.Objects.Flags
 {
+    ///<summary>
+    ///Flags for performing hit tests on the WowWorldFrame.
+    ///</summary>
     [Flags]
     public enum WowWorldFrameHitFlag : uint
     {

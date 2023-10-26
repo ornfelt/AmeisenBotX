@@ -8,24 +8,59 @@ namespace AmeisenBotX.Core.Engines.Dungeon.Profiles.Classic
 {
     public class DeadminesProfile : IDungeonProfile
     {
+        /// <summary>
+        /// The name of the Defias Gunpowder.
+        /// </summary>
         private const string defiasGunPowderName = "Defias Gunpowder";
 
+        /// <summary>
+        /// Gets the author of the code.
+        /// </summary>
         public string Author { get; } = "Jannis";
 
+        /// <summary>
+        /// Gets or sets the description of the Dungeon profile.
+        /// </summary>
+        /// <value>
+        /// Profile for the Dungeon in Westfall, made for Level 15 to 18.
+        /// </value>
         public string Description { get; } = "Profile for the Dungeon in Westfall, made for Level 15 to 18.";
 
+        /// <summary>
+        /// Gets the coordinates of the dungeon exit in a Vector3 format.
+        /// </summary>
         public Vector3 DungeonExit { get; } = new(-15, -392, 63);
 
+        /// <summary>
+        /// Gets or sets the faction type of the dungeon as Neutral.
+        /// </summary>
         public DungeonFactionType FactionType { get; } = DungeonFactionType.Neutral;
 
+        /// <summary>
+        /// Gets the size of the group, which is always 5.
+        /// </summary>
         public int GroupSize { get; } = 5;
 
+        /// <summary>
+        /// Gets the map ID of the Deadmines.
+        /// </summary>
         public WowMapId MapId { get; } = WowMapId.Deadmines;
 
+        /// <summary>
+        /// Gets or sets the maximum level allowed.
+        /// </summary>
         public int MaxLevel { get; } = 18;
 
+        /// <summary>
+        /// Gets the name of the location, which is "[15-18] Deadmines".
+        /// </summary>
         public string Name { get; } = "[15-18] Deadmines";
 
+        ///<summary>
+        ///A list of DungeonNodes representing the nodes in the dungeon. Each DungeonNode 
+        ///contains the coordinates of the node and an optional DungeonNodeType, 
+        ///indicating whether it is a boss node, a door node, a collect node, or a use node.
+        ///</summary>
         public List<DungeonNode> Nodes { get; private set; } = new()
         {
             new(new(-16, -383, 62)),
@@ -113,14 +148,30 @@ namespace AmeisenBotX.Core.Engines.Dungeon.Profiles.Classic
             new(new(-64, -821, 41))
         };
 
+        /// <summary>
+        /// Gets the list of priority units.
+        /// </summary>
         public List<int> PriorityUnits { get; } = new();
 
+        /// <summary>
+        /// Gets the required item level.
+        /// </summary>
         public int RequiredItemLevel { get; } = 10;
 
+        /// <summary>
+        /// Gets the required level.
+        /// </summary>
         public int RequiredLevel { get; } = 15;
 
+        /// <summary>
+        /// Gets the world entry coordinates in a three-dimensional vector.
+        /// The coordinates are set to (-11208, 1680, 24) by default.
+        /// </summary>
         public Vector3 WorldEntry { get; } = new(-11208, 1680, 24);
 
+        /// <summary>
+        /// Gets the map ID of the World Entry in Eastern Kingdoms.
+        /// </summary>
         public WowMapId WorldEntryMapId { get; } = WowMapId.EasternKingdoms;
     }
 }

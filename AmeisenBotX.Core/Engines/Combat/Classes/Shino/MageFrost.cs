@@ -13,6 +13,12 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Shino
 {
     public class MageFrost : TemplateCombatClass
     {
+        /// <summary>
+        /// Initializes a new instance of the MageFrost class.
+        /// Adds jobs to the MyAuraManager to keep active auras, including Arcane Intellect, Frost Armor, Ice Armor, Mana Shield, and Ice Barrier.
+        /// Sets the InterruptSpells property of the InterruptManager to include Counterspell.
+        /// </summary>
+        /// <param name="bot">The AmeisenBotInterfaces object used for initialization.</param>
         public MageFrost(AmeisenBotInterfaces bot) : base(bot)
         {
             MyAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, Mage335a.ArcaneIntellect, () => TryCastSpell(Mage335a.ArcaneIntellect, 0, true)));
@@ -27,18 +33,43 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Shino
             };
         }
 
+        /// <summary>
+        /// Gets the description of the grinding and leveling combat class.
+        /// </summary>
         public override string Description => "Grinding and Leveling CombatClass.";
 
+        /// <summary>
+        /// Gets or sets the display name of the Frostmage.
+        /// </summary>
         public override string DisplayName2 => "Frostmage";
 
+        /// <summary>
+        /// Gets or sets a value indicating whether this object handles movement.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if this object handles movement; otherwise, <c>false</c>.
+        /// </value>
         public override bool HandlesMovement => false;
 
+        /// <summary>
+        /// Gets a value indicating whether this character is not a melee character.
+        /// </summary>
         public override bool IsMelee => false;
 
+        ///<summary>
+        /// Gets or sets the item comparator used for comparing items.
+        ///</summary>
         public override IItemComparator ItemComparator { get; set; } = new BasicIntellectComparator(new() { WowArmorType.Shield }, new() { WowWeaponType.Sword, WowWeaponType.Mace, WowWeaponType.Axe });
 
+        /// <summary>
+        /// Gets or sets the role of the character in the World of Warcraft game.
+        /// The role is set to Damage Per Second (DPS).
+        /// </summary>
         public override WowRole Role => WowRole.Dps;
 
+        /// <summary>
+        /// Gets or sets the talent tree for the object.
+        /// </summary>
         public override TalentTree Talents { get; } = new()
         {
             Tree1 = new()
@@ -77,18 +108,42 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Shino
             },
         };
 
+        /// <summary>
+        /// Gets or sets a value indicating whether this character should use auto attacks.
+        /// </summary>
         public override bool UseAutoAttacks => true;
 
+        /// <summary>
+        /// Gets the version of the object.
+        /// </summary>
         public override string Version => "1.0";
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the player can walk behind an enemy.
+        /// </summary>
+        /// <returns>A boolean value indicating whether the player can walk behind an enemy. Always returns false.</returns>
         public override bool WalkBehindEnemy => false;
 
+        /// <summary>
+        /// Gets or sets the WowClass of the character,
+        /// which is set to Mage in this case.
+        /// </summary>
         public override WowClass WowClass => WowClass.Mage;
 
+        /// <summary>
+        /// Gets or sets the WowVersion property to the value of WowVersion.WotLK335a.
+        /// </summary>
         public override WowVersion WowVersion => WowVersion.WotLK335a;
 
+        /// <summary>
+        /// Gets or sets the date and time of the last sheep.
+        /// </summary>
         private DateTime LastSheep { get; set; } = DateTime.Now;
 
+        /// <summary>
+        /// Executes the mage's rotation logic to attack the target. 
+        /// This method overrides the base Execute method.
+        /// </summary>
         public override void Execute()
         {
             base.Execute();
@@ -183,6 +238,16 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Shino
             }
         }
 
+        /// <summary>
+        /// This method is used to destroy conjured items from the character's inventory based on the spell rank. 
+        /// It first checks if the character knows the spell ConjureWater. If true, it goes through a series of if statements 
+        /// to destroy conjured water items in the inventory based on the spell rank. It then checks if the character knows 
+        /// the spell ConjureRefreshment and destroys Conjured Glacier Water if true. 
+        /// If the character knows the spell ConjureFood, it goes through a series of if statements to destroy conjured 
+        /// food items in the inventory based on the spell rank. It also checks if the character knows the spell ConjureRefreshment 
+        /// and destroys Conjured Croissant if true. If the character knows the spell ConjureRefreshment, it destroys 
+        /// Conjured Mana Pie if the character doesn't have it. It then calls the base OutOfCombatExecute method.
+        /// </summary>
         public override void OutOfCombatExecute()
         {
             if (Bot.Character.SpellBook.IsSpellKnown(Mage335a.ConjureWater))
@@ -328,6 +393,12 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Shino
             base.OutOfCombatExecute();
         }
 
+        /// <summary>
+        /// Retrieves the opening spell for the bot's character.
+        /// </summary>
+        /// <returns>
+        /// The opening spell. If the character has a Frostbolt spell, it will be returned; otherwise, the Fireball spell will be returned.
+        /// </returns>
         protected override Spell GetOpeningSpell()
         {
             Spell spell = Bot.Character.SpellBook.GetSpellByName(Mage335a.FrostBolt);

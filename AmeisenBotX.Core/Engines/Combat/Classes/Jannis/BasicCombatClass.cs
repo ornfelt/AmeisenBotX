@@ -22,20 +22,28 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis
 {
     public abstract class BasicCombatClass : SimpleConfigurable, ICombatClass
     {
+        /// This array holds the IDs of various healing items that can be used by the player. It includes IDs for potions and healthstones.
         private readonly int[] useableHealingItems = new int[]
-                                                                                                                                                                                                                                                                                                                                                                                {
+                                                                                                                                                                                                                                                                                                                                                                                        {
             // potions
             118, 929, 1710, 2938, 3928, 4596, 5509, 13446, 22829, 33447,
             // healthstones
             5509, 5510, 5511, 5512, 9421, 19013, 22103, 36889, 36892,
-        };
+                };
 
+        /// <summary>
+        /// An array of item IDs representing usable mana items.
+        /// </summary>
         private readonly int[] useableManaItems = new int[]
-        {
+                {
             // potions
             2245, 3385, 3827, 6149, 13443, 13444, 33448, 22832,
-        };
+                };
 
+        /// <summary>
+        /// Initializes a new instance of the BasicCombatClass class with the provided bot.
+        /// </summary>
+        /// <param name="bot">The AmeisenBotInterfaces object that represents the bot.</param>
         protected BasicCombatClass(AmeisenBotInterfaces bot)
         {
             Bot = bot;
@@ -62,70 +70,151 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis
             Configurables.TryAdd("ManaItemThreshold", 30.0);
         }
 
+        /// <summary>
+        /// Gets or sets the name of the author.
+        /// </summary>
         public string Author { get; } = "Jannis";
 
+        /// Gets or sets the blacklisted target display ids.
         public IEnumerable<int> BlacklistedTargetDisplayIds { get => TargetProviderDps.BlacklistedTargets; set => TargetProviderDps.BlacklistedTargets = value; }
 
+        /// Gets or sets the instance of the CooldownManager class that manages cooldown periods.
         public CooldownManager CooldownManager { get; private set; }
 
+        /// <summary>
+        /// Gets the description of the object as a string.
+        /// </summary>
         public abstract string Description { get; }
 
+        /// <summary>
+        /// Gets the display name with the WowVersion surrounded by square brackets and the DisplayName2.
+        /// </summary>
         public string DisplayName => $"[{WowVersion}] {DisplayName2}";
 
+        /// <summary>
+        /// Gets the display name of the object.
+        /// </summary>
         public abstract string DisplayName2 { get; }
 
+        /// Represents the time-limited event of an automatic attack occurrence.
         public TimegatedEvent EventAutoAttack { get; private set; }
 
+        /// Gets or sets the TimegatedEvent for checking the facing of an event.
         public TimegatedEvent EventCheckFacing { get; set; }
 
+        /// Property for accessing the GroupAuraManager object.
         public GroupAuraManager GroupAuraManager { get; private set; }
 
+        /// <summary>
+        /// Gets a boolean value indicating if the code handles facing.
+        /// </summary>
         public bool HandlesFacing => true;
 
+        /// <summary>
+        /// Gets a value indicating whether this object handles movement.
+        /// </summary>
+        /// <returns>True if this object handles movement; otherwise, false.</returns>
         public abstract bool HandlesMovement { get; }
 
+        /// <summary>
+        /// Gets or sets the reference to the InterruptManager object.
+        /// </summary>
         public InterruptManager InterruptManager { get; private set; }
 
+        /// <summary>
+        /// Gets a value indicating whether this character is a melee character.
+        /// </summary>
         public abstract bool IsMelee { get; }
 
+        ///<summary>
+        /// Gets or sets the item comparator used for comparing items.
+        ///</summary>
         public abstract IItemComparator ItemComparator { get; set; }
 
+        /// Gets or sets the AuraManager object associated with this instance.
         public AuraManager MyAuraManager { get; private set; }
 
+        /// Gets or sets the display IDs of the priority targets for the target provider DPS.
         public IEnumerable<int> PriorityTargetDisplayIds { get => TargetProviderDps.PriorityTargets; set => TargetProviderDps.PriorityTargets = value; }
 
+        /// <summary>
+        /// Gets or sets the dictionary containing the resurrection targets as key-value pairs,
+        /// where the key is a string and the value is a DateTime object.
+        /// </summary>
         public Dictionary<string, DateTime> RessurrectionTargets { get; private set; }
 
+        /// <summary>
+        /// Gets or sets the role of the Wow object.
+        /// </summary>
         public abstract WowRole Role { get; }
 
+        /// <summary>
+        /// Gets the talent tree for the current instance.
+        /// </summary>
         public abstract TalentTree Talents { get; }
 
+        /// <summary>
+        /// Gets or sets the target AuraManager for this object.
+        /// </summary>
         public AuraManager TargetAuraManager { get; private set; }
 
+        /// <summary>
+        /// Gets the target provider for Dps.
+        /// </summary>
         public ITargetProvider TargetProviderDps { get; private set; }
 
+        /// Gets or sets the target provider for healing operations.
         public ITargetProvider TargetProviderHeal { get; private set; }
 
+        /// Gets or sets the target provider for tanks.
         public ITargetProvider TargetProviderTank { get; private set; }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the entity will use auto attacks.
+        /// </summary>
+        /// <returns>True if the entity will use auto attacks; otherwise, false.</returns>
         public abstract bool UseAutoAttacks { get; }
 
+        /// <summary>
+        /// Gets the version of the object.
+        /// </summary>
         public abstract string Version { get; }
 
+        /// <summary>
+        /// Gets a value indicating whether the character can walk behind enemies.
+        /// </summary>
+        /// <returns>True if the character can walk behind enemies, false otherwise.</returns>
         public abstract bool WalkBehindEnemy { get; }
 
+        /// <summary>
+        /// Gets or sets the WowClass property.
+        /// </summary>
         public abstract WowClass WowClass { get; }
 
+        /// Gets the version of Wow.
         public abstract WowVersion WowVersion { get; }
 
+        /// <summary>
+        /// Gets or sets the instance of the AmeisenBotInterfaces class that represents the bot.
+        /// </summary>
         protected AmeisenBotInterfaces Bot { get; }
 
+        /// <summary>
+        /// Gets or sets the date and time of when the last spell was cast.
+        /// </summary>
         protected DateTime LastSpellCast { get; private set; }
 
+        /// <summary>
+        /// Gets or sets the list of functions that determine whether a spell should be aborted or not.
+        /// </summary>
         protected List<Func<bool, bool>> SpellAbortFunctions { get; }
 
+        /// Gets or sets the unique identifier of the current cast target.
         private ulong CurrentCastTargetGuid { get; set; }
 
+        /// <summary>
+        /// Attacks the target if it is within melee range, otherwise moves towards the target.
+        /// </summary>
         public virtual void AttackTarget()
         {
             if (Bot.Target == null)
@@ -145,6 +234,7 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis
             }
         }
 
+        /// This method represents the execution logic of the bot. It first checks if the target is not null and if the event check facing is successful. If both conditions are met, the bot will call the CheckFacing method on the target. 
         public virtual void Execute()
         {
             if (Bot.Target != null && EventCheckFacing.Run())
@@ -244,6 +334,7 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis
             }
         }
 
+        /// This method is responsible for executing actions when the player is out of combat. It first checks if the player is currently casting a spell, and if so, it checks if the target is in line of sight or if any spell abort functions are triggered. If either condition is met, the player's casting is stopped. 
         public virtual void OutOfCombatExecute()
         {
             if (Bot.Player.IsCasting)
@@ -269,11 +360,21 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis
             }
         }
 
+        /// <summary>
+        /// Override method that returns a string representation of the object in the format: [WowClass] [Role] DisplayName (Author)
+        /// </summary>
         public override string ToString()
         {
             return $"[{WowClass}] [{Role}] {DisplayName} ({Author})";
         }
 
+        /// <summary>
+        /// Checks if a weapon enchantment is present on the specified equipment slot.
+        /// </summary>
+        /// <param name="slot">The equipment slot to check.</param>
+        /// <param name="enchantmentName">The name of the weapon enchantment to look for.</param>
+        /// <param name="spellToCastEnchantment">The spell to cast the enchantment.</param>
+        /// <returns>True if the weapon enchantment is not present and the spell to cast the enchantment was successfully cast, otherwise false.</returns>
         protected bool CheckForWeaponEnchantment(WowEquipmentSlot slot, string enchantmentName, string spellToCastEnchantment)
         {
             if (Bot.Character.Equipment.Items.ContainsKey(slot))
@@ -296,6 +397,11 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis
             return false;
         }
 
+        /// This method handles dead party members by checking if the given spell is available, has enough mana cost, and is not on cooldown. 
+        /// It then iterates through the party members, finds the first dead player who is not in the resurrection targets dictionary or has expired in the dictionary, 
+        /// then adds the player's name to the resurrection targets dictionary with a 10-second expiration time and attempts to cast the spell on the player. 
+        /// If the player's name is already in the resurrection targets dictionary and has not expired, it attempts to cast the spell on the player. 
+        /// Finally, it returns true if the method successfully handles a dead party member, otherwise false.
         protected bool HandleDeadPartymembers(string spellName)
         {
             Spell spell = Bot.Character.SpellBook.GetSpellByName(spellName);
@@ -336,6 +442,12 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis
             return false;
         }
 
+        /// <summary>
+        /// Determines if a spell is within the specified range of a unit.
+        /// </summary>
+        /// <param name="spell">The spell to check the range for.</param>
+        /// <param name="wowUnit">The unit to check the range against.</param>
+        /// <returns>True if the spell is within the specified range of the unit, otherwise false.</returns>
         protected bool IsInRange(Spell spell, IWowUnit wowUnit)
         {
             if ((spell.MinRange == 0 && spell.MaxRange == 0) || spell.MaxRange == 0)
@@ -347,18 +459,51 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis
             return distance >= spell.MinRange && distance <= spell.MaxRange - 1.0;
         }
 
+        ///<summary>
+        ///Attempts to cast an area of effect (AOE) spell with the specified spellName, targeting the entity with the given guid.
+        ///</summary>
+        ///<param name="spellName">The name of the spell to be cast.</param>
+        ///<param name="guid">The unique identifier of the target entity.</param>
+        ///<param name="needsResource">(Optional) Determines whether the spell requires a resource to be cast.</param>
+        ///<param name="currentResourceAmount">(Optional) The current amount of resource available for casting the spell.</param>
+        ///<param name="forceTargetSwitch">(Optional) Specifies whether the target of the spell should be switched forcefully.</param>
+        ///<returns>
+        ///Returns true if the spell was successfully cast and the AOE effect was applied, otherwise false.
+        ///</returns>
         protected bool TryCastAoeSpell(string spellName, ulong guid, bool needsResource = false, int currentResourceAmount = 0, bool forceTargetSwitch = false)
         {
             return TryCastSpell(spellName, guid, needsResource, currentResourceAmount, forceTargetSwitch)
                 && CastAoeSpell(guid);
         }
 
+        /// <summary>
+        /// Tries to cast an area of effect spell for a Death Knight character with the specified parameters.
+        /// </summary>
+        /// <param name="spellName">The name of the spell to be cast.</param>
+        /// <param name="guid">The unique identifier of the target.</param>
+        /// <param name="needsRunicPower">Optional parameter to indicate if the spell requires runic power.</param>
+        /// <param name="needsBloodrune">Optional parameter to indicate if the spell requires a blood rune.</param>
+        /// <param name="needsFrostrune">Optional parameter to indicate if the spell requires a frost rune.</param>
+        /// <param name="needsUnholyrune">Optional parameter to indicate if the spell requires an unholy rune.</param>
+        /// <param name="forceTargetSwitch">Optional parameter to determine if the target should be switched.</param>
+        /// <returns>True if the spell was successfully cast; otherwise, false.</returns>
         protected bool TryCastAoeSpellDk(string spellName, ulong guid, bool needsRunicPower = false, bool needsBloodrune = false, bool needsFrostrune = false, bool needsUnholyrune = false, bool forceTargetSwitch = false)
         {
             return TryCastSpellDk(spellName, guid, needsRunicPower, needsBloodrune, needsFrostrune, needsUnholyrune, forceTargetSwitch)
                 && CastAoeSpell(guid);
         }
 
+        /// <summary>
+        /// Tries to cast a spell with the given parameters.
+        /// </summary>
+        /// <param name="spellName">The name of the spell to cast.</param>
+        /// <param name="guid">The GUID of the target for the spell. Set to 0 for self-targeting spells.</param>
+        /// <param name="needsResource">Optional. Determines whether the spell requires a resource. Default is false.</param>
+        /// <param name="currentResourceAmount">Optional. The current amount of resources available. Default is 0.</param>
+        /// <param name="forceTargetSwitch">Optional. Determines whether to force a target switch. Default is false.</param>
+        /// <param name="additionalValidation">Optional. Additional validation function to check before casting the spell. Default is null.</param>
+        /// <param name="additionalPreperation">Optional. Additional preparation function to execute before casting the spell. Default is null.</param>
+        /// <returns>True if the spell was cast successfully, false otherwise.</returns>
         protected bool TryCastSpell(string spellName, ulong guid, bool needsResource = false, int currentResourceAmount = 0, bool forceTargetSwitch = false, Func<bool> additionalValidation = null, Func<bool> additionalPreperation = null)
         {
             if (!Bot.Character.SpellBook.IsSpellKnown(spellName) || (guid != 0 && guid != Bot.Wow.PlayerGuid && !Bot.Objects.IsTargetInLineOfSight)) { return false; }
@@ -390,6 +535,17 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis
             return false;
         }
 
+        /// <summary>
+        /// Tries to cast a spell for a Death Knight character.
+        /// </summary>
+        /// <param name="spellName">The name of the spell to cast.</param>
+        /// <param name="guid">The unique identifier of the character.</param>
+        /// <param name="needsRunicPower">Determines if the spell needs runic power.</param>
+        /// <param name="needsBloodrune">Determines if the spell needs a blood rune.</param>
+        /// <param name="needsFrostrune">Determines if the spell needs a frost rune.</param>
+        /// <param name="needsUnholyrune">Determines if the spell needs an unholy rune.</param>
+        /// <param name="forceTargetSwitch">Determines if the target needs to be switched.</param>
+        /// <returns>True if the spell was cast successfully, otherwise false.</returns>
         protected bool TryCastSpellDk(string spellName, ulong guid, bool needsRunicPower = false, bool needsBloodrune = false, bool needsFrostrune = false, bool needsUnholyrune = false, bool forceTargetSwitch = false)
         {
             return TryCastSpell(spellName, guid, needsRunicPower, Bot.Player.RunicPower, forceTargetSwitch, () =>
@@ -401,6 +557,16 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis
             });
         }
 
+        /// <summary>
+        /// Tries to cast a spell for a rogue character, with the option to specify energy, combo points, and a target switch.
+        /// </summary>
+        /// <param name="spellName">The name of the spell to cast.</param>
+        /// <param name="guid">The unique identifier of the rogue character.</param>
+        /// <param name="needsEnergy">Indicates whether the spell requires energy.</param>
+        /// <param name="needsCombopoints">Indicates whether the spell requires combo points.</param>
+        /// <param name="requiredCombopoints">The minimum number of combo points required to cast the spell.</param>
+        /// <param name="forceTargetSwitch">Indicates whether a target switch should be forced.</param>
+        /// <returns>True if the spell was successfully cast, otherwise false.</returns>
         protected bool TryCastSpellRogue(string spellName, ulong guid, bool needsEnergy = false, bool needsCombopoints = false, int requiredCombopoints = 1, bool forceTargetSwitch = false)
         {
             return TryCastSpell(spellName, guid, needsEnergy, Bot.Player.Energy, forceTargetSwitch, () =>
@@ -409,6 +575,15 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis
             });
         }
 
+        /// <summary>
+        /// Tries to cast a spell for a warrior character.
+        /// </summary>
+        /// <param name="spellName">The name of the spell to cast.</param>
+        /// <param name="requiredStance">The required stance for the spell.</param>
+        /// <param name="guid">The unique identifier of the character.</param>
+        /// <param name="needsResource">Optional. Indicates if the spell needs a resource.</param>
+        /// <param name="forceTargetSwitch">Optional. Indicates if the target should be switched forcibly.</param>
+        /// <returns>True if the spell was cast successfully; otherwise, false.</returns>
         protected bool TryCastSpellWarrior(string spellName, string requiredStance, ulong guid, bool needsResource = false, bool forceTargetSwitch = false)
         {
             return TryCastSpell(spellName, guid, needsResource, Bot.Player.Rage, forceTargetSwitch, null, () =>
@@ -425,6 +600,10 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis
             });
         }
 
+        /// <summary>
+        /// Attempts to find a target using the given targetProvider and sets the specified targets out parameter.
+        /// Returns true if a valid target is found, false otherwise.
+        /// </summary>
         protected bool TryFindTarget(ITargetProvider targetProvider, out IEnumerable<IWowUnit> targets)
         {
             if (targetProvider.Get(out targets))
@@ -452,6 +631,11 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis
             return false;
         }
 
+        /// <summary>
+        /// Casts an area-of-effect spell on the specified target.
+        /// </summary>
+        /// <param name="targetGuid">The unique identifier of the target to cast the spell on.</param>
+        /// <returns>Returns true if the spell was successfully cast, otherwise false.</returns>
         private bool CastAoeSpell(ulong targetGuid)
         {
             if (ValidateTarget(targetGuid, out IWowUnit target, out bool _))
@@ -464,6 +648,7 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis
             return false;
         }
 
+        /// This method checks if a spell can be cast and performs the casting if possible. It retrieves the cooldown of the spell using Lua and parses the result. If the cooldown is negative, it sets it to a default value of 100 ms. Then it sets the cooldown of the spell using the CooldownManager. If the spell casting is successful, it logs the casting target and the cooldown. If the casting fails, it logs the failure along with the cooldown. Returns true if the spell was cast successfully, false otherwise.
         private bool CastSpell(string spellName, bool castOnSelf)
         {
             // spits out stuff like this "1;300" (1 or 0 whether the cast was successful or
@@ -523,6 +708,9 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis
             return false;
         }
 
+        /// <summary>
+        /// Checks if the target is facing the player, and makes the player face the target if not.
+        /// </summary>
         private void CheckFacing(IWowUnit target)
         {
             if (target != null
@@ -533,6 +721,13 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis
             }
         }
 
+        /// <summary>
+        /// This method prepares for the cast of a spell by potentially changing the target and preventing movement.
+        /// </summary>
+        /// <param name="isTargetMyself">A boolean indicating whether the target is the player or not.</param>
+        /// <param name="target">The target of the spell.</param>
+        /// <param name="switchTarget">A boolean indicating whether to switch the target or not.</param>
+        /// <param name="spell">The spell to be cast.</param>
         private void PrepareCast(bool isTargetMyself, IWowUnit target, bool switchTarget, Spell spell)
         {
             if (!isTargetMyself && switchTarget)
@@ -546,6 +741,15 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis
             }
         }
 
+        /// <summary>
+        /// Validates if a spell can be cast on a target with the provided parameters.
+        /// </summary>
+        /// <param name="spell">The spell to be cast.</param>
+        /// <param name="target">The target on which the spell will be cast.</param>
+        /// <param name="resource">The available resource for casting the spell.</param>
+        /// <param name="needsResource">Determines if the spell requires a resource.</param>
+        /// <param name="isTargetMyself">Determines if the target is the caster themself.</param>
+        /// <returns>True if the spell is valid to be cast, otherwise false.</returns>
         private bool ValidateSpell(Spell spell, IWowUnit target, int resource, bool needsResource, bool isTargetMyself)
         {
             return spell != null
@@ -554,6 +758,11 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis
                 && (isTargetMyself || IsInRange(spell, target));
         }
 
+        /// <summary>
+        /// Validates the target based on the given GUID and retrieves the corresponding IWowUnit object. 
+        /// Sets the target and needToSwitchTargets flags accordingly.
+        /// Returns true if the target is not null.
+        /// </summary>
         private bool ValidateTarget(ulong guid, out IWowUnit target, out bool needToSwitchTargets)
         {
             if (guid == 0)

@@ -8,22 +8,51 @@ namespace AmeisenBotX.Core.Engines.Dungeon.Profiles.TBC
 {
     public class HellfireRampartsProfile : IDungeonProfile
     {
+        /// <summary>
+        /// Gets the name of the author of the code.
+        /// </summary>
         public string Author { get; } = "Jannis";
 
+        /// <summary>
+        /// Gets the description of the DungeonProfile.
+        /// </summary>
+        /// <returns>The description of the DungeonProfile, "Profile for the Dungeon in Outland, made for Level 58 to 62."</returns>
         public string Description { get; } = "Profile for the Dungeon in Outland, made for Level 58 to 62.";
 
+        /// <summary>
+        /// Gets the position of the dungeon exit.
+        /// </summary>
         public Vector3 DungeonExit { get; } = new(-1357, -1634, 68);
 
+        /// <summary>
+        /// Gets the faction type of the dungeon, which is set to Neutral by default.
+        /// </summary>
         public DungeonFactionType FactionType { get; } = DungeonFactionType.Neutral;
 
+        /// <summary>
+        /// Gets the group size, which is a constant value of 5.
+        /// </summary>
         public int GroupSize { get; } = 5;
 
+        /// <summary>
+        /// Gets the MapId property which represents the map ID for the Hellfire Ramparts in the World of Warcraft.
+        /// </summary>
         public WowMapId MapId { get; } = WowMapId.HellfireRamparts;
 
+        /// <summary>
+        /// Gets the maximum level.
+        /// </summary>
         public int MaxLevel { get; } = 62;
 
+        /// <summary>
+        /// Gets the name of the location, which is set to "[58-62] Hellfire Ramparts".
+        /// </summary>
         public string Name { get; } = "[58-62] Hellfire Ramparts";
 
+        /// <summary>
+        /// Gets or sets the list of DungeonNode objects.
+        /// </summary>
+        /// <value>The list of DungeonNode objects.</value>
         public List<DungeonNode> Nodes { get; private set; } = new()
         {
             new(new(-1355, 1641, 68)),
@@ -208,14 +237,30 @@ namespace AmeisenBotX.Core.Engines.Dungeon.Profiles.TBC
             new(new(-1429, 1771, 82), DungeonNodeType.Use),
         };
 
+        /// <summary>
+        /// Gets the list of priority units.
+        /// </summary>
         public List<int> PriorityUnits { get; } = new();
 
+        /// <summary>
+        /// Gets the required item level.
+        /// </summary>
         public int RequiredItemLevel { get; } = 60;
 
+        /// <summary>
+        /// Gets the required level, which is set to 58.
+        /// </summary>
         public int RequiredLevel { get; } = 58;
 
+        /// <summary>
+        /// Gets the position of the world entry in a three-dimensional Cartesian coordinate system.
+        /// The position is set to (-362, 3078, -15) by default.
+        /// </summary>
         public Vector3 WorldEntry { get; } = new(-362, 3078, -15);
 
+        /// <summary>
+        /// Gets the map ID of the World Entry in the Outland.
+        /// </summary>
         public WowMapId WorldEntryMapId { get; } = WowMapId.Outland;
     }
 }

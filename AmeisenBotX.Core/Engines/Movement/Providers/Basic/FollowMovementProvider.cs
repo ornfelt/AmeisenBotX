@@ -10,6 +10,11 @@ namespace AmeisenBotX.Core.Engines.Movement.Providers.Basic
 {
     public class FollowMovementProvider : IMovementProvider
     {
+        /// <summary>
+        /// Initializes a new instance of the FollowMovementProvider class.
+        /// </summary>
+        /// <param name="bot">The AmeisenBotInterfaces representing the bot.</param>
+        /// <param name="config">The AmeisenBotConfig representing the bot configuration.</param>
         public FollowMovementProvider(AmeisenBotInterfaces bot, AmeisenBotConfig config)
         {
             Bot = bot;
@@ -19,16 +24,35 @@ namespace AmeisenBotX.Core.Engines.Movement.Providers.Basic
             OffsetCheckEvent = new(TimeSpan.FromMilliseconds(30000));
         }
 
+        /// <summary>
+        /// Gets or sets the instance of the AmeisenBotInterfaces.
+        /// </summary>
         private AmeisenBotInterfaces Bot { get; }
 
+        /// <summary>
+        /// Gets the configuration settings for the AmeisenBot.
+        /// </summary>
         private AmeisenBotConfig Config { get; }
 
+        /// <summary>
+        /// Gets or sets the offset for following an object in a Vector3 format.
+        /// </summary>
         private Vector3 FollowOffset { get; set; }
 
+        /// <summary>
+        /// Gets the TimegatedEvent used for offset checking.
+        /// </summary>
         private TimegatedEvent OffsetCheckEvent { get; }
 
+        /// <summary>Gets the instance of the Random class used for generating random numbers.</summary>
         private Random Random { get; }
 
+        /// <summary>
+        /// Checks if the bot can get the position and movement action for following a unit.
+        /// </summary>
+        /// <param name="position">The position of the unit to follow.</param>
+        /// <param name="type">The movement action to be performed.</param>
+        /// <returns>True if the position and movement action are obtained successfully, false otherwise.</returns>
         public bool Get(out Vector3 position, out MovementAction type)
         {
             if (!Bot.Player.IsDead
@@ -67,6 +91,12 @@ namespace AmeisenBotX.Core.Engines.Movement.Providers.Basic
             return false;
         }
 
+        /// <summary>
+        /// Determines if there is a unit to follow and assigns it to the out parameter playerToFollow.
+        /// </summary>
+        /// <param name="playerToFollow">The unit that will be followed.</param>
+        /// <param name="ignoreRange">Optional. Flag to ignore range when determining if a player should be followed, default is false.</param>
+        /// <returns>Returns true if there is a unit to follow, false otherwise.</returns>
         private bool IsUnitToFollowThere(out IWowUnit playerToFollow, bool ignoreRange = false)
         {
             IEnumerable<IWowPlayer> wowPlayers = Bot.Objects.All.OfType<IWowPlayer>().Where(e => !e.IsDead);
@@ -96,6 +126,11 @@ namespace AmeisenBotX.Core.Engines.Movement.Providers.Basic
             return false;
         }
 
+        /// <summary>
+        /// Determines whether the bot should follow a player.
+        /// </summary>
+        /// <param name="playerToFollow">The player to follow.</param>
+        /// <returns>True if the bot should follow the player, otherwise false.</returns>
         private bool ShouldIFollowPlayer(IWowUnit playerToFollow)
         {
             if (playerToFollow == null)

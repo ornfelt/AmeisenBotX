@@ -12,6 +12,17 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Shino
 {
     public class PriestShadow : TemplateCombatClass
     {
+        /// <summary>
+        /// Initializes a new instance of the PriestShadow class.
+        /// Adds a KeepActiveAuraJob for the Priest335a.Shadowform spell, ensuring it stays active.
+        /// Adds a KeepActiveAuraJob for the Priest335a.PowerWordFortitude spell, ensuring it stays active.
+        /// Adds a KeepActiveAuraJob for the Priest335a.VampiricEmbrace spell, ensuring it stays active.
+        /// Adds a KeepActiveAuraJob for the Priest335a.VampiricTouch spell, ensuring it stays active on the target.
+        /// Adds a KeepActiveAuraJob for the Priest335a.DevouringPlague spell, ensuring it stays active on the target.
+        /// Adds a KeepActiveAuraJob for the Priest335a.ShadowWordPain spell, ensuring it stays active on the target.
+        /// Adds a KeepActiveAuraJob for the Priest335a.MindBlast spell, ensuring it stays active on the target.
+        /// Adds a delegate to the SpellsToKeepActiveOnParty dictionary to keep Priest335a.PowerWordFortitude active on party members.
+        /// </summary>
         public PriestShadow(AmeisenBotInterfaces bot) : base(bot)
         {
             MyAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, Priest335a.Shadowform, () => TryCastSpell(Priest335a.Shadowform, Bot.Wow.PlayerGuid, true)));
@@ -26,14 +37,31 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Shino
             GroupAuraManager.SpellsToKeepActiveOnParty.Add((Priest335a.PowerWordFortitude, (spellName, guid) => TryCastSpell(spellName, guid, true)));
         }
 
+        /// <summary>
+        /// Gets the description of the FCFS based CombatClass for the Shadow Priest spec.
+        /// </summary>
         public override string Description => "FCFS based CombatClass for the Shadow Priest spec.";
 
+        /// <summary>
+        /// Gets or sets the display name for a Priest Shadow.
+        /// </summary>
         public override string DisplayName2 => "Priest Shadow";
 
+        /// <summary>
+        /// Gets a value indicating whether this object handles movement.
+        /// This property is set to false.
+        /// </summary>
         public override bool HandlesMovement => false;
 
+        /// <summary>
+        /// Gets a value indicating whether this entity is melee.
+        /// </summary>
+        /// <returns>False, indicating that the entity is not melee.</returns>
         public override bool IsMelee => false;
 
+        /// <summary>
+        /// Gets or sets the item comparator for the character's items.
+        /// </summary>
         public override IItemComparator ItemComparator
         {
             get =>
@@ -48,8 +76,44 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Shino
             set { }
         }
 
+        /// <summary>
+        /// Gets the role of the character as a DPS (Damage Per Second) role.
+        /// </summary>
         public override WowRole Role => WowRole.Dps;
 
+        ///<summary>
+        ///An override of the <see cref="TalentTree"/> property.
+        ///It returns a new <see cref="TalentTree"/> object with the following configuration:
+        ///- Tree1 has the following talents:
+        ///   - Talent at position 2 with values (1, 2, 5)
+        ///   - Talent at position 4 with values (1, 4, 3)
+        ///   - Talent at position 5 with values (1, 5, 2)
+        ///   - Talent at position 7 with values (1, 7, 3)
+        ///- Tree2 is empty
+        ///- Tree3 has the following talents:
+        ///   - Talent at position 1 with values (3, 1, 3)
+        ///   - Talent at position 2 with values (3, 2, 2)
+        ///   - Talent at position 3 with values (3, 3, 5)
+        ///   - Talent at position 5 with values (3, 5, 2)
+        ///   - Talent at position 6 with values (3, 6, 3)
+        ///   - Talent at position 8 with values (3, 8, 5)
+        ///   - Talent at position 9 with values (3, 9, 1)
+        ///   - Talent at position 10 with values (3, 10, 2)
+        ///   - Talent at position 11 with values (3, 11, 2)
+        ///   - Talent at position 12 with values (3, 12, 3)
+        ///   - Talent at position 14 with values (3, 14, 1)
+        ///   - Talent at position 16 with values (3, 16, 3)
+        ///   - Talent at position 17 with values (3, 17, 2)
+        ///   - Talent at position 18 with values (3, 18, 3)
+        ///   - Talent at position 19 with values (3, 19, 1)
+        ///   - Talent at position 20 with values (3, 20, 5)
+        ///   - Talent at position 21 with values (3, 21, 2)
+        ///   - Talent at position 22 with values (3, 22, 3)
+        ///   - Talent at position 24 with values (3, 24, 1)
+        ///   - Talent at position 25 with values (3, 25, 3)
+        ///   - Talent at position 26 with values (3, 26, 5)
+        ///   - Talent at position 27 with values (3, 27, 1)
+        ///</summary>
         public override TalentTree Talents { get; } = new()
         {
             Tree1 = new()
@@ -87,16 +151,41 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Shino
             },
         };
 
+        /// <summary>
+        /// Gets or sets a value indicating whether this character should use auto attacks.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if this character should use auto attacks; otherwise, <c>false</c>.
+        /// </value>
         public override bool UseAutoAttacks => true;
 
+        /// <summary>
+        /// Gets the version of the code.
+        /// </summary>
+        /// <returns>The version of the code as a string.</returns>
         public override string Version => "1.2";
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the character can walk behind the enemy.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if the character cannot walk behind the enemy; otherwise, <c>false</c>.
+        /// </value>
         public override bool WalkBehindEnemy => false;
 
+        /// <summary>
+        /// Gets or sets the wow class for the current character as a Priest.
+        /// </summary>
         public override WowClass WowClass => WowClass.Priest;
 
+        /// <summary>
+        /// Gets or sets the World of Warcraft version, which is WotLK335a.
+        /// </summary>
         public override WowVersion WowVersion => WowVersion.WotLK335a;
 
+        /// <summary>
+        /// Executes the specified code block, performing a series of actions based on the current state of the bot and the player.
+        /// </summary>
         public override void Execute()
         {
             base.Execute();
@@ -142,6 +231,11 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Shino
             }
         }
 
+        /// <summary>
+        /// Returns the opening spell for the Priest335a class.
+        /// If the spell "ShadowWordPain" is available, it will be returned.
+        /// Otherwise, the spell "Smite" will be returned.
+        /// </summary>
         protected override Spell GetOpeningSpell()
         {
             Spell spell = Bot.Character.SpellBook.GetSpellByName(Priest335a.ShadowWordPain);

@@ -31,12 +31,18 @@ namespace AmeisenBotX.Core.Logic
 {
     public class AmeisenBotLogic : IAmeisenBotLogic
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="StaticDeathRoutes"/> class and adds the <see cref="ForgeOfSoulsDeathRoute"/> and <see cref="PitOfSaronDeathRoute"/> routes.
+        /// </summary>
         private readonly List<IStaticDeathRoute> StaticDeathRoutes = new()
         {
             new ForgeOfSoulsDeathRoute(),
             new PitOfSaronDeathRoute()
         };
 
+        ///<summary>
+        ///Constructor for the AmeisenBotLogic class.
+        ///</summary>
         public AmeisenBotLogic(AmeisenBotConfig config, AmeisenBotInterfaces bot)
         {
             Config = config;
@@ -312,72 +318,177 @@ namespace AmeisenBotX.Core.Logic
             );
         }
 
+        /// <summary>
+        /// Event triggered when World of Warcraft starts.
+        /// </summary>
         public event Action OnWoWStarted;
 
+        /// <summary>
+        /// Gets or sets the mode of the bot.
+        /// </summary>
         public BotMode Mode { get; private set; }
 
+        /// <summary>
+        /// Gets or sets the TimegatedEvent for the AntiAfkEvent.
+        /// </summary>
         private TimegatedEvent AntiAfkEvent { get; }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether any party members are currently in a fight.
+        /// </summary>
         private bool ArePartymembersInFight { get; set; }
 
+        /// <summary>
+        /// Gets or sets the AmeisenBotInterfaces object representing the bot.
+        /// </summary>
         private AmeisenBotInterfaces Bot { get; }
 
+        /// <summary>
+        /// Gets or sets the private TimegatedEvent called CharacterUpdateEvent.
+        /// </summary>
         private TimegatedEvent CharacterUpdateEvent { get; }
 
+        /// <summary>
+        /// Gets or sets the private property representing the ClassTrainer of the WowUnit.
+        /// </summary>
         private IWowUnit ClassTrainer { get; set; }
 
+        /// <summary>
+        /// Gets the AmeisenBot configuration.
+        /// </summary>
         private AmeisenBotConfig Config { get; }
 
+        /// <summary>
+        /// Gets or sets the timestamp when the dungeon died.
+        /// </summary>
         private DateTime DungeonDiedTimestamp { get; set; }
 
+        /// <summary>
+        /// Gets the timegated event for eating a block.
+        /// </summary>
         private TimegatedEvent EatBlockEvent { get; }
 
+        /// <summary>
+        /// Gets or sets the private TimegatedEvent called EatEvent.
+        /// </summary>
         private TimegatedEvent EatEvent { get; }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether it is the user's first login.
+        /// </summary>
         private bool FirstLogin { get; set; }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether it is the first start.
+        /// </summary>
         private bool FirstStart { get; set; }
 
+        /// <summary>
+        /// Gets or sets the collection of food items in the WoW inventory.
+        /// </summary>
+        /// <returns>The collection of food items.</returns>
         private IEnumerable<IWowInventoryItem> Food { get; set; }
 
+        /// <summary>
+        /// Gets the timegated event for idle action.
+        /// </summary>
         private TimegatedEvent IdleActionEvent { get; }
 
+        /// <summary>
+        /// Gets or sets the DateTime object representing the time when the player started the game.
+        /// </summary>
         private DateTime IngameSince { get; set; }
 
+        /// <summary>
+        /// Gets or sets the timegated event for login attempts.
+        /// </summary>
         private TimegatedEvent LoginAttemptEvent { get; }
 
+        /// <summary>
+        /// Gets or sets the number of attempts made to loot items.
+        /// </summary>
         private int LootTry { get; set; }
 
+        /// <summary>
+        /// Gets the private TimegatedEvent LootTryEvent.
+        /// </summary>
         private TimegatedEvent LootTryEvent { get; }
 
+        /// <summary>
+        /// Gets or sets the merchant interface for interacting with the World of Warcraft unit.
+        /// </summary>
         private IWowUnit Merchant { get; set; }
 
+        ///<summary>
+        ///Gets or sets the private instance of the MovementManager class.
+        ///</summary>
         private MovementManager MovementManager { get; }
 
+        /// <summary>
+        /// Gets the TimegatedEvent representing a party members fight event.
+        /// </summary>
         private TimegatedEvent PartymembersFightEvent { get; }
 
+        /// <summary>
+        /// Gets or sets the profession trainer for the WOW unit.
+        /// </summary>
         private IWowUnit ProfessionTrainer { get; set; }
 
+        /// <summary>
+        /// Gets or sets the quest giver unit to talk to.
+        /// </summary>
         private IWowUnit QuestGiverToTalkTo { get; set; }
 
+        /// <summary>
+        /// Gets the instance of the Random class.
+        /// </summary>
         private Random Random { get; }
 
+        /// <summary>
+        /// Gets or sets the timegated event responsible for rendering the switch event.
+        /// </summary>
         private TimegatedEvent RenderSwitchEvent { get; }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the static routes have been searched.
+        /// </summary>
         private bool SearchedStaticRoutes { get; set; }
 
+        /// <summary>
+        /// Gets or sets the static death route.
+        /// </summary>
         private IStaticDeathRoute StaticRoute { get; set; }
 
+        /// <summary>
+        /// Gets the private Tree property.
+        /// </summary>
         private Tree Tree { get; }
 
+        /// <summary>
+        /// Gets or sets the list of units looted, represented by their ulong values.
+        /// </summary>
         private List<ulong> UnitsLooted { get; }
 
+        /// <summary>
+        /// Gets or sets the private TimegatedEvent UnitsLootedCleanupEvent property.
+        /// </summary>
         private TimegatedEvent UnitsLootedCleanupEvent { get; }
 
+        /// <summary>
+        /// Gets the queue of units to loot.
+        /// </summary>
         private Queue<ulong> UnitsToLoot { get; }
 
+        /// <summary>
+        /// Gets or sets the private TimegatedEvent for updating food.
+        /// </summary>
         private TimegatedEvent UpdateFood { get; }
 
+        /// <summary>
+        /// Determines the appropriate trainer subtype for the given class.
+        /// </summary>
+        /// <param name="wowClass">The class for which to determine the trainer subtype.</param>
+        /// <returns>The corresponding trainer subtype for the given class.</returns>
         public static NpcSubType DecideClassTrainer(WowClass wowClass)
         {
             return wowClass switch
@@ -395,6 +506,10 @@ namespace AmeisenBotX.Core.Logic
             };
         }
 
+        /// <summary>
+        /// Changes the mode of the bot and performs actions based on the new mode.
+        /// </summary>
+        /// <param name="mode">The new bot mode to be set.</param>
         public void ChangeMode(BotMode mode)
         {
             Mode = mode;
@@ -410,11 +525,18 @@ namespace AmeisenBotX.Core.Logic
             }
         }
 
+        /// <summary>
+        /// Executes the Tick method of the Tree class.
+        /// </summary>
         public void Tick()
         {
             Tree.Tick();
         }
 
+        /// <summary>
+        /// Method to prevent the player from going AFK.
+        /// It checks if the AntiAfkEvent is currently running and if so, updates the TickCount in the Bot's Memory and sets the Timegate of the AntiAfkEvent to a random value between 300 and 2300 milliseconds.
+        /// </summary>
         private void AntiAfk()
         {
             if (AntiAfkEvent.Run())
@@ -462,6 +584,13 @@ namespace AmeisenBotX.Core.Logic
             return StaticRoute != null;
         }
 
+        ///<summary>
+        /// Changes the Realmlist in the config.wtf file.
+        ///</summary>
+        ///<returns>
+        /// The status of the Realmlist change. Returns BtStatus.Success if successful, 
+        /// BtStatus.Failed if an error occurred.
+        ///</returns>
         private BtStatus ChangeRealmlist()
         {
             if (!Config.AutoChangeRealmlist)
@@ -519,6 +648,16 @@ namespace AmeisenBotX.Core.Logic
             return BtStatus.Failed;
         }
 
+        /// <summary>
+        /// This method is used to check and update the configuration file "config.wtf" 
+        /// to ensure that the necessary settings (READEULA, READTOS, and MOVIE) are correctly set.
+        /// If the file does not exist, it does not make any changes and returns a Failed status.
+        /// If the file exists and any of the necessary settings are missing or incorrect,
+        /// it updates the file with the correct settings and sets its attributes to read-only.
+        /// After making the necessary changes, it returns a Success status.
+        /// If any error occurs while checking or updating the file, it logs an error message and returns a Failed status.
+        /// </summary>
+        /// <returns>The status of the configuration check and update operation, either Success or Failed.</returns>
         private BtStatus CheckTosAndEula()
         {
             try
@@ -590,6 +729,11 @@ namespace AmeisenBotX.Core.Logic
             return BtStatus.Failed;
         }
 
+        /// <summary>
+        /// Checks if the character is dead and performs appropriate actions accordingly.
+        /// If the character is dead, sets SearchedStaticRoutes to false and checks if the character is in a battleground map or if Config.ReleaseSpirit is true.
+        /// If true, calls Bot.Wow.RepopMe() and returns BtStatus.Success, otherwise returns BtStatus.Ongoing.
+        /// </summary>
         private BtStatus Dead()
         {
             SearchedStaticRoutes = false;
@@ -603,6 +747,16 @@ namespace AmeisenBotX.Core.Logic
             return BtStatus.Ongoing;
         }
 
+        /// <summary>
+        /// Checks if the dungeon is dead.
+        /// If no party members are in fight, it checks if the DungeonDiedTimestamp has been set.
+        /// If not, it sets the DungeonDiedTimestamp to the current time.
+        /// If the DungeonDiedTimestamp has been set and the time difference between the current time and the DungeonDiedTimestamp is greater than 30 seconds,
+        /// it resurrects the bot, resets SearchedStaticRoutes, and returns BtStatus.Success.
+        /// If there are party members alive that can resurrect the bot or the time difference between the current time and the DungeonDiedTimestamp is greater than 30 seconds,
+        /// it resurrects the bot, resets SearchedStaticRoutes, and returns BtStatus.Success.
+        /// Otherwise, it returns BtStatus.Ongoing.
+        /// </summary>
         private BtStatus DeadDungeon()
         {
             if (!ArePartymembersInFight)
@@ -632,6 +786,11 @@ namespace AmeisenBotX.Core.Logic
             return BtStatus.Ongoing;
         }
 
+        /// <summary>
+        /// Method to handle eating and drinking for the Bot. It checks if the Bot needs to eat or drink based on configured percentages, 
+        /// and if so, determines whether to use food, refreshment, or water. It also checks if the Bot is already eating or drinking,
+        /// and returns ongoing status if it is. Returns success status if no eating or drinking is needed.
+        /// </summary>
         private BtStatus Eat()
         {
             if (EatEvent.Run())
@@ -698,6 +857,13 @@ namespace AmeisenBotX.Core.Logic
             return BtStatus.Success;
         }
 
+        /// <summary>
+        /// Retrieves a collection of all lootable units within a certain radius of the player's position,
+        /// excluding units that have already been looted by the bot.
+        /// </summary>
+        /// <returns>
+        /// An IEnumerable object representing the lootable units.
+        /// </returns>
         private IEnumerable<IWowUnit> GetLootableUnits()
         {
             return Bot.Objects.All.OfType<IWowUnit>()
@@ -706,12 +872,20 @@ namespace AmeisenBotX.Core.Logic
                     && e.Position.GetDistance(Bot.Player.Position) < Config.LootUnitsRadius);
         }
 
+        /// <summary>
+        /// Checks if the battleground has finished.
+        /// </summary>
         private bool IsBattlegroundFinished()
         {
             return Bot.Memory.Read(Bot.Memory.Offsets.BattlegroundFinished, out int bgFinished)
                 && bgFinished == 1;
         }
 
+        ///<summary>
+        ///Checks if there is a repair NPC near the player.
+        ///If a repair NPC is found, it is assigned to the 'unit' out parameter.
+        ///Returns true if a repair NPC is found, false otherwise.
+        ///</summary>
         private bool IsRepairNpcNear(out IWowUnit unit)
         {
             unit = Bot.Objects.All.OfType<IWowUnit>()
@@ -724,6 +898,9 @@ namespace AmeisenBotX.Core.Logic
             return unit != null;
         }
 
+        /// <summary>
+        /// Determines if there is a vendor NPC near the player character and assigns the NPC object to the out parameter.
+        /// </summary>
         private bool IsVendorNpcNear(out IWowUnit unit)
         {
             unit = Bot.Objects.All.OfType<IWowUnit>()
@@ -736,6 +913,9 @@ namespace AmeisenBotX.Core.Logic
             return unit != null;
         }
 
+        /// <summary>
+        /// Loads the window position of the World of Warcraft window.
+        /// </summary>
         private void LoadWowWindowPosition()
         {
             if (Config.SaveWowWindowPosition && !Config.AutoPositionWow)
@@ -752,6 +932,9 @@ namespace AmeisenBotX.Core.Logic
             }
         }
 
+        /// <summary>
+        /// Logs in the user to the game.
+        /// </summary>
         private void Login()
         {
             Bot.Wow.SetWorldLoadedCheck(true);
@@ -773,6 +956,10 @@ namespace AmeisenBotX.Core.Logic
             Bot.Wow.SetWorldLoadedCheck(false);
         }
 
+        /// <summary>
+        /// Attempts to loot units near the bot.
+        /// </summary>
+        /// <returns>Returns the status of the looting operation.</returns>
         private BtStatus LootNearUnits()
         {
             IWowUnit unit = Bot.GetWowObjectByGuid<IWowUnit>(UnitsToLoot.Peek());
@@ -813,11 +1000,21 @@ namespace AmeisenBotX.Core.Logic
             return BtStatus.Ongoing;
         }
 
+        /// <summary>
+        /// Moves the object to the target position.
+        /// </summary>
+        /// <returns>The status of the movement.</returns>
         private BtStatus Move()
         {
             return MoveToPosition(MovementManager.Target);
         }
 
+        /// <summary>
+        /// Moves the bot to the specified position.
+        /// </summary>
+        /// <param name="position">The position to move to.</param>
+        /// <param name="movementAction">The movement action to use (default is MovementAction.Move).</param>
+        /// <returns>The status of the movement operation.</returns>
         private BtStatus MoveToPosition(Vector3 position, MovementAction movementAction = MovementAction.Move)
         {
             if (position != Vector3.Zero && Bot.Player.DistanceTo(position) > 3.0f)
@@ -829,6 +1026,10 @@ namespace AmeisenBotX.Core.Logic
             return BtStatus.Success;
         }
 
+        /// <summary>
+        /// Determines if the player needs to eat.
+        /// </summary>
+        /// <returns>True if the player needs to eat; otherwise, false.</returns>
         private bool NeedToEat()
         {
             // is eating blocked, used to prevent shredding of food
@@ -870,6 +1071,9 @@ namespace AmeisenBotX.Core.Logic
                        || Food.Any(e => Enum.IsDefined(typeof(WowRefreshment), e.Id)));
         }
 
+        /// <summary>
+        /// Checks if the player and party members need to engage in a fight.
+        /// </summary>
         private bool NeedToFight()
         {
             if (PartymembersFightEvent.Run())
@@ -885,16 +1089,27 @@ namespace AmeisenBotX.Core.Logic
                 || ArePartymembersInFight;
         }
 
+        /// <summary>
+        /// Determines if the bot needs to follow a tactic or not.
+        /// </summary>
+        /// <returns>True if the bot needs to follow a tactic, otherwise false.</returns>
         private bool NeedToFollowTactic()
         {
             return Bot.Tactic.Execute() && !Bot.Tactic.AllowAttacking;
         }
 
+        /// <summary>
+        /// Determines if the user needs to login.
+        /// </summary>
         private bool NeedToLogin()
         {
             return Bot.Memory.Read(Bot.Memory.Offsets.IsIngame, out int isIngame) && isIngame == 0;
         }
 
+        /// <summary>
+        /// Checks if there is a need to loot units.
+        /// </summary>
+        /// <returns>Returns true if there are units to loot, false otherwise.</returns>
         private bool NeedToLoot()
         {
             if (UnitsLootedCleanupEvent.Run())
@@ -918,6 +1133,12 @@ namespace AmeisenBotX.Core.Logic
             return UnitsToLoot.Count > 0;
         }
 
+        /// <summary>
+        /// Checks whether the character needs to repair or sell items.
+        /// </summary>
+        /// <returns>
+        /// Returns true if the character needs to repair or sell items; otherwise, false.
+        /// </returns>
         private bool NeedToRepairOrSell()
         {
             bool needToRepair = Bot.Character.Equipment.Items.Any(e => e.Value.MaxDurability > 0 && e.Value.Durability / (double)e.Value.MaxDurability * 100.0 <= Config.ItemRepairThreshold);
@@ -998,6 +1219,10 @@ namespace AmeisenBotX.Core.Logic
             return false;
         }
 
+        /// <summary>
+        /// Determines if the player needs to talk to a quest giver.
+        /// </summary>
+        /// <returns>True if the player needs to talk to a quest giver; otherwise, false.</returns>
         private bool NeedToTalkToQuestgiver()
         {
             if (Config.AutoTalkToNearQuestgivers)
@@ -1029,6 +1254,10 @@ namespace AmeisenBotX.Core.Logic
             return false;
         }
 
+        /// <summary>
+        /// Checks if the character needs to train secondary skills.
+        /// </summary>
+        /// <returns>True if the character needs to train secondary skills, otherwise false.</returns>
         private bool NeedToTrainSecondarySkills()
         {
             IWowUnit professionTrainer = null;
@@ -1063,6 +1292,10 @@ namespace AmeisenBotX.Core.Logic
             return ProfessionTrainer != null; // todo: Config.LearnSecondarySkills
         }
 
+        /// <summary>
+        /// Determines if the player needs to train spells.
+        /// </summary>
+        /// <returns>Returns true if the player needs to train spells, otherwise false.</returns>
         private bool NeedToTrainSpells()
         {
             IWowUnit classTrainer = null;
@@ -1088,6 +1321,9 @@ namespace AmeisenBotX.Core.Logic
             return Bot.Character.LastLevelTrained != 0 && Bot.Character.LastLevelTrained < Bot.Player.Level;
         }
 
+        /// <summary>
+        /// Runs to the corpse position and retrieves it if the distance between the player's position and the corpse position is greater than the Ghost Resurrect Threshold. Returns Success if the corpse is successfully retrieved, Ongoing if the player is still moving towards the corpse, and Failed if the corpse position cannot be read.
+        /// </summary>
         private BtStatus RunToCorpseAndRetrieveIt()
         {
             if (!Bot.Memory.Read(Bot.Memory.Offsets.CorpsePosition, out Vector3 corpsePosition))
@@ -1105,6 +1341,9 @@ namespace AmeisenBotX.Core.Logic
             return BtStatus.Success;
         }
 
+        /// <summary>
+        /// Sets the console variables (CVars) for the game.
+        /// </summary>
         private void SetCVars()
         {
             List<(string, string)> cvars = new()
@@ -1183,11 +1422,19 @@ namespace AmeisenBotX.Core.Logic
             Bot.Wow.LuaDoString(sb.ToString());
         }
 
+        /// <summary>
+        /// Sets up the WoW interface by calling the Setup method of the Bot.Wow object. 
+        /// Returns Success if the setup is successful, otherwise returns Failed.
+        /// </summary>
         private BtStatus SetupWowInterface()
         {
             return Bot.Wow.Setup() ? BtStatus.Success : BtStatus.Failed;
         }
 
+        /// <summary>
+        /// Starts the WoW process.
+        /// </summary>
+        /// <returns>The status of the WoW process.</returns>
         private BtStatus StartWow()
         {
             if (File.Exists(Config.PathToWowExe))
@@ -1222,6 +1469,9 @@ namespace AmeisenBotX.Core.Logic
             return BtStatus.Failed;
         }
 
+        /// <summary>
+        /// Method used to update the in-game functionality.
+        /// </summary>
         private void UpdateIngame()
         {
             if (FirstStart)

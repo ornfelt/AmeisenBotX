@@ -1,5 +1,8 @@
 ﻿namespace AmeisenBotX.Wow.Objects.Enums
 {
+    /// <summary>
+    /// Enumeration of various food items in the game.
+    /// </summary>
     public enum WowFood
     {
         ToughJerky = 117,

@@ -1,5 +1,12 @@
 ﻿namespace AmeisenBotX.Wow.Objects.Enums
 {
+    /// <summary>
+    /// Represents the skill IDs for various abilities in the game.
+    /// </summary>
+    /// <remarks>
+    /// Each skill ID corresponds to a specific ability or proficiency in the game.
+    /// These skill IDs are used for various purposes such as character class specialization, weapon proficiency, trade skills, and more.
+    /// </remarks>
     public enum WowSkillId : ushort
     {
         Frost = 6,

@@ -7,12 +7,16 @@ namespace AmeisenBotX.Core.Engines.Quest.Quests.TheBarrens.Crossroads
 {
     internal class QDisruptTheAttacks : BotQuest
     {
+        /// <summary>
+        /// Initializes a new instance of the QDisruptTheAttacks class.
+        /// </summary>
+        /// <param name="bot">The bot instance implementing the AmeisenBotInterfaces.</param>
         public QDisruptTheAttacks(AmeisenBotInterfaces bot)
-            : base(bot, 871, "Disrupt the Attacks", 9, 1,
-                () => (bot.GetClosestQuestGiverByNpcId(bot.Player.Position, new List<int> { 3429 }), new Vector3(-473.20f, -2595.70f, 103.81f)),
-                () => (bot.GetClosestQuestGiverByNpcId(bot.Player.Position, new List<int> { 3429 }), new Vector3(-473.20f, -2595.70f, 103.81f)),
-                new List<IQuestObjective>()
-                {
+                    : base(bot, 871, "Disrupt the Attacks", 9, 1,
+                        () => (bot.GetClosestQuestGiverByNpcId(bot.Player.Position, new List<int> { 3429 }), new Vector3(-473.20f, -2595.70f, 103.81f)),
+                        () => (bot.GetClosestQuestGiverByNpcId(bot.Player.Position, new List<int> { 3429 }), new Vector3(-473.20f, -2595.70f, 103.81f)),
+                        new List<IQuestObjective>()
+                        {
                     new QuestObjectiveChain(new List<IQuestObjective>()
                     {
                         new KillAndLootQuestObjective(bot, new List<int> { 3267 }, 8, 0, new List<List<Vector3>> {
@@ -102,7 +106,7 @@ namespace AmeisenBotX.Core.Engines.Quest.Quests.TheBarrens.Crossroads
                             },
                         }),
                     })
-                })
+                        })
         { }
     }
 }

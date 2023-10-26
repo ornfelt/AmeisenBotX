@@ -13,6 +13,10 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Mop548
 {
     public class WarriorProtection : BasicCombatClass
     {
+        /// <summary>
+        /// Initializes a new instance of the WarriorProtection class.
+        /// </summary>
+        /// <param name="bot">The bot instance to be passed as a parameter.</param>
         public WarriorProtection(AmeisenBotInterfaces bot) : base(bot)
         {
             Configurables.TryAdd("FartOnCharge", false);
@@ -24,19 +28,38 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Mop548
             };
         }
 
+        /// <summary>
+        /// Returns the description of the Beta CombatClass for the Protection Warrior spec.
+        /// </summary>
+        /// <value>
+        /// "Beta CombatClass for the Protection Warrior spec. For Dungeons and Questing"
+        /// </value>
         public override string Description => "Beta CombatClass for the Protection Warrior spec. For Dungeons and Questing";
 
+        /// <summary>
+        /// Gets or sets the display name for the warrior's protection class.
+        /// </summary>
         public override string DisplayName2 => "Warrior Protection";
 
+        /// <summary>
+        /// Indicates that the method overrides the base class and handles movement.
+        /// </summary>
         public override bool HandlesMovement => true;
 
+        /// <summary>
+        /// Gets a value indicating whether this is a melee attack.
+        /// </summary>
         public override bool IsMelee => true;
 
+        /// <summary>
+        /// Gets or sets the item comparator used for comparing items.
+        /// </summary>
+        /// <value>A <see cref="IItemComparator"/> object.</value>
         public override IItemComparator ItemComparator { get; set; } = new BasicComparator
-        (
-            new() { WowArmorType.Cloth, WowArmorType.Leather },
-            new()
-            {
+                (
+                    new() { WowArmorType.Cloth, WowArmorType.Leather },
+                    new()
+                    {
                 WowWeaponType.SwordTwoHand,
                 WowWeaponType.MaceTwoHand,
                 WowWeaponType.AxeTwoHand,
@@ -46,9 +69,9 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Mop548
                 WowWeaponType.Thrown,
                 WowWeaponType.Wand,
                 WowWeaponType.Dagger
-            },
-            new Dictionary<string, double>()
-            {
+                    },
+                    new Dictionary<string, double>()
+                    {
                 { "ITEM_MOD_STAMINA_SHORT", 1.0 },
                 { "ITEM_MOD_PARRY_RATING_SHORT", 1.0 },
                 { "ITEM_MOD_DODGE_RATING_SHORT", 0.6 },
@@ -56,11 +79,17 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Mop548
                 { "ITEM_MOD_CRIT_RATING_SHORT", 0.3 },
                 { "ITEM_MOD_STRENGHT_SHORT", 0.2 },
                 { "ITEM_MOD_HASTE_RATING_SHORT", 0.1 },
-            }
-        );
+                    }
+                );
 
+        /// <summary>
+        /// Gets or sets the role of this character in the game "World of Warcraft" as a Tank.
+        /// </summary>
         public override WowRole Role => WowRole.Tank;
 
+        /// <summary>
+        /// Gets or sets the talent trees.
+        /// </summary>
         public override TalentTree Talents { get; } = new()
         {
             Tree1 = new()
@@ -74,18 +103,38 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Mop548
             },
         };
 
+        /// The property indicates whether the object should use auto attacks.
         public override bool UseAutoAttacks => true;
 
+        /// <summary>
+        /// Gets the version of the object.
+        /// </summary>
         public override string Version => "1.0";
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the player can walk behind the enemy.
+        /// </summary>
+        /// <returns>Always returns false.</returns>
         public override bool WalkBehindEnemy => false;
 
+        /// <summary>
+        /// Gets or sets the WoW class associated with this instance, which is Warrior.
+        /// </summary>
         public override WowClass WowClass => WowClass.Warrior;
 
+        /// <summary>
+        /// Gets or sets the World of Warcraft version, which is set to Mist of Pandaria (548).
+        /// </summary>
         public override WowVersion WowVersion => WowVersion.MoP548;
 
+        /// <summary>
+        /// Gets or sets the last time the fart occurred.
+        /// </summary>
         private DateTime LastFarted { get; set; }
 
+        /// <summary>
+        /// Executes the actions for the bot.
+        /// </summary>
         public override void Execute()
         {
             base.Execute();

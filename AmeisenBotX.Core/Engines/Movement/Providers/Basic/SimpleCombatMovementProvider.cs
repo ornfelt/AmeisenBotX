@@ -7,13 +7,26 @@ namespace AmeisenBotX.Core.Engines.Movement.Providers.Basic
 {
     public class SimpleCombatMovementProvider : IMovementProvider
     {
+        /// <summary>
+        /// Initializes a new instance of the SimpleCombatMovementProvider class.
+        /// </summary>
+        /// <param name="bot">The AmeisenBotInterfaces object to be used by the SimpleCombatMovementProvider.</param>
         public SimpleCombatMovementProvider(AmeisenBotInterfaces bot)
         {
             Bot = bot;
         }
 
+        /// <summary>
+        /// Gets or sets the AmeisenBotInterfaces object representing the bot.
+        /// </summary>
         private AmeisenBotInterfaces Bot { get; }
 
+        /// <summary>
+        /// Returns a boolean value indicating if the bot should perform a movement action and assigns the position and type of movement if true.
+        /// </summary>
+        /// <param name="position">The position to move to if a movement action is required.</param>
+        /// <param name="type">The type of movement action to perform if a movement action is required.</param>
+        /// <returns>Returns true if a movement action is required and assigns the position and type of movement, otherwise returns false and assigns default values.</returns>
         public bool Get(out Vector3 position, out MovementAction type)
         {
             if (Bot.CombatClass != null

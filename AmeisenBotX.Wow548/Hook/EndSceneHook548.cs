@@ -13,8 +13,12 @@ namespace AmeisenBotX.Wow548.Hook
 {
     public class EndSceneHook548 : GenericEndSceneHook
     {
+        /// <summary>
+        /// Initializes a new instance of the EndSceneHook548 class.
+        /// </summary>
+        /// <param name="memory">The WowMemoryApi object to use for memory operations.</param>
         public EndSceneHook548(WowMemoryApi memory)
-            : base(memory)
+                    : base(memory)
         {
             OriginalFunctionBytes = new();
         }
@@ -29,6 +33,10 @@ namespace AmeisenBotX.Wow548.Hook
         /// </summary>
         private Dictionary<IntPtr, byte> OriginalFunctionBytes { get; }
 
+        ///<summary>
+        /// Calls an object function with the specified object base address and function address.
+        /// Returns a boolean indicating whether the function call was successful or not.
+        ///</summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool CallObjectFunction(IntPtr objectBaseAddress, IntPtr functionAddress, List<object>? args = null)
         {
@@ -73,6 +81,10 @@ namespace AmeisenBotX.Wow548.Hook
             return InjectAndExecute(asm, readReturnBytes, out _);
         }
 
+        /// <summary>
+        /// Abandons quests that are not in the provided list of quest names.
+        /// </summary>
+        /// <param name="questNames">The list of quest names.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void LuaAbandonQuestsNotIn(IEnumerable<string> questNames)
         {
@@ -90,6 +102,11 @@ namespace AmeisenBotX.Wow548.Hook
             }
         }
 
+        /// <summary>
+        /// Executes a Lua command statement.
+        /// </summary>
+        /// <param name="command">The Lua command to execute.</param>
+        /// <returns>True if the Lua command was successfully executed, false otherwise.</returns>
         public bool LuaDoString(string command)
         {
 #if DEBUG
@@ -125,12 +142,21 @@ namespace AmeisenBotX.Wow548.Hook
             return false;
         }
 
+        /// <summary>
+        /// Executes the function GameobjectOnRightClick when an object is right-clicked.
+        /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void ObjectRightClick(IntPtr objectBase)
         {
             CallObjectFunction(objectBase, Memory.Offsets.FunctionGameobjectOnRightClick);
         }
 
+        /// <summary>
+        /// Sets the facing angle of a unit.
+        /// </summary>
+        /// <param name="unitBase">The base address of the unit.</param>
+        /// <param name="angle">The desired facing angle in radians.</param>
+        /// <param name="smooth">Optional. Indicates whether to smoothly transition to the new facing angle. Defaults to false.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void SetFacing(IntPtr unitBase, float angle, bool smooth = false)
         {
@@ -141,6 +167,15 @@ namespace AmeisenBotX.Wow548.Hook
             });
         }
 
+        /// <summary>
+        /// Sets the rendering state based on the specified boolean value.
+        /// If rendering is enabled, the WorldFrame and UIParent are shown.
+        /// The main thread is suspended while modifying the rendering state.
+        /// If rendering is enabled, specific functions are enabled and the render flags are restored to their original values.
+        /// If rendering is disabled, the render flags are stored, specific functions are disabled, and the render flags are set to 0.
+        /// The main thread is resumed after modifying the rendering state.
+        /// If rendering is disabled, the WorldFrame and UIParent are hidden.
+        /// </summary>
         public void SetRenderState(bool renderingEnabled)
         {
             if (renderingEnabled)
@@ -180,6 +215,10 @@ namespace AmeisenBotX.Wow548.Hook
             }
         }
 
+        /// <summary>
+        /// Sets the target GUID for injection and execution.
+        /// </summary>
+        /// <param name="guid">The GUID to set as the target.</param>
         public void TargetGuid(ulong guid)
         {
             byte[] guidBytes = BitConverter.GetBytes(guid);
@@ -194,6 +233,13 @@ namespace AmeisenBotX.Wow548.Hook
             });
         }
 
+        /// <summary>
+        /// Traces a line from a start point to an end point with specified flags.
+        /// </summary>
+        /// <param name="start">The starting point of the line.</param>
+        /// <param name="end">The ending point of the line.</param>
+        /// <param name="flags">The flags specifying additional tracing options.</param>
+        /// <returns>True if the tracing is successful and the return address is not zero, false otherwise.</returns>
         public bool TraceLine(Vector3 start, Vector3 end, uint flags)
         {
             if (Memory.AllocateMemory(40, out IntPtr tracelineCodecave))
@@ -237,6 +283,10 @@ namespace AmeisenBotX.Wow548.Hook
             return false;
         }
 
+        /// <summary>
+        /// Interacts with a unit identified by a specified global unique identifier (GUID).
+        /// </summary>
+        /// <param name="guid">The global unique identifier of the unit.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void InteractWithUnit(ulong guid)
         {
@@ -252,6 +302,10 @@ namespace AmeisenBotX.Wow548.Hook
             });
         }
 
+        /// <summary>
+        /// Clicks on the terrain at the specified position.
+        /// </summary>
+        /// <param name="position">The position on the terrain to click on.</param>
         public void ClickOnTerrain(Vector3 position)
         {
             if (Memory.AllocateMemory(20, out IntPtr codeCaveVector3))
@@ -276,6 +330,11 @@ namespace AmeisenBotX.Wow548.Hook
             }
         }
 
+        /// <summary>
+        /// Moves the player character to the specified position by allocating memory and calling the appropriate object function.
+        /// </summary>
+        /// <param name="playerBase">The base address of the player.</param>
+        /// <param name="position">The target position to move the player character to.</param>
         public void ClickToMove(IntPtr playerBase, Vector3 position)
         {
             if (Memory.AllocateMemory(12, out IntPtr codeCaveVector3))
@@ -294,12 +353,25 @@ namespace AmeisenBotX.Wow548.Hook
             }
         }
 
+        /// <summary>
+        /// Executes a Lua command and reads the result.
+        /// </summary>
+        /// <param name="cmdVarTuple">A tuple containing the command and variable.</param>
+        /// <param name="result">The result of the execution.</param>
+        /// <returns>True if the execution was successful, false otherwise.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool ExecuteLuaAndRead((string, string) cmdVarTuple, out string result)
         {
             return ExecuteLuaAndRead(cmdVarTuple.Item1, cmdVarTuple.Item2, out result);
         }
 
+        /// <summary>
+        /// Executes a Lua command and reads the result.
+        /// </summary>
+        /// <param name="command">The Lua command to execute.</param>
+        /// <param name="variable">The variable to pass to the Lua command.</param>
+        /// <param name="result">The result of the Lua command execution.</param>
+        /// <returns>True if the command was executed successfully and a non-empty result was obtained, otherwise false.</returns>
         public bool ExecuteLuaAndRead(string command, string variable, out string result)
         {
 #if DEBUG
@@ -353,12 +425,25 @@ namespace AmeisenBotX.Wow548.Hook
             return false;
         }
 
+        /// <summary>
+        /// FacePosition method is used to make the player face a specific position.
+        /// </summary>
+        /// <param name="playerBase">The player's base address.</param>
+        /// <param name="playerPosition">The current player position.</param>
+        /// <param name="positionToFace">The position that the player should face.</param>
+        /// <param name="smooth">Determines whether the facing movement should be smooth or instant (default is instant).</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void FacePosition(IntPtr playerBase, Vector3 playerPosition, Vector3 positionToFace, bool smooth = false)
         {
             SetFacing(playerBase, BotMath.GetFacingAngle(playerPosition, positionToFace), smooth);
         }
 
+        /// <summary>
+        /// Retrieves localized text based on the provided variable.
+        /// </summary>
+        /// <param name="variable">The variable used to retrieve the localized text.</param>
+        /// <param name="result">The localized text that is retrieved.</param>
+        /// <returns>True if the localized text is successfully retrieved and is not empty; otherwise, false.</returns>
         public bool GetLocalizedText(string variable, out string result)
         {
 #if DEBUG
@@ -401,6 +486,9 @@ namespace AmeisenBotX.Wow548.Hook
             return false;
         }
 
+        /// <summary>
+        /// Gets the reaction of a unit.
+        /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public int GetUnitReaction(IntPtr a, IntPtr b)
         {
@@ -412,6 +500,9 @@ namespace AmeisenBotX.Wow548.Hook
                 && ret != IntPtr.Zero ? ret.ToInt32() : 2;
         }
 
+        /// <summary>
+        /// Disables a function by checking if it has already been replaced and if not, saves the original function bytes and patches the memory with a specific opcode.
+        /// </summary>
         private void DisableFunction(IntPtr address)
         {
             // check whether we already replaced the function or not
@@ -423,6 +514,10 @@ namespace AmeisenBotX.Wow548.Hook
             }
         }
 
+        /// <summary>
+        /// Enables a function by restoring its original bytes if the RET opcode is present.
+        /// </summary>
+        /// <param name="address">The address of the function to enable.</param>
         private void EnableFunction(IntPtr address)
         {
             // check for RET opcode to be present before restoring original function
@@ -434,6 +529,10 @@ namespace AmeisenBotX.Wow548.Hook
             }
         }
 
+        /// <summary>
+        /// Saves the original function bytes at the specified memory address.
+        /// </summary>
+        /// <param name="address">The memory address where the function bytes are located.</param>
         private void SaveOriginalFunctionBytes(IntPtr address)
         {
             if (Memory.Read(address, out byte opcode))

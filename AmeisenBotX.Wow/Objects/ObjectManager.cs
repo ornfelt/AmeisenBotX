@@ -22,13 +22,29 @@ namespace AmeisenBotX.Wow.Objects
         where TContainer : IWowContainer, new()
 
     {
+        /// <summary>
+        /// The maximum object count.
+        /// </summary>
         protected const int MAX_OBJECT_COUNT = 4096;
 
+        /// <summary>
+        /// The lock object used to synchronize access to the query.
+        /// </summary>
         protected readonly object queryLock = new();
 
+        /// <summary>
+        /// A protected readonly array of IntPtr that stores the pointers to WoW objects.
+        /// </summary>
         protected readonly IntPtr[] wowObjectPointers;
+        /// <summary>
+        /// The array of Wow objects that are protected and can only be accessed within the class.
+        /// </summary>
         protected readonly IWowObject[] wowObjects;
 
+        /// <summary>
+        /// Constructor for the ObjectManager class.
+        /// Initializes a new instance of the class with the provided memory pointer.
+        /// </summary>
         public ObjectManager(WowMemoryApi memory)
         {
             Memory = memory;
@@ -126,8 +142,14 @@ namespace AmeisenBotX.Wow.Objects
         ///<inheritdoc cref="IObjectProvider.ZoneSubName"/>
         public string ZoneSubName { get; protected set; }
 
+        /// <summary>
+        /// Gets or sets the protected WowMemoryApi object.
+        /// </summary>
         protected WowMemoryApi Memory { get; }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the player's GUID is a vehicle.
+        /// </summary>
         protected bool PlayerGuidIsVehicle { get; set; }
 
         /// <summary>
@@ -229,14 +251,30 @@ namespace AmeisenBotX.Wow.Objects
             }
         }
 
+        /// <summary>
+        /// Reads the party information.
+        /// </summary>
         protected abstract void ReadParty();
 
+        /// <summary>
+        /// Updates the value of a global variable located at the specified memory address.
+        /// If the address is not zero and the memory read operation is successful, returns the value of the variable. Otherwise, returns the default value for the variable type.
+        /// </summary>
+        /// <typeparam name="T">The type of the global variable. Must be a value type.</typeparam>
+        /// <param name="address">The memory address where the global variable is located.</param>
+        /// <returns>The value of the global variable if read operation is successful; otherwise, the default value for the type.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         protected T UpdateGlobalVar<T>(IntPtr address) where T : unmanaged
         {
             return address != IntPtr.Zero && Memory.Read(address, out T v) ? v : default;
         }
 
+        /// <summary>
+        /// Updates a global variable of type string.
+        /// </summary>
+        /// <param name="address">The memory address of the variable.</param>
+        /// <param name="maxLength">The maximum length of the string.</param>
+        /// <returns>The updated global variable string, or an empty string if the address is zero or the read operation fails.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         protected string UpdateGlobalVarString(IntPtr address, int maxLenght = 128)
         {

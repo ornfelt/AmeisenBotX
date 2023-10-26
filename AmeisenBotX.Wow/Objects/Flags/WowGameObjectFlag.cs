@@ -2,6 +2,9 @@
 
 namespace AmeisenBotX.Wow.Objects.Flags
 {
+    /// <summary>
+    /// Flags for identifying different properties of a World of Warcraft game object.
+    /// </summary>
     [Flags]
     public enum WowGameObjectFlag
     {

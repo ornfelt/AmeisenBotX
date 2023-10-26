@@ -6,6 +6,9 @@ namespace AmeisenBotX.Memory.Structs
 {
     public struct AllocationPool
     {
+        /// <summary>
+        /// Initializes a new instance of the AllocationPool class with the specified address and size.
+        /// </summary>
         public AllocationPool(IntPtr address, int size)
         {
             Address = address;
@@ -14,10 +17,20 @@ namespace AmeisenBotX.Memory.Structs
             Allocations = new();
         }
 
+        /// <summary>
+        /// Gets or sets the address pointed to by the IntPtr.
+        /// </summary>
         public IntPtr Address { get; }
 
+        /// <summary>
+        /// Gets the SortedList of allocations, where the key represents the position
+        /// and the value represents the allocated amount.
+        /// </summary>
         public SortedList<int, int> Allocations { get; }
 
+        /// <summary>
+        /// Gets the size of the object.
+        /// </summary>
         public int Size { get; }
 
         /// <summary>
@@ -64,6 +77,12 @@ namespace AmeisenBotX.Memory.Structs
             return false;
         }
 
+        /// <summary>
+        /// Gets the next available block of memory with a specified size.
+        /// </summary>
+        /// <param name="size">The size of the block of memory to retrieve.</param>
+        /// <param name="offset">An output parameter that will contain the offset of the retrieved block.</param>
+        /// <returns>Returns true if a block of the specified size was found, false otherwise.</returns>
         private bool GetNextFreeBlock(int size, out int offset)
         {
             if (size <= Size)

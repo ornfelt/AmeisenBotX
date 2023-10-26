@@ -10,6 +10,10 @@ namespace AmeisenBotX.Core.Engines.Tactic.Dungeon.ForgeOfSouls
 {
     public class BronjahmTactic : ITactic
     {
+        /// <summary>
+        /// Initializes a new instance of the BronjahmTactic class.
+        /// </summary>
+        /// <param name="bot">The AmeisenBotInterfaces object.</param>
         public BronjahmTactic(AmeisenBotInterfaces bot)
         {
             Bot = bot;
@@ -20,18 +24,48 @@ namespace AmeisenBotX.Core.Engines.Tactic.Dungeon.ForgeOfSouls
             };
         }
 
+        /// <summary>
+        /// Gets the area represented by a Vector3 object. The area is calculated using the
+        /// coordinates (5297, 2506, 686).
+        /// </summary>
         public Vector3 Area { get; } = new(5297, 2506, 686);
 
+        /// <summary>
+        /// Represents the radius of the area.
+        /// </summary>
         public float AreaRadius { get; } = 70.0f;
 
+        /// <summary>
+        /// Gets or sets the Bot interface for the AmeisenBot.
+        /// </summary>
         public AmeisenBotInterfaces Bot { get; }
 
+        /// <summary>
+        /// Gets or sets the dictionary of configurable values.
+        /// </summary>
+        /// <value>
+        /// The dictionary containing configurable values.  
+        /// </value>
         public Dictionary<string, dynamic> Configurables { get; private set; }
 
+        /// <summary>
+        /// The MapId property represents the unique identifier of the map 'The Forge of Souls' in the 'World of Warcraft' game.
+        /// </summary>
         public WowMapId MapId { get; } = WowMapId.TheForgeOfSouls;
 
+        /// <summary>
+        /// Gets the display ID for Bronjahm.
+        /// </summary>
         private static List<int> BronjahmDisplayId { get; } = new List<int> { 30226 };
 
+        /// <summary>
+        /// Executes a tactic based on the provided parameters.
+        /// </summary>
+        /// <param name="role">The role of the player (Tank, DPS, or Heal).</param>
+        /// <param name="isMelee">A boolean indicating whether the player is in melee range or not.</param>
+        /// <param name="preventMovement">An out parameter indicating if movement should be prevented.</param>
+        /// <param name="allowAttacking">An out parameter indicating if attacking is allowed.</param>
+        /// <returns>A boolean value indicating if the tactic was executed successfully.</returns>
         public bool ExecuteTactic(WowRole role, bool isMelee, out bool preventMovement, out bool allowAttacking)
         {
             preventMovement = false;

@@ -2,6 +2,9 @@
 
 namespace AmeisenBotX.Wow.Objects.Flags
 {
+    /// <summary>
+    /// Flags for specifying properties of a WowCorpse object.
+    /// </summary>
     [Flags]
     public enum WowCorpseFlag
     {

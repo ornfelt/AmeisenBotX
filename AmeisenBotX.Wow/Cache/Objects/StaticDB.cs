@@ -5,6 +5,9 @@ namespace AmeisenBotX.Wow.Cache.Objects
 {
     internal class StaticDB
     {
+        /// <summary>
+        /// Represents a list of static mailboxes.
+        /// </summary>
         public static List<StaticMailbox> Mailboxes = new()
         {
             new(171752, 0, -4828.28f, -1285.05f, 501.807f, true, false),
@@ -214,6 +217,9 @@ namespace AmeisenBotX.Wow.Cache.Objects
             new(177044, 0, 1560.58f, 289.393f, -62.1814f, false, true)
         };
 
+        /// <summary>
+        /// List of static vendors with their respective properties.
+        /// </summary>
         public static List<StaticVendor> Vendors = new()
         {
             new(54, 0, -9464.87f, 93.9896f, 58.5271f, false, false, false, false, true, true, false),

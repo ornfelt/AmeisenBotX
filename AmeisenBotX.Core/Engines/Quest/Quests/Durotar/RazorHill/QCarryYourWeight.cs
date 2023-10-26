@@ -7,12 +7,16 @@ namespace AmeisenBotX.Core.Engines.Quest.Quests.Durotar.RazorHill
 {
     internal class QCarryYourWeight : BotQuest
     {
+        /// <summary>
+        /// Initializes a new instance of the QCarryYourWeight class.
+        /// </summary>
+        /// <param name="bot">The AmeisenBotInterfaces object.</param>
         public QCarryYourWeight(AmeisenBotInterfaces bot)
-            : base(bot, 791, "Carry Your Weight", 4, 1,
-                () => (bot.GetClosestQuestGiverByNpcId(bot.Player.Position, new List<int> { 3147 }), new Vector3(384.74f, -4600.13f, 76.17f)),
-                () => (bot.GetClosestQuestGiverByNpcId(bot.Player.Position, new List<int> { 3147 }), new Vector3(384.74f, -4600.13f, 76.17f)),
-                new List<IQuestObjective>()
-                {
+                    : base(bot, 791, "Carry Your Weight", 4, 1,
+                        () => (bot.GetClosestQuestGiverByNpcId(bot.Player.Position, new List<int> { 3147 }), new Vector3(384.74f, -4600.13f, 76.17f)),
+                        () => (bot.GetClosestQuestGiverByNpcId(bot.Player.Position, new List<int> { 3147 }), new Vector3(384.74f, -4600.13f, 76.17f)),
+                        new List<IQuestObjective>()
+                        {
                     new QuestObjectiveChain(new List<IQuestObjective>()
                     {
                         new KillAndLootQuestObjective(bot, new List<int> { 3119,3120,3128,3129,3192,5808,5809 }, 8, 4870, new List<List<Vector3>> {
@@ -41,7 +45,7 @@ namespace AmeisenBotX.Core.Engines.Quest.Quests.Durotar.RazorHill
                             },
                         }),
                     })
-                })
+                        })
         { }
     }
 }

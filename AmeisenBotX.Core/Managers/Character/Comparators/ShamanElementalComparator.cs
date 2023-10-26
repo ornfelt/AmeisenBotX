@@ -6,6 +6,10 @@ namespace AmeisenBotX.Core.Managers.Character.Comparators
 {
     public class ShamanElementalComparator : BasicComparator
     {
+        /// <summary>
+        /// Initializes a new instance of the ShamanElementalComparator class with optional armor and weapon type blacklists.
+        /// Sets the GearscoreFactory property to a new instance of GearscoreFactory, and assigns default weight values to different WowStatTypes.
+        /// </summary>
         public ShamanElementalComparator(List<WowArmorType> armorTypeBlacklist = null, List<WowWeaponType> weaponTypeBlacklist = null) : base(armorTypeBlacklist, weaponTypeBlacklist)
         {
             GearscoreFactory = new GearscoreFactory(new Dictionary<string, double>

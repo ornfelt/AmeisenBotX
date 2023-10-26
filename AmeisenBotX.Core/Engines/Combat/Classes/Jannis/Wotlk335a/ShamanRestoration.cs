@@ -11,6 +11,10 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 {
     public class ShamanRestoration : BasicCombatClass
     {
+        /// <summary>
+        /// Constructor for the ShamanRestoration class.
+        /// </summary>
+        /// <param name="bot">An instance of the AmeisenBotInterfaces that the ShamanRestoration class is based on.</param>
         public ShamanRestoration(AmeisenBotInterfaces bot) : base(bot)
         {
             MyAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, Shaman335a.WaterShield, () => TryCastSpell(Shaman335a.WaterShield, 0, true)));
@@ -22,18 +26,43 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
             };
         }
 
+        /// <summary>
+        /// Gets the description of the FCFS based CombatClass for the Restoration Shaman spec.
+        /// </summary>
         public override string Description => "FCFS based CombatClass for the Restoration Shaman spec.";
 
+        /// <summary>
+        /// Gets the display name for a Shaman with the Restoration specialization.
+        /// </summary>
         public override string DisplayName2 => "Shaman Restoration";
 
+        /// <summary>
+        /// Gets a value indicating whether this code handles movement.
+        /// </summary>
+        /// <returns>Always returns false.</returns>
         public override bool HandlesMovement => false;
 
+        /// <summary>
+        /// Gets a value indicating whether it is a melee attack.
+        /// </summary>
         public override bool IsMelee => false;
 
+        /// <summary>
+        /// Gets or sets the item comparator for comparing items.
+        /// </summary>
         public override IItemComparator ItemComparator { get; set; } = new BasicSpiritComparator(new() { WowArmorType.Shield });
 
+        /// <summary>
+        /// Gets the role of the character as a healer.
+        /// </summary>
         public override WowRole Role => WowRole.Heal;
 
+        /// <summary>
+        /// Gets or sets the talent tree of the character.
+        /// </summary>
+        /// <value>
+        /// The talent tree consisting of three trees: Tree1, Tree2, and Tree3. Each tree contains a dictionary with key-value pairs representing the talent points and the corresponding talents.
+        /// </value>
         public override TalentTree Talents { get; } = new()
         {
             Tree1 = new(),
@@ -69,18 +98,42 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
             },
         };
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the character should use auto attacks.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if the character should use auto attacks; otherwise, <c>false</c>.
+        /// </value>
         public override bool UseAutoAttacks => false;
 
+        ///<summary>Returns the version of the object.</summary>
         public override string Version => "1.0";
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the player can walk behind an enemy.
+        /// </summary>
+        /// <returns>Returns false indicating that walking behind an enemy is not allowed.</returns>
         public override bool WalkBehindEnemy => false;
 
+        /// <summary>
+        /// Gets or sets the WowClass for the Shaman character.
+        /// </summary>
         public override WowClass WowClass => WowClass.Shaman;
 
+        /// <summary>
+        /// Gets or sets the World of Warcraft version, which is set to Wrath of the Lich King (3.3.5a).
+        /// </summary>
         public override WowVersion WowVersion => WowVersion.WotLK335a;
 
+        /// <summary>
+        /// Gets or sets the dictionary that stores the spell ID as the key and the corresponding heal value as the value.
+        /// </summary>
         private Dictionary<int, string> SpellUsageHealDict { get; }
 
+        /// <summary>
+        /// Executes the action, including base execution and checking if healing someone is needed.
+        /// If healing is not needed, attempts to find a target and casts spells accordingly.
+        /// </summary>
         public override void Execute()
         {
             base.Execute();
@@ -105,6 +158,14 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
             }
         }
 
+        /// <summary>
+        /// Executes actions when the character is out of combat. This method
+        /// checks if any party members are dead and uses the Ancestral Spirit
+        /// ability to revive them if necessary. If any party members are revived,
+        /// the method returns. Otherwise, it checks if the character's main hand
+        /// weapon has the Earthliving buff and the Earthliving weapon enchantment.
+        /// If not, the method returns.
+        /// </summary>
         public override void OutOfCombatExecute()
         {
             base.OutOfCombatExecute();
@@ -120,6 +181,10 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
             }
         }
 
+        /// <summary>
+        /// Checks if there is a need to heal someone.
+        /// </summary>
+        /// <returns>True if there is a need to heal someone, otherwise false.</returns>
         private bool NeedToHealSomeone()
         {
             if (TargetProviderHeal.Get(out IEnumerable<IWowUnit> unitsToHeal))

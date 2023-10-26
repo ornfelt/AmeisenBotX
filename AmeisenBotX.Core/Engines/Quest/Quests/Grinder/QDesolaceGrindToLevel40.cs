@@ -7,10 +7,14 @@ namespace AmeisenBotX.Core.Engines.Quest.Quests.Grinder
 {
     internal class QDesolaceGrindToLevel40 : GrindingBotQuest
     {
+        /// <summary>
+        /// Constructor for the QDesolaceGrindToLevel40 class.
+        /// </summary>
+        /// <param name="bot">An instance of the AmeisenBotInterfaces interface.</param>
         public QDesolaceGrindToLevel40(AmeisenBotInterfaces bot)
-            : base("DesolaceGrindToLevel40",
-                new List<IQuestObjective>()
-                {
+                    : base("DesolaceGrindToLevel40",
+                        new List<IQuestObjective>()
+                        {
                     new QuestObjectiveChain(new List<IQuestObjective>()
                     {
                         new GrindingObjective(bot, 40, new List<List<Vector3>> {
@@ -30,7 +34,7 @@ namespace AmeisenBotX.Core.Engines.Quest.Quests.Grinder
                             },
                         }),
                     })
-                })
+                        })
         { }
     }
 }

@@ -7,15 +7,27 @@ namespace AmeisenBotX.Core.Engines.Jobs.Profiles.Gathering
 {
     public class CopperTinSilverWestfallProfile : IMiningProfile
     {
+        /// <summary>
+        /// Determines if the path is a circle.
+        /// </summary>
         public bool IsCirclePath => true;
 
+        /// <summary>
+        /// Gets the job type which is set to Mining.
+        /// </summary>
         public JobType JobType => JobType.Mining;
 
+        /// <summary>
+        /// Gets or sets the list of mailbox nodes.
+        /// </summary>
         public List<Vector3> MailboxNodes { get; private set; } = new()
         {
             new(-10643, 1157, 33),
         };
 
+        /// <summary>
+        /// Gets the list of WowOreId representing different types of ores.
+        /// </summary>
         public List<WowOreId> OreTypes { get; } = new()
         {
             WowOreId.Copper,
@@ -23,6 +35,10 @@ namespace AmeisenBotX.Core.Engines.Jobs.Profiles.Gathering
             WowOreId.Tin
         };
 
+        /// <summary>
+        /// Represents a list of Vector3 positions that define a path.
+        /// </summary>
+        /// <value>The path.</value>
         public List<Vector3> Path { get; } = new()
         {
             new(-9799, 872, 25),
@@ -725,6 +741,10 @@ namespace AmeisenBotX.Core.Engines.Jobs.Profiles.Gathering
             new(-9807, 866, 25),
         };
 
+        /// <summary>
+        /// Converts the object to a string representation.
+        /// </summary>
+        /// <returns>A string containing the job type, materials and location.</returns>
         public override string ToString()
         {
             return $"[{JobType}] (Copper, Tin, Silver) Westfall (Kamel)";
