@@ -4,6 +4,10 @@ using AmeisenBotX.Wow.Objects;
 
 namespace AmeisenBotX.Wow548.Objects
 {
+    /// <summary>
+    /// Initializes a new instance of the ObjectManager548 class.
+    /// </summary>
+    /// <param name="memory">The WowMemoryApi object to use for memory operations.</param>
     public class ObjectManager548 : ObjectManager<WowObject548, WowUnit548, WowPlayer548, WowGameobject548, WowDynobject548, WowItem548, WowCorpse548, WowContainer548>
     {
         /// <summary>

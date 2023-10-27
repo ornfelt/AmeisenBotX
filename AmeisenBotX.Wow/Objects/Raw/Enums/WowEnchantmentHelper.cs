@@ -2,6 +2,9 @@
 
 namespace AmeisenBotX.Wow.Objects.Raw.Enums
 {
+    /// <summary>
+    /// This class provides a dictionary containing the enchantments and their corresponding IDs.
+    /// </summary>
     public static class WowEnchantmentHelper
     {
         /// <summary>

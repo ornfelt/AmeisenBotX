@@ -6,6 +6,10 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Logic.Idle.Actions
 {
+    /// </value>
+    /// <summary>
+    /// Executes the idle action.
+    /// </summary>
     public class LookAtGroupIdleAction : IIdleAction
     {
         /// <summary>

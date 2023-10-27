@@ -2,6 +2,9 @@
 
 namespace AmeisenBotX.Wow335a.Combatlog.Enums
 {
+    /// <summary>
+    /// Gets the unique identifier for the destination. The value is set to 5 by default.
+    /// </summary>
     public class CombatlogFields335a : ICombatlogFields
     {
         /// <summary>

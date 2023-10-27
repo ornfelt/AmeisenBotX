@@ -2,6 +2,9 @@
 
 namespace AmeisenBotX.Core.Managers.Character.Spells.Objects
 {
+    /// <summary>
+    /// Represents a spell with properties for cast time, costs, and maximum range.
+    /// </summary>
     public class Spell
     {
         /// <summary>

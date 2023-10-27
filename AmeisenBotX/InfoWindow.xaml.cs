@@ -10,6 +10,10 @@ using System.Windows.Media;
 
 namespace AmeisenBotX
 {
+    /// <summary>
+    /// Enum that represents the different display modes in the application.
+    /// The available modes are Equipment, Inventory, and Spells.
+    /// </summary>
     public partial class InfoWindow : Window
     {
         /// <summary>

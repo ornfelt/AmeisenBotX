@@ -6,6 +6,9 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Dungeon.Profiles.TBC
 {
+    /// <summary>
+    /// Gets the position of the dungeon exit.
+    /// </summary>
     public class HellfireRampartsProfile : IDungeonProfile
     {
         /// <summary>

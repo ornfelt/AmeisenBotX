@@ -7,6 +7,9 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Wow335a.Objects
 {
+    /// <summary>
+    /// Represents a World of Warcraft item in version 3.3.5a.
+    /// </summary>
     [Serializable]
     public class WowItem335a : WowObject335a, IWowItem
     {

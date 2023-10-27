@@ -8,6 +8,9 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Logic.Idle.Actions
 {
+    /// <summary>
+    /// Gets or sets a value indicating whether the Autopilot is the only mode available.
+    /// </summary>
     public class AuctionHouseIdleAction : IIdleAction
     {
         /// <summary>

@@ -3,6 +3,9 @@ using System;
 
 namespace AmeisenBotX.Core.Engines.Combat.Helpers
 {
+    /// <summary>
+    /// Initializes a new instance of the PetManager class with the specified parameters.
+    /// </summary>
     public class PetManager
     {
         /// <summary>

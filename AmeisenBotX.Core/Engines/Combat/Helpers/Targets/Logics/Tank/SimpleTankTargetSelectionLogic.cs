@@ -10,6 +10,10 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Helpers.Targets.Logics.Tank
 {
+    /// <summary>
+    /// Initializes a new instance of the SimpleTankTargetSelectionLogic class with the specified AmeisenBotInterfaces object.
+    /// Adds various TargetValidator objects and a DungeonTargetPrioritizer to the target selection logic for a simple tank.
+    /// </summary>
     public class SimpleTankTargetSelectionLogic : BasicTargetSelectionLogic
     {
         /// <summary>

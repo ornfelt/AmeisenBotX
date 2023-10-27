@@ -5,6 +5,9 @@ using AmeisenBotX.Wow548.Objects.Descriptors;
 
 namespace AmeisenBotX.Wow548.Objects
 {
+    /// <summary>
+    /// Represents a serialized WowItem548 object that implements the IWowItem interface.
+    /// </summary>
     [Serializable]
     public unsafe class WowItem548 : WowObject548, IWowItem
     {

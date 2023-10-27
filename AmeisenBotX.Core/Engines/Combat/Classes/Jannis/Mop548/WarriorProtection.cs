@@ -11,6 +11,10 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Mop548
 {
+    /// <summary>
+    /// Initializes a new instance of the WarriorProtection class.
+    /// </summary>
+    /// <param name="bot">The bot instance to be passed as a parameter.</param>
     public class WarriorProtection : BasicCombatClass
     {
         /// <summary>

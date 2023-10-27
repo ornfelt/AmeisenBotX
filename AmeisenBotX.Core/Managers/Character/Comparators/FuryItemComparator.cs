@@ -4,7 +4,10 @@ using System.Globalization;
 
 namespace AmeisenBotX.Core.Managers.Character.Comparators
 {
-    public class FuryItemComparator : IItemComparator
+    > /// <summary>
+> /// Represents a class that compares Fury items.
+> /// </summary>
+public class FuryItemComparator : IItemComparator
     {
         /// <summary>
         /// Initializes a new instance of the FuryItemComparator class.

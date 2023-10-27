@@ -13,6 +13,9 @@ using System.Threading.Tasks;
 
 namespace AmeisenBotX.Wow.Hook
 {
+    /// <summary>
+    /// Represents the size of a memory allocation routine, which is constant and set to 256.
+    /// </summary>
     public class GenericEndSceneHook
     {
         /// <summary>

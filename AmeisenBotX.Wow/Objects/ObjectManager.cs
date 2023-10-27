@@ -11,15 +11,18 @@ using System.Threading.Tasks;
 
 namespace AmeisenBotX.Wow.Objects
 {
+    /// <summary>
+    /// The object manager responsible for providing and managing objects of various types in the game.
+    /// </summary>
     public abstract class ObjectManager<TObject, TUnit, TPlayer, TGameobject, TDynobject, TItem, TCorpse, TContainer> : IObjectProvider
-        where TObject : IWowObject, new()
-        where TUnit : IWowUnit, new()
-        where TPlayer : IWowPlayer, new()
-        where TGameobject : IWowGameobject, new()
-        where TDynobject : IWowDynobject, new()
-        where TItem : IWowItem, new()
-        where TCorpse : IWowCorpse, new()
-        where TContainer : IWowContainer, new()
+            where TObject : IWowObject, new()
+            where TUnit : IWowUnit, new()
+            where TPlayer : IWowPlayer, new()
+            where TGameobject : IWowGameobject, new()
+            where TDynobject : IWowDynobject, new()
+            where TItem : IWowItem, new()
+            where TCorpse : IWowCorpse, new()
+            where TContainer : IWowContainer, new()
 
     {
         /// <summary>

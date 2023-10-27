@@ -6,6 +6,9 @@ using System.Windows.Input;
 
 namespace AmeisenBotX.StateConfig
 {
+    /// <summary>
+    /// Gets or sets a value indicating whether the StateQuestingConfigWindow is in questing mode.
+    /// </summary>
     public partial class StateQuestingConfigWindow : Window, IStateConfigWindow
     {
         /// <summary>

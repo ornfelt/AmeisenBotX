@@ -5,6 +5,13 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Logic.Routines
 {
+    /// <summary>
+    /// This method is used to sell items from the bot's inventory.
+    /// It creates a copy of items to prevent updates while selling.
+    /// It iterates through each item in the inventory and checks if it should be sold based on the configured item sell blacklist 
+    /// and the item quality settings in the AmeisenBotConfig object.
+    /// If the item is an improvement for the character, it equips the new item and sells the previous one.
+    /// </summary>
     public static class SellItemsRoutine
     {
         /// <summary>

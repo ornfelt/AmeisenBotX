@@ -14,6 +14,9 @@ using System.Text.Json;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 {
+    /// <summary>
+    /// Initializes a new instance of the DruidRestoration class, with the specified bot.
+    /// </summary>
     public class DruidRestoration : BasicCombatClass
     {
         /// <summary>

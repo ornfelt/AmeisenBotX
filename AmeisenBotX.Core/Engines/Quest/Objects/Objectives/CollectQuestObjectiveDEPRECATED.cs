@@ -7,6 +7,14 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Quest.Objects.Objectives
 {
+    /// <summary>
+    /// Initializes a new instance of the CollectQuestObjectiveDEPRECATED class.
+    /// </summary>
+    /// <param name="bot">The AmeisenBotInterfaces object.</param>
+    /// <param name="itemId">The ID of the item.</param>
+    /// <param name="itemAmount">The amount of the item to collect.</param>
+    /// <param name="objectDisplayId">The ID of the object display.</param>
+    /// <param name="area">The list of AreaNode objects.</param>
     public class CollectQuestObjectiveDEPRECATED : IQuestObjective
     {
         /// <summary>

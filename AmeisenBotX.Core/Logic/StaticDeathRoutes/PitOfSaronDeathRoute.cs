@@ -3,6 +3,12 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Logic.StaticDeathRoutes
 {
+    /// <summary>
+    /// Gets or sets the death point for the character.
+    /// </summary>
+    /// <value>
+    /// The death point represented by a Vector3 object.
+    /// </value>
     public class PitOfSaronDeathRoute : StaticPathDeathRoute
     {
         /// <summary>

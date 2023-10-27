@@ -18,6 +18,10 @@ using Point = System.Drawing.Point;
 
 namespace AmeisenBotX
 {
+    /// <summary>
+    /// Initializes a new instance of the MapWindow class.
+    /// </summary>
+    /// <param name="ameisenBot">The AmeisenBot instance to associate with the MapWindow.</param>
     public partial class MapWindow : Window
     {
         /// <summary>

@@ -9,6 +9,9 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 {
+    /// <summary>
+    /// Represents a druid specialization that focuses on balance, utilizing both nature-based abilities and arcane spells.
+    /// </summary>
     public class DruidBalance : BasicCombatClass
     {
         /// <summary>

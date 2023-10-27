@@ -5,6 +5,10 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Quest.Quests.Grinder
 {
+    /// <summary>
+    /// Constructor for the QTanarisGrindToLevel44 class.
+    /// </summary>
+    /// <param name="bot">An AmeisenBotInterfaces object representing the bot.</param>
     internal class QTanarisGrindToLevel44 : GrindingBotQuest
     {
         /// <summary>

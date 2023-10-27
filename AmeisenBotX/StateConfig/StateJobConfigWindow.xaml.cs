@@ -6,6 +6,9 @@ using System.Windows.Input;
 
 namespace AmeisenBotX.StateConfig
 {
+    /// <summary>
+    /// Initializes a new instance of the StateJobConfigWindow class with the specified AmeisenBot and AmeisenBotConfig.
+    /// </summary>
     public partial class StateJobConfigWindow : Window, IStateConfigWindow
     {
         /// <summary>

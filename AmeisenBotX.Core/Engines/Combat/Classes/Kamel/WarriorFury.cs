@@ -10,6 +10,9 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
 {
+    /// <summary>
+    /// Represents a Warrior specialization focused on fury and close combat.
+    /// </summary>
     internal class WarriorFury : BasicKamelClass
     {
         /// <summary>

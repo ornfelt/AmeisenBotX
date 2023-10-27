@@ -9,6 +9,9 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Bia10
 {
+    /// <summary>
+    /// Initializes a new instance of the MageFrost class with the specified bot parameter.
+    /// </summary>
     public class MageFrost : BasicCombatClassBia10
     {
         /// <summary>

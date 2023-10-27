@@ -9,6 +9,10 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Movement.Providers.Special
 {
+    /// <summary>
+    /// Initializes a new instance of the DungeonMovementProvider class. 
+    /// </summary>
+    /// <param name="bot">The AmeisenBotInterfaces instance used for movement.</param>
     public class DungeonMovementProvider : IMovementProvider
     {
         /// <summary>

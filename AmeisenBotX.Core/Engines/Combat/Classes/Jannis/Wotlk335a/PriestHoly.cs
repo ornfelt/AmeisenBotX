@@ -9,6 +9,11 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 {
+    /// <summary>
+    /// Constructor for the PriestHoly class.
+    /// Initializes the PriestHoly object with the specified bot.
+    /// </summary>
+    /// <param name="bot">The bot object.</param>
     public class PriestHoly : BasicCombatClass
     {
         /// <summary>

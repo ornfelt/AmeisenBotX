@@ -6,6 +6,9 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Managers.Character.Comparators
 {
+    /// <summary>
+    /// Initializes a new instance of the BasicComparator class with the specified armor type blacklist and weapon type blacklist.
+    /// </summary>
     public class BasicComparator : IItemComparator
     {
         /// <summary>

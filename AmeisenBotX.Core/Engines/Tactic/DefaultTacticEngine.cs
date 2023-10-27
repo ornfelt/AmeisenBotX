@@ -8,6 +8,9 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Tactic
 {
+    /// <summary>
+    /// Initializes a new instance of the DefaultTacticEngine class with the provided bot.
+    /// </summary>
     public class DefaultTacticEngine : ITacticEngine
     {
         /// <summary>

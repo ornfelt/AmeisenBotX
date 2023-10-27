@@ -3,6 +3,10 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Helpers.Targets.Validation.Basic
 {
+    ///<summary>
+    ///Creates a new instance of the IsThreatTargetValidator class.
+    ///</summary>
+    ///<param name="bot">The AmeisenBotInterfaces instance to be used for validating threat targets.</param>
     public class IsThreatTargetValidator : ITargetValidator
     {
         ///<summary>

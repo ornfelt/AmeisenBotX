@@ -5,6 +5,9 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Quest.Quests.Grinder
 {
+    /// <summary>
+    /// A quest that involves grinding in The Barrens area until level 19.
+    /// </summary>
     internal class QTheBarrensGrindToLevel19 : GrindingBotQuest
     {
         ///<summary>

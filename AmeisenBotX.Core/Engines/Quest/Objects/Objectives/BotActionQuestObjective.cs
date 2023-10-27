@@ -2,6 +2,9 @@
 
 namespace AmeisenBotX.Core.Engines.Quest.Objects.Objectives
 {
+    /// <summary>
+    /// Gets a value indicating whether the task is finished.
+    /// </summary>
     public class BotActionQuestObjective : IQuestObjective
     {
         /// <summary>

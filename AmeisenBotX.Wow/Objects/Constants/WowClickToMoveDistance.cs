@@ -1,5 +1,8 @@
 ﻿namespace AmeisenBotX.Wow.Objects.Constants
 {
+    /// <summary>
+    /// Represents the distance to move in the ClickToMove system.
+    /// </summary>
     public class WowClickToMoveDistance
     {
         /// <summary>

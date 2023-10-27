@@ -8,6 +8,9 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
 {
+    /// <summary>
+    /// Represents a shaman specialization focused on enhancing their abilities.
+    /// </summary>
     internal class ShamanEnhancement : BasicKamelClass
     {
         /// <summary>

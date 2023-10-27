@@ -5,6 +5,9 @@ using System;
 
 namespace AmeisenBotX.Wow335a.Objects
 {
+    /// <summary>
+    /// Returns a string representation of the DynamicObject, including its Guid, SpellId, Caster, and Radius properties.
+    /// </summary>
     [Serializable]
     public class WowDynobject335a : WowObject335a, IWowDynobject
     {

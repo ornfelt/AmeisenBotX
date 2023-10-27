@@ -3,6 +3,13 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Managers.Character.Talents.Objects
 {
+    /// <summary>
+    /// Initializes a new instance of the TalentTree class with a given talentString.
+    /// The talentString is split into individual talents based on the "|" delimiter.
+    /// Each talent is further split into individual items based on the ";" delimiter.
+    /// Only talents with a length of at least 4 and items with a length of at least 5 are considered.
+    /// For each valid talent, a new Talent object is created using the specified item values.
+    /// </summary>
     public class TalentTree
     {
         /// <summary>

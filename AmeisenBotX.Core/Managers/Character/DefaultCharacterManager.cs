@@ -19,6 +19,9 @@ using System.Threading.Tasks;
 
 namespace AmeisenBotX.Core.Managers.Character
 {
+    /// <summary>
+    /// Initializes a new instance of the DefaultCharacterManager class.
+    /// </summary>
     public class DefaultCharacterManager : ICharacterManager
     {
         /// <summary>

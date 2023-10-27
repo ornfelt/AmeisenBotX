@@ -2,6 +2,9 @@
 
 namespace AmeisenBotX.Wow548.Offsets
 {
+    /// <summary>
+    /// Represents a list with offset values.
+    /// </summary>
     public class OffsetList548 : IOffsetList
     {
         /// <summary>

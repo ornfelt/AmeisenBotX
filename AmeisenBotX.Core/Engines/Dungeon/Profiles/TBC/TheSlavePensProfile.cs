@@ -6,6 +6,9 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Dungeon.Profiles.TBC
 {
+    /// <summary>
+    /// Represents a profile for the Slave Pens dungeon in Outland, designed for characters at Level 60 to 64.
+    /// </summary>
     public class TheSlavePensProfile : IDungeonProfile
     {
         /// <summary>

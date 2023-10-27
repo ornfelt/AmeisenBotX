@@ -6,6 +6,11 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Helpers.Aura.Objects
 {
+    /// <summary>
+    /// Initializes a new instance of the KeepBestActiveAuraJob class.
+    /// </summary>
+    /// <param name="db">The IAmeisenBotDb object.</param>
+    /// <param name="actions">The collection of actions as a tuple of strings and functions.</param>
     public class KeepBestActiveAuraJob : IAuraJob
     {
         /// <summary>

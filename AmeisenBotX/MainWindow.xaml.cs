@@ -28,6 +28,17 @@ using System.Windows.Media;
 
 namespace AmeisenBotX
 {
+    /// <summary>
+    /// Initializes a new instance of the MainWindow class with the specified data path and config path.
+    /// Throws FileNotFoundException if the data path or config path does not exist.
+    /// Sets the DataPath and ConfigPath properties.
+    /// Initializes various brushes and freezes them for improved performance.
+    /// Creates a new LabelUpdateEvent with a TimeSpan of 1 second.
+    /// Sets the RenderState to true.
+    /// Initializes and enables a new KeyboardHook.
+    /// </summary>
+    /// <param name="dataPath">The path to the data</param>
+    /// <param name="configPath">The path to the config</param>
     public partial class MainWindow : Window
     {
         /// <summary>

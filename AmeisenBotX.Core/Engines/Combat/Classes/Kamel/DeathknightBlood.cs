@@ -13,6 +13,10 @@ using System.Text.Json;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
 {
+    /// <summary>
+    /// Initializes a new instance of the DeathknightBlood class with the provided bot.
+    /// Creates a TargetManager with a SimpleDpsTargetSelectionLogic for the bot and a TimeSpan of 250 milliseconds.
+    /// </summary>
     public class DeathknightBlood : ICombatClass
     {
         /// <summary>

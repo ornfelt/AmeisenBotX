@@ -9,6 +9,9 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Tactic.Dungeon.PitOfSaron
 {
+    /// <summary>
+    /// Represents the IckAndKrickTactic class that implements the ITactic interface.
+    /// </summary>
     public class IckAndKrickTactic : ITactic
     {
         /// <summary>

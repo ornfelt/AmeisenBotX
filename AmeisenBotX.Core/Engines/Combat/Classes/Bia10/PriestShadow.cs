@@ -8,6 +8,9 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Bia10
 {
+    /// <summary>
+    /// Constructor for the PriestShadow class. Initializes and adds jobs to the MyAuraManager and TargetAuraManager. These jobs keep track of and cast various spells based on certain conditions.
+    /// </summary>
     public class PriestShadow : BasicCombatClassBia10
     {
         /// <summary>

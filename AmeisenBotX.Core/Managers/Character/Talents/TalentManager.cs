@@ -7,6 +7,9 @@ using System.Text;
 
 namespace AmeisenBotX.Core.Managers.Character.Talents
 {
+    /// <summary>
+    /// Represents a manager for handling talent-related operations in the World of Warcraft game.
+    /// </summary>
     public class TalentManager
     {
         /// <summary>

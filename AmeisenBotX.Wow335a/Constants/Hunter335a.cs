@@ -1,5 +1,8 @@
 ﻿namespace AmeisenBotX.Wow335a.Constants
 {
+    /// <summary>
+    /// Represents the constant string "Aspect of the Dragonhawk".
+    /// </summary>
     public static class Hunter335a
     {
         /// <summary>

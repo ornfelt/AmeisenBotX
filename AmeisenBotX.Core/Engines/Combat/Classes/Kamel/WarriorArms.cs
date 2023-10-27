@@ -10,6 +10,9 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
 {
+    /// <summary>
+    /// Represents a warrior archetype with a focus on arms combat.
+    /// </summary>
     internal class WarriorArms : BasicKamelClass
     {
         /// <summary>

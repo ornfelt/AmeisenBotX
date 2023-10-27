@@ -10,6 +10,9 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Movement
 {
+    /// <summary>
+    /// Event triggered when the movement engine needs to find a path.
+    /// </summary>
     public class MovementEngine : IMovementEngine
     {
         /// <summary>

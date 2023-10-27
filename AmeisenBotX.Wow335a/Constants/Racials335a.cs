@@ -1,5 +1,9 @@
 ﻿namespace AmeisenBotX.Wow335a.Constants
 {
+    /// <summary>
+    /// Represents the constant string value "Blood Fury".
+    /// This constant is associated with the Orc racial ability.
+    /// </summary>
     public static class Racials335a
     {
         /// <summary>

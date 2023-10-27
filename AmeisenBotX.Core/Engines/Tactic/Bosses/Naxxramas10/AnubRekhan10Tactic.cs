@@ -10,6 +10,10 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Tactic.Bosses.Naxxramas10
 {
+    /// <summary>
+    /// Represents the area defined by a three-dimensional vector.
+    /// The default value is set to (3273, -3476, 287).
+    /// </summary>
     public class AnubRekhan10Tactic : SimpleConfigurable, ITactic
     {
         /// <summary>

@@ -12,6 +12,9 @@ using System.Text.Json;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.einTyp
 {
+    /// <summary>
+    /// Represents a Paladin Protection class that implements the ICombatClass interface.
+    /// </summary>
     public class PaladinProtection : ICombatClass
     {
         /// <summary>

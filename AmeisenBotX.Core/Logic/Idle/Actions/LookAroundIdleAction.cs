@@ -2,6 +2,10 @@
 
 namespace AmeisenBotX.Core.Logic.Idle.Actions
 {
+    /// <summary>
+    /// Initializes a new instance of the LookAroundIdleAction class.
+    /// </summary>
+    /// <param name="bot">The bot to perform the action.</param>
     public class LookAroundIdleAction : IIdleAction
     {
         /// <summary>

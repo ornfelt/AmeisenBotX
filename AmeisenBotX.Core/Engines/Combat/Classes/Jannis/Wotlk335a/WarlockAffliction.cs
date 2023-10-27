@@ -11,6 +11,10 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 {
+    /// <summary>
+    /// Initializes a new instance of the WarlockAffliction class.
+    /// </summary>
+    /// <param name="bot">The AmeisenBotInterfaces to use for the WarlockAffliction class.</param>
     public class WarlockAffliction : BasicCombatClass
     {
         ///<summary>

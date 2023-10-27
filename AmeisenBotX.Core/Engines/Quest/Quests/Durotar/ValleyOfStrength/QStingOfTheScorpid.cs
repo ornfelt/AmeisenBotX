@@ -5,6 +5,10 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Quest.Quests.Durotar.ValleyOfStrength
 {
+    /// <summary>
+    /// Constructor for the "Sting of the Scorpid" quest. 
+    /// Initializes the quest with the given bot and parameters. 
+    /// </summary>
     internal class QStingOfTheScorpid : BotQuest
     {
         /// <summary>

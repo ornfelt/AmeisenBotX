@@ -5,6 +5,9 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Quest.Quests.Durotar.RazorHill
 {
+    /// <summary>
+    /// Constructor for the "Vanquish the Betrayers" quest.
+    /// </summary>
     internal class QVanquishTheBetrayers : BotQuest
     {
         /// <summary>

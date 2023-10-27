@@ -3,6 +3,9 @@ using System.Windows.Media;
 
 namespace AmeisenBotX.Utils
 {
+    /// <summary>
+    /// Represents the primary brush for a druid.
+    /// </summary>
     public static class WowColors
     {
         /// <summary>

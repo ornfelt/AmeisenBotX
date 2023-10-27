@@ -2,6 +2,9 @@
 
 namespace AmeisenBotX.Core.Engines.Quest.Objects
 {
+    /// <summary>
+    /// Gets or sets the position of the AreaNode as a Vector3 object.
+    /// </summary>
     public class AreaNode
     {
         /// <summary>

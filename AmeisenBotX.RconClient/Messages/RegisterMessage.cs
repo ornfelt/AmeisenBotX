@@ -2,6 +2,9 @@
 
 namespace AmeisenBotX.RconClient.Messages
 {
+    /// <summary>
+    /// Gets or sets the unique identifier for the object.
+    /// </summary>
     public class RegisterMessage
     {
         /// <summary>

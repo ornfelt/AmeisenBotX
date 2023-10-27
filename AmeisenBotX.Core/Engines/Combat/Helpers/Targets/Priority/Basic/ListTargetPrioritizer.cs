@@ -4,6 +4,9 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Helpers.Targets.Priority.Basic
 {
+    /// <summary>
+    /// Represents a target prioritizer that uses a List to prioritize items.
+    /// </summary>
     public class ListTargetPrioritizer : ITargetPrioritizer
     {
         /// <summary>

@@ -3,6 +3,11 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Managers.Character.Comparators
 {
+    /// <summary>
+    /// Initializes a new instance of the <see cref="BasicStaminaComparator"/> class.
+    /// </summary>
+    /// <param name="armorTypeBlacklist">The list of armor types to blacklist.</param>
+    /// <param name="weaponTypeBlacklist">The list of weapon types to blacklist.</param>
     public class BasicStaminaComparator : BasicComparator
     {
         /// <summary>

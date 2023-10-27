@@ -9,6 +9,14 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Quest.Objects.Objectives
 {
+    /// <summary>
+    /// Initializes a new instance of the CollectQuestObjective class.
+    /// </summary>
+    /// <param name="bot">The AmeisenBotInterfaces object.</param>
+    /// <param name="itemId">The ID of the item to collect.</param>
+    /// <param name="itemAmount">The amount of the item to collect.</param>
+    /// <param name="gameObjectIds">The list of game object IDs to interact with.</param>
+    /// <param name="positions">The list of positions to move to within the area.</param>
     public class CollectQuestObjective : IQuestObjective
     {
         /// <summary>

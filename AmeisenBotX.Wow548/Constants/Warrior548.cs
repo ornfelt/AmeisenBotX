@@ -1,5 +1,8 @@
 ﻿namespace AmeisenBotX.Wow548.Constants
 {
+    /// <summary>
+    /// Represents the name of the Cleave ability.
+    /// </summary>
     public static class Warrior548
     {
         /// <summary>

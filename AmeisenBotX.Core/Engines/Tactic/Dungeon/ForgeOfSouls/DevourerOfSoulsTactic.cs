@@ -8,6 +8,9 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Tactic.Dungeon.ForgeOfSouls
 {
+    /// <summary>
+    /// Represents a tactic for the DevourerOfSouls monster.
+    /// </summary>
     public class DevourerOfSoulsTactic : ITactic
     {
         /// <summary>

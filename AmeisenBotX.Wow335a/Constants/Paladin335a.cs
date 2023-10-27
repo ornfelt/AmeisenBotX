@@ -1,5 +1,8 @@
 ﻿namespace AmeisenBotX.Wow335a.Constants
 {
+    /// <summary>
+    /// Represents the constant string value for "Blessing of Kings".
+    /// </summary>
     public static class Paladin335a
     {
         /// <summary>

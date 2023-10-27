@@ -7,6 +7,9 @@ using System.IO;
 
 namespace AmeisenBotX.Core.Managers.Chat
 {
+    /// <summary>
+    /// Creates a new instance of the DefaultChatManager class.
+    /// </summary>
     public class DefaultChatManager : IChatManager
     {
         /// <summary>

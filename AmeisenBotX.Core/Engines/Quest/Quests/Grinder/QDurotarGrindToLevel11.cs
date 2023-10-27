@@ -5,6 +5,10 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Quest.Quests.Grinder
 {
+    /// <summary>
+    /// Constructs a new instance of the QDurotarGrindToLevel11 class.
+    /// </summary>
+    /// <param name="bot">An object implementing the AmeisenBotInterfaces interface.</param>
     internal class QDurotarGrindToLevel11 : GrindingBotQuest
     {
         /// <summary>

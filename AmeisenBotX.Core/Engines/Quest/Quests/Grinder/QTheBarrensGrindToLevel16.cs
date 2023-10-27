@@ -5,6 +5,12 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Quest.Quests.Grinder
 {
+    /// <summary>
+    /// Constructor for the QTheBarrensGrindToLevel16 class.
+    /// Initializes a new instance of the class with the specified bot and quest objective chain.
+    /// The quest objective chain consists of a grinding objective with specific coordinates for leveling up to level 16.
+    /// </summary>
+    /// <param name="bot">The bot object implementing the AmeisenBotInterfaces interface.</param>
     internal class QTheBarrensGrindToLevel16 : GrindingBotQuest
     {
         /// <summary>

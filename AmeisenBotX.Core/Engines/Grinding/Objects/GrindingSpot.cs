@@ -2,6 +2,9 @@
 
 namespace AmeisenBotX.Core.Engines.Grinding.Objects
 {
+    /// <summary>
+    /// Initializes a new instance of the GrindingSpot class with the specified position, radius, minimum level, and maximum level.
+    /// </summary>
     public class GrindingSpot
     {
         /// <summary>

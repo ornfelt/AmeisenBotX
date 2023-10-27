@@ -4,6 +4,12 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Quest.Objects.Objectives
 {
+    /// <summary>
+    /// Initializes a new instance of the MoveToObjectQuestObjective class.
+    /// </summary>
+    /// <param name="bot">The bot interface used for controlling the bot.</param>
+    /// <param name="objectDisplayId">The display ID of the object to move towards.</param>
+    /// <param name="distance">The maximum distance from the object that is considered as reached.</param>
     public class MoveToObjectQuestObjective : IQuestObjective
     {
         /// <summary>

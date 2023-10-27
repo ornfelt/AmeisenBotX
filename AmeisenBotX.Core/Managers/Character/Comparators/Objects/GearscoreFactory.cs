@@ -5,6 +5,9 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Managers.Character.Comparators.Objects
 {
+    /// <summary>
+    /// Gets the dictionary of string keys and double values representing the stat multiplicators.
+    /// </summary>
     public class GearscoreFactory
     {
         /// <summary>

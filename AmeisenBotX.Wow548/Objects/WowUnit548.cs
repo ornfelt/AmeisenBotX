@@ -12,6 +12,9 @@ using System.Text;
 
 namespace AmeisenBotX.Wow548.Objects
 {
+    /// <summary>
+    /// Gets or sets the unit descriptor for WowUnitDescriptor548.
+    /// </summary>
     [Serializable]
     public unsafe class WowUnit548 : WowObject548, IWowUnit
     {

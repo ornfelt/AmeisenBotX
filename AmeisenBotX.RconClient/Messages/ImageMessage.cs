@@ -2,6 +2,12 @@
 
 namespace AmeisenBotX.RconClient.Messages
 {
+    /// <summary>
+    /// Gets or sets the Guid property.
+    /// </summary>
+    /// <remarks>
+    /// The Guid is used to uniquely identify an object.
+    /// </remarks>
     public class ImageMessage
     {
         /// <summary>

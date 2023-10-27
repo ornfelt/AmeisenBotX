@@ -6,6 +6,9 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Dungeon.Profiles.WotLK
 {
+    /// <summary>
+    /// Gets the coordinates of the dungeon exit.
+    /// </summary>
     public class PitOfSaronProfile : IDungeonProfile
     {
         /// <summary>

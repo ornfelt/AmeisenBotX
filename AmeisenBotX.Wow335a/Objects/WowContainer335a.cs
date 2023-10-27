@@ -4,6 +4,9 @@ using System;
 
 namespace AmeisenBotX.Wow335a.Objects
 {
+    /// <summary>
+    /// Overrides the default ToString method.
+    /// </summary>
     [Serializable]
     public class WowContainer335a : WowObject335a, IWowContainer
     {

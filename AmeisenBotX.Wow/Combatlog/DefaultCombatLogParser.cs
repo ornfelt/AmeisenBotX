@@ -8,8 +8,11 @@ using System.Text.Json;
 
 namespace AmeisenBotX.Wow.Combatlog
 {
+    /// <summary>
+    /// Class for parsing combat logs in the default format.
+    /// </summary>
     public class DefaultCombatlogParser<T> : ICombatlogParser
-        where T : ICombatlogFields, new()
+            where T : ICombatlogFields, new()
     {
         /// <summary>
         /// Event that is triggered when damage is inflicted.

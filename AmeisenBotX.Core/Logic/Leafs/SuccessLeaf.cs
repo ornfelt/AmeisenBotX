@@ -4,6 +4,10 @@ using System;
 
 namespace AmeisenBotX.Core.Logic.Leafs
 {
+    /// <summary>
+    /// Initializes a new instance of the SuccessLeaf class.
+    /// </summary>
+    /// <param name="action">The action to be performed.</param>
     public class SuccessLeaf : INode
     {
         /// <summary>

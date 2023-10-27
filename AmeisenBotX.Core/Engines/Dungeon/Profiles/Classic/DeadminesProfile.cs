@@ -6,6 +6,9 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Dungeon.Profiles.Classic
 {
+    /// <summary>
+    /// Profile for the Deadmines Dungeon in Westfall, made for Level 15 to 18.
+    /// </summary>
     public class DeadminesProfile : IDungeonProfile
     {
         /// <summary>

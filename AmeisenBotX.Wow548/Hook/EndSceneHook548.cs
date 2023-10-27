@@ -11,6 +11,9 @@ using System.Text;
 
 namespace AmeisenBotX.Wow548.Hook
 {
+    /// <summary>
+    /// Initializes a new instance of the EndSceneHook548 class.
+    /// </summary>
     public class EndSceneHook548 : GenericEndSceneHook
     {
         /// <summary>

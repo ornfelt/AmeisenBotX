@@ -4,6 +4,15 @@ using System.Text;
 
 namespace AmeisenBotX.Wow.Hook.Modules
 {
+    /// <summary>
+    /// Initializes a new instance of the RunLuaHookModule class.
+    /// </summary>
+    /// <param name="onUpdate">The action to perform when the module is updated.</param>
+    /// <param name="tick">The action to perform on each tick of the module.</param>
+    /// <param name="memory">An instance of the WowMemoryApi class.</param>
+    /// <param name="lua">The Lua code to be executed.</param>
+    /// <param name="varName">The name of the variable to be assigned the Lua code result.</param>
+    /// <param name="alloc">The allocation size for the hook.</param>
     public class RunLuaHookModule : RunAsmHookModule
     {
         /// <summary>

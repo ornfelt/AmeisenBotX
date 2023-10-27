@@ -3,6 +3,10 @@ using System;
 
 namespace AmeisenBotX.Core.Managers.Character.Inventory.Objects
 {
+    /// <summary>
+    /// Initializes a new instance of the WowWeapon class, using the given WowInventoryItem to create the weapon.
+    /// </summary>
+    /// <param name="wowBasicItem">The WowInventoryItem used to create the weapon.</param>
     public class WowWeapon : WowBasicItem
     {
         /// <summary>

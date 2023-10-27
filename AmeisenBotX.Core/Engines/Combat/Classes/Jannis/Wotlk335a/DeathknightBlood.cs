@@ -10,6 +10,13 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 {
+    /// <summary>
+    /// Constructor for the DeathknightBlood class.
+    /// Initializes and adds active aura jobs for Blood Presence and Horn of Winter to the MyAuraManager.
+    /// Initializes and adds active aura jobs for Frost Fever and Blood Plague to the TargetAuraManager.
+    /// Sets the interrupt spells for the InterruptManager.
+    /// Sets the BloodBoilEvent to a TimeSpan of 2 seconds.
+    /// </summary>
     public class DeathknightBlood : BasicCombatClass
     {
         /// <summary>

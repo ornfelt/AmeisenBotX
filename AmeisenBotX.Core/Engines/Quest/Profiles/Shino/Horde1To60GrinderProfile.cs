@@ -4,6 +4,10 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Quest.Profiles.Shino
 {
+    /// <summary>
+    /// Constructor for Horde1To60GrinderProfile, which sets up the list of quests to be completed.
+    /// Each quest is added to the Quests queue, with the corresponding bot and level.
+    /// </summary>
     internal class Horde1To60GrinderProfile : IQuestProfile
     {
         /// <summary>

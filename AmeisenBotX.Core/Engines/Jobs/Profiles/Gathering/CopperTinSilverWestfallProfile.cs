@@ -5,6 +5,9 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Jobs.Profiles.Gathering
 {
+    /// <summary>
+    /// Determines if the path is a circle.
+    /// </summary>
     public class CopperTinSilverWestfallProfile : IMiningProfile
     {
         /// <summary>

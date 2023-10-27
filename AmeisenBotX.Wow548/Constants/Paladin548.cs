@@ -1,5 +1,8 @@
 ﻿namespace AmeisenBotX.Wow548.Constants
 {
+    /// <summary>
+    /// Represents the constant string "Beacon of Light".
+    /// </summary>
     public static class Paladin548
     {
         /// <summary>

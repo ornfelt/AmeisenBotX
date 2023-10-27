@@ -9,6 +9,9 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Tactic.Bosses.TheObsidianSanctum10
 {
+    /// <summary>
+    /// Initializes a new instance of the TwilightPortalTactic class.
+    /// </summary>
     public class TwilightPortalTactic : ITactic
     {
         /// <summary>

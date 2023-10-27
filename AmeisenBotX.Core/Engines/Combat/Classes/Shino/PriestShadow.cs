@@ -10,6 +10,14 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Shino
 {
+    /// <summary>
+    /// Initializes a new instance of the PriestShadow class.
+    /// Adds a KeepActiveAuraJob for the Priest335a.Shadowform spell, ensuring it stays active.
+    /// Adds a KeepActiveAuraJob for the Priest335a.PowerWordFortitude spell, ensuring it stays active.
+    /// Adds a KeepActiveAuraJob for the Priest335a.VampiricEmbrace spell, ensuring it stays active.
+    /// Adds a KeepActiveAuraJob for the Priest335a.VampiricTouch spell, ensuring it stays active on the target.
+    /// Adds a KeepActiveAuraJob for the Priest335a.Devo.
+    /// </summary>
     public class PriestShadow : TemplateCombatClass
     {
         /// <summary>

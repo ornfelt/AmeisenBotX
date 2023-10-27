@@ -8,6 +8,11 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Movement.Providers.Basic
 {
+    /// <summary>
+    /// Initializes a new instance of the FollowMovementProvider class.
+    /// </summary>
+    /// <param name="bot">The AmeisenBotInterfaces representing the bot.</param>
+    /// <param name="config">The AmeisenBotConfig representing the bot configuration.</param>
     public class FollowMovementProvider : IMovementProvider
     {
         /// <summary>

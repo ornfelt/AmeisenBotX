@@ -5,6 +5,10 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Logic.Idle.Actions
 {
+    /// <summary>
+    /// Initializes a new instance of the RandomEmoteIdleAction class with the specified AmeisenBotInterfaces object, assigning it to the Bot property.
+    /// </summary>
+    /// <param name="bot">The AmeisenBotInterfaces object to assign to the Bot property.</param>
     public class RandomEmoteIdleAction : IIdleAction
     {
         /// <summary>

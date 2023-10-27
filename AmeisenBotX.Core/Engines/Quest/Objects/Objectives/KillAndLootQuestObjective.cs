@@ -11,6 +11,13 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Quest.Objects.Objectives
 {
+    /// <summary>
+    /// Initializes a new instance of the KillAndLootQuestObjective class with the specified parameters.
+    /// </summary>
+    /// <param name="bot">The AmeisenBotInterfaces instance for performing bot actions.</param>
+    /// <param name="npcIds">The list of NPC IDs to target for the quest objective.</param>
+    /// <param name="collectOrKillAmount">The amount of NPCs to collect or kill for the quest objective.</param>
+    /// <param name="questItemId">The quest item ID required for completing the quest objective.</param>
     public class KillAndLootQuestObjective : IQuestObjective
     {
         /// <summary>

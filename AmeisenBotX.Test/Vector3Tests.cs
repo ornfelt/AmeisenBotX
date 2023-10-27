@@ -4,6 +4,9 @@ using System;
 
 namespace AmeisenBotX.Test
 {
+    /// <summary>
+    /// Test method for Vector3 addition.
+    /// </summary>
     [TestClass]
     public class Vector3Tests
     {

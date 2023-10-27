@@ -3,6 +3,11 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Managers.Character.Comparators
 {
+    /// <summary>
+    /// Initializes a new instance of the BasicArmorComparator class with optional armor and weapon type blacklists.
+    /// </summary>
+    /// <param name="armorTypeBlacklist">A list of WowArmorType to blacklist.</param>
+    /// <param name="weaponTypeBlacklist">A list of WowWeaponType to blacklist.</param>
     public class BasicArmorComparator : BasicComparator
     {
         /// <summary>

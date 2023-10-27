@@ -6,6 +6,10 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Dungeon.Profiles.TBC
 {
+    /// <summary>
+    /// Gets the position of the dungeon exit in 3D space.
+    /// The position is set to (0, 24, -45) by default
+    /// </summary>
     public class TheBloodFurnaceProfile : IDungeonProfile
     {
         /// <summary>

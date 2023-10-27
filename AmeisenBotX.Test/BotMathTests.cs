@@ -4,6 +4,9 @@ using System;
 
 namespace AmeisenBotX.Test
 {
+    /// <summary>
+    /// Tests the calculation of the facing angle using different positions.
+    /// </summary>
     [TestClass]
     public class BotMathTests
     {

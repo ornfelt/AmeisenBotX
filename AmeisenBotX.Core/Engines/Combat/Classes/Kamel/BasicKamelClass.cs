@@ -13,6 +13,9 @@ using System.Text.Json;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
 {
+    /// <summary>
+    /// Represents the Race Night Elf and its special ability "Shadowmeld".
+    /// </summary>
     public abstract class BasicKamelClass : ICombatClass
     {
         /// <summary>

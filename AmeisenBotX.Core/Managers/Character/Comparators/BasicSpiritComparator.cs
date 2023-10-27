@@ -3,6 +3,11 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Managers.Character.Comparators
 {
+    /// <summary>
+    /// Initializes a new instance of the BasicSpiritComparator class.
+    /// </summary>
+    /// <param name="armorTypeBlacklist">A list of armor types to be excluded from the comparison. Default is null.</param>
+    /// <param name="weaponTypeBlacklist">A list of weapon types to be excluded from the comparison. Default is null.</param>
     public class BasicSpiritComparator : BasicComparator
     {
         /// <summary>

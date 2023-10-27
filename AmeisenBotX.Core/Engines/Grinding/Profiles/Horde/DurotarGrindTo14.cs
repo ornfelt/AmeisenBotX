@@ -7,6 +7,9 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Grinding.Profiles.Horde
 {
+    /// <summary>
+    /// List of NPCs that are of interest.
+    /// </summary>
     public class DurotarGrindTo14 : IGrindingProfile
     {
         /// <summary>

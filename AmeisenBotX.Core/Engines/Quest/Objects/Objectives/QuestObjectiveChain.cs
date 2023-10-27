@@ -3,6 +3,10 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Quest.Objects.Objectives
 {
+    /// <summary>
+    /// Initializes a new instance of the QuestObjectiveChain class with the provided list of quest objectives.
+    /// </summary>
+    /// <param name="questObjectives">The list of quest objectives to be set for the QuestObjectiveChain.</param>
     public class QuestObjectiveChain : IQuestObjective
     {
         /// <summary>

@@ -2,6 +2,9 @@
 
 namespace AmeisenBotX.RconClient.Messages
 {
+    /// <summary>
+    /// Gets or sets the value of the "guid" property.
+    /// </summary>
     public class KeepAliveMessage
     {
         /// <summary>

@@ -12,6 +12,10 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 {
+    /// <summary>
+    /// Initializes a new instance of the WarriorProtection class with the specified bot.
+    /// </summary>
+    /// <param name="bot">The bot to use for the WarriorProtection class.</param>
     public class WarriorProtection : BasicCombatClass
     {
         /// <summary>

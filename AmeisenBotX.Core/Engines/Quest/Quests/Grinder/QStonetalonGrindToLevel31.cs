@@ -5,6 +5,10 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Quest.Quests.Grinder
 {
+    /// <summary>
+    /// Constructor for the QStonetalonGrindToLevel31 quest. Grinds to level 31 in Stonetalon.
+    /// </summary>
+    /// <param name="bot">The AmeisenBotInterfaces object.</param>
     internal class QStonetalonGrindToLevel31 : GrindingBotQuest
     {
         /// <summary>

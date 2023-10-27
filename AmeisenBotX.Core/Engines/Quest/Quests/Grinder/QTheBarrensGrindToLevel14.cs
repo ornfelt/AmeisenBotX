@@ -5,6 +5,9 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Quest.Quests.Grinder
 {
+    /// <summary>
+    /// Creates a new instance of the QTheBarrensGrindToLevel14 class, which represents a quest for grinding to level 14 in The Barrens.
+    /// </summary>
     internal class QTheBarrensGrindToLevel14 : GrindingBotQuest
     {
         /// <summary>

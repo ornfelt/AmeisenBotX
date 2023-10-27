@@ -4,6 +4,9 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Grinding.Profiles.Alliance.Group
 {
+    /// <summary>
+    /// Represents a grinding profile that allows the player to level up from 1 to 80.
+    /// </summary>
     public class UltimateGrinding1To80 : IGrindingProfile
     {
         /// <summary>

@@ -4,6 +4,9 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Logic.Idle.Actions.Utils
 {
+    /// <summary>
+    /// Initializes a new instance of the <see cref="BasicIdleAction"/> class.
+    /// </summary>
     public abstract class BasicIdleAction : IIdleAction
     {
         /// <summary>

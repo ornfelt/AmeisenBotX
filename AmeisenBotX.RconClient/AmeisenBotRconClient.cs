@@ -9,6 +9,14 @@ using System.Text.Json.Serialization;
 
 namespace AmeisenBotX.RconClient
 {
+    ///<summary>
+    /// Creates a new instance of the AmeisenBotRconClient class with the specified parameters.
+    ///</summary>
+    ///<param name="endpoint">The endpoint of the AmeisenBot RCON server.</param>
+    ///<param name="name">The name of the client.</param>
+    ///<param name="wowRace">The race of the client's character in World of Warcraft.</param>
+    ///<param name="wowGender">The gender of the client's character in World of Warcraft.</param>
+    ///<param name="wowClass">The class of the client's character in World of Warcraft.</param>
     public class AmeisenBotRconClient
     {
         ///<summary>

@@ -6,6 +6,9 @@ using Rect = AmeisenBotX.Memory.Win32.Rect;
 
 namespace AmeisenBotX.Overlay.Utils
 {
+    /// <summary>
+    /// Transform world coordinates to screen coordinates.
+    /// </summary>
     public static class OverlayMath
     {
         /// <summary>

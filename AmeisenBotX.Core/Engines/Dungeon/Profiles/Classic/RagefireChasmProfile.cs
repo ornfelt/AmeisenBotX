@@ -6,6 +6,9 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Dungeon.Profiles.Classic
 {
+    /// <summary>
+    /// Represents a profile for the Ragefire Chasm Dungeon in Orgrimmar, designed for players between level 13 to 18.
+    /// </summary>
     public class RagefireChasmProfile : IDungeonProfile
     {
         /// <summary>

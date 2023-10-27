@@ -7,6 +7,12 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 {
+    /// <summary>
+    /// Initializes a new instance of the PaladinProtection class.
+    /// Adds jobs to the MyAuraManager to keep certain auras active.
+    /// Sets up the InterruptManager with the HammerOfJustice spell as an interrupt.
+    /// Adds a spell to keep active on the party using the GroupAuraManager.
+    /// </summary>
     public class PaladinProtection : BasicCombatClass
     {
         /// <summary>

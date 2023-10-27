@@ -6,6 +6,9 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Helpers.Targets.Validation.Special
 {
+    ///<summary>
+    /// Constructor for DungeonTargetValidator class.
+    ///</summary>
     public class DungeonTargetValidator : ITargetValidator
     {
         ///<summary>

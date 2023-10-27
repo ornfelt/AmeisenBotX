@@ -9,6 +9,9 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
 {
+    /// <summary>
+    /// Represents a Restoration Shaman class that inherits from the BasicKamelClass.
+    /// </summary>
     internal class RestorationShaman : BasicKamelClass
     {
         /// <summary>

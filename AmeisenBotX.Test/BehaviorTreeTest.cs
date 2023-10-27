@@ -6,6 +6,15 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace AmeisenBotX.Test
 {
+    /// <summary>
+    /// Tests the behavior of a DualSelector tree.
+    /// The tree has four leaf nodes: treeResult00, treeResult10, treeResult01, and treeResult11.
+    /// The tree selects between two nodes based on the values of FirstNode and SecondFirstNode in the testBlackboard.
+    /// If FirstNode is false, it selects treeResult00 and treeResult01.
+    /// If SecondFirstNode is false, it selects treeResult00 and treeResult10.
+    /// If both FirstNode and SecondFirstNode are false, it selects treeResult00.
+    /// If both FirstNode and SecondFirstNode are true, it selects treeResult11.
+    /// </summary>
     [TestClass]
     public class BehaviorTreeTest
     {
@@ -669,6 +678,9 @@ namespace AmeisenBotX.Test
         }
     }
 
+    /// <summary>
+    /// Represents a class that implements the IBlackboard interface for testing purposes.
+    /// </summary>
     public class TestBlackboard : IBlackboard
     {
         /// <summary>

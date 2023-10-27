@@ -9,6 +9,9 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Logic.Idle.Actions
 {
+    /// <summary>
+    /// Represents an action that checks emails while the system is idle.
+    /// </summary>
     public class CheckMailsIdleAction : IIdleAction
     {
         /// <summary>

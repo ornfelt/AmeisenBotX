@@ -1,5 +1,8 @@
 ﻿namespace AmeisenBotX.Core.Engines.Movement.Settings
 {
+    /// <summary>
+    /// Defines the configuration options for movement behavior.
+    /// </summary>
     public class MovementSettings
     {
         /// <summary>

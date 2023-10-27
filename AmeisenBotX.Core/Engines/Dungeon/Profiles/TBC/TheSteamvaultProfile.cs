@@ -6,6 +6,8 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Dungeon.Profiles.TBC
 {
+    /// Represents a dungeon profile for The Steamvault in World of Warcraft.
+    /// </summary>
     public class TheSteamvaultProfile : IDungeonProfile
     {
         /// <summary>

@@ -7,6 +7,12 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Grinding.Profiles.Horde
 {
+    /// <summary>
+    /// A list of non-player characters (NPCs) that are of interest.
+    /// </summary>
+    /// <value>
+    /// The list of NPCs of interest.
+    /// </value>
     public class DurotarGrindTo11 : IGrindingProfile
     {
         ///<summary>

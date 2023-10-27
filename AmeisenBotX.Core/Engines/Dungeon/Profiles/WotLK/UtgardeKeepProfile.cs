@@ -6,6 +6,9 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Dungeon.Profiles.WotLK
 {
+    /// <summary>
+    /// Gets the dungeon exit position as a Vector3.
+    /// </summary>
     public class UtgardeKeepProfile : IDungeonProfile
     {
         /// <summary>

@@ -5,6 +5,9 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Quest.Quests.TheBarrens.OutpostStonetalon
 {
+    /// <summary>
+    /// Initializes a new instance of the QKolkarLeaders class.
+    /// </summary>
     internal class QKolkarLeaders : BotQuest
     {
         /// <summary>

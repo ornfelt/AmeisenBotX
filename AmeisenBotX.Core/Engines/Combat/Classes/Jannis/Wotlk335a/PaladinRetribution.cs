@@ -7,6 +7,9 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 {
+    /// <summary>
+    /// Overrides the ExecuteCombatLogic method from the BasicCombatClass base class. Contains the specific combat logic for the PaladinRetribution class.
+    /// </summary>
     public class PaladinRetribution : BasicCombatClass
     {
         /// <summary>

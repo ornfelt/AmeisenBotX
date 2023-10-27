@@ -7,6 +7,9 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Logic.Idle.Actions
 {
+    /// <summary>
+    /// Gets the instance of the SitToChairIdleAction class.
+    /// </summary>
     public class SitToChairIdleAction : IIdleAction
     {
         /// <summary>
