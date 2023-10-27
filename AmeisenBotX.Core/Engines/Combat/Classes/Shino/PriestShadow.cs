@@ -10,6 +10,9 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Shino
 {
+    /// <summary>
+    /// Represents a shadow specialization of the Priest class.
+    /// </summary>
     public class PriestShadow : TemplateCombatClass
     {
         /// <summary>

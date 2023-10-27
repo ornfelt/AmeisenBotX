@@ -5,6 +5,9 @@ using AmeisenBotX.Wow.Objects.Enums;
 
 namespace AmeisenBotX.Core.Engines.Movement.Providers.Basic
 {
+    /// <summary>
+    /// Represents a class that provides simple combat movement functionality, implementing the IMovementProvider interface.
+    /// </summary>
     public class SimpleCombatMovementProvider : IMovementProvider
     {
         /// <summary>

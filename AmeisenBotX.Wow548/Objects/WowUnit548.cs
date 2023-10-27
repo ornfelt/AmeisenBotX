@@ -12,6 +12,9 @@ using System.Text;
 
 namespace AmeisenBotX.Wow548.Objects
 {
+    /// <summary>
+    /// Represents a World of Warcraft unit that can be serialized, implementing the IWowUnit interface.
+    /// </summary>
     [Serializable]
     public unsafe class WowUnit548 : WowObject548, IWowUnit
     {

@@ -5,6 +5,9 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Movement.Pathfinding.Objects
 {
+    /// <summary>
+    /// Represents a specific area to be searched.
+    /// </summary>
     internal class SearchArea
     {
         /// <summary>

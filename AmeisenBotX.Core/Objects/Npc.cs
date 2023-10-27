@@ -4,6 +4,9 @@ using AmeisenBotX.Wow.Objects.Enums;
 
 namespace AmeisenBotX.Core.Objects
 {
+    /// <summary>
+    /// Represents a non-playable character (NPC) in the game.
+    /// </summary>
     public class Npc
     {
         /// <summary>

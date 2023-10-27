@@ -6,6 +6,9 @@ using Rect = AmeisenBotX.Memory.Win32.Rect;
 
 namespace AmeisenBotX.Overlay.Utils
 {
+    /// <summary>
+    /// Provides mathematical functions for overlay operations.
+    /// </summary>
     public static class OverlayMath
     {
         /// <summary>

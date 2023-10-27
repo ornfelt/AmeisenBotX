@@ -9,6 +9,9 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Tactic.Bosses.TheObsidianSanctum10
 {
+    /// <summary>
+    /// Represents a tactic that uses the Twilight Portal ability to quickly traverse the map.
+    /// </summary>
     public class TwilightPortalTactic : ITactic
     {
         /// <summary>

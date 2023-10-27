@@ -11,6 +11,9 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Mop548
 {
+    /// <summary>
+    /// The WarriorProtection class represents a combat class for warriors specializing in protection role in battles.
+    /// </summary>
     public class WarriorProtection : BasicCombatClass
     {
         /// <summary>

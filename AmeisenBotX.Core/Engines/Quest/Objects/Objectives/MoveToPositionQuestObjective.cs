@@ -3,6 +3,9 @@ using AmeisenBotX.Core.Engines.Movement.Enums;
 
 namespace AmeisenBotX.Core.Engines.Quest.Objects.Objectives
 {
+    /// <summary>
+    /// Represents a quest objective that requires the player to move to a specific position.
+    /// </summary>
     public class MoveToPositionQuestObjective : IQuestObjective
     {
         /// <summary>

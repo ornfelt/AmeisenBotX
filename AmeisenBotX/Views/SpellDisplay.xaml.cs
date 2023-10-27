@@ -4,6 +4,9 @@ using System.Windows.Controls;
 
 namespace AmeisenBotX.Views
 {
+    /// <summary>
+    /// Represents a control used to display a spell.
+    /// </summary>
     public partial class SpellDisplay : UserControl
     {
         /// <summary>

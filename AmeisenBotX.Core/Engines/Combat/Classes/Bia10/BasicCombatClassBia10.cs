@@ -20,6 +20,9 @@ using System.Text.Json;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Bia10
 {
+    /// <summary>
+    /// Represents a basic combat class for the Bia10 bot.
+    /// </summary>
     public abstract class BasicCombatClassBia10 : ICombatClass
     {
         /// <summary>

@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Logic.StaticDeathRoutes
 {
+    /// <summary>
+    /// Represents a death route for the Forge of Souls.
+    /// </summary>
     public class ForgeOfSoulsDeathRoute : StaticPathDeathRoute
     {
         /// <summary>

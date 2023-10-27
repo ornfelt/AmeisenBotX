@@ -7,6 +7,9 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Grinding.Profiles.Horde
 {
+    /// <summary>
+    /// Represents a grinding profile for leveling from 1 to 6 in the Valley of Trials area of Kalimdor.
+    /// </summary>
     public class DurotarGrindTo6 : IGrindingProfile
     {
         /// <summary>

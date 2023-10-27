@@ -2,6 +2,9 @@
 
 namespace AmeisenBotX.Core.Managers.Character.Spells.Objects
 {
+    /// <summary>
+    /// The spell properties.
+    /// </summary>
     public class Spell
     {
         /// <summary>

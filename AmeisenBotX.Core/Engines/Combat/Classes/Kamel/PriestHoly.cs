@@ -9,6 +9,9 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
 {
+    /// <summary>
+    /// Represents a holy priest specialized in healing spells.
+    /// </summary>
     internal class PriestHoly : BasicKamelClass
     {
         /// <summary>

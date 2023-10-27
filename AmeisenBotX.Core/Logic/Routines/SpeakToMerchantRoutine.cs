@@ -4,6 +4,9 @@ using System;
 
 namespace AmeisenBotX.Core.Logic.Routines
 {
+    /// <summary>
+    /// Utility class for performing routine actions related to interacting with a merchant in the game.
+    /// </summary>
     public static class SpeakToMerchantRoutine
     {
         /// <summary>

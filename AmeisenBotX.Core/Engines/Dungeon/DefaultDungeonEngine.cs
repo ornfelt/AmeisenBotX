@@ -19,6 +19,9 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Dungeon
 {
+    /// <summary>
+    /// Constructs a DefaultDungeonEngine object with the provided bot and config.
+    /// </summary>
     public class DefaultDungeonEngine : IDungeonEngine
     {
         /// <summary>

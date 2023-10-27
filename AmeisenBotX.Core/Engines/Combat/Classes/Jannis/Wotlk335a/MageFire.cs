@@ -7,6 +7,9 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 {
+    /// <summary>
+    /// Initializes a new instance of the MageFire class with the provided AmeisenBotInterfaces object as a parameter.
+    /// </summary>
     public class MageFire : BasicCombatClass
     {
         /// Initializes a new instance of the MageFire class with the provided AmeisenBotInterfaces object as a parameter. It sets up the necessary jobs for the MyAuraManager and TargetAuraManager to keep certain auras active. It also initializes the InterruptManager with the InterruptSpells dictionary, mapping the Counterspell spell ID to the TryCastSpell method. Additionally, it adds the ArcaneIntellect spell to the SpellsToKeepActiveOnParty list in the GroupAuraManager.

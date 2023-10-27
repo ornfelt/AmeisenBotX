@@ -11,6 +11,9 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Quest.Objects.Objectives
 {
+    /// <summary>
+    /// Represents a quest objective to kill and loot specific NPCs.
+    /// </summary>
     public class KillAndLootQuestObjective : IQuestObjective
     {
         /// <summary>

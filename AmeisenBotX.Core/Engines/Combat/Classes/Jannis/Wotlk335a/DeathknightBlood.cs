@@ -10,6 +10,9 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 {
+    /// <summary>
+    /// Class for the DeathknightBlood specialization, which focuses on tanking and dealing damage.
+    /// </summary>
     public class DeathknightBlood : BasicCombatClass
     {
         /// <summary>

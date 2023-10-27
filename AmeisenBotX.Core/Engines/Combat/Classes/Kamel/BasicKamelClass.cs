@@ -13,6 +13,9 @@ using System.Text.Json;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
 {
+    /// <summary>
+    /// Represents a basic combat class for a troll character with the race spell Berserking.
+    /// </summary>
     public abstract class BasicKamelClass : ICombatClass
     {
         /// <summary>

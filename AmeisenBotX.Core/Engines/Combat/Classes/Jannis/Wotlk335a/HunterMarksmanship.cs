@@ -12,6 +12,9 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 {
+    /// <summary>
+    /// Class representing the Marksmanship specialization for the Hunter class.
+    /// </summary>
     public class HunterMarksmanship : BasicCombatClass
     {
         /// <summary>

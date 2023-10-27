@@ -3,6 +3,9 @@ using System.Windows.Input;
 
 namespace AmeisenBotX.Views
 {
+    /// <summary>
+    /// Represents a window that prompts the user for confirmation.
+    /// </summary>
     public partial class ConfirmWindow : Window
     {
         /// <summary>

@@ -13,6 +13,9 @@ using static AmeisenBotX.Memory.Win32.Win32Imports;
 
 namespace AmeisenBotX.Memory
 {
+    /// <summary>
+    /// Represents an implementation of the IMemoryApi interface that allows direct memory access.
+    /// </summary>
     public unsafe class XMemory : IMemoryApi
     {
         /// <summary>

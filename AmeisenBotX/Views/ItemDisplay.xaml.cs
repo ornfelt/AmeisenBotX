@@ -7,6 +7,9 @@ using System.Windows.Media;
 
 namespace AmeisenBotX.Views
 {
+    ///<summary>
+    /// Class representing the display of an item in a user control.
+    ///</summary>
     public partial class ItemDisplay : UserControl
     {
         ///<summary>

@@ -7,6 +7,12 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 {
+    ///<summary>
+    ///Constructor for ShamanEnhancement class.
+    ///Initializes the AuraManager with two KeepActiveAuraJobs: one for Lightning Shield and one for Water Shield.
+    ///The Lightning Shield job is added if the player's mana percentage is greater than 60.0 and the TryCastSpell method returns true for casting Lightning Shield.
+    ///The Water Shield job is added if the player's maximum health is less than 70.0 and the TryCastSpell method returns true for casting Water Shield.
+    ///</summary>
     public class ShamanEnhancement : BasicCombatClass
     {
         ///<summary>

@@ -5,6 +5,9 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Quest.Quests.Durotar.ValleyOfStrength
 {
+    /// <summary>
+    /// Represents a class for the Cutting Teeth quest in the BotQuest game.
+    /// </summary>
     internal class QCuttingTeeth : BotQuest
     {
         /// <summary>

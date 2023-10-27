@@ -2,6 +2,9 @@
 
 namespace AmeisenBotX.Core.Engines.Quest.Objects
 {
+    /// <summary>
+    /// Represents a node in an area.
+    /// </summary>
     public class AreaNode
     {
         /// <summary>

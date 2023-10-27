@@ -1,5 +1,8 @@
 ﻿namespace AmeisenBotX.Wow548.Constants
 {
+    /// <summary>
+    /// Represents a collection of racial abilities for various races in the game.
+    /// </summary>
     public static class Racials548
     {
         /// <summary>

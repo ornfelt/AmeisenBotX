@@ -6,6 +6,9 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Dungeon.Profiles.TBC
 {
+    /// <summary>
+    /// Profile for the Hellfire Ramparts Dungeon in Outland, designed for characters between Level 58 to 62.
+    /// </summary>
     public class HellfireRampartsProfile : IDungeonProfile
     {
         /// <summary>

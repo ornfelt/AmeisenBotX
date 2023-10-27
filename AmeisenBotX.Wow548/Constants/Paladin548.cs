@@ -1,5 +1,8 @@
 ﻿namespace AmeisenBotX.Wow548.Constants
 {
+    /// <summary>
+    /// Represents the name of the "Crusader Strike" ability.
+    /// </summary>
     public static class Paladin548
     {
         /// <summary>

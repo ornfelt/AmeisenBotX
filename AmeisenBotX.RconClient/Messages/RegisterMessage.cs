@@ -2,6 +2,9 @@
 
 namespace AmeisenBotX.RconClient.Messages
 {
+    /// <summary>
+    /// Represents a RegisterMessage object that contains information about a class and gender of an individual.
+    /// </summary>
     public class RegisterMessage
     {
         /// <summary>

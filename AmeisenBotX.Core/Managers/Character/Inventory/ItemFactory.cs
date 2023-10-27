@@ -7,6 +7,9 @@ using System.Text.Json.Serialization;
 
 namespace AmeisenBotX.Core.Managers.Character.Inventory
 {
+    /// <summary>
+    /// Builds a specific item based on the type of the basic item.
+    /// </summary>
     public static class ItemFactory
     {
         /// <summary>

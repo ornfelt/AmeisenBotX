@@ -6,6 +6,9 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Dungeon.Profiles.WotLK
 {
+    /// <summary>
+    /// Represents a profile for the Forge of Souls dungeon, implementing the IDungeonProfile interface.
+    /// </summary>
     public class ForgeOfSoulsProfile : IDungeonProfile
     {
         /// <summary>

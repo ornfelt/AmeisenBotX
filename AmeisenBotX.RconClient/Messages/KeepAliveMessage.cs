@@ -2,6 +2,9 @@
 
 namespace AmeisenBotX.RconClient.Messages
 {
+    /// <summary>
+    /// Represents a message used to keep the connection alive.
+    /// </summary>
     public class KeepAliveMessage
     {
         /// <summary>

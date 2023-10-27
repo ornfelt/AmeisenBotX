@@ -3,6 +3,9 @@ using AmeisenBotX.Wow.Offsets;
 
 namespace AmeisenBotX.Wow
 {
+    /// <summary>
+    /// Represents a WowMemoryApi class that extends XMemory and initializes a new instance with the specified offset list.
+    /// </summary>
     public class WowMemoryApi : XMemory
     {
         /// <summary>

@@ -11,6 +11,9 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Logic.CombatClasses.Shino
 {
+    /// <summary>
+    /// This is an abstract class that serves as a template for creating combat classes. It inherits from the BasicCombatClass. The class is instantiated with a specified AmeisenBotInterfaces instance.
+    /// </summary>
     public abstract class TemplateCombatClass : BasicCombatClass
     {
         /// <summary>

@@ -6,6 +6,9 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Helpers.Aura.Objects
 {
+    /// <summary>
+    /// Represents a job responsible for keeping the best active aura.
+    /// </summary>
     public class KeepBestActiveAuraJob : IAuraJob
     {
         /// <summary>

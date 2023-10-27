@@ -2,6 +2,9 @@
 
 namespace AmeisenBotX.Core.Logic.Idle.Actions
 {
+    /// <summary>
+    /// Represents a class for performing a "look around" idle action.
+    /// </summary>
     public class LookAroundIdleAction : IIdleAction
     {
         /// <summary>

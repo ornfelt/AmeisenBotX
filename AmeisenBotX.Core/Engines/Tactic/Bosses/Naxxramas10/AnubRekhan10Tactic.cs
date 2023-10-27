@@ -10,6 +10,9 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Tactic.Bosses.Naxxramas10
 {
+    /// <summary>
+    /// Represents a tactic for defeating Anub'Rekhan in the 10-man raid version.
+    /// </summary>
     public class AnubRekhan10Tactic : SimpleConfigurable, ITactic
     {
         /// <summary>

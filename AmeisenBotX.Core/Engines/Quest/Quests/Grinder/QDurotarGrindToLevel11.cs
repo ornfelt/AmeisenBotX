@@ -5,6 +5,9 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Quest.Quests.Grinder
 {
+    /// <summary>
+    /// Represents a quest that involves grinding in the Durotar area to level 11.
+    /// </summary>
     internal class QDurotarGrindToLevel11 : GrindingBotQuest
     {
         /// <summary>

@@ -4,6 +4,9 @@ using AmeisenBotX.Wow.Objects;
 
 namespace AmeisenBotX.Wow548.Objects
 {
+    /// <summary>
+    /// Represents an object manager for managing WoW objects in the game.
+    /// </summary>
     public class ObjectManager548 : ObjectManager<WowObject548, WowUnit548, WowPlayer548, WowGameobject548, WowDynobject548, WowItem548, WowCorpse548, WowContainer548>
     {
         /// <summary>

@@ -5,6 +5,9 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Quest.Quests.TheBarrens.OutpostStonetalon
 {
+    /// <summary>
+    /// Represents a class that handles the behavior of Kolkar Leaders in the game.
+    /// </summary>
     internal class QKolkarLeaders : BotQuest
     {
         /// <summary>

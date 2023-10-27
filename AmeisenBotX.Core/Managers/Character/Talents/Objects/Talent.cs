@@ -1,5 +1,8 @@
 ﻿namespace AmeisenBotX.Core.Managers.Character.Talents.Objects
 {
+    /// <summary>
+    /// Represents a talent with specific tab, number, and rank.
+    /// </summary>
     public class Talent
     {
         /// <summary>

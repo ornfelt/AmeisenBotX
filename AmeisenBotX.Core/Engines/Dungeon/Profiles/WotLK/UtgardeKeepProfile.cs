@@ -6,6 +6,9 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Dungeon.Profiles.WotLK
 {
+    /// <summary>
+    /// Represents a profile for the Utgarde Keep dungeon in the Howling Fjord.
+    /// </summary>
     public class UtgardeKeepProfile : IDungeonProfile
     {
         /// <summary>

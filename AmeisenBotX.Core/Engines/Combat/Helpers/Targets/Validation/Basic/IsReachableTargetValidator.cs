@@ -6,6 +6,9 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Helpers.Targets.Validation.Basic
 {
+    /// <summary>
+    /// Represents a validator that checks if a target is reachable within a specified maximum distance.
+    /// </summary>
     public class IsReachableTargetValidator : ITargetValidator
     {
         /// <summary>

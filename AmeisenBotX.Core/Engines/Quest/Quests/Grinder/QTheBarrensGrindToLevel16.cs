@@ -5,6 +5,9 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Quest.Quests.Grinder
 {
+    /// <summary>
+    /// Constructor for the QTheBarrensGrindToLevel16 class.
+    /// </summary>
     internal class QTheBarrensGrindToLevel16 : GrindingBotQuest
     {
         /// <summary>

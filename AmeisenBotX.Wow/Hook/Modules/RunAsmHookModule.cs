@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Wow.Hook.Modules
 {
+    /// <summary>
+    /// Represents a class that is responsible for running assembly hook modules.
+    /// </summary>
     public abstract class RunAsmHookModule : IHookModule
     {
         ///<summary>

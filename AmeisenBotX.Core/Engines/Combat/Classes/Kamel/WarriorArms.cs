@@ -10,6 +10,9 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
 {
+    /// <summary>
+    /// Represents a Warrior specialization that focuses on offense and wielding two-handed weapons.
+    /// </summary>
     internal class WarriorArms : BasicKamelClass
     {
         /// <summary>

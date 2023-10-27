@@ -6,6 +6,9 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Dungeon.Profiles.TBC
 {
+    /// <summary>
+    /// Represents a dungeon profile for The Underbog, designed for players at level 61 to 65.
+    /// </summary>
     public class TheUnderbogProfile : IDungeonProfile
     {
         /// <summary>

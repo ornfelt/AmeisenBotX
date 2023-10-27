@@ -14,6 +14,9 @@ using System.Text.Json;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 {
+    /// <summary>
+    /// Represents a class for a Restoration Druid, specialized in healing abilities and support.
+    /// </summary>
     public class DruidRestoration : BasicCombatClass
     {
         /// <summary>

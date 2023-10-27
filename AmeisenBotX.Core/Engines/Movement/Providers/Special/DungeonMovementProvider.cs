@@ -9,6 +9,9 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Movement.Providers.Special
 {
+    /// <summary>
+    /// Represents a movement provider for dungeon maps.
+    /// </summary>
     public class DungeonMovementProvider : IMovementProvider
     {
         /// <summary>

@@ -5,6 +5,9 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Logic.Routines
 {
+    /// <summary>
+    /// A static class that handles the routine of selling items from a bot's inventory based on certain conditions.
+    /// </summary>
     public static class SellItemsRoutine
     {
         /// <summary>

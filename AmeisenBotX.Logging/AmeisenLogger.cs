@@ -6,6 +6,9 @@ using System.Text;
 
 namespace AmeisenBotX.Logging
 {
+    /// <summary>
+    /// Represents a logger class that provides thread-safe logging functionality.
+    /// </summary>
     public class AmeisenLogger
     {
         /// <summary>

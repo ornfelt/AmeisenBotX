@@ -5,6 +5,9 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Quest.Quests.Durotar.RazorHill
 {
+    /// <summary>
+    /// Represents a quest for dealing with encroachment.
+    /// </summary>
     internal class QEncroachment : BotQuest
     {
         /// <summary>

@@ -16,6 +16,9 @@ using System.Windows.Input;
 
 namespace AmeisenBotX
 {
+    /// <summary>
+    /// Represents a window for developer tools.
+    /// </summary>
     public partial class DevToolsWindow
     {
         /// <summary>

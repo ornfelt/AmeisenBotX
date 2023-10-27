@@ -5,6 +5,9 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Quest.Quests.TheBarrens.Crossroads
 {
+    /// <summary>
+    /// Represents a quest giver named Serena Bloodfeather.
+    /// </summary>
     internal class QSerenaBloodfeather : BotQuest
     {
         /// <summary>

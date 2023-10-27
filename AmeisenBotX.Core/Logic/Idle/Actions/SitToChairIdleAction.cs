@@ -7,6 +7,9 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Logic.Idle.Actions
 {
+    /// <summary>
+    /// Represents an idle action where the bot sits on a chair.
+    /// </summary>
     public class SitToChairIdleAction : IIdleAction
     {
         /// <summary>

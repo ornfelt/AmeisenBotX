@@ -15,6 +15,9 @@ using System.Text;
 
 namespace AmeisenBotX.Wow335a.Objects
 {
+    /// <summary>
+    /// Represents a unit in World of Warcraft version 3.3.5a.
+    /// </summary>
     [Serializable]
     public class WowUnit335a : WowObject335a, IWowUnit
     {

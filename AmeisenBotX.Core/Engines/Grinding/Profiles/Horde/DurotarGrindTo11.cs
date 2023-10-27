@@ -7,6 +7,9 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Grinding.Profiles.Horde
 {
+    ///<summary>
+    ///Represents a grinding profile in the Durotar area, focusing on reaching level 11.
+    ///</summary>
     public class DurotarGrindTo11 : IGrindingProfile
     {
         ///<summary>

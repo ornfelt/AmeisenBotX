@@ -10,6 +10,9 @@ using System.Windows.Media;
 
 namespace AmeisenBotX
 {
+    /// <summary>
+    /// Represents a window that provides information about the AmeisenBot.
+    /// </summary>
     public partial class InfoWindow : Window
     {
         /// <summary>

@@ -4,6 +4,10 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Combat.Helpers
 {
+    /// <summary>
+    /// Initializes a new instance of the <see cref="CooldownManager"/> class with the provided collection of spells.
+    /// The cooldowns dictionary is created and populated with spell names as keys and their corresponding current time in UTC as values.
+    /// </summary>
     public class CooldownManager
     {
         /// <summary>

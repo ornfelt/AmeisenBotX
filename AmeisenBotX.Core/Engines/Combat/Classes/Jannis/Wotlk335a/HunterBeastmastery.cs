@@ -12,6 +12,9 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 {
+    /// <summary>
+    /// Constructor for the HunterBeastmastery class.
+    /// </summary>
     public class HunterBeastmastery : BasicCombatClass
     {
         /// <summary>

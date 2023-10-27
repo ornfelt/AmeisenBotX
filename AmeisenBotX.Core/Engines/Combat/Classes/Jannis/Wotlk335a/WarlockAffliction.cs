@@ -11,6 +11,9 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 {
+    /// <summary>
+    /// Represents a class for a Warlock specializing in Affliction spells.
+    /// </summary>
     public class WarlockAffliction : BasicCombatClass
     {
         ///<summary>

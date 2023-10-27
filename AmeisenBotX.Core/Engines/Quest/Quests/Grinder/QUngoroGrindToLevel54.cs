@@ -5,6 +5,9 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Quest.Quests.Grinder
 {
+    /// <summary>
+    /// Represents a quest objective to grind in the zone of Ungoro to reach level 54.
+    /// </summary>
     internal class QUngoroGrindToLevel54 : GrindingBotQuest
     {
         /// <summary>

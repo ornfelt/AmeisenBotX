@@ -2,6 +2,9 @@
 
 namespace AmeisenBotX.Wow548.Combatlog.Enums
 {
+    /// <summary>
+    /// Gets the flags value.
+    /// </summary>
     public class CombatlogFields548 : ICombatlogFields
     {
         /// <summary>

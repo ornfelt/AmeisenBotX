@@ -8,6 +8,9 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 {
+    /// <summary>
+    /// The MageArcane class extends the BasicCombatClass, providing functionality for managing auras, dispelling buffs, and interrupting spells.
+    /// </summary>
     public class MageArcane : BasicCombatClass
     {
         /// Initializes a new instance of the MageArcane class with the provided bot parameter. It adds jobs to the MyAuraManager.Jobs list to keep certain auras active. It also sets the TargetAuraManager.DispellBuffs delegate to check if there are unit stealable buffs on the target and attempt to cast spellSteal if true. The InterruptManager.InterruptSpells dictionary is initialized with Counterspell as the key and a lambda expression as the value, which calls the TryCastSpell method with the Counterspell spell and the target's GUID. Finally, it adds a spell to the GroupAuraManager.SpellsToKeepActiveOnParty list, using ArcaneIntellect as the spell and a lambda expression that calls TryCastSpell with the spellName and guid parameters, and setting the last argument to true.

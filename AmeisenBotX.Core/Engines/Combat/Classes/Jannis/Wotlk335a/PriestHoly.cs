@@ -9,6 +9,9 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 {
+    /// <summary>
+    /// Represents a priest specialization that focuses on healing and support abilities.
+    /// </summary>
     public class PriestHoly : BasicCombatClass
     {
         /// <summary>

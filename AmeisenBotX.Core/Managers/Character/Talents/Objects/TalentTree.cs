@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Managers.Character.Talents.Objects
 {
+    /// <summary>
+    /// Represents a talent tree that is initialized with a talentString.
+    /// </summary>
     public class TalentTree
     {
         /// <summary>

@@ -10,6 +10,9 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
 {
+    /// <summary>
+    /// Represents a fury warrior.
+    /// </summary>
     internal class WarriorFury : BasicKamelClass
     {
         /// <summary>

@@ -28,6 +28,9 @@ using System.Windows.Media;
 
 namespace AmeisenBotX
 {
+    /// <summary>
+    /// Initializes a new instance of the MainWindow class with the specified data path and config path.
+    /// </summary>
     public partial class MainWindow : Window
     {
         /// <summary>

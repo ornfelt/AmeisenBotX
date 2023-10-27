@@ -4,6 +4,9 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Combat.Helpers.Aura
 {
+    /// <summary>
+    /// Represents a class for managing auras in the bot.
+    /// </summary>
     public class AuraManager
     {
         /// <summary>

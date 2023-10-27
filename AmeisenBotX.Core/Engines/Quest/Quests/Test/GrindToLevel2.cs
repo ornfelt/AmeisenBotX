@@ -5,6 +5,10 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Quest.Quests.Test
 {
+    /// <summary>
+    /// Initializes a new instance of the GrindToLevel2 class.
+    /// This class is used to create a bot that will grind boars in the Valley of Strength.
+    /// </summary>
     internal class GrindToLevel2 : GrindingBotQuest
     {
         /// <summary>

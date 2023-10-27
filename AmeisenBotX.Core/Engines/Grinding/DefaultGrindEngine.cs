@@ -17,6 +17,9 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Grinding
 {
+    /// <summary>
+    /// Represents the default implementation of the IGrindingEngine interface.
+    /// </summary>
     public class DefaultGrindEngine : IGrindingEngine
     {
         /// <summary>

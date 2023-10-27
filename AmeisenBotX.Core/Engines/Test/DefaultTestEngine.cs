@@ -7,6 +7,9 @@ using System;
 
 namespace AmeisenBotX.Core.Engines.Test
 {
+    /// <summary>
+    /// Represents the default implementation of the ITestEngine interface.
+    /// </summary>
     public class DefaultTestEngine : ITestEngine
     {
         /// <summary>

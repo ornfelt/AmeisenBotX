@@ -5,6 +5,9 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Quest.Quests.TheBarrens.Crossroads
 {
+    /// summary>
+    /// Constructor for the QProwlersOfTheBarrens quest.
+    /// summary>
     internal class QProwlersOfTheBarrens : BotQuest
     {
         /// <summary>

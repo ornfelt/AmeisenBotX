@@ -1,5 +1,8 @@
 ﻿namespace AmeisenBotX.Wow335a.Constants
 {
+    /// <summary>
+    /// Represents the constant string value "Arcane Intellect".
+    /// </summary>
     public static class Mage335a
     {
         /// <summary>

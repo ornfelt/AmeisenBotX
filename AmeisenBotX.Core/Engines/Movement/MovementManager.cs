@@ -4,6 +4,9 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Movement
 {
+    /// <summary>
+    /// Represents a manager for handling movement operations.
+    /// </summary>
     public class MovementManager
     {
         /// <summary>

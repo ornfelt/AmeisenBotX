@@ -11,6 +11,9 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Logic.Idle.Actions
 {
+    /// <summary>
+    /// Represents a class that implements the idle action for fishing.
+    /// </summary>
     public class FishingIdleAction : IIdleAction
     {
         /// <summary>

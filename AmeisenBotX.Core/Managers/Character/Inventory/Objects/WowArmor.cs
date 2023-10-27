@@ -3,6 +3,9 @@ using System;
 
 namespace AmeisenBotX.Core.Managers.Character.Inventory.Objects
 {
+    /// <summary>
+    /// Represents a type of armor in the game Wow. Inherits from WowBasicItem.
+    /// </summary>
     public class WowArmor : WowBasicItem
     {
         /// <summary>

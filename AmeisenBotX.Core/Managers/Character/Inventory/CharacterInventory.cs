@@ -9,6 +9,9 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Managers.Character.Inventory
 {
+    /// <summary>
+    /// Represents a character's inventory in a game, containing a list of items and providing thread-safe access.
+    /// </summary>
     public class CharacterInventory
     {
         /// <summary>

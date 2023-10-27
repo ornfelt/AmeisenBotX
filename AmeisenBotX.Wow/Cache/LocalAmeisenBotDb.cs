@@ -15,6 +15,9 @@ using System.Text.Json.Serialization;
 
 namespace AmeisenBotX.Wow.Cache
 {
+    /// <summary>
+    /// Initializes a new instance of the LocalAmeisenBotDb class.
+    /// </summary>
     public class LocalAmeisenBotDb : IAmeisenBotDb
     {
         /// <summary>

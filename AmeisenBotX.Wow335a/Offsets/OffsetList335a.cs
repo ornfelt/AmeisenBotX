@@ -3,6 +3,9 @@ using System;
 
 namespace AmeisenBotX.Wow335a.Offsets
 {
+    /// <summary>
+    /// Represents a list of offsets used in the OffsetList335a class.
+    /// </summary>
     public class OffsetList335a : IOffsetList
     {
         /// <summary>

@@ -5,6 +5,9 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Quest.Quests.TheBarrens.Crossroads
 {
+    /// <summary>
+    /// Creates a new instance of the QSouthseaFreebooters class.
+    /// </summary>
     internal class QSouthseaFreebooters : BotQuest
     {
         /// <summary>

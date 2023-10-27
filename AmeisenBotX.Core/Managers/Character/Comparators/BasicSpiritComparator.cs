@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Managers.Character.Comparators
 {
+    /// <summary>
+    /// Represents a basic spirit comparator class.
+    /// </summary>
     public class BasicSpiritComparator : BasicComparator
     {
         /// <summary>

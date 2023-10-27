@@ -9,6 +9,9 @@ using System.Text;
 
 namespace AmeisenBotX.Wow335a.Objects
 {
+    /// <summary>
+    /// Represents a player in the World of Warcraft 3.3.5a game version.
+    /// </summary>
     [Serializable]
     public class WowPlayer335a : WowUnit335a, IWowPlayer
     {

@@ -8,6 +8,9 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Bia10
 {
+    /// <summary>
+    /// Initializes a new instance of the WarriorFurry class with the specified AmeisenBotInterfaces object as a parameter. 
+    /// </summary>
     public class WarrirorFurry : BasicCombatClassBia10
     {
         /// <summary>

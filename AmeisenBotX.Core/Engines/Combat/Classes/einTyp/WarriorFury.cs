@@ -12,6 +12,9 @@ using System.Text.Json;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.einTyp
 {
+    /// <summary>
+    /// Represents a class that implements the ICombatClass interface for the Warrior Fury specialization.
+    /// </summary>
     public class WarriorFury : ICombatClass
     {
         /// <summary>
@@ -458,6 +461,9 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.einTyp
             return newTargetFound;
         }
 
+        /// <summary>
+        /// The WarriorFurySpells class is responsible for managing the fury spells of a warrior.
+        /// </summary>
         private class WarriorFurySpells
         {
             /// <summary>

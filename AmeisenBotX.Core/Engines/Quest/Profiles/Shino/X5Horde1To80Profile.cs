@@ -8,6 +8,9 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Quest.Profiles.Shino
 {
+    /// <summary>
+    /// Represents a quest profile for a Horde character leveling from level 1 to level 80.
+    /// </summary>
     internal class X5Horde1To80Profile : IQuestProfile
     {
         /// <summary>

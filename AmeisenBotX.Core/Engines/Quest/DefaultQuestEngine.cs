@@ -7,6 +7,9 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Quest
 {
+    /// <summary>
+    /// Represents the default implementation of a quest engine that handles quests for a bot.
+    /// </summary>
     public class DefaultQuestEngine : IQuestEngine
     {
         /// <summary>

@@ -3,6 +3,9 @@ using System.Text.Json.Serialization;
 
 namespace AmeisenBotX.Wow.Events
 {
+    /// <summary>
+    /// Represents a WowEvent object.
+    /// </summary>
     public class WowEvent
     {
         /// <summary>

@@ -4,6 +4,9 @@ using System;
 
 namespace AmeisenBotX.Core.Logic.Leafs
 {
+    /// <summary>
+    /// Represents a leaf node in a tree structure that signifies a successful operation.
+    /// </summary>
     public class SuccessLeaf : INode
     {
         /// <summary>

@@ -11,6 +11,9 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 {
+    /// <summary>
+    /// Represents a Warlock class with Demonology specialization in a combat scenario, derived from the BasicCombatClass.
+    /// </summary>
     public class WarlockDemonology : BasicCombatClass
     {
         /// <summary>

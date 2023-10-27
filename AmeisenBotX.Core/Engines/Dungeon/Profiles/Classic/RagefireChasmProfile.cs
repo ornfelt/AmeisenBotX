@@ -6,6 +6,9 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Dungeon.Profiles.Classic
 {
+    /// <summary>
+    /// This class represents the profile for the Ragefire Chasm dungeon.
+    /// </summary>
     public class RagefireChasmProfile : IDungeonProfile
     {
         /// <summary>

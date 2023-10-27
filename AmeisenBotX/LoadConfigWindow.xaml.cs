@@ -10,6 +10,9 @@ using Path = System.IO.Path;
 
 namespace AmeisenBotX
 {
+    /// <summary>
+    /// Represents a window for loading configurations.
+    /// </summary>
     public partial class LoadConfigWindow : Window
     {
         /// <summary>

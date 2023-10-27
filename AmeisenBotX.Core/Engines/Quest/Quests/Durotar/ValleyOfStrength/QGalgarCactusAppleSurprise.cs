@@ -5,6 +5,9 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Quest.Quests.Durotar.ValleyOfStrength
 {
+    /// <summary>
+    /// Represents a quest called "Galgar's Cactus Apple Surprise" in the game.
+    /// </summary>
     internal class QGalgarCactusAppleSurprise : BotQuest
     {
         /// <summary>

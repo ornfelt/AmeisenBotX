@@ -13,6 +13,9 @@ using System.Text.Json;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
 {
+    /// <summary>
+    /// Initializes a new instance of the DeathknightBlood class with the provided bot.
+    /// </summary>
     public class DeathknightBlood : ICombatClass
     {
         /// <summary>

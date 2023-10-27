@@ -7,6 +7,9 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 {
+    /// <summary>
+    /// This constructor initializes a DruidFeralCat object and sets up various jobs and spell configurations for the bot.
+    /// </summary>
     public class DruidFeralCat : BasicCombatClass
     {
         /// This constructor initializes a DruidFeralCat object and sets up various jobs and spell configurations for the bot. It takes in a parameter 'bot' of type AmeisenBotInterfaces to provide access to necessary functionalities.

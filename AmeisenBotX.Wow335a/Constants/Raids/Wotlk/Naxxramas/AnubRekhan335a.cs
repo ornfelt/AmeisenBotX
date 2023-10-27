@@ -1,5 +1,8 @@
 ﻿namespace AmeisenBotX.Wow335a.Constants.Raids.Wotlk.Naxxramas
 {
+    /// <summary>
+    /// Represents a static class for storing the Spell IDs of Anub'Rekhan's abilities.
+    /// </summary>
     public static class AnubRekhan335a
     {
         /// <summary>

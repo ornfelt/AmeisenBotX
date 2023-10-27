@@ -6,6 +6,9 @@ using AmeisenBotX.Wow335a.Constants;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 {
+    /// <summary>
+    /// Represents a rogue specialization focused on assassination, allowing for efficient and deadly combat.
+    /// </summary>
     public class RogueAssassination : BasicCombatClass
     {
         /// <summary>

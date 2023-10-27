@@ -5,6 +5,11 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Quest.Quests.Grinder
 {
+    /// <summary>
+    /// Constructor for the QDesolaceGrindToLevel35 class. Initializes the quest with the provided bot instance and sets the quest name as "DesolaceGrindToLevel35".
+    /// It also sets the quest objectives as a list containing a single quest objective chain.
+    /// The quest objective chain contains a single grinding objective which requires the bot to reach level 35.
+    /// </summary>
     internal class QDesolaceGrindToLevel35 : GrindingBotQuest
     {
         /// <summary>

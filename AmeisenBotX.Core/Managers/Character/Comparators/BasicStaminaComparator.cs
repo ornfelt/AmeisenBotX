@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Managers.Character.Comparators
 {
+    /// <summary>
+    /// Represents a basic stamina comparator that compares stamina values of items.
+    /// </summary>
     public class BasicStaminaComparator : BasicComparator
     {
         /// <summary>

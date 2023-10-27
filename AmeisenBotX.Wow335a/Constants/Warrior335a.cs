@@ -1,5 +1,8 @@
 ﻿namespace AmeisenBotX.Wow335a.Constants
 {
+    /// <summary>
+    /// This static class represents a warrior with specific abilities in a game.
+    /// </summary>
     public static class Warrior335a
     {
         /// <summary>

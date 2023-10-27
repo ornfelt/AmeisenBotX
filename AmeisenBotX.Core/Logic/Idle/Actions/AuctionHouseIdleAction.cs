@@ -8,6 +8,9 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Logic.Idle.Actions
 {
+    /// <summary>
+    /// Represents an idle action related to the auction house in a game.
+    /// </summary>
     public class AuctionHouseIdleAction : IIdleAction
     {
         /// <summary>

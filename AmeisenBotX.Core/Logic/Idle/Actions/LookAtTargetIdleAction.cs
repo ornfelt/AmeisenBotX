@@ -3,6 +3,9 @@ using System;
 
 namespace AmeisenBotX.Core.Logic.Idle.Actions
 {
+    /// <summary>
+    /// Represents a class that implements the IIdleAction interface to define an idle action of looking at a target.
+    /// </summary>
     public class LookAtTargetIdleAction : IIdleAction
     {
         /// <summary>

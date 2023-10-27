@@ -5,6 +5,9 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Helpers.Targets.Validation.Util
 {
+    /// <summary>
+    /// CachedTargetValidator class implements the ITargetValidator interface and provides a caching mechanism for target validators.
+    /// </summary>
     public class CachedTargetValidator : ITargetValidator
     {
         /// <summary>

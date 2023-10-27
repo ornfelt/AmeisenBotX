@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Managers.Character.Comparators
 {
+    /// <summary>
+    /// Represents a basic intellect comparator that compares armor and weapon types.
+    /// </summary>
     public class BasicIntellectComparator : BasicComparator
     {
         /// <summary>

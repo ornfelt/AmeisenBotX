@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Movement.Pathfinding.Objects
 {
+    /// <summary>
+    /// Represents a collection of search areas defined by a list of Vector3 positions.
+    /// </summary>
     internal class SearchAreaEnsamble
     {
         /// <summary>

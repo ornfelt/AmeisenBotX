@@ -1,5 +1,8 @@
 ﻿namespace AmeisenBotX.Wow335a.Constants
 {
+    /// <summary>
+    /// Represents the constant string "Eviscerate".
+    /// </summary>
     public static class Rogue335a
     {
         /// <summary>

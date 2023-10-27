@@ -11,6 +11,9 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 {
+    /// <summary>
+    /// Represents a combat class for a Warlock specializing in Destruction abilities.
+    /// </summary>
     public class WarlockDestruction : BasicCombatClass
     {
         /// <summary>

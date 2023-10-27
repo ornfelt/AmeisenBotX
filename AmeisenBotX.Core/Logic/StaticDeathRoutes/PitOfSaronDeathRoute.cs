@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Logic.StaticDeathRoutes
 {
+    /// <summary>
+    /// Represents a death route in the Pit of Saron dungeon.
+    /// </summary>
     public class PitOfSaronDeathRoute : StaticPathDeathRoute
     {
         /// <summary>

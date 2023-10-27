@@ -5,6 +5,9 @@ using System;
 
 namespace AmeisenBotX.Core.Engines.Movement.Providers.Basic
 {
+    /// <summary>
+    /// Implementation of the IMovementProvider interface for the StayAroundMovementProvider class.
+    /// </summary>
     public class StayAroundMovementProvider : IMovementProvider
     {
         /// <summary>

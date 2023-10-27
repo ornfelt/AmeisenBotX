@@ -6,6 +6,9 @@ using AmeisenBotX.Wow335a.Constants;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 {
+    /// <summary>
+    /// Initializes a new instance of the PriestShadow class.
+    /// </summary>
     public class PriestShadow : BasicCombatClass
     {
         /// <summary>

@@ -2,6 +2,9 @@
 
 namespace AmeisenBotX.Core.Engines.Combat.Helpers.Targets.Validation.Basic
 {
+    /// <summary>
+    /// Determines if the specified WoW unit is currently in combat.
+    /// </summary>
     public class IsInCombatTargetValidator : ITargetValidator
     {
         /// <summary>

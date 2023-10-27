@@ -7,6 +7,9 @@ using System.Text;
 
 namespace AmeisenBotX.Core.Managers.Character.Talents
 {
+    /// <summary>
+    /// Represents a manager for talents in a game.
+    /// </summary>
     public class TalentManager
     {
         /// <summary>

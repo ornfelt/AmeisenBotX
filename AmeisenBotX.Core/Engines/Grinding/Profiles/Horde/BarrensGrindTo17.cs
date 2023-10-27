@@ -7,6 +7,9 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Grinding.Profiles.Horde
 {
+    /// <summary>
+    /// Represents a grinding profile for leveling up to level 17 in the Barrens.
+    /// </summary>
     public class BarrensGrindTo17 : IGrindingProfile
     {
         /// <summary>

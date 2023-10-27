@@ -5,6 +5,9 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
 {
+    /// <summary>
+    /// Represents a RogueAssassination class that inherits from the BasicKamelClass.
+    /// </summary>
     internal class RogueAssassination : BasicKamelClass
     {
         /// <summary>

@@ -19,6 +19,9 @@ using System.Threading.Tasks;
 
 namespace AmeisenBotX.Core.Managers.Character
 {
+    /// <summary>
+    /// Default implementation of the ICharacterManager interface that provides methods for managing character data and actions.
+    /// </summary>
     public class DefaultCharacterManager : ICharacterManager
     {
         /// <summary>

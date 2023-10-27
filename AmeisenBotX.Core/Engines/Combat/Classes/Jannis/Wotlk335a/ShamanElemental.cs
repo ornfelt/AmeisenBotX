@@ -8,6 +8,9 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 {
+    /// <summary>
+    /// Constructor for the ShamanElemental class.
+    /// </summary>
     public class ShamanElemental : BasicCombatClass
     {
         /// <summary>

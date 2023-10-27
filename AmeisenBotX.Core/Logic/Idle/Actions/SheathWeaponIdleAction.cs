@@ -2,6 +2,9 @@
 
 namespace AmeisenBotX.Core.Logic.Idle.Actions
 {
+    /// <summary>
+    /// Gets or sets a value indicating whether the autopilot mode is exclusive.
+    /// </summary>
     public class SheathWeaponIdleAction : IIdleAction
     {
         /// <summary>

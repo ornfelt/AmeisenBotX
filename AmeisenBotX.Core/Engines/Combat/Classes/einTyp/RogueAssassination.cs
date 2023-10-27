@@ -12,6 +12,9 @@ using System.Text.Json;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.einTyp
 {
+    /// <summary>
+    /// Represents a Rogue specialization that focuses on assassination techniques.
+    /// </summary>
     public class RogueAssassination : ICombatClass
     {
         /// <summary>
@@ -515,6 +518,9 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.einTyp
             return newTargetFound;
         }
 
+        /// <summary>
+        /// Represents the Rogue Assassin spells.
+        /// </summary>
         private class RogueAssassinSpells
         {
             /// <summary>

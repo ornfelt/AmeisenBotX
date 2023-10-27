@@ -4,6 +4,10 @@ using System.Globalization;
 
 namespace AmeisenBotX.Core.Managers.Character.Comparators
 {
+    /// <summary>
+    /// Determines if the given tank item is better than the current tank item based on their ratings.
+    /// Returns true if the tank item is better, false otherwise.
+    /// </summary>
     public class TankItemComparator : IItemComparator
     {
         /// <summary>

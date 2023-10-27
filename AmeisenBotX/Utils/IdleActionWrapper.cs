@@ -1,5 +1,8 @@
 ﻿namespace AmeisenBotX.Utils
 {
+    /// <summary>
+    /// Represents a wrapper class for the IdleAction feature.
+    /// </summary>
     public class IdleActionWrapper
     {
         /// <summary>

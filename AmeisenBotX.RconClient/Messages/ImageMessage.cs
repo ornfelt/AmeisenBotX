@@ -2,6 +2,9 @@
 
 namespace AmeisenBotX.RconClient.Messages
 {
+    /// <summary>
+    /// Represents an image message with a unique identifier and an image name.
+    /// </summary>
     public class ImageMessage
     {
         /// <summary>

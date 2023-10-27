@@ -1,5 +1,8 @@
 ﻿namespace AmeisenBotX.Core.Managers.Character.Inventory.Objects
 {
+    /// <summary>
+    /// Initializes a new instance of the WowRecipe class.
+    /// </summary>
     public class WowRecipe : WowBasicItem
     {
         /// <summary>

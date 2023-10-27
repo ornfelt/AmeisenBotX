@@ -12,6 +12,9 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 {
+    /// <summary>
+    /// Represents a warrior class specialization focused on providing protection and defense for allies.
+    /// </summary>
     public class WarriorProtection : BasicCombatClass
     {
         /// <summary>

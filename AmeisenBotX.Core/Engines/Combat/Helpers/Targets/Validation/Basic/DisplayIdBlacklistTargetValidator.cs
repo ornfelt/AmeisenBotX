@@ -4,6 +4,9 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Helpers.Targets.Validation.Basic
 {
+    /// <summary>
+    /// Represents a target validator for Display IDs that checks against a blacklist.
+    /// </summary>
     public class DisplayIdBlacklistTargetValidator : ITargetValidator
     {
         /// <summary>

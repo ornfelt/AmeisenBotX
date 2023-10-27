@@ -3,6 +3,9 @@ using AmeisenBotX.Core.Engines.Movement.Enums;
 
 namespace AmeisenBotX.Core.Logic.Routines
 {
+    /// <summary>
+    /// Moves the bot to the specified target position.
+    /// </summary>
     public static class CommonRoutines
     {
         /// <summary>

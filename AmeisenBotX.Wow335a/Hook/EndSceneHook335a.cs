@@ -13,6 +13,9 @@ using System.Text;
 
 namespace AmeisenBotX.Wow335a.Hook
 {
+    /// <summary>
+    /// Represents a hook for the end scene in World of Warcraft version 3.3.5a.
+    /// </summary>
     public class EndSceneHook335a : GenericEndSceneHook
     {
         /// <summary>

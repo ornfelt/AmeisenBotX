@@ -5,6 +5,9 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Quest.Quests.Grinder
 {
+    /// <summary>
+    /// Represents a class for grinding quests in Stonetalon until level 23.
+    /// </summary>
     internal class QStonetalonGrindToLevel23 : GrindingBotQuest
     {
         /// <summary>

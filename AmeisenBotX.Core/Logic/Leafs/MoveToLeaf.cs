@@ -6,6 +6,9 @@ using System;
 
 namespace AmeisenBotX.Core.Logic.Leafs
 {
+    /// <summary>
+    /// Represents a class that moves the bot to a leaf node in a tree structure.
+    /// </summary>
     public class MoveToLeaf : INode
     {
         /// <summary>

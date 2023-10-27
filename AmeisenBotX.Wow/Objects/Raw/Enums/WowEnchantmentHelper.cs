@@ -2,6 +2,9 @@
 
 namespace AmeisenBotX.Wow.Objects.Raw.Enums
 {
+    /// <summary>
+    /// Helper class for managing World of Warcraft enchantments.
+    /// </summary>
     public static class WowEnchantmentHelper
     {
         /// <summary>

@@ -7,6 +7,9 @@ using System;
 
 namespace AmeisenBotX.Wow335a.Objects
 {
+    /// <summary>
+    /// Represents a World of Warcraft object for version 3.3.5a, implementing the IWowObject interface.
+    /// </summary>
     [Serializable]
     public class WowObject335a : IWowObject
     {

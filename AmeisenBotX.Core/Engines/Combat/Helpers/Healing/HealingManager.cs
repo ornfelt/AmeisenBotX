@@ -11,6 +11,9 @@ using System.Text.Json;
 
 namespace AmeisenBotX.Core.Engines.Combat.Helpers.Healing
 {
+    /// <summary>
+    /// The HealingManager class is responsible for managing healing spells, preventing overhealing, and selecting fast heals when necessary.
+    /// </summary>
     public class HealingManager
     {
         /// <summary>

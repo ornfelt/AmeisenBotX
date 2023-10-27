@@ -7,6 +7,9 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Helpers.Aura
 {
+    /// <summary>
+    /// Initializes a new instance of the GroupAuraManager class.
+    /// </summary>
     public class GroupAuraManager
     {
         /// <summary>

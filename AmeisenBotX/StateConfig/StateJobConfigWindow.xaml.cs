@@ -6,6 +6,9 @@ using System.Windows.Input;
 
 namespace AmeisenBotX.StateConfig
 {
+    /// <summary>
+    /// Represents a window for configuring state jobs in the application.
+    /// </summary>
     public partial class StateJobConfigWindow : Window, IStateConfigWindow
     {
         /// <summary>

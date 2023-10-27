@@ -11,6 +11,9 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Shino
 {
+    /// <summary>
+    /// Initializes a new instance of the MageFrost class and applies necessary buffs and settings for Frost Mages.
+    /// </summary>
     public class MageFrost : TemplateCombatClass
     {
         /// <summary>

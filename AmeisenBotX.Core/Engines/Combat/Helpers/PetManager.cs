@@ -3,6 +3,9 @@ using System;
 
 namespace AmeisenBotX.Core.Engines.Combat.Helpers
 {
+    /// <summary>
+    /// Manages pets and their actions.
+    /// </summary>
     public class PetManager
     {
         /// <summary>

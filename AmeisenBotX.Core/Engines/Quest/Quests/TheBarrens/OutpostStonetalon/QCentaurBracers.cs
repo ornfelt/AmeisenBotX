@@ -5,6 +5,9 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Quest.Quests.TheBarrens.OutpostStonetalon
 {
+    /// <summary>
+    /// Class representing the QCentaurBracers quest, a subclass of BotQuest.
+    /// </summary>
     internal class QCentaurBracers : BotQuest
     {
         /// <summary>

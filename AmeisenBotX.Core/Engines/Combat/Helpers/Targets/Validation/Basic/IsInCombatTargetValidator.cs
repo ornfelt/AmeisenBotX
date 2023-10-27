@@ -3,6 +3,9 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Helpers.Targets.Validation.Basic
 {
+    ///summary>
+    /// The Bot interface used for validating threat targets.
+    ///</summary>
     public class IsThreatTargetValidator : ITargetValidator
     {
         ///<summary>

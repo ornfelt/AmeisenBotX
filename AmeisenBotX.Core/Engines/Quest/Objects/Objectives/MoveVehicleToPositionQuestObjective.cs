@@ -3,6 +3,9 @@ using AmeisenBotX.Core.Engines.Movement.Enums;
 
 namespace AmeisenBotX.Core.Engines.Quest.Objects.Objectives
 {
+    /// <summary>
+    /// Represents a quest objective to move a vehicle to a specific position while maintaining a certain distance.
+    /// </summary>
     public class MoveVehicleToPositionQuestObjective : IQuestObjective
     {
         /// <summary>

@@ -1,5 +1,8 @@
 ﻿namespace AmeisenBotX.Wow.Objects.Enums
 {
+    /// <summary>
+    /// Represents the different attribute modifiers for items.
+    /// </summary>
     public static class WowStatType
     {
         /// <summary>

@@ -8,6 +8,9 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Tactic
 {
+    /// <summary>
+    /// Represents a default implementation of the ITacticEngine interface.
+    /// </summary>
     public class DefaultTacticEngine : ITacticEngine
     {
         /// <summary>

@@ -3,6 +3,9 @@ using System.Runtime.InteropServices;
 
 namespace AmeisenBotX.Memory.Win32
 {
+    /// <summary>
+    /// Provides a set of methods to import functions from the Win32 API.
+    /// </summary>
     public static unsafe class Win32Imports
     {
         /// <summary>

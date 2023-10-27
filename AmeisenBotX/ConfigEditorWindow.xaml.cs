@@ -22,6 +22,9 @@ using System.Windows.Shapes;
 
 namespace AmeisenBotX
 {
+    /// <summary>
+    /// Represents a window for editing configuration settings.
+    /// </summary>
     public partial class ConfigEditorWindow : Window
     {
         /// <summary>

@@ -4,6 +4,9 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Quest.Quests.Durotar.ValleyOfStrength
 {
+    /// <summary>
+    /// Initializes a new instance of the QSarkoth2 class.
+    /// </summary>
     internal class QSarkoth2 : BotQuest
     {
         /// <summary>

@@ -2,6 +2,9 @@
 
 namespace AmeisenBotX.Wow.Objects
 {
+    /// <summary>
+    /// Represents a World of Warcraft mount.
+    /// </summary>
     public class WowMount
     {
         /// <summary>

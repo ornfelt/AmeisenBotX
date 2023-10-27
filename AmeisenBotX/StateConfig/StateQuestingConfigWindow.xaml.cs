@@ -6,6 +6,9 @@ using System.Windows.Input;
 
 namespace AmeisenBotX.StateConfig
 {
+    /// <summary>
+    /// Represents a window for configuring questing state for the AmeisenBot.
+    /// </summary>
     public partial class StateQuestingConfigWindow : Window, IStateConfigWindow
     {
         /// <summary>

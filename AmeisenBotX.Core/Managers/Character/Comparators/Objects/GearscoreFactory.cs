@@ -5,6 +5,9 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Managers.Character.Comparators.Objects
 {
+    /// <summary>
+    /// Initializes a new instance of the GearscoreFactory class with the specified stat multiplicators.
+    /// </summary>
     public class GearscoreFactory
     {
         /// <summary>

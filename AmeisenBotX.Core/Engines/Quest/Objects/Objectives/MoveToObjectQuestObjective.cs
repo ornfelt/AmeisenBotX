@@ -4,6 +4,9 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Quest.Objects.Objectives
 {
+    /// <summary>
+    /// Represents a quest objective that requires the player to move towards a specific object.
+    /// </summary>
     public class MoveToObjectQuestObjective : IQuestObjective
     {
         /// <summary>

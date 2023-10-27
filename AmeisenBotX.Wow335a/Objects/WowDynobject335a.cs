@@ -5,6 +5,9 @@ using System;
 
 namespace AmeisenBotX.Wow335a.Objects
 {
+    /// <summary>
+    /// Represents a dynamic object in the World of Warcraft game, with properties for the caster, radius, and spell ID.
+    /// </summary>
     [Serializable]
     public class WowDynobject335a : WowObject335a, IWowDynobject
     {

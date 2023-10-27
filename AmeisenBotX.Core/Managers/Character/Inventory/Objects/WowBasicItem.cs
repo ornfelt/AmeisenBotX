@@ -3,6 +3,9 @@ using System.Text.Json.Serialization;
 
 namespace AmeisenBotX.Core.Managers.Character.Inventory.Objects
 {
+    /// <summary>
+    /// Initializes a new instance of the WowBasicItem class.
+    /// </summary>
     public class WowBasicItem : IWowInventoryItem
     {
         /// <summary>

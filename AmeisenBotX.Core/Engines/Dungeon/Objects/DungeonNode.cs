@@ -3,6 +3,9 @@ using AmeisenBotX.Core.Engines.Dungeon.Enums;
 
 namespace AmeisenBotX.Core.Engines.Dungeon.Objects
 {
+    /// <summary>
+    /// Constructor for creating a new dungeon node.
+    /// </summary>
     public class DungeonNode
     {
         /// <summary>

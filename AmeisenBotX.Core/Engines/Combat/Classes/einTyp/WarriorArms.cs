@@ -12,6 +12,9 @@ using System.Text.Json;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.einTyp
 {
+    /// <summary>
+    /// Represents a warrior specialization focused on melee combat with two-handed weapons.
+    /// </summary>
     public class WarriorArms : ICombatClass
     {
         /// <summary>
@@ -445,6 +448,9 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.einTyp
             return newTargetFound;
         }
 
+        /// <summary>
+        /// Represents a private class for managing warrior's arm spells.
+        /// </summary>
         private class WarriorArmSpells
         {
             /// <summary>

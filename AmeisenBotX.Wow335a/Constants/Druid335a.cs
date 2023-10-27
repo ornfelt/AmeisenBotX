@@ -1,5 +1,8 @@
 ﻿namespace AmeisenBotX.Wow335a.Constants
 {
+    /// <summary>
+    /// Represents the Druid335a class.
+    /// </summary>
     public static class Druid335a
     {
         /// <summary>

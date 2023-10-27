@@ -4,6 +4,9 @@ using System.Text;
 
 namespace AmeisenBotX.Wow.Hook.Modules
 {
+    /// <summary>
+    /// Represents a module for hooking traceline jump functionality.
+    /// </summary>
     public class TracelineJumpHookModule : RunAsmHookModule
     {
         /// <summary>

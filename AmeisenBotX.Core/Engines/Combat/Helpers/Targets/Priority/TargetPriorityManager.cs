@@ -5,6 +5,9 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Helpers.Targets.Priority
 {
+    /// <summary>
+    /// Initializes a new instance of the <see cref="TargetPriorityManager"/> class.
+    /// </summary>
     public class TargetPriorityManager : ITargetPrioritizer
     {
         /// <summary>

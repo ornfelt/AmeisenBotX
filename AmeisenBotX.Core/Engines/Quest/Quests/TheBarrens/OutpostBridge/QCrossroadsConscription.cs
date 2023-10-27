@@ -4,6 +4,9 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Quest.Quests.TheBarrens.OutpostBridge
 {
+    /// <summary>
+    /// Represents a quest for conscription at the Crossroads.
+    /// </summary>
     internal class QCrossroadsConscription : BotQuest
     {
         /// <summary>

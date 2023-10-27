@@ -6,6 +6,9 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Logic.Idle.Actions
 {
+    /// <summary>
+    /// A class that represents an idle action where the character looks at nearby NPCs.
+    /// </summary>
     public class LookAtNpcsIdleAction : IIdleAction
     {
         /// <summary>

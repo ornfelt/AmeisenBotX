@@ -1,5 +1,8 @@
 ﻿namespace AmeisenBotX.Wow335a.Constants
 {
+    /// <summary>
+    /// Represents the Warlock335a static class.
+    /// </summary>
     public static class Warlock335a
     {
         /// <summary>

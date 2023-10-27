@@ -4,6 +4,9 @@ using System;
 
 namespace AmeisenBotX.Core.Logic.Routines
 {
+    /// <summary>
+    /// Runs the AmeisenBot with the specified bot and selected unit parameters, returning a boolean to indicate success.
+    /// </summary>
     public static class SpeakToClassTrainerRoutine
     {
         /// <summary>

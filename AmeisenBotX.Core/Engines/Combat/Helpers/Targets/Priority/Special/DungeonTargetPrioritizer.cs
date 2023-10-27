@@ -5,6 +5,9 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Combat.Helpers.Targets.Priority.Special
 {
+    /// <summary>
+    /// Represents a class that prioritizes targets within a dungeon environment.
+    /// </summary>
     public class DungeonTargetPrioritizer : ITargetPrioritizer
     {
         /// <summary>

@@ -6,6 +6,9 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Dungeon.Profiles.Classic
 {
+    /// <summary>
+    /// Represents a profile for the Shadowfang Keep dungeon in The Silverpine Forest, designed for characters between levels 22 to 30.
+    /// </summary>
     public class ShadowfangKeepProfile : IDungeonProfile
     {
         /// <summary>

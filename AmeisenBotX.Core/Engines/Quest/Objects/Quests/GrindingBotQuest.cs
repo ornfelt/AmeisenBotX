@@ -4,6 +4,9 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Quest.Objects.Quests
 {
+    /// <summary>
+    /// Represents a quest for a grinding bot, with a specified name and objectives.
+    /// </summary>
     internal class GrindingBotQuest : IBotQuest
     {
         /// <summary>

@@ -2,6 +2,9 @@
 
 namespace AmeisenBotX.RconClient.Messages
 {
+    /// <summary>
+    /// Represents a data message containing information about the number of free bag slots and combat class.
+    /// </summary>
     public class DataMessage
     {
         /// <summary>

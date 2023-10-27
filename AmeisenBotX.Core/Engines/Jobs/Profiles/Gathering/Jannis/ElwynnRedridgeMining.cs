@@ -5,6 +5,9 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Jobs.Profiles.Gathering.Jannis
 {
+    /// <summary>
+    /// Represents a mining profile for the Elwynn Redridge area.
+    /// </summary>
     public class ElwynnRedridgeMining : IMiningProfile
     {
         /// <summary>

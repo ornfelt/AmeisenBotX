@@ -4,6 +4,9 @@ using System.Text;
 
 namespace AmeisenBotX.Wow.Hook.Modules
 {
+    /// <summary>
+    /// Represents a class that runs Lua hook module.
+    /// </summary>
     public class RunLuaHookModule : RunAsmHookModule
     {
         /// <summary>

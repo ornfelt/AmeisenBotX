@@ -9,6 +9,9 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Bia10
 {
+    /// <summary>
+    /// Represents a frost mage combat class that specializes in dealing frost damage.
+    /// </summary>
     public class MageFrost : BasicCombatClassBia10
     {
         /// <summary>

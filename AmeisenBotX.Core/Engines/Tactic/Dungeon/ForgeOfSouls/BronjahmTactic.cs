@@ -8,6 +8,9 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Tactic.Dungeon.ForgeOfSouls
 {
+    /// <summary>
+    /// Represents a specific tactic for the character Bronjahm in a game.
+    /// </summary>
     public class BronjahmTactic : ITactic
     {
         /// <summary>

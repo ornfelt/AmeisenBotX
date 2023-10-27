@@ -7,6 +7,9 @@ using System.Threading;
 
 namespace AmeisenBotX.Core.Engines.Movement.Pathfinding
 {
+    /// <summary>
+    /// Represents a navigation handler for the Ameisen application, implementing the IPathfindingHandler interface.
+    /// </summary>
     public class AmeisenNavigationHandler : IPathfindingHandler
     {
         /// <summary>

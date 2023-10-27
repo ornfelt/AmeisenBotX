@@ -8,6 +8,9 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Quest.Objects.Objectives
 {
+    /// <summary>
+    /// Represents a grinding objective in a quest.
+    /// </summary>
     internal class GrindingObjective : IQuestObjective
     {
         /// <summary>

@@ -11,6 +11,9 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Managers.Character.Inventory
 {
+    /// <summary>
+    /// Represents a class that holds a dictionary of items mapped to equipment slots.
+    /// </summary>
     public class CharacterEquipment
     {
         /// <summary>

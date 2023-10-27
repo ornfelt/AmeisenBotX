@@ -7,6 +7,9 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Movement.Objects
 {
+    /// <summary>
+    /// Represents a basic vehicle.
+    /// </summary>
     public class BasicVehicle
     {
         /// <summary>

@@ -5,6 +5,10 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Quest.Quests.Grinder
 {
+    /// <summary>
+    /// Class for grinding in Durotar until level 9.
+    /// Inherits from GrindingBotQuest.
+    /// </summary>
     internal class QDurotarGrindToLevel9 : GrindingBotQuest
     {
         /// <summary>

@@ -10,6 +10,9 @@ using System.Text.Json.Serialization;
 
 namespace AmeisenBotX.Core.Managers.Character.Spells
 {
+    /// <summary>
+    /// Represents a spell book that contains a collection of spells.
+    /// </summary>
     public class SpellBook
     {
         /// <summary>

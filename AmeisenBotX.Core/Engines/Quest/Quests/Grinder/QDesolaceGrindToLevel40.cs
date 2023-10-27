@@ -5,6 +5,9 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Quest.Quests.Grinder
 {
+    /// <summary>
+    /// Represents a quest for grinding to level 40 in the Desolace area.
+    /// </summary>
     internal class QDesolaceGrindToLevel40 : GrindingBotQuest
     {
         /// <summary>

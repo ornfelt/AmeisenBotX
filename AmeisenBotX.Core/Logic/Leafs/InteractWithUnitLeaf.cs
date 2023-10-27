@@ -6,6 +6,9 @@ using System;
 
 namespace AmeisenBotX.Core.Logic.Leafs
 {
+    /// <summary>
+    /// Represents a leaf node for interacting with a unit in the AmeisenBotInterfaces system, extending the MoveToLeaf class.
+    /// </summary>
     public class InteractWithUnitLeaf : MoveToLeaf
     {
         /// <summary>

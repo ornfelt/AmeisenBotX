@@ -9,6 +9,9 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 {
+    /// <summary>
+    /// Represents a Priest Discipline class that inherits from the BasicCombatClass.
+    /// </summary>
     public class PriestDiscipline : BasicCombatClass
     {
         /// <summary>

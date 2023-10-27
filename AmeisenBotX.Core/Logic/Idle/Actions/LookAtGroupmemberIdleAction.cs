@@ -6,6 +6,9 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Logic.Idle.Actions
 {
+    /// <summary>
+    /// Represents an idle action where a group member is looked at.
+    /// </summary>
     public class LookAtGroupmemberIdleAction : IIdleAction
     {
         /// <summary>

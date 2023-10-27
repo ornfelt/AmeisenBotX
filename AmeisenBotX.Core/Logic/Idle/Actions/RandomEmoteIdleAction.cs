@@ -5,6 +5,9 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Logic.Idle.Actions
 {
+    /// <summary>
+    /// Represents an idle action that randomly performs emotes.
+    /// </summary>
     public class RandomEmoteIdleAction : IIdleAction
     {
         /// <summary>

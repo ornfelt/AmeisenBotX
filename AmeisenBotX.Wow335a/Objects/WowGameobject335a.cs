@@ -8,6 +8,9 @@ using System.Globalization;
 
 namespace AmeisenBotX.Wow335a.Objects
 {
+    /// <summary>
+    /// Gets or sets the DisplayId value.
+    /// </summary>
     [Serializable]
     public class WowGameobject335a : WowObject335a, IWowGameobject
     {

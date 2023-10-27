@@ -2,6 +2,9 @@
 
 namespace AmeisenBotX.Core.Managers.Character.Comparators
 {
+    /// <summary>
+    /// Determines if the provided current item is better than the provided another item.
+    /// </summary>
     public class ItemLevelComparator : IItemComparator
     {
         /// <summary>

@@ -10,6 +10,9 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Movement
 {
+    /// <summary>
+    /// Represents the movement engine for the bot.
+    /// </summary>
     public class MovementEngine : IMovementEngine
     {
         /// <summary>

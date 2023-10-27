@@ -3,6 +3,9 @@ using System;
 
 namespace AmeisenBotX.Core.Managers.Character.Inventory.Objects
 {
+    /// <summary>
+    /// Represents a weapon in the game World of Warcraft.
+    /// </summary>
     public class WowWeapon : WowBasicItem
     {
         /// <summary>

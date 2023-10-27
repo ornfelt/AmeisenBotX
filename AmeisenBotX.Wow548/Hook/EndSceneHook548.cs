@@ -11,6 +11,9 @@ using System.Text;
 
 namespace AmeisenBotX.Wow548.Hook
 {
+    /// <summary>
+    /// Represents a hook that is triggered at the end of a scene in the game, specifically for version 548.
+    /// </summary>
     public class EndSceneHook548 : GenericEndSceneHook
     {
         /// <summary>

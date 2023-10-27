@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Managers.Character.Comparators
 {
+    /// <summary>
+    /// Initializes a new instance of the BasicStrengthComparator class with optional armor and weapon type blacklists.
+    /// </summary>
     public class BasicStrengthComparator : BasicComparator
     {
         /// <summary>

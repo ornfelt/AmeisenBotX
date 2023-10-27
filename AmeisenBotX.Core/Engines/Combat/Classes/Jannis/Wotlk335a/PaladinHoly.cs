@@ -15,6 +15,9 @@ using System.Text.Json;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 {
+    /// <summary>
+    /// Represents a holy Paladin combat class that specializes in healing and supporting the group.
+    /// </summary>
     public class PaladinHoly : BasicCombatClass
     {
         /// <summary>

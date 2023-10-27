@@ -8,6 +8,9 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Movement.Providers.Basic
 {
+    /// <summary>
+    /// Represents a movement provider that follows a specific target.
+    /// </summary>
     public class FollowMovementProvider : IMovementProvider
     {
         /// <summary>

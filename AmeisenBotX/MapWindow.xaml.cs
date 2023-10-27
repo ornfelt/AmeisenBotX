@@ -18,6 +18,9 @@ using Point = System.Drawing.Point;
 
 namespace AmeisenBotX
 {
+    /// <summary>
+    /// Represents a window that displays a map and is associated with an AmeisenBot instance.
+    /// </summary>
     public partial class MapWindow : Window
     {
         /// <summary>

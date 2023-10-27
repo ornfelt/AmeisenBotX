@@ -9,6 +9,9 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Quest.Profiles.StartAreas
 {
+    /// <summary>
+    /// Represents a quest profile for the Death Knight starting area.
+    /// </summary>
     public class DeathknightStartAreaQuestProfile : IQuestProfile
     {
         /// <summary>

@@ -8,6 +8,9 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Bia10
 {
+    /// <summary>
+    /// Initializes a new instance of the ShamanElemental class with the specified bot.
+    /// </summary>
     public class ShamanElemental : BasicCombatClassBia10
     {
         /// <summary>

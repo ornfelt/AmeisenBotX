@@ -6,6 +6,9 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Test
 {
+    /// <summary>
+    /// Represents a class for testing the CharacterManager functionality.
+    /// </summary>
     [TestClass]
     public class CharacterManagerTests
     {

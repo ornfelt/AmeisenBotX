@@ -6,6 +6,9 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Dungeon.Profiles.TBC
 {
+    /// <summary>
+    /// Represents a profile for the Blood Furnace dungeon, implementing the IDungeonProfile interface.
+    /// </summary>
     public class TheBloodFurnaceProfile : IDungeonProfile
     {
         /// <summary>

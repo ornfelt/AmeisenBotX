@@ -6,6 +6,9 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Dungeon.Profiles.Classic
 {
+    /// <summary>
+    /// Represents a profile for a dungeon, implementing the IDungeonProfile interface.
+    /// </summary>
     public class StockadeProfile : IDungeonProfile
     {
         /// <summary>

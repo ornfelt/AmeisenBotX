@@ -2,6 +2,9 @@
 
 namespace AmeisenBotX.Wow548.Offsets
 {
+    /// <summary>
+    /// Represents a list of offsets with two properties: AuraCount1 and AuraCount2. AuraCount1 is an IntPtr representing the memory address 0x1218, while AuraCount2 is initialized with the hexadecimal value 0xE14.
+    /// </summary>
     public class OffsetList548 : IOffsetList
     {
         /// <summary>

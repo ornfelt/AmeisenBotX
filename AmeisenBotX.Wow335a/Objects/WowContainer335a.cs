@@ -4,6 +4,9 @@ using System;
 
 namespace AmeisenBotX.Wow335a.Objects
 {
+    /// <summary>
+    /// Represents a WoW container with a specified number of slots and a raw WowContainerDescriptor335a.
+    /// </summary>
     [Serializable]
     public class WowContainer335a : WowObject335a, IWowContainer
     {

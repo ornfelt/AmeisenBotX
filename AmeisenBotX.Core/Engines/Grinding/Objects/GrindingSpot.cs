@@ -2,6 +2,9 @@
 
 namespace AmeisenBotX.Core.Engines.Grinding.Objects
 {
+    /// <summary>
+    /// Represents a location where grinding can take place.
+    /// </summary>
     public class GrindingSpot
     {
         /// <summary>

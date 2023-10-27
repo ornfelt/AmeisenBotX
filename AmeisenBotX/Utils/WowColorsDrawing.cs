@@ -4,6 +4,9 @@ using System.Drawing;
 
 namespace AmeisenBotX.Utils
 {
+    /// <summary>
+    /// Represents a static class for drawing colors used in Wow.
+    /// </summary>
     public static class WowColorsDrawing
     {
         /// <summary>

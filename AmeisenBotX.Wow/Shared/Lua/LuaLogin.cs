@@ -1,5 +1,8 @@
 ﻿namespace AmeisenBotX.Wow.Shared.Lua
 {
+    /// <summary>
+    /// Utility class for navigating and performing login actions in the game client.
+    /// </summary>
     public static class LuaLogin
     {
         /// <summary>

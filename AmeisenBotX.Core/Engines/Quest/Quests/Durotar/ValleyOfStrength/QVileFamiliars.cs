@@ -5,6 +5,9 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Quest.Quests.Durotar.ValleyOfStrength
 {
+    /// <summary>
+    /// Represents a class for handling quests related to Vile Familiars.
+    /// </summary>
     internal class QVileFamiliars : BotQuest
     {
         /// <summary>

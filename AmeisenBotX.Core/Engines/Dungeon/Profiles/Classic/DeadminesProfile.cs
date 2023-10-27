@@ -6,6 +6,9 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Dungeon.Profiles.Classic
 {
+    /// <summary>
+    /// Represents a Deadmines dungeon profile.
+    /// </summary>
     public class DeadminesProfile : IDungeonProfile
     {
         /// <summary>

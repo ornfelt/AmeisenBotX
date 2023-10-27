@@ -4,6 +4,9 @@ using System.Globalization;
 
 namespace AmeisenBotX.Core.Managers.Character.Comparators
 {
+    /// <summary>
+    /// Represents a comparator for Fury items that implements the IItemComparator interface.
+    /// </summary>
     public class FuryItemComparator : IItemComparator
     {
         /// <summary>

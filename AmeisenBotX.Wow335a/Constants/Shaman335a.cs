@@ -1,5 +1,8 @@
 ﻿namespace AmeisenBotX.Wow335a.Constants
 {
+    /// <summary>
+    /// Represents the constant string value "Chain Lightning".
+    /// </summary>
     public static class Shaman335a
     {
         /// <summary>

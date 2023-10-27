@@ -4,6 +4,9 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Logic.Idle.Actions.Utils
 {
+    /// <summary>
+    /// Represents a basic idle action that can be performed.
+    /// </summary>
     public abstract class BasicIdleAction : IIdleAction
     {
         /// <summary>

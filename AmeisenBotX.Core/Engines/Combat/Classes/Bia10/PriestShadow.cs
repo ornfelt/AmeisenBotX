@@ -8,6 +8,9 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Bia10
 {
+    /// <summary>
+    /// Constructor for the PriestShadow class.
+    /// </summary>
     public class PriestShadow : BasicCombatClassBia10
     {
         /// <summary>

@@ -7,6 +7,9 @@ using System.Text.Json.Serialization;
 
 namespace AmeisenBotX.Core
 {
+    /// <summary>
+    /// Represents the configuration settings for the AmeisenBot.
+    /// </summary>
     public class AmeisenBotConfig
     {
         /// <summary>

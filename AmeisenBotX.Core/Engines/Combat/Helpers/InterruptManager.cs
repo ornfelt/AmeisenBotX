@@ -5,6 +5,9 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Helpers
 {
+    /// <summary>
+    /// Represents a class that manages interrupts in a game.
+    /// </summary>
     public class InterruptManager
     {
         /// <summary>

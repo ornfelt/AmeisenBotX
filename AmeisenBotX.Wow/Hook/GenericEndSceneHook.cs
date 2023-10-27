@@ -13,6 +13,9 @@ using System.Threading.Tasks;
 
 namespace AmeisenBotX.Wow.Hook
 {
+    /// <summary>
+    /// Represents a generic class for handling end scene hooks.
+    /// </summary>
     public class GenericEndSceneHook
     {
         /// <summary>

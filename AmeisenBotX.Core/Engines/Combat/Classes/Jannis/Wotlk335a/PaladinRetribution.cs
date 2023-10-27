@@ -7,6 +7,9 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 {
+    /// <summary>
+    /// Constructor for the PaladinRetribution class. Initializes the PaladinRetribution object with the provided bot interface.
+    /// </summary>
     public class PaladinRetribution : BasicCombatClass
     {
         /// <summary>

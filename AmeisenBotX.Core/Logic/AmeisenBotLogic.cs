@@ -29,6 +29,9 @@ using System.Text;
 
 namespace AmeisenBotX.Core.Logic
 {
+    /// <summary>
+    /// Represents the logic for an AmeisenBot, including the initialization of static death routes.
+    /// </summary>
     public class AmeisenBotLogic : IAmeisenBotLogic
     {
         /// <summary>

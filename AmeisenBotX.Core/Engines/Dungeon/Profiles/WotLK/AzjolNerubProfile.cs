@@ -6,6 +6,9 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Dungeon.Profiles.WotLK
 {
+    /// <summary>
+    /// Represents a dungeon profile for Azjol Nerub.
+    /// </summary>
     public class AzjolNerubProfile : IDungeonProfile
     {
         /// <summary>

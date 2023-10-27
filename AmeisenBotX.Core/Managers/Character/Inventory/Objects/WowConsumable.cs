@@ -1,5 +1,8 @@
 ﻿namespace AmeisenBotX.Core.Managers.Character.Inventory.Objects
 {
+    /// <summary>
+    /// Initializes a new instance of the WowConsumable class with the specified WowInventoryItem object as a base.
+    /// </summary>
     public class WowConsumable : WowBasicItem
     {
         /// <summary>

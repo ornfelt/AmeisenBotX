@@ -6,6 +6,9 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Dungeon.Profiles.Classic
 {
+    ///<summary>
+    ///This class represents a profile for the Wailing Caverns dungeon in The Barrens, designed for players between levels 17 and 24.
+    ///</summary>
     public class WailingCavernsProfile : IDungeonProfile
     {
         /// <summary>

@@ -29,6 +29,9 @@ using System.Runtime.CompilerServices;
 
 namespace AmeisenBotX.Core
 {
+    /// <summary>
+    /// Provides access to various interfaces for controlling and interacting with an AmeisenBot.
+    /// </summary>
     public class AmeisenBotInterfaces
     {
         /// <summary>

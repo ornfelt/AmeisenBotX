@@ -10,6 +10,9 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 {
+    /// <summary>
+    /// Represents a warrior specialization that specializes in fury combat, utilizing dual-wielding weapons to unleash devastating attacks.
+    /// </summary>
     public class WarriorFury : BasicCombatClass
     {
         /// <summary>

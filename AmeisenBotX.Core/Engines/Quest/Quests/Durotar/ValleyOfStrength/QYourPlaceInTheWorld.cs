@@ -4,6 +4,9 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Quest.Quests.Durotar.ValleyOfStrength
 {
+    /// <summary>
+    /// Represents a quest that helps you discover your place in the world.
+    /// </summary>
     internal class QYourPlaceInTheWorld : BotQuest
     {
         /// <summary>

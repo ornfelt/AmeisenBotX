@@ -20,6 +20,9 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis
 {
+    /// <summary>
+    /// This class serves as a base for all combat classes and implements the necessary interfaces for configuration and combat.
+    /// </summary>
     public abstract class BasicCombatClass : SimpleConfigurable, ICombatClass
     {
         /// This array holds the IDs of various healing items that can be used by the player. It includes IDs for potions and healthstones.

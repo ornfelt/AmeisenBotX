@@ -3,6 +3,9 @@ using AmeisenBotX.Wow548.Objects.Descriptors;
 
 namespace AmeisenBotX.Wow548.Objects
 {
+    /// <summary>
+    /// Represents a container in the Wow game.
+    /// </summary>
     [Serializable]
     public unsafe class WowContainer548 : WowObject548, IWowContainer
     {

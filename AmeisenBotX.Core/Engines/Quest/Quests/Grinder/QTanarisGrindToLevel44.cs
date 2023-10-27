@@ -5,6 +5,9 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Quest.Quests.Grinder
 {
+    /// <summary>
+    /// Represents a class for grinding in Tanaris until level 44.
+    /// </summary>
     internal class QTanarisGrindToLevel44 : GrindingBotQuest
     {
         /// <summary>

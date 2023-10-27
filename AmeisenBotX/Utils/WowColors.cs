@@ -3,6 +3,9 @@ using System.Windows.Media;
 
 namespace AmeisenBotX.Utils
 {
+    /// <summary>
+    /// Represents a static, read-only brush that is used as the secondary color for DK.
+    /// </summary>
     public static class WowColors
     {
         /// <summary>

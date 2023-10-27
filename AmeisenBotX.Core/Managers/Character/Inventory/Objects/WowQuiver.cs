@@ -1,5 +1,8 @@
 ﻿namespace AmeisenBotX.Core.Managers.Character.Inventory.Objects
 {
+    /// <summary>
+    /// Represents a quiver in the World of Warcraft game.
+    /// </summary>
     public class WowQuiver : WowBasicItem
     {
         /// <summary>

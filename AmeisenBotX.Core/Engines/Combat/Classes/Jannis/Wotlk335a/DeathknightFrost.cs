@@ -7,6 +7,9 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 {
+    /// <summary>
+    /// Represents a DeathknightFrost class that extends BasicCombatClass. This class is responsible for managing various AuraManager and InterruptManager jobs for the bot object.
+    /// </summary>
     public class DeathknightFrost : BasicCombatClass
     {
         /// Constructor for a DeathknightFrost object that takes in a bot object and initializes various AuraManager and InterruptManager jobs.

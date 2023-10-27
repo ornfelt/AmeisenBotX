@@ -6,6 +6,9 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Managers.Character.Comparators
 {
+    /// <summary>
+    /// Represents a basic item comparator that compares items based on their armor and weapon types.
+    /// </summary>
     public class BasicComparator : IItemComparator
     {
         /// <summary>

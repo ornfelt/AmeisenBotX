@@ -5,6 +5,9 @@ using AmeisenBotX.Wow548.Objects.Descriptors;
 
 namespace AmeisenBotX.Wow548.Objects
 {
+    /// <summary>
+    /// Represents a World of Warcraft item with a specific item descriptor.
+    /// </summary>
     [Serializable]
     public unsafe class WowItem548 : WowObject548, IWowItem
     {

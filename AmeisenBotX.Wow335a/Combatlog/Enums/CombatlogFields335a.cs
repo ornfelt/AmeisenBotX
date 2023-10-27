@@ -2,6 +2,9 @@
 
 namespace AmeisenBotX.Wow335a.Combatlog.Enums
 {
+    /// <summary>
+    /// Represents the combat log fields for patch 3.3.5a.
+    /// </summary>
     public class CombatlogFields335a : ICombatlogFields
     {
         /// <summary>

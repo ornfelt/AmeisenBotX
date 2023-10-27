@@ -5,6 +5,9 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Jobs.Profiles.Gathering
 {
+    /// <summary>
+    /// Represents a mining profile for gathering copper, tin, and silver in Westfall.
+    /// </summary>
     public class CopperTinSilverWestfallProfile : IMiningProfile
     {
         /// <summary>

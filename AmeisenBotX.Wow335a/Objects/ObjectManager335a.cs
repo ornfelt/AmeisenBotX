@@ -8,6 +8,9 @@ using System.Linq;
 
 namespace AmeisenBotX.Wow335a.Objects
 {
+    /// <summary>
+    /// Initializes a new instance of the ObjectManager335a class.
+    /// </summary>
     public class ObjectManager335a : ObjectManager<WowObject335a, WowUnit335a, WowPlayer335a, WowGameobject335a, WowDynobject335a, WowItem335a, WowCorpse335a, WowContainer335a>
     {
         /// <summary>

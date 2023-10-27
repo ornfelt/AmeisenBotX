@@ -2,6 +2,9 @@
 
 namespace AmeisenBotX.Core.Logic.Idle.Actions.Utils
 {
+    /// <summary>
+    /// Represents a First-Come-First-Serve (FCFS) idle action that inherits from the BasicIdleAction class.
+    /// </summary>
     public class FcfsIdleAction : BasicIdleAction
     {
         /// <summary>

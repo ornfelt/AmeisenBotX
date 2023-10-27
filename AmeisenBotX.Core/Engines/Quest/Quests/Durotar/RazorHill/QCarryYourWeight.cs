@@ -5,6 +5,9 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Quest.Quests.Durotar.RazorHill
 {
+    /// <summary>
+    /// Represents a quest called "Carry Your Weight".
+    /// </summary>
     internal class QCarryYourWeight : BotQuest
     {
         /// <summary>

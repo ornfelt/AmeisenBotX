@@ -10,6 +10,9 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 {
+    /// <summary>
+    /// Represents a combat class for a warrior specialized in arms.
+    /// </summary>
     public class WarriorArms : BasicCombatClass
     {
         /// <summary>

@@ -12,6 +12,9 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 {
+    /// <summary>
+    /// Constructor for the HunterSurvival class that initializes a new instance with the provided bot.
+    /// </summary>
     public class HunterSurvival : BasicCombatClass
     {
         /// <summary>

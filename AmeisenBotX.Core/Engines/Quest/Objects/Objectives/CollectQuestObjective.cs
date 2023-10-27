@@ -9,6 +9,9 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Quest.Objects.Objectives
 {
+    /// <summary>
+    /// Represents a quest objective to collect a certain amount of a specific item.
+    /// </summary>
     public class CollectQuestObjective : IQuestObjective
     {
         /// <summary>

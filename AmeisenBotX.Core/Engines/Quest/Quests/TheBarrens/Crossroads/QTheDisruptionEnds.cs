@@ -5,6 +5,9 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Quest.Quests.TheBarrens.Crossroads
 {
+    ///<summary>
+    ///Constructor for the "The Disruption Ends" quest.
+    ///</summary>
     internal class QTheDisruptionEnds : BotQuest
     {
         ///<summary>

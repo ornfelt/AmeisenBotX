@@ -5,6 +5,9 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Quest.Quests.TheBarrens.Crossroads
 {
+    /// <summary>
+    /// Represents a quest for dealing with the Plainstrider Menace.
+    /// </summary>
     internal class QPlainstriderMenace : BotQuest
     {
         /// <summary>

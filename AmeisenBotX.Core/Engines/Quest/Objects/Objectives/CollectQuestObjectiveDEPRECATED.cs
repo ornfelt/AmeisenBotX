@@ -7,6 +7,9 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Quest.Objects.Objectives
 {
+    /// <summary>
+    /// Represents a deprecated quest objective that requires collecting a specific item in a game.
+    /// </summary>
     public class CollectQuestObjectiveDEPRECATED : IQuestObjective
     {
         /// <summary>
