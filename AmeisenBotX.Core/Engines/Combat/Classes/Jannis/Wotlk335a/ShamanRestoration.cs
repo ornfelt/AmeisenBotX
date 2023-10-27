@@ -9,10 +9,6 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 {
-    /// <summary>
-    /// Constructor for the ShamanRestoration class.
-    /// </summary>
-    /// <param name="bot">An instance of the AmeisenBotInterfaces that the ShamanRestoration class is based on.</param>
     public class ShamanRestoration : BasicCombatClass
     {
         /// <summary>

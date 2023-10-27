@@ -1,8 +1,5 @@
 ﻿namespace AmeisenBotX.Wow335a.Constants
 {
-    /// <summary>
-    /// Represents the constant value for "Soul Fire".
-    /// </summary>
     public static class Warlock335a
     {
         /// <summary>

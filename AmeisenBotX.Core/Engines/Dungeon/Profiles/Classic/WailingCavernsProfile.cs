@@ -6,10 +6,6 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Dungeon.Profiles.Classic
 {
-    /// <summary>
-    /// Represents the position of the dungeon exit in a 3D space.
-    /// The coordinates for the dungeon exit are (-167, 134, -73).
-    /// </summary>
     public class WailingCavernsProfile : IDungeonProfile
     {
         /// <summary>

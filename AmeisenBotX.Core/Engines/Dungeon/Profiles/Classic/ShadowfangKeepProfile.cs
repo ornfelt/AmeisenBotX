@@ -6,9 +6,6 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Dungeon.Profiles.Classic
 {
-    /// <summary>
-    /// Gets the exit coordinates of the Shadowfang Keep dungeon.
-    /// </summary>
     public class ShadowfangKeepProfile : IDungeonProfile
     {
         /// <summary>

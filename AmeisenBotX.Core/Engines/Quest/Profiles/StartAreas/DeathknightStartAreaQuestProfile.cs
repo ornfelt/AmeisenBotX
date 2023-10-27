@@ -9,10 +9,6 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Quest.Profiles.StartAreas
 {
-    /// <summary>
-    /// Initializes a new instance of the DeathknightStartAreaQuestProfile class.
-    /// </summary>
-    /// <param name="bot">The AmeisenBotInterfaces bot.</param>
     public class DeathknightStartAreaQuestProfile : IQuestProfile
     {
         /// <summary>

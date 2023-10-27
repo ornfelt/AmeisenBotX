@@ -1,8 +1,5 @@
 ﻿namespace AmeisenBotX.Wow335a.Constants
 {
-    /// <summary>
-    /// Represents the Earthliving buff.
-    /// </summary>
     public static class Shaman335a
     {
         /// <summary>

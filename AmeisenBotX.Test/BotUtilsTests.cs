@@ -5,9 +5,6 @@ using System.Linq;
 
 namespace AmeisenBotX.Test
 {
-    /// <summary>
-    /// Tests the BigValueToString method with various input values and verifies the expected output.
-    /// </summary>
     [TestClass]
     public class BotUtilsTests
     {

@@ -11,9 +11,6 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Helpers.Targets
 {
-    /// <summary>
-    /// Initializes a new instance of the TargetManager class with the specified parameters.
-    /// </summary>
     public class TargetManager : ITargetProvider
     {
         /// <summary>

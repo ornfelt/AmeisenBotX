@@ -5,9 +5,6 @@ using System.Threading;
 
 namespace AmeisenBotX.Test
 {
-    /// <summary>
-    /// Tests the functionality of the TimegateTest method.
-    /// </summary>
     [TestClass]
     public class TimegatedEventTests
     {

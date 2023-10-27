@@ -7,10 +7,6 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 {
-    /// <summary>
-    /// Constructor for the DeathknightUnholy class. Initializes the MyAuraManager and TargetAuraManager jobs, and sets the InterruptManager InterruptSpells.
-    /// </summary>
-    /// <param name="bot">The AmeisenBotInterfaces object.</param>
     public class DeathknightUnholy : BasicCombatClass
     {
         /// <summary>

@@ -7,10 +7,6 @@ using System.Windows.Media;
 
 namespace AmeisenBotX.Views
 {
-    ///<summary>
-    /// Constructor for the ItemDisplay class.
-    ///</summary>
-    ///<param name="wowItem">The WowInventoryItem object to be displayed.</param>
     public partial class ItemDisplay : UserControl
     {
         ///<summary>

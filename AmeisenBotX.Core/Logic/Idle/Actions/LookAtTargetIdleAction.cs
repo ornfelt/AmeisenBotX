@@ -3,10 +3,6 @@ using System;
 
 namespace AmeisenBotX.Core.Logic.Idle.Actions
 {
-    /// <summary>
-    /// Initializes a new instance of the LookAtTargetIdleAction class.
-    /// </summary>
-    /// <param name="bot">The bot object.</param>
     public class LookAtTargetIdleAction : IIdleAction
     {
         /// <summary>

@@ -8,9 +8,6 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Tactic.Dungeon.ForgeOfSouls
 {
-    /// <summary>
-    /// Initializes a new instance of the BronjahmTactic class.
-    /// </summary>
     public class BronjahmTactic : ITactic
     {
         /// <summary>

@@ -8,11 +8,6 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 {
-    /// <summary>
-    /// Constructor for the ShamanElemental class.
-    /// Initializes the jobs for MyAuraManager and TargetAuraManager, and sets the interrupt spells for InterruptManager.
-    /// </summary>
-    /// <param name="bot">The bot instance.</param>
     public class ShamanElemental : BasicCombatClass
     {
         /// <summary>

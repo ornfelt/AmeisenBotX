@@ -4,9 +4,6 @@ using System;
 
 namespace AmeisenBotX.Wow335a.Objects
 {
-    /// <summary>
-    /// Represents a corpse in the World of Warcraft game. Implements the IWowCorpse interface.
-    /// </summary>
     [Serializable]
     public class WowCorpse335a : WowObject335a, IWowCorpse
     {

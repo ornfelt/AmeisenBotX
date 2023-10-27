@@ -8,9 +8,6 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Helpers.Targets.Logics
 {
-    /// <summary>
-    /// Gets or sets the collection of valid alive targets.
-    /// </summary>
     public abstract class BasicTargetSelectionLogic
     {
         /// <summary>

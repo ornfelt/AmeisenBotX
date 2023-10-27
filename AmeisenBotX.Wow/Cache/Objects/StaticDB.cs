@@ -3,9 +3,6 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Wow.Cache.Objects
 {
-    /// <summary>
-    /// Represents a list of static mailboxes.
-    /// </summary>
     internal class StaticDB
     {
         /// <summary>

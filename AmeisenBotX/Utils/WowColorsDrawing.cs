@@ -4,9 +4,6 @@ using System.Drawing;
 
 namespace AmeisenBotX.Utils
 {
-    /// <summary>
-    /// Represents a solid brush used for a druid's secondary color.
-    /// </summary>
     public static class WowColorsDrawing
     {
         /// <summary>

@@ -11,11 +11,6 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Shino
 {
-    /// <summary>
-    /// Initializes a new instance of the MageFrost class.
-    /// Adds jobs to the MyAuraManager to keep active auras, including Arcane Intellect, Frost Armor, Ice Armor, Mana Shield, and Ice Barrier.
-    /// Sets the InterruptSpells property of the InterruptManager to include Counterspell.
-    /// </summary>
     public class MageFrost : TemplateCombatClass
     {
         /// <summary>

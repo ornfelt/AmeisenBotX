@@ -8,10 +8,6 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 {
-    /// <summary>
-    /// Initializes a new instance of the DruidFeralBear class and sets up the necessary aura and spell management for the bot.
-    /// </summary>
-    /// <param name="bot">The AmeisenBotInterfaces instance to use for aura and spell management.</param>
     public class DruidFeralBear : BasicCombatClass
     {
         /// <summary>

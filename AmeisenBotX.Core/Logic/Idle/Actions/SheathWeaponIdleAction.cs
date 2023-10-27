@@ -2,9 +2,6 @@
 
 namespace AmeisenBotX.Core.Logic.Idle.Actions
 {
-    /// <summary>
-    /// Executes the idle action of sheathing the weapon.
-    /// </summary>
     public class SheathWeaponIdleAction : IIdleAction
     {
         /// <summary>

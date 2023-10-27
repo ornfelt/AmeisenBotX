@@ -7,15 +7,6 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 {
-    ///<summary>
-    ///Constructor for ShamanEnhancement class.
-    ///Initializes the AuraManager with two KeepActiveAuraJobs: one for Lightning Shield and one for Water Shield.
-    ///The Lightning Shield job is added if the player's mana percentage is greater than 60.0 and the TryCastSpell method returns true for casting Lightning Shield.
-    ///The Water Shield job is added if the player's mana percentage is less than 20.0 and the TryCastSpell method returns true for casting Water Shield.
-    ///Initializes the TargetAuraManager with a KeepActiveAuraJobs: one for Flametongue Weapon and one for Windfury Weapon.
-    ///The Flametongue Weapon job is added if the player's mana percentage is greater than 30.0 and the TryCastSpell method returns true for casting Flametongue Weapon.
-    ///The Windfury Weapon job is added if the player's mana percentage is greater than 50.0 and the TryCastSpell method returns true for casting Windfury Weapon.
-    ///</summary>
     public class ShamanEnhancement : BasicCombatClass
     {
         ///<summary>

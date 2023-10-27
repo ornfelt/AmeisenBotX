@@ -4,9 +4,6 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Helpers.Targets.Validation.Basic
 {
-    /// <summary>
-    /// Gets or sets the collection of blacklisted integers.
-    /// </summary>
     public class DisplayIdBlacklistTargetValidator : ITargetValidator
     {
         /// <summary>

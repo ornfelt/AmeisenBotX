@@ -6,10 +6,6 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Logic.Idle.Actions
 {
-    /// <summary>
-    /// Initializes a new instance of the LookAtNpcsIdleAction class.
-    /// </summary>
-    /// <param name="bot">The AmeisenBotInterfaces object to use.</param>
     public class LookAtNpcsIdleAction : IIdleAction
     {
         /// <summary>

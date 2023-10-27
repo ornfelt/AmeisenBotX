@@ -8,9 +8,6 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Bia10
 {
-    /// <summary>
-    /// Initializes a new instance of the WarriorFurry class with the specified AmeisenBotInterfaces object as a parameter. This constructor adds two KeepActiveAuraJob objects to the MyAuraManager.Jobs list.
-    /// </summary>
     public class WarrirorFurry : BasicCombatClassBia10
     {
         /// <summary>

@@ -11,9 +11,6 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Logic.CombatClasses.Shino
 {
-    /// <summary>
-    /// Gets the author name.
-    /// </summary>
     public abstract class TemplateCombatClass : BasicCombatClass
     {
         /// <summary>

@@ -10,9 +10,6 @@ using Path = System.IO.Path;
 
 namespace AmeisenBotX
 {
-    /// <summary>
-    /// Initializes a new instance of the LoadConfigWindow class.
-    /// </summary>
     public partial class LoadConfigWindow : Window
     {
         /// <summary>

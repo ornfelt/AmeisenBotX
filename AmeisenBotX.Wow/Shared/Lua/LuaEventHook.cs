@@ -1,8 +1,5 @@
 ﻿namespace AmeisenBotX.Wow.Shared.Lua
 {
-    /// <summary>
-    /// Provides a set of methods for retrieving data from a frame, table, handler function, and output string.
-    /// </summary>
     public static class LuaEventHook
     {
         /// <summary>

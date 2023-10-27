@@ -5,9 +5,6 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Quest.Quests.TheBarrens.Crossroads
 {
-    /// <summary>
-    /// Initializes a new instance of the QDisruptTheAttacks class.
-    /// </summary>
     internal class QDisruptTheAttacks : BotQuest
     {
         /// <summary>

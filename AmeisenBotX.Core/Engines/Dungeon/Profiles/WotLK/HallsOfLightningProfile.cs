@@ -6,9 +6,6 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Dungeon.Profiles.WotLK
 {
-    /// <summary>
-    /// Represents a dungeon profile for the Halls of Lightning Dungeon near Ulduar, designed for characters at Level 75 to 80.
-    /// </summary>
     public class HallsOfLightningProfile : IDungeonProfile
     {
         /// <summary>

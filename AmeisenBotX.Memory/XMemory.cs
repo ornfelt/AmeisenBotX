@@ -13,9 +13,6 @@ using static AmeisenBotX.Memory.Win32.Win32Imports;
 
 namespace AmeisenBotX.Memory
 {
-    /// <summary>
-    /// FASM configuration. If encountering a fasm error, consider increasing the values.
-    /// </summary>
     public unsafe class XMemory : IMemoryApi
     {
         /// <summary>

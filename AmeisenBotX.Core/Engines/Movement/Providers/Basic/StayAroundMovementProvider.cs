@@ -5,10 +5,6 @@ using System;
 
 namespace AmeisenBotX.Core.Engines.Movement.Providers.Basic
 {
-    /// <summary>
-    /// Implements the movement logic for staying around a specific point.
-    /// </summary>
-    /// <returns>Returns true if the movement logic was successfully executed, false otherwise.</returns>
     public class StayAroundMovementProvider : IMovementProvider
     {
         /// <summary>

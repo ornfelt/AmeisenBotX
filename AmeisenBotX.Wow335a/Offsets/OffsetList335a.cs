@@ -3,9 +3,6 @@ using System;
 
 namespace AmeisenBotX.Wow335a.Offsets
 {
-    /// <summary>
-    /// Gets the pointer to the AuraTable2 with the default value of 0xC58.
-    /// </summary>
     public class OffsetList335a : IOffsetList
     {
         /// <summary>

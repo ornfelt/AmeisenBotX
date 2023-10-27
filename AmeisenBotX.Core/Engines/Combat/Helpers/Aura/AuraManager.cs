@@ -4,10 +4,6 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Combat.Helpers.Aura
 {
-    /// <summary>
-    /// Initializes a new instance of the AuraManager class.
-    /// </summary>
-    /// <param name="bot">The bot instance that will use the AuraManager.</param>
     public class AuraManager
     {
         /// <summary>

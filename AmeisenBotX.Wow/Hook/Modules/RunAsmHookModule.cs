@@ -3,9 +3,6 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Wow.Hook.Modules
 {
-    /// <summary>
-    /// Frees the memory allocated for the Assembly Hook Module.
-    /// </summary>
     public abstract class RunAsmHookModule : IHookModule
     {
         ///<summary>

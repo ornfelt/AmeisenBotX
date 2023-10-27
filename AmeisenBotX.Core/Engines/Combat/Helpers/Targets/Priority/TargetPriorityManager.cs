@@ -5,9 +5,6 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Helpers.Targets.Priority
 {
-    /// <summary>
-    /// Gets or sets the list of prioritizers used by the TargetPriorityManager.
-    /// </summary>
     public class TargetPriorityManager : ITargetPrioritizer
     {
         /// <summary>

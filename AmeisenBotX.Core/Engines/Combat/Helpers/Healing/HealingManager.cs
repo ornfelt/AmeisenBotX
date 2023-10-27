@@ -11,15 +11,6 @@ using System.Text.Json;
 
 namespace AmeisenBotX.Core.Engines.Combat.Helpers.Healing
 {
-    /// <summary>
-    /// Create a new instance of the HealingManager that is used to choose healing spells in a
-    /// smart way. It observes the heals done by the bot and remembers how much each spell
-    /// healed. Based on that knowledge, it is able to cancel spells to prevent overhealing and
-    /// choose fast heals when the target is going to die in a few seconds.
-    /// </summary>
-    /// <param name="bot">A collection of AmeisenBotInterfaces</param>
-    /// <param name="tryCastSpellAction">A function to cast a spell</param>
-    /// <param name="damageMonitor">The damage monitor</param>
     public class HealingManager
     {
         /// <summary>

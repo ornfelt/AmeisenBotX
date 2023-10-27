@@ -3,12 +3,6 @@ using AmeisenBotX.Core.Engines.Dungeon.Enums;
 
 namespace AmeisenBotX.Core.Engines.Dungeon.Objects
 {
-    /// <summary>
-    /// Constructor for creating a new dungeon node.
-    /// </summary>
-    /// <param name="position">The position of the dungeon node.</param>
-    /// <param name="type">The type of the dungeon node (optional, defaults to DungeonNodeType.Normal).</param>
-    /// <param name="extra">Extra information about the dungeon node (optional).</param>
     public class DungeonNode
     {
         /// <summary>

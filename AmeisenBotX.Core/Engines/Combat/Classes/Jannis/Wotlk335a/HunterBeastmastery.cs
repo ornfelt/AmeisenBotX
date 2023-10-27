@@ -12,14 +12,6 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 {
-    /// <summary>
-    /// Constructor for the HunterBeastmastery class.
-    /// Initializes a new instance of the class and sets the PetManager property.
-    /// Also adds jobs to the MyAuraManager and TargetAuraManager properties.
-    /// Sets the interrupt spells for the InterruptManager.
-    /// Adds configurable values to the Configurables dictionary.
-    /// </summary>
-    /// <param name="bot">The AmeisenBotInterfaces object.</param>
     public class HunterBeastmastery : BasicCombatClass
     {
         /// <summary>

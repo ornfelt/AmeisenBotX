@@ -7,9 +7,6 @@ using System;
 
 namespace AmeisenBotX.Wow335a.Objects
 {
-    /// <summary>
-    /// Gets the unique identifier of the RawObject.
-    /// </summary>
     [Serializable]
     public class WowObject335a : IWowObject
     {

@@ -2,11 +2,6 @@
 
 namespace AmeisenBotX.Core.Logic.Idle.Actions.Utils
 {
-    /// <summary>
-    /// Initializes a new instance of the FcfsIdleAction class with the specified
-    /// name and list of idle actions, and initializes the base class with the actions
-    /// and name.
-    /// </summary>
     public class FcfsIdleAction : BasicIdleAction
     {
         /// <summary>

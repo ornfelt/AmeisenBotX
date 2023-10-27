@@ -4,9 +4,6 @@ using System.Globalization;
 
 namespace AmeisenBotX.Core.Managers.Character.Comparators
 {
-    /// <summary>
-    /// Determines if the provided item is better than the current item in the inventory.
-    /// </summary>
     public class AssassinationItemComparator : IItemComparator
     {
         /// <summary>

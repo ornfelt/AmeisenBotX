@@ -5,11 +5,6 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Quest.Quests.Durotar.ValleyOfStrength
 {
-    /// <summary>
-    /// Constructor for the QCuttingTeeth class.
-    /// </summary>
-    /// <param name="bot">The AmeisenBotInterfaces object.</param>
-    /// <returns>A new instance of the QCuttingTeeth class.</returns>
     internal class QCuttingTeeth : BotQuest
     {
         /// <summary>

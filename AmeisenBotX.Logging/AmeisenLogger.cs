@@ -6,9 +6,6 @@ using System.Text;
 
 namespace AmeisenBotX.Logging
 {
-    /// <summary>
-    /// Represents a singleton logger class for logging Ameisen events.
-    /// </summary>
     public class AmeisenLogger
     {
         /// <summary>

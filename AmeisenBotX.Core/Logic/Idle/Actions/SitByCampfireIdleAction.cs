@@ -5,9 +5,6 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Logic.Idle.Actions
 {
-    /// <summary>
-    /// Represents an idle action where the bot sits by a campfire.
-    /// </summary>
     public class SitByCampfireIdleAction : IIdleAction
     {
         /// <summary>

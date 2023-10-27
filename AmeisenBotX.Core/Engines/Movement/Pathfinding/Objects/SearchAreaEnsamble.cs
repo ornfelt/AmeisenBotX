@@ -3,9 +3,6 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Movement.Pathfinding.Objects
 {
-    /// <summary>
-    /// Initializes a new instance of the SearchAreaEnsemble class.
-    /// </summary>
     internal class SearchAreaEnsamble
     {
         /// <summary>

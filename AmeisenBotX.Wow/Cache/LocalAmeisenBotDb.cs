@@ -15,9 +15,6 @@ using System.Text.Json.Serialization;
 
 namespace AmeisenBotX.Wow.Cache
 {
-    /// <summary>
-    /// Gets or sets a concurrent dictionary that contains blacklisted nodes with their associated information.
-    /// </summary>
     public class LocalAmeisenBotDb : IAmeisenBotDb
     {
         /// <summary>

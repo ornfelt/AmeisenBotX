@@ -65,9 +65,6 @@ using System.Threading.Tasks;
 
 namespace AmeisenBotX.Core
 {
-    /// <summary>
-    /// Represents an AmeisenBot and its functionality.
-    /// </summary>
     public class AmeisenBot
     {
         /// <summary>

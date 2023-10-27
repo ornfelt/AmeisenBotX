@@ -6,9 +6,6 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Logic.Idle.Actions
 {
-    /// <summary>
-    /// Initializes a new instance of the LookAtGroupmemberIdleAction class.
-    /// </summary>
     public class LookAtGroupmemberIdleAction : IIdleAction
     {
         /// <summary>

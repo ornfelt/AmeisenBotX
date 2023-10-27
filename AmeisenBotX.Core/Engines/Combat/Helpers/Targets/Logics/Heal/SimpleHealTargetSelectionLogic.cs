@@ -4,9 +4,6 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Helpers.Targets.Logics.Heal
 {
-    /// <summary>
-    /// Represents a basic target selection logic for healing, which selects a target and assigns it to the out parameter.
-    /// </summary>
     public class SimpleHealTargetSelectionLogic : BasicTargetSelectionLogic
     {
         /// <summary>

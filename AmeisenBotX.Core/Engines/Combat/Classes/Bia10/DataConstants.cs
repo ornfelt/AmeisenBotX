@@ -1,8 +1,5 @@
 ﻿namespace AmeisenBotX.Core.Engines.Combat.Classes.Bia10
 {
-    /// <summary>
-    /// An array that contains the IDs of usable healing items, including food, potions, and healthstones.
-    /// </summary>
     public static class DataConstants
     {
         /// <summary>

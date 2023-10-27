@@ -6,9 +6,6 @@ using System.Windows.Input;
 
 namespace AmeisenBotX.StateConfig
 {
-    /// <summary>
-    /// Represents a window for configuring the state of grinding in the AmeisenBot.
-    /// </summary>
     public partial class StateGrindingConfigWindow : Window, IStateConfigWindow
     {
         /// <summary>

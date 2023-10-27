@@ -5,9 +5,6 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Overlay
 {
-    /// <summary>
-    /// Initializes a new instance of the AmeisenBotOverlay class with the specified main window handle.
-    /// </summary>
     public class AmeisenBotOverlay
     {
         /// <summary>

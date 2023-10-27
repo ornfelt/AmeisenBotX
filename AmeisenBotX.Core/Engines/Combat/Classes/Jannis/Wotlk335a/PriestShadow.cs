@@ -6,11 +6,6 @@ using AmeisenBotX.Wow335a.Constants;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 {
-    /// <summary>
-    /// Initializes a new instance of the PriestShadow class.
-    /// Adds jobs to the MyAuraManager and TargetAuraManager to keep certain auras active.
-    /// Also adds a spell to be kept active on the party members through the GroupAuraManager.
-    /// </summary>
     public class PriestShadow : BasicCombatClass
     {
         /// <summary>

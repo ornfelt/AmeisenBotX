@@ -4,9 +4,6 @@ using AmeisenBotX.Wow.Objects.Enums;
 
 namespace AmeisenBotX.Core.Objects
 {
-    /// <summary>
-    /// Represents an interactable object in the game.
-    /// </summary>
     public class InteractableObject
     {
         /// <summary>

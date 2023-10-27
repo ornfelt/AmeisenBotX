@@ -6,9 +6,6 @@ using System.Collections.Specialized;
 
 namespace AmeisenBotX.Wow548.Objects
 {
-    /// <summary>
-    /// Represents a WowObject548 that implements the IWowObject interface.
-    /// </summary>
     [Serializable]
     public class WowObject548 : IWowObject
     {

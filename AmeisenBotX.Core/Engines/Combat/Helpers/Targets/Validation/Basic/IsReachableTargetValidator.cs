@@ -6,9 +6,6 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Helpers.Targets.Validation.Basic
 {
-    /// <summary>
-    /// Gets the Bot object.
-    /// </summary>
     public class IsReachableTargetValidator : ITargetValidator
     {
         /// <summary>

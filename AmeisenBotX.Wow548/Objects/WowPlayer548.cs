@@ -7,9 +7,6 @@ using System.Text;
 
 namespace AmeisenBotX.Wow548.Objects
 {
-    /// <summary>
-    /// Represents a player character in the Wow game.
-    /// </summary>
     [Serializable]
     public unsafe class WowPlayer548 : WowUnit548, IWowPlayer
     {

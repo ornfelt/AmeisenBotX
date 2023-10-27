@@ -7,9 +7,6 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Quest
 {
-    /// <summary>
-    /// Gets or sets the event that is triggered when querying for completed quests.
-    /// </summary>
     public class DefaultQuestEngine : IQuestEngine
     {
         /// <summary>

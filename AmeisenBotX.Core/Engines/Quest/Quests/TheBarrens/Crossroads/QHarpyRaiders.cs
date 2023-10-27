@@ -5,9 +5,6 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Quest.Quests.TheBarrens.Crossroads
 {
-    /// <summary>
-    /// Constructor for the QHarpyRaiders class.
-    /// </summary>
     internal class QHarpyRaiders : BotQuest
     {
         /// <summary>

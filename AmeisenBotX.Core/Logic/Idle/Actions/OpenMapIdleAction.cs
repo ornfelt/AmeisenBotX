@@ -2,10 +2,6 @@
 
 namespace AmeisenBotX.Core.Logic.Idle.Actions
 {
-    /// <summary>
-    /// Initializes a new instance of the OpenMapIdleAction class.
-    /// </summary>
-    /// <param name="bot">The AmeisenBotInterfaces to associate with this OpenMapIdleAction.</param>
     public class OpenMapIdleAction : IIdleAction
     {
         /// <summary>

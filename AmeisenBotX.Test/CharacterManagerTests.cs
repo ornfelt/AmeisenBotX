@@ -6,10 +6,6 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Test
 {
-    /// "type": "weapon\"," +
-    /// <summary>
-    /// Represents the character manager for handling character-related operations and tests.
-    /// </summary>
     [TestClass]
     public class CharacterManagerTests
     {

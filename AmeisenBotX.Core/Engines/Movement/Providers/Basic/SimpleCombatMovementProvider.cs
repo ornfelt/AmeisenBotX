@@ -5,9 +5,6 @@ using AmeisenBotX.Wow.Objects.Enums;
 
 namespace AmeisenBotX.Core.Engines.Movement.Providers.Basic
 {
-    /// <summary>
-    /// Gets or sets the AmeisenBotInterfaces object representing the bot.
-    /// </summary>
     public class SimpleCombatMovementProvider : IMovementProvider
     {
         /// <summary>

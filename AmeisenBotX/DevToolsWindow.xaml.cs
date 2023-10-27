@@ -16,10 +16,6 @@ using System.Windows.Input;
 
 namespace AmeisenBotX
 {
-    /// <summary>
-    /// Initializes a new instance of the <see cref="DevToolsWindow"/> class.
-    /// </summary>
-    /// <param name="ameisenBot">The <see cref="AmeisenBot"/> used for this instance of the <see cref="DevToolsWindow"/>.</param>
     public partial class DevToolsWindow
     {
         /// <summary>

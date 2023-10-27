@@ -4,9 +4,6 @@ using System.Globalization;
 
 namespace AmeisenBotX.Core.Managers.Character.Comparators
 {
-    /// <summary>
-    /// Initializes a new instance of the ArmsItemComparator class.
-    /// </summary>
     public class ArmsItemComparator : IItemComparator
     {
         /// <summary>

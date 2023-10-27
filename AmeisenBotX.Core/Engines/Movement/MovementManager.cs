@@ -4,10 +4,6 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Movement
 {
-    /// <summary>
-    /// Gets or sets the collection of movement providers.
-    /// </summary>
-    /// <returns>A collection of objects implementing the IMovementProvider interface.</returns>
     public class MovementManager
     {
         /// <summary>

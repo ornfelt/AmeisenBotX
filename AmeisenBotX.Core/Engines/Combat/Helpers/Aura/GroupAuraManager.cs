@@ -7,10 +7,6 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Helpers.Aura
 {
-    /// <summary>
-    /// Initializes a new instance of the GroupAuraManager class.
-    /// </summary>
-    /// <param name="bot">The AmeisenBotInterfaces instance to be assigned to the Bot property.</param>
     public class GroupAuraManager
     {
         /// <summary>

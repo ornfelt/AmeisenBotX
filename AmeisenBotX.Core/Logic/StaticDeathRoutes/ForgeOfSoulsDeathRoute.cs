@@ -3,9 +3,6 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Logic.StaticDeathRoutes
 {
-    /// <summary>
-    /// Gets the death point for the Forge of Souls Death Route.
-    /// </summary>
     public class ForgeOfSoulsDeathRoute : StaticPathDeathRoute
     {
         /// <summary>

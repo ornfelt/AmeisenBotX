@@ -3,9 +3,6 @@ using AmeisenBotX.Wow.Objects.Enums;
 
 namespace AmeisenBotX.Core.Engines.Combat.Helpers.Targets.Validation.Basic
 {
-    /// <summary>
-    /// Gets or sets the instance of the AmeisenBotInterfaces associated with the private Bot property.
-    /// </summary>
     public class IsAttackableTargetValidator : ITargetValidator
     {
         /// <summary>

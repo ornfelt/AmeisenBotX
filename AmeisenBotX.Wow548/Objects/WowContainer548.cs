@@ -3,9 +3,6 @@ using AmeisenBotX.Wow548.Objects.Descriptors;
 
 namespace AmeisenBotX.Wow548.Objects
 {
-    /// <summary>
-    /// Returns a string representation of the Container object, including its Guid and SlotCount.
-    /// </summary>
     [Serializable]
     public unsafe class WowContainer548 : WowObject548, IWowContainer
     {

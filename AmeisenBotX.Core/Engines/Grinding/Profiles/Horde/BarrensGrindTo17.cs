@@ -7,9 +7,6 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Grinding.Profiles.Horde
 {
-    /// <summary>
-    /// Gets the list of non-player characters (NPCs) of interest.
-    /// </summary>
     public class BarrensGrindTo17 : IGrindingProfile
     {
         /// <summary>

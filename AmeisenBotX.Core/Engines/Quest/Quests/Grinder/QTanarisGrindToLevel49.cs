@@ -5,11 +5,6 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Quest.Quests.Grinder
 {
-    /// <summary>
-    /// Creates a new instance of QTanarisGrindToLevel49 with the specified AmeisenBotInterfaces object.
-    /// This quest objective involves grinding mobs in Tanaris to reach level 49.
-    /// The grinding locations include a series of vectors within Tanaris.
-    /// </summary>
     internal class QTanarisGrindToLevel49 : GrindingBotQuest
     {
         /// <summary>

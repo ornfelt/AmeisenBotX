@@ -5,9 +5,6 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Quest.Quests.Grinder
 {
-    /// <summary>
-    /// Constructor for the QDurotarGrindToLevel6 quest. Sets the quest name and objectives.
-    /// </summary>
     internal class QDurotarGrindToLevel6 : GrindingBotQuest
     {
         /// <summary>

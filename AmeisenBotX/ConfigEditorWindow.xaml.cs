@@ -22,13 +22,6 @@ using System.Windows.Shapes;
 
 namespace AmeisenBotX
 {
-    /// <summary>
-    /// Creates a new instance of the ConfigEditorWindow class.
-    /// </summary>
-    /// <param name="dataDir">The data directory path.</param>
-    /// <param name="ameisenBot">A reference to an AmeisenBot instance.</param>
-    /// <param name="initialConfig">An optional initial AmeisenBotConfig instance.</param>
-    /// <param name="initialConfigName">An optional initial config name.</param>
     public partial class ConfigEditorWindow : Window
     {
         /// <summary>

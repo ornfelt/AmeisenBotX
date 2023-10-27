@@ -10,9 +10,6 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 {
-    /// <summary>
-    /// Constructor for the WarriorArms class.
-    /// </summary>
     public class WarriorArms : BasicCombatClass
     {
         /// <summary>

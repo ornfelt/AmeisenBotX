@@ -29,9 +29,6 @@ using System.Text;
 
 namespace AmeisenBotX.Core.Logic
 {
-    /// <summary>
-    /// Initializes a new instance of the <see cref="AmeisenBotLogic"/> class with the provided config and interfaces.
-    /// </summary>
     public class AmeisenBotLogic : IAmeisenBotLogic
     {
         /// <summary>

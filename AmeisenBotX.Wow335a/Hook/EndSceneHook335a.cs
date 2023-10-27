@@ -13,9 +13,6 @@ using System.Text;
 
 namespace AmeisenBotX.Wow335a.Hook
 {
-    /// <summary>
-    /// Gets the WowMemoryApi instance.
-    /// </summary>
     public class EndSceneHook335a : GenericEndSceneHook
     {
         /// <summary>

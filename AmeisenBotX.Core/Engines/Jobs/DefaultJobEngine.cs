@@ -14,9 +14,6 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Jobs
 {
-    /// <summary>
-    /// Initializes a new instance of the DefaultJobEngine class with the given bot and config.
-    /// </summary>
     public class DefaultJobEngine : IJobEngine
     {
         /// <summary>

@@ -3,11 +3,6 @@ using AmeisenBotX.Core.Engines.Movement.Enums;
 
 namespace AmeisenBotX.Core.Logic.Routines
 {
-    /// Moves the bot to the target position if the target is not in line of sight or
-    /// if the distance to the target position is greater than the specified range.
-    /// Returns true if the bot successfully starts moving towards the target position,
-    /// otherwise returns false.
-    /// </summary>
     public static class CommonRoutines
     {
         /// <summary>

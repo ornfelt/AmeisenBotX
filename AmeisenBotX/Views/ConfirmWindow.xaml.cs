@@ -3,13 +3,6 @@ using System.Windows.Input;
 
 namespace AmeisenBotX.Views
 {
-    /// <summary>
-    /// Constructor for creating a confirm window with a custom title, message, okay button text, and cancel button text.
-    /// </summary>
-    /// <param name="title">The title of the confirm window.</param>
-    /// <param name="message">The message displayed in the confirm window.</param>
-    /// <param name="btnOkayText">The text shown on the okay button. Default value is "✔️ Okay".</param>
-    /// <param name="btnCancelText">The text shown on the cancel button. Default value is "❌ Cancel".</param>
     public partial class ConfirmWindow : Window
     {
         /// <summary>

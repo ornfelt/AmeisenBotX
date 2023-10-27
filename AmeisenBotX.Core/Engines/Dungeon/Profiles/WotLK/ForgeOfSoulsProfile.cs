@@ -6,12 +6,6 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Dungeon.Profiles.WotLK
 {
-    /// <summary>
-    /// Gets the level range of the Dungeon in Icecrown.
-    /// </summary>
-    /// <returns>
-    /// The level range of the Dungeon in Icecrown.
-    /// </returns>
     public class ForgeOfSoulsProfile : IDungeonProfile
     {
         /// <summary>

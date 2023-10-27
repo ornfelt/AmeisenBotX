@@ -1,8 +1,5 @@
 ﻿namespace AmeisenBotX.Wow335a.Constants
 {
-    /// <summary>
-    /// The constant string value for the spell "Binding Heal".
-    /// </summary>
     public static class Priest335a
     {
         /// <summary>

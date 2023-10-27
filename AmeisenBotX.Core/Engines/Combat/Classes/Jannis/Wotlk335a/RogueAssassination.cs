@@ -6,9 +6,6 @@ using AmeisenBotX.Wow335a.Constants;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 {
-    /// <summary>
-    /// Initializes a new instance of the RogueAssassination class with the specified AmeisenBotInterfaces object.
-    /// </summary>
     public class RogueAssassination : BasicCombatClass
     {
         /// <summary>

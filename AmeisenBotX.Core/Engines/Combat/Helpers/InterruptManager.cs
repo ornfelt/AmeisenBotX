@@ -5,9 +5,6 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Helpers
 {
-    /// <summary>
-    /// Initializes a new instance of the <see cref="InterruptManager"/> class.
-    /// </summary>
     public class InterruptManager
     {
         /// <summary>

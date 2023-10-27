@@ -5,9 +5,6 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Quest.Quests.TheBarrens.Crossroads
 {
-    /// <summary>
-    /// Initializes a new instance of the QSuppliesForTheCrossroads class with the specified bot, quest ID, quest name, quest level, quest group, quest giver and starting position, and quest objectives.
-    /// </summary>
     internal class QSuppliesForTheCrossroads : BotQuest
     {
         /// <summary>

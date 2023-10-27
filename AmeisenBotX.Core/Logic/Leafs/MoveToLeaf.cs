@@ -6,13 +6,6 @@ using System;
 
 namespace AmeisenBotX.Core.Logic.Leafs
 {
-    /// <summary>
-    /// Initializes a new instance of the MoveToLeaf class.
-    /// </summary>
-    /// <param name="bot">The AmeisenBotInterfaces object representing the bot.</param>
-    /// <param name="getUnit">The function to get the IWowUnit.</param>
-    /// <param name="child">The optional INode child.</param>
-    /// <param name="maxDistance">The maximum distance for moving to the leaf, defaulted to 3.2f.</param>
     public class MoveToLeaf : INode
     {
         /// <summary>

@@ -6,9 +6,6 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Dungeon.Profiles.TBC
 {
-    /// <summary>
-    /// TheUnderbogProfile class represents a dungeon profile for the Dungeon in Outland. It is made for Levels 61 to 65.
-    /// </summary>
     public class TheUnderbogProfile : IDungeonProfile
     {
         /// <summary>

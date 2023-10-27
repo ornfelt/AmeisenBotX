@@ -9,9 +9,6 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Managers.Character.Inventory
 {
-    /// <summary>
-    /// Represents a collection of objects that implement the IWowInventoryItem interface.
-    /// </summary>
     public class CharacterInventory
     {
         /// <summary>

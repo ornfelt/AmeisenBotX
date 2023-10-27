@@ -10,11 +10,6 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Helpers.Targets.Logics.Dps
 {
-    /// <summary>
-    /// Initializes a new instance of the SimpleDpsTargetSelectionLogic class with the specified bot.
-    /// Sets up the target validators and prioritizers for selecting the target.
-    /// </summary>
-    /// <param name="bot">The bot used for validating and prioritizing targets.</param>
     public class SimpleDpsTargetSelectionLogic : BasicTargetSelectionLogic
     {
         /// <summary>

@@ -8,12 +8,6 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Quest.Profiles.Shino
 {
-    /// <summary>
-    /// Initializes a new instance of the X5Horde1To80Profile class with the given bot.
-    /// The constructor sets up a series of quests in a queue for the bot to complete as it progresses from level 1 to level 80.
-    /// Each quest is added to a separate list within the queue, with each list representing a group of related quests.
-    /// The bot will complete the quests in the order they are enqueued.
-    /// </summary>
     internal class X5Horde1To80Profile : IQuestProfile
     {
         /// <summary>

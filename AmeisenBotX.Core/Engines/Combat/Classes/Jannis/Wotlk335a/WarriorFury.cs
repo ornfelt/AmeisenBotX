@@ -10,9 +10,6 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 {
-    /// <summary>
-    /// Initializes a new instance of the WarriorFury class with the specified bot.
-    /// </summary>
     public class WarriorFury : BasicCombatClass
     {
         /// <summary>

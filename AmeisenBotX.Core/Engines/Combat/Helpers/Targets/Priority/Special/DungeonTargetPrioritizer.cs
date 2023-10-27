@@ -5,10 +5,6 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Combat.Helpers.Targets.Priority.Special
 {
-    /// <summary>
-    /// Initializes a new instance of the DungeonTargetPrioritizer class.
-    /// </summary>
-    /// <param name="bot">The AmeisenBotInterfaces instance.</param>
     public class DungeonTargetPrioritizer : ITargetPrioritizer
     {
         /// <summary>

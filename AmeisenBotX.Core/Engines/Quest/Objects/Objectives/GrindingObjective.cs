@@ -8,13 +8,6 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Quest.Objects.Objectives
 {
-    /// <summary>
-    /// Initializes a new instance of the GrindingObjective class.
-    /// </summary>
-    /// <param name="bot">The AmeisenBotInterfaces object used for grinding.</param>
-    /// <param name="targetLevel">The target level for grinding.</param>
-    /// <param name="grindingAreas">The list of grinding areas.</param>
-    /// <param name="vendorsLocation">The list of vendor locations. (Optional)</param>
     internal class GrindingObjective : IQuestObjective
     {
         /// <summary>

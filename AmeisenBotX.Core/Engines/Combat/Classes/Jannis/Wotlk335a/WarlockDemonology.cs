@@ -11,12 +11,6 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 {
-    /// <summary>
-    /// Creates a new instance of the WarlockDemonology class, inheriting from the base class.
-    /// Initializes the PetManager with a specified bot, time interval, condition for summoning a demon, and condition for re-summoning a demon.
-    /// Initializes the MyAuraManager with the bot's database and a list of active auras to be kept on the warlock.
-    /// Initializes the TargetAuraManager with the bot's database and a list of target auras to be applied to enemies.
-    /// </summary>
     public class WarlockDemonology : BasicCombatClass
     {
         /// <summary>

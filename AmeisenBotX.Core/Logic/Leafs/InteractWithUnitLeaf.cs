@@ -6,9 +6,6 @@ using System;
 
 namespace AmeisenBotX.Core.Logic.Leafs
 {
-    /// <summary>
-    /// Initializes a new instance of the InteractWithUnitLeaf class.
-    /// </summary>
     public class InteractWithUnitLeaf : MoveToLeaf
     {
         /// <summary>

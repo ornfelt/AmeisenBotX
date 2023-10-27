@@ -4,11 +4,6 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Logic.Idle.Actions.Utils
 {
-    /// <summary>
-    /// Initializes a new instance of the RandomIdleAction class with the specified name and list of idle actions.
-    /// </summary>
-    /// <param name="name">The name of the random idle action.</param>
-    /// <param name="actions">The list of idle actions.</param>
     public class RandomIdleAction : BasicIdleAction
     {
         /// <summary>

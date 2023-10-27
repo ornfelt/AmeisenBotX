@@ -2,9 +2,6 @@
 
 namespace AmeisenBotX.Wow.Objects
 {
-    /// <summary>
-    /// Gets or sets the spell ID.
-    /// </summary>
     public class WowMount
     {
         /// <summary>

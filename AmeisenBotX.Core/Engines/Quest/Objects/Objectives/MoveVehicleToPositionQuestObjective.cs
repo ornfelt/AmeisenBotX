@@ -3,13 +3,6 @@ using AmeisenBotX.Core.Engines.Movement.Enums;
 
 namespace AmeisenBotX.Core.Engines.Quest.Objects.Objectives
 {
-    /// <summary>
-    /// Initializes a new instance of the MoveVehicleToPositionQuestObjective class.
-    /// </summary>
-    /// <param name="bot">The AmeisenBotInterfaces object.</param>
-    /// <param name="position">The target position to move the vehicle to.</param>
-    /// <param name="distance">The distance to maintain from the target position.</param>
-    /// <param name="movementAction">The movement action to perform (default is Move).</param>
     public class MoveVehicleToPositionQuestObjective : IQuestObjective
     {
         /// <summary>

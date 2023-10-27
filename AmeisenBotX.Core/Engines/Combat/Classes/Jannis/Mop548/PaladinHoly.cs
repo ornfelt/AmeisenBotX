@@ -14,10 +14,6 @@ using System.Text.Json;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Mop548
 {
-    /// <summary>
-    /// Constructor for the PaladinHoly class.
-    /// Initializes configurable values and sets up event handlers for spell updates and beacon changes.
-    /// </summary>
     public class PaladinHoly : BasicCombatClass
     {
         /// <summary>

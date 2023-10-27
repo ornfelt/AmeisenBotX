@@ -5,10 +5,6 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Quest.Quests.TheBarrens.OutpostStonetalon
 {
-    /// <summary>
-    /// Constructor for QCentaurBracers quest.
-    /// Initializes the quest with the specified parameters.
-    /// </summary>
     internal class QCentaurBracers : BotQuest
     {
         /// <summary>

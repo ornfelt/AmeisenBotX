@@ -5,9 +5,6 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Logic.Idle
 {
-    /// <summary>
-    /// Initializes a new instance of the IdleActionManager class with the specified AmeisenBotConfig and idleActions.
-    /// </summary>
     public class IdleActionManager
     {
         /// <summary>

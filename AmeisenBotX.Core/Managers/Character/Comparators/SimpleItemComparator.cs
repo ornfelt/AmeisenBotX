@@ -4,9 +4,6 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Managers.Character.Comparators
 {
-    /// <summary>
-    /// Initializes a new instance of the SimpleItemComparator class.
-    /// </summary>
     public class SimpleItemComparator : IItemComparator
     {
         /// <summary>

@@ -1,8 +1,5 @@
 ﻿namespace AmeisenBotX.Core.Managers.Character.Talents.Objects
 {
-    /// <summary>
-    /// Initializes a new instance of the Talent class with the specified tab, number, and rank.
-    /// </summary>
     public class Talent
     {
         /// <summary>

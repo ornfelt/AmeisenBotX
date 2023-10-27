@@ -2,9 +2,6 @@
 
 namespace AmeisenBotX.RconClient.Messages
 {
-    /// <summary>
-    /// Gets or sets the current profile.
-    /// </summary>
     public class DataMessage
     {
         /// <summary>

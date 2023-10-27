@@ -1,8 +1,5 @@
 ﻿namespace AmeisenBotX.Wow335a.Constants.Raids.Wotlk.Naxxramas
 {
-    /// <summary>
-    /// Represents a class with constant fields for the AnubRekhan335a spell IDs.
-    /// </summary>
     public static class AnubRekhan335a
     {
         /// <summary>

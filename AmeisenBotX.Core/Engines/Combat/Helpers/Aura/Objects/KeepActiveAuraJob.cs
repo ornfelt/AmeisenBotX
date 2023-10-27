@@ -6,9 +6,6 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Helpers.Aura.Objects
 {
-    /// <summary>
-    /// Initializes a new instance of the KeepActiveAuraJob class.
-    /// </summary>
     public class KeepActiveAuraJob : IAuraJob
     {
         /// <summary>

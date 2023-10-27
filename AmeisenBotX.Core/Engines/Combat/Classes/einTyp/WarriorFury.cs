@@ -12,10 +12,6 @@ using System.Text.Json;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.einTyp
 {
-    /// <summary>
-    /// Represents a Warrior specialization that focuses on dealing high amounts of damage.
-    /// Implements the <see cref="ICombatClass"/> interface.
-    /// </summary>
     public class WarriorFury : ICombatClass
     {
         /// <summary>
@@ -462,9 +458,6 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.einTyp
             return newTargetFound;
         }
 
-        /// <summary>
-        /// Represents a class that contains the names of various Fury spells used by Warriors.
-        /// </summary>
         private class WarriorFurySpells
         {
             /// <summary>

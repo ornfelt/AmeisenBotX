@@ -17,12 +17,6 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Grinding
 {
-    /// <summary>
-    /// Constructor for the DefaultGrindEngine class.
-    /// Initializes a new instance of the DefaultGrindEngine class with the specified bot and config.
-    /// </summary>
-    /// <param name="bot">The AmeisenBotInterfaces object representing the bot.</param>
-    /// <param name="config">The AmeisenBotConfig object representing the bot configuration.</param>
     public class DefaultGrindEngine : IGrindingEngine
     {
         /// <summary>

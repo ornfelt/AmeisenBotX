@@ -1,8 +1,5 @@
 ﻿namespace AmeisenBotX.Wow548.Constants
 {
-    /// <summary>
-    /// Represents the class with racial abilities.
-    /// </summary>
     public static class Racials548
     {
         /// <summary>

@@ -5,9 +5,6 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Helpers.Targets.Validation
 {
-    /// <summary>
-    /// Initializes a new instance of the TargetValidationManager class with the provided ITargetValidator.
-    /// </summary>
     public class TargetValidationManager : ITargetValidator
     {
         /// <summary>

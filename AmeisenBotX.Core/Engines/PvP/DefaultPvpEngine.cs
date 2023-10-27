@@ -4,10 +4,6 @@ using AmeisenBotX.BehaviorTree.Objects;
 
 namespace AmeisenBotX.Core.Engines.PvP
 {
-    /// <summary>
-    /// Constructor for DefaultPvpEngine class.
-    /// Initializes a new instance of the class with the provided bot and config parameters.
-    /// </summary>
     public class DefaultPvpEngine : IPvpEngine
     {
         /// <summary>

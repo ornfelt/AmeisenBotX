@@ -6,9 +6,6 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Dungeon.Profiles.Classic
 {
-    /// <summary>
-    /// Stockade Profile for the Dungeon in Stormwind, made for Level 24 to 31.
-    /// </summary>
     public class StockadeProfile : IDungeonProfile
     {
         /// <summary>

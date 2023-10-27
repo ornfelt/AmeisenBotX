@@ -11,9 +11,6 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Managers.Character.Inventory
 {
-    /// <summary>
-    /// Represents a class that holds and manages the equipment of a character in a game.
-    /// </summary>
     public class CharacterEquipment
     {
         /// <summary>

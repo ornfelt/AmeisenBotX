@@ -7,9 +7,6 @@ using System.Text.Json.Serialization;
 
 namespace AmeisenBotX.Core
 {
-    /// <summary>
-    /// Gets or sets the duration in milliseconds for anti-AFK functionality.
-    /// </summary>
     public class AmeisenBotConfig
     {
         /// <summary>

@@ -1,8 +1,5 @@
 ﻿namespace AmeisenBotX.Core.Managers.Character.Inventory.Objects
 {
-    /// <summary>
-    /// Initializes a new instance of the <see cref="WowGem"/> class with the specified <see cref="IWowInventoryItem"/>.
-    /// </summary>
     public class WowGem : WowBasicItem
     {
         /// <summary>

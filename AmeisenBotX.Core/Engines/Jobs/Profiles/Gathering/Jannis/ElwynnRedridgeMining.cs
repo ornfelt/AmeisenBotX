@@ -5,9 +5,6 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Jobs.Profiles.Gathering.Jannis
 {
-    /// <summary>
-    /// Gets or sets the name of the Elwynn/Redridge mining profile.
-    /// </summary>
     public class ElwynnRedridgeMining : IMiningProfile
     {
         /// <summary>

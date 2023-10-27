@@ -4,13 +4,6 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Quest.Quests.TheBarrens.Crossroads
 {
-    /// <summary>
-    /// Initializes a new instance of the QLetterToJinZil class with the given bot.
-    /// The quest has an ID of 1060 and a name of "Letter to Jin'Zil".
-    /// It requires a minimum level of 15 and a maximum level of 1.
-    /// The starting point is determined by finding the closest quest giver with the NPC ID 3449,
-    /// which is obtained by using the bot's position. The starting position is set to (-474.89f, -2607.74f, 127.89f).
-    /// </summary>
     internal class QLetterToJinZil : BotQuest
     {
         /// <summary>

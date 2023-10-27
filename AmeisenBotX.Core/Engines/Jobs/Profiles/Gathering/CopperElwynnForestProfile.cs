@@ -5,9 +5,6 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Jobs.Profiles.Gathering
 {
-    /// <summary>
-    /// Represents a mining profile for Copper in Elwynn Forest.
-    /// </summary>
     public class CopperElwynnForestProfile : IMiningProfile
     {
         /// <summary>

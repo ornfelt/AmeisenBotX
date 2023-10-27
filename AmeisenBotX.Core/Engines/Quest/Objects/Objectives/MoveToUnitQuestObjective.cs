@@ -4,9 +4,6 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Quest.Objects.Objectives
 {
-    /// <summary>
-    /// Initializes a new instance of the MoveToUnitQuestObjective class.
-    /// </summary>
     public class MoveToUnitQuestObjective : IQuestObjective
     {
         /// <summary>

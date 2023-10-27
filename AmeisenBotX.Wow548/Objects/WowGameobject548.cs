@@ -7,12 +7,6 @@ using System.Globalization;
 
 namespace AmeisenBotX.Wow548.Objects
 {
-    /// <summary>
-    /// The descriptor for the WowGameobject548 object.
-    /// </summary>
-    /// <remarks>
-    /// This descriptor provides information about the WowGameobject object with identifier 548.
-    /// </remarks>
     [Serializable]
     public unsafe class WowGameobject548 : WowObject548, IWowGameobject
     {

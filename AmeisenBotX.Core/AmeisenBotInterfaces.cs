@@ -29,9 +29,6 @@ using System.Runtime.CompilerServices;
 
 namespace AmeisenBotX.Core
 {
-    /// <summary>
-    /// Gets or sets the combat class for the character.
-    /// </summary>
     public class AmeisenBotInterfaces
     {
         /// <summary>

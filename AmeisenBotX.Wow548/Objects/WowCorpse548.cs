@@ -3,9 +3,6 @@ using AmeisenBotX.Wow548.Objects.Descriptors;
 
 namespace AmeisenBotX.Wow548.Objects
 {
-    /// <summary>
-    /// Gets or sets the WowCorpseDescriptor object representing the corpse descriptor for WowCorpseDescriptor548.
-    /// </summary>
     [Serializable]
     public unsafe class WowCorpse548 : WowObject548, IWowCorpse
     {

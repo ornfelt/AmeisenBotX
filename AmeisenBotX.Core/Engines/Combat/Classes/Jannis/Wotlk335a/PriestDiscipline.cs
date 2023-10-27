@@ -9,13 +9,6 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 {
-    /// <summary>
-    /// Constructor for the PriestDiscipline class.
-    /// Initializes the PriestDiscipline object, setting the bot parameter to the provided value.
-    /// Adds jobs to the MyAuraManager to keep the PowerWordFortitude and InnerFire auras active.
-    /// Initializes the SpellUsageHealDict dictionary with key-value pairs representing spell usage thresholds and corresponding spell names.
-    /// Adds the PowerWordFortitude spell to the class's spell list.
-    /// </summary>
     public class PriestDiscipline : BasicCombatClass
     {
         /// <summary>

@@ -4,9 +4,6 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Quest.Objects.Quests
 {
-    /// <summary>
-    /// Gets or sets the value indicating whether the acceptance is true.
-    /// </summary>
     internal class GrindingBotQuest : IBotQuest
     {
         /// <summary>

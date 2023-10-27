@@ -5,9 +5,6 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Quest.Quests.TheBarrens.Crossroads
 {
-    /// <summary>
-    /// Initializes a new instance of the QPlainstriderMenace class.
-    /// </summary>
     internal class QPlainstriderMenace : BotQuest
     {
         /// <summary>

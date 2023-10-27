@@ -9,9 +9,6 @@ using System.Text;
 
 namespace AmeisenBotX.Wow335a.Objects
 {
-    /// <summary>
-    /// Represents an array of visible item enchantments.
-    /// </summary>
     [Serializable]
     public class WowPlayer335a : WowUnit335a, IWowPlayer
     {

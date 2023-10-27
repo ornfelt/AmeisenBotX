@@ -4,10 +4,6 @@ using System.Windows.Input;
 
 namespace AmeisenBotX
 {
-    /// <summary>
-    /// Event handler for the click event of the ButtonExit button.
-    /// Hides the current window.
-    /// </summary>
     public partial class RelationshipWindow : Window
     {
         /// <summary>

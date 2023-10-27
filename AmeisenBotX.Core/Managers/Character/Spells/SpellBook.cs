@@ -10,9 +10,6 @@ using System.Text.Json.Serialization;
 
 namespace AmeisenBotX.Core.Managers.Character.Spells
 {
-    /// <summary>
-    /// Event triggered when the Spell Book is updated.
-    /// </summary>
     public class SpellBook
     {
         /// <summary>

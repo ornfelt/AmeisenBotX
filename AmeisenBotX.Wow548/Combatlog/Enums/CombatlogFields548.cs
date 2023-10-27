@@ -2,9 +2,6 @@
 
 namespace AmeisenBotX.Wow548.Combatlog.Enums
 {
-    /// <summary>
-    /// Represents a set of combat log fields.
-    /// </summary>
     public class CombatlogFields548 : ICombatlogFields
     {
         /// <summary>

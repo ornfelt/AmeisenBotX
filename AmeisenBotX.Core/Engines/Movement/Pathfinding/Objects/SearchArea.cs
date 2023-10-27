@@ -5,10 +5,6 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Movement.Pathfinding.Objects
 {
-    /// <summary>
-    /// Initializes a new instance of the SearchArea class with the given search area.
-    /// </summary>
-    /// <param name="searchArea">The list of Vector3 representing the search area.</param>
     internal class SearchArea
     {
         /// <summary>

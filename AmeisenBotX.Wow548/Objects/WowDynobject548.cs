@@ -4,9 +4,6 @@ using AmeisenBotX.Wow548.Objects.Descriptors;
 
 namespace AmeisenBotX.Wow548.Objects
 {
-    /// <summary>
-    /// Gets or sets the protected WowDynamicobjectDescriptor548 instance.
-    /// </summary>
     [Serializable]
     public unsafe class WowDynobject548 : WowObject548, IWowDynobject
     {

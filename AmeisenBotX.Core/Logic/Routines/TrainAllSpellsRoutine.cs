@@ -1,10 +1,5 @@
 ﻿namespace AmeisenBotX.Core.Logic.Routines
 {
-    /// <summary>
-    /// Executes the Run method to perform actions on the bot and config. 
-    /// Note: This can fail for numerous reasons such as insufficient funds or bugs with the NPC or trainer frame.
-    /// Please ensure a stable trainer frame is open and an unlimited cash supply is available before executing this method.
-    /// </summary>
     public static class TrainAllSpellsRoutine
     {
         /// <summary>

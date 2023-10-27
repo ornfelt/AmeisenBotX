@@ -10,9 +10,6 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
 {
-    /// <summary>
-    /// Represents a protection specialization of the Paladin class.
-    /// </summary>
     internal class PaladinProtection : BasicKamelClass
     {
         /// <summary>

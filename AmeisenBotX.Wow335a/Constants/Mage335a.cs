@@ -1,8 +1,5 @@
 ﻿namespace AmeisenBotX.Wow335a.Constants
 {
-    /// <summary>
-    /// Represents the constant string value for "Arcane Missile".
-    /// </summary>
     public static class Mage335a
     {
         /// <summary>
