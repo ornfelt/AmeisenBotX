@@ -1,6 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
+/// <summary>
+/// Represents a WowEvent object.
+/// </summary>
 namespace AmeisenBotX.Wow.Events
 {
     /// <summary>

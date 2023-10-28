@@ -4,6 +4,10 @@ using System.IO;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
+/// <summary>
+/// Manages the serialization and deserialization of objects that implement the <see cref="IStoreable"/> interface.
+/// Allows for storing the state of objects in JSON format and subsequently loading their states from the JSON files.
+/// </summary>
 namespace AmeisenBotX.Common.Storage
 {
     /// <summary>

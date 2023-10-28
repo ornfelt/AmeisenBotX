@@ -4,6 +4,9 @@ using AmeisenBotX.Core.Engines.Dungeon.Objects;
 using AmeisenBotX.Wow.Objects.Enums;
 using System.Collections.Generic;
 
+/// <summary>
+/// Namespace containing dungeon profile related classes and interfaces.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Dungeon.Profiles
 {
     /// <summary>

@@ -1,5 +1,8 @@
 ﻿using System;
 
+/// <summary>
+/// Represents the flags for various NPC roles in the game World of Warcraft.
+/// </summary>
 namespace AmeisenBotX.Wow.Objects.Flags
 {
     /// <summary>

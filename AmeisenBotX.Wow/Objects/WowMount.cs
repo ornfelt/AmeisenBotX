@@ -1,5 +1,8 @@
 ﻿using System.Text.Json.Serialization;
 
+/// <summary>
+/// Represents a namespace for World of Warcraft objects related to mounts.
+/// </summary>
 namespace AmeisenBotX.Wow.Objects
 {
     /// <summary>

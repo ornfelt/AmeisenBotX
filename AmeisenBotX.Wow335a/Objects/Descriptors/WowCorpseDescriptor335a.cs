@@ -1,5 +1,8 @@
 ﻿using System.Runtime.InteropServices;
 
+/// <summary>
+/// Namespace that contains objects and descriptors related to corpses in World of Warcraft.
+/// </summary>
 namespace AmeisenBotX.Wow335a.Objects.Descriptors
 {
     /// <summary>

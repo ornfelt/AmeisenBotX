@@ -3,6 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
+/// <summary>
+/// Contains the logic for managing idle actions in the AmeisenBotX application.
+/// </summary>
 namespace AmeisenBotX.Core.Logic.Idle
 {
     /// <summary>

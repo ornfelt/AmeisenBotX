@@ -2,6 +2,9 @@
 using AmeisenBotX.Wow.Objects;
 using System.Collections.Generic;
 
+/// <summary>
+/// Namespace for quest objectives related to moving towards a specific object.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Quest.Objects.Objectives
 {
     /// <summary>

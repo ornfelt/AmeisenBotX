@@ -1,4 +1,7 @@
-﻿namespace AmeisenBotX.Wow.Objects
+﻿/// <summary>
+/// Represents an interface for a World of Warcraft aura.
+/// </summary>
+namespace AmeisenBotX.Wow.Objects
 {
     /// <summary>
     /// Represents an aura in the World of Warcraft game.

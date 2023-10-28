@@ -4,6 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
+/// <summary>
+/// Namespace that contains classes related to idle actions in the AmeisenBotX.Core.Logic.Idle.Actions namespace.
+/// </summary>
 namespace AmeisenBotX.Core.Logic.Idle.Actions
 {
     /// <summary>

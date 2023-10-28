@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 
+/// <summary>
+/// Represents a namespace that contains helper classes for prioritizing targets in combat.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Combat.Helpers.Targets.Priority.Basic
 {
     /// <summary>

@@ -2,6 +2,9 @@
 using AmeisenBotX.Wow.Objects.Enums;
 using System.Globalization;
 
+/// <summary>
+/// Provides classes for comparing character items in the AmeisenBotX game.
+/// </summary>
 namespace AmeisenBotX.Core.Managers.Character.Comparators
 {
     /// <summary>

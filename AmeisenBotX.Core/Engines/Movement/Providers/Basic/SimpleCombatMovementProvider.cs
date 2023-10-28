@@ -3,6 +3,9 @@ using AmeisenBotX.Core.Engines.Movement.Enums;
 using AmeisenBotX.Wow.Objects;
 using AmeisenBotX.Wow.Objects.Enums;
 
+/// <summary>
+/// Represents a namespace that contains classes for providing basic combat movement functionality.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Movement.Providers.Basic
 {
     /// <summary>

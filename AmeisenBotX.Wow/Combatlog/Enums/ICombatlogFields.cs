@@ -1,4 +1,7 @@
-﻿namespace AmeisenBotX.Wow.Combatlog.Enums
+﻿/// <summary>
+/// Interface for combat log fields.
+/// </summary>
+namespace AmeisenBotX.Wow.Combatlog.Enums
 {
     ///<summary>Interface for combat log fields.</summary>
     public interface ICombatlogFields

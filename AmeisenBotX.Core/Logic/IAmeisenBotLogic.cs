@@ -1,5 +1,8 @@
 ﻿using System;
 
+/// <summary>
+/// Represents the logic for an AmeisenBot interacting with World of Warcraft.
+/// </summary>
 namespace AmeisenBotX.Core.Logic
 {
     /// <summary>

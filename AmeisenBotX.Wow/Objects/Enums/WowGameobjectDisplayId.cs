@@ -1,4 +1,7 @@
-﻿namespace AmeisenBotX.Wow.Objects.Enums
+﻿///<summary>
+///Namespace containing enums representing Wow Game Object Display Ids.
+///</summary>
+namespace AmeisenBotX.Wow.Objects.Enums
 {
     ///<summary>
     ///Enum representing Wow Game Object Display Ids.

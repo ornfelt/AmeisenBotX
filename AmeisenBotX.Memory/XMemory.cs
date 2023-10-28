@@ -11,6 +11,9 @@ using System.Runtime.InteropServices;
 using System.Text;
 using static AmeisenBotX.Memory.Win32.Win32Imports;
 
+/// <summary>
+/// Represents a namespace that provides an implementation of the IMemoryApi interface for direct memory access.
+/// </summary>
 namespace AmeisenBotX.Memory
 {
     /// <summary>

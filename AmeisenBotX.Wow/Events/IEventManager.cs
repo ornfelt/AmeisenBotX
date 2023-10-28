@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
+/// <summary>
+/// Namespace for handling World of Warcraft events.
+/// </summary>
 namespace AmeisenBotX.Wow.Events
 {
     public interface IEventManager

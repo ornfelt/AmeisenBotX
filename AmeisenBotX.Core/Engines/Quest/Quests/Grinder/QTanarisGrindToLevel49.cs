@@ -3,6 +3,9 @@ using AmeisenBotX.Core.Engines.Quest.Objects.Objectives;
 using AmeisenBotX.Core.Engines.Quest.Objects.Quests;
 using System.Collections.Generic;
 
+/// <summary>
+/// The namespace for the engine that handles grinding quests in AmeisenBotX.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Quest.Quests.Grinder
 {
     /// <summary>

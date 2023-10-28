@@ -1,4 +1,7 @@
-﻿namespace AmeisenBotX.Wow335a.Constants
+﻿/// <summary>
+/// Represents a static class for Death Knight abilities.
+/// </summary>
+namespace AmeisenBotX.Wow335a.Constants
 {
     /// <summary>
     /// Represents a static class for Death Knight abilities.

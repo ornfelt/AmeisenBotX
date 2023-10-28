@@ -1,5 +1,8 @@
 ﻿using AmeisenBotX.Common.Math;
 
+/// <summary>
+/// Contains cache structures for the AmeisenBotX World of Warcraft bot.
+/// </summary>
 namespace AmeisenBotX.Wow.Cache.Structs
 {
     /// <summary>

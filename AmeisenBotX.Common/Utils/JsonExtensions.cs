@@ -1,6 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Text.Json;
 
+/// <summary>
+/// Extension methods for JSON related operations, especially for JsonElement manipulation.
+/// </summary>
 namespace AmeisenBotX.Common.Utils
 {
     /// <summary>

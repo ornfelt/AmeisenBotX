@@ -5,6 +5,9 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
+/// summary>
+/// Gets or sets the flag indicating whether area of effect detection should be avoided.
+/// </summary>
 namespace AmeisenBotX.Core
 {
     /// <summary>

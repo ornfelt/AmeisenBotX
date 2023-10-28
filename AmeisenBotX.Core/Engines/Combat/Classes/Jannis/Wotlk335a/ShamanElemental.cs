@@ -6,6 +6,10 @@ using AmeisenBotX.Wow.Objects.Enums;
 using AmeisenBotX.Wow335a.Constants;
 using System.Linq;
 
+/// <summary>
+/// Constructor for the ShamanElemental class.
+/// Initializes the jobs for MyAuraManager and TargetAuraManager, and sets the interrupt spells for InterruptManager.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 {
     /// <summary>

@@ -2,6 +2,9 @@
 using AmeisenBotX.BehaviorTree.Objects;
 using System;
 
+/// <summary>
+/// Represents a leaf node in a tree structure that signifies a successful operation.
+/// </summary>
 namespace AmeisenBotX.Core.Logic.Leafs
 {
     /// <summary>

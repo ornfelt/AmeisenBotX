@@ -1,4 +1,7 @@
-﻿namespace AmeisenBotX.Core.Managers.Character.Inventory.Objects
+﻿/// <summary>
+/// Represents a namespace for managing character inventory objects in the World of Warcraft game.
+/// </summary>
+namespace AmeisenBotX.Core.Managers.Character.Inventory.Objects
 {
     /// <summary>
     /// Represents a quiver in the World of Warcraft game.

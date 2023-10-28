@@ -5,6 +5,9 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
+/// <summary>
+/// Namespace containing views related to the AmeisenBotX application.
+/// </summary>
 namespace AmeisenBotX.Views
 {
     ///<summary>

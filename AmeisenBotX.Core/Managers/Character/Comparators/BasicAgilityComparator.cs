@@ -1,6 +1,9 @@
 ﻿using AmeisenBotX.Wow.Objects.Enums;
 using System.Collections.Generic;
 
+/// <summary>
+/// Provides classes for managing and comparing character attributes in the AmeisenBotX framework.
+/// </summary>
 namespace AmeisenBotX.Core.Managers.Character.Comparators
 {
     /// <summary>

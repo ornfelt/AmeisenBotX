@@ -3,6 +3,9 @@ using AmeisenBotX.Core.Engines.Quest.Objects.Objectives;
 using AmeisenBotX.Core.Engines.Quest.Objects.Quests;
 using System.Collections.Generic;
 
+/// <summary>
+/// Namespace for quests related to the QRaptorThieves in The Barrens Crossroads.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Quest.Quests.TheBarrens.Crossroads
 {
     /// <summary>

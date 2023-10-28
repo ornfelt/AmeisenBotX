@@ -6,6 +6,9 @@ using AmeisenBotX.Core.Engines.Tactic.Dungeon.PitOfSaron;
 using AmeisenBotX.Wow.Objects.Enums;
 using System.Collections.Generic;
 
+/// <summary>
+/// Represents a namespace for the AmeisenBotX.Core.Engines.Tactic namespace.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Tactic
 {
     /// <summary>

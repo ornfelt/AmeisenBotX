@@ -2,6 +2,9 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
+/// <summary>
+/// Namespace for testing Vector3 addition.
+/// </summary>
 namespace AmeisenBotX.Test
 {
     /// <summary>

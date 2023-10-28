@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
+/// <summary>
+/// Namespace for modules related to hooking traceline jump functionality.
+/// </summary>
 namespace AmeisenBotX.Wow.Hook.Modules
 {
     /// <summary>

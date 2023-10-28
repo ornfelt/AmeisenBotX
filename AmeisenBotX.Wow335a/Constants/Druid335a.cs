@@ -1,4 +1,7 @@
-﻿namespace AmeisenBotX.Wow335a.Constants
+﻿/// <summary>
+/// Contains constants specific to the World of Warcraft 3.3.5a version for the AmeisenBotX project.
+/// </summary>
+namespace AmeisenBotX.Wow335a.Constants
 {
     /// <summary>
     /// Represents the Druid335a class.

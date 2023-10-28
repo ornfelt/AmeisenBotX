@@ -3,6 +3,9 @@ using AmeisenBotX.Wow.Objects.Enums;
 using System;
 using System.Collections.Generic;
 
+/// <summary>
+/// Represents a class that prioritizes targets within a dungeon environment.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Combat.Helpers.Targets.Priority.Special
 {
     /// <summary>

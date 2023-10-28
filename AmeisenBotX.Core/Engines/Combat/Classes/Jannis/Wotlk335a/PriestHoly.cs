@@ -7,6 +7,9 @@ using AmeisenBotX.Wow335a.Constants;
 using System.Collections.Generic;
 using System.Linq;
 
+/// <summary>
+/// Contains classes related to the combat engine for the World of Warcraft: Wrath of the Lich King expansion, specifically for the character class 'Priest' and its 'Holy' specialization.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 {
     /// <summary>

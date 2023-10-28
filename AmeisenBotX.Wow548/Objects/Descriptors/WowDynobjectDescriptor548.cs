@@ -1,5 +1,8 @@
 ﻿using System.Runtime.InteropServices;
 
+/// <summary>
+/// Represents a Wow Dynamicobject Descriptor 548.
+/// </summary>
 namespace AmeisenBotX.Wow548.Objects.Descriptors
 {
     /// <summary>

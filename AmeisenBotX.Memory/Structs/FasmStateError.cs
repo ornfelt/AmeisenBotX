@@ -1,5 +1,8 @@
 ﻿using System.Runtime.InteropServices;
 
+/// <summary>
+/// Contains structs related to the memory of the AmeisenBotX namespace.
+/// </summary>
 namespace AmeisenBotX.Memory.Structs
 {
     /// <summary>

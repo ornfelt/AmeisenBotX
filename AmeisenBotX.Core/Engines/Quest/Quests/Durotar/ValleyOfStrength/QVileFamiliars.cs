@@ -3,6 +3,9 @@ using AmeisenBotX.Core.Engines.Quest.Objects.Objectives;
 using AmeisenBotX.Core.Engines.Quest.Objects.Quests;
 using System.Collections.Generic;
 
+/// <summary>
+/// Represents a class for handling quests related to Vile Familiars in the Valley of Strength in Durotar.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Quest.Quests.Durotar.ValleyOfStrength
 {
     /// <summary>

@@ -1,6 +1,9 @@
 ﻿using AmeisenBotX.Core.Managers.Character.Inventory.Objects;
 using System.Linq;
 
+/// <summary>
+/// Contains classes and delegates related to the objectives of quests in the AmeisenBotX engine.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Quest.Objects.Objectives
 {
     /// <summary>

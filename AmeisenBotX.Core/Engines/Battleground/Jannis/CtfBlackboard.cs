@@ -4,6 +4,9 @@ using AmeisenBotX.Wow.Objects;
 using System;
 using System.Collections.Generic;
 
+/// <summary>
+/// Represents a namespace for managing Capture The Flag (CTF) battleground information.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Battleground.Jannis
 {
     /// <summary>

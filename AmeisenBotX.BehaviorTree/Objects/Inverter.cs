@@ -1,5 +1,8 @@
 ﻿using AmeisenBotX.BehaviorTree.Enums;
 
+/// <summary>
+/// Represents a node that inverts the status of its child node.
+/// </summary>
 namespace AmeisenBotX.BehaviorTree.Objects
 {
     /// <summary>

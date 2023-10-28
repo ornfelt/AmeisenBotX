@@ -3,6 +3,9 @@ using AmeisenBotX.Core.Engines.Quest.Objects.Objectives;
 using AmeisenBotX.Core.Engines.Quest.Objects.Quests;
 using System.Collections.Generic;
 
+/// <summary>
+/// Represents a namespace for quest objectives related to grinding in the zone of Ungoro to reach level 54.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Quest.Quests.Grinder
 {
     /// <summary>

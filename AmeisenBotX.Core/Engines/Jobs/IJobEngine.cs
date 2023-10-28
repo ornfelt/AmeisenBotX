@@ -1,6 +1,9 @@
 ﻿using AmeisenBotX.Core.Engines.Jobs.Profiles;
 using System.Collections.Generic;
 
+/// <summary>
+/// Represents a job engine that allows entering, executing, and resetting jobs.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Jobs
 {
     /// <summary>

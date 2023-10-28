@@ -5,6 +5,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 
+/// <summary>
+/// Contains classes and methods for managing and intercepting keyboard inputs and hotkeys.
+/// </summary>
 namespace AmeisenBotX.Common.Keyboard
 {
     /// <summary>

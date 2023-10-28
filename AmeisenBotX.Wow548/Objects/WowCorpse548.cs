@@ -1,6 +1,9 @@
 ﻿using AmeisenBotX.Wow.Objects;
 using AmeisenBotX.Wow548.Objects.Descriptors;
 
+/// <summary>
+/// Namespace containing objects related to corpses in World of Warcraft version 5.4.8.
+/// </summary>
 namespace AmeisenBotX.Wow548.Objects
 {
     /// <summary>

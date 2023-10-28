@@ -9,6 +9,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
+/// <summary>
+/// Represents a Warlock class with Demonology specialization in a combat scenario, derived from the BasicCombatClass.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 {
     /// <summary>

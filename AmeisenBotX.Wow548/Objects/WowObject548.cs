@@ -4,6 +4,9 @@ using AmeisenBotX.Wow.Objects;
 using AmeisenBotX.Wow548.Objects.Descriptors;
 using System.Collections.Specialized;
 
+/// <summary>
+/// Represents a namespace for WowObject548 objects that implement the IWowObject interface.
+/// </summary>
 namespace AmeisenBotX.Wow548.Objects
 {
     /// <summary>

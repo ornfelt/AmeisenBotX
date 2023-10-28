@@ -1,4 +1,7 @@
-﻿namespace AmeisenBotX.Wow335a.Constants
+﻿/// <summary>
+/// This namespace contains constants related to a warrior character in a game.
+/// </summary>
+namespace AmeisenBotX.Wow335a.Constants
 {
     /// <summary>
     /// This static class represents a warrior with specific abilities in a game.

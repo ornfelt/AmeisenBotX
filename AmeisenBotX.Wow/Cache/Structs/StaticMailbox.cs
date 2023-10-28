@@ -1,5 +1,8 @@
 ﻿using AmeisenBotX.Common.Math;
 
+/// <summary>
+/// Contains structs related to caching data for static mailboxes in the game world.
+/// </summary>
 namespace AmeisenBotX.Wow.Cache.Structs
 {
     /// <summary>

@@ -4,6 +4,9 @@ using AmeisenBotX.Core.Managers.Character.Talents.Objects;
 using AmeisenBotX.Wow.Objects.Enums;
 using AmeisenBotX.Wow335a.Constants;
 
+/// <summary>
+/// Represents a namespace for the rogue specialization focused on assassination in World of Warcraft: Wrath of the Lich King (3.3.5a).
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 {
     /// <summary>

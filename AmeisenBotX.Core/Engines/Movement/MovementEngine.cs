@@ -8,6 +8,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
+/// <summary>
+/// Represents the namespace for the movement engine of the bot.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Movement
 {
     /// <summary>

@@ -8,6 +8,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
+/// <summary>
+/// Namespace for the fury warrior class in the combat engine.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
 {
     /// <summary>

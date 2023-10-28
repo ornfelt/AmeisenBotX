@@ -2,6 +2,9 @@
 using AmeisenBotX.Wow.Objects.Enums;
 using System;
 
+/// <summary>
+/// Namespace containing classes and delegates related to quest objectives for the Runeforging engine.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Quest.Objects.Objectives
 {
     /// <summary>

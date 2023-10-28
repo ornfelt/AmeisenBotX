@@ -3,6 +3,9 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using System.Linq;
 
+/// <summary>
+/// Tests the BigValueToString method with various input values and verifies the expected output.
+/// </summary>
 namespace AmeisenBotX.Test
 {
     /// <summary>

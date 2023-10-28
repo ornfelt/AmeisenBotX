@@ -5,6 +5,9 @@ using AmeisenBotX.Core.Objects.Enums;
 using AmeisenBotX.Wow.Objects.Enums;
 using System.Collections.Generic;
 
+/// <summary>
+/// Namespace containing grinding profiles for Horde characters.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Grinding.Profiles.Horde
 {
     /// <summary>

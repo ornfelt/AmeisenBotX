@@ -3,6 +3,9 @@ using AmeisenBotX.Wow.Objects.Enums;
 using System;
 using System.Linq;
 
+/// <summary>
+/// Represents an idle action where a character sits by a campfire.
+/// </summary>
 namespace AmeisenBotX.Core.Logic.Idle.Actions
 {
     /// <summary>

@@ -8,6 +8,9 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using Path = System.IO.Path;
 
+/// <summary>
+/// Namespace for the AmeisenBotX library.
+/// </summary>
 namespace AmeisenBotX
 {
     /// <summary>

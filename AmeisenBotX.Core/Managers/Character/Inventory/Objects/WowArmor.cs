@@ -1,6 +1,9 @@
 ﻿using AmeisenBotX.Wow.Objects.Enums;
 using System;
 
+/// <summary>
+/// Represents a type of armor in the game Wow. Inherits from WowBasicItem.
+/// </summary>
 namespace AmeisenBotX.Core.Managers.Character.Inventory.Objects
 {
     /// <summary>

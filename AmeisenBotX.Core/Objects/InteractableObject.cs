@@ -2,6 +2,9 @@
 using AmeisenBotX.Core.Objects.Enums;
 using AmeisenBotX.Wow.Objects.Enums;
 
+/// <summary>
+/// Represents an interactable object in the game.
+/// </summary>
 namespace AmeisenBotX.Core.Objects
 {
     /// <summary>

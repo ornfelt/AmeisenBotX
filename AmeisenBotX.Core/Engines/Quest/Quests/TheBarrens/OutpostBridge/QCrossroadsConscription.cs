@@ -2,6 +2,9 @@ using AmeisenBotX.Common.Math;
 using AmeisenBotX.Core.Engines.Quest.Objects.Quests;
 using System.Collections.Generic;
 
+/// <summary>
+/// Represents a namespace for quests related to the Outpost Bridge in The Barrens.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Quest.Quests.TheBarrens.OutpostBridge
 {
     /// <summary>

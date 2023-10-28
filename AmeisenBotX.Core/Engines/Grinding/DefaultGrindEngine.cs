@@ -15,6 +15,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
+/// <summary>
+/// Represents the default implementation of the IGrindingEngine interface.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Grinding
 {
     /// <summary>

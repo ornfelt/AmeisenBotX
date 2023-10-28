@@ -27,6 +27,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 
+/// <summary>
+/// Provides access to various interfaces for controlling and interacting with an AmeisenBot.
+/// </summary>
 namespace AmeisenBotX.Core
 {
     /// <summary>

@@ -6,6 +6,9 @@ using AmeisenBotX.Wow.Objects.Enums;
 using AmeisenBotX.Wow335a.Constants;
 using System.Linq;
 
+/// <summary>
+/// Namespace for the DruidFeralBear class in the AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a namespace. 
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 {
     /// <summary>

@@ -1,4 +1,7 @@
-﻿namespace AmeisenBotX.Wow548.Constants
+﻿/// <summary>
+/// Provides constants specific to the World of Warcraft 5.4.8 version for the AmeisenBotX project.
+/// </summary>
+namespace AmeisenBotX.Wow548.Constants
 {
     /// <summary>
     /// Represents the name of the "Crusader Strike" ability.

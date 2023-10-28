@@ -4,6 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
+/// <summary>
+/// Represents a validator that checks if a target is reachable within a specified maximum distance.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Combat.Helpers.Targets.Validation.Basic
 {
     /// <summary>

@@ -7,6 +7,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
+/// <summary>
+/// Represents a specific tactic implementation, named IckAndKrickTactic, that implements the ITactic interface.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Tactic.Dungeon.PitOfSaron
 {
     /// <summary>

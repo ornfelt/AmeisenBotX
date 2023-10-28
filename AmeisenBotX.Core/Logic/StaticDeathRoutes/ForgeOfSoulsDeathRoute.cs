@@ -1,6 +1,9 @@
 ﻿using AmeisenBotX.Common.Math;
 using System.Collections.Generic;
 
+/// <summary>
+/// Represents a death route for the Forge of Souls.
+/// </summary>
 namespace AmeisenBotX.Core.Logic.StaticDeathRoutes
 {
     /// <summary>

@@ -7,6 +7,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
+/// <summary>
+/// Namespace for the KamelBG engine in the AmeisenBotX.Core.Engines.Battleground namespace.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Battleground.KamelBG
 {
     /// <summary>

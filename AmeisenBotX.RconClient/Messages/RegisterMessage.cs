@@ -1,5 +1,8 @@
 ﻿using System.Text.Json.Serialization;
 
+/// <summary>
+/// Represents a namespace for RconClient messages related to registering a class and gender of an individual.
+/// </summary>
 namespace AmeisenBotX.RconClient.Messages
 {
     /// <summary>

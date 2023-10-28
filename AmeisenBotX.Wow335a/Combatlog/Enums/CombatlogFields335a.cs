@@ -1,5 +1,8 @@
 ﻿using AmeisenBotX.Wow.Combatlog.Enums;
 
+/// <summary>
+/// Represents the combat log fields for patch 3.3.5a.
+/// </summary>
 namespace AmeisenBotX.Wow335a.Combatlog.Enums
 {
     /// <summary>

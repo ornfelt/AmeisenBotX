@@ -1,5 +1,8 @@
 ﻿using System;
 
+/// <summary>
+/// Flags for identifying different properties of a World of Warcraft game object.
+/// </summary>
 namespace AmeisenBotX.Wow.Objects.Flags
 {
     /// <summary>

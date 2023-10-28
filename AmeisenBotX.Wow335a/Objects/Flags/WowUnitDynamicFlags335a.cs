@@ -1,5 +1,8 @@
 ﻿using System;
 
+/// <summary>
+/// Represents the dynamic flags for a World of Warcraft unit in patch 3.3.5a.
+/// </summary>
 namespace AmeisenBotX.Wow335a.Objects.Flags
 {
     /// <summary>

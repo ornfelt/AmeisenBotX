@@ -2,6 +2,9 @@
 using AmeisenBotX.Wow.Objects.Enums;
 using System.Collections.Generic;
 
+/// <summary>
+/// The namespace containing managers for character comparisons in the AmeisenBotX Core.
+/// </summary>
 namespace AmeisenBotX.Core.Managers.Character.Comparators
 {
     /// <summary>

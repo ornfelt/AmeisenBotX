@@ -1,6 +1,9 @@
 ﻿using System.Collections.Specialized;
 using System.Runtime.InteropServices;
 
+/// <summary>
+/// Represents a namespace for objects related to World of Warcraft unit descriptors with ID 548.
+/// </summary>
 namespace AmeisenBotX.Wow548.Objects.Descriptors
 {
     /// <summary>

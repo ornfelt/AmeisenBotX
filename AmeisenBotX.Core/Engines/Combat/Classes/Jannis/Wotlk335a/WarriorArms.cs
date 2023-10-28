@@ -8,6 +8,9 @@ using AmeisenBotX.Wow335a.Constants;
 using System;
 using System.Linq;
 
+/// <summary>
+/// Namespace for combat classes specialized in warrior arms.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 {
     /// <summary>

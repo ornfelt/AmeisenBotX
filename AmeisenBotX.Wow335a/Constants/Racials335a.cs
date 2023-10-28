@@ -1,4 +1,7 @@
-﻿namespace AmeisenBotX.Wow335a.Constants
+﻿/// <summary>
+/// Represents a collection of racial abilities and constants for the 3.3.5a version of the game.
+/// </summary>
+namespace AmeisenBotX.Wow335a.Constants
 {
     /// <summary>
     /// Represents a collection of racial abilities and constants for the 3.3.5a version of the game.

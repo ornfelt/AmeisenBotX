@@ -1,4 +1,7 @@
-﻿namespace AmeisenBotX.Core.Engines.Battleground.KamelBG.Enums
+﻿/// <summary>
+/// This namespace contains enums related to battlegrounds in the AmeisenBotX Core Engine.
+/// </summary>
+namespace AmeisenBotX.Core.Engines.Battleground.KamelBG.Enums
 {
     /// <summary>
     /// Enumeration of flag IDs used in various battlegrounds.

@@ -2,6 +2,9 @@
 using AmeisenBotX.Wow.Objects;
 using System.Collections.Generic;
 
+/// <summary>
+/// Namespace containing classes related to quest objectives involving moving to a specific unit.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Quest.Objects.Objectives
 {
     /// <summary>

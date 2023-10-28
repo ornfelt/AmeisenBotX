@@ -1,6 +1,9 @@
 ﻿using AmeisenBotX.Memory;
 using AmeisenBotX.Wow.Offsets;
 
+/// <summary>
+/// Represents a namespace for the AmeisenBotX.Wow namespace that includes a WowMemoryApi class that extends XMemory and initializes a new instance with the specified offset list.
+/// </summary>
 namespace AmeisenBotX.Wow
 {
     /// <summary>

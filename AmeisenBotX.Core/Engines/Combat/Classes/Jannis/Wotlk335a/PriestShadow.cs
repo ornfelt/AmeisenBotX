@@ -4,6 +4,9 @@ using AmeisenBotX.Core.Managers.Character.Talents.Objects;
 using AmeisenBotX.Wow.Objects.Enums;
 using AmeisenBotX.Wow335a.Constants;
 
+/// <summary>
+/// This namespace contains classes related to the combat engine for the World of Warcraft: Wrath of the Lich King expansion, specifically for the character class Priest in Shadow spec.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 {
     /// <summary>

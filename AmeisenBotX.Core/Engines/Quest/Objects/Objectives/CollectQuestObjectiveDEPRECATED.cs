@@ -5,6 +5,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
+/// <summary>
+/// Namespace for quest objectives related to collecting specific items in a game.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Quest.Objects.Objectives
 {
     /// <summary>

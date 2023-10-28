@@ -1,4 +1,7 @@
-﻿namespace AmeisenBotX.BehaviorTree.Objects
+﻿/// <summary>
+/// Represents a composite node in a BehaviorTree with an associated blackboard.
+/// </summary>
+namespace AmeisenBotX.BehaviorTree.Objects
 {
     /// <summary>
     /// Represents a composite node in a BehaviorTree, which can have multiple child nodes.

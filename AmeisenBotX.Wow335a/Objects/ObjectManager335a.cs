@@ -6,6 +6,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
+/// <summary>
+/// Initializes a new instance of the ObjectManager335a class.
+/// </summary>
 namespace AmeisenBotX.Wow335a.Objects
 {
     /// <summary>

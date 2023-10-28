@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
+/// <summary>
+/// Represents a namespace that contains classes responsible for running assembly hook modules.
+/// </summary>
 namespace AmeisenBotX.Wow.Hook.Modules
 {
     /// <summary>

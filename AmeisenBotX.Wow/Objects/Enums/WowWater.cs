@@ -1,4 +1,7 @@
-﻿namespace AmeisenBotX.Wow.Objects.Enums
+﻿/// <summary>
+/// WowWater is an enumeration representing different types of water items in the game World of Warcraft.
+/// </summary>
+namespace AmeisenBotX.Wow.Objects.Enums
 {
     /// <summary>
     /// WowWater is an enumeration representing different types of water items

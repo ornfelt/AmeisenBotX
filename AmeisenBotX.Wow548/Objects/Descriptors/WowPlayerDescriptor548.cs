@@ -1,5 +1,8 @@
 ﻿using System.Runtime.InteropServices;
 
+/// <summary>
+/// Namespace for objects related to WoW player descriptors in version 5.4.8.
+/// </summary>
 namespace AmeisenBotX.Wow548.Objects.Descriptors
 {
     /// <summary>

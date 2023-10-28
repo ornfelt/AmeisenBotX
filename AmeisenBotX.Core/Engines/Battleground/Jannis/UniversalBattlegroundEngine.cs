@@ -1,6 +1,9 @@
 ﻿using AmeisenBotX.Core.Engines.Battleground.Jannis.Profiles;
 using AmeisenBotX.Wow.Objects.Enums;
 
+/// <summary>
+/// Represents a universal battleground engine that can handle different battleground profiles.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Battleground.Jannis
 {
     /// <summary>

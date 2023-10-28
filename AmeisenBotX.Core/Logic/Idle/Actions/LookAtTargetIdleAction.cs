@@ -1,6 +1,9 @@
 ﻿using AmeisenBotX.Common.Math;
 using System;
 
+/// <summary>
+/// Provides classes for defining and managing idle actions in the AmeisenBotX application.
+/// </summary>
 namespace AmeisenBotX.Core.Logic.Idle.Actions
 {
     /// <summary>

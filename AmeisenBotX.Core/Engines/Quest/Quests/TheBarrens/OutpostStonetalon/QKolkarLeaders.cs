@@ -3,6 +3,9 @@ using AmeisenBotX.Core.Engines.Quest.Objects.Objectives;
 using AmeisenBotX.Core.Engines.Quest.Objects.Quests;
 using System.Collections.Generic;
 
+/// <summary>
+/// Represents a namespace that contains classes related to handling the behavior of Kolkar Leaders in the game.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Quest.Quests.TheBarrens.OutpostStonetalon
 {
     /// <summary>

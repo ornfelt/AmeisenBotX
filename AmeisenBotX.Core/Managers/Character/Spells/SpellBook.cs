@@ -8,6 +8,9 @@ using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
+/// <summary>
+/// Represents a namespace that manages character spells.
+/// </summary>
 namespace AmeisenBotX.Core.Managers.Character.Spells
 {
     /// <summary>

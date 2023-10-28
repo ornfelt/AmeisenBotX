@@ -2,6 +2,9 @@ using AmeisenBotX.Common.Math;
 using AmeisenBotX.Core.Engines.Quest.Objects.Quests;
 using System.Collections.Generic;
 
+/// <summary>
+/// Represents a class that handles the quest "A Peon's Burden", initializing a new instance of the QAPeonBurden class.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Quest.Quests.Durotar.RazorHill
 {
     /// <summary>

@@ -7,6 +7,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
+/// <summary>
+/// Represents the namespace for the Arathi Basin battleground engine.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Battleground.KamelBG
 {
     /// <summary>

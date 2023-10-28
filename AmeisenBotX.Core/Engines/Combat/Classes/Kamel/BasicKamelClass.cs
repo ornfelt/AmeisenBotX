@@ -11,6 +11,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
 
+/// <summary>
+/// The AmeisenBotX.Core.Engines.Combat.Classes.Kamel namespace contains classes related to combat functionalities for the Kamel class in the AmeisenBotX game.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
 {
     /// <summary>

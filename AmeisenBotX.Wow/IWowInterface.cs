@@ -6,6 +6,10 @@ using AmeisenBotX.Wow.Objects.Enums;
 using System;
 using System.Collections.Generic;
 
+/// <summary>
+/// Interface to the wow game. All functions that interact with the game should be reachable via
+/// this interface.
+/// </summary>
 namespace AmeisenBotX.Wow
 {
     /// <summary>

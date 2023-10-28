@@ -6,6 +6,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
+/// <summary>
+/// Represents a namespace for target selection logic helpers.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Combat.Helpers.Targets.Logics
 {
     /// <summary>

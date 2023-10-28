@@ -2,6 +2,9 @@
 using AmeisenBotX.Wow335a.Objects.Descriptors;
 using System;
 
+/// <summary>
+/// This namespace contains classes and interfaces related to objects in the WoW 3.3.5a version for the AmeisenBotX project.
+/// </summary>
 namespace AmeisenBotX.Wow335a.Objects
 {
     /// <summary>

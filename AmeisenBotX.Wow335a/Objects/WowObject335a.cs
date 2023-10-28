@@ -5,6 +5,9 @@ using AmeisenBotX.Wow.Objects.Enums;
 using AmeisenBotX.Wow335a.Objects.Descriptors;
 using System;
 
+/// <summary>
+/// Represents a namespace for World of Warcraft objects in version 3.3.5a.
+/// </summary>
 namespace AmeisenBotX.Wow335a.Objects
 {
     /// <summary>

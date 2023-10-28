@@ -8,6 +8,9 @@ using AmeisenBotX.Wow335a.Constants.Raids.Wotlk.Naxxramas;
 using System;
 using System.Collections.Generic;
 
+/// <summary>
+/// Contains tactics for bosses in the 10-man version of the Naxxramas raid in AmeisenBotX.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Tactic.Bosses.Naxxramas10
 {
     /// <summary>

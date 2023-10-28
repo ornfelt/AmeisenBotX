@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 
+/// <summary>
+/// Represents a namespace for target validation helpers related to combat in the AmeisenBotX.Core.Engines.Combat.Helpers.Targets.Validation.Basic namespace.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Combat.Helpers.Targets.Validation.Basic
 {
     /// <summary>

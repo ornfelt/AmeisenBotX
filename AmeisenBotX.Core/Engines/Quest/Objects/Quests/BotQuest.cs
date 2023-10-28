@@ -10,6 +10,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 
+/// <summary>
+/// Contains classes and objects related to bot quests.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Quest.Objects.Quests
 {
     /// <summary>

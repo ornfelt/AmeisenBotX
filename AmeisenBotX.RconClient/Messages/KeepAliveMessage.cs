@@ -1,5 +1,8 @@
 ﻿using System.Text.Json.Serialization;
 
+/// <summary>
+/// Contains classes for handling RCON client messages.
+/// </summary>
 namespace AmeisenBotX.RconClient.Messages
 {
     /// <summary>

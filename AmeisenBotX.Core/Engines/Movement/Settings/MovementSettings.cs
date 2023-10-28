@@ -1,4 +1,7 @@
-﻿namespace AmeisenBotX.Core.Engines.Movement.Settings
+﻿/// <summary>
+/// Represents the settings related to the movement in a game or application.
+/// </summary>
+namespace AmeisenBotX.Core.Engines.Movement.Settings
 {
     /// <summary>
     /// Represents the settings related to the movement in a game or application.

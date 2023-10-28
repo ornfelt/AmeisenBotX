@@ -1,4 +1,7 @@
-﻿namespace AmeisenBotX.Wow.Cache.Enums
+﻿/// <summary>
+/// Enum representing different types of points of interest.
+/// </summary>
+namespace AmeisenBotX.Wow.Cache.Enums
 {
     /// <summary>
     /// Enum representing different types of points of interest.

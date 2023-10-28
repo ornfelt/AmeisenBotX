@@ -4,6 +4,9 @@ using AmeisenBotX.Core.Engines.Movement.Enums;
 using AmeisenBotX.Wow.Objects;
 using System;
 
+/// <summary>
+/// Represents a class that moves the bot to a leaf node in a tree structure.
+/// </summary>
 namespace AmeisenBotX.Core.Logic.Leafs
 {
     /// <summary>

@@ -1,4 +1,7 @@
-﻿namespace AmeisenBotX.Core.Objects.Enums
+﻿/// <summary>
+/// Represents the subtypes of NPCs in the game.
+/// </summary>
+namespace AmeisenBotX.Core.Objects.Enums
 {
     /// <summary>
     /// Represents the subtypes of NPCs in the game.

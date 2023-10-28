@@ -1,5 +1,8 @@
 ﻿using AmeisenBotX.Wow.Objects;
 
+/// <summary>
+/// Contains basic validation helpers for combat targets in the AmeisenBotX engine.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Combat.Helpers.Targets.Validation.Basic
 {
     /// <summary>

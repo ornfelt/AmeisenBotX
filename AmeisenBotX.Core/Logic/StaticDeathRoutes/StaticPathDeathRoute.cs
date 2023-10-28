@@ -3,6 +3,9 @@ using AmeisenBotX.Wow.Objects.Enums;
 using System.Collections.Generic;
 using System.Linq;
 
+/// <summary>
+/// Set this to the "fake" corpse position that lies beneath the dungeon.
+/// </summary>
 namespace AmeisenBotX.Core.Logic.StaticDeathRoutes
 {
     /// <summary>

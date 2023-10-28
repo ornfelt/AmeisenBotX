@@ -16,6 +16,9 @@ using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
+/// <summary>
+/// Namespace for the WowInterface class specific to game version 5.4.8 18414.
+/// </summary>
 namespace AmeisenBotX.Wow548
 {
     /// <summary>

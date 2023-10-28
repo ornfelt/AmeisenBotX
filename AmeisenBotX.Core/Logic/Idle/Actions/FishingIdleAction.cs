@@ -9,6 +9,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
+/// <summary>
+/// Represents a namespace that contains classes for implementing idle actions in the AmeisenBotX.Core.Logic.Idle.Actions namespace.
+/// </summary>
 namespace AmeisenBotX.Core.Logic.Idle.Actions
 {
     /// <summary>

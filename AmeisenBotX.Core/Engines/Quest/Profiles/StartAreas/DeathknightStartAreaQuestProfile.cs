@@ -7,6 +7,9 @@ using AmeisenBotX.Wow.Objects.Enums;
 using System.Collections.Generic;
 using System.Linq;
 
+/// <summary>
+/// Represents a quest profile for the Death Knight starting area.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Quest.Profiles.StartAreas
 {
     /// <summary>

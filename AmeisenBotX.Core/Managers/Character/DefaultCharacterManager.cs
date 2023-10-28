@@ -17,6 +17,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+/// <summary>
+/// Default implementation of the ICharacterManager interface that provides methods for managing character data and actions.
+/// </summary>
 namespace AmeisenBotX.Core.Managers.Character
 {
     /// <summary>

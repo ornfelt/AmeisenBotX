@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 
+/// <summary>
+/// Contains utility classes for idle actions in the AmeisenBotX.Core.Logic.Idle.Actions namespace.
+/// </summary>
 namespace AmeisenBotX.Core.Logic.Idle.Actions.Utils
 {
     /// <summary>

@@ -1,6 +1,9 @@
 ﻿using AmeisenBotX.Common.Math;
 using AmeisenBotX.Core.Engines.Dungeon.Enums;
 
+/// <summary>
+/// Namespace for the core engines related to dungeon objects.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Dungeon.Objects
 {
     /// <summary>

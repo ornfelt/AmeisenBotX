@@ -1,6 +1,9 @@
 ﻿using AmeisenBotX.Wow.Objects;
 using AmeisenBotX.Wow.Objects.Enums;
 
+/// <summary>
+/// Determines if the given unit is valid. A valid unit should be alive, attackable, and not a critter.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Combat.Helpers.Targets.Validation.Basic
 {
     /// <summary>

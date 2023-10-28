@@ -6,6 +6,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
+/// <summary>
+/// Represents a namespace that contains movement providers for basic movement functionality.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Movement.Providers.Basic
 {
     /// <summary>

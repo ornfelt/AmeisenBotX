@@ -1,5 +1,8 @@
 ﻿using System.Text.Json.Serialization;
 
+/// <summary>
+/// Namespace containing classes related to managing character spells.
+/// </summary>
 namespace AmeisenBotX.Core.Managers.Character.Spells.Objects
 {
     /// <summary>

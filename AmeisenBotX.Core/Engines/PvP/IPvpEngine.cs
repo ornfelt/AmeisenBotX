@@ -1,4 +1,7 @@
-﻿namespace AmeisenBotX.Core.Engines.PvP
+﻿/// <summary>
+/// Represents an interface for a player versus player (PVP) engine.
+/// </summary>
+namespace AmeisenBotX.Core.Engines.PvP
 {
     /// <summary>
     /// Represents an interface for a player versus player (PVP) engine.

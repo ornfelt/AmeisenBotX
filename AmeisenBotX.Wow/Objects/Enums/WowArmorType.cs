@@ -1,4 +1,7 @@
-﻿namespace AmeisenBotX.Wow.Objects.Enums
+﻿/// <summary>
+/// Represents the different types of armor in the game World of Warcraft.
+/// </summary>
+namespace AmeisenBotX.Wow.Objects.Enums
 {
     /// <summary>
     /// Represents the different types of armor in the game World of Warcraft.

@@ -1,4 +1,7 @@
-﻿namespace AmeisenBotX.Core.Engines.Test
+﻿/// <summary>
+/// Represents an interface for a test engine.
+/// </summary>
+namespace AmeisenBotX.Core.Engines.Test
 {
     /// <summary>
     /// Represents an interface for a test engine.

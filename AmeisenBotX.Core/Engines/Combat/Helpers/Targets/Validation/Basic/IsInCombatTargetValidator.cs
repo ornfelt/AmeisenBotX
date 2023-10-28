@@ -1,6 +1,9 @@
 ﻿using AmeisenBotX.Wow.Objects;
 using System.Linq;
 
+/// <summary>
+/// The Bot interface used for validating threat targets.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Combat.Helpers.Targets.Validation.Basic
 {
     ///summary>

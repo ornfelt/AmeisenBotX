@@ -2,6 +2,9 @@
 using AmeisenBotX.Core.Objects;
 using System.Collections.Generic;
 
+/// <summary>
+/// Represents a namespace that contains grinding profiles for leveling a character from level 1 to 80.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Grinding.Profiles.Alliance.Group
 {
     /// <summary>

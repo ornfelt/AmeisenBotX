@@ -2,6 +2,9 @@
 using AmeisenBotX.BehaviorTree.Enums;
 using AmeisenBotX.BehaviorTree.Objects;
 
+/// <summary>
+/// Namespace for the PvP engine of the AmeisenBotX.Core library.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.PvP
 {
     /// <summary>

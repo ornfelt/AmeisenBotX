@@ -4,6 +4,9 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
+/// <summary>
+/// Represents a window for configuring questing state for the AmeisenBot.
+/// </summary>
 namespace AmeisenBotX.StateConfig
 {
     /// <summary>

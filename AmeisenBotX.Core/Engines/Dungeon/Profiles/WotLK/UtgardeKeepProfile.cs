@@ -4,6 +4,9 @@ using AmeisenBotX.Core.Engines.Dungeon.Objects;
 using AmeisenBotX.Wow.Objects.Enums;
 using System.Collections.Generic;
 
+/// <summary>
+/// Represents a profile for the Utgarde Keep dungeon in the Howling Fjord.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Dungeon.Profiles.WotLK
 {
     /// <summary>

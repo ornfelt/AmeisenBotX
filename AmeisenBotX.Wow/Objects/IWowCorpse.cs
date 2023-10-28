@@ -1,5 +1,8 @@
 ﻿using AmeisenBotX.Wow.Objects.Enums;
 
+/// <summary>
+/// Represents an interface for a World of Warcraft corpse object.
+/// </summary>
 namespace AmeisenBotX.Wow.Objects
 {
     /// <summary>

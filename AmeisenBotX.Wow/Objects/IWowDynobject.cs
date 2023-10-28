@@ -1,5 +1,8 @@
 ﻿using AmeisenBotX.Wow.Objects.Enums;
 
+/// <summary>
+/// This namespace contains classes and interfaces related to World of Warcraft objects for the AmeisenBotX project.
+/// </summary>
 namespace AmeisenBotX.Wow.Objects
 {
     /// <summary>

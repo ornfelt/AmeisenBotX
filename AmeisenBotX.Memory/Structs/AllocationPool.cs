@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 
+/// <summary>
+/// Represents a pool of memory allocations.
+/// </summary>
 namespace AmeisenBotX.Memory.Structs
 {
     public struct AllocationPool

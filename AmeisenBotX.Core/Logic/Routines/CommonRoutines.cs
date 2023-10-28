@@ -1,6 +1,9 @@
 ﻿using AmeisenBotX.Common.Math;
 using AmeisenBotX.Core.Engines.Movement.Enums;
 
+/// <summary>
+/// Provides core logic routines for the AmeisenBotX.
+/// </summary>
 namespace AmeisenBotX.Core.Logic.Routines
 {
     /// <summary>

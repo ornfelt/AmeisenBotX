@@ -1,6 +1,9 @@
 ﻿using AmeisenBotX.Common.Math;
 using System.Collections.Generic;
 
+/// <summary>
+/// Represents a death route in the Pit of Saron dungeon.
+/// </summary>
 namespace AmeisenBotX.Core.Logic.StaticDeathRoutes
 {
     /// <summary>

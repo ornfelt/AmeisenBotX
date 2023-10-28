@@ -1,4 +1,7 @@
-﻿namespace AmeisenBotX.Core.Engines.Dungeon.Enums
+﻿/// <summary>
+/// Represents the different types of nodes in a dungeon.
+/// </summary>
+namespace AmeisenBotX.Core.Engines.Dungeon.Enums
 {
     /// <summary>
     /// Represents the different types of nodes in a dungeon.

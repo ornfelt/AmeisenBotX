@@ -1,4 +1,7 @@
-﻿namespace AmeisenBotX.Wow.Objects.Enums
+﻿/// <summary>
+/// Represents the faction ID used in the World of Warcraft game.
+/// </summary>
+namespace AmeisenBotX.Wow.Objects.Enums
 {
     /// <summary>
     /// Represents the faction ID used in the World of Warcraft game.

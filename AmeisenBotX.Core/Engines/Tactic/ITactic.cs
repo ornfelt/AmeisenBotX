@@ -2,6 +2,9 @@
 using AmeisenBotX.Wow.Objects.Enums;
 using System.Collections.Generic;
 
+/// <summary>
+/// Represents a namespace for tactics in the game world.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Tactic
 {
     /// <summary>

@@ -1,6 +1,9 @@
 ﻿using AmeisenBotX.Wow.Offsets;
 using System;
 
+/// <summary>
+/// Contains the offsets used in the AmeisenBotX for the WoW 3.3.5a version.
+/// </summary>
 namespace AmeisenBotX.Wow335a.Offsets
 {
     /// <summary>

@@ -1,6 +1,9 @@
 ﻿using System.IO;
 using System.Runtime.CompilerServices;
 
+/// <summary>
+/// Contains utility classes for the AmeisenBotX project.
+/// </summary>
 namespace AmeisenBotX.Common.Utils
 {
     /// <summary>

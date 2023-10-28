@@ -1,5 +1,8 @@
 ﻿using System.Collections.Generic;
 
+/// <summary>
+/// Represents a namespace for managing World of Warcraft inventory items.
+/// </summary>
 namespace AmeisenBotX.Core.Managers.Character.Inventory.Objects
 {
     /// <summary>

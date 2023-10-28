@@ -6,6 +6,9 @@ using AmeisenBotX.Wow.Objects.Enums;
 using AmeisenBotX.Wow335a.Constants;
 using System.Collections.Generic;
 
+/// <summary>
+/// Namespace for the ShamanElemental combat class in the AmeisenBotX.Core.Engines.Combat.Classes.Bia10 namespace.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Bia10
 {
     /// <summary>

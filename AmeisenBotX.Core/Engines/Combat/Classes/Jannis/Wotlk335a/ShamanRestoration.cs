@@ -7,6 +7,9 @@ using AmeisenBotX.Wow335a.Constants;
 using System.Collections.Generic;
 using System.Linq;
 
+/// <summary>
+/// Represents a restoration shaman combat class that is derived from the BasicCombatClass.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 {
     /// <summary>

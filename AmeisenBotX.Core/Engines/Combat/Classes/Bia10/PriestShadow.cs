@@ -6,6 +6,9 @@ using AmeisenBotX.Wow335a.Constants;
 using System.Collections.Generic;
 using System.Linq;
 
+/// <summary>
+/// Constructor for the PriestShadow class. Initializes and adds jobs to the MyAuraManager and TargetAuraManager. These jobs keep track of and cast various spells based on certain conditions.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Bia10
 {
     /// <summary>

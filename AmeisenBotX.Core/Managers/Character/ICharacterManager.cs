@@ -8,6 +8,9 @@ using AmeisenBotX.Wow.Objects;
 using AmeisenBotX.Wow.Objects.Enums;
 using System.Collections.Generic;
 
+/// <summary>
+/// Namespace for managing character information and actions.
+/// </summary>
 namespace AmeisenBotX.Core.Managers.Character
 {
     /// <summary>

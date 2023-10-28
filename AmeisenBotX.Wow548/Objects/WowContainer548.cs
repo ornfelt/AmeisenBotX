@@ -1,6 +1,9 @@
 ﻿using AmeisenBotX.Wow.Objects;
 using AmeisenBotX.Wow548.Objects.Descriptors;
 
+/// <summary>
+/// Represents a namespace for objects related to containers in the Wow game.
+/// </summary>
 namespace AmeisenBotX.Wow548.Objects
 {
     /// <summary>

@@ -8,6 +8,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
+/// <summary>
+/// The namespace for DPS target selection logic in the AmeisenBotX combat engine.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Combat.Helpers.Targets.Logics.Dps
 {
     /// <summary>

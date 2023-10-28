@@ -2,6 +2,9 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
+/// <summary>
+/// Namespace for testing the calculation of the facing angle using different positions.
+/// </summary>
 namespace AmeisenBotX.Test
 {
     /// <summary>

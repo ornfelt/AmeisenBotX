@@ -1,6 +1,9 @@
 ﻿using AmeisenBotX.Common.Math;
 using AmeisenBotX.Core.Engines.Movement.Enums;
 
+/// <summary>
+/// Contains classes and interfaces related to the movement engine of the AmeisenBotX.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Movement
 {
     /// <summary>

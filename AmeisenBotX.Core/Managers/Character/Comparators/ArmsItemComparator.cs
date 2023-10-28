@@ -2,6 +2,9 @@
 using AmeisenBotX.Wow.Objects.Enums;
 using System.Globalization;
 
+/// <summary>
+/// Represents a class that compares arms items.
+/// </summary>
 namespace AmeisenBotX.Core.Managers.Character.Comparators
 {
     /// <summary>

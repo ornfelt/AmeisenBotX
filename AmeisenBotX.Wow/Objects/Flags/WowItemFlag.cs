@@ -1,5 +1,8 @@
 ﻿using System;
 
+/// <summary>
+/// Represents various flags that can be applied to a World of Warcraft item.
+/// </summary>
 namespace AmeisenBotX.Wow.Objects.Flags
 {
     /// <summary>

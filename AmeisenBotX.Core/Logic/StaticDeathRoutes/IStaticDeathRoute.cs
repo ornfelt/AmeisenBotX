@@ -1,6 +1,9 @@
 ﻿using AmeisenBotX.Common.Math;
 using AmeisenBotX.Wow.Objects.Enums;
 
+/// <summary>
+/// Provides classes and interfaces for managing static death routes in AmeisenBotX.
+/// </summary>
 namespace AmeisenBotX.Core.Logic.StaticDeathRoutes
 {
     public interface IStaticDeathRoute

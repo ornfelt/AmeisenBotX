@@ -5,6 +5,9 @@ using AmeisenBotX.Wow.Objects.Enums;
 using AmeisenBotX.Wow335a.Constants;
 using System.Linq;
 
+/// <summary>
+/// The AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a namespace contains classes related to combat functionality for the AmeisenBotX bot, specifically for the Wotlk335a version.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 {
     /// <summary>

@@ -19,6 +19,9 @@ using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
+/// <summary>
+/// WowInterface for the game version 3.3.5a 12340.
+/// </summary>
 namespace AmeisenBotX.Wow335a
 {
     /// <summary>

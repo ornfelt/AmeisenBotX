@@ -1,4 +1,7 @@
-﻿namespace AmeisenBotX.Wow548.Constants
+﻿/// <summary>
+/// Represents the namespace for constants related to the Warrior class in World of Warcraft version 5.4.8.
+/// </summary>
+namespace AmeisenBotX.Wow548.Constants
 {
     /// <summary>
     /// Represents the constant string "Charge".

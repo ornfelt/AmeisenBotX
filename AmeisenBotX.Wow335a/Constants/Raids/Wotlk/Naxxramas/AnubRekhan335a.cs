@@ -1,4 +1,7 @@
-﻿namespace AmeisenBotX.Wow335a.Constants.Raids.Wotlk.Naxxramas
+﻿/// <summary>
+/// Defines constants related to the Naxxramas raid in the Wrath of the Lich King expansion for the AmeisenBotX WoW 3.3.5a bot.
+/// </summary>
+namespace AmeisenBotX.Wow335a.Constants.Raids.Wotlk.Naxxramas
 {
     /// <summary>
     /// Represents a static class for storing the Spell IDs of Anub'Rekhan's abilities.

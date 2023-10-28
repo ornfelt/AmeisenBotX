@@ -1,5 +1,8 @@
 ﻿using AmeisenBotX.Wow.Objects;
 
+/// <summary>
+/// Determines if the specified World of Warcraft unit has priority.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Combat.Helpers.Targets.Priority
 {
     /// <summary>

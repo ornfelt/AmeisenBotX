@@ -5,6 +5,9 @@ using AmeisenBotX.Wow.Objects.Enums;
 using AmeisenBotX.Wow335a.Constants;
 using System.Linq;
 
+/// <summary>
+/// The namespace containing classes related to the combat engine for the World of Warcraft character class DruidFeralCat in the Wrath of the Lich King expansion (version 3.3.5a) by Jannis.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 {
     /// <summary>

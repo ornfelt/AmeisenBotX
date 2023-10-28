@@ -1,6 +1,9 @@
 ﻿using AmeisenBotX.Wow.Objects.Enums;
 using System.Collections.Generic;
 
+/// <summary>
+/// Represents a basic stamina comparator that compares stamina values of items.
+/// </summary>
 namespace AmeisenBotX.Core.Managers.Character.Comparators
 {
     /// <summary>

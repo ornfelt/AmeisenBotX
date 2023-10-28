@@ -1,4 +1,7 @@
-﻿namespace AmeisenBotX.Common.Keyboard.Enums
+﻿/// <summary>
+/// Represents the possible states of a keyboard key.
+/// </summary>
+namespace AmeisenBotX.Common.Keyboard.Enums
 {
     /// <summary>
     /// Represents the possible states of a keyboard key.

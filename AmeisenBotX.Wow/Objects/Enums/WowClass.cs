@@ -1,4 +1,7 @@
-﻿namespace AmeisenBotX.Wow.Objects.Enums
+﻿/// <summary>
+/// Represents the classes in the game World of Warcraft.
+/// </summary>
+namespace AmeisenBotX.Wow.Objects.Enums
 {
     /// <summary>
     /// Represents the classes in the game World of Warcraft.

@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
+/// <summary>
+/// Provides classes and objects related to the management of character talents in AmeisenBotX.
+/// </summary>
 namespace AmeisenBotX.Core.Managers.Character.Talents.Objects
 {
     /// <summary>

@@ -2,6 +2,9 @@
 using AmeisenBotX.Wow.Objects.Flags;
 using System.Runtime.InteropServices;
 
+/// <summary>
+/// Namespace for raw objects related to World of Warcraft in version 3.3.5a.
+/// </summary>
 namespace AmeisenBotX.Wow335a.Objects.Raw
 {
     /// <summary>

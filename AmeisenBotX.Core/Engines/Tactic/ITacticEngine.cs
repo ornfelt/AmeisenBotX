@@ -1,4 +1,7 @@
-﻿namespace AmeisenBotX.Core.Engines.Tactic
+﻿/// <summary>
+/// Represents an interface for a tactic engine.
+/// </summary>
+namespace AmeisenBotX.Core.Engines.Tactic
 {
     /// <summary>
     /// Represents an interface for a tactic engine.

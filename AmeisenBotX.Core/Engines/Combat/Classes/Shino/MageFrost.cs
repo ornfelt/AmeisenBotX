@@ -9,6 +9,9 @@ using AmeisenBotX.Wow335a.Constants;
 using System;
 using System.Linq;
 
+/// <summary>
+/// This namespace contains classes related to the combat engine for the AmeisenBotX, specifically for the Shino class.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Shino
 {
     /// <summary>

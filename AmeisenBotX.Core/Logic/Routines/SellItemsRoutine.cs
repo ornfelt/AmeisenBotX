@@ -3,6 +3,9 @@ using AmeisenBotX.Wow.Objects.Enums;
 using System;
 using System.Linq;
 
+/// <summary>
+/// The namespace that contains logic for various routines used in the AmeisenBotX project.
+/// </summary>
 namespace AmeisenBotX.Core.Logic.Routines
 {
     /// <summary>

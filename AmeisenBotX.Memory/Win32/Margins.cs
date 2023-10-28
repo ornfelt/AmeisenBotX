@@ -1,5 +1,8 @@
 ﻿using System.Runtime.InteropServices;
 
+/// <summary>
+/// Represents the Win32 memory namespace for AmeisenBotX.
+/// </summary>
 namespace AmeisenBotX.Memory.Win32
 {
     /// <summary>

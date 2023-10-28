@@ -5,6 +5,9 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
+/// <summary>
+/// Namespace for managing chat functionality in the AmeisenBotX.Core library.
+/// </summary>
 namespace AmeisenBotX.Core.Managers.Chat
 {
     /// <summary>

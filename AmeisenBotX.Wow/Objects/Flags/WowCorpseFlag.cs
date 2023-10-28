@@ -1,5 +1,8 @@
 ﻿using System;
 
+/// <summary>
+/// Namespace containing flags for specifying properties of a WowCorpse object.
+/// </summary>
 namespace AmeisenBotX.Wow.Objects.Flags
 {
     /// <summary>

@@ -5,6 +5,9 @@ using AmeisenBotX.Wow.Objects.Enums;
 using AmeisenBotX.Wow335a.Constants;
 using System.Linq;
 
+/// <summary>
+/// Constructor for the DeathknightUnholy class. Initializes the MyAuraManager and TargetAuraManager jobs, and sets the InterruptManager InterruptSpells.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 {
     /// <summary>

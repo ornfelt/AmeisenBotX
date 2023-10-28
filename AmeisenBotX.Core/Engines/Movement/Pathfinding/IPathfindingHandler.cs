@@ -1,6 +1,9 @@
 ﻿using AmeisenBotX.Common.Math;
 using System.Collections.Generic;
 
+/// <summary>
+/// Interface for a pathfinding handler.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Movement.Pathfinding
 {
     /// <summary>

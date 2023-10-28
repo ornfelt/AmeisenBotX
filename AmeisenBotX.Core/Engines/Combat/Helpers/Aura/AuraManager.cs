@@ -2,6 +2,9 @@
 using AmeisenBotX.Wow.Objects;
 using System.Collections.Generic;
 
+/// <summary>
+/// Represents a namespace for managing auras in the bot.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Combat.Helpers.Aura
 {
     /// <summary>

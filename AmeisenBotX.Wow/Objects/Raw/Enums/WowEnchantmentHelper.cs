@@ -1,5 +1,8 @@
 ﻿using System.Collections.Generic;
 
+/// <summary>
+/// Helper class for managing World of Warcraft enchantments.
+/// </summary>
 namespace AmeisenBotX.Wow.Objects.Raw.Enums
 {
     /// <summary>

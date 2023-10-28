@@ -1,5 +1,8 @@
 ﻿using System.Runtime.InteropServices;
 
+/// <summary>
+/// Represents a structure containing the party member guids.
+/// </summary>
 namespace AmeisenBotX.Wow335a.Objects.Raw
 {
     ///<summary>

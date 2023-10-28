@@ -7,6 +7,9 @@ using AmeisenBotX.Wow335a.Constants;
 using System.Collections.Generic;
 using System.Linq;
 
+/// <summary>
+/// Namespace for the frost mage combat class that specializes in dealing frost damage.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Bia10
 {
     /// <summary>

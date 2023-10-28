@@ -6,6 +6,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
+/// <summary>
+/// Namespace for the engine responsible for the battleground behavior.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Battleground.einTyp
 {
     /// <summary>

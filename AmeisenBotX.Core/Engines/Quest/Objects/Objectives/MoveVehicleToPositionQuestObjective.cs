@@ -1,6 +1,9 @@
 ﻿using AmeisenBotX.Common.Math;
 using AmeisenBotX.Core.Engines.Movement.Enums;
 
+/// <summary>
+/// Contains classes related to quest objectives for moving vehicles to specific positions while maintaining a certain distance.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Quest.Objects.Objectives
 {
     /// <summary>

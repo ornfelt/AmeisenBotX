@@ -1,5 +1,8 @@
 ﻿using System;
 
+/// <summary>
+/// Represents the flags for a World of Warcraft aura.
+/// </summary>
 namespace AmeisenBotX.Wow.Objects.Flags
 {
     /// <summary>

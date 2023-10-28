@@ -3,6 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 
+/// <summary>
+/// Represents a namespace for combat log objects in the AmeisenBotX.Wow.Combatlog.Objects namespace.
+/// </summary>
 namespace AmeisenBotX.Wow.Combatlog.Objects
 {
     /// <summary>

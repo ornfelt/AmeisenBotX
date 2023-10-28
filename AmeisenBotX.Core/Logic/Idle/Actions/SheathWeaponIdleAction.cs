@@ -1,5 +1,8 @@
 ﻿using System;
 
+/// <summary>
+/// Namespace for the core logic of idle actions in the AmeisenBotX project.
+/// </summary>
 namespace AmeisenBotX.Core.Logic.Idle.Actions
 {
     /// <summary>

@@ -2,6 +2,9 @@ using AmeisenBotX.Common.Math;
 using AmeisenBotX.Core.Engines.Quest.Objects.Quests;
 using System.Collections.Generic;
 
+/// <summary>
+/// Namespace for quests related to the Valley of Strength in Durotar.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Quest.Quests.Durotar.ValleyOfStrength
 {
     /// <summary>

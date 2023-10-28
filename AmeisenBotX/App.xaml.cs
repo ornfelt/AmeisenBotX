@@ -1,5 +1,8 @@
 ﻿using System.Windows;
 
+/// <summary>
+/// Namespace for the AmeisenBotX application.
+/// </summary>
 namespace AmeisenBotX
 {
     /// <summary>

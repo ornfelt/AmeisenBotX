@@ -1,4 +1,7 @@
-﻿namespace AmeisenBotX.Common.Math
+﻿/// <summary>
+/// Namespace containing common mathematical operations and structures.
+/// </summary>
+namespace AmeisenBotX.Common.Math
 {
     /// <summary>
     /// Represents a 3x3 matrix, primarily used for 3D transformations and operations.

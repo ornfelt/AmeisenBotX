@@ -63,6 +63,9 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
+/// <summary>
+/// Provides core functionalities for the AmeisenBotX application.
+/// </summary>
 namespace AmeisenBotX.Core
 {
     /// <summary>

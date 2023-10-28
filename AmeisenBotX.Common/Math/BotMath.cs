@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 
+/// <summary>
+/// Contains mathematical utilities for bot movement and positioning calculations in a 3D space.
+/// </summary>
 namespace AmeisenBotX.Common.Math
 {
     /// <summary>

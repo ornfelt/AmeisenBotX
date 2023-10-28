@@ -5,6 +5,9 @@ using System.Diagnostics;
 using System.Text;
 using static AmeisenBotX.Memory.Win32.Win32Imports;
 
+/// <summary>
+/// Namespace for memory-related functionality.
+/// </summary>
 namespace AmeisenBotX.Memory
 {
     public interface IMemoryApi : IDisposable

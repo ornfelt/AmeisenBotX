@@ -1,5 +1,8 @@
 ﻿using System;
 
+/// <summary>
+/// Flags for various reputation properties.
+/// </summary>
 namespace AmeisenBotX.Wow.Objects.Flags
 {
     ///<summary>

@@ -1,6 +1,9 @@
 ﻿using AmeisenBotX.Wow.Cache.Structs;
 using System.Collections.Generic;
 
+/// <summary>
+/// Represents a namespace for accessing a list of static mailboxes.
+/// </summary>
 namespace AmeisenBotX.Wow.Cache.Objects
 {
     /// <summary>

@@ -1,5 +1,8 @@
 ﻿using System.Runtime.InteropServices;
 
+/// <summary>
+/// Represents a namespace for descriptors of dynamic objects in World of Warcraft (version 3.3.5a).
+/// </summary>
 namespace AmeisenBotX.Wow335a.Objects.Descriptors
 {
     /// <summary>

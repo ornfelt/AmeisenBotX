@@ -3,6 +3,9 @@ using AmeisenBotX.Wow.Objects.Raw.Enums;
 using AmeisenBotX.Wow.Objects.Raw.SubStructs;
 using AmeisenBotX.Wow548.Objects.Descriptors;
 
+/// <summary>
+/// Represents a namespace for World of Warcraft objects related to version 5.4.8.
+/// </summary>
 namespace AmeisenBotX.Wow548.Objects
 {
     /// <summary>

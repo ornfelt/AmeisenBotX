@@ -1,4 +1,7 @@
-﻿namespace AmeisenBotX.Wow335a.Constants
+﻿/// <summary>
+/// The constant string representing the Paladin335a namespace.
+/// </summary>
+namespace AmeisenBotX.Wow335a.Constants
 {
     /// <summary>
     /// The constant string representing the beacon of light.

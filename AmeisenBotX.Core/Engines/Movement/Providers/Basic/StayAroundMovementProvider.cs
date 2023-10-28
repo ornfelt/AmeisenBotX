@@ -3,6 +3,9 @@ using AmeisenBotX.Core.Engines.Movement.Enums;
 using AmeisenBotX.Wow.Objects;
 using System;
 
+/// <summary>
+/// Namespace for the basic movement providers used in the AmeisenBotX.Core.Engines.Movement.Providers.Basic namespace.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Movement.Providers.Basic
 {
     /// <summary>

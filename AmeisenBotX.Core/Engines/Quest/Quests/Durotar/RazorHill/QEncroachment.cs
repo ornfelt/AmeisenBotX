@@ -3,6 +3,9 @@ using AmeisenBotX.Core.Engines.Quest.Objects.Objectives;
 using AmeisenBotX.Core.Engines.Quest.Objects.Quests;
 using System.Collections.Generic;
 
+/// <summary>
+/// Represents a quest for dealing with encroachment.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Quest.Quests.Durotar.RazorHill
 {
     /// <summary>

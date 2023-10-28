@@ -1,6 +1,9 @@
 ﻿using System.Windows;
 using System.Windows.Input;
 
+/// <summary>
+/// Represents a namespace that contains views related to the AmeisenBotX application.
+/// </summary>
 namespace AmeisenBotX.Views
 {
     /// <summary>

@@ -9,6 +9,9 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
+/// <summary>
+/// Represents a generic object manager that provides access to various types of game objects in the World of Warcraft.
+/// </summary>
 namespace AmeisenBotX.Wow.Objects
 {
     /// <summary>

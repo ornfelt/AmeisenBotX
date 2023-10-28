@@ -9,6 +9,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
+/// <summary>
+/// This namespace contains the combat classes for the Shino character in the AmeisenBotX.Core.Logic.CombatClasses namespace.
+/// </summary>
 namespace AmeisenBotX.Core.Logic.CombatClasses.Shino
 {
     /// <summary>

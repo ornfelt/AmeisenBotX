@@ -6,6 +6,9 @@ using AmeisenBotX.Wow335a.Constants;
 using System.Collections.Generic;
 using System.Linq;
 
+/// <summary>
+/// This namespace contains classes related to the combat engine of the AmeisenBotX, specifically for the Bia10 version.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Bia10
 {
     /// <summary>

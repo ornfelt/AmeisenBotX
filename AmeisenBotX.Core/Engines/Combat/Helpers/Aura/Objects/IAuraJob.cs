@@ -1,6 +1,9 @@
 ﻿using AmeisenBotX.Wow.Objects;
 using System.Collections.Generic;
 
+/// <summary>
+/// Contains helper classes and objects for managing and interacting with Auras in the AmeisenBotX Combat Engine.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Combat.Helpers.Aura.Objects
 {
     /// <summary>

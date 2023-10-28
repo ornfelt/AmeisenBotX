@@ -4,6 +4,9 @@ using AmeisenBotX.Core.Engines.Dungeon.Objects;
 using AmeisenBotX.Wow.Objects.Enums;
 using System.Collections.Generic;
 
+/// <summary>
+/// Represents a namespace for classic dungeon profiles.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Dungeon.Profiles.Classic
 {
     /// <summary>

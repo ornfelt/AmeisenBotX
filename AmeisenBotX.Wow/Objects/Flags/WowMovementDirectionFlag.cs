@@ -1,5 +1,8 @@
 ﻿using System;
 
+/// <summary>
+/// This namespace contains classes related to flags used in the AmeisenBotX.Wow.Objects namespace.
+/// </summary>
 namespace AmeisenBotX.Wow.Objects.Flags
 {
     /// <summary>

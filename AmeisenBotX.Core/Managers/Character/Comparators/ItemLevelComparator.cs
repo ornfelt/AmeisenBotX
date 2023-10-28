@@ -1,5 +1,8 @@
 ﻿using AmeisenBotX.Core.Managers.Character.Inventory.Objects;
 
+/// <summary>
+/// Namespace for managing character comparators.
+/// </summary>
 namespace AmeisenBotX.Core.Managers.Character.Comparators
 {
     /// <summary>

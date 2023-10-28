@@ -3,6 +3,9 @@ using AmeisenBotX.Wow.Objects;
 using System.Collections.Generic;
 using System.Linq;
 
+/// <summary>
+/// Represents a namespace that contains helper classes for managing interrupts in a game.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Combat.Helpers
 {
     /// <summary>

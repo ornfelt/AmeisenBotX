@@ -1,6 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Text.Json;
 
+/// <summary>
+/// Defines a contract for objects that can be serialized to and deserialized from a JSON representation.
+/// Classes or structs that implement this interface should be able to convert their internal state 
+/// to a dictionary representation for saving and should also be able to populate their internal state 
+/// from a dictionary representation when loading.
+/// </summary>
 namespace AmeisenBotX.Common.Storage
 {
     /// <summary>

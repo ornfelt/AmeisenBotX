@@ -2,6 +2,9 @@
 using AmeisenBotX.Core.Objects;
 using System.Collections.Generic;
 
+/// <summary>
+/// Represents a namespace for grinding profiles, which contain a list of NPCs, objects, and spots of interest for grinding.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Grinding.Profiles
 {
     /// <summary>

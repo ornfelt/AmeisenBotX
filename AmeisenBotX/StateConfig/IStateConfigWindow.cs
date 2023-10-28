@@ -1,5 +1,8 @@
 ﻿using AmeisenBotX.Core;
 
+/// <summary>
+/// Represents an interface for a state configuration window.
+/// </summary>
 namespace AmeisenBotX.StateConfig
 {
     /// <summary>

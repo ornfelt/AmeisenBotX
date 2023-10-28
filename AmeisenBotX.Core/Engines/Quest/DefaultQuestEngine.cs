@@ -5,6 +5,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
+/// <summary>
+/// Represents the default implementation of a quest engine that handles quests for a bot.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Quest
 {
     /// <summary>

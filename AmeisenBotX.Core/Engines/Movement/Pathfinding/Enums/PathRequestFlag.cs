@@ -1,5 +1,8 @@
 ﻿using System;
 
+/// <summary>
+/// Specifies the flags used for path requests.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Movement.Pathfinding.Enums
 {
     /// <summary>

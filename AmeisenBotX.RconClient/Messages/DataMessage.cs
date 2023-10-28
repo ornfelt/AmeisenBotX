@@ -1,5 +1,8 @@
 ﻿using System.Text.Json.Serialization;
 
+/// <summary>
+/// Provides classes for handling remote control client messages in the AmeisenBotX application.
+/// </summary>
 namespace AmeisenBotX.RconClient.Messages
 {
     /// <summary>

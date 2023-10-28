@@ -1,6 +1,9 @@
 ﻿using AmeisenBotX.Wow.Objects;
 using AmeisenBotX.Wow.Objects.Enums;
 
+/// <summary>
+/// Contains structures related to caching for the AmeisenBotX World of Warcraft bot.
+/// </summary>
 namespace AmeisenBotX.Wow.Cache.Structs
 {
     /// <summary>

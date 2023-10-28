@@ -4,6 +4,9 @@ using AmeisenBotX.Core.Engines.Dungeon.Objects;
 using AmeisenBotX.Wow.Objects.Enums;
 using System.Collections.Generic;
 
+/// <summary>
+/// This namespace contains dungeon profiles for the Wrath of the Lich King expansion in AmeisenBotX.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Dungeon.Profiles.WotLK
 {
     /// <summary>

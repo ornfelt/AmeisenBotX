@@ -1,4 +1,7 @@
-﻿namespace AmeisenBotX.Core.Objects.Enums
+﻿/// <summary>
+/// Represents the namespace for core objects and enums in the AmeisenBotX project.
+/// </summary>
+namespace AmeisenBotX.Core.Objects.Enums
 {
     /// <summary>
     /// Represents the faction type of a mailbox.

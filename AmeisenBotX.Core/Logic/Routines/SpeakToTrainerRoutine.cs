@@ -2,6 +2,9 @@
 using AmeisenBotX.Wow.Objects;
 using System;
 
+/// <summary>
+/// Namespace containing logic routines for the AmeisenBotX.Core project.
+/// </summary>
 namespace AmeisenBotX.Core.Logic.Routines
 {
     /// <summary>

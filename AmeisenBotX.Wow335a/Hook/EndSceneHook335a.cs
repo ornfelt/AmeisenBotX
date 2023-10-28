@@ -11,6 +11,9 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 
+/// <summary>
+/// Provides hook classes for World of Warcraft version 3.3.5a in the AmeisenBotX project.
+/// </summary>
 namespace AmeisenBotX.Wow335a.Hook
 {
     /// <summary>

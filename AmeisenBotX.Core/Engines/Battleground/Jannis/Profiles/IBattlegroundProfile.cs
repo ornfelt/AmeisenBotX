@@ -1,4 +1,7 @@
-﻿namespace AmeisenBotX.Core.Engines.Battleground.Jannis.Profiles
+﻿/// <summary>
+/// Represents a namespace for profiles related to the AmeisenBotX.Core.Engines.Battleground.Jannis namespace.
+/// </summary>
+namespace AmeisenBotX.Core.Engines.Battleground.Jannis.Profiles
 {
     /// <summary>
     /// Represents a profile for a bot in a battleground.

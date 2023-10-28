@@ -4,6 +4,9 @@ using AmeisenBotX.Core.Engines.Dungeon.Objects;
 using AmeisenBotX.Wow.Objects.Enums;
 using System.Collections.Generic;
 
+/// <summary>
+/// Contains dungeon profiles for The Burning Crusade expansion in the AmeisenBotX project.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Dungeon.Profiles.TBC
 {
     /// <summary>

@@ -3,6 +3,9 @@ using AmeisenBotX.Core.Engines.Quest.Objects.Objectives;
 using AmeisenBotX.Core.Engines.Quest.Objects.Quests;
 using System.Collections.Generic;
 
+/// <summary>
+/// Contains classes related to the "Carry Your Weight" quest in Durotar RazorHill.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Quest.Quests.Durotar.RazorHill
 {
     /// <summary>

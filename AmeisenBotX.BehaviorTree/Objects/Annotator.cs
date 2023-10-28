@@ -1,5 +1,8 @@
 ﻿using AmeisenBotX.BehaviorTree.Enums;
 
+/// <summary>
+/// Namespace containing objects related to the BehaviorTree, including the Annotator node.
+/// </summary>
 namespace AmeisenBotX.BehaviorTree.Objects
 {
     /// <summary>

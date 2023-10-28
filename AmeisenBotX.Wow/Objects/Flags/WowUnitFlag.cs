@@ -1,5 +1,8 @@
 ﻿using System;
 
+/// <summary>
+/// Specifies the flags that can be applied to a WowUnit.
+/// </summary>
 namespace AmeisenBotX.Wow.Objects.Flags
 {
     /// <summary>

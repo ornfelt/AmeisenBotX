@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
+/// <summary>
+/// Provides a set of methods to import functions from the Win32 API.
+/// </summary>
 namespace AmeisenBotX.Memory.Win32
 {
     /// <summary>

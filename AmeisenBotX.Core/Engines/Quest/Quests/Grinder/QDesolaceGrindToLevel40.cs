@@ -3,6 +3,9 @@ using AmeisenBotX.Core.Engines.Quest.Objects.Objectives;
 using AmeisenBotX.Core.Engines.Quest.Objects.Quests;
 using System.Collections.Generic;
 
+/// <summary>
+/// Represents a namespace for quests related to grinding to level 40 in the Desolace area.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Quest.Quests.Grinder
 {
     /// <summary>

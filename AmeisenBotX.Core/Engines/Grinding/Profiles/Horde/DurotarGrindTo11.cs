@@ -5,6 +5,9 @@ using AmeisenBotX.Core.Objects.Enums;
 using AmeisenBotX.Wow.Objects.Enums;
 using System.Collections.Generic;
 
+/// <summary>
+/// Represents a grinding profile in the Durotar area, focusing on reaching level 11.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Grinding.Profiles.Horde
 {
     ///<summary>

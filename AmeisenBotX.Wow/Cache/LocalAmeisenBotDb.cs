@@ -13,6 +13,9 @@ using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
+/// <summary>
+/// Namespace for caching functionality related to the AmeisenBotX.Wow module.
+/// </summary>
 namespace AmeisenBotX.Wow.Cache
 {
     /// <summary>

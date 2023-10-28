@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
+/// <summary>
+/// Represents a namespace for hook modules related to Lua scripting in World of Warcraft.
+/// </summary>
 namespace AmeisenBotX.Wow.Hook.Modules
 {
     /// <summary>

@@ -3,6 +3,9 @@ using AmeisenBotX.Core.Engines.Quest.Objects.Objectives;
 using AmeisenBotX.Core.Engines.Quest.Objects.Quests;
 using System.Collections.Generic;
 
+/// <summary>
+/// Namespace containing classes related to grinding quests in the Durotar area up to level 6.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Quest.Quests.Grinder
 {
     /// <summary>

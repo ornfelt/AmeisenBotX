@@ -3,6 +3,9 @@ using AmeisenBotX.Core.Managers.Character.Talents.Objects;
 using AmeisenBotX.Wow.Objects.Enums;
 using System.Collections.Generic;
 
+/// <summary>
+/// Represents a namespace for the RogueAssassination class that inherits from the BasicKamelClass.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
 {
     /// <summary>

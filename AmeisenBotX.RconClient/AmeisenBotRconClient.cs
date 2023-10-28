@@ -7,6 +7,9 @@ using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
+/// <summary>
+/// Represents a client for communicating with the AmeisenBot RCON server.
+/// </summary>
 namespace AmeisenBotX.RconClient
 {
     /// <summary>

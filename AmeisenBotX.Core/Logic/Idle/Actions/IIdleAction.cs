@@ -1,5 +1,8 @@
 ﻿using System;
 
+/// <summary>
+/// Represents an idle action.
+/// </summary>
 namespace AmeisenBotX.Core.Logic.Idle.Actions
 {
     /// <summary>

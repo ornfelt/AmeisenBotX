@@ -1,6 +1,9 @@
 ﻿using AmeisenBotX.Core.Engines.Quest.Objects.Objectives;
 using System.Collections.Generic;
 
+/// <summary>
+/// Contains classes and interfaces for handling bot quests in the AmeisenBotX engine.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Quest.Objects.Quests
 {
     /// <summary>

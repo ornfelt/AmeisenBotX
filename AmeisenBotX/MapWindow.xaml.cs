@@ -16,6 +16,9 @@ using System.Windows.Media.Imaging;
 using Color = System.Drawing.Color;
 using Point = System.Drawing.Point;
 
+/// <summary>
+/// Represents a window that displays a map and is associated with an AmeisenBot instance.
+/// </summary>
 namespace AmeisenBotX
 {
     /// <summary>

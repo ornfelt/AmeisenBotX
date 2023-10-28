@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
+/// <summary>
+/// A struct that represents a collection of IntPtr values for raid players.
+/// </summary>
 namespace AmeisenBotX.Wow335a.Objects.Raw
 {
     /// <summary>

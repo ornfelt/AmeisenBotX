@@ -4,6 +4,9 @@ using AmeisenBotX.Common.Utils;
 using AmeisenBotX.Wow.Objects;
 using System;
 
+/// <summary>
+/// Represents a leaf node for interacting with a unit in the AmeisenBotInterfaces system, extending the MoveToLeaf class.
+/// </summary>
 namespace AmeisenBotX.Core.Logic.Leafs
 {
     /// <summary>

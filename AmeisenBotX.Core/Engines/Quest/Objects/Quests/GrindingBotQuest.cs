@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 
+/// <summary>
+/// Represents a namespace for quest objects and related functionality.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Quest.Objects.Quests
 {
     /// <summary>

@@ -5,6 +5,9 @@ using AmeisenBotX.Common.Math;
 using AmeisenBotX.Wow.Objects;
 using System;
 
+/// <summary>
+/// Represents the namespace for the AmeisenBotX.Core.Engines.Test namespace.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Test
 {
     /// <summary>

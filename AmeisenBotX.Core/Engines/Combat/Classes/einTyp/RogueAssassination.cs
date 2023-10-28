@@ -10,6 +10,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
 
+/// <summary>
+/// Namespace for the RogueAssassination class, which represents a Rogue specialization that focuses on assassination techniques.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Combat.Classes.einTyp
 {
     /// <summary>

@@ -1,5 +1,8 @@
 ﻿using AmeisenBotX.Wow.Combatlog.Enums;
 
+/// <summary>
+/// Contains the combat log fields for World of Warcraft version 5.4.8.
+/// </summary>
 namespace AmeisenBotX.Wow548.Combatlog.Enums
 {
     /// <summary>

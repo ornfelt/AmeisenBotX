@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Text.Json;
 
+/// <summary>
+/// Represents a basic configurable class that can be loaded from and saved to a JSON representation.
+/// </summary>
 namespace AmeisenBotX.Common.Storage
 {
     /// <summary>

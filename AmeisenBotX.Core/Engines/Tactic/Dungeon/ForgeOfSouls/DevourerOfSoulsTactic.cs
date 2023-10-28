@@ -6,6 +6,9 @@ using AmeisenBotX.Wow.Objects.Enums;
 using System;
 using System.Collections.Generic;
 
+/// <summary>
+/// Implements the ITactic interface for the DevourerOfSoulsTactic class.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Tactic.Dungeon.ForgeOfSouls
 {
     /// <summary>

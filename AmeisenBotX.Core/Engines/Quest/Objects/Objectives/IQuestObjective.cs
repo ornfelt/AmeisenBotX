@@ -1,4 +1,7 @@
-﻿namespace AmeisenBotX.Core.Engines.Quest.Objects.Objectives
+﻿/// <summary>
+/// Represents an interface for a quest objective.
+/// </summary>
+namespace AmeisenBotX.Core.Engines.Quest.Objects.Objectives
 {
     /// <summary>
     /// Represents an interface for a quest objective.

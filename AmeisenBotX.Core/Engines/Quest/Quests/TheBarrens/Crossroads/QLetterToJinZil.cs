@@ -2,6 +2,9 @@ using AmeisenBotX.Common.Math;
 using AmeisenBotX.Core.Engines.Quest.Objects.Quests;
 using System.Collections.Generic;
 
+/// <summary>
+/// The AmeisenBotX.Core.Engines.Quest.Quests.TheBarrens.Crossroads namespace contains classes related to quests in The Barrens Crossroads area.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Quest.Quests.TheBarrens.Crossroads
 {
     /// <summary>

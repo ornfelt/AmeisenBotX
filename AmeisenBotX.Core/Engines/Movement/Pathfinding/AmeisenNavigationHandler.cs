@@ -5,6 +5,9 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 
+/// <summary>
+/// Represents a navigation handler for the Ameisen application, implementing the IPathfindingHandler interface.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Movement.Pathfinding
 {
     /// <summary>

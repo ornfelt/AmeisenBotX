@@ -1,5 +1,8 @@
 ﻿using System;
 
+/// <summary>
+/// Represents a quest objective that requires a specific bot action to be completed.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Quest.Objects.Objectives
 {
     /// <summary>

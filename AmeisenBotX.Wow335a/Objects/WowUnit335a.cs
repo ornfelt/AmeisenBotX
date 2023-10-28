@@ -13,6 +13,9 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 
+/// <summary>
+/// Provides classes and interfaces for handling objects in World of Warcraft version 3.3.5a.
+/// </summary>
 namespace AmeisenBotX.Wow335a.Objects
 {
     /// <summary>

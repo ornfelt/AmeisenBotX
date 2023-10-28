@@ -2,6 +2,9 @@
 using AmeisenBotX.Wow.Objects;
 using AmeisenBotX.Wow548.Objects.Descriptors;
 
+/// <summary>
+/// Represents a dynamic object in the Wow game that inherits from WowObject548 and implements the IWowDynobject interface.
+/// </summary>
 namespace AmeisenBotX.Wow548.Objects
 {
     /// <summary>

@@ -1,5 +1,8 @@
 ﻿using System;
 
+/// <summary>
+/// Represents a set of key codes returned by the event.
+/// </summary>
 namespace AmeisenBotX.Common.Keyboard.Enums
 {
     /// <summary>

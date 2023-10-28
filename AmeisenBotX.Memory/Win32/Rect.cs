@@ -1,5 +1,8 @@
 ﻿using System.Runtime.InteropServices;
 
+/// <summary>
+/// Gets or sets the top value of the element.
+/// </summary>
 namespace AmeisenBotX.Memory.Win32
 {
     /// <summary>

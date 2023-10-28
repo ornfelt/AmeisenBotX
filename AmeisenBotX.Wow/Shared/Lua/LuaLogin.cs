@@ -1,4 +1,7 @@
-﻿namespace AmeisenBotX.Wow.Shared.Lua
+﻿/// <summary>
+/// This namespace contains classes and methods related to Lua scripting within the AmeisenBotX WoW bot.
+/// </summary>
+namespace AmeisenBotX.Wow.Shared.Lua
 {
     /// <summary>
     /// Utility class for navigating and performing login actions in the game client.

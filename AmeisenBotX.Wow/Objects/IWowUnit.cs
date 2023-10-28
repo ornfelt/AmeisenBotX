@@ -3,6 +3,9 @@ using AmeisenBotX.Wow.Objects.Flags;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 
+/// <summary>
+/// Represents a unit in the game world with various attributes and behaviors.
+/// </summary>
 namespace AmeisenBotX.Wow.Objects
 {
     /// <summary>

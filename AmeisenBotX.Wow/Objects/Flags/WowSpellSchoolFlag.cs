@@ -1,5 +1,21 @@
 ﻿using System;
 
+/// <summary>
+/// Flags for the different spell schools in World of Warcraft.
+/// Each flag represents a different spell school.
+/// </summary>
+/// <remarks>
+/// Possible values:
+/// </remarks>
+/// <list type="table">
+/// <item>
+/// <term>None</term>
+/// <description>No school</description>
+/// </item>
+/// <item>
+/// <term>Physical</term>
+/// <description>Physical school</description>
+/// </item>
 namespace AmeisenBotX.Wow.Objects.Flags
 {
     /// <summary>

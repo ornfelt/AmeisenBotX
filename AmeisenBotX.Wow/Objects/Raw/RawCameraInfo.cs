@@ -1,6 +1,9 @@
 ﻿using AmeisenBotX.Common.Math;
 using System.Runtime.InteropServices;
 
+/// <summary>
+/// Represents raw camera information.
+/// </summary>
 namespace AmeisenBotX.Wow.Objects.Raw
 {
     /// <summary>

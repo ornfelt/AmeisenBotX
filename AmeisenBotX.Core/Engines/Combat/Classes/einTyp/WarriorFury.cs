@@ -10,6 +10,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
 
+/// <summary>
+/// Provides classes related to different types of combat engines in the AmeisenBotX Core.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Combat.Classes.einTyp
 {
     /// <summary>

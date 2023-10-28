@@ -1,4 +1,7 @@
-﻿namespace AmeisenBotX.Core.Objects.Enums
+﻿/// <summary>
+/// Represents the different types of non-playable characters (NPCs) in a game.
+/// </summary>
+namespace AmeisenBotX.Core.Objects.Enums
 {
     /// <summary>
     /// Represents the different types of non-playable characters (NPCs) in a game.

@@ -2,6 +2,9 @@
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
+/// <summary>
+/// Provides mathematical structures and functions related to the AmeisenBotX project.
+/// </summary>
 namespace AmeisenBotX.Common.Math
 {
     /// <summary>

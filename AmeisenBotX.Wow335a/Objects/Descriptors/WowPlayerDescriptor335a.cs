@@ -1,6 +1,9 @@
 ﻿using AmeisenBotX.Wow.Objects.Raw.SubStructs;
 using System.Runtime.InteropServices;
 
+/// <summary>
+/// Represents a namespace for WoW player descriptors.
+/// </summary>
 namespace AmeisenBotX.Wow335a.Objects.Descriptors
 {
     /// <summary>

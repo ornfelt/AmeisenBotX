@@ -10,6 +10,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
 
+/// <summary>
+/// Represents a namespace for the Paladin Protection combat class.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Combat.Classes.einTyp
 {
     /// <summary>

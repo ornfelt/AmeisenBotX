@@ -6,6 +6,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
+/// <summary>
+/// Contains classes related to the combat engine for the Kamel class in the AmeisenBotX project.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
 {
     /// <summary>

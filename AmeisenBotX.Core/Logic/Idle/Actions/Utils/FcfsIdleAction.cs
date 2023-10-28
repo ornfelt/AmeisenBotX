@@ -1,5 +1,8 @@
 ﻿using System.Collections.Generic;
 
+/// <summary>
+/// Represents a namespace for utility classes related to First-Come-First-Serve (FCFS) idle actions.
+/// </summary>
 namespace AmeisenBotX.Core.Logic.Idle.Actions.Utils
 {
     /// <summary>

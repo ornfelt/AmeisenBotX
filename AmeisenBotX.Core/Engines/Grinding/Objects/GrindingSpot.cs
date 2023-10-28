@@ -1,5 +1,8 @@
 ﻿using AmeisenBotX.Common.Math;
 
+/// <summary>
+/// Namespace for objects related to grinding in the AmeisenBotX.Core.Engines.Grinding namespace.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Grinding.Objects
 {
     /// <summary>

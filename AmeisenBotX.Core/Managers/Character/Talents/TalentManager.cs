@@ -5,6 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+/// <summary>
+/// Represents a manager for talents in a game.
+/// </summary>
 namespace AmeisenBotX.Core.Managers.Character.Talents
 {
     /// <summary>

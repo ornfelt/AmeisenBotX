@@ -1,4 +1,7 @@
-﻿namespace AmeisenBotX.Core.Engines.Dungeon.Enums
+﻿/// <summary>
+/// The namespace containing the enums related to dungeon engines in the AmeisenBotX.Core library.
+/// </summary>
+namespace AmeisenBotX.Core.Engines.Dungeon.Enums
 {
     /// <summary>
     /// The faction types for a dungeon.

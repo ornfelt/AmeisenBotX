@@ -6,6 +6,9 @@ using AmeisenBotX.Wow.Objects.Enums;
 using System.Collections.Generic;
 using System.Linq;
 
+/// <summary>
+/// Represents a namespace for grinding objectives in a quest.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Quest.Objects.Objectives
 {
     /// <summary>

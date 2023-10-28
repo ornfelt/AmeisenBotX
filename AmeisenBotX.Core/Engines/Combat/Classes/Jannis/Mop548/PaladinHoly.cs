@@ -12,6 +12,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
 
+/// <summary>
+/// Namespace for the PaladinHoly class in the Jannis.Mop548 namespace of the Combat.Classes namespace in the AmeisenBotX.Core.Engines namespace.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Mop548
 {
     /// <summary>

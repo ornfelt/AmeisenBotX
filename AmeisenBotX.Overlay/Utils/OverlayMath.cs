@@ -4,6 +4,9 @@ using System;
 using System.Drawing;
 using Rect = AmeisenBotX.Memory.Win32.Rect;
 
+/// <summary>
+/// Provides utility functions for overlay operations.
+/// </summary>
 namespace AmeisenBotX.Overlay.Utils
 {
     /// <summary>

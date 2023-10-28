@@ -5,6 +5,9 @@ using AmeisenBotX.Wow.Objects.Enums;
 using System;
 using System.Linq;
 
+/// <summary>
+/// Represents an idle action where the bot sits on a chair.
+/// </summary>
 namespace AmeisenBotX.Core.Logic.Idle.Actions
 {
     /// <summary>

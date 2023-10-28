@@ -10,6 +10,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
+/// <summary>
+/// Namespace for the HunterBeastmastery class in the AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a namespace.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 {
     /// <summary>

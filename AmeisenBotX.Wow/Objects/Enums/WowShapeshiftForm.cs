@@ -1,4 +1,7 @@
-﻿namespace AmeisenBotX.Wow.Objects.Enums
+﻿/// <summary>
+/// Specifies the different forms a World of Warcraft character can shapeshift into.
+/// </summary>
+namespace AmeisenBotX.Wow.Objects.Enums
 {
     /// <summary>
     /// Specifies the different forms a World of Warcraft character can shapeshift into.

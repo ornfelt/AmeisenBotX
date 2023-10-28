@@ -1,5 +1,8 @@
 ﻿using AmeisenBotX.Wow.Objects.Enums;
 
+/// <summary>
+/// Represents a namespace for objects related to containers in the World of Warcraft game.
+/// </summary>
 namespace AmeisenBotX.Wow.Objects
 {
     /// <summary>

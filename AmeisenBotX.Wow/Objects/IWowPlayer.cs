@@ -2,6 +2,9 @@
 using AmeisenBotX.Wow.Objects.Raw.SubStructs;
 using System.Collections.Generic;
 
+/// <summary>
+/// Provides classes and interfaces related to World of Warcraft game objects.
+/// </summary>
 namespace AmeisenBotX.Wow.Objects
 {
     /// <summary>

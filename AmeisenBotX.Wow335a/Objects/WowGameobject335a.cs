@@ -6,6 +6,9 @@ using System;
 using System.Collections.Specialized;
 using System.Globalization;
 
+/// <summary>
+/// Namespace for objects related to World of Warcraft game objects in version 3.3.5a.
+/// </summary>
 namespace AmeisenBotX.Wow335a.Objects
 {
     /// <summary>

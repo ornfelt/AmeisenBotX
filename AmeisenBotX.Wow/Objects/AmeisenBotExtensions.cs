@@ -1,5 +1,8 @@
 ﻿using AmeisenBotX.Wow.Objects.Enums;
 
+/// <summary>
+/// Defines the objects used in the AmeisenBotX World of Warcraft bot.
+/// </summary>
 namespace AmeisenBotX.Wow.Objects
 {
     /// <summary>

@@ -6,6 +6,9 @@ using AmeisenBotX.Wow335a.Constants;
 using System;
 using System.Linq;
 
+/// <summary>
+/// Contains classes related to the combat engine for the World of Warcraft character 'Jannis' in the Wrath of the Lich King 3.3.5a version, developed by AmeisenBotX.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 {
     /// <summary>

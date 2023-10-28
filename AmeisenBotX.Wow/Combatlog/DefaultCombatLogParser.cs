@@ -6,6 +6,9 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 
+/// <summary>
+/// Represents a namespace for parsing combat logs in World of Warcraft.
+/// </summary>
 namespace AmeisenBotX.Wow.Combatlog
 {
     /// <summary>

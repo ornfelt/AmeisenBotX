@@ -1,4 +1,9 @@
-﻿namespace AmeisenBotX.Wow.Objects.Enums
+﻿/// <summary>
+/// Represents the WowHerbId enumeration.
+/// The enumeration contains constants representing different types of herbs used in the World of Warcraft game.
+/// Each constant is associated with a specific herb ID.
+/// </summary>
+namespace AmeisenBotX.Wow.Objects.Enums
 {
     /// <summary>
     /// Represents the WowHerbId enumeration.

@@ -2,6 +2,9 @@
 using AmeisenBotX.Wow.Objects.Enums;
 using System.Globalization;
 
+/// <summary>
+/// Represents a namespace for managing character comparators in the AmeisenBotX.Core.Managers.Character.Comparators namespace.
+/// </summary>
 namespace AmeisenBotX.Core.Managers.Character.Comparators
 {
     /// <summary>

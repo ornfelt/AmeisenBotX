@@ -1,5 +1,8 @@
 ﻿using AmeisenBotX.Wow.Offsets;
 
+/// <summary>
+/// Contains the offsets used in the AmeisenBotX for the WoW 5.4.8 version.
+/// </summary>
 namespace AmeisenBotX.Wow548.Offsets
 {
     /// <summary>

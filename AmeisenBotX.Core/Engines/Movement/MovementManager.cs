@@ -2,6 +2,9 @@
 using AmeisenBotX.Core.Engines.Movement.Enums;
 using System.Collections.Generic;
 
+/// <summary>
+/// Represents a manager for handling movement operations.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Movement
 {
     /// <summary>

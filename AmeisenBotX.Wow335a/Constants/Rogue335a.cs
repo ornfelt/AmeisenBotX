@@ -1,4 +1,7 @@
-﻿namespace AmeisenBotX.Wow335a.Constants
+﻿/// <summary>
+/// Represents the namespace for constants related to the Rogue class in World of Warcraft version 3.3.5a.
+/// </summary>
+namespace AmeisenBotX.Wow335a.Constants
 {
     /// <summary>
     /// Represents the constant string "Eviscerate".

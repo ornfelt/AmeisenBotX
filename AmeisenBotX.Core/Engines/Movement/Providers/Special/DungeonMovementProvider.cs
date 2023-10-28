@@ -7,6 +7,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
+/// <summary>
+/// Represents a movement provider for dungeon maps.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Movement.Providers.Special
 {
     /// <summary>

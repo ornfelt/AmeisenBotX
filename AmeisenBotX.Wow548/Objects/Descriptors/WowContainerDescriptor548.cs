@@ -1,5 +1,8 @@
 ﻿using System.Runtime.InteropServices;
 
+/// <summary>
+/// Represents a descriptor for a container in World of Warcraft, specifically for the "WowContainerDescriptor548" struct.
+/// </summary>
 namespace AmeisenBotX.Wow548.Objects.Descriptors
 {
     /// <summary>

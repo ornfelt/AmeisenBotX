@@ -1,6 +1,9 @@
 ﻿using AmeisenBotX.BehaviorTree.Enums;
 using System;
 
+/// <summary>
+/// Namespace containing objects related to the behavior tree implementation for the AmeisenBotX project.
+/// </summary>
 namespace AmeisenBotX.BehaviorTree.Objects
 {
     /// <summary>

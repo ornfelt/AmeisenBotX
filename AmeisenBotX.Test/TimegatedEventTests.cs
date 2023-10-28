@@ -3,6 +3,9 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Threading;
 
+/// <summary>
+/// Represents a namespace that contains unit tests for the TimegatedEvent class.
+/// </summary>
 namespace AmeisenBotX.Test
 {
     /// <summary>

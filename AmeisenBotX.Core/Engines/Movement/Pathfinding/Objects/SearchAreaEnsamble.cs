@@ -1,6 +1,9 @@
 ﻿using AmeisenBotX.Common.Math;
 using System.Collections.Generic;
 
+/// <summary>
+/// Represents a collection of search areas defined by a list of Vector3 positions.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Movement.Pathfinding.Objects
 {
     /// <summary>

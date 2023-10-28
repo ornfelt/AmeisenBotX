@@ -2,6 +2,9 @@
 using System;
 using System.Runtime.InteropServices;
 
+/// <summary>
+/// Represents the low-level data provided by the keyboard when a key is pressed or released.
+/// </summary>
 namespace AmeisenBotX.Common.Keyboard.Objects
 {
     /// <summary>

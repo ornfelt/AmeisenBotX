@@ -1,4 +1,7 @@
-﻿namespace AmeisenBotX.Utils
+﻿/// <summary>
+/// Contains utility classes and methods for the AmeisenBotX namespace.
+/// </summary>
+namespace AmeisenBotX.Utils
 {
     /// <summary>
     /// Represents a wrapper class for the IdleAction feature.

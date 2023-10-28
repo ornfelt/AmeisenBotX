@@ -1,5 +1,8 @@
 ﻿using System;
 
+/// <summary>
+/// Contains the offsets used by the AmeisenBotX for World of Warcraft.
+/// </summary>
 namespace AmeisenBotX.Wow.Offsets
 {
     ///<summary>

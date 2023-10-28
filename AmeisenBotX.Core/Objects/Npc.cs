@@ -2,6 +2,9 @@
 using AmeisenBotX.Core.Objects.Enums;
 using AmeisenBotX.Wow.Objects.Enums;
 
+/// <summary>
+/// Contains core objects used in the AmeisenBotX project.
+/// </summary>
 namespace AmeisenBotX.Core.Objects
 {
     /// <summary>

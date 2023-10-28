@@ -2,6 +2,9 @@
 using AmeisenBotX.Wow.Objects.Enums;
 using System;
 
+/// <summary>
+/// Represents objects in the game world.
+/// </summary>
 namespace AmeisenBotX.Wow.Objects
 {
     /// <summary>

@@ -1,5 +1,8 @@
 ﻿using System;
 
+/// <summary>
+/// Contains utility classes and methods for the AmeisenBotX project.
+/// </summary>
 namespace AmeisenBotX.Common.Utils
 {
     /// <summary>

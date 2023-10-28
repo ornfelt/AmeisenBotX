@@ -3,6 +3,9 @@ using AmeisenBotX.Wow.Objects.Enums;
 using System;
 using System.Collections.Generic;
 
+/// <summary>
+/// Represents a namespace that contains classes and interfaces related to managing chat functionality in the game.
+/// </summary>
 namespace AmeisenBotX.Core.Managers.Chat
 {
     /// <summary>

@@ -1,6 +1,9 @@
 ﻿using AmeisenBotX.Wow.Objects;
 using System.Collections.Generic;
 
+/// <summary>
+/// Represents a provider for target information.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Combat.Helpers.Targets
 {
     /// <summary>

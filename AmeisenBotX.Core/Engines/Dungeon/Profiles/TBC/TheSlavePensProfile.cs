@@ -4,6 +4,9 @@ using AmeisenBotX.Core.Engines.Dungeon.Objects;
 using AmeisenBotX.Wow.Objects.Enums;
 using System.Collections.Generic;
 
+/// <summary>
+/// This namespace contains profiles for dungeons in The Burning Crusade expansion of World of Warcraft, used by the AmeisenBotX bot engine.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Dungeon.Profiles.TBC
 {
     /// <summary>

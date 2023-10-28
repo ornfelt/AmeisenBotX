@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
+/// <summary>
+/// Represents an interface for parsing combat log data.
+/// </summary>
 namespace AmeisenBotX.Wow.Combatlog
 {
     /// <summary>

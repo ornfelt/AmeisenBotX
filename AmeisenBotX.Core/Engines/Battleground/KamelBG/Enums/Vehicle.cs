@@ -1,4 +1,7 @@
-﻿namespace AmeisenBotX.Core.Engines.Battleground.KamelBG.Enums
+﻿/// <summary>
+/// Enumeration of vehicle IDs used in battlegrounds.
+/// </summary>
+namespace AmeisenBotX.Core.Engines.Battleground.KamelBG.Enums
 {
     /// <summary>
     /// Enumeration of vehicle IDs used in battlegrounds.

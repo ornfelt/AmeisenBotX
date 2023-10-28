@@ -1,4 +1,7 @@
-﻿namespace AmeisenBotX.Core.Logic.Routines
+﻿/// <summary>
+/// Provides logic for various routines used in the AmeisenBotX bot.
+/// </summary>
+namespace AmeisenBotX.Core.Logic.Routines
 {
     /// <summary>
     /// Executes the Run method to perform actions on the bot and config. 

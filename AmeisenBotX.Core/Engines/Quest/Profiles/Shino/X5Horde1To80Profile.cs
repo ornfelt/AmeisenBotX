@@ -6,6 +6,9 @@ using AmeisenBotX.Core.Engines.Quest.Quests.TheBarrens.OutpostBridge;
 using AmeisenBotX.Core.Engines.Quest.Quests.TheBarrens.OutpostStonetalon;
 using System.Collections.Generic;
 
+/// <summary>
+/// The namespace containing quest profiles for the Shino engine in AmeisenBotX.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Quest.Profiles.Shino
 {
     /// <summary>

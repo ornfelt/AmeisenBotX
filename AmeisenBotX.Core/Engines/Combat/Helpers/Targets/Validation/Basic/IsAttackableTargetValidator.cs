@@ -1,6 +1,9 @@
 ﻿using AmeisenBotX.Wow.Objects;
 using AmeisenBotX.Wow.Objects.Enums;
 
+/// <summary>
+/// Represents a target validator that checks if a target is attackable.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Combat.Helpers.Targets.Validation.Basic
 {
     /// <summary>

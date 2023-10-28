@@ -3,6 +3,10 @@ using AmeisenBotX.BehaviorTree.Interfaces;
 using AmeisenBotX.BehaviorTree.Objects;
 using System;
 
+/// <summary>
+/// Represents a behavior tree that operates on a given blackboard of type <typeparamref name="T"/>.
+/// </summary>
+/// <typeparam name="T">The type of the blackboard this behavior tree operates on.</typeparam>
 namespace AmeisenBotX.BehaviorTree
 {
     /// <summary>

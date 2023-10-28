@@ -9,6 +9,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
+/// <summary>
+/// Provides classes for managing character's inventory in AmeisenBotX.
+/// </summary>
 namespace AmeisenBotX.Core.Managers.Character.Inventory
 {
     /// <summary>

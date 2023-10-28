@@ -1,5 +1,8 @@
 ﻿using AmeisenBotX.Core.Engines.Grinding.Profiles;
 
+/// <summary>
+/// Represents an interface for a grinding engine.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Grinding
 {
     /// <summary>

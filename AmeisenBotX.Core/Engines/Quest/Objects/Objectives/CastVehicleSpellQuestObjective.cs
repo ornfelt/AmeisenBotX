@@ -1,4 +1,7 @@
-﻿namespace AmeisenBotX.Core.Engines.Quest.Objects.Objectives
+﻿/// <summary>
+/// Represents a quest objective that requires casting a vehicle spell.
+/// </summary>
+namespace AmeisenBotX.Core.Engines.Quest.Objects.Objectives
 {
     /// <summary>
     /// Represents a delegate that defines the condition for casting a vehicle spell in a quest objective.

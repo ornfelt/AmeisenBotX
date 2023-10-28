@@ -1,5 +1,8 @@
 ﻿using System.Runtime.InteropServices;
 
+/// <summary>
+/// Represents a boolean value indicating if the subject is outdoors.
+/// </summary>
 namespace AmeisenBotX.Wow.Hook.Structs
 {
     /// <summary>

@@ -1,4 +1,7 @@
-﻿namespace AmeisenBotX.Core.Engines.Quest.Objects.Objectives
+﻿/// <summary>
+/// Represents a quest objective that waits until a specific condition is fulfilled before considering it completed.
+/// </summary>
+namespace AmeisenBotX.Core.Engines.Quest.Objects.Objectives
 {
     /// <summary>
     /// Delegate representing a condition that needs to be fulfilled before the quest objective is considered completed.

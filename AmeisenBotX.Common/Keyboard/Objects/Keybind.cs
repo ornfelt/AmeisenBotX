@@ -1,4 +1,7 @@
-﻿namespace AmeisenBotX.Common.Keyboard.Objects
+﻿/// <summary>
+/// Provides classes and structures related to keyboard operations for the AmeisenBotX project.
+/// </summary>
+namespace AmeisenBotX.Common.Keyboard.Objects
 {
     /// <summary>
     /// Represents a combination of a key and its associated modifier for binding purposes.

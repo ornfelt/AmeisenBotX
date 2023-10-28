@@ -1,5 +1,8 @@
 ﻿using System.Runtime.InteropServices;
 
+/// <summary>
+/// Represents a namespace for raw objects related to the World of Warcraft 3.3.5a version.
+/// </summary>
 namespace AmeisenBotX.Wow335a.Objects.Raw
 {
     /// <summary>

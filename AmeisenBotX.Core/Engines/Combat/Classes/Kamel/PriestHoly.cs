@@ -7,6 +7,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
+/// <summary>
+/// Represents a holy priest specialized in healing spells.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
 {
     /// <summary>

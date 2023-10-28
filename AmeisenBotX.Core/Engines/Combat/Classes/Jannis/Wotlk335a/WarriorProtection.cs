@@ -10,6 +10,9 @@ using AmeisenBotX.Wow335a.Constants;
 using System;
 using System.Linq;
 
+/// <summary>
+/// Namespace for the warrior class specialization focused on providing protection and defense for allies.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 {
     /// <summary>

@@ -9,6 +9,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
+/// <summary>
+/// Namespace containing helper classes for managing targets in combat.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Combat.Helpers.Targets
 {
     /// <summary>

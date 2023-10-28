@@ -6,6 +6,9 @@ using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
+/// <summary>
+/// This namespace contains classes related to wow's ingame event system.
+/// </summary>
 namespace AmeisenBotX.Wow.Events
 {
     /// <summary>

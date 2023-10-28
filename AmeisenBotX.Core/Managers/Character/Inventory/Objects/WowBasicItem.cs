@@ -1,6 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
+/// <summary>
+/// Namespace for managing character inventory objects in the AmeisenBotX.Core library.
+/// </summary>
 namespace AmeisenBotX.Core.Managers.Character.Inventory.Objects
 {
     /// <summary>

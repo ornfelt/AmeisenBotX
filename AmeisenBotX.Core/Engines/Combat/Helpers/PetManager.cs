@@ -1,6 +1,9 @@
 ﻿using AmeisenBotX.Common.Utils;
 using System;
 
+/// <summary>
+/// Namespace for managing pets and their actions.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Combat.Helpers
 {
     /// <summary>

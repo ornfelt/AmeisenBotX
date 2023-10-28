@@ -4,6 +4,9 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
+/// <summary>
+/// Initializes a new instance of the StateJobConfigWindow class with the specified AmeisenBot and AmeisenBotConfig.
+/// </summary>
 namespace AmeisenBotX.StateConfig
 {
     /// <summary>

@@ -1,6 +1,9 @@
 ﻿using AmeisenBotX.Wow.Objects.Enums;
 using System;
 
+/// <summary>
+/// Represents a namespace for managing character inventory objects in the game World of Warcraft.
+/// </summary>
 namespace AmeisenBotX.Core.Managers.Character.Inventory.Objects
 {
     /// <summary>

@@ -2,6 +2,9 @@
 using AmeisenBotX.Core.Engines.Quest.Quests.Grinder;
 using System.Collections.Generic;
 
+/// <summary>
+/// Namespace for the Shino profile of the AmeisenBotX.Core.Engines.Quest.Profiles namespace.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Quest.Profiles.Shino
 {
     /// <summary>

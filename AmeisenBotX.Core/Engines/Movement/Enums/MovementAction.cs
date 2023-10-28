@@ -1,4 +1,7 @@
-﻿namespace AmeisenBotX.Core.Engines.Movement.Enums
+﻿/// <summary>
+/// Enumeration representing different movement actions.
+/// </summary>
+namespace AmeisenBotX.Core.Engines.Movement.Enums
 {
     /// <summary>
     /// Enumeration representing different movement actions.

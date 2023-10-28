@@ -5,6 +5,9 @@ using AmeisenBotX.Wow.Objects.Raw.SubStructs;
 using AmeisenBotX.Wow548.Objects.Descriptors;
 using System.Text;
 
+/// <summary>
+/// Represents a namespace for objects related to players in the game World of Warcraft version 5.4.8.
+/// </summary>
 namespace AmeisenBotX.Wow548.Objects
 {
     /// <summary>

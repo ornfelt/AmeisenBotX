@@ -5,6 +5,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
+/// <summary>
+/// Represents a class that manages group auras.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Combat.Helpers.Aura
 {
     /// <summary>

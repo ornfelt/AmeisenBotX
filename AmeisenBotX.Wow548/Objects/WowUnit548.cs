@@ -10,6 +10,9 @@ using AmeisenBotX.Wow548.Objects.Flags;
 using System.Collections.Specialized;
 using System.Text;
 
+/// <summary>
+/// Represents a namespace that contains objects related to World of Warcraft version 5.4.8.
+/// </summary>
 namespace AmeisenBotX.Wow548.Objects
 {
     /// <summary>

@@ -4,6 +4,9 @@ using AmeisenBotX.Core.Engines.Dungeon.Objects;
 using AmeisenBotX.Wow.Objects.Enums;
 using System.Collections.Generic;
 
+/// <summary>
+/// Represents a namespace for profiles related to the Pit of Saron dungeon in the Wrath of the Lich King expansion.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Dungeon.Profiles.WotLK
 {
     /// <summary>

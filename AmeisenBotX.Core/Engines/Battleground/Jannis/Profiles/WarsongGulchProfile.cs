@@ -16,6 +16,9 @@ using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
+/// <summary>
+/// Represents a profile for the Warsong Gulch battleground.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Battleground.Jannis.Profiles
 {
     /// <summary>

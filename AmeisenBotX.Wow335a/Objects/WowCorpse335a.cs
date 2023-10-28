@@ -2,6 +2,9 @@
 using AmeisenBotX.Wow335a.Objects.Descriptors;
 using System;
 
+/// <summary>
+/// Represents a namespace for objects related to corpses in the World of Warcraft game for the 335a version.
+/// </summary>
 namespace AmeisenBotX.Wow335a.Objects
 {
     /// <summary>

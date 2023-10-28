@@ -9,6 +9,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
+/// <summary>
+/// The AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Mop548 namespace contains combat classes for warriors specializing in protection role in battles.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Mop548
 {
     /// <summary>

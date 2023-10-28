@@ -6,6 +6,9 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
+/// <summary>
+/// Contains utility classes and methods for the AmeisenBotX.
+/// </summary>
 namespace AmeisenBotX.Common.Utils
 {
     /// <summary>

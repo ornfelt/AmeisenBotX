@@ -1,5 +1,8 @@
 ﻿using System;
 
+/// <summary>
+/// Namespace containing hook modules for the AmeisenBotX.Wow.Hook library.
+/// </summary>
 namespace AmeisenBotX.Wow.Hook.Modules
 {
     public interface IHookModule

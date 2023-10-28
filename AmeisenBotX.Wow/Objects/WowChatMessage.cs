@@ -1,6 +1,9 @@
 ﻿using AmeisenBotX.Wow.Objects.Enums;
 using System.Collections.Generic;
 
+/// <summary>
+/// Represents a namespace for objects related to the game "World of Warcraft".
+/// </summary>
 namespace AmeisenBotX.Wow.Objects
 {
     /// <summary>

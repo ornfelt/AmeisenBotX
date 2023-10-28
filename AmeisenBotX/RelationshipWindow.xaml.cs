@@ -2,6 +2,9 @@
 using System.Windows;
 using System.Windows.Input;
 
+/// <summary>
+/// The AmeisenBotX namespace contains classes for handling bot operations.
+/// </summary>
 namespace AmeisenBotX
 {
     /// <summary>

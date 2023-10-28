@@ -1,6 +1,9 @@
 ﻿using System.Collections.Specialized;
 using System.Runtime.InteropServices;
 
+/// <summary>
+/// Represents a descriptor for a World of Warcraft corpse with specific attributes.
+/// </summary>
 namespace AmeisenBotX.Wow548.Objects.Descriptors
 {
     /// <summary>

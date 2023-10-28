@@ -20,6 +20,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
+/// <summary>
+/// Represents a window for editing configuration settings.
+/// </summary>
 namespace AmeisenBotX
 {
     /// <summary>

@@ -1,6 +1,9 @@
 ﻿using AmeisenBotX.Core.Engines.Quest.Profiles;
 using System.Collections.Generic;
 
+/// <summary>
+/// Provides classes and interfaces for handling and managing quests in AmeisenBotX.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Quest
 {
     /// <summary>

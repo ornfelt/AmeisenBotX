@@ -8,6 +8,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
+/// <summary>
+/// The namespace for the logic related to target selection for a tank in the AmeisenBotX combat engine.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Combat.Helpers.Targets.Logics.Tank
 {
     /// <summary>

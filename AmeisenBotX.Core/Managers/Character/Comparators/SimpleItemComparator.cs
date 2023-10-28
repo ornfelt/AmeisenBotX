@@ -2,6 +2,9 @@
 using AmeisenBotX.Core.Managers.Character.Inventory.Objects;
 using System.Collections.Generic;
 
+/// <summary>
+/// Namespace for managing character comparators in the AmeisenBotX.Core.Managers.Character.Comparators namespace.
+/// </summary>
 namespace AmeisenBotX.Core.Managers.Character.Comparators
 {
     /// <summary>

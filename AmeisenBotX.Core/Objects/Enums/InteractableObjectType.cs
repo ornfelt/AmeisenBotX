@@ -1,4 +1,7 @@
-﻿namespace AmeisenBotX.Core.Objects.Enums
+﻿/// <summary>
+/// Represents the type of object that can be interacted with.
+/// </summary>
+namespace AmeisenBotX.Core.Objects.Enums
 {
     /// <summary>
     /// Represents the type of object that can be interacted with.

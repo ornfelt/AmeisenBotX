@@ -5,6 +5,9 @@ using AmeisenBotX.Wow.Objects.Enums;
 using AmeisenBotX.Wow335a.Constants;
 using System.Linq;
 
+/// <summary>
+/// This namespace is for the ShamanEnhancement class in the Jannis module of the Wotlk335a engine in the AmeisenBotX.Core.Engines.Combat.Classes.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 {
     ///<summary>

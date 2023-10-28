@@ -4,6 +4,9 @@ using AmeisenBotX.Wow.Objects.Enums;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 
+/// <summary>
+/// Namespace for testing the CharacterManager functionality.
+/// </summary>
 namespace AmeisenBotX.Test
 {
     /// <summary>

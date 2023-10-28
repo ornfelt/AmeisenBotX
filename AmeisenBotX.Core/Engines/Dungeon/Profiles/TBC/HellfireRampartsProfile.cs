@@ -4,6 +4,9 @@ using AmeisenBotX.Core.Engines.Dungeon.Objects;
 using AmeisenBotX.Wow.Objects.Enums;
 using System.Collections.Generic;
 
+/// <summary>
+/// Namespace for dungeon profiles related to the Hellfire Ramparts Dungeon in Outland.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Dungeon.Profiles.TBC
 {
     /// <summary>

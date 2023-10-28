@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 
+/// <summary>
+/// Represents a namespace for helper classes related to selecting targets for healing in combat.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Combat.Helpers.Targets.Logics.Heal
 {
     /// <summary>

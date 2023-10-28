@@ -3,6 +3,9 @@ using AmeisenBotX.Core.Managers.Character.Talents.Objects;
 using AmeisenBotX.Wow.Objects.Enums;
 using System.Collections.Generic;
 
+/// <summary>
+/// This namespace contains classes related to the combat engine of the AmeisenBotX.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Combat.Classes
 {
     public interface ICombatClass

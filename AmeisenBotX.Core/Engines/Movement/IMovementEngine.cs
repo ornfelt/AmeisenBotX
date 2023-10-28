@@ -3,6 +3,9 @@ using AmeisenBotX.Core.Engines.Movement.Enums;
 using System;
 using System.Collections.Generic;
 
+/// <summary>
+/// Namespace for the movement engine of the AmeisenBotX.Core library.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Movement
 {
     public interface IMovementEngine

@@ -1,5 +1,8 @@
 ﻿using AmeisenBotX.Common.Math;
 
+/// <summary>
+/// Represents a node in an area.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Quest.Objects
 {
     /// <summary>

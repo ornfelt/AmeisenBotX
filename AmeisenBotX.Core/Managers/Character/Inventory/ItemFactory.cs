@@ -5,6 +5,9 @@ using System.Globalization;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
+/// <summary>
+/// Builds a specific item based on the type of the basic item.
+/// </summary>
 namespace AmeisenBotX.Core.Managers.Character.Inventory
 {
     /// <summary>

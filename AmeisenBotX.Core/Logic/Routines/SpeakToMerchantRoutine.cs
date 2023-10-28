@@ -2,6 +2,9 @@
 using AmeisenBotX.Wow.Objects;
 using System;
 
+/// <summary>
+/// Utility class for performing routine actions related to interacting with a merchant in the game.
+/// </summary>
 namespace AmeisenBotX.Core.Logic.Routines
 {
     /// <summary>

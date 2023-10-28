@@ -1,4 +1,7 @@
-﻿namespace AmeisenBotX.Core.Logic.Enums
+﻿/// <summary>
+/// Represents the available modes for a bot.
+/// </summary>
+namespace AmeisenBotX.Core.Logic.Enums
 {
     /// <summary>
     /// Represents the available modes for a bot.

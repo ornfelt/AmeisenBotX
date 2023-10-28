@@ -3,6 +3,9 @@ using AmeisenBotX.Wow.Objects;
 using System.Collections.Generic;
 using System.Linq;
 
+/// <summary>
+/// Manages the validation of targets by implementing the ITargetValidator interface.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Combat.Helpers.Targets.Validation
 {
     /// <summary>

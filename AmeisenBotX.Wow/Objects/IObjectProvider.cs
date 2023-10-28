@@ -4,6 +4,9 @@ using AmeisenBotX.Wow.Objects.Raw;
 using System;
 using System.Collections.Generic;
 
+/// <summary>
+/// Namespace for objects related to the AmeisenBotX.Wow library.
+/// </summary>
 namespace AmeisenBotX.Wow.Objects
 {
     public interface IObjectProvider

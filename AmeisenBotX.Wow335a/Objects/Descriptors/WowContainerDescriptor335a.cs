@@ -1,5 +1,8 @@
 ﻿using System.Runtime.InteropServices;
 
+/// <summary>
+/// Namespace for objects related to descriptors of containers in the World of Warcraft game.
+/// </summary>
 namespace AmeisenBotX.Wow335a.Objects.Descriptors
 {
     /// <summary>

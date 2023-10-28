@@ -1,6 +1,9 @@
 ﻿using AmeisenBotX.Wow.Objects;
 using System.Collections.Generic;
 
+/// <summary>
+/// Represents a quest objective that requires the player to use a specific unit to meet certain conditions.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Quest.Objects.Objectives
 {
     /// <summary>

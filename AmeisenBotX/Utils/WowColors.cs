@@ -1,6 +1,9 @@
 ﻿using AmeisenBotX.Wow.Objects.Enums;
 using System.Windows.Media;
 
+/// <summary>
+/// Contains static, read-only brushes that are used as colors for DK.
+/// </summary>
 namespace AmeisenBotX.Utils
 {
     /// <summary>

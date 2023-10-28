@@ -3,6 +3,9 @@ using GameOverlay.Windows;
 using System;
 using System.Collections.Generic;
 
+/// <summary>
+/// Namespace for the AmeisenBotX overlay functionality.
+/// </summary>
 namespace AmeisenBotX.Overlay
 {
     /// <summary>

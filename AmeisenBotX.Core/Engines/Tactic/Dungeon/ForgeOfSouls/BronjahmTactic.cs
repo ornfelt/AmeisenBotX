@@ -6,6 +6,9 @@ using AmeisenBotX.Wow.Objects.Enums;
 using System.Collections.Generic;
 using System.Linq;
 
+/// <summary>
+/// Represents a specific tactic for the character Bronjahm in a game.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Tactic.Dungeon.ForgeOfSouls
 {
     /// <summary>

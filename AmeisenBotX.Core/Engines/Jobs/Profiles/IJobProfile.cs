@@ -1,5 +1,8 @@
 ﻿using AmeisenBotX.Core.Engines.Jobs.Enums;
 
+/// <summary>
+/// Represents an interface for a job profile.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Jobs.Profiles
 {
     /// <summary>

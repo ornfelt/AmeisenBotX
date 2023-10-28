@@ -1,5 +1,8 @@
 ﻿using System.Runtime.InteropServices;
 
+/// <summary>
+/// Represents a structure that describes a WoW game object.
+/// </summary>
 namespace AmeisenBotX.Wow335a.Objects.Descriptors
 {
     /// <summary>

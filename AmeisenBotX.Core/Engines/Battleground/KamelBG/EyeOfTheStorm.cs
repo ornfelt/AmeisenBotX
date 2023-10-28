@@ -7,6 +7,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
+/// <summary>
+/// Namespace containing the implementation of the Eye of the Storm battleground engine.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Battleground.KamelBG
 {
     /// <summary>

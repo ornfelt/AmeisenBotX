@@ -26,6 +26,9 @@ using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
 
+/// <summary>
+/// Namespace for the AmeisenBotX application.
+/// </summary>
 namespace AmeisenBotX
 {
     /// <summary>

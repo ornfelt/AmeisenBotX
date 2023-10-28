@@ -1,4 +1,7 @@
-﻿namespace AmeisenBotX.Core.Engines.Movement.Pathfinding.Enums
+﻿/// <summary>
+/// Enumeration of message types.
+/// </summary>
+namespace AmeisenBotX.Core.Engines.Movement.Pathfinding.Enums
 {
     /// <summary>
     /// Enumeration of message types.

@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 
+/// <summary>
+/// Namespace for managing character comparators and objects.
+/// </summary>
 namespace AmeisenBotX.Core.Managers.Character.Comparators.Objects
 {
     /// <summary>

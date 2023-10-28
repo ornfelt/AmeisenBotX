@@ -9,6 +9,9 @@ using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Text;
 
+/// <summary>
+/// Represents a hook that is triggered at the end of a scene in the game, specifically for version 548.
+/// </summary>
 namespace AmeisenBotX.Wow548.Hook
 {
     /// <summary>

@@ -3,6 +3,9 @@ using AmeisenBotX.Core.Engines.Jobs.Enums;
 using AmeisenBotX.Wow.Objects.Enums;
 using System.Collections.Generic;
 
+/// <summary>
+/// Defines the Jannis specific implementations for the gathering profiles in the AmeisenBotX engine.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Jobs.Profiles.Gathering.Jannis
 {
     /// <summary>

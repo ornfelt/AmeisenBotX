@@ -1,5 +1,8 @@
 ﻿using System;
 
+/// <summary>
+/// Contains classes for implementing idle actions in the AmeisenBotX.Core.Logic.Idle.Actions namespace.
+/// </summary>
 namespace AmeisenBotX.Core.Logic.Idle.Actions
 {
     /// <summary>

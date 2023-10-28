@@ -1,4 +1,7 @@
-﻿namespace AmeisenBotX.Core.Engines.Combat.Classes.Bia10
+﻿/// <summary>
+/// This namespace contains classes related to the combat engine of the AmeisenBotX, specifically for the Bia10 class.
+/// </summary>
+namespace AmeisenBotX.Core.Engines.Combat.Classes.Bia10
 {
     /// <summary>
     /// An array that contains the IDs of usable healing items, including food, potions, and healthstones.

@@ -3,6 +3,9 @@ using AmeisenBotX.Wow.Objects;
 using AmeisenBotX.Wow335a.Objects.Descriptors;
 using System;
 
+/// <summary>
+/// Defines the objects related to the World of Warcraft game version 3.3.5a.
+/// </summary>
 namespace AmeisenBotX.Wow335a.Objects
 {
     /// <summary>

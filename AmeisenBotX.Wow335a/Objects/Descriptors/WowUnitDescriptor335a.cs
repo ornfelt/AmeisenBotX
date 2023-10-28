@@ -1,6 +1,9 @@
 ﻿using System.Collections.Specialized;
 using System.Runtime.InteropServices;
 
+/// <summary>
+/// Represents a descriptor for a World of Warcraft unit in version 3.3.5a.
+/// </summary>
 namespace AmeisenBotX.Wow335a.Objects.Descriptors
 {
     /// <summary>

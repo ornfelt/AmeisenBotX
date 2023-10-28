@@ -1,4 +1,7 @@
-﻿namespace AmeisenBotX.Wow.Objects.Constants
+﻿/// <summary>
+/// Contains constants related to World of Warcraft objects for the AmeisenBotX project.
+/// </summary>
+namespace AmeisenBotX.Wow.Objects.Constants
 {
     /// <summary>
     /// Represents the WowClickToMoveDistance class that contains constant values for interaction and attack ranges in the game.

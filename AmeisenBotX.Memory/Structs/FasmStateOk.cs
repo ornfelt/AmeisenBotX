@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
+/// <summary>
+/// Represents a struct that holds information about the state of the FASM assembler.
+/// </summary>
 namespace AmeisenBotX.Memory.Structs
 {
     /// <summary>

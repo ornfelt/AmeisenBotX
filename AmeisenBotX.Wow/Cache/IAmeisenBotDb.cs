@@ -4,6 +4,9 @@ using AmeisenBotX.Wow.Objects;
 using AmeisenBotX.Wow.Objects.Enums;
 using System.Collections.Generic;
 
+/// <summary>
+/// Interface for a database that stores various data related to a bot's interactions with the game.
+/// </summary>
 namespace AmeisenBotX.Wow.Cache
 {
     /// <summary>

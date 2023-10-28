@@ -1,5 +1,8 @@
 ﻿using System.Runtime.InteropServices;
 
+/// <summary>
+/// Represents a sub-structure for item enchantments.
+/// </summary>
 namespace AmeisenBotX.Wow.Objects.Raw.SubStructs
 {
     /// <summary>

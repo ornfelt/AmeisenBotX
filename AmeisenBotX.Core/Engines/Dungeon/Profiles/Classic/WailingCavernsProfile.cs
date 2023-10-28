@@ -4,6 +4,9 @@ using AmeisenBotX.Core.Engines.Dungeon.Objects;
 using AmeisenBotX.Wow.Objects.Enums;
 using System.Collections.Generic;
 
+/// <summary>
+/// The namespace contains classes and interfaces related to dungeon profiles for the classic version of the AmeisenBotX game bot.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Dungeon.Profiles.Classic
 {
     ///<summary>

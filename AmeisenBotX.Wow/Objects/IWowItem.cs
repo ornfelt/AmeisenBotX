@@ -2,6 +2,9 @@
 using AmeisenBotX.Wow.Objects.Raw.SubStructs;
 using System.Collections.Generic;
 
+/// <summary>
+/// Represents an item in the World of Warcraft game.
+/// </summary>
 namespace AmeisenBotX.Wow.Objects
 {
     /// <summary>

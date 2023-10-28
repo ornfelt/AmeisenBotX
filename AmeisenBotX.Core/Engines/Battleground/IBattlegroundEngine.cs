@@ -1,4 +1,7 @@
-﻿namespace AmeisenBotX.Core.Engines.Battleground
+﻿/// <summary>
+/// Provides classes and interfaces for the battleground engine in the AmeisenBotX.Core.
+/// </summary>
+namespace AmeisenBotX.Core.Engines.Battleground
 {
     /// <summary>
     /// Represents an engine responsible for handling battleground operations.

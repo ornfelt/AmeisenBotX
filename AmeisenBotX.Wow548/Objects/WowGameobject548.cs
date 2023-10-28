@@ -5,6 +5,9 @@ using AmeisenBotX.Wow548.Objects.Descriptors;
 using System.Collections.Specialized;
 using System.Globalization;
 
+/// <summary>
+/// This namespace contains classes and interfaces related to WoW game objects for version 548.
+/// </summary>
 namespace AmeisenBotX.Wow548.Objects
 {
     /// <summary>

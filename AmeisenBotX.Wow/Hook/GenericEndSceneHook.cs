@@ -11,6 +11,9 @@ using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 
+/// <summary>
+/// Represents a namespace for handling end scene hooks in the AmeisenBotX.Wow.Hook namespace.
+/// </summary>
 namespace AmeisenBotX.Wow.Hook
 {
     /// <summary>

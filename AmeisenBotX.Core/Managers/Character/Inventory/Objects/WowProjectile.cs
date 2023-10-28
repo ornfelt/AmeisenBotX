@@ -1,4 +1,7 @@
-﻿namespace AmeisenBotX.Core.Managers.Character.Inventory.Objects
+﻿/// <summary>
+/// Represents a projectile item in the character's inventory.
+/// </summary>
+namespace AmeisenBotX.Core.Managers.Character.Inventory.Objects
 {
     /// <summary>
     /// Initializes a new instance of the WowProjectile class with the specified WowInventoryItem.

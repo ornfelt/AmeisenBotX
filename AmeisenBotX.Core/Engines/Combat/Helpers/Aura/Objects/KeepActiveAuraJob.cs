@@ -4,6 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
+/// <summary>
+/// Represents a namespace for helper classes related to combat auras.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Combat.Helpers.Aura.Objects
 {
     /// <summary>

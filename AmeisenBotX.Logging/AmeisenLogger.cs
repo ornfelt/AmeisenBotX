@@ -4,6 +4,9 @@ using System;
 using System.IO;
 using System.Text;
 
+/// <summary>
+/// Namespace for logging related classes and functionality.
+/// </summary>
 namespace AmeisenBotX.Logging
 {
     /// <summary>

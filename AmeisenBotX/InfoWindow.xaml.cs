@@ -8,6 +8,9 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 
+/// <summary>
+/// Represents a window that provides information about the AmeisenBotX namespace.
+/// </summary>
 namespace AmeisenBotX
 {
     /// <summary>

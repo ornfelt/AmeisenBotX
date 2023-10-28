@@ -8,6 +8,9 @@ using AmeisenBotX.Wow.Objects.Enums;
 using AmeisenBotX.Wow335a.Constants;
 using System.Collections.Generic;
 
+/// <summary>
+/// Represents a shadow specialization of the Priest class.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Shino
 {
     /// <summary>

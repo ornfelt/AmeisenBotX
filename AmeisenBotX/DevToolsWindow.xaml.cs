@@ -14,6 +14,9 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
+/// <summary>
+/// Represents a window for developer tools.
+/// </summary>
 namespace AmeisenBotX
 {
     /// <summary>

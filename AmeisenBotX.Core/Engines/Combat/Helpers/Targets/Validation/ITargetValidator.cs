@@ -1,5 +1,8 @@
 ﻿using AmeisenBotX.Wow.Objects;
 
+/// <summary>
+/// Represents an interface for validating the target.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Combat.Helpers.Targets.Validation
 {
     /// <summary>

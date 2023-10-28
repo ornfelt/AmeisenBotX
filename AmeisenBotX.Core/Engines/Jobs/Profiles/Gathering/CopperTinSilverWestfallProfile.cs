@@ -3,6 +3,9 @@ using AmeisenBotX.Core.Engines.Jobs.Enums;
 using AmeisenBotX.Wow.Objects.Enums;
 using System.Collections.Generic;
 
+/// <summary>
+/// Namespace for gathering profiles related to mining copper, tin, and silver in Westfall.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Jobs.Profiles.Gathering
 {
     /// <summary>

@@ -5,6 +5,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
+/// <summary>
+/// Contains classes and objects related to the movement engine of AmeisenBotX.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Movement.Objects
 {
     /// <summary>

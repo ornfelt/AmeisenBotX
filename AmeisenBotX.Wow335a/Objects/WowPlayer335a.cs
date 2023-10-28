@@ -7,6 +7,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
+/// <summary>
+/// Represents a namespace for objects related to players in the World of Warcraft 3.3.5a game version.
+/// </summary>
 namespace AmeisenBotX.Wow335a.Objects
 {
     /// <summary>

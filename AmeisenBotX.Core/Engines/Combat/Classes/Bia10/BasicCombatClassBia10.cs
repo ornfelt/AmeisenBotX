@@ -18,6 +18,9 @@ using System.Globalization;
 using System.Linq;
 using System.Text.Json;
 
+/// <summary>
+/// Represents a namespace for the Bia10 combat class in the AmeisenBotX.Core.Engines.Combat.Classes namespace.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Bia10
 {
     /// <summary>

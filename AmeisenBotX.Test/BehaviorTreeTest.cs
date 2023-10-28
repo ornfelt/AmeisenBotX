@@ -4,6 +4,13 @@ using AmeisenBotX.BehaviorTree.Interfaces;
 using AmeisenBotX.BehaviorTree.Objects;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
+/// <summary>
+/// Tests the behavior of a DualSelector tree.
+/// The tree has four leaf nodes: treeResult00, treeResult10, treeResult01, and treeResult11.
+/// The tree selects between two nodes based on the values of FirstNode and SecondFirstNode in the testBlackboard.
+/// If FirstNode is false, it selects treeResult00 and treeResult01.
+/// If SecondFirstNode is false, it selects treeResult10 and treeResult11.
+/// </summary>
 namespace AmeisenBotX.Test
 {
     /// <summary>

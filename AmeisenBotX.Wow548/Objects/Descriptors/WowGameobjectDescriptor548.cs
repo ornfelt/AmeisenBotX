@@ -1,6 +1,9 @@
 ﻿using System.Collections.Specialized;
 using System.Runtime.InteropServices;
 
+/// <summary>
+/// Namespace containing descriptors for WoW game objects with specific properties.
+/// </summary>
 namespace AmeisenBotX.Wow548.Objects.Descriptors
 {
     /// <summary>

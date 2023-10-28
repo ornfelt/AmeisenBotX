@@ -1,4 +1,8 @@
-﻿namespace AmeisenBotX.Wow.Objects.Enums
+﻿/// <summary>
+/// Represents the different types of ore in the game World of Warcraft.
+/// Each ore has a unique identifier.
+/// </summary>
+namespace AmeisenBotX.Wow.Objects.Enums
 {
     /// <summary>
     /// Represents the different types of ore in the game World of Warcraft.

@@ -1,4 +1,7 @@
-﻿namespace AmeisenBotX.Wow.Shared.Lua
+﻿/// <summary>
+/// Retrieves data from a frame, table, handler function, and output string.
+/// </summary>
+namespace AmeisenBotX.Wow.Shared.Lua
 {
     /// <summary>
     /// Represents a static class that provides methods for retrieving data from a frame, table, handler function, and output string.

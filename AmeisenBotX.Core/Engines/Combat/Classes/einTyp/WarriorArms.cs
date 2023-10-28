@@ -10,6 +10,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
 
+/// <summary>
+/// Defines the namespace for the 'WarriorArms' class in the AmeisenBotX combat engine.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Combat.Classes.einTyp
 {
     /// <summary>

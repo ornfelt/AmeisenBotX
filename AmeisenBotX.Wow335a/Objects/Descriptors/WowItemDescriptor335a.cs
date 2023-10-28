@@ -1,6 +1,9 @@
 ﻿using AmeisenBotX.Wow.Objects.Raw.SubStructs;
 using System.Runtime.InteropServices;
 
+/// <summary>
+/// Represents a struct that contains information about a World of Warcraft item.
+/// </summary>
 namespace AmeisenBotX.Wow335a.Objects.Descriptors
 {
     /// <summary>

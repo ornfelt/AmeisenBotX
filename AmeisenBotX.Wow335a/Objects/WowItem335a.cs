@@ -5,6 +5,9 @@ using AmeisenBotX.Wow335a.Objects.Descriptors;
 using System;
 using System.Collections.Generic;
 
+/// <summary>
+/// Represents a namespace for World of Warcraft item objects in the version 3.3.5a of the game.
+/// </summary>
 namespace AmeisenBotX.Wow335a.Objects
 {
     /// <summary>

@@ -2,6 +2,9 @@
 using AmeisenBotX.Wow.Objects.Enums;
 using System.Collections.Generic;
 
+/// <summary>
+/// Represents a namespace for mining profiles for character jobs.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Jobs.Profiles
 {
     /// <summary>

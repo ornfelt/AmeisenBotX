@@ -2,6 +2,9 @@
 using AmeisenBotX.Wow;
 using AmeisenBotX.Wow.Objects;
 
+/// <summary>
+/// Represents an object manager for managing WoW objects in the game.
+/// </summary>
 namespace AmeisenBotX.Wow548.Objects
 {
     /// <summary>

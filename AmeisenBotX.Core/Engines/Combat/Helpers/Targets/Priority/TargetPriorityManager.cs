@@ -3,6 +3,9 @@ using AmeisenBotX.Wow.Objects;
 using System.Collections.Generic;
 using System.Linq;
 
+/// <summary>
+/// Represents a manager for determining target priorities.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Combat.Helpers.Targets.Priority
 {
     /// <summary>

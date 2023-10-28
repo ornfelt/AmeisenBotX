@@ -7,6 +7,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
+/// <summary>
+/// The AmeisenBotX.Core.Managers.Character.Inventory namespace contains classes that manage a character's inventory in a game.
+/// </summary>
 namespace AmeisenBotX.Core.Managers.Character.Inventory
 {
     /// <summary>

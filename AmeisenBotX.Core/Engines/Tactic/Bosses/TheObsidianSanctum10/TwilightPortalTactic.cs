@@ -7,6 +7,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
+/// <summary>
+/// Namespace for tactics related to the boss encounter in The Obsidian Sanctum (10-player version).
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Tactic.Bosses.TheObsidianSanctum10
 {
     /// <summary>

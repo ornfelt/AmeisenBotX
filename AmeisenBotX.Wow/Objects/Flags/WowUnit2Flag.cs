@@ -1,5 +1,8 @@
 ﻿using System;
 
+/// <summary>
+/// Represents flags for the WowUnit2Flag enum.
+/// </summary>
 namespace AmeisenBotX.Wow.Objects.Flags
 {
     /// <summary>

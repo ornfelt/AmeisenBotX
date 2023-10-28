@@ -1,4 +1,7 @@
-﻿namespace AmeisenBotX.Logging.Enums
+﻿/// <summary>
+/// Represents the namespace for logging enums.
+/// </summary>
+namespace AmeisenBotX.Logging.Enums
 {
     /// <summary>
     /// Represents various logging levels.

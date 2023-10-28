@@ -5,6 +5,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
+/// <summary>
+/// Manager to observe environmental threats (not threat of mobs)
+/// </summary>
 namespace AmeisenBotX.Core.Managers.Threat
 {
     /// <summary>

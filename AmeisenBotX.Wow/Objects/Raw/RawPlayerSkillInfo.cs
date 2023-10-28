@@ -1,5 +1,8 @@
 ﻿using System.Runtime.InteropServices;
 
+/// <summary>
+/// Represents the raw information of a player skill.
+/// </summary>
 namespace AmeisenBotX.Wow.Objects.Raw
 {
     /// <summary>

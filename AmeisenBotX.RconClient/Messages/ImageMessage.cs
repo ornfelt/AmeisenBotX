@@ -1,5 +1,8 @@
 ﻿using System.Text.Json.Serialization;
 
+/// <summary>
+/// Contains classes for handling image messages in the RconClient.
+/// </summary>
 namespace AmeisenBotX.RconClient.Messages
 {
     /// <summary>

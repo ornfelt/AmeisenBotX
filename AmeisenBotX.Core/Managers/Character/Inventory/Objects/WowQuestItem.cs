@@ -1,4 +1,7 @@
-﻿namespace AmeisenBotX.Core.Managers.Character.Inventory.Objects
+﻿/// <summary>
+/// Namespace for managing character inventory objects in the AmeisenBotX.Core library.
+/// </summary>
+namespace AmeisenBotX.Core.Managers.Character.Inventory.Objects
 {
     /// <summary>
     /// Initializes a new instance of the WowQuestItem class, using the provided WowInventoryItem object as the base item.

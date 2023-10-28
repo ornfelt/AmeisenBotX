@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Threading;
 
+/// <summary>
+/// Contains utility classes and methods used by the AmeisenBotX application.
+/// </summary>
 namespace AmeisenBotX.Common.Utils
 {
     /// <summary>

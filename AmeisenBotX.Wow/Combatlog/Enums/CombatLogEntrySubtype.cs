@@ -1,4 +1,7 @@
-﻿namespace AmeisenBotX.Wow.Combatlog.Enums
+﻿/// <summary>
+/// Represents the possible subtypes of combat log entries.
+/// </summary>
+namespace AmeisenBotX.Wow.Combatlog.Enums
 {
     /// <summary>
     /// Represents the possible subtypes of combat log entries.

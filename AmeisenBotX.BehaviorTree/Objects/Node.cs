@@ -1,5 +1,8 @@
 ﻿using AmeisenBotX.BehaviorTree.Enums;
 
+/// <summary>
+/// Represents a node in a BehaviorTree. This interface defines the core methods required for a BehaviorTree node's execution.
+/// </summary>
 namespace AmeisenBotX.BehaviorTree.Objects
 {
     /// <summary>

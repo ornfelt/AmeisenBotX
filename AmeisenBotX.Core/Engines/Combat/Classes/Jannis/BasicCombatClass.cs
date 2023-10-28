@@ -18,6 +18,9 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 
+/// <summary>
+/// This namespace contains the combat classes for the AmeisenBotX.Core.Engines.Combat.Classes.Jannis namespace.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis
 {
     /// <summary>

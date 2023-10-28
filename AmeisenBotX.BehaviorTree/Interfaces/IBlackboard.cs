@@ -1,4 +1,7 @@
-﻿namespace AmeisenBotX.BehaviorTree.Interfaces
+﻿/// <summary>
+/// Represents a blackboard used for sharing data between different parts of a behavior tree.
+/// </summary>
+namespace AmeisenBotX.BehaviorTree.Interfaces
 {
     /// <summary>
     /// Represents a blackboard used for sharing data between different parts of a behavior tree.

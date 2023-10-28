@@ -1,5 +1,8 @@
 ﻿using System;
 
+/// <summary>
+/// Flags for performing hit tests on the WowWorldFrame.
+/// </summary>
 namespace AmeisenBotX.Wow.Objects.Flags
 {
     ///<summary>

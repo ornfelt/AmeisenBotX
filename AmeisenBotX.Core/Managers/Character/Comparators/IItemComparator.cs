@@ -1,5 +1,8 @@
 ﻿using AmeisenBotX.Core.Managers.Character.Inventory.Objects;
 
+/// <summary>
+/// Represents an interface for comparing World of Warcraft inventory items.
+/// </summary>
 namespace AmeisenBotX.Core.Managers.Character.Comparators
 {
     /// <summary>

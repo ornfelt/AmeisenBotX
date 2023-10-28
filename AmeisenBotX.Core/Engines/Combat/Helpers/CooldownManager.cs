@@ -2,6 +2,9 @@
 using System;
 using System.Collections.Generic;
 
+/// <summary>
+/// The AmeisenBotX.Core.Engines.Combat.Helpers namespace contains helper classes and methods for managing combat in the AmeisenBotX game.
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Combat.Helpers
 {
     /// <summary>
