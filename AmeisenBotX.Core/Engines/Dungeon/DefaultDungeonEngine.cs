@@ -17,7 +17,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-"/// <summary>
+/// <summary>
 /// Provides the core functionality for the AmeisenBotX Dungeon Engine.
 /// </summary>"
 namespace AmeisenBotX.Core.Engines.Dungeon
