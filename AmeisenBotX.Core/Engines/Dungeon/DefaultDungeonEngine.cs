@@ -19,7 +19,7 @@ using System.Linq;
 
 /// <summary>
 /// Provides the core functionality for the AmeisenBotX Dungeon Engine.
-/// </summary>"
+/// </summary>
 namespace AmeisenBotX.Core.Engines.Dungeon
 {
     /// <summary>

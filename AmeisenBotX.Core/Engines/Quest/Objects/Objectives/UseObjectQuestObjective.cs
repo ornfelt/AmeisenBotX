@@ -18,6 +18,9 @@ namespace AmeisenBotX.Core.Engines.Quest.Objects.Objectives
     /// </returns>
     public delegate bool UseObjectQuestObjectiveCondition();
 
+    /// <summary>
+    /// Represents a quest objective that requires using a specific object with the given display ID.
+    /// </summary>
     public class UseObjectQuestObjective : IQuestObjective
     {
         /// <summary>

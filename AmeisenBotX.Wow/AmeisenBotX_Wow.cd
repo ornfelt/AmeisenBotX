@@ -1,0 +1,660 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="AmeisenBotX.Wow.Cache.Objects.StaticDB" Collapsed="true">
+    <Position X="14.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Cache\Objects\StaticDB.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Wow.Cache.LocalAmeisenBotDb" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="20" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgNAiIAAEQAAAIAgAQAAAIACAAIUhAAABBAAIgBASAE=</HashCode>
+      <FileName>Cache\LocalAmeisenBotDb.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Wow.Combatlog.DefaultCombatlogParser&lt;T&gt;" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="16.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAAAAAAAAAgAAAAAgAEAIAAAAACAAAAAA=</HashCode>
+      <FileName>Combatlog\DefaultCombatLogParser.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Wow.Events.SimpleEventManager" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="27" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAABAACEAAAAAEAiggKBAAAYACAAAAAQAA=</HashCode>
+      <FileName>Events\SimpleEventManager.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Wow.Events.WowEvent" Collapsed="true">
+    <Position X="20" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAACAAQAAAAAAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>Events\WowEvent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Wow.Hook.Modules.RunAsmHookModule" Collapsed="true">
+    <Position X="1.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAQAAAAAAAACAABAAAABABAAAgIAAAAAQAA=</HashCode>
+      <FileName>Hook\Modules\RunAsmHookModule.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AmeisenBotX.Wow.Hook.Modules.RunLuaHookModule" Collapsed="true">
+    <Position X="0.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAACAAAAAAAAAAAAAAASAAAAAAABABAAAAAAAAAAAIA=</HashCode>
+      <FileName>Hook\Modules\RunLuaHookModule.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Wow.Hook.Modules.TracelineJumpHookModule" Collapsed="true">
+    <Position X="2.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAIACAAAAAAAAAAAAAABABAAAAAAAAAAAAA=</HashCode>
+      <FileName>Hook\Modules\TracelineJumpHookModule.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Wow.Hook.GenericEndSceneHook" Collapsed="true">
+    <Position X="18.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>JAAABCBQAAAAAgAgIADACEIgQAFIAAhAAjoIAAQQAAA=</HashCode>
+      <FileName>Hook\GenericEndSceneHook.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Wow.Objects.Constants.WowClickToMoveDistance" Collapsed="true">
+    <Position X="16.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQIABAAAAAAAAAAAAAAAAAAAAAACAAAAAAAA=</HashCode>
+      <FileName>Objects\Constants\WowClickToMoveDistance.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Wow.Objects.Enums.WowStatType" Collapsed="true">
+    <Position X="25.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAIRAAAABAAEBQAAAAAAFAwkRAEAAAABAIQCAgAg=</HashCode>
+      <FileName>Objects\Enums\WowStatType.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Wow.Objects.Raw.Enums.WowEnchantmentHelper" Collapsed="true">
+    <Position X="18.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Objects\Raw\Enums\WowEnchantmentHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Wow.Objects.AmeisenBotExtensions" Collapsed="true">
+    <Position X="14.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAFAIAAAAAAAAAAAAAAAAAAAACAAAAAAAQAAAA=</HashCode>
+      <FileName>Objects\AmeisenBotExtensions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Wow.Objects.ObjectManager&lt;TObject, TUnit, TPlayer, TGameobject, TDynobject, TItem, TCorpse, TContainer&gt;" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="25.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAACQABCIADGCBAAQCCAAKAQBggECEAACqAAhRyAYCA=</HashCode>
+      <FileName>Objects\ObjectManager.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Wow.Objects.WowMount" Collapsed="true">
+    <Position X="23.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABAAAAAAAIAAAAAAQAAAAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>Objects\WowMount.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Wow.Shared.Lua.LuaEventHook" Collapsed="true">
+    <Position X="21.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Shared\Lua\LuaEventHook.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Wow.Shared.Lua.LuaLogin" Collapsed="true">
+    <Position X="23.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Shared\Lua\LuaLogin.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Wow.WowMemoryApi" Collapsed="true">
+    <Position X="21.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAA=</HashCode>
+      <FileName>WowMemoryApi.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="AmeisenBotX.Wow.Hook.Structs.GameInfo" Collapsed="true">
+    <Position X="14.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>Hook\Structs\GameInfo.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="AmeisenBotX.Wow.Objects.Raw.SubStructs.ItemEnchantment" Collapsed="true">
+    <Position X="16.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAhAAAAAA=</HashCode>
+      <FileName>Objects\Raw\SubStructs\ItemEnchantment.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="AmeisenBotX.Wow.Objects.Raw.SubStructs.QuestlogEntry" Collapsed="true">
+    <Position X="18.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAQAgQAAAAAAAABAAAAAIAAAIAA=</HashCode>
+      <FileName>Objects\Raw\SubStructs\QuestlogEntry.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="AmeisenBotX.Wow.Objects.Raw.SubStructs.VisibleItemEnchantment" Collapsed="true">
+    <Position X="23.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAhAAAAAA=</HashCode>
+      <FileName>Objects\Raw\SubStructs\VisibleItemEnchantment.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="AmeisenBotX.Wow.Objects.Raw.RawCameraInfo" Collapsed="true">
+    <Position X="20" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAMABAAAAgEAACAAAAAQAIAKAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Objects\Raw\RawCameraInfo.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="AmeisenBotX.Wow.Objects.Raw.RawPlayerSkillInfo" Collapsed="true">
+    <Position X="21.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACBAAAAAAAAAAAAAACAAAAAgAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Objects\Raw\RawPlayerSkillInfo.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Interface Name="AmeisenBotX.Wow.Cache.Structs.ILikeUnit" Collapsed="true">
+    <Position X="23.5" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgBAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Cache\Structs\ILikeUnit.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AmeisenBotX.Wow.Cache.IAmeisenBotDb" Collapsed="true">
+    <Position X="14.75" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgNACIAAAQAAAIAgAAAAAAAAAAIAhAAAABAAAgBASAA=</HashCode>
+      <FileName>Cache\IAmeisenBotDb.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AmeisenBotX.Wow.Combatlog.Enums.ICombatlogFields" Collapsed="true">
+    <Position X="16.5" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAJAAAAgAAAgAAAAACAACAAAAgAAQAAQABAAAAAAA=</HashCode>
+      <FileName>Combatlog\Enums\ICombatlogFields.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AmeisenBotX.Wow.Combatlog.ICombatlogParser" Collapsed="true">
+    <Position X="18.25" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAAAAAAAAAgAAAAAgAEAAAAAAACAAAAAA=</HashCode>
+      <FileName>Combatlog\ICombatLogParser.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AmeisenBotX.Wow.Events.IEventManager" Collapsed="true">
+    <Position X="20" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAEAAAAAAACggCAAAAYAAAAAAAQAA=</HashCode>
+      <FileName>Events\IEventManager.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AmeisenBotX.Wow.Hook.Modules.IHookModule" Collapsed="true">
+    <Position X="21.75" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAQAAAAAAAACAAAAAAAAABAAAAIAAAAAQAA=</HashCode>
+      <FileName>Hook\Modules\IHookModule.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AmeisenBotX.Wow.Objects.IObjectProvider" Collapsed="true">
+    <Position X="25.25" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACQABCAACCCAAAAAAAACAQBAAECAAAAKAABRyAIAA=</HashCode>
+      <FileName>Objects\IObjectProvider.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AmeisenBotX.Wow.Objects.IWowAura" Collapsed="true">
+    <Position X="14.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAIAAAAIAAAAAAAAAAAAAAABEAAAAAAAAAA=</HashCode>
+      <FileName>Objects\IWowAura.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AmeisenBotX.Wow.Objects.IWowContainer" Collapsed="true">
+    <Position X="10" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Objects\IWowContainer.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AmeisenBotX.Wow.Objects.IWowCorpse" Collapsed="true">
+    <Position X="12.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAACAAAAAAAAAAAAAAAAAAAAACAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Objects\IWowCorpse.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AmeisenBotX.Wow.Objects.IWowDynobject" Collapsed="true">
+    <Position X="1" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAACAAAAAAAIAAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Objects\IWowDynobject.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AmeisenBotX.Wow.Objects.IWowGameobject" Collapsed="true">
+    <Position X="3.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAAAAAAAAAAAAAAAAAACAABQQAIEAAAAAE=</HashCode>
+      <FileName>Objects\IWowGameobject.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AmeisenBotX.Wow.Objects.IWowItem" Collapsed="true">
+    <Position X="5.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAEAAAAAAAAAQQAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Objects\IWowItem.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AmeisenBotX.Wow.Objects.IWowObject" Collapsed="true">
+    <Position X="6.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AARAAAAAAAAAAACgAAIgAAQCICAABIAQAQACAAAAAQg=</HashCode>
+      <FileName>Objects\IWowObject.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AmeisenBotX.Wow.Objects.IWowPlayer" Collapsed="true">
+    <Position X="7.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAgAAAAAABAAAAAAQIAAAAAAkAEUQAAAAAABAU=</HashCode>
+      <FileName>Objects\IWowPlayer.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AmeisenBotX.Wow.Objects.IWowUnit" Collapsed="true">
+    <Position X="7.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>0QIYDACOKOEAKZWTiRskOsiikkQwGIshQwdxIKAMISU=</HashCode>
+      <FileName>Objects\IWowUnit.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AmeisenBotX.Wow.Offsets.IOffsetList" Collapsed="true">
+    <Position X="27" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QyECAAjKIhDiFhQggeEURsCQQHCRokAVgAg+ogwQIQg=</HashCode>
+      <FileName>Offsets\IOffsetList.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AmeisenBotX.Wow.IWowInterface" Collapsed="true">
+    <Position X="16.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>Hwa0iChEqbAKKBZBhwSKCIoAAtRSR8EUOwOAqfgUQCg=</HashCode>
+      <FileName>IWowInterface.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="AmeisenBotX.Wow.Cache.Enums.PoiType" Collapsed="true">
+    <Position X="18.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAIAAAAABQAACCAAAABgAgAAAAAAAAA=</HashCode>
+      <FileName>Cache\Enums\PoiType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="AmeisenBotX.Wow.Combatlog.Enums.CombatlogEntrySubtype" Collapsed="true">
+    <Position X="14.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAhEQIICAAEAAEAYCEkAUgASQICgBQQAAIEEggQBAgA=</HashCode>
+      <FileName>Combatlog\Enums\CombatLogEntrySubtype.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="AmeisenBotX.Wow.Combatlog.Enums.CombatlogEntryType" Collapsed="true">
+    <Position X="16.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BABEAAIAAAAAAEAIAAoAAAQAgIAAAAAAAAEEmAABAgA=</HashCode>
+      <FileName>Combatlog\Enums\CombatLogEntryType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="AmeisenBotX.Wow.Objects.Enums.WowAmmoType" Collapsed="true">
+    <Position X="20" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAAAAAAAAAAAAAAAQAAAAAAAQgAAAEAAAA=</HashCode>
+      <FileName>Objects\Enums\WowAmmoType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="AmeisenBotX.Wow.Objects.Enums.WowArmorType" Collapsed="true">
+    <Position X="21.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gACAACAAABEAAgAAAAAAAAIEAAAAAIAAAAAAAQkAAAA=</HashCode>
+      <FileName>Objects\Enums\WowArmorType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="AmeisenBotX.Wow.Objects.Enums.WowChat" Collapsed="true">
+    <Position X="25.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CCpAAIAAAAQAAgAABYAAAgBACQkCBAUAIAAMEAAAABA=</HashCode>
+      <FileName>Objects\Enums\WowChat.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="AmeisenBotX.Wow.Objects.Enums.WowClass" Collapsed="true">
+    <Position X="27" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAIAAAAAAAADAAEAAAgECAAAAUAAAAAAMAAAA=</HashCode>
+      <FileName>Objects\Enums\WowClass.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="AmeisenBotX.Wow.Objects.Enums.WowClickToMoveType" Collapsed="true">
+    <Position X="14.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAQAACAQIABAAgEAABAAAAAAIAAEAAAIACAAAUAAAI=</HashCode>
+      <FileName>Objects\Enums\WowClickToMoveType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="AmeisenBotX.Wow.Objects.Enums.WowCreatureType" Collapsed="true">
+    <Position X="18.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAIAABIAgQAAFAAAAAAAAABBAAICAAAAAAAQARA=</HashCode>
+      <FileName>Objects\Enums\WowCreatureType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="AmeisenBotX.Wow.Objects.Enums.WowDispelType" Collapsed="true">
+    <Position X="20" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAEAAAAAgGAAAAgAAAAAgAAAAAAAAABIABAAEAAAA=</HashCode>
+      <FileName>Objects\Enums\WowDispelTypes.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="AmeisenBotX.Wow.Objects.Enums.WowDungeonDifficulty" Collapsed="true">
+    <Position X="21.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAACAAAAAAAIAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Objects\Enums\WowDungeonDifficulty.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="AmeisenBotX.Wow.Objects.Enums.WowEquipmentSlot" Collapsed="true">
+    <Position X="23.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQQJQAAAQAAAABACAIJCECAAAAACAkAAgAAACIgI=</HashCode>
+      <FileName>Objects\Enums\WowEquipmentSlot.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="AmeisenBotX.Wow.Objects.Enums.WowFactionID" Collapsed="true">
+    <Position X="25.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>nXd776/e7PHpl+5++6jVzN7yp7fN3/e3J5b1n//83d4=</HashCode>
+      <FileName>Objects\Enums\WowFactionID.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="AmeisenBotX.Wow.Objects.Enums.WowFood" Collapsed="true">
+    <Position X="27" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAZAwgEABwBgAIDAAAAAZAAQSABgAQEAIAAAQ=</HashCode>
+      <FileName>Objects\Enums\WowFood.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="AmeisenBotX.Wow.Objects.Enums.WowGameObjectDisplayId" Collapsed="true">
+    <Position X="14.75" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIEAAAAAAAQAAAAAAAAAAgQAAACAAAAABIAAAAAA=</HashCode>
+      <FileName>Objects\Enums\WowGameobjectDisplayId.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="AmeisenBotX.Wow.Objects.Enums.WowGameObjectType" Collapsed="true">
+    <Position X="18.25" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gM0CATAAEYAEQQAAiSUARAQAgAAgQCAAAACACAAAQAg=</HashCode>
+      <FileName>Objects\Enums\WowGameobjectType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="AmeisenBotX.Wow.Objects.Enums.WowGameState" Collapsed="true">
+    <Position X="20" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABgAAAEAAAgAAEQSAABABAAAAAAAgAAAAACAAAAgAI=</HashCode>
+      <FileName>Objects\Enums\WowGameState.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="AmeisenBotX.Wow.Objects.Enums.WowGender" Collapsed="true">
+    <Position X="21.75" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAABA=</HashCode>
+      <FileName>Objects\Enums\WowGender.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="AmeisenBotX.Wow.Objects.Enums.WowHerbId" Collapsed="true">
+    <Position X="23.5" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EYoQAgIEAAAARAAAIEAGCAAAZEBUkIlCAFAAAAECgAQ=</HashCode>
+      <FileName>Objects\Enums\WowHerbId.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="AmeisenBotX.Wow.Objects.Enums.WowItemQuality" Collapsed="true">
+    <Position X="27" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAQAAAACAAAAQAAAAAAAQgAIACAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Objects\Enums\WowItemQuality.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="AmeisenBotX.Wow.Objects.Enums.WowItemSubClass" Collapsed="true">
+    <Position X="14.75" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BGSyGeAYEhkgXtZAYDAB0upF4G7wBYUckawkL/pQSYg=</HashCode>
+      <FileName>Objects\Enums\WowItemSubClass.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="AmeisenBotX.Wow.Objects.Enums.WowLuaUnit" Collapsed="true">
+    <Position X="16.5" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EEAEAAAAAAAACAAEAgAAACAAAAAAIACBAAAAEQgAAAA=</HashCode>
+      <FileName>Objects\Enums\WowLuaUnit.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="AmeisenBotX.Wow.Objects.Enums.WowMapId" Collapsed="true">
+    <Position X="18.25" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>jKT/6h+4vJ+vxTve9dBcQqqV1Pi40tXspC02JlwcnNU=</HashCode>
+      <FileName>Objects\Enums\WowMapId.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="AmeisenBotX.Wow.Objects.Enums.WowObjectType" Collapsed="true">
+    <Position X="21.75" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAAAAAAAAAICAAAAAMgAAAAAAAAAAAEQMAAAA=</HashCode>
+      <FileName>Objects\Enums\WowObjectType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="AmeisenBotX.Wow.Objects.Enums.WowOreId" Collapsed="true">
+    <Position X="23.5" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>KAEIAAAAAAAAAABAACACASAAAEACABAAIAAgAAIAAQE=</HashCode>
+      <FileName>Objects\Enums\WowOreId.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="AmeisenBotX.Wow.Objects.Enums.WowPowerType" Collapsed="true">
+    <Position X="25.25" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QiAECAAAAAAAAAAAAAAEAAAAAAAAAIAAAAAAIAAAABA=</HashCode>
+      <FileName>Objects\Enums\WowPowertype.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="AmeisenBotX.Wow.Objects.Enums.WowRace" Collapsed="true">
+    <Position X="27" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AkAgBAEEgEJAAAAIAAAARAAAACEIAAAgABAAABUAQBg=</HashCode>
+      <FileName>Objects\Enums\WowRace.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="AmeisenBotX.Wow.Objects.Enums.WowRaidDifficulty" Collapsed="true">
+    <Position X="14.75" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAEAAAAAABAAAAAAAAAAAAAAQAAAAAA=</HashCode>
+      <FileName>Objects\Enums\WowRaidDifficulty.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="AmeisenBotX.Wow.Objects.Enums.WowRefreshment" Collapsed="true">
+    <Position X="16.5" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAA=</HashCode>
+      <FileName>Objects\Enums\WowRefreshment.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="AmeisenBotX.Wow.Objects.Enums.WowRole" Collapsed="true">
+    <Position X="20" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAEAAAAAEAAA=</HashCode>
+      <FileName>Objects\Enums\WowRole.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="AmeisenBotX.Wow.Objects.Enums.WowRollType" Collapsed="true">
+    <Position X="21.75" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAQAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Objects\Enums\WowRollType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="AmeisenBotX.Wow.Objects.Enums.WowRuneType" Collapsed="true">
+    <Position X="23.5" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAAAABAAAAAAAAAAAAAAIAgAAAAAAAAAAA=</HashCode>
+      <FileName>Objects\Enums\WowRuneType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="AmeisenBotX.Wow.Objects.Enums.WowShapeshiftForm" Collapsed="true">
+    <Position X="25.25" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAASAKIAAECAAAAAKAACIAAKYAAABAEBABAA=</HashCode>
+      <FileName>Objects\Enums\WowShapeshiftForm.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="AmeisenBotX.Wow.Objects.Enums.WowSkillId" Collapsed="true">
+    <Position X="27" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>Jh51sVJRCZsQA8YUZIlEZPZI+MJ1icCo1awNU4ce+aM=</HashCode>
+      <FileName>Objects\Enums\WowSkillId.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="AmeisenBotX.Wow.Objects.Enums.WowUnitClassificationType" Collapsed="true">
+    <Position X="18.25" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAQAAAAAAAAAAAAAAAAAJAAAAAgAAUAAAAAA=</HashCode>
+      <FileName>Objects\Enums\WowUnitClassificationType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="AmeisenBotX.Wow.Objects.Enums.WowUnitReaction" Collapsed="true">
+    <Position X="23.5" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgIAAAAAAAAAAAABAAgAAABAAAIIAAAAAABAAAAQAA=</HashCode>
+      <FileName>Objects\Enums\WowUnitReaction.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="AmeisenBotX.Wow.Objects.Enums.WowVersion" Collapsed="true">
+    <Position X="25.25" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAIAAAAAAAAA=</HashCode>
+      <FileName>Objects\Enums\WowVersion.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="AmeisenBotX.Wow.Objects.Enums.WowWater" Collapsed="true">
+    <Position X="27" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QSQAAAIAAAQAAAIIQAAAIAAAAABAAAARCAQAAAAACCA=</HashCode>
+      <FileName>Objects\Enums\WowWater.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="AmeisenBotX.Wow.Objects.Enums.WowWeaponType" Collapsed="true">
+    <Position X="14.75" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>oEAgAAAQAAAAAAQAQAABAAABICMABAgAgQBAAAMgAAA=</HashCode>
+      <FileName>Objects\Enums\WowWeaponType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="AmeisenBotX.Wow.Objects.Enums.WowZoneId" Collapsed="true">
+    <Position X="18.25" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>//////////////////////////////////////////8=</HashCode>
+      <FileName>Objects\Enums\WowZoneId.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="AmeisenBotX.Wow.Objects.Flags.WowAuraFlag" Collapsed="true">
+    <Position X="23.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAEAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>Objects\Flags\WowAuraFlag.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="AmeisenBotX.Wow.Objects.Flags.WowCorpseFlag" Collapsed="true">
+    <Position X="16.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAgAAAKAAAAABAAAgEAABA=</HashCode>
+      <FileName>Objects\Flags\WowCorpseFlag.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="AmeisenBotX.Wow.Objects.Flags.WowGameObjectFlag" Collapsed="true">
+    <Position X="16.5" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAgAAAAAAAAAEAgAAQAAAAIAAAIBAAIgiEAAJA=</HashCode>
+      <FileName>Objects\Flags\WowGameObjectFlag.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="AmeisenBotX.Wow.Objects.Flags.WowItemFlag" Collapsed="true">
+    <Position X="25.25" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAuAgAACAAAAAAABEIhEBAQJFIAEAQAFAgMAgGBABA=</HashCode>
+      <FileName>Objects\Flags\WowItemFlag.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="AmeisenBotX.Wow.Objects.Flags.WowMovementDirectionFlag" Collapsed="true">
+    <Position X="20" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAADAAAACgABAAAQAAEAAAAAIAMAQAAIAgAEBAIY=</HashCode>
+      <FileName>Objects\Flags\WowMovementDirectionFlag.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="AmeisenBotX.Wow.Objects.Flags.WowReputationFlag" Collapsed="true">
+    <Position X="18.25" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAABCAAAAAAAEAQAAAAAAQAAAAAAAQAIAAEAAAEUAAA=</HashCode>
+      <FileName>Objects\Flags\WowReputationFlag.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="AmeisenBotX.Wow.Objects.Flags.WowSpellSchoolFlag" Collapsed="true">
+    <Position X="14.75" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAAAAAAEAAAAAAQAABEAAIAAAAAAAEAAAA=</HashCode>
+      <FileName>Objects\Flags\WowSpellSchoolFlag.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="AmeisenBotX.Wow.Objects.Flags.WowUnit2Flag" Collapsed="true">
+    <Position X="16.5" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABAAAAAAAAAEAAAAAAQAAAIBAQIBAAAAgEAAgA=</HashCode>
+      <FileName>Objects\Flags\WowUnit2Flag.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="AmeisenBotX.Wow.Objects.Flags.WowUnitFlag" Collapsed="true">
+    <Position X="20" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>MgSAAAQBAAIAEAAAgAGAEYACAAgIgAAIBAAAgiEQAEI=</HashCode>
+      <FileName>Objects\Flags\WowUnitFlag.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="AmeisenBotX.Wow.Objects.Flags.WowUnitNpcFlag" Collapsed="true">
+    <Position X="21.75" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAEBIBAAAgBAgACQApQCAAACBBERGAhAAAAEoAAA=</HashCode>
+      <FileName>Objects\Flags\WowUnitNpcFlag.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="AmeisenBotX.Wow.Objects.Flags.WowWorldFrameHitFlag" Collapsed="true">
+    <Position X="16.5" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAEAAAAAAACAIAAAAAAAIACgAgAAAAQAQAA=</HashCode>
+      <FileName>Objects\Flags\WowWorldFrameHitFlag.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

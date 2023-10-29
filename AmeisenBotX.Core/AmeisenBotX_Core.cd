@@ -1,0 +1,2480 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="AmeisenBotX.Core.Engines.Battleground.einTyp.RunBoyRunEngine" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="76.25" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>KYMABCAAAEQgB4QAggAAAAQAAALEABAAAAAABAAAAAA=</HashCode>
+      <FileName>Engines\Battleground\einTyp\RunBoyRunEngine.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Battleground.Jannis.Profiles.WarsongGulchProfile" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="85" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAIAACEBEDAgBAYAgBAAIQACiAJgQAQABAAAAAAAEGA=</HashCode>
+      <FileName>Engines\Battleground\Jannis\Profiles\WarsongGulchProfile.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Battleground.Jannis.CtfBlackboard" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="81.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACQADAAAgCAAABAACEBAAAAAAAAACAAQAAAAAAABAAA=</HashCode>
+      <FileName>Engines\Battleground\Jannis\CtfBlackboard.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Battleground.Jannis.UniversalBattlegroundEngine" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="92" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAgBAQEgAAAAAQAAAIEAAAAABAAAAAAAAA=</HashCode>
+      <FileName>Engines\Battleground\Jannis\UniversalBattlegroundEngine.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Battleground.KamelBG.ArathiBasin" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="86.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAABgBAYAiAQAABQAAAYEAAAAQAAAACAAAAA=</HashCode>
+      <FileName>Engines\Battleground\KamelBG\ArathiBasin.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Battleground.KamelBG.EyeOfTheStorm" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="78" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAACAgBAQAiAQAABQAIAIEAAAAQAAAACAAAAA=</HashCode>
+      <FileName>Engines\Battleground\KamelBG\EyeOfTheStorm.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Battleground.KamelBG.KummelEngine" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="81.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAMABAAAKASgBBQIgAAAAAQAAAIEABAAAACAgQAAIAA=</HashCode>
+      <FileName>Engines\Battleground\KamelBG\KummelEngine.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Battleground.KamelBG.StrandOfTheAncients" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="83.25" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAABAAAAAAAgBAQAgAAAABQAAAIEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engines\Battleground\KamelBG\StrandOfTheAncients.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Combat.Classes.Bia10.BasicCombatClassBia10" Collapsed="true">
+    <Position X="21" Y="13.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAS0qAACAAwgAaEkQgFAQAAJEJAMAMQAABKAIBAkFA=</HashCode>
+      <FileName>Engines\Combat\Classes\Bia10\BasicCombatClassBia10.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Combat.Classes.Bia10.DataConstants" Collapsed="true">
+    <Position X="83.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAEQABAAAAABAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engines\Combat\Classes\Bia10\DataConstants.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Combat.Classes.Bia10.MageFrost" Collapsed="true">
+    <Position X="20" Y="14.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAEAAACAAwAAYAkAAAAAAAIABAAAAAAAACAIBAAAA=</HashCode>
+      <FileName>Engines\Combat\Classes\Bia10\MageFrost.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Combat.Classes.Bia10.PriestShadow" Collapsed="true">
+    <Position X="22.25" Y="14.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAEAAACAAwAAYAkAAAAAAAIABAAAAAAAACAIBAAAA=</HashCode>
+      <FileName>Engines\Combat\Classes\Bia10\PriestShadow.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Combat.Classes.Bia10.ShamanElemental" Collapsed="true">
+    <Position X="24.5" Y="14.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAEAAACAAwAAYAkAAAAAAAIABAAAAAAAACAIBAAQA=</HashCode>
+      <FileName>Engines\Combat\Classes\Bia10\ShamanElemental.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Combat.Classes.Bia10.WarrirorFurry" Collapsed="true">
+    <Position X="17.75" Y="14.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAEAAACAAwAAYAkAAAAAAAIABAAAAAAAACAIBAAAA=</HashCode>
+      <FileName>Engines\Combat\Classes\Bia10\WarriorFurry.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Combat.Classes.einTyp.PaladinProtection" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="86.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAJ1IAECAIxAGaAlQAABUAAIAJAAAIAyAgAAKBAgFA=</HashCode>
+      <FileName>Engines\Combat\Classes\einTyp\PaladinProtection.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Combat.Classes.einTyp.RogueAssassination" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="97.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAB1IAACAAwAAaAsAAIBEAAICJMAAIADAiAAKBEABA=</HashCode>
+      <FileName>Engines\Combat\Classes\einTyp\RogueAssassination.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Combat.Classes.einTyp.WarriorArms" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="81.5" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAB1IAECAAwAEaAkAAABEAAIAJAAAIADAiAAKBAABA=</HashCode>
+      <FileName>Engines\Combat\Classes\einTyp\WarriorArms.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Combat.Classes.einTyp.WarriorFury" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="83.25" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAB1IAECAAwAEaAkAAABEAAIAJAAAIADAiAAKBAABA=</HashCode>
+      <FileName>Engines\Combat\Classes\einTyp\WarriorFury.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Mop548.PaladinHoly" Collapsed="true">
+    <Position X="15.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IACAkIAACAAwAAYAEAAAAAAAIABAABAAAAACAIFAAAA=</HashCode>
+      <FileName>Engines\Combat\Classes\Jannis\Mop548\PaladinHoly.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Mop548.WarriorProtection" Collapsed="true">
+    <Position X="19.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IACAEAAACAAgAAYAEAAAAIAAIABAAAAAAAACAIBAAAA=</HashCode>
+      <FileName>Engines\Combat\Classes\Jannis\Mop548\WarriorProtection.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a.DeathknightBlood" Collapsed="true">
+    <Position X="24.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IACAEAAECAAgAAYAEAAAAAAAIABAAAAAAAACAIBAAAA=</HashCode>
+      <FileName>Engines\Combat\Classes\Jannis\Wotlk335a\DeathknightBlood.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a.DeathknightFrost" Collapsed="true">
+    <Position X="28.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IACAEAAACAAgAAYAEAAAAAAAIABAAAAAAAACAIBAAAA=</HashCode>
+      <FileName>Engines\Combat\Classes\Jannis\Wotlk335a\DeathknightFrost.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a.DeathknightUnholy" Collapsed="true">
+    <Position X="33.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IACAEAAACAAgAAYAEAAAAAAAIABAAAAAAAACAIBAAAA=</HashCode>
+      <FileName>Engines\Combat\Classes\Jannis\Wotlk335a\DeathknightUnholy.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a.DruidBalance" Collapsed="true">
+    <Position X="42.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IACAGAAACACwAAYAEAAAAAAAIABAAAAAAACSAJBAAAA=</HashCode>
+      <FileName>Engines\Combat\Classes\Jannis\Wotlk335a\DruidBalance.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a.DruidFeralBear" Collapsed="true">
+    <Position X="46.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IACAGAAACAAwAAYAEAAAAAAAIABAAAAAAAACAIBAAAA=</HashCode>
+      <FileName>Engines\Combat\Classes\Jannis\Wotlk335a\DruidFeralBear.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a.DruidFeralCat" Collapsed="true">
+    <Position X="51.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IACAGAAACAAwAAYAEAAAAAAAIABAAAAAAAACAIBAAAA=</HashCode>
+      <FileName>Engines\Combat\Classes\Jannis\Wotlk335a\DruidFeralCat.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a.DruidRestoration" Collapsed="true">
+    <Position X="55.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IACAkIAACAAwAAYAEAAAAAAAIABAAAAAAAACAIFAAQA=</HashCode>
+      <FileName>Engines\Combat\Classes\Jannis\Wotlk335a\DruidRestoration.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a.HunterBeastmastery" Collapsed="true">
+    <Position X="60.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IADAEAACCAAwAAYAEAAAAAAAICBAAAAAAAACAJBAAAA=</HashCode>
+      <FileName>Engines\Combat\Classes\Jannis\Wotlk335a\HunterBeastmastery.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a.HunterMarksmanship" Collapsed="true">
+    <Position X="64.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IADAEAACCAAwAAYAEAAAAAAAIABgAAAAAAACAIBAAAA=</HashCode>
+      <FileName>Engines\Combat\Classes\Jannis\Wotlk335a\HunterMarksmanship.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a.HunterSurvival" Collapsed="true">
+    <Position X="69.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IADAEAACCAAwAAYAEAAAAAAAIABgAAAAAAACAIBAAAA=</HashCode>
+      <FileName>Engines\Combat\Classes\Jannis\Wotlk335a\HunterSurvival.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a.MageArcane" Collapsed="true">
+    <Position X="71.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IACAEAAACAAgAAYAkAAAAAAAIABAAAAAAAACAIBAAAA=</HashCode>
+      <FileName>Engines\Combat\Classes\Jannis\Wotlk335a\MageArcane.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a.MageFire" Collapsed="true">
+    <Position X="73.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IACAEAAACAAgAAYAEAAAAAAAIABAAAAAAAACAIBAAAA=</HashCode>
+      <FileName>Engines\Combat\Classes\Jannis\Wotlk335a\MageFire.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a.PaladinHoly" Collapsed="true">
+    <Position X="4" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IACAkIAACAAwAAYAEAAAAAAAIABAABAAAAACAIFAAAA=</HashCode>
+      <FileName>Engines\Combat\Classes\Jannis\Wotlk335a\PaladinHoly.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a.PaladinProtection" Collapsed="true">
+    <Position X="6.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IACAEAAACAAwAAYAEAACAAAAIABAAAAAAAACAIBAAAA=</HashCode>
+      <FileName>Engines\Combat\Classes\Jannis\Wotlk335a\PaladinProtection.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a.PaladinRetribution" Collapsed="true">
+    <Position X="8.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IACAEAAACAAwAAYAEAAAAAAAIABAAAAAAAACAIBAAAA=</HashCode>
+      <FileName>Engines\Combat\Classes\Jannis\Wotlk335a\PaladinRetribution.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a.PriestDiscipline" Collapsed="true">
+    <Position X="10.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IACAEAAACAAwAAYAEAAAAAIAIABAAAAAAAACAIBAAAA=</HashCode>
+      <FileName>Engines\Combat\Classes\Jannis\Wotlk335a\PriestDiscipline.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a.PriestHoly" Collapsed="true">
+    <Position X="13" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IACAEAAACAAwAAYAEAAAAAIAIABAAAAAAAACAIBAAAA=</HashCode>
+      <FileName>Engines\Combat\Classes\Jannis\Wotlk335a\PriestHoly.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a.PriestShadow" Collapsed="true">
+    <Position X="17.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IACAEAAACAAwAAYAEAAAAAAAIABAAAAAAAACAIBAAAA=</HashCode>
+      <FileName>Engines\Combat\Classes\Jannis\Wotlk335a\PriestShadow.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a.RogueAssassination" Collapsed="true">
+    <Position X="22" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IACAEAAACAAgAAYAEAAAAAAAIABAAAAAAAACAIBAAAA=</HashCode>
+      <FileName>Engines\Combat\Classes\Jannis\Wotlk335a\RogueAssassination.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a.ShamanElemental" Collapsed="true">
+    <Position X="26.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IACAEAAACAAwAAYAEABAAAAAIABAAAAAAAACAIBAAAA=</HashCode>
+      <FileName>Engines\Combat\Classes\Jannis\Wotlk335a\ShamanElemental.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a.ShamanEnhancement" Collapsed="true">
+    <Position X="31" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IACAEAAACAAwAAYAEABAAAAAIABAAAAAAAACAIBAAAA=</HashCode>
+      <FileName>Engines\Combat\Classes\Jannis\Wotlk335a\ShamanEnhancement.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a.ShamanRestoration" Collapsed="true">
+    <Position X="35.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IACAEAAACAAwAAYAEAAAAAIAIABAAAAAAAACAIBAAAA=</HashCode>
+      <FileName>Engines\Combat\Classes\Jannis\Wotlk335a\ShamanRestoration.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a.WarlockAffliction" Collapsed="true">
+    <Position X="44.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IACAEAACCAAwAAYAEAAAAAAAIABAAAAAAAACAIBAAAA=</HashCode>
+      <FileName>Engines\Combat\Classes\Jannis\Wotlk335a\WarlockAffliction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a.WarlockDemonology" Collapsed="true">
+    <Position X="49" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IACAEAACCAAwAAYAEAAAAAAAIABAAAAAAAACAIBAAAA=</HashCode>
+      <FileName>Engines\Combat\Classes\Jannis\Wotlk335a\WarlockDemonology.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a.WarlockDestruction" Collapsed="true">
+    <Position X="53.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IACAEAACCAAwAAYAEAAAAAAAIABAAAAAAAACAIBAAAA=</HashCode>
+      <FileName>Engines\Combat\Classes\Jannis\Wotlk335a\WarlockDestruction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a.WarriorArms" Collapsed="true">
+    <Position X="58" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IACAEAAACAAgAAYAEACAAAAAIABAAAAAAAACAIBAAAA=</HashCode>
+      <FileName>Engines\Combat\Classes\Jannis\Wotlk335a\WarriorArms.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a.WarriorFury" Collapsed="true">
+    <Position X="62.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IACAEAAACAAgAAYAEACAAAAAIABAAAAAAAACAIBAAAA=</HashCode>
+      <FileName>Engines\Combat\Classes\Jannis\Wotlk335a\WarriorFury.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a.WarriorProtection" Collapsed="true">
+    <Position X="67" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IACAEAAACAAgAAYAEACAAAAAIABAAAAAAAACAIBAAAA=</HashCode>
+      <FileName>Engines\Combat\Classes\Jannis\Wotlk335a\WarriorProtection.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Combat.Classes.Jannis.BasicCombatClass" Collapsed="true">
+    <Position X="38.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAGSUiAACAI4wAaEkEwEAADAJEJAkAEQAJBaIIBACBg=</HashCode>
+      <FileName>Engines\Combat\Classes\Jannis\BasicCombatClass.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Combat.Classes.Kamel.BasicKamelClass" Collapsed="true">
+    <Position X="7.75" Y="16.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IBAI0JBQSAA4AAaGkAwAABBAIAJAAUIMAAACkJhAAhA=</HashCode>
+      <FileName>Engines\Combat\Classes\Kamel\BasicKamelClass.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Combat.Classes.Kamel.DeathknightBlood" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="86.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAA0IAACAAwAAaAkAAAAAAAICJAIAIAAAgAAJBAABA=</HashCode>
+      <FileName>Engines\Combat\Classes\Kamel\DeathknightBlood.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Combat.Classes.Kamel.PaladinProtection" Collapsed="true">
+    <Position X="1" Y="17.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ICAAEBBICIAwAAIAkCABCCIAIAREAEAEgAgG4IjgAAE=</HashCode>
+      <FileName>Engines\Combat\Classes\Kamel\PaladinProtection.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Combat.Classes.Kamel.PriestHoly" Collapsed="true">
+    <Position X="3.25" Y="17.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAgAEAQFCAA0CAICkAABiQAAIABABEEEBkACgIhgUAk=</HashCode>
+      <FileName>Engines\Combat\Classes\Kamel\PriestHoly.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Combat.Classes.Kamel.RestorationShaman" Collapsed="true">
+    <Position X="5.5" Y="17.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>MBgAECEECAE0AMIkkAAAAgEMIABEFQAIAQECkohACEg=</HashCode>
+      <FileName>Engines\Combat\Classes\Kamel\RestorationShaman .cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Combat.Classes.Kamel.RogueAssassination" Collapsed="true">
+    <Position X="7.75" Y="17.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAEAAACAAwAAIAkAAAAAAAIABAAAAAAAACgIhAAAA=</HashCode>
+      <FileName>Engines\Combat\Classes\Kamel\RogueAssassination.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Combat.Classes.Kamel.ShamanEnhancement" Collapsed="true">
+    <Position X="10" Y="17.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>YBAAEkAECAEwASIC0AAEAIAQIABFIAABIAACiIlIAEQ=</HashCode>
+      <FileName>Engines\Combat\Classes\Kamel\ShamanEnhancement.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Combat.Classes.Kamel.WarriorArms" Collapsed="true">
+    <Position X="12.25" Y="17.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>MABEEhBAjCAwAAJYkBCgDAQQKAJJAAQAgBACgojACQg=</HashCode>
+      <FileName>Engines\Combat\Classes\Kamel\WarriorArms.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Combat.Classes.Kamel.WarriorFury" Collapsed="true">
+    <Position X="14.5" Y="17.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>MABGEhBAjCAwAAJYkBiADAQQKAJJAAAAgBACg4jACQg=</HashCode>
+      <FileName>Engines\Combat\Classes\Kamel\WarriorFury.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Combat.Classes.Shino.MageFrost" Collapsed="true">
+    <Position X="37.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IACAEAAACAAwAAYAEAAAAAAAIABAAAAAAAACAIJAAAA=</HashCode>
+      <FileName>Engines\Combat\Classes\Shino\MageFrost.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Combat.Classes.Shino.PriestShadow" Collapsed="true">
+    <Position X="40" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IACAEAAACAAgAAYAEAAAAAAAIABAAAAAAAACAIJAAAA=</HashCode>
+      <FileName>Engines\Combat\Classes\Shino\PriestShadow.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Logic.CombatClasses.Shino.TemplateCombatClass" Collapsed="true">
+    <Position X="38.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEgAAAAAgQAAAIAAAAAAAAAAIABBA=</HashCode>
+      <FileName>Engines\Combat\Classes\Shino\TemplateCombatClass.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Combat.Helpers.Aura.Objects.KeepActiveAuraJob" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="97.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAEAAAAAQAAAAAAAAAAAAAAAAAAAY=</HashCode>
+      <FileName>Engines\Combat\Helpers\Aura\Objects\KeepActiveAuraJob.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Combat.Helpers.Aura.Objects.KeepBestActiveAuraJob" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="76.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>Engines\Combat\Helpers\Aura\Objects\KeepBestActiveAuraJob.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Combat.Helpers.Aura.AuraManager" Collapsed="true">
+    <Position X="95.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAEAAAAAAAAIAAAAAAAAAAAAAQAA=</HashCode>
+      <FileName>Engines\Combat\Helpers\Aura\AuraManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Combat.Helpers.Aura.GroupAuraManager" Collapsed="true">
+    <Position X="92" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAIAAAAAAAAAAAAIAAAAAAAAAAAAAQAA=</HashCode>
+      <FileName>Engines\Combat\Helpers\Aura\GroupAuraManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Combat.Helpers.Healing.HealingManager" Collapsed="true">
+    <Position X="95.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgIAAQAAgAQAIAAAAkAAQAEIQEEBAAIABGAEAQAA=</HashCode>
+      <FileName>Engines\Combat\Helpers\Healing\HealingManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Combat.Helpers.Targets.Logics.Dps.SimpleDpsTargetSelectionLogic" Collapsed="true">
+    <Position X="22.25" Y="17.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engines\Combat\Helpers\Targets\Logics\Dps\SimpleDpsTargetSelectionLogic.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Combat.Helpers.Targets.Logics.Heal.SimpleHealTargetSelectionLogic" Collapsed="true">
+    <Position X="17.75" Y="17.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engines\Combat\Helpers\Targets\Logics\Heal\SimpleHealTargetSelectionLogic.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Combat.Helpers.Targets.Logics.Tank.SimpleTankTargetSelectionLogic" Collapsed="true">
+    <Position X="20" Y="17.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engines\Combat\Helpers\Targets\Logics\Tank\SimpleTankTargetSelectionLogic.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Combat.Helpers.Targets.Logics.BasicTargetSelectionLogic" Collapsed="true">
+    <Position X="20" Y="16.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAAAAAAAAAAAAAAIIAAAAAAAQAEAAEAA=</HashCode>
+      <FileName>Engines\Combat\Helpers\Targets\Logics\BasicTargetSelectionLogic.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Combat.Helpers.Targets.Priority.Basic.ListTargetPrioritizer" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="83.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAACAAAAAAAAAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engines\Combat\Helpers\Targets\Priority\Basic\ListTargetPrioritizer.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Combat.Helpers.Targets.Priority.Special.DungeonTargetPrioritizer" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="90.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAIAAAAAAACAAAAAAAIAAAAAAAAAAAABAAA=</HashCode>
+      <FileName>Engines\Combat\Helpers\Targets\Priority\Special\DungeonTargetPrioritizer.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Combat.Helpers.Targets.Priority.TargetPriorityManager" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="97.25" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAAAAACAAAAEAAACAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engines\Combat\Helpers\Targets\Priority\TargetPriorityManager.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Combat.Helpers.Targets.Validation.Basic.DisplayIdBlacklistTargetValidator" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="85" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAQAAAAAA=</HashCode>
+      <FileName>Engines\Combat\Helpers\Targets\Validation\Basic\DisplayIdBlacklistTargetValidator.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Combat.Helpers.Targets.Validation.Basic.IsAttackableTargetValidator" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="85" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAgAAAAAAAIAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engines\Combat\Helpers\Targets\Validation\Basic\IsAttackableTargetValidator.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Combat.Helpers.Targets.Validation.Basic.IsInCombatTargetValidator" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="86.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engines\Combat\Helpers\Targets\Validation\Basic\IsInCombatTargetValidator.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Combat.Helpers.Targets.Validation.Basic.IsReachableTargetValidator" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="88.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAgAAAAAABIAAAAAAACAAAAAAAE=</HashCode>
+      <FileName>Engines\Combat\Helpers\Targets\Validation\Basic\IsReachableTargetValidator.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Combat.Helpers.Targets.Validation.Basic.IsThreatTargetValidator" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="90.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAgAAAAAAAIAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engines\Combat\Helpers\Targets\Validation\Basic\IsThreatTargetValidator.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Combat.Helpers.Targets.Validation.Basic.IsValidAliveTargetValidator" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="92" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engines\Combat\Helpers\Targets\Validation\Basic\IsValidAliveTargetValidator.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Combat.Helpers.Targets.Validation.Special.DungeonTargetValidator" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="92" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAAAAAAAAAAAgAAgAgAAIAAAQAAAIAAAAAAAA=</HashCode>
+      <FileName>Engines\Combat\Helpers\Targets\Validation\Special\DungeonTargetValidator.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Combat.Helpers.Targets.Validation.Util.CachedTargetValidator" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="83.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAAAAAAAAAAggAAAAAAAAAAAAAAAAAAABAAA=</HashCode>
+      <FileName>Engines\Combat\Helpers\Targets\Validation\Util\CachedTargetValidator.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Combat.Helpers.Targets.Validation.TargetValidationManager" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="76.25" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAQAAAAAAAAgAAAAAAAAAAAAAAAAAAAABAAA=</HashCode>
+      <FileName>Engines\Combat\Helpers\Targets\Validation\TargetValidationManager.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Combat.Helpers.Targets.TargetManager" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="95.5" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAIAAAAABAAQAAAAAAAAAAAAAAAAAQAAAACAA=</HashCode>
+      <FileName>Engines\Combat\Helpers\Targets\TargetManager.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Combat.Helpers.CooldownManager" Collapsed="true">
+    <Position X="76.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAAAAAAAAAAAAAQAgAAAAABAAAAA=</HashCode>
+      <FileName>Engines\Combat\Helpers\CooldownManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Combat.Helpers.InterruptManager" Collapsed="true">
+    <Position X="83.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAQAA=</HashCode>
+      <FileName>Engines\Combat\Helpers\InterruptManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Combat.Helpers.PetManager" Collapsed="true">
+    <Position X="88.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AARAAACAACAAAAAAAAAAABEAAAIAAAAAAAAAAAAAwAA=</HashCode>
+      <FileName>Engines\Combat\Helpers\PetManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Dungeon.Objects.DungeonNode" Collapsed="true">
+    <Position X="88.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAgBAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Engines\Dungeon\Objects\DungeonNode.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Dungeon.Profiles.Classic.DeadminesProfile" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="85" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAiAACAgAgiAASIAAAAACAQAAAgAAAAAEA=</HashCode>
+      <FileName>Engines\Dungeon\Profiles\Classic\DeadminesProfile.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Dungeon.Profiles.Classic.RagefireChasmProfile" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="93.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAiAACAgAgiAASIAAAAACAQAAAAAAAAAEA=</HashCode>
+      <FileName>Engines\Dungeon\Profiles\Classic\RagefireChasmProfile.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Dungeon.Profiles.Classic.ShadowfangKeepProfile" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="85" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAiAACAgAgiAASIAAAAACAQAAAAAAAAAEA=</HashCode>
+      <FileName>Engines\Dungeon\Profiles\Classic\ShadowfangKeepProfile.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Dungeon.Profiles.Classic.StockadeProfile" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="81.5" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAiAACAgAgiAASIAAAAACAQAAAAAAAAAEA=</HashCode>
+      <FileName>Engines\Dungeon\Profiles\Classic\StockadeProfile.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Dungeon.Profiles.Classic.WailingCavernsProfile" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="78" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAiAACAgAgiAASIAAAAACAQAAAAAAAAAEA=</HashCode>
+      <FileName>Engines\Dungeon\Profiles\Classic\WailingCavernsProfile.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Dungeon.Profiles.TBC.HellfireRampartsProfile" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="97.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAiAACAgAgiAASIAAAAACAQAAAAAAAAAEA=</HashCode>
+      <FileName>Engines\Dungeon\Profiles\TBC\HellfireRampartsProfile.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Dungeon.Profiles.TBC.TheBloodFurnaceProfile" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="78" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAiAACAgAgiAASIAAAAACAQAAAAAAAAAEA=</HashCode>
+      <FileName>Engines\Dungeon\Profiles\TBC\TheBloodFurnaceProfile.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Dungeon.Profiles.TBC.TheSlavePensProfile" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="79.75" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAiAACAgAgiAASIAAAAACAQAAAAAAAAAEA=</HashCode>
+      <FileName>Engines\Dungeon\Profiles\TBC\TheSlavePensProfile.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Dungeon.Profiles.TBC.TheSteamvaultProfile" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="81.5" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAiAACAgAgiAASIAAAAACAQAAAAAAAAAEA=</HashCode>
+      <FileName>Engines\Dungeon\Profiles\TBC\TheSteamvaultProfile.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Dungeon.Profiles.TBC.TheUnderbogProfile" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="83.25" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAiAACAgAgiAASIAAAAACAQAAAAAAAAAEA=</HashCode>
+      <FileName>Engines\Dungeon\Profiles\TBC\TheUnderbogProfile.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Dungeon.Profiles.WotLK.AzjolNerubProfile" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="97.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAiAACAgAgiAASIAAAAACAQAAAAAAAAAEA=</HashCode>
+      <FileName>Engines\Dungeon\Profiles\WotLK\AzjolNerubProfile.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Dungeon.Profiles.WotLK.ForgeOfSoulsProfile" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="83.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAiAACAgAgiAASIAAAAACAQAAAAAAAAAEA=</HashCode>
+      <FileName>Engines\Dungeon\Profiles\WotLK\ForgeOfSoulsProfile.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Dungeon.Profiles.WotLK.HallsOfLightningProfile" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="93.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAiAACAgAgiAASIAAAAACAQAAAAAAAAAEA=</HashCode>
+      <FileName>Engines\Dungeon\Profiles\WotLK\HallsOfLightningProfile.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Dungeon.Profiles.WotLK.PitOfSaronProfile" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="90.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAiAACAgAgiAASIAAAAACAQAAAAAAAAAEA=</HashCode>
+      <FileName>Engines\Dungeon\Profiles\WotLK\PitOfSaron.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Dungeon.Profiles.WotLK.UtgardeKeepProfile" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="76.25" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAiAACAgAgiAASIAAAAACAQAAAAAAAAAEA=</HashCode>
+      <FileName>Engines\Dungeon\Profiles\WotLK\UtgardeKeepProfile.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Dungeon.DefaultDungeonEngine" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="93.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgRAEAAggBBCQAAAAAAIAAAAKgYAAA0BAAAECAAAA=</HashCode>
+      <FileName>Engines\Dungeon\DefaultDungeonEngine.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Grinding.Objects.GrindingSpot" Collapsed="true">
+    <Position X="90.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAABAAAAEA=</HashCode>
+      <FileName>Engines\Grinding\Objects\GrindingSpot.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Grinding.Profiles.Alliance.Group.UltimateGrinding1To80" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="90.25" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAEAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAIAgAA=</HashCode>
+      <FileName>Engines\Grinding\Profiles\Alliance\Group\UltimateGrinding1To80.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Grinding.Profiles.Horde.BarrensGrindTo17" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="76.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAEAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAIAgAA=</HashCode>
+      <FileName>Engines\Grinding\Profiles\Horde\BarrensGrindTo17.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Grinding.Profiles.Horde.DurotarGrindTo11" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="93.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAEAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAIAgAA=</HashCode>
+      <FileName>Engines\Grinding\Profiles\Horde\DurotarGrindTo11.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Grinding.Profiles.Horde.DurotarGrindTo14" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="95.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAEAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAIAgAA=</HashCode>
+      <FileName>Engines\Grinding\Profiles\Horde\DurotarGrindTo14.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Grinding.Profiles.Horde.DurotarGrindTo6" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="97.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAEAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAIAgAA=</HashCode>
+      <FileName>Engines\Grinding\Profiles\Horde\DurotarGrindTo6.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Grinding.DefaultGrindEngine" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="95.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAgCJAAAIhiAIGQAIEBQSQAAAKKIAAAIQRAAAAgAAAA=</HashCode>
+      <FileName>Engines\Grinding\DefaultGrindEngine.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Jobs.Profiles.Gathering.Jannis.ElwynnRedridgeMining" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="76.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAAAAAAAIEAAAAAgAAAAAAAAAAAAAQAACAAAA=</HashCode>
+      <FileName>Engines\Jobs\Profiles\Gathering\Jannis\ElwynnRedridgeMining.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Jobs.Profiles.Gathering.CopperElwynnForestProfile" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="78" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAAAAAAAIEAAAAAgAAAAAAAAAAAAAQAACAAAA=</HashCode>
+      <FileName>Engines\Jobs\Profiles\Gathering\CopperElwynnForestProfile.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Jobs.Profiles.Gathering.CopperTinSilverWestfallProfile" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="79.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAAAAAAAIEAAAAAgAAAAAAAAAAAAAQAACAAAA=</HashCode>
+      <FileName>Engines\Jobs\Profiles\Gathering\CopperTinSilverWestfallProfile.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Jobs.DefaultJobEngine" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="97.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QBAQAAQAAgAABAQAAASAAAAIAAIkAACAABAAACAAAAA=</HashCode>
+      <FileName>Engines\Jobs\DefaultJobEngine.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Movement.Objects.BasicVehicle" Collapsed="true">
+    <Position X="78" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAQAAAAAAAAAAAAACAAAACBwEAIgAAAAAAASBgAMAAA=</HashCode>
+      <FileName>Engines\Movement\Objects\BasicVehicle.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Movement.Pathfinding.Objects.SearchArea" Collapsed="true">
+    <Position X="79.75" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAAAAAAAAMEAAAAAAACAAAAgAAgAAIAQAAAAE=</HashCode>
+      <FileName>Engines\Movement\Pathfinding\Objects\SearchArea.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Movement.Pathfinding.Objects.SearchAreaEnsamble" Collapsed="true">
+    <Position X="81.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAgAAAAAAAAAIAAAAAAAACACACAAQAAAAQAACA=</HashCode>
+      <FileName>Engines\Movement\Pathfinding\Objects\SearchAreaEnsamble.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Movement.Pathfinding.AmeisenNavigationHandler" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="83.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAIAAAAIAAAAAAEACCQAgAIAAAAAAAAAQ=</HashCode>
+      <FileName>Engines\Movement\Pathfinding\AmeisenNavigationHandler.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Movement.Providers.Basic.FollowMovementProvider" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="81.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAADAAAAAAAAAAAIABAIAAAAACAAAEAA=</HashCode>
+      <FileName>Engines\Movement\Providers\Basic\FollowMovementProvider.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Movement.Providers.Basic.SimpleCombatMovementProvider" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="88.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAAAAAAAAAAIAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engines\Movement\Providers\Basic\SimpleCombatMovementProvider.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Movement.Providers.Basic.StayAroundMovementProvider" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="79.75" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAgAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engines\Movement\Providers\Basic\StayAroundMovementProvider.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Movement.Providers.Special.DungeonMovementProvider" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="86.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAEAABAAAAAAgAAAAIAAAABAAAAAAAAAAA=</HashCode>
+      <FileName>Engines\Movement\Providers\Special\DungeonMovementProvider.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Movement.Settings.MovementSettings" Collapsed="true">
+    <Position X="97.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAQAAAAAACAgAAAAAAABAAAAAAAAAgAAAAAAAAAQAAA=</HashCode>
+      <FileName>Engines\Movement\Settings\MovementSettings.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Movement.MovementEngine" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="93.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQBQAEAoAgBQYAIAFUAEAwEAeAAQEBAiAAAQIAQAE=</HashCode>
+      <FileName>Engines\Movement\MovementEngine.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Movement.MovementManager" Collapsed="true">
+    <Position X="95.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAEAAAAAEAAACAAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Engines\Movement\MovementManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.PvP.DefaultPvpEngine" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="76.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAIAAAAAwAAAAQAAAAAAAAAAAIQAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engines\PvP\DefaultPvpEngine.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Quest.Objects.Objectives.BotActionQuestObjective" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="79.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAQAAAAAAAAAAAAAAAAAAACAAAQ=</HashCode>
+      <FileName>Engines\Quest\Objects\Objectives\BotActionQuestObjective.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Quest.Objects.Objectives.CastSpellQuestObjective" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="85" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAQIAAQAAAAAAAIAAAAAAAAAAACAAAA=</HashCode>
+      <FileName>Engines\Quest\Objects\Objectives\CastSpellQuestObjective.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Quest.Objects.Objectives.CastVehicleSpellQuestObjective" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="86.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAQIAAQAAAAAAAIAAAAAAAAAAACAAAA=</HashCode>
+      <FileName>Engines\Quest\Objects\Objectives\CastVehicleSpellQuestObjective.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Quest.Objects.Objectives.CollectQuestObjective" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="93.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAEAAAAQAgAQAAAAAAAICAAAAAAAAAQCAAAA=</HashCode>
+      <FileName>Engines\Quest\Objects\Objectives\CollectQuestObjective.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Quest.Objects.Objectives.CollectQuestObjectiveDEPRECATED" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="95.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEAAAAQAgAQAAAAAAAICAAAAAAAAAQCBQAA=</HashCode>
+      <FileName>Engines\Quest\Objects\Objectives\CollectQuestObjectiveDEPRECATED.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Quest.Objects.Objectives.GrindingObjective" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="88.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAgAAAAQAAAQCAAAAAAIAAAAAAACAAECAAAA=</HashCode>
+      <FileName>Engines\Quest\Objects\Objectives\GrindingObjective.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Quest.Objects.Objectives.KillAndLootQuestObjective" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="78" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAGABAAAgAAAAQAAASCAAAAAAIAMIgAAAAAAACAgAA=</HashCode>
+      <FileName>Engines\Quest\Objects\Objectives\KillAndLootQuestObjective.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Quest.Objects.Objectives.KillUnitQuestObjective" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="79.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAQAIAQAAgAAAAIAAAAAAAAAAACAAAA=</HashCode>
+      <FileName>Engines\Quest\Objects\Objectives\KillUnitQuestObjective.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Quest.Objects.Objectives.MoveToObjectQuestObjective" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="76.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAQAAggAAAIAAABAAAAAAACAAAA=</HashCode>
+      <FileName>Engines\Quest\Objects\Objectives\MoveToObjectQuestObjective.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Quest.Objects.Objectives.MoveToPositionQuestObjective" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="78" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQQAAQAAAAAAAIAAABAABAAAACAAAA=</HashCode>
+      <FileName>Engines\Quest\Objects\Objectives\MoveToPositionQuestObjective.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Quest.Objects.Objectives.MoveToUnitQuestObjective" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="79.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAgAAAAQAAAQAAAAAAAIAAABAAAAAAACAAAA=</HashCode>
+      <FileName>Engines\Quest\Objects\Objectives\MoveToUnitQuestObjective.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Quest.Objects.Objectives.MoveVehicleToPositionQuestObjective" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="81.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQQAAQAAAAAAAIAAABAABAAAACAAAA=</HashCode>
+      <FileName>Engines\Quest\Objects\Objectives\MoveVehicleToPositionQuestObjective.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Quest.Objects.Objectives.QuestObjectiveChain" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="92" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAQAAAAAIAAAAAAAAAAAAAKAAAA=</HashCode>
+      <FileName>Engines\Quest\Objects\Objectives\QuestObjectiveChain.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Quest.Objects.Objectives.RuneforgingQuestObjective" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="78" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAECAAAQAAAQAAAAAAAIAAAAAAAAAAACAAAA=</HashCode>
+      <FileName>Engines\Quest\Objects\Objectives\RuneforgingQuestObjective.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Quest.Objects.Objectives.TalkToUnitQuestObjective" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="92" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEACAAAAACAAAQAIAQAAAAAAQIAAAAAAAAAAACAQAA=</HashCode>
+      <FileName>Engines\Quest\Objects\Objectives\TalkToUnitQuestObjective.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Quest.Objects.Objectives.UseItemQuestObjective" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="93.75" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAQAgAQAAAAAAAIAAAAAAAAAAACAAAA=</HashCode>
+      <FileName>Engines\Quest\Objects\Objectives\UseItemQuestObjective.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Quest.Objects.Objectives.UseObjectQuestObjective" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="95.5" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAQAAAQAAggAAIIAAAAAAAAAAACAAAA=</HashCode>
+      <FileName>Engines\Quest\Objects\Objectives\UseObjectQuestObjective.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Quest.Objects.Objectives.UseUnitQuestObjective" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="97.25" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAQAIAQAAgAAAAIAAAAAAAAIAACAAAA=</HashCode>
+      <FileName>Engines\Quest\Objects\Objectives\UseUnitQuestObjective.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Quest.Objects.Objectives.WaitUntilQuestObjective" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="79.75" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAQAAAQAAAAAAAAAAAAAAAAAAACAAAA=</HashCode>
+      <FileName>Engines\Quest\Objects\Objectives\WaitUntilQuestObjective.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Quest.Objects.Quests.BotQuest" Collapsed="true">
+    <Position X="32.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACSACAAAEACAQAAgQAIAQAAAIABAEBgAAAAACAAAE=</HashCode>
+      <FileName>Engines\Quest\Objects\Quests\BotQuest.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Quest.Objects.Quests.GrindingBotQuest" Collapsed="true">
+    <Position X="17.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACQACAAAAACAQAAgQAAAQAAAAABAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engines\Quest\Objects\Quests\GrindingBotQuest.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Quest.Objects.AreaNode" Collapsed="true">
+    <Position X="88.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engines\Quest\Objects\AreaNode.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Quest.Profiles.Shino.Horde1To60GrinderProfile" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="76.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engines\Quest\Profiles\Shino\Horde1To60GrinderProfile.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Quest.Profiles.Shino.X5Horde1To80Profile" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="86.75" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engines\Quest\Profiles\Shino\X5Horde1To80Profile.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Quest.Profiles.StartAreas.DeathknightStartAreaQuestProfile" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="88.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAAEAAAABAAAAAAAAAAAAAAAQAQAAAA=</HashCode>
+      <FileName>Engines\Quest\Profiles\StartAreas\DeathknightStartAreaQuestProfile.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Quest.Quests.Durotar.RazorHill.QAPeonBurden" Collapsed="true">
+    <Position X="14.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engines\Quest\Quests\Durotar\RazorHill\QAPeonBurden.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Quest.Quests.Durotar.RazorHill.QCarryYourWeight" Collapsed="true">
+    <Position X="19" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engines\Quest\Quests\Durotar\RazorHill\QCarryYourWeight.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Quest.Quests.Durotar.RazorHill.QConscriptOfTheHorde" Collapsed="true">
+    <Position X="23.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engines\Quest\Quests\Durotar\RazorHill\QConscriptOfTheHorde.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Quest.Quests.Durotar.RazorHill.QEncroachment" Collapsed="true">
+    <Position X="28" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engines\Quest\Quests\Durotar\RazorHill\QEncroachment.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Quest.Quests.Durotar.RazorHill.QVanquishTheBetrayers" Collapsed="true">
+    <Position X="32.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engines\Quest\Quests\Durotar\RazorHill\QVanquishTheBetrayers.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Quest.Quests.Durotar.ValleyOfStrength.QCuttingTeeth" Collapsed="true">
+    <Position X="34.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engines\Quest\Quests\Durotar\ValleyOfStrength\QCuttingTeeth.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Quest.Quests.Durotar.ValleyOfStrength.QGalgarCactusAppleSurprise" Collapsed="true">
+    <Position X="37" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engines\Quest\Quests\Durotar\ValleyOfStrength\QGalgarCactusAppleSurprise.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Quest.Quests.Durotar.ValleyOfStrength.QSarkoth" Collapsed="true">
+    <Position X="39.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engines\Quest\Quests\Durotar\ValleyOfStrength\QSarkoth.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Quest.Quests.Durotar.ValleyOfStrength.QSarkoth2" Collapsed="true">
+    <Position X="41.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engines\Quest\Quests\Durotar\ValleyOfStrength\QSarkoth2.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Quest.Quests.Durotar.ValleyOfStrength.QStingOfTheScorpid" Collapsed="true">
+    <Position X="46" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engines\Quest\Quests\Durotar\ValleyOfStrength\QStingOfTheScorpid.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Quest.Quests.Durotar.ValleyOfStrength.QVileFamiliars" Collapsed="true">
+    <Position X="50.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engines\Quest\Quests\Durotar\ValleyOfStrength\QVileFamiliars.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Quest.Quests.Durotar.ValleyOfStrength.QYourPlaceInTheWorld" Collapsed="true">
+    <Position X="55" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engines\Quest\Quests\Durotar\ValleyOfStrength\QYourPlaceInTheWorld.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Quest.Quests.Grinder.QDesolaceGrindToLevel35" Collapsed="true">
+    <Position X="31.25" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engines\Quest\Quests\Grinder\QDesolaceGrindToLevel35.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Quest.Quests.Grinder.QDesolaceGrindToLevel40" Collapsed="true">
+    <Position X="33.5" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engines\Quest\Quests\Grinder\QDesolaceGrindToLevel40.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Quest.Quests.Grinder.QDurotarGrindToLevel11" Collapsed="true">
+    <Position X="2" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engines\Quest\Quests\Grinder\QDurotarGrindToLevel11.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Quest.Quests.Grinder.QDurotarGrindToLevel6" Collapsed="true">
+    <Position X="4.25" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engines\Quest\Quests\Grinder\QDurotarGrindToLevel6.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Quest.Quests.Grinder.QDurotarGrindToLevel9" Collapsed="true">
+    <Position X="6.5" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engines\Quest\Quests\Grinder\QDurotarGrindToLevel9.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Quest.Quests.Grinder.QSilithusGrindToLevel60" Collapsed="true">
+    <Position X="8.75" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engines\Quest\Quests\Grinder\QSilithusGrindToLevel60.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Quest.Quests.Grinder.QStonetalonGrindToLevel23" Collapsed="true">
+    <Position X="11" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engines\Quest\Quests\Grinder\QStonetalonGrindToLevel23.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Quest.Quests.Grinder.QStonetalonGrindToLevel31" Collapsed="true">
+    <Position X="13.25" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engines\Quest\Quests\Grinder\QStonetalonGrindToLevel31.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Quest.Quests.Grinder.QTanarisGrindToLevel44" Collapsed="true">
+    <Position X="15.5" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engines\Quest\Quests\Grinder\QTanarisGrindToLevel44.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Quest.Quests.Grinder.QTanarisGrindToLevel49" Collapsed="true">
+    <Position X="17.75" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engines\Quest\Quests\Grinder\QTanarisGrindToLevel49.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Quest.Quests.Grinder.QTheBarrensGrindToLevel14" Collapsed="true">
+    <Position X="20" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engines\Quest\Quests\Grinder\QTheBarrensGrindToLevel14.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Quest.Quests.Grinder.QTheBarrensGrindToLevel16" Collapsed="true">
+    <Position X="22.25" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engines\Quest\Quests\Grinder\QTheBarrensGrindToLevel16.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Quest.Quests.Grinder.QTheBarrensGrindToLevel19" Collapsed="true">
+    <Position X="24.5" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engines\Quest\Quests\Grinder\QTheBarrensGrindToLevel19.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Quest.Quests.Grinder.QUngoroGrindToLevel54" Collapsed="true">
+    <Position X="26.75" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engines\Quest\Quests\Grinder\QUngoroGrindToLevel54.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Quest.Quests.Test.GrindToLevel2" Collapsed="true">
+    <Position X="29" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engines\Quest\Quests\Test\GrindToLevel2.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Quest.Quests.TheBarrens.Crossroads.QDisruptTheAttacks" Collapsed="true">
+    <Position X="43.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engines\Quest\Quests\TheBarrens\Crossroads\QDisruptTheAttacks.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Quest.Quests.TheBarrens.Crossroads.QHarpyLieutenants" Collapsed="true">
+    <Position X="48.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engines\Quest\Quests\TheBarrens\Crossroads\QHarpyLieutenants.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Quest.Quests.TheBarrens.Crossroads.QHarpyRaiders" Collapsed="true">
+    <Position X="52.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engines\Quest\Quests\TheBarrens\Crossroads\QHarpyRaiders.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Quest.Quests.TheBarrens.Crossroads.QLetterToJinZil" Collapsed="true">
+    <Position X="57.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engines\Quest\Quests\TheBarrens\Crossroads\QLetterToJinZil.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Quest.Quests.TheBarrens.Crossroads.QPlainstriderMenace" Collapsed="true">
+    <Position X="59.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engines\Quest\Quests\TheBarrens\Crossroads\QPlainstriderMenace.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Quest.Quests.TheBarrens.Crossroads.QProwlersOfTheBarrens" Collapsed="true">
+    <Position X="61.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engines\Quest\Quests\TheBarrens\Crossroads\QProwlersOfTheBarrens.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Quest.Quests.TheBarrens.Crossroads.QRaptorThieves" Collapsed="true">
+    <Position X="3.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engines\Quest\Quests\TheBarrens\Crossroads\QRaptorThieves.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Quest.Quests.TheBarrens.Crossroads.QSerenaBloodfeather" Collapsed="true">
+    <Position X="5.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engines\Quest\Quests\TheBarrens\Crossroads\QSerenaBloodfeather.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Quest.Quests.TheBarrens.Crossroads.QSouthseaFreebooters" Collapsed="true">
+    <Position X="7.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engines\Quest\Quests\TheBarrens\Crossroads\QSouthseaFreebooters.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Quest.Quests.TheBarrens.Crossroads.QSuppliesForTheCrossroads" Collapsed="true">
+    <Position X="10" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engines\Quest\Quests\TheBarrens\Crossroads\QSuppliesForTheCrossroads.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Quest.Quests.TheBarrens.Crossroads.QTheDisruptionEnds" Collapsed="true">
+    <Position X="12.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engines\Quest\Quests\TheBarrens\Crossroads\QTheDisruptionEnds.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Quest.Quests.TheBarrens.Crossroads.QTheZhevra" Collapsed="true">
+    <Position X="16.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engines\Quest\Quests\TheBarrens\Crossroads\QTheZhevra.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Quest.Quests.TheBarrens.OutpostBridge.QCrossroadsConscription" Collapsed="true">
+    <Position X="21.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engines\Quest\Quests\TheBarrens\OutpostBridge\QCrossroadsConscription.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Quest.Quests.TheBarrens.OutpostStonetalon.QCentaurBracers" Collapsed="true">
+    <Position X="25.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engines\Quest\Quests\TheBarrens\OutpostStonetalon\QCentaurBracers.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Quest.Quests.TheBarrens.OutpostStonetalon.QKolkarLeaders" Collapsed="true">
+    <Position X="30.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engines\Quest\Quests\TheBarrens\OutpostStonetalon\QKolkarLeaders.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Quest.DefaultQuestEngine" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="78" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAAIAAYAAAAAAAAQAAIEAAAAABQAAAAAAAA=</HashCode>
+      <FileName>Engines\Quest\DefaultQuestEngine.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Tactic.Bosses.Naxxramas10.AnubRekhan10Tactic" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="85" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAEAACAAAQAACAAAAAAALAQAAAAAAQ0QgAQAA=</HashCode>
+      <FileName>Engines\Tactic\Bosses\Naxxramas10\AnubRekhan10Tactic.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Tactic.Bosses.TheObsidianSanctum10.TwilightPortalTactic" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="88.5" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAQAQAAACAAAAAAAAAAAAAAIAQAMAAAAAAQAAIAA=</HashCode>
+      <FileName>Engines\Tactic\Bosses\TheObsidianSanctum10\TwilightPortalTactic.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Tactic.Dungeon.ForgeOfSouls.BronjahmTactic" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="81.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAACAAAAAAAAAAAAAAIAQAAAAAAAAQAIIAA=</HashCode>
+      <FileName>Engines\Tactic\Dungeon\ForgeOfSouls\BronjahmTactic.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Tactic.Dungeon.ForgeOfSouls.DevourerOfSoulsTactic" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="83.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAACAAAAAAAAAAAAAAIAQAAAAAAAAYAAIAA=</HashCode>
+      <FileName>Engines\Tactic\Dungeon\ForgeOfSouls\DevourerOfSoulsTactic.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Tactic.Dungeon.PitOfSaron.IckAndKrickTactic" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="78" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAACAAgAAAAAAAAAAAIAQAAAAgAACQAAIAA=</HashCode>
+      <FileName>Engines\Tactic\Dungeon\PitOfSaron\IckAndKrickTactic.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Tactic.DefaultTacticEngine" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="79.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAQAAAAAAAAAAAIAAAAAAAIAAQAAAAA=</HashCode>
+      <FileName>Engines\Tactic\DefaultTacticEngine.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Engines.Test.DefaultTestEngine" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="81.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABQACAgAAAAQAAAAAAIgAAgIEAAAAAAAAIgAAIAA=</HashCode>
+      <FileName>Engines\Test\DefaultTestEngine.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Logic.Idle.Actions.Utils.BasicIdleAction" Collapsed="true">
+    <Position X="6.75" Y="19.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAgAIAAACAQEAAAAAAQAAAAEAAAgAAACAAAAQAA=</HashCode>
+      <FileName>Logic\Idle\Actions\Utils\BasicIdleAction.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Logic.Idle.Actions.Utils.FcfsIdleAction" Collapsed="true">
+    <Position X="5.5" Y="20.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Logic\Idle\Actions\Utils\FcfsIdleAction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Logic.Idle.Actions.Utils.RandomIdleAction" Collapsed="true">
+    <Position X="7.75" Y="20.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAAAAEAAAAAAAAAAAABAA=</HashCode>
+      <FileName>Logic\Idle\Actions\Utils\RandomIdleAction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Logic.Idle.Actions.AuctionHouseIdleAction" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="93.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>oAAEAAgAAAAACAQEAAAAAAAAAAIEAAIgAAAiAEAARAA=</HashCode>
+      <FileName>Logic\Idle\Actions\AuctionHouseIdleAction.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Logic.Idle.Actions.CheckMailsIdleAction" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="92" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>oAAEAAgAAAAACAwEAAAAAAAIAAIEAABgAAACAAAARAA=</HashCode>
+      <FileName>Logic\Idle\Actions\CheckMailsIdleAction.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Logic.Idle.Actions.FishingIdleAction" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="79.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>hAAAABgAAAACCAQEAACAAAAAEAIEAAAgAAECAAAARAA=</HashCode>
+      <FileName>Logic\Idle\Actions\FishingIdleAction.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Logic.Idle.Actions.LookAroundIdleAction" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="85" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAgAAAAACAQEAAAAAAAAAAIEAAAgAAACAAAARAA=</HashCode>
+      <FileName>Logic\Idle\Actions\LookAroundIdleAction.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Logic.Idle.Actions.LookAtGroupIdleAction" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="86.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAgAAAgAAAAACAQEAAAAAAAAAAIEAAAgAAACAAAARAA=</HashCode>
+      <FileName>Logic\Idle\Actions\LookAtGroupIdleAction.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Logic.Idle.Actions.LookAtGroupmemberIdleAction" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="88.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAgAAgAACAQEAAAAAAAAAAIEAAAgAAACAAAARAA=</HashCode>
+      <FileName>Logic\Idle\Actions\LookAtGroupmemberIdleAction.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Logic.Idle.Actions.LookAtNpcsIdleAction" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="90.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAIAAAgAAAAACAQEAAAAAAAAAAIEAAAgAAACAAAARAA=</HashCode>
+      <FileName>Logic\Idle\Actions\LookAtNpcsIdleAction.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Logic.Idle.Actions.LookAtTargetIdleAction" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="92" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAgAAAAACAQEAAAAAAAAAAIEAAAgAAACAAAARAA=</HashCode>
+      <FileName>Logic\Idle\Actions\LookAtTargetIdleAction.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Logic.Idle.Actions.OpenMapIdleAction" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="85" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAgAAAAACAQEAAAAAAAAAAIEAAAgAAACAAAAQAA=</HashCode>
+      <FileName>Logic\Idle\Actions\OpenMapIdleAction.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Logic.Idle.Actions.RandomEmoteIdleAction" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="95.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAgIAAAACAQEAAAAAAAIAAIEAAAgAAACAAAARAA=</HashCode>
+      <FileName>Logic\Idle\Actions\RandomEmoteIdleAction.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Logic.Idle.Actions.SheathWeaponIdleAction" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="86.75" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAgAAAAACAQEAAAAAAAAAAIEAAAgAAACAAAAQAA=</HashCode>
+      <FileName>Logic\Idle\Actions\SheathWeaponIdleAction.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Logic.Idle.Actions.SitByCampfireIdleAction" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="92" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAgAAAAACAwEAAAAAAAAACIEAAAgAAACAAAARAA=</HashCode>
+      <FileName>Logic\Idle\Actions\SitByCampfireIdleAction.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Logic.Idle.Actions.SitToChairIdleAction" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="93.75" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAgAAAAACAwEAAAAACAAAAIEAAAgAAACAAAAQAE=</HashCode>
+      <FileName>Logic\Idle\Actions\SitToChairIdleAction.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Logic.Idle.IdleActionManager" Collapsed="true">
+    <Position X="79.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAgAABAAAAAQAAAAIAAAACAAgBAAAAIIARAA=</HashCode>
+      <FileName>Logic\Idle\IdleActionManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Logic.Leafs.InteractWithUnitLeaf" Collapsed="true">
+    <Position X="0.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAgAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Logic\Leafs\InteractWithUnitLeaf.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Logic.Leafs.MoveToLeaf" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAgAAAAIQAAAAAAAAAAAIAAAIAAAAAAAAAAAE=</HashCode>
+      <FileName>Logic\Leafs\MoveToLeaf.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Logic.Leafs.SuccessLeaf" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="85" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAU=</HashCode>
+      <FileName>Logic\Leafs\SuccessLeaf.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Logic.Routines.CommonRoutines" Collapsed="true">
+    <Position X="97.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Logic\Routines\CommonRoutines.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Logic.Routines.SellItemsRoutine" Collapsed="true">
+    <Position X="83.25" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>Logic\Routines\SellItemsRoutine.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Logic.Routines.SpeakToMerchantRoutine" Collapsed="true">
+    <Position X="97.25" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>Logic\Routines\SpeakToMerchantRoutine.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Logic.Routines.SpeakToClassTrainerRoutine" Collapsed="true">
+    <Position X="95.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>Logic\Routines\SpeakToTrainerRoutine.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Logic.Routines.TrainAllSpellsRoutine" Collapsed="true">
+    <Position X="86.75" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>Logic\Routines\TrainAllSpellsRoutine.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Logic.StaticDeathRoutes.ForgeOfSoulsDeathRoute" Collapsed="true">
+    <Position X="0.5" Y="20.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAACAA=</HashCode>
+      <FileName>Logic\StaticDeathRoutes\ForgeOfSoulsDeathRoute.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Logic.StaticDeathRoutes.PitOfSaronDeathRoute" Collapsed="true">
+    <Position X="2.75" Y="20.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAACAA=</HashCode>
+      <FileName>Logic\StaticDeathRoutes\PitOfSaronDeathRoute.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Logic.StaticDeathRoutes.StaticPathDeathRoute" Collapsed="true">
+    <Position X="1.75" Y="19.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAIBAAAAAQAAAAAAAAAAAAACAEAACAA=</HashCode>
+      <FileName>Logic\StaticDeathRoutes\StaticPathDeathRoute.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Logic.AmeisenBotLogic" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="81.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EKAAMABCGvGACBBAAJFALIWyBA89xGAQCqAQGiYCQgA=</HashCode>
+      <FileName>Logic\AmeisenBotLogic.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Managers.Character.Comparators.Objects.GearscoreFactory" Collapsed="true">
+    <Position X="86.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAACAAAACAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Managers\Character\Comparators\Objects\GearscoreFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Managers.Character.Comparators.ArmsItemComparator" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="90.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAAAAAAAAAAAAAAAAAAIAAAEAAAAAAAAAAAA=</HashCode>
+      <FileName>Managers\Character\Comparators\ArmsItemComparator.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Managers.Character.Comparators.AssassinationItemComparator" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="92" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAA=</HashCode>
+      <FileName>Managers\Character\Comparators\AssassinationItemComparator.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Managers.Character.Comparators.BasicAgilityComparator" Collapsed="true">
+    <Position X="1" Y="14.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Managers\Character\Comparators\BasicAgilityComparator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Managers.Character.Comparators.BasicArmorComparator" Collapsed="true">
+    <Position X="3.25" Y="14.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Managers\Character\Comparators\BasicArmorComparator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Managers.Character.Comparators.BasicComparator" Collapsed="true">
+    <Position X="7.75" Y="13.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAABAAAIAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAA=</HashCode>
+      <FileName>Managers\Character\Comparators\BasicComparator.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Managers.Character.Comparators.BasicIntellectComparator" Collapsed="true">
+    <Position X="5.5" Y="14.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Managers\Character\Comparators\BasicIntellectComparator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Managers.Character.Comparators.BasicSpiritComparator" Collapsed="true">
+    <Position X="7.75" Y="14.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Managers\Character\Comparators\BasicSpiritComparator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Managers.Character.Comparators.BasicStaminaComparator" Collapsed="true">
+    <Position X="10" Y="14.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Managers\Character\Comparators\BasicStaminaComparator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Managers.Character.Comparators.BasicStrengthComparator" Collapsed="true">
+    <Position X="12.25" Y="14.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Managers\Character\Comparators\BasicStrengthComparator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Managers.Character.Comparators.FuryItemComparator" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="85" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAAAAAAAAAAAAAAAAAAIAAAEAAAAAAAAAAAA=</HashCode>
+      <FileName>Managers\Character\Comparators\FuryItemComparator.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Managers.Character.Comparators.ItemLevelComparator" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="95.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAA=</HashCode>
+      <FileName>Managers\Character\Comparators\ItemLevelComparator.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Managers.Character.Comparators.ShamanElementalComparator" Collapsed="true">
+    <Position X="14.5" Y="14.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Managers\Character\Comparators\ShamanElementalComparator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Managers.Character.Comparators.SimpleItemComparator" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="90.25" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAIAAAAAAAAAAAAACAAAAAAEAAAAAAAAAAAA=</HashCode>
+      <FileName>Managers\Character\Comparators\SimpleItemComparator.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Managers.Character.Comparators.TankItemComparator" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="93.75" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAA=</HashCode>
+      <FileName>Managers\Character\Comparators\TankItemComparator.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Managers.Character.Inventory.Objects.WowArmor" Collapsed="true">
+    <Position X="24.25" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Managers\Character\Inventory\Objects\WowArmor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Managers.Character.Inventory.Objects.WowBasicItem" Collapsed="true">
+    <Position X="16.5" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABACAABBAQAAAADEAAAgAEQAAiAAAAAAAQAAEBgQAAA=</HashCode>
+      <FileName>Managers\Character\Inventory\Objects\WowBasicItem.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Managers.Character.Inventory.Objects.WowConsumable" Collapsed="true">
+    <Position X="26.5" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Managers\Character\Inventory\Objects\WowConsumable.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Managers.Character.Inventory.Objects.WowContainer" Collapsed="true">
+    <Position X="28.75" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Managers\Character\Inventory\Objects\WowContainer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Managers.Character.Inventory.Objects.WowGem" Collapsed="true">
+    <Position X="31" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Managers\Character\Inventory\Objects\WowGem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Managers.Character.Inventory.Objects.WowKey" Collapsed="true">
+    <Position X="1.75" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Managers\Character\Inventory\Objects\WowKey.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Managers.Character.Inventory.Objects.WowMiscellaneousItem" Collapsed="true">
+    <Position X="4" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Managers\Character\Inventory\Objects\WowMiscellaneousItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Managers.Character.Inventory.Objects.WowMoneyItem" Collapsed="true">
+    <Position X="6.25" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Managers\Character\Inventory\Objects\WowMoneyItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Managers.Character.Inventory.Objects.WowProjectile" Collapsed="true">
+    <Position X="8.5" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Managers\Character\Inventory\Objects\WowProjectile.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Managers.Character.Inventory.Objects.WowQuestItem" Collapsed="true">
+    <Position X="10.75" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Managers\Character\Inventory\Objects\WowQuestItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Managers.Character.Inventory.Objects.WowQuiver" Collapsed="true">
+    <Position X="13" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Managers\Character\Inventory\Objects\WowQuiver.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Managers.Character.Inventory.Objects.WowReagent" Collapsed="true">
+    <Position X="15.25" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Managers\Character\Inventory\Objects\WowReagent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Managers.Character.Inventory.Objects.WowRecipe" Collapsed="true">
+    <Position X="17.5" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Managers\Character\Inventory\Objects\WowRecipe.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Managers.Character.Inventory.Objects.WowTradeGoods" Collapsed="true">
+    <Position X="19.75" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Managers\Character\Inventory\Objects\WowTradeGoods.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Managers.Character.Inventory.Objects.WowWeapon" Collapsed="true">
+    <Position X="22" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Managers\Character\Inventory\Objects\WowWeapon.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Managers.Character.Inventory.CharacterEquipment" Collapsed="true">
+    <Position X="88.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIQAAAAAAAACCAAAAAgQAAAAAAgQAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Managers\Character\Inventory\CharacterEquipment.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Managers.Character.Inventory.CharacterInventory" Collapsed="true">
+    <Position X="90.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAgAACAAAAAgBAAAAAAkQAAABEgAEAABAAAA=</HashCode>
+      <FileName>Managers\Character\Inventory\CharacterInventory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Managers.Character.Inventory.ItemFactory" Collapsed="true">
+    <Position X="93.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAAAAAAAAAAAAAAAAAAICAAAAAAAAAAAAA=</HashCode>
+      <FileName>Managers\Character\Inventory\ItemFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Managers.Character.Spells.Objects.Spell" Collapsed="true">
+    <Position X="76.25" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEABAACAAAAIAEAAAAACAAQAAAAAAQAAAAAAACAAAAA=</HashCode>
+      <FileName>Managers\Character\Spells\Objects\Spell.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Managers.Character.Spells.SpellBook" Collapsed="true">
+    <Position X="78" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAACAAAAAQAAAAAAQAAAAAAAAQAIAAAABAAAAAAAA=</HashCode>
+      <FileName>Managers\Character\Spells\SpellBook.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Managers.Character.Talents.Objects.Talent" Collapsed="true">
+    <Position X="86.75" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAABAAAEAAAgAAAEAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Managers\Character\Talents\Objects\Talent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Managers.Character.Talents.Objects.TalentTree" Collapsed="true">
+    <Position X="90.25" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAAAAABAQAAAAAAAABAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Managers\Character\Talents\Objects\TalentTree.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Managers.Character.Talents.TalentManager" Collapsed="true">
+    <Position X="88.5" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAgAIAAAAAAAQAAAAGAAAAAAAAAA=</HashCode>
+      <FileName>Managers\Character\Talents\TalentManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Managers.Character.DefaultCharacterManager" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="90.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>kgAQAAAAAoAAAIBASQGBBAQAAABQwEABUCAACgJAAEA=</HashCode>
+      <FileName>Managers\Character\DefaultCharacterManager.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Managers.Chat.DefaultChatManager" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="92" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAABAAABAAAgEAAAAAAAACAAAAAAAAAAA=</HashCode>
+      <FileName>Managers\Chat\DefaultChatManager.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Core.Managers.Threat.ThreatManager" Collapsed="true">
+    <Position X="85" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAABAAAAAAAAAAAIAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Managers\Threat\ThreatManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Objects.InteractableObject" Collapsed="true">
+    <Position X="81.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAACAAAgAAAAAAAAAAAAACAAAIAAAAAAAQA=</HashCode>
+      <FileName>Objects\InteractableObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.Objects.Npc" Collapsed="true">
+    <Position X="83.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAACAAACAAAgAAAAAAQAAAAAAAAAAQAAAAAAAQA=</HashCode>
+      <FileName>Objects\Npc.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.AmeisenBot" Collapsed="true">
+    <Position X="76.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ARguyCAQDiEEACAoQggNSgAgBEIADaAAgGTkAAhgQyk=</HashCode>
+      <FileName>AmeisenBot.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.AmeisenBotConfig" Collapsed="true">
+    <Position X="78" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>iEmSBTK9FjHkRAsAMcaEEonQiAxDGzdHEZ1wEKRbIbA=</HashCode>
+      <FileName>AmeisenBotConfig.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Core.AmeisenBotInterfaces" Collapsed="true">
+    <Position X="79.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAABBDFQQyiAAAFEACICABAigUCBmAIxAITQAAagA=</HashCode>
+      <FileName>AmeisenBotInterfaces.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="AmeisenBotX.Core.Engines.Battleground.Jannis.Profiles.IBattlegroundProfile" Collapsed="true">
+    <Position X="81.5" Y="12.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engines\Battleground\Jannis\Profiles\IBattlegroundProfile.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AmeisenBotX.Core.Engines.Battleground.IBattlegroundEngine" Collapsed="true">
+    <Position X="79.75" Y="12.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgBAQAgAAAAAQAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engines\Battleground\IBattlegroundEngine.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AmeisenBotX.Core.Engines.Combat.Classes.ICombatClass" Collapsed="true">
+    <Position X="88.5" Y="12.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAUAAACAAwAAaAkAAAAAAAIABAAAAAAAAAAIBAABA=</HashCode>
+      <FileName>Engines\Combat\Classes\ICombatClass.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AmeisenBotX.Core.Engines.Combat.Helpers.Aura.Objects.IAuraJob" Collapsed="true">
+    <Position X="78" Y="12.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>Engines\Combat\Helpers\Aura\Objects\IAuraJob.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AmeisenBotX.Core.Engines.Combat.Helpers.Targets.Priority.ITargetPrioritizer" Collapsed="true">
+    <Position X="97.25" Y="13.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engines\Combat\Helpers\Targets\Priority\ITargetPrioritizer.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AmeisenBotX.Core.Engines.Combat.Helpers.Targets.Validation.ITargetValidator" Collapsed="true">
+    <Position X="78" Y="14.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engines\Combat\Helpers\Targets\Validation\ITargetValidator.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AmeisenBotX.Core.Engines.Combat.Helpers.Targets.ITargetProvider" Collapsed="true">
+    <Position X="76.25" Y="14.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAABAAAAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Engines\Combat\Helpers\Targets\ITargetProvider.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AmeisenBotX.Core.Engines.Dungeon.Profiles.IDungeonProfile" Collapsed="true">
+    <Position X="92" Y="12.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAiAACAgAgiAASIAAAAACAQAAAAAAAAAEA=</HashCode>
+      <FileName>Engines\Dungeon\Profiles\IDungeonProfile.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AmeisenBotX.Core.Engines.Dungeon.IDungeonEngine" Collapsed="true">
+    <Position X="90.25" Y="12.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAAAQAAAAAAIAAAACAAAAAABAAAAAAAAA=</HashCode>
+      <FileName>Engines\Dungeon\IDungeonEngine.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AmeisenBotX.Core.Engines.Grinding.Profiles.IGrindingProfile" Collapsed="true">
+    <Position X="95.5" Y="12.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAgAA=</HashCode>
+      <FileName>Engines\Grinding\Profiles\IGrindingProfile.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AmeisenBotX.Core.Engines.Grinding.IGrindingEngine" Collapsed="true">
+    <Position X="93.75" Y="12.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAACQAAAAAAAAAAAAAAAAAABAAAAAAAAA=</HashCode>
+      <FileName>Engines\Grinding\IGrindingEngine.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AmeisenBotX.Core.Engines.Jobs.Profiles.IJobProfile" Collapsed="true">
+    <Position X="0.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engines\Jobs\Profiles\IJobProfile.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AmeisenBotX.Core.Engines.Jobs.Profiles.IMiningProfile" Collapsed="true">
+    <Position X="0.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAIAAAAAAgAAAAAAAAAAAAAQAACAAAA=</HashCode>
+      <FileName>Engines\Jobs\Profiles\IMiningProfile.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AmeisenBotX.Core.Engines.Jobs.IJobEngine" Collapsed="true">
+    <Position X="78" Y="13.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABAQAAAAAAAAAAAAEAACAABAAAAAAAAA=</HashCode>
+      <FileName>Engines\Jobs\IJobEngine.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AmeisenBotX.Core.Engines.Movement.Pathfinding.IPathfindingHandler" Collapsed="true">
+    <Position X="83.25" Y="13.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAEACCAAgAIAAAAAAAAAA=</HashCode>
+      <FileName>Engines\Movement\Pathfinding\IPathfindingHandler.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AmeisenBotX.Core.Engines.Movement.IMovementEngine" Collapsed="true">
+    <Position X="79.75" Y="13.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAABAYAAAAUAAAQEAAAAQABACAAAQAAAAA=</HashCode>
+      <FileName>Engines\Movement\IMovementEngine.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AmeisenBotX.Core.Engines.Movement.IMovementProvider" Collapsed="true">
+    <Position X="81.5" Y="13.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engines\Movement\IMovementProvider.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AmeisenBotX.Core.Engines.PvP.IPvpEngine" Collapsed="true">
+    <Position X="85" Y="13.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engines\PvP\IPvpEngine.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AmeisenBotX.Core.Engines.Quest.Objects.Objectives.IQuestObjective" Collapsed="true">
+    <Position X="88.5" Y="13.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAQAAAAAAAAAAAAAAAAAAACAAAA=</HashCode>
+      <FileName>Engines\Quest\Objects\Objectives\IQuestObjective.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AmeisenBotX.Core.Engines.Quest.Objects.Quests.IBotQuest" Collapsed="true">
+    <Position X="83.25" Y="12.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACQACAAAAACAQAAgQAAAQAAAAABAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engines\Quest\Objects\Quests\IBotQuest.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AmeisenBotX.Core.Engines.Quest.Profiles.IQuestProfile" Collapsed="true">
+    <Position X="90.25" Y="13.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engines\Quest\Profiles\IQuestProfile.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AmeisenBotX.Core.Engines.Quest.IQuestEngine" Collapsed="true">
+    <Position X="86.75" Y="13.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAIAAQAAAAAAAAAAAAEAAAAABQAAAAAAAA=</HashCode>
+      <FileName>Engines\Quest\IQuestEngine.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AmeisenBotX.Core.Engines.Tactic.ITactic" Collapsed="true">
+    <Position X="93.75" Y="13.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAACAAAAAAAAAAAAIAAAQAAAAAAAAQAAIAA=</HashCode>
+      <FileName>Engines\Tactic\ITactic.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AmeisenBotX.Core.Engines.Tactic.ITacticEngine" Collapsed="true">
+    <Position X="95.5" Y="13.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAQAAAAA=</HashCode>
+      <FileName>Engines\Tactic\ITacticEngine.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AmeisenBotX.Core.Engines.Test.ITestEngine" Collapsed="true">
+    <Position X="79.75" Y="14.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engines\Test\ITestEngine.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AmeisenBotX.Core.Logic.Idle.Actions.IIdleAction" Collapsed="true">
+    <Position X="97.25" Y="12.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAgAAAAACAQAAAAAAAAAAAAEAAAgAAACAAAAQAA=</HashCode>
+      <FileName>Logic\Idle\Actions\IIdleAction.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AmeisenBotX.Core.Logic.StaticDeathRoutes.IStaticDeathRoute" Collapsed="true">
+    <Position X="92" Y="13.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAABAAAAAQAAAAAAAAAAAAACAAAAAAA=</HashCode>
+      <FileName>Logic\StaticDeathRoutes\IStaticDeathRoute.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AmeisenBotX.Core.Logic.IAmeisenBotLogic" Collapsed="true">
+    <Position X="76.25" Y="12.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAQAA=</HashCode>
+      <FileName>Logic\IAmeisenBotLogic.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AmeisenBotX.Core.Managers.Character.Comparators.IItemComparator" Collapsed="true">
+    <Position X="76.25" Y="13.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAA=</HashCode>
+      <FileName>Managers\Character\Comparators\IItemComparator.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AmeisenBotX.Core.Managers.Character.Inventory.Objects.IWowInventoryItem" Collapsed="true">
+    <Position X="81.5" Y="14.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABACAABBAQAAAADAAAAgAEQAAiAAAAAAAQAAEBgQAAA=</HashCode>
+      <FileName>Managers\Character\Inventory\Objects\IWowInventoryItem.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AmeisenBotX.Core.Managers.Character.ICharacterManager" Collapsed="true">
+    <Position X="85" Y="12.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>kgAQAAAAAgAAAABACQEABAQAAABAwAABUAAAAgIAAAA=</HashCode>
+      <FileName>Managers\Character\ICharacterManager.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AmeisenBotX.Core.Managers.Chat.IChatManager" Collapsed="true">
+    <Position X="86.75" Y="12.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAABAAAAAAAgAAAAAAAAACAAAAAAAAAAA=</HashCode>
+      <FileName>Managers\Chat\IChatManager.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="AmeisenBotX.Core.Engines.Battleground.KamelBG.Enums.Flags" Collapsed="true">
+    <Position X="83.25" Y="15.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAIAAAAAABAAAAACAAAAAAAAAAAAAQAAgAAAAAA=</HashCode>
+      <FileName>Engines\Battleground\KamelBG\Enums\Flags.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="AmeisenBotX.Core.Engines.Battleground.KamelBG.Enums.FlagsAlli" Collapsed="true">
+    <Position X="85" Y="15.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAABAAAAACAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Engines\Battleground\KamelBG\Enums\Flags.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="AmeisenBotX.Core.Engines.Battleground.KamelBG.Enums.FlagsHord" Collapsed="true">
+    <Position X="86.75" Y="15.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAIAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engines\Battleground\KamelBG\Enums\Flags.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="AmeisenBotX.Core.Engines.Battleground.KamelBG.Enums.Vehicle" Collapsed="true">
+    <Position X="83.25" Y="16" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Engines\Battleground\KamelBG\Enums\Vehicle.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="AmeisenBotX.Core.Engines.Combat.Helpers.Healing.Enums.HealSpellType" Collapsed="true">
+    <Position X="88.5" Y="15.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAACAAAAAAAAAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engines\Combat\Helpers\Healing\Enums\HealSpellType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="AmeisenBotX.Core.Engines.Dungeon.Enums.DungeonFactionType" Collapsed="true">
+    <Position X="78" Y="15.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAAAAAIBAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engines\Dungeon\Enums\DungeonFactionType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="AmeisenBotX.Core.Engines.Dungeon.Enums.DungeonNodeType" Collapsed="true">
+    <Position X="79.75" Y="15.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAgAAAgAAQAAAAAAAAAAMAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engines\Dungeon\Enums\DungeonNodeType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="AmeisenBotX.Core.Engines.Jobs.Enums.JobType" Collapsed="true">
+    <Position X="92" Y="15.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAA=</HashCode>
+      <FileName>Engines\Jobs\Enums\JobType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="AmeisenBotX.Core.Engines.Jobs.Enums.MailBox" Collapsed="true">
+    <Position X="93.75" Y="15.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>Engines\Jobs\Enums\MailBox.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="AmeisenBotX.Core.Engines.Movement.Enums.MovementAction" Collapsed="true">
+    <Position X="97.25" Y="15.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAAIAAAAAAAAAQACBgAAAgAAAAAAAAAAEAAAE=</HashCode>
+      <FileName>Engines\Movement\Enums\MovementAction.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="AmeisenBotX.Core.Engines.Movement.Enums.PreventMovementType" Collapsed="true">
+    <Position X="81.5" Y="16" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engines\Movement\Enums\PreventMovementType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="AmeisenBotX.Core.Engines.Movement.Pathfinding.Enums.EMessageType" Collapsed="true">
+    <Position X="81.5" Y="15.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAACAAAAABAAAAAAEAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engines\Movement\Pathfinding\Enums\EMessageType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="AmeisenBotX.Core.Engines.Movement.Pathfinding.Enums.PathRequestFlag" Collapsed="true">
+    <Position X="79.75" Y="16" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>Engines\Movement\Pathfinding\Enums\PathRequestFlag.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="AmeisenBotX.Core.Logic.Enums.BotMode" Collapsed="true">
+    <Position X="76.25" Y="15.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAQAAAAAAEAAAAAAAAAAAAAAABAAAAEAAgA=</HashCode>
+      <FileName>Logic\Enums\BotMode.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="AmeisenBotX.Core.Objects.Enums.InteractableObjectType" Collapsed="true">
+    <Position X="90.25" Y="15.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAAAAAAAAAAAAABAAAAAAEAAAAAAAAAACAAQA=</HashCode>
+      <FileName>Objects\Enums\InteractableObjectType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="AmeisenBotX.Core.Objects.Enums.MailboxFactionType" Collapsed="true">
+    <Position X="95.5" Y="15.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAAAAAIBAAAAAAAAEAAAA=</HashCode>
+      <FileName>Objects\Enums\MailboxFactionType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="AmeisenBotX.Core.Objects.Enums.NpcSubType" Collapsed="true">
+    <Position X="76.25" Y="16" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQASIEEAQFAIAAACAQEACAAAgAgQAABAgCCABAkAACA=</HashCode>
+      <FileName>Objects\Enums\NpcSubType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="AmeisenBotX.Core.Objects.Enums.NpcType" Collapsed="true">
+    <Position X="78" Y="16" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAMBAAAAAgAAAAAQAAQAAAAAAAAAAAgAAAAAABAA=</HashCode>
+      <FileName>Objects\Enums\NpcType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Delegate Name="AmeisenBotX.Core.Engines.Quest.Objects.Objectives.CastSpellQuestObjectiveCondition" Collapsed="true">
+    <Position X="78" Y="17" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engines\Quest\Objects\Objectives\CastSpellQuestObjective.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Delegate Name="AmeisenBotX.Core.Engines.Quest.Objects.Objectives.CastVehicleSpellQuestObjectiveCondition" Collapsed="true">
+    <Position X="79.75" Y="17" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engines\Quest\Objects\Objectives\CastVehicleSpellQuestObjective.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Delegate Name="AmeisenBotX.Core.Engines.Quest.Objects.Objectives.KillUnitQuestObjectiveCondition" Collapsed="true">
+    <Position X="83.25" Y="17" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engines\Quest\Objects\Objectives\KillUnitQuestObjective.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Delegate Name="AmeisenBotX.Core.Engines.Quest.Objects.Objectives.EnchantItemQuestObjectiveCondition" Collapsed="true">
+    <Position X="81.5" Y="17" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engines\Quest\Objects\Objectives\RuneforgingQuestObjective.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Delegate Name="AmeisenBotX.Core.Engines.Quest.Objects.Objectives.TalkToUnitQuestObjectiveCondition" Collapsed="true">
+    <Position X="85" Y="17" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engines\Quest\Objects\Objectives\TalkToUnitQuestObjective.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Delegate Name="AmeisenBotX.Core.Engines.Quest.Objects.Objectives.UseItemQuestObjectiveCondition" Collapsed="true">
+    <Position X="86.75" Y="17" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engines\Quest\Objects\Objectives\UseItemQuestObjective.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Delegate Name="AmeisenBotX.Core.Engines.Quest.Objects.Objectives.UseObjectQuestObjectiveCondition" Collapsed="true">
+    <Position X="88.5" Y="17" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engines\Quest\Objects\Objectives\UseObjectQuestObjective.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Delegate Name="AmeisenBotX.Core.Engines.Quest.Objects.Objectives.UseUnitQuestObjectiveCondition" Collapsed="true">
+    <Position X="90.25" Y="17" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engines\Quest\Objects\Objectives\UseUnitQuestObjective.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Delegate Name="AmeisenBotX.Core.Engines.Quest.Objects.Objectives.WaitUntilQuestObjectiveCondition" Collapsed="true">
+    <Position X="92" Y="17" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engines\Quest\Objects\Objectives\WaitUntilQuestObjective.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Delegate Name="AmeisenBotX.Core.Engines.Quest.Objects.Quests.BotQuestGetPosition" Collapsed="true">
+    <Position X="76.25" Y="17" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>Engines\Quest\Objects\Quests\BotQuest.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

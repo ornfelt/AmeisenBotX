@@ -8,6 +8,9 @@ namespace AmeisenBotX.Core.Engines.Quest.Objects.Objectives
     /// </summary>
     public delegate bool CastVehicleSpellQuestObjectiveCondition();
 
+    /// <summary>
+    /// Represents a quest objective that requires casting a specific vehicle spell.
+    /// </summary>
     public class CastVehicleSpellQuestObjective : IQuestObjective
     {
         /// <summary>

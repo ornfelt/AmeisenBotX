@@ -9,6 +9,9 @@ using System.Collections.Generic;
 /// </summary>
 namespace AmeisenBotX.Wow.Objects
 {
+    /// <summary>
+    /// Represents an interface for providing and managing World of Warcraft (WoW) game objects.
+    /// </summary>
     public interface IObjectProvider
     {
         /// <summary>

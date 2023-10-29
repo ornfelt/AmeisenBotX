@@ -11,6 +11,9 @@ namespace AmeisenBotX.Core.Engines.Quest.Objects.Objectives
     /// </summary>
     public delegate bool UseItemQuestObjectiveCondition();
 
+    /// <summary>
+    /// Represents a quest objective that requires using a specific item to complete.
+    /// </summary>
     public class UseItemQuestObjective : IQuestObjective
     {
         /// <summary>

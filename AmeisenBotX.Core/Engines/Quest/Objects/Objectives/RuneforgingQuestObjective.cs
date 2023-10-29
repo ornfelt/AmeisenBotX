@@ -12,6 +12,9 @@ namespace AmeisenBotX.Core.Engines.Quest.Objects.Objectives
     /// </summary>
     public delegate bool EnchantItemQuestObjectiveCondition();
 
+    /// <summary>
+    /// Represents a quest objective related to the process of Runeforging.
+    /// </summary>
     public class RuneforgingQuestObjective : IQuestObjective
     {
         /// <summary>

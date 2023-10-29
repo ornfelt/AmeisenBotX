@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="AmeisenBotX.Common.Keyboard.KeyboardHook" Collapsed="true">
+    <Position X="6" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAAABAAAEAAADAAAAAABBABAAQAgAABgAAA=</HashCode>
+      <FileName>Keyboard\KeyboardHook.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Common.Math.BotMath" Collapsed="true">
+    <Position X="4.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gDAAAAAIAAAAAAQAAAAAAAAAAAgAAgAAaAAAAgAEAAA=</HashCode>
+      <FileName>Math\BotMath.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Common.Storage.SimpleConfigurable" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="4.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAA=</HashCode>
+      <FileName>Storage\SimpleConfigurable.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Common.Storage.StorageManager" Collapsed="true">
+    <Position X="6" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAIgIAAAAEAAEABAAAAAAAAAAABAAAAAAAAAAAAAAE=</HashCode>
+      <FileName>Storage\StorageManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Common.Utils.BotUtils" Collapsed="true">
+    <Position X="6" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QACAAACAAAEAAAAAACAAAAAAABgAAABACAAACAAAACA=</HashCode>
+      <FileName>Utils\BotUtils.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Common.Utils.IOUtils" Collapsed="true">
+    <Position X="7.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Utils\IOUtils.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Common.Utils.JsonExtensions" Collapsed="true">
+    <Position X="4.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAEAAAAAA=</HashCode>
+      <FileName>Utils\JsonExtensions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Common.Utils.LockedTimer" Collapsed="true">
+    <Position X="7.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAAAAAAAAAAAAAAAAAAACCAAAAAAAAAEQAA=</HashCode>
+      <FileName>Utils\LockedTimer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Common.Utils.TimegatedEvent" Collapsed="true">
+    <Position X="7.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAEAgAAAAAIAAAQAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>Utils\TimegatedEvent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="AmeisenBotX.Common.Keyboard.Objects.Keybind" Collapsed="true">
+    <Position X="4.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAQAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Keyboard\Objects\Keybind.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="AmeisenBotX.Common.Keyboard.Objects.LowLevelKeyboardInput" Collapsed="true">
+    <Position X="6" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABACAAAAAAAAAAABAAAAEAAAAAAAAAAAAAAAAIAA=</HashCode>
+      <FileName>Keyboard\Objects\LowLevelKeyboardInput.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="AmeisenBotX.Common.Math.Matrix3x3" Collapsed="true">
+    <Position X="7.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAsAAAAAAAAIEIDAAgACKABAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Math\Matrix3x3.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="AmeisenBotX.Common.Math.Vector3" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="4.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAEAFAQQAAAAUE8AeHAwEAGwAAAIAAABAARABA4iM=</HashCode>
+      <FileName>Math\Vector3.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Struct>
+  <Interface Name="AmeisenBotX.Common.Storage.IStoreable" Collapsed="true">
+    <Position X="4.25" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Storage\IStoreable.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="AmeisenBotX.Common.Keyboard.Enums.KeyboardState" Collapsed="true">
+    <Position X="4.25" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAgAAAAAgAAAAAAAAAAAAAAAAAAAAAIAA=</HashCode>
+      <FileName>Keyboard\Enums\KeyboardState.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="AmeisenBotX.Common.Keyboard.Enums.KeyCode" Collapsed="true">
+    <Position X="6" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>A5ru5//VYcooCswJU3ETACoVGk1c1BsKyKGo////aWM=</HashCode>
+      <FileName>Keyboard\Enums\KeyCode.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

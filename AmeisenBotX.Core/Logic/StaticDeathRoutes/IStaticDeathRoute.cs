@@ -6,6 +6,9 @@ using AmeisenBotX.Wow.Objects.Enums;
 /// </summary>
 namespace AmeisenBotX.Core.Logic.StaticDeathRoutes
 {
+    /// <summary>
+    /// Represents an interface for defining a static death route in a game world.
+    /// </summary>
     public interface IStaticDeathRoute
     {
         /// <summary>

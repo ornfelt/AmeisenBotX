@@ -1,0 +1,282 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="AmeisenBotX.Wow335a.Combatlog.Enums.CombatlogFields335a" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="19" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAJAAAAgAAAgAAAAACAACAAAAgAAQAAQABAAAAAAA=</HashCode>
+      <FileName>Combatlog\Enums\CombatlogFields335a.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Wow335a.Constants.Raids.Wotlk.Naxxramas.AnubRekhan335a" Collapsed="true">
+    <Position X="17.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Constants\Raids\Wotlk\Naxxramas\AnubRekhan335a.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Wow335a.Constants.Deathknight335a" Collapsed="true">
+    <Position X="20.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAKAABQAAACIIVAAMQCAAAAQRoAAAgAAgEEAAQBAAQg=</HashCode>
+      <FileName>Constants\Deathknight335a.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Wow335a.Constants.Druid335a" Collapsed="true">
+    <Position X="22.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>TJIBIIEAAgCAAJEAAUgaARgAwEEKAAD0BQQAAABxgCo=</HashCode>
+      <FileName>Constants\Druid335a.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Wow335a.Constants.Hunter335a" Collapsed="true">
+    <Position X="17.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACASAACEAEAEAA4ATQAAQAEAAIhBRAgIAAiAAiAA=</HashCode>
+      <FileName>Constants\Hunter335a.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Wow335a.Constants.Mage335a" Collapsed="true">
+    <Position X="19" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ESAAISCCAFAAAEAKAAEFEAAECCAACEAABEQQgAERBQI=</HashCode>
+      <FileName>Constants\Mage335a.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Wow335a.Constants.Paladin335a" Collapsed="true">
+    <Position X="24.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAECAAIQAABAAEBkAAEAgAgAAAIEAAAEiUEwMAAApE=</HashCode>
+      <FileName>Constants\Paladin335a.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Wow335a.Constants.Priest335a" Collapsed="true">
+    <Position X="17.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAgDAEAAAAAhgAEAIAAAgA6gAAYAAAAABBIAGAAAGA=</HashCode>
+      <FileName>Constants\Priest335a.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Wow335a.Constants.Racials335a" Collapsed="true">
+    <Position X="19" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAgAUAAAAAAAAhAAAAABAAAAAARAgAIAAAAAQAAA=</HashCode>
+      <FileName>Constants\Racials335a.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Wow335a.Constants.Rogue335a" Collapsed="true">
+    <Position X="20.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAgAAAQgCACAAAAIAAEAAAAAAAAAAAAABAAAAAAA=</HashCode>
+      <FileName>Constants\Rogue335a.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Wow335a.Constants.Shaman335a" Collapsed="true">
+    <Position X="22.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>UFgAAEAEgABIIIgAEBIAJEBAAQAgAAAAUEgIgQAEAIg=</HashCode>
+      <FileName>Constants\Shaman335a.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Wow335a.Constants.Warlock335a" Collapsed="true">
+    <Position X="24.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AoAQBAgAAAEcIAyAECAACAAIAYMAAAAAAQA8BDAQAAU=</HashCode>
+      <FileName>Constants\Warlock335a.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Wow335a.Constants.Warrior335a" Collapsed="true">
+    <Position X="17.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAIKAAgAUACFQQAIBABBQiBKAAAIwOiAJBI0AgAAg=</HashCode>
+      <FileName>Constants\Warrior335a.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Wow335a.Hook.EndSceneHook335a" Collapsed="true">
+    <Position X="24.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BABBAABEIIAAAABAEAAgAoAAAFAwAAAAggCCAAAAgAA=</HashCode>
+      <FileName>Hook\EndSceneHook335a.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Wow335a.Objects.ObjectManager335a" Collapsed="true">
+    <Position X="20.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAACIAAAAAAAAEAAAA=</HashCode>
+      <FileName>Objects\ObjectManager335a.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AmeisenBotX.Wow335a.Objects.WowContainer335a" Collapsed="true">
+    <Position X="3.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAEAAAAAAAIAAAAAAAAAAAAAIAAAAA=</HashCode>
+      <FileName>Objects\WowContainer335a.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AmeisenBotX.Wow335a.Objects.WowCorpse335a" Collapsed="true">
+    <Position X="8" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEQAAACAAAAAAAAEQAAAAAAAAAAACAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Objects\WowCorpse335a.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AmeisenBotX.Wow335a.Objects.WowDynobject335a" Collapsed="true">
+    <Position X="10.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQIAAACAAAAAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Objects\WowDynobject335a.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AmeisenBotX.Wow335a.Objects.WowGameobject335a" Collapsed="true">
+    <Position X="12.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQABAAAAAAAAAAEAAAAAAAAAAAACAABQAAIEAAAAAE=</HashCode>
+      <FileName>Objects\WowGameobject335a.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AmeisenBotX.Wow335a.Objects.WowItem335a" Collapsed="true">
+    <Position X="14.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAACAAAAEAAAEAAAAAQQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Objects\WowItem335a.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AmeisenBotX.Wow335a.Objects.WowObject335a" Collapsed="true">
+    <Position X="9" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAkAAIAAAAGIAAABAAAAwACAAAAAQA=</HashCode>
+      <FileName>Objects\WowObject335a.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AmeisenBotX.Wow335a.Objects.WowPlayer335a" Collapsed="true">
+    <Position X="5.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAQAAAAgAAAAAABEACEgAQICAAAAAkAEUAAAAAAABAU=</HashCode>
+      <FileName>Objects\WowPlayer335a.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AmeisenBotX.Wow335a.Objects.WowUnit335a" Collapsed="true">
+    <Position X="5.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>0QYIDAACAKEACJSWgYIkGoAAgkQQGIohAgYxIAAAAAU=</HashCode>
+      <FileName>Objects\WowUnit335a.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AmeisenBotX.Wow335a.Offsets.OffsetList335a" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="22.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QyECAAjKIhDiFhQggeEURsCQQHCRokAVgAg+ogwQIQg=</HashCode>
+      <FileName>Offsets\OffsetList335a.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AmeisenBotX.Wow335a.WowInterface335a" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="19" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>Hwa0iDxUr/AKKAZJjwQKCyoAEtVSR8IUOxOAKfgWQCk=</HashCode>
+      <FileName>WowInterface335a.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Struct Name="AmeisenBotX.Wow335a.Objects.Descriptors.WowContainerDescriptor335a" Collapsed="true">
+    <Position X="24.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAQAAAAEAAIAAAAAAAAAAAACAAAAAA=</HashCode>
+      <FileName>Objects\Descriptors\WowContainerDescriptor335a.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="AmeisenBotX.Wow335a.Objects.Descriptors.WowCorpseDescriptor335a" Collapsed="true">
+    <Position X="17.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAABACAAAAACAQQAAAAAAAAAAAQCAAAAAAFAAAAAAA=</HashCode>
+      <FileName>Objects\Descriptors\WowCorpseDescriptor335a.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="AmeisenBotX.Wow335a.Objects.Descriptors.WowDynobjectDescriptor335a" Collapsed="true">
+    <Position X="19" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAACAAAAAAAYAAAAAAAAAIAAAQAAAAAAAAAAAAA=</HashCode>
+      <FileName>Objects\Descriptors\WowDynobjectDescriptor335a.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="AmeisenBotX.Wow335a.Objects.Descriptors.WowGameobjectDescriptor335a" Collapsed="true">
+    <Position X="20.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AADwBAAAAAAAAAAQAAAAAAAACAAACAADQAAAAAAAAAE=</HashCode>
+      <FileName>Objects\Descriptors\WowGameobjectDescriptor335a.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="AmeisenBotX.Wow335a.Objects.Descriptors.WowItemDescriptor335a" Collapsed="true">
+    <Position X="22.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAABASAAAICAAAQAAAAAUAAAAEAQAIAEQAAAFAAAMA=</HashCode>
+      <FileName>Objects\Descriptors\WowItemDescriptor335a.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="AmeisenBotX.Wow335a.Objects.Descriptors.WowObjectDescriptor335a" Collapsed="true">
+    <Position X="24.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAQAAIAAAAAAAAABAAAAQAAAEAAAQA=</HashCode>
+      <FileName>Objects\Descriptors\WowObjectDescriptor335a.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="AmeisenBotX.Wow335a.Objects.Descriptors.WowPlayerDescriptor335a" Collapsed="true">
+    <Position X="17.25" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QYQJjChTGtDaFqCZWkEEkAwApVQCCDASFCoB4wEgLMA=</HashCode>
+      <FileName>Objects\Descriptors\WowPlayerDescriptor335a.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="AmeisenBotX.Wow335a.Objects.Descriptors.WowUnitDescriptor335a" Collapsed="true">
+    <Position X="19" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>VQCIDhEU5AYAiICQIFIIyKABiAACStoBACJOKpCIEAU=</HashCode>
+      <FileName>Objects\Descriptors\WowUnitDescriptor335a.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="AmeisenBotX.Wow335a.Objects.Raw.RawPartyGuids" Collapsed="true">
+    <Position X="17.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAHAIAAAAAAAAIAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Objects\Raw\RawPartyGuids.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="AmeisenBotX.Wow335a.Objects.Raw.RawRaidPlayer" Collapsed="true">
+    <Position X="19" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAIAAAAAAAA=</HashCode>
+      <FileName>Objects\Raw\RawRaidPlayer.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="AmeisenBotX.Wow335a.Objects.Raw.RawRaidStruct" Collapsed="true">
+    <Position X="20.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQACAAAAAAAAAAAAAAAAgAAAAAAAUAgEACAQAAQAAA=</HashCode>
+      <FileName>Objects\Raw\RawRaidStruct.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="AmeisenBotX.Wow335a.Objects.Raw.WowAura335a" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="22.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAICAAAMEAAAAAEAAAAoAAABEAAAAAAAABA=</HashCode>
+      <FileName>Objects\Raw\WowAura335a.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Struct>
+  <Enum Name="AmeisenBotX.Wow335a.Objects.Flags.WowUnitDynamicFlags335a" Collapsed="true">
+    <Position X="17.25" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAgBAACAAAAAAAQAAAQAAgAAAAAACAEAAAA=</HashCode>
+      <FileName>Objects\Flags\WowUnitDynamicFlags335a.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -5,6 +5,9 @@
 /// </summary>
 namespace AmeisenBotX.Wow.Hook.Modules
 {
+    /// <summary>
+    /// Represents an interface for a hook module that provides assembly instructions and data processing functions.
+    /// </summary>
     public interface IHookModule
     {
         /// <summary>

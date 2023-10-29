@@ -8,6 +8,10 @@ using System.Collections.Generic;
 /// </summary>
 namespace AmeisenBotX.Core.Engines.Dungeon
 {
+    /// <summary>
+    /// Represents the interface for a dungeon engine in a game.
+    /// This interface defines methods and properties for managing dungeon-related functionality.
+    /// </summary>
     public interface IDungeonEngine
     {
         /// <summary>

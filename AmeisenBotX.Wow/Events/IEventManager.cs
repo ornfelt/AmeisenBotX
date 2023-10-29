@@ -6,6 +6,9 @@ using System.Collections.Generic;
 /// </summary>
 namespace AmeisenBotX.Wow.Events
 {
+    /// <summary>
+    /// Represents an interface for managing and handling events and event subscriptions.
+    /// </summary>
     public interface IEventManager
     {
         /// <summary>

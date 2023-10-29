@@ -10,6 +10,9 @@ using static AmeisenBotX.Memory.Win32.Win32Imports;
 /// </summary>
 namespace AmeisenBotX.Memory
 {
+    /// <summary>
+    /// Represents an interface for memory-related operations and management.
+    /// </summary>
     public interface IMemoryApi : IDisposable
     {
         /// <summary>

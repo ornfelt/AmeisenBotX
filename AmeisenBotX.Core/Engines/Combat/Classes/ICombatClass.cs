@@ -8,6 +8,9 @@ using System.Collections.Generic;
 /// </summary>
 namespace AmeisenBotX.Core.Engines.Combat.Classes
 {
+    /// <summary>
+    /// Defines the properties and behaviors for combat-related classes.
+    /// </summary>
     public interface ICombatClass
     {
         /// <summary>

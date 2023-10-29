@@ -7,6 +7,9 @@ using System.Linq;
 /// </summary>
 namespace AmeisenBotX.Memory.Structs
 {
+    /// <summary>
+    /// Represents an allocation pool with a specified address and size.
+    /// </summary>
     public struct AllocationPool
     {
         /// <summary>

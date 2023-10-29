@@ -15,6 +15,9 @@ namespace AmeisenBotX.Core.Engines.Quest.Objects.Objectives
     /// <returns>True if the unit should be killed for the quest objective; otherwise, false.</returns>
     public delegate bool KillUnitQuestObjectiveCondition();
 
+    /// <summary>
+    /// Represents a quest objective that requires killing a specific unit with the given display ID.
+    /// </summary>
     public class KillUnitQuestObjective : IQuestObjective
     {
         /// <summary>

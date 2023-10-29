@@ -11,6 +11,9 @@ namespace AmeisenBotX.Core.Engines.Quest.Objects.Objectives
     /// </summary>
     public delegate bool UseUnitQuestObjectiveCondition();
 
+    /// <summary>
+    /// Represents a quest objective that requires using a specific NPC unit with the given display ID.
+    /// </summary>
     public class UseUnitQuestObjective : IQuestObjective
     {
         /// <summary>

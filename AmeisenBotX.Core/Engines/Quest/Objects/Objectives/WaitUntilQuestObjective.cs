@@ -9,6 +9,9 @@ namespace AmeisenBotX.Core.Engines.Quest.Objects.Objectives
     /// </summary>
     public delegate bool WaitUntilQuestObjectiveCondition();
 
+    /// <summary>
+    /// Represents a quest objective that requires waiting until a specified condition is met.
+    /// </summary>
     public class WaitUntilQuestObjective : IQuestObjective
     {
         /// <summary>

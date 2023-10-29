@@ -24,6 +24,9 @@ namespace AmeisenBotX.Core.Engines.Quest.Objects.Quests
     /// </returns>
     public delegate (IWowObject, Vector3) BotQuestGetPosition();
 
+    /// <summary>
+    /// Represents a bot quest with various quest-related properties and objectives.
+    /// </summary>
     public class BotQuest : IBotQuest
     {
         /// <summary>

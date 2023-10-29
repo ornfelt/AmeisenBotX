@@ -8,6 +8,10 @@ using System.Collections.Generic;
 /// </summary>
 namespace AmeisenBotX.Core.Engines.Movement
 {
+    /// <summary>
+    /// Represents the interface for a movement engine used for character movement in a game.
+    /// This interface defines properties and methods for managing character movement and navigation.
+    /// </summary>
     public interface IMovementEngine
     {
         /// <summary>
