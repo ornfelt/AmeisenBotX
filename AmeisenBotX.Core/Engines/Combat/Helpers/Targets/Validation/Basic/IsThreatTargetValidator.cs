@@ -6,9 +6,9 @@ using System.Linq;
 /// </summary>
 namespace AmeisenBotX.Core.Engines.Combat.Helpers.Targets.Validation.Basic
 {
-    ///summary>
+    /// <summary>
     /// The Bot interface used for validating threat targets.
-    ///</summary>
+    /// </summary>
     public class IsThreatTargetValidator : ITargetValidator
     {
         ///<summary>

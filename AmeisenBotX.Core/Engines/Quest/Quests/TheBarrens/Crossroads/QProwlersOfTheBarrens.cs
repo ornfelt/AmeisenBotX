@@ -8,9 +8,9 @@ using System.Collections.Generic;
 /// </summary>
 namespace AmeisenBotX.Core.Engines.Quest.Quests.TheBarrens.Crossroads
 {
-    /// summary>
+    /// <summary>
     /// Constructor for the QProwlersOfTheBarrens quest.
-    /// summary>
+    /// </summary>
     internal class QProwlersOfTheBarrens : BotQuest
     {
         /// <summary>
