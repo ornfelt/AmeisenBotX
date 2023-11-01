@@ -13,6 +13,7 @@ using AmeisenBotX.Logging.Enums;
 using AmeisenBotX.Wow.Objects;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 /// <summary>
@@ -75,7 +76,8 @@ namespace AmeisenBotX.Core.Engines.Grinding
                                                         (
                                                             () => SelectTarget(),
                                                             new Leaf(FightTarget),
-                                                            new Leaf(() => BtStatus.Failed)
+                                                            new Leaf(MoveToNextGrindNode)
+                                                            //new Leaf(() => BtStatus.Failed)
                                                         ),
                                                         new Leaf(MoveToNextGrindNode)
                                                     )
@@ -570,6 +572,7 @@ namespace AmeisenBotX.Core.Engines.Grinding
 
             IEnumerable<IWowUnit> nearUnits = Bot.GetNearEnemiesOrNeutrals<IWowUnit>(nearestGrindSpot.Position, nearestGrindSpot.Radius)
                 .Where(e => UnitWithinGrindSpotLvlLimit(e, nearestGrindSpot)
+                                && e.Level >= (Bot.Player.Level-4)
                                 && ObjectWithinGrindSpotRadius(e, nearestGrindSpot)
                                 && e.Health > 10)
                 .OrderBy(e => e.Position.GetDistance2D(Bot.Player.Position));
@@ -589,6 +592,7 @@ namespace AmeisenBotX.Core.Engines.Grinding
                 .OrderBy(e => e.Position.GetDistance2D(Bot.Player.Position))
                 .ToList();
             IEnumerable<IWowUnit> enemiesAround = Bot.GetNearEnemies<IWowUnit>(Bot.Player.Position, 40)
+                .Where(e => e.Level >= (Bot.Player.Level-4))
                 .OrderBy(e => e.Position.GetDistance2D(Bot.Player.Position))
                 .ToList();
 

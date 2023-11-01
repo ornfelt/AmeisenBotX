@@ -5,6 +5,7 @@ using AmeisenBotX.Core.Engines.Movement.Enums;
 using AmeisenBotX.Wow.Objects;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 /// <summary>
@@ -125,7 +126,10 @@ namespace AmeisenBotX.Core.Engines.Battleground.KamelBG
         public void Execute()
         {
             if (Bot.Player.IsGhost)
-                return;
+            {
+                Bot.Movement.StopMovement();
+                Debug.WriteLine("Stopping movement since player is dead!");
+            }
             Combat();
 
             IWowGameobject FlagNode = Bot.Objects.All
@@ -164,9 +168,9 @@ namespace AmeisenBotX.Core.Engines.Battleground.KamelBG
 
                     Vector3 currentNode = Path[CurrentNodeCounter];
 
-                    if (AllBaseList[CurrentNodeCounter].Contains("Uncontrolled")
+                    if (AllBaseList[CurrentNodeCounter] != null && (AllBaseList[CurrentNodeCounter].Contains("Uncontrolled")
                         || AllBaseList[CurrentNodeCounter].Contains("In Conflict")
-                        || AllBaseList[CurrentNodeCounter].Contains(FactionFlagState))
+                        || AllBaseList[CurrentNodeCounter].Contains(FactionFlagState)))
                     {
                         Bot.Movement.SetMovementAction(MovementAction.Move, currentNode);
                     }
