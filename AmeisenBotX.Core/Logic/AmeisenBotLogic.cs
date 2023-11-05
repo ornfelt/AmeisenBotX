@@ -149,7 +149,7 @@ namespace AmeisenBotX.Core.Logic
                 (NeedToRepairOrSell, interactWithMerchantNode),
                 (NeedToTrainSpells, interactWithClassTrainerNode),
                 (NeedToTrainSecondarySkills, interactWithProfessionTrainerNode),
-                (NeedToLoot, new Leaf(LootNearUnits)),
+                //(NeedToLoot, new Leaf(LootNearUnits)),
                 (NeedToEat, new Leaf(Eat))
             );
 

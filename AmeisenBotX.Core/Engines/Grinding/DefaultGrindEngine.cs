@@ -475,6 +475,7 @@ namespace AmeisenBotX.Core.Engines.Grinding
         /// </summary>
         private bool NeedToRepair()
         {
+            return false;
             return Bot.Character.Equipment.Items.Any(e => e.Value.MaxDurability > 0
                    && (e.Value.Durability / (double)e.Value.MaxDurability * 100.0) <= Config.ItemRepairThreshold);
         }
@@ -573,6 +574,7 @@ namespace AmeisenBotX.Core.Engines.Grinding
             IEnumerable<IWowUnit> nearUnits = Bot.GetNearEnemiesOrNeutrals<IWowUnit>(nearestGrindSpot.Position, nearestGrindSpot.Radius)
                 .Where(e => UnitWithinGrindSpotLvlLimit(e, nearestGrindSpot)
                                 && e.Level >= (Bot.Player.Level-4)
+                                && !BlackListedTargets.Contains(e.Guid)
                                 && ObjectWithinGrindSpotRadius(e, nearestGrindSpot)
                                 && e.Health > 10)
                 .OrderBy(e => e.Position.GetDistance2D(Bot.Player.Position));
@@ -592,7 +594,7 @@ namespace AmeisenBotX.Core.Engines.Grinding
                 .OrderBy(e => e.Position.GetDistance2D(Bot.Player.Position))
                 .ToList();
             IEnumerable<IWowUnit> enemiesAround = Bot.GetNearEnemies<IWowUnit>(Bot.Player.Position, 40)
-                .Where(e => e.Level >= (Bot.Player.Level-4))
+                .Where(e => e.Level >= (Bot.Player.Level-4) && !BlackListedTargets.Contains(e.Guid))
                 .OrderBy(e => e.Position.GetDistance2D(Bot.Player.Position))
                 .ToList();
 

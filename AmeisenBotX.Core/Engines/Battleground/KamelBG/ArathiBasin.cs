@@ -128,7 +128,7 @@ namespace AmeisenBotX.Core.Engines.Battleground.KamelBG
             if (Bot.Player.IsGhost)
             {
                 Bot.Movement.StopMovement();
-                Debug.WriteLine("Stopping movement since player is dead!");
+                //Debug.WriteLine("Stopping movement since player is dead!");
             }
             Combat();
 
@@ -168,9 +168,12 @@ namespace AmeisenBotX.Core.Engines.Battleground.KamelBG
 
                     Vector3 currentNode = Path[CurrentNodeCounter];
 
-                    if (AllBaseList[CurrentNodeCounter] != null && (AllBaseList[CurrentNodeCounter].Contains("Uncontrolled")
-                        || AllBaseList[CurrentNodeCounter].Contains("In Conflict")
-                        || AllBaseList[CurrentNodeCounter].Contains(FactionFlagState)))
+                    if (FactionFlagState == null)
+                        GetFaction();
+
+                    if (AllBaseList?[CurrentNodeCounter]?.Contains("Uncontrolled") == true ||
+                        AllBaseList?[CurrentNodeCounter]?.Contains("In Conflict") == true ||
+                        AllBaseList?[CurrentNodeCounter]?.Contains(FactionFlagState) == true)
                     {
                         Bot.Movement.SetMovementAction(MovementAction.Move, currentNode);
                     }
@@ -184,7 +187,7 @@ namespace AmeisenBotX.Core.Engines.Battleground.KamelBG
                             CurrentNodeCounter = 0;
                         }
                     }
-                    else if (FactionFlagState != null && AllBaseList[CurrentNodeCounter].Contains(FactionFlagState))
+                    else if (AllBaseList?[CurrentNodeCounter]?.Contains(FactionFlagState) == true)
                     {
                         ++CurrentNodeCounter;
                         if (CurrentNodeCounter >= Path.Count)

@@ -1,5 +1,6 @@
 ﻿using AmeisenBotX.Core.Engines.Battleground.Jannis.Profiles;
 using AmeisenBotX.Wow.Objects.Enums;
+using System.Diagnostics;
 
 /// <summary>
 /// Represents a universal battleground engine that can handle different battleground profiles.
@@ -55,6 +56,11 @@ namespace AmeisenBotX.Core.Engines.Battleground.Jannis
 
             Bot.CombatClass?.OutOfCombatExecute();
             Profile?.Execute();
+            if (Bot.Player.IsGhost)
+            {
+                Bot.Movement.StopMovement();
+                //Debug.WriteLine("Stopping movement since player is dead!");
+            }
         }
 
         /// <inheritdoc />
