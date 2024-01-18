@@ -5,6 +5,7 @@ using AmeisenBotX.Core.Engines.Movement.Enums;
 using AmeisenBotX.Wow.Objects;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Battleground.KamelBG
@@ -71,6 +72,11 @@ namespace AmeisenBotX.Core.Engines.Battleground.KamelBG
 
         public void Execute()
         {
+            if (Bot.Player.IsGhost)
+            {
+                Bot.Movement.StopMovement();
+                //Debug.WriteLine("Stopping movement since player is dead!");
+            }
             Combat();
 
             IWowGameobject FlagNode = Bot.Objects.All
@@ -109,9 +115,9 @@ namespace AmeisenBotX.Core.Engines.Battleground.KamelBG
 
                     Vector3 currentNode = Path[CurrentNodeCounter];
 
-                    if (AllBaseList[CurrentNodeCounter].Contains("Uncontrolled")
-                        || AllBaseList[CurrentNodeCounter].Contains("In Conflict")
-                        || AllBaseList[CurrentNodeCounter].Contains(FactionFlagState))
+                    if (AllBaseList?[CurrentNodeCounter]?.Contains("Uncontrolled") == true ||
+                        AllBaseList?[CurrentNodeCounter]?.Contains("In Conflict") == true ||
+                        AllBaseList?[CurrentNodeCounter]?.Contains(FactionFlagState) == true)
                     {
                         Bot.Movement.SetMovementAction(MovementAction.Move, currentNode);
                     }
@@ -125,7 +131,7 @@ namespace AmeisenBotX.Core.Engines.Battleground.KamelBG
                             CurrentNodeCounter = 0;
                         }
                     }
-                    else if (FactionFlagState != null && AllBaseList[CurrentNodeCounter].Contains(FactionFlagState))
+                    else if (AllBaseList?[CurrentNodeCounter]?.Contains(FactionFlagState) == true)
                     {
                         ++CurrentNodeCounter;
                         if (CurrentNodeCounter >= Path.Count)

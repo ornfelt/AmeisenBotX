@@ -24,6 +24,11 @@ namespace AmeisenBotX.Core.Engines.Battleground.Jannis
 
             Bot.CombatClass?.OutOfCombatExecute();
             Profile?.Execute();
+            if (Bot.Player.IsGhost)
+            {
+                Bot.Movement.StopMovement();
+                //Debug.WriteLine("Stopping movement since player is dead!");
+            }
         }
 
         public void Reset()

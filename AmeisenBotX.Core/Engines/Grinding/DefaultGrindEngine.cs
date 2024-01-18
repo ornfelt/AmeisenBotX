@@ -8,6 +8,8 @@ using AmeisenBotX.Core.Engines.Movement.Enums;
 using AmeisenBotX.Core.Logic;
 using AmeisenBotX.Core.Objects;
 using AmeisenBotX.Core.Objects.Enums;
+using AmeisenBotX.Logging;
+using AmeisenBotX.Logging.Enums;
 using AmeisenBotX.Wow.Objects;
 using System;
 using System.Collections.Generic;
@@ -61,7 +63,8 @@ namespace AmeisenBotX.Core.Engines.Grinding
                                                         (
                                                             () => SelectTarget(),
                                                             new Leaf(FightTarget),
-                                                            new Leaf(() => BtStatus.Failed)
+                                                            new Leaf(MoveToNextGrindNode)
+                                                            //new Leaf(() => BtStatus.Failed)
                                                         ),
                                                         new Leaf(MoveToNextGrindNode)
                                                     )
@@ -79,6 +82,10 @@ namespace AmeisenBotX.Core.Engines.Grinding
                 RootSelector
             );
         }
+
+        private static uint FightingTargetCounter = 0;
+
+        private static List<ulong> BlackListedTargets = new List<ulong>();
 
         public AmeisenBotInterfaces Bot { get; }
 
@@ -126,6 +133,15 @@ namespace AmeisenBotX.Core.Engines.Grinding
         {
             if (Bot.Target == null)
             {
+                return BtStatus.Failed;
+            }
+
+            FightingTargetCounter++;
+            if (FightingTargetCounter > 1000)
+            {
+                AmeisenLogger.I.Log("AmeisenBot", "FightingTargetCounter > 1000 " + Bot.Target.Guid, LogLevel.Debug);
+                BlackListedTargets.Add(Bot.Target.Guid);
+                Bot.Wow.ClearTarget();
                 return BtStatus.Failed;
             }
 
@@ -302,6 +318,8 @@ namespace AmeisenBotX.Core.Engines.Grinding
 
             if (Bot.Player.Position.GetDistance(NextSpot.Position) < 5.0f)
             {
+                AmeisenLogger.I.Log("AmeisenBot", "Moving towards nextspot, pos: " + NextSpot.Position.X + " " + NextSpot.Position.Y + 
+                    " " + NextSpot.Position.Z, LogLevel.Debug);
                 GoingToNextSpot = false;
                 NextSpot = new GrindingSpot();
                 return BtStatus.Success;
@@ -348,12 +366,14 @@ namespace AmeisenBotX.Core.Engines.Grinding
 
         private bool NeedToRepair()
         {
+            return false;
             return Bot.Character.Equipment.Items.Any(e => e.Value.MaxDurability > 0
                    && (e.Value.Durability / (double)e.Value.MaxDurability * 100.0) <= Config.ItemRepairThreshold);
         }
 
         private bool NeedToSell()
         {
+            return false;
             return Bot.Character.Inventory.FreeBagSlots < Config.BagSlotsToGoSell;
         }
 
@@ -395,7 +415,9 @@ namespace AmeisenBotX.Core.Engines.Grinding
             }
 
             IWowUnit possibleTarget = Bot.GetNearEnemiesOrNeutrals<IWowUnit>(nearestGrindSpot.Position, nearestGrindSpot.Radius)
-                .Where(e => UnitWithinGrindSpotLvlLimit(e, nearestGrindSpot) && ObjectWithinGrindSpotRadius(e, nearestGrindSpot))
+                //.Where(e => UnitWithinGrindSpotLvlLimit(e, nearestGrindSpot) && ObjectWithinGrindSpotRadius(e, nearestGrindSpot))
+                .Where(e => UnitWithinGrindSpotLvlLimit(e, nearestGrindSpot) && ObjectWithinGrindSpotRadius(e, nearestGrindSpot)
+                && !BlackListedTargets.Contains(e.Guid))
                 .OrderBy(e => e.Position.GetDistance2D(Bot.Player.Position))
                 .FirstOrDefault();
 
@@ -404,6 +426,7 @@ namespace AmeisenBotX.Core.Engines.Grinding
                 return false;
             }
 
+            FightingTargetCounter = 0;
             Bot.Wow.ChangeTarget(possibleTarget.Guid);
             return true;
         }
@@ -422,6 +445,8 @@ namespace AmeisenBotX.Core.Engines.Grinding
 
             IEnumerable<IWowUnit> nearUnits = Bot.GetNearEnemiesOrNeutrals<IWowUnit>(nearestGrindSpot.Position, nearestGrindSpot.Radius)
                 .Where(e => UnitWithinGrindSpotLvlLimit(e, nearestGrindSpot)
+                                && e.Level >= (Bot.Player.Level - 4)
+                                && !BlackListedTargets.Contains(e.Guid)
                                 && ObjectWithinGrindSpotRadius(e, nearestGrindSpot)
                                 && e.Health > 10)
                 .OrderBy(e => e.Position.GetDistance2D(Bot.Player.Position));
@@ -438,21 +463,25 @@ namespace AmeisenBotX.Core.Engines.Grinding
                 .OrderBy(e => e.Position.GetDistance2D(Bot.Player.Position))
                 .ToList();
             IEnumerable<IWowUnit> enemiesAround = Bot.GetNearEnemies<IWowUnit>(Bot.Player.Position, 40)
+                .Where(e => e.Level >= (Bot.Player.Level-4) && !BlackListedTargets.Contains(e.Guid))
                 .OrderBy(e => e.Position.GetDistance2D(Bot.Player.Position))
                 .ToList();
 
             if (enemiesFightingMe.Any())
             {
+                AmeisenLogger.I.Log("AmeisenBot", "ThreatsNearby! (enemiesfightingme)", LogLevel.Debug);
                 Bot.Wow.ChangeTarget(enemiesFightingMe.FirstOrDefault().Guid);
                 return true;
             }
             if (enemiesTargetingMe.Any())
             {
+                AmeisenLogger.I.Log("AmeisenBot", "ThreatsNearby! (enemiestargetingme)", LogLevel.Debug);
                 Bot.Wow.ChangeTarget(enemiesTargetingMe.FirstOrDefault().Guid);
                 return true;
             }
             if (enemiesAround.Any())
             {
+                AmeisenLogger.I.Log("AmeisenBot", "ThreatsNearby! (enemiesAround)", LogLevel.Debug);
                 Bot.Wow.ChangeTarget(enemiesAround.FirstOrDefault().Guid);
                 return true;
             }
