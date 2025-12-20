@@ -89,7 +89,7 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
             //Race (Human)
             spellCoolDown.Add(EveryManforHimselfSpell, DateTime.Now);
 
-            PriorityTargetDisplayIds = new List<int>();
+            PriorityTargetDisplayIds = [];
         }
 
         public abstract string Author { get; }
@@ -322,10 +322,10 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
 
         public void RevivePartyMember(string reviveSpellName)
         {
-            List<IWowUnit> partyMemberToHeal = new(Bot.Objects.Partymembers)
-            {
-                Bot.Player
-            };
+            List<IWowUnit> partyMemberToHeal =
+            [
+.. Bot.Objects.Partymembers,                 Bot.Player
+            ];
 
             partyMemberToHeal = [.. partyMemberToHeal.Where(e => e.IsDead).OrderBy(e => e.HealthPercentage)];
 
@@ -350,7 +350,7 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
             if (TargetSelectEvent.Run())
             {
                 IWowUnit nearTarget = Bot.GetNearEnemies<IWowUnit>(Bot.Player.Position, 50)
-                .Where(e => !e.IsNotAttackable && (e.Type == WowObjectType.Player && (e.IsPvpFlagged && Bot.Db.GetReaction(e, Bot.Player) != WowUnitReaction.Friendly) || (e.IsInCombat)) || (e.IsInCombat && Bot.Db.GetUnitName(e, out string name) && name != "The Lich King" && !(Bot.Objects.MapId == WowMapId.DrakTharonKeep && e.CurrentlyChannelingSpellId == 47346)))
+                .Where(e => (!e.IsNotAttackable && ((e.Type == WowObjectType.Player && e.IsPvpFlagged && Bot.Db.GetReaction(e, Bot.Player) != WowUnitReaction.Friendly) || e.IsInCombat)) || (e.IsInCombat && Bot.Db.GetUnitName(e, out string name) && name != "The Lich King" && !(Bot.Objects.MapId == WowMapId.DrakTharonKeep && e.CurrentlyChannelingSpellId == 47346)))
                 .OrderBy(e => e.Position.GetDistance(Bot.Player.Position))
                 .FirstOrDefault();//&& e.Type(Player)
 

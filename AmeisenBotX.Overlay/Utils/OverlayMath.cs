@@ -41,7 +41,7 @@ namespace AmeisenBotX.Overlay.Utils
             float fovHorizontal;
             float fovVertical;
 
-            if (cameraInfo.Fov > 0.5f && cameraInfo.Fov < 2.5f)
+            if (cameraInfo.Fov is > 0.5f and < 2.5f)
             {
                 // FOV looks like it's in radians (typical range 0.5-2.0 rad = ~30-115 degrees)
                 fovVertical = cameraInfo.Fov;
@@ -50,8 +50,8 @@ namespace AmeisenBotX.Overlay.Utils
             else
             {
                 // Fallback to original heuristic (works "half decent")
-                fovHorizontal = (aspect * (aspect >= 1.6f ? 55.0f : 44.0f)) * DEG_TO_RAD;
-                fovVertical = (aspect * 35.0f) * DEG_TO_RAD;
+                fovHorizontal = aspect * (aspect >= 1.6f ? 55.0f : 44.0f) * DEG_TO_RAD;
+                fovVertical = aspect * 35.0f * DEG_TO_RAD;
             }
 
             // Calculate projection factors

@@ -227,8 +227,8 @@ namespace AmeisenBotX.Core.Engines.Combat.Helpers.Healing
 
                 foreach (IWowUnit target in targetsNeedToBeHealed)
                 {
-                    double damageWeight = maxDamage > 0 && IncomingDamage.ContainsKey(target.Guid) ? (IncomingDamage[target.Guid] / maxDamage) * IncomingDamageMod : 0.0;
-                    double healthWeight = (target.Health / target.MaxHealth) * HealthWeightMod;
+                    double damageWeight = maxDamage > 0 && IncomingDamage.ContainsKey(target.Guid) ? IncomingDamage[target.Guid] / maxDamage * IncomingDamageMod : 0.0;
+                    double healthWeight = target.Health / target.MaxHealth * HealthWeightMod;
 
                     double weight = healthWeight + damageWeight;
 

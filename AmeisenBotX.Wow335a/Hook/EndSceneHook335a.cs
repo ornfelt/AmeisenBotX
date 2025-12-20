@@ -101,15 +101,15 @@ namespace AmeisenBotX.Wow335a.Hook
                 {
                     if (Memory.WriteBytes(memAlloc, bytes))
                     {
-                        return InjectAndExecute(new string[]
-                        {
+                        return InjectAndExecute(
+                        [
                             "PUSH 0",
                             $"PUSH {memAlloc}",
                             $"PUSH {memAlloc}",
                             $"CALL {Memory.Offsets.FunctionLuaDoString}",
                             "ADD ESP, 0xC",
                             "RET",
-                        });
+                        ]);
                     }
                 }
                 finally
@@ -181,14 +181,14 @@ namespace AmeisenBotX.Wow335a.Hook
         {
             byte[] guidBytes = BitConverter.GetBytes(guid);
 
-            InjectAndExecute(new string[]
-            {
+            InjectAndExecute(
+            [
                 $"PUSH {BitConverter.ToUInt32(guidBytes, 4)}",
                 $"PUSH {BitConverter.ToUInt32(guidBytes, 0)}",
                 $"CALL {Memory.Offsets.FunctionSetTarget}",
                 "ADD ESP, 0x8",
                 "RET"
-            });
+            ]);
         }
 
         public bool TraceLine(Vector3 start, Vector3 end, uint flags)
@@ -248,13 +248,13 @@ namespace AmeisenBotX.Wow335a.Hook
                 {
                     if (Memory.Write(nint.Add(codeCaveVector3, 8), position))
                     {
-                        InjectAndExecute(new string[]
-                        {
+                        InjectAndExecute(
+                        [
                             $"PUSH {codeCaveVector3.ToInt32()}",
                             $"CALL {Memory.Offsets.FunctionHandleTerrainClick}",
                             "ADD ESP, 0x4",
                             "RET",
-                        });
+                        ]);
                     }
                 }
                 finally

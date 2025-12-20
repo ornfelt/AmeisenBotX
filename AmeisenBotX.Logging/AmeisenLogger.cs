@@ -101,7 +101,7 @@ namespace AmeisenBotX.Logging
                 {
                     OnLogRaw?.Invoke(tag, log, logLevel);
 
-                    string line = $"[{DateTime.UtcNow.ToLongTimeString()}] {$"[{logLevel}]",-9} {$"[{tag}]",-24} {log}";
+                    string line = $"[{DateTime.UtcNow:T}] {$"[{logLevel}]",-9} {$"[{tag}]",-24} {log}";
 
                     StringBuilder.AppendLine(line);
                     OnLog?.Invoke(logLevel, line);

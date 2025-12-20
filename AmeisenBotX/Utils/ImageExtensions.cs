@@ -17,13 +17,16 @@ namespace AmeisenBotX.Utils
 
         public static ImageSource ToImageSource(this Bitmap bitmap)
         {
-            if (bitmap == null) return null;
+            if (bitmap == null)
+            {
+                return null;
+            }
 
             IntPtr hBitmap = bitmap.GetHbitmap();
 
             try
             {
-                var wpfBitmap = Imaging.CreateBitmapSourceFromHBitmap(
+                BitmapSource wpfBitmap = Imaging.CreateBitmapSourceFromHBitmap(
                     hBitmap,
                     IntPtr.Zero,
                     Int32Rect.Empty,

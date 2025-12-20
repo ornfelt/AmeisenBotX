@@ -1,5 +1,7 @@
-﻿using AmeisenBotX.Wow.Objects.Enums;
+﻿using AmeisenBotX.Common.Math;
+using AmeisenBotX.Wow.Objects.Enums;
 using AmeisenBotX.Wow.Objects.Flags;
+using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 
@@ -184,6 +186,8 @@ namespace AmeisenBotX.Wow.Objects
         };
 
         float Rotation { get; }
+
+        Vector3 RotationVector => new(MathF.Cos(Rotation), MathF.Sin(Rotation), 0);
 
         /// <summary>
         /// The unit's current run speed in yards per second.

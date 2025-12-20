@@ -141,8 +141,8 @@ namespace AmeisenBotX.Core.Logic.Idle.Actions
 
         private bool IsFishingRodEquipped()
         {
-            return (Bot.Character.Equipment.Items[WowEquipmentSlot.INVSLOT_MAINHAND] != null
-                && ((WowWeapon)Bot.Character.Equipment.Items[WowEquipmentSlot.INVSLOT_MAINHAND]).WeaponType == WowWeaponType.FishingPole);
+            return Bot.Character.Equipment.Items[WowEquipmentSlot.INVSLOT_MAINHAND] != null
+                && ((WowWeapon)Bot.Character.Equipment.Items[WowEquipmentSlot.INVSLOT_MAINHAND]).WeaponType == WowWeaponType.FishingPole;
         }
     }
 }

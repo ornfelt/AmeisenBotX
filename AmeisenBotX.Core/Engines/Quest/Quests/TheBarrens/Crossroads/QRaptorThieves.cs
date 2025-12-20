@@ -1,19 +1,17 @@
 using AmeisenBotX.Common.Math;
 using AmeisenBotX.Core.Engines.Quest.Objects.Objectives;
 using AmeisenBotX.Core.Engines.Quest.Objects.Quests;
-using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Quest.Quests.TheBarrens.Crossroads
 {
     internal class QRaptorThieves(AmeisenBotInterfaces bot) : BotQuest(bot, 869, "Raptor Thieves", 9, 1,
-            () => (bot.GetClosestQuestGiverByNpcId(bot.Player.Position, new List<int> { 3464 }), new Vector3(-435.95f, -2639.21f, 96.36f)),
-            () => (bot.GetClosestQuestGiverByNpcId(bot.Player.Position, new List<int> { 3464 }), new Vector3(-435.95f, -2639.21f, 96.36f)),
+            () => (bot.GetClosestQuestGiverByNpcId(bot.Player.Position, [3464]), new Vector3(-435.95f, -2639.21f, 96.36f)),
+            () => (bot.GetClosestQuestGiverByNpcId(bot.Player.Position, [3464]), new Vector3(-435.95f, -2639.21f, 96.36f)),
             [
                     new QuestObjectiveChain(
                     [
                         new KillAndLootQuestObjective(bot, [3254, 3255, 3256, 3257, 5842], 12, 5062, [
-                            new()
-                            {
+                            [
                                 new Vector3(-332.38f, -1044.35f, 41.14f),
                                 new Vector3(-1322.19f, -1823.66f, 91.93f),
                                 new Vector3(-1783.92f, -2250.27f, 91.74f),
@@ -27,7 +25,7 @@ namespace AmeisenBotX.Core.Engines.Quest.Quests.TheBarrens.Crossroads
                                 new Vector3(1318.61f, -3116.13f, 91.97f),
                                 new Vector3(555.39f, -1688.75f, 92.54f),
                                 new Vector3(-172.88f, -1091.55f, 46.78f),
-                            },
+                            ],
                         ]),
                     ])
                 ])

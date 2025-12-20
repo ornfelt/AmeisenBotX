@@ -14,9 +14,9 @@ namespace AmeisenBotX.Core.Engines.Combat.Helpers.Targets.Validation.Basic
                 // has no target
                 && (unit.TargetGuid == 0
                     // unit is targeting me, group or pets
-                    || (unit.TargetGuid == Bot.Player.Guid || Bot.Objects.PartymemberGuids.Contains(unit.TargetGuid) || Bot.Objects.PartyPetGuids.Contains(unit.TargetGuid)
+                    || unit.TargetGuid == Bot.Player.Guid || Bot.Objects.PartymemberGuids.Contains(unit.TargetGuid) || Bot.Objects.PartyPetGuids.Contains(unit.TargetGuid)
                     // group or pets are targeting the unit
-                    || (Bot.Objects.Partymembers.Any(e => e.TargetGuid == unit.Guid) || Bot.Objects.PartyPets.Any(e => e.TargetGuid == unit.Guid))));
+                    || Bot.Objects.Partymembers.Any(e => e.TargetGuid == unit.Guid) || Bot.Objects.PartyPets.Any(e => e.TargetGuid == unit.Guid));
         }
     }
 }

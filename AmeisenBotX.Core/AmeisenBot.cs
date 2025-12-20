@@ -145,17 +145,17 @@ namespace AmeisenBotX.Core
             Bot.Wow.OnBattlegroundStatus += OnBattlegroundStatusChanged;
             Bot.Wow.ObjectProvider.OnObjectUpdateComplete += OnObjectUpdateComplete;
 
-            Bot.Storage = new(IOUtils.CreateDirectoryIfNotExists(ProfileFolder, "data"), new List<string>()
-            {
+            Bot.Storage = new(IOUtils.CreateDirectoryIfNotExists(ProfileFolder, "data"),
+            [
                 // strings to strip from class names in the config file, makes stuff more compact.
                 // example: "AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a.WarriorArms"
                 //          will be name "Jannis.Wotlk335a.WarriorArms" in the config file.
                 "AmeisenBotX.Core.Engines.Combat.Classes.",
                 "AmeisenBotX.Core.Engines.Tactic."
-            });
+            ]);
 
-            Bot.IdleActions = new(Config, new List<IIdleAction>()
-            {
+            Bot.IdleActions = new(Config,
+            [
                 new AuctionHouseIdleAction(Bot),
                 new CheckMailsIdleAction(Bot),
                 new FishingIdleAction(Bot),
@@ -174,7 +174,7 @@ namespace AmeisenBotX.Core
                 new RandomEmoteIdleAction(Bot),
                 new SitByCampfireIdleAction(Bot),
                 new SitToChairIdleAction(Bot, Config.MinFollowDistance),
-            });
+            ]);
 
             Bot.Chat = new DefaultChatManager(Config, ProfileFolder);
             Bot.Tactic = new DefaultTacticEngine(Bot);
@@ -519,14 +519,14 @@ namespace AmeisenBotX.Core
         private void InitBattlegroundEngines()
         {
             // add battleground engines here
-            BattlegroundEngines = new List<IBattlegroundEngine>()
-            {
+            BattlegroundEngines =
+            [
                 new UniversalBattlegroundEngine(Bot),
                 new ArathiBasin(Bot),
                 new StrandOfTheAncients(Bot),
                 new EyeOfTheStorm(Bot),
                 new RunBoyRunEngine(Bot)
-            };
+            ];
         }
 
         private void InitCombatClasses()
@@ -546,36 +546,36 @@ namespace AmeisenBotX.Core
         private void InitGrindingProfiles()
         {
             // add grinding profiles here
-            GrindingProfiles = new List<IGrindingProfile>()
-            {
+            GrindingProfiles =
+            [
                 new UltimateGrinding1To80(),
                 new DurotarGrindTo6(),
                 new DurotarGrindTo11(),
                 new DurotarGrindTo14(),
                 new BarrensGrindTo17()
-            };
+            ];
         }
 
         private void InitJobProfiles()
         {
             // add job profiles here
-            JobProfiles = new List<IJobProfile>()
-            {
+            JobProfiles =
+            [
                 new CopperElwynnForestProfile(),
                 new CopperTinSilverWestfallProfile(),
                 new ElwynnRedridgeMining(),
-            };
+            ];
         }
 
         private void InitQuestProfiles()
         {
             // add quest profiles here
-            QuestProfiles = new List<IQuestProfile>()
-            {
+            QuestProfiles =
+            [
                 new DeathknightStartAreaQuestProfile(Bot),
                 new X5Horde1To80Profile(Bot),
                 new Horde1To60GrinderProfile(Bot)
-            };
+            ];
         }
 
         private void LoadCustomCombatClass()

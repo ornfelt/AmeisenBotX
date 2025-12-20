@@ -18,18 +18,16 @@ namespace AmeisenBotX.Core.Engines.Movement
         {
             foreach (IMovementProvider provider in Providers)
             {
-                if (provider.Get(out Vector3 position, out MovementAction type, out float rotation))
+                if (provider.Get(out Vector3 position, out MovementAction type))
                 {
                     Target = position;
                     Type = type;
-                    Rotation = rotation;
                     return true;
                 }
             }
 
             Type = MovementAction.None;
             Target = Vector3.Zero;
-            Rotation = 0f;
             return false;
         }
     }

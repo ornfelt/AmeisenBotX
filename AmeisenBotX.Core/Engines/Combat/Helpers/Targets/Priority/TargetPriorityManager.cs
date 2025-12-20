@@ -21,7 +21,7 @@ namespace AmeisenBotX.Core.Engines.Combat.Helpers.Targets.Priority
 
         public TargetPriorityManager(IEnumerable<ITargetPrioritizer> validators)
         {
-            Prioritizers = new(validators);
+            Prioritizers = [.. validators];
             ListTargetPrioritizer = new();
         }
 

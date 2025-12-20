@@ -261,12 +261,12 @@
                 <SolidColorBrush Color="{DynamicResource DarkForeground}" />
             </Button.Foreground>
         </Button>
-        <Label Content="AI Win:" HorizontalAlignment="Left" Margin="6,226,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift Light" Padding="0" BorderThickness="0,0,0,1" Width="38">
+        <Label Content="IsInCombat:" HorizontalAlignment="Left" Margin="6,226,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift Light" Padding="0" BorderThickness="0,0,0,1" Width="70">
             <Label.Foreground>
                 <SolidColorBrush Color="{DynamicResource DarkForeground}" />
             </Label.Foreground>
         </Label>
-        <Label x:Name="labelWinProbability" Content="-" HorizontalAlignment="Left" Margin="49,226,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift Light" Padding="0" Width="145">
+        <Label x:Name="labelCombatState" Content="-" HorizontalAlignment="Left" Margin="81,226,0,0" VerticalAlignment="Top" FontFamily="Bahnschrift Light" Padding="0" Width="113">
             <Label.Foreground>
                 <SolidColorBrush Color="{DynamicResource DarkForeground}" />
             </Label.Foreground>

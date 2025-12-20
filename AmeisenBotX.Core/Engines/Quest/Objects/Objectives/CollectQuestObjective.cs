@@ -25,7 +25,7 @@ namespace AmeisenBotX.Core.Engines.Quest.Objects.Objectives
                 }
 
                 IWowInventoryItem inventoryItem = Bot.Character.Inventory.Items.Find(item => item.Id == ItemId);
-                return inventoryItem != null ? Math.Min(100.0 * ((float)inventoryItem.Count) / ((float)WantedItemAmount), 100.0) : 0.0;
+                return inventoryItem != null ? Math.Min(100.0 * inventoryItem.Count / WantedItemAmount, 100.0) : 0.0;
             }
         }
 

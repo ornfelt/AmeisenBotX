@@ -61,7 +61,7 @@ namespace AmeisenBotX.Core.Engines.AI
         private SimpleNeuralNetwork brain;
         private readonly string brainFile;
         private readonly string memoryFile;
-        private readonly List<TacticalSnapshot> memory = new();
+        private readonly List<TacticalSnapshot> memory = [];
         private readonly Lock _lock = new();
         private bool isTrained = false;
 
@@ -96,7 +96,9 @@ namespace AmeisenBotX.Core.Engines.AI
         public AiSpellCategory PredictAction(TacticalSnapshot state)
         {
             if (brain == null || state == null)
+            {
                 return AiSpellCategory.Unknown;
+            }
 
             // Heuristic fallback if untrained
             if (!isTrained)
@@ -104,8 +106,8 @@ namespace AmeisenBotX.Core.Engines.AI
                 return GetHeuristicAction(state);
             }
 
-            var inputs = ExtractFeatures(state);
-            var outputs = brain.FeedForward(inputs);
+            double[] inputs = ExtractFeatures(state);
+            double[] outputs = brain.FeedForward(inputs);
 
             // Find max output (argmax)
             int maxIdx = 0;
@@ -120,10 +122,7 @@ namespace AmeisenBotX.Core.Engines.AI
             }
 
             // Only use prediction if confidence is reasonable
-            if (maxVal < 0.3)
-                return GetHeuristicAction(state);
-
-            return (AiSpellCategory)maxIdx;
+            return maxVal < 0.3 ? GetHeuristicAction(state) : (AiSpellCategory)maxIdx;
         }
 
         /// <summary>
@@ -131,19 +130,25 @@ namespace AmeisenBotX.Core.Engines.AI
         /// </summary>
         public void Train(TacticalSnapshot state, AiSpellCategory actionTaken)
         {
-            if (brain == null || state == null) return;
+            if (brain == null || state == null)
+            {
+                return;
+            }
 
             state.ActionTaken = (int)actionTaken;
 
             lock (_lock)
             {
                 memory.Add(state);
-                if (memory.Count > 500) memory.RemoveAt(0);
+                if (memory.Count > 500)
+                {
+                    memory.RemoveAt(0);
+                }
             }
 
             // Online training
-            var inputs = ExtractFeatures(state);
-            var targets = new double[OutputSize];
+            double[] inputs = ExtractFeatures(state);
+            double[] targets = new double[OutputSize];
             targets[(int)actionTaken] = 1.0;
 
             brain.Train(inputs, targets);
@@ -197,23 +202,33 @@ namespace AmeisenBotX.Core.Engines.AI
         {
             // Emergency healing
             if (s.HealthPct < 0.30)
+            {
                 return AiSpellCategory.HealSelf;
+            }
 
             // Defensive cooldown
             if (s.HealthPct < 0.40 && s.DefensiveCdRatio < 0.1)
+            {
                 return AiSpellCategory.DefensiveCooldown;
+            }
 
             // Interrupt
             if (s.TargetIsCasting && s.TargetIsInterruptible && s.InterruptCdRatio < 0.1)
+            {
                 return AiSpellCategory.CrowdControl;
+            }
 
             // Execute phase
             if (s.TargetHealthPct < 0.20 && s.BurstCdRatio < 0.1)
+            {
                 return AiSpellCategory.BurstCooldown;
+            }
 
             // Need DoTs
             if (s.ActiveDotsOnTarget == 0)
+            {
                 return AiSpellCategory.DamageDot;
+            }
 
             // Default damage
             return AiSpellCategory.Damage;
@@ -227,13 +242,20 @@ namespace AmeisenBotX.Core.Engines.AI
 
         private void LoadMemory()
         {
-            if (!File.Exists(memoryFile)) return;
+            if (!File.Exists(memoryFile))
+            {
+                return;
+            }
+
             try
             {
-                var loaded = JsonSerializer.Deserialize<List<TacticalSnapshot>>(File.ReadAllText(memoryFile));
+                List<TacticalSnapshot> loaded = JsonSerializer.Deserialize<List<TacticalSnapshot>>(File.ReadAllText(memoryFile));
                 if (loaded != null)
                 {
-                    lock (_lock) memory.AddRange(loaded);
+                    lock (_lock)
+                    {
+                        memory.AddRange(loaded);
+                    }
                 }
             }
             catch { }

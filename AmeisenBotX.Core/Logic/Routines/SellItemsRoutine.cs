@@ -17,11 +17,11 @@ namespace AmeisenBotX.Core.Logic.Routines
                 IWowInventoryItem itemToSell = item;
 
                 if (config.ItemSellBlacklist.Any(e => e.Equals(item.Name, StringComparison.OrdinalIgnoreCase))
-                    || !config.SellGrayItems && item.ItemQuality == (int)WowItemQuality.Poor
-                    || !config.SellWhiteItems && item.ItemQuality == (int)WowItemQuality.Common
-                    || !config.SellGreenItems && item.ItemQuality == (int)WowItemQuality.Uncommon
-                    || !config.SellBlueItems && item.ItemQuality == (int)WowItemQuality.Rare
-                    || !config.SellPurpleItems && item.ItemQuality == (int)WowItemQuality.Epic)
+                    || (!config.SellGrayItems && item.ItemQuality == (int)WowItemQuality.Poor)
+                    || (!config.SellWhiteItems && item.ItemQuality == (int)WowItemQuality.Common)
+                    || (!config.SellGreenItems && item.ItemQuality == (int)WowItemQuality.Uncommon)
+                    || (!config.SellBlueItems && item.ItemQuality == (int)WowItemQuality.Rare)
+                    || (!config.SellPurpleItems && item.ItemQuality == (int)WowItemQuality.Epic))
                 {
                     continue;
                 }

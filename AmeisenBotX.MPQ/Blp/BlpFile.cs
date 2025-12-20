@@ -15,7 +15,7 @@ namespace AmeisenBotX.MPQ.Blp
             red = (byte)r;
             green = (byte)g;
             blue = (byte)b;
-            alpha = (byte)255;
+            alpha = 255;
         }
 
         public ARGBColor8(byte r, byte g, byte b)
@@ -72,16 +72,24 @@ namespace AmeisenBotX.MPQ.Blp
 
         private byte[] getPictureUncompressedByteArray(int MipmapLevel)
         {
-            if (MipmapLevel >= MipMapCount) MipmapLevel = MipMapCount - 1;
-            if (MipmapLevel < 0) MipmapLevel = 0;
-            byte[] pic = new byte[((width * height) * 4) / (int)(Math.Pow(2, MipmapLevel))];
+            if (MipmapLevel >= MipMapCount)
+            {
+                MipmapLevel = MipMapCount - 1;
+            }
+
+            if (MipmapLevel < 0)
+            {
+                MipmapLevel = 0;
+            }
+
+            byte[] pic = new byte[width * height * 4 / (int)Math.Pow(2, MipmapLevel)];
             byte[] indices = getPictureData(MipmapLevel);
             for (int i = 0; i < indices.Length; i++)
             {
                 pic[i * 4] = paletteBGRA[indices[i]].red;
-                pic[i * 4 + 1] = paletteBGRA[indices[i]].green;
-                pic[i * 4 + 2] = paletteBGRA[indices[i]].blue;
-                pic[i * 4 + 3] = (alphaDepth > 0) ? paletteBGRA[indices[i]].alpha : (byte)255;
+                pic[(i * 4) + 1] = paletteBGRA[indices[i]].green;
+                pic[(i * 4) + 2] = paletteBGRA[indices[i]].blue;
+                pic[(i * 4) + 3] = (alphaDepth > 0) ? paletteBGRA[indices[i]].alpha : (byte)255;
             }
             return pic;
         }
@@ -91,8 +99,15 @@ namespace AmeisenBotX.MPQ.Blp
             if (str != null)
             {
                 byte[] data;
-                if (MipmapLevel >= MipMapCount) MipmapLevel = MipMapCount - 1;
-                if (MipmapLevel < 0) MipmapLevel = 0;
+                if (MipmapLevel >= MipMapCount)
+                {
+                    MipmapLevel = MipMapCount - 1;
+                }
+
+                if (MipmapLevel < 0)
+                {
+                    MipmapLevel = 0;
+                }
 
                 data = new byte[mippmapSize[MipmapLevel]];
                 str.Position = (int)mipmapOffsets[MipmapLevel];
@@ -107,7 +122,11 @@ namespace AmeisenBotX.MPQ.Blp
             get
             {
                 int i = 0;
-                while (mipmapOffsets[i] != 0) i++;
+                while (mipmapOffsets[i] != 0)
+                {
+                    i++;
+                }
+
                 return i;
             }
         }
@@ -118,13 +137,17 @@ namespace AmeisenBotX.MPQ.Blp
             byte[] buffer = new byte[4];
             str.Read(buffer, 0, 4);
 
-            if ((new ASCIIEncoding()).GetString(buffer) != "BLP2")
+            if (new ASCIIEncoding().GetString(buffer) != "BLP2")
+            {
                 throw new Exception("Invalid BLP Format");
+            }
 
             str.Read(buffer, 0, 4);
             type = BitConverter.ToUInt32(buffer, 0);
             if (type != 1)
+            {
                 throw new Exception("Invalid BLP-Type! Should be 1 but " + type + " was found");
+            }
 
             str.Read(buffer, 0, 4);
             encoding = buffer[0];
@@ -171,7 +194,7 @@ namespace AmeisenBotX.MPQ.Blp
             if (encoding == 2)
             {
                 int flag = (alphaDepth > 1) ? ((alphaEncoding == 7) ? (int)DXTDecompression.DXTFlags.DXT5 : (int)DXTDecompression.DXTFlags.DXT3) : (int)DXTDecompression.DXTFlags.DXT1;
-                DXTDecompression.DecompressImage(out pic, (width / (int)(Math.Pow(2, MipmapLevel))), (height / (int)(Math.Pow(2, MipmapLevel))), getPictureData(MipmapLevel), flag);
+                DXTDecompression.DecompressImage(out pic, width / (int)Math.Pow(2, MipmapLevel), height / (int)Math.Pow(2, MipmapLevel), getPictureData(MipmapLevel), flag);
             }
             else
             {
@@ -183,8 +206,8 @@ namespace AmeisenBotX.MPQ.Blp
 
         public Bitmap GetBitmap(int MipmapLevel)
         {
-            int x = (width / (int)(Math.Pow(2, MipmapLevel))), y = (height / (int)(Math.Pow(2, MipmapLevel)));
-            Bitmap bmp = new Bitmap(x, y);
+            int x = width / (int)Math.Pow(2, MipmapLevel), y = height / (int)Math.Pow(2, MipmapLevel);
+            Bitmap bmp = new(x, y);
             byte[] pic = getImageBytes(MipmapLevel);
             System.Drawing.Imaging.BitmapData bmpdata = bmp.LockBits(new Rectangle(0, 0, x, y), System.Drawing.Imaging.ImageLockMode.WriteOnly, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
             ARGBColor8.convertToBGRA(ref pic);
@@ -222,7 +245,7 @@ namespace AmeisenBotX.MPQ.Blp
                 Array.Copy(block, 0, colourBlock, 0, 8);
             }
 
-            DecompressColor(ref rgba, colourBlock, ((flags & (int)DXTFlags.DXT1) != 0));
+            DecompressColor(ref rgba, colourBlock, (flags & (int)DXTFlags.DXT1) != 0);
 
             if ((flags & (int)DXTFlags.DXT3) != 0)
             {
@@ -245,8 +268,8 @@ namespace AmeisenBotX.MPQ.Blp
                 byte lo = (byte)(quant & 0x0F);
                 byte hi = (byte)(quant & 0xF0);
 
-                rgba[8 * i + 3] = (byte)(lo | (lo << 4));
-                rgba[8 * i + 7] = (byte)(hi | (hi >> 4));
+                rgba[(8 * i) + 3] = (byte)(lo | (lo << 4));
+                rgba[(8 * i) + 7] = (byte)(hi | (hi >> 4));
             }
         }
 
@@ -264,7 +287,7 @@ namespace AmeisenBotX.MPQ.Blp
             {
                 for (int i = 1; i < 5; i++)
                 {
-                    codes[1 + i] = (byte)(((5 - i) * alpha0 + i * alpha1) / 5);
+                    codes[1 + i] = (byte)((((5 - i) * alpha0) + (i * alpha1)) / 5);
                 }
 
                 codes[6] = 0;
@@ -274,7 +297,7 @@ namespace AmeisenBotX.MPQ.Blp
             {
                 for (int i = 1; i < 7; i++)
                 {
-                    codes[i + 1] = (byte)(((7 - i) * alpha0 + i * alpha1) / 7);
+                    codes[i + 1] = (byte)((((7 - i) * alpha0) + (i * alpha1)) / 7);
                 }
             }
 
@@ -291,19 +314,19 @@ namespace AmeisenBotX.MPQ.Blp
                 for (int j = 0; j < 3; j++)
                 {
                     int _byte = blockSrc[blockSrc_pos++];
-                    value |= (_byte << 8 * j);
+                    value |= _byte << (8 * j);
                 }
 
                 for (int j = 0; j < 8; j++)
                 {
-                    int index = (value >> 3 * j) & 0x07;
+                    int index = (value >> (3 * j)) & 0x07;
                     dest[indices_pos++] = (byte)index;
                 }
             }
 
             for (int i = 0; i < 16; i++)
             {
-                rgba[4 * i + 3] = codes[indices[i]];
+                rgba[(4 * i) + 3] = codes[indices[i]];
             }
         }
 
@@ -327,8 +350,8 @@ namespace AmeisenBotX.MPQ.Blp
                 }
                 else
                 {
-                    codes[8 + i] = (byte)((2 * c + d) / 3);
-                    codes[12 + i] = (byte)((c + 2 * d) / 3);
+                    codes[8 + i] = (byte)(((2 * c) + d) / 3);
+                    codes[12 + i] = (byte)((c + (2 * d)) / 3);
                 }
             }
 
@@ -340,10 +363,10 @@ namespace AmeisenBotX.MPQ.Blp
             {
                 byte packed = bytes[4 + i];
 
-                indices[0 + i * 4] = (byte)(packed & 0x3);
-                indices[1 + i * 4] = (byte)((packed >> 2) & 0x3);
-                indices[2 + i * 4] = (byte)((packed >> 4) & 0x3);
-                indices[3 + i * 4] = (byte)((packed >> 6) & 0x3);
+                indices[0 + (i * 4)] = (byte)(packed & 0x3);
+                indices[1 + (i * 4)] = (byte)((packed >> 2) & 0x3);
+                indices[2 + (i * 4)] = (byte)((packed >> 4) & 0x3);
+                indices[3 + (i * 4)] = (byte)((packed >> 6) & 0x3);
             }
 
             for (int i = 0; i < 16; i++)
@@ -351,14 +374,14 @@ namespace AmeisenBotX.MPQ.Blp
                 byte offset = (byte)(4 * indices[i]);
                 for (int j = 0; j < 4; j++)
                 {
-                    rgba[4 * i + j] = codes[offset + j];
+                    rgba[(4 * i) + j] = codes[offset + j];
                 }
             }
         }
 
         private static int Unpack565(byte[] packed, int packed_offset, ref byte[] colour, int colour_offset)
         {
-            int value = (int)packed[0 + packed_offset] | ((int)packed[1 + packed_offset] << 8);
+            int value = packed[0 + packed_offset] | (packed[1 + packed_offset] << 8);
 
             byte red = (byte)((value >> 11) & 0x1F);
             byte green = (byte)((value >> 5) & 0x3F);
@@ -387,7 +410,11 @@ namespace AmeisenBotX.MPQ.Blp
                     byte[] targetRGBA = new byte[4 * 16];
                     int targetRGBA_pos = 0;
                     byte[] sourceBlockBuffer = new byte[bytesPerBlock];
-                    if (sourceBlock.Length == sourceBlock_pos) continue;
+                    if (sourceBlock.Length == sourceBlock_pos)
+                    {
+                        continue;
+                    }
+
                     Array.Copy(sourceBlock, sourceBlock_pos, sourceBlockBuffer, 0, bytesPerBlock);
                     Decompress(ref targetRGBA, sourceBlockBuffer, flags);
 
@@ -401,12 +428,14 @@ namespace AmeisenBotX.MPQ.Blp
                             int sy = y + py;
                             if (sx < width && sy < height)
                             {
-                                int targetPixel = 4 * (width * sy + sx);
+                                int targetPixel = 4 * ((width * sy) + sx);
                                 Array.Copy(targetRGBA, targetRGBA_pos, sourcePixel, 0, 4);
                                 targetRGBA_pos += 4;
 
                                 for (int i = 0; i < 4; i++)
+                                {
                                     rgba[targetPixel + i] = sourcePixel[i];
+                                }
                             }
                             else
                             {

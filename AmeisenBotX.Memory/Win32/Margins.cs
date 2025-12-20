@@ -27,7 +27,7 @@ namespace AmeisenBotX.Memory.Win32
         {
             unchecked
             {
-                return Left * 23 + Right * 23 + Top * 23 + Bottom * 23;
+                return (Left * 23) + (Right * 23) + (Top * 23) + (Bottom * 23);
             }
         }
 

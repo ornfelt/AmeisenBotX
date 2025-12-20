@@ -128,8 +128,8 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
 
             double playerRunePower = Bot.Objects.Player.RunicPower;
             double distanceToTarget = Bot.Objects.Player.Position.GetDistance(target.Position);
-            double targetHealthPercent = (target.Health / (double)target.MaxHealth) * 100;
-            double playerHealthPercent = (Bot.Objects.Player.Health / (double)Bot.Objects.Player.MaxHealth) * 100.0;
+            double targetHealthPercent = target.Health / (double)target.MaxHealth * 100;
+            double playerHealthPercent = Bot.Objects.Player.Health / (double)Bot.Objects.Player.MaxHealth * 100.0;
             (string, int) targetCastingInfo = Bot.Wow.GetUnitCastingInfo(WowLuaUnit.Target);
             //List<string> myBuffs = Bot.NewBot.GetBuffs(WowLuaUnit.Player.ToString());
             //myBuffs.Any(e => e.Equals("Chains of Ice"))
@@ -157,9 +157,9 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
                 .Where(e => e.Position.GetDistance(Bot.Objects.Player.Position) <= 10)
                 .ToList();
 
-            if (unitsNearPlayer.Count > 2 &&
+            if ((unitsNearPlayer.Count > 2 &&
                 Bot.Wow.GetSpellCooldown("Blood Boil") <= 0 &&
-                Bot.Wow.IsRuneReady(0) ||
+                Bot.Wow.IsRuneReady(0)) ||
                 Bot.Wow.IsRuneReady(1))
             {
                 Bot.Wow.CastSpell("Blood Boil");
@@ -180,8 +180,8 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
                 return;
             }
 
-            if (Bot.Wow.GetSpellCooldown("Icy Touch") <= 0 &&
-                Bot.Wow.IsRuneReady(2) ||
+            if ((Bot.Wow.GetSpellCooldown("Icy Touch") <= 0 &&
+                Bot.Wow.IsRuneReady(2)) ||
                 Bot.Wow.IsRuneReady(3))
             {
                 Bot.Wow.CastSpell("Icy Touch");

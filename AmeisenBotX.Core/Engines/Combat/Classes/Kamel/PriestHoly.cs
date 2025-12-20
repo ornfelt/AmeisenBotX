@@ -175,10 +175,10 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
         {
             if (TargetSelectEvent.Run())
             {
-                List<IWowUnit> CastBuff = new(Bot.Objects.Partymembers)
-                {
-                    Bot.Player
-                };
+                List<IWowUnit> CastBuff =
+                [
+.. Bot.Objects.Partymembers,                     Bot.Player
+                ];
 
                 CastBuff =
                 [
@@ -241,7 +241,7 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
                 {
                     Spell spell = Bot.Character.SpellBook.GetSpellByName(spellName);
 
-                    if ((Bot.Player.Mana >= spell.Costs && IsSpellReady(spellName)))
+                    if (Bot.Player.Mana >= spell.Costs && IsSpellReady(spellName))
                     {
                         double distance = Bot.Player.Position.GetDistance(Bot.Target.Position);
 
@@ -258,7 +258,7 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
 
                     Spell spell = Bot.Character.SpellBook.GetSpellByName(spellName);
 
-                    if ((Bot.Player.Mana >= spell.Costs && IsSpellReady(spellName)))
+                    if (Bot.Player.Mana >= spell.Costs && IsSpellReady(spellName))
                     {
                         Bot.Wow.CastSpell(spellName);
                         return true;
@@ -271,11 +271,11 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
 
         private void StartHeal()
         {
-            List<IWowUnit> partyMemberToHeal = new(Bot.Objects.Partymembers)
-            {
-                //healableUnits.AddRange(Bot.ObjectManager.PartyPets);
+            List<IWowUnit> partyMemberToHeal =
+            [
+.. Bot.Objects.Partymembers,                 //healableUnits.AddRange(Bot.ObjectManager.PartyPets);
                 Bot.Player
-            };
+            ];
 
             partyMemberToHeal = [.. partyMemberToHeal.Where(e => e.HealthPercentage <= 94 && !e.IsDead).OrderBy(e => e.HealthPercentage)];
 

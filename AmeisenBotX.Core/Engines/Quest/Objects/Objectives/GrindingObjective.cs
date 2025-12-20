@@ -12,7 +12,7 @@ namespace AmeisenBotX.Core.Engines.Quest.Objects.Objectives
     {
         public bool Finished => Bot.Player.Level >= WantedLevel;
 
-        public double Progress => 100.0 * (Bot.Player.Level + Bot.Player.XpPercentage / 100.0) / WantedLevel;
+        public double Progress => 100.0 * (Bot.Player.Level + (Bot.Player.XpPercentage / 100.0)) / WantedLevel;
 
         public List<Vector3> VendorsLocation { get; } = vendorsLocation;
 

@@ -16,7 +16,7 @@ namespace AmeisenBotX.Core.Engines.Combat.Helpers.Targets.Validation.Util
 
         public CachedTargetValidator(IEnumerable<ITargetValidator> validators, TimeSpan maxCacheTime)
         {
-            Validators = new(validators);
+            Validators = [.. validators];
             Cache = [];
             MaxCacheTime = maxCacheTime;
         }

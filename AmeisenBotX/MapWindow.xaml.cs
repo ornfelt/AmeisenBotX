@@ -143,8 +143,8 @@ namespace AmeisenBotX
             float rSin = MathF.Sin(rotation);
             float cSin = MathF.Cos(rotation);
 
-            float newX = originX * cSin - originY * rSin;
-            float newY = originX * rSin + originY * cSin;
+            float newX = (originX * cSin) - (originY * rSin);
+            float newY = (originX * rSin) + (originY * cSin);
 
             return new((int)(newX + x), (int)(newY + y));
         }

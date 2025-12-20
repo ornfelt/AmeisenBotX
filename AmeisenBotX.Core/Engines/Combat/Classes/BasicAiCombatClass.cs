@@ -59,23 +59,15 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes
             }
 
             // Fallback: Heuristic Logic based on Strategy
-            switch (AiStrategy)
+            return AiStrategy switch
             {
-                case Movement.AI.AiCombatStrategy.Survival:
-                    return category == AiSpellCategory.HealSelf || category == AiSpellCategory.DefensiveCooldown || category == AiSpellCategory.Utility;
-
-                case Movement.AI.AiCombatStrategy.Burst:
-                    return category == AiSpellCategory.BurstCooldown || category == AiSpellCategory.Damage;
-
-                case Movement.AI.AiCombatStrategy.Flee:
-                    // Recommend CC (to peel) or Utility (Speed boosts) or Defensive Cooldowns
-                    return category == AiSpellCategory.CrowdControl
-                        || category == AiSpellCategory.Utility
-                        || category == AiSpellCategory.DefensiveCooldown;
-
-                default:
-                    return true; // If standard, allow everything
-            }
+                Movement.AI.AiCombatStrategy.Survival => category is AiSpellCategory.HealSelf or AiSpellCategory.DefensiveCooldown or AiSpellCategory.Utility,
+                Movement.AI.AiCombatStrategy.Burst => category is AiSpellCategory.BurstCooldown or AiSpellCategory.Damage,
+                Movement.AI.AiCombatStrategy.Flee => category is AiSpellCategory.CrowdControl
+                                        or AiSpellCategory.Utility
+                                        or AiSpellCategory.DefensiveCooldown,// Recommend CC (to peel) or Utility (Speed boosts) or Defensive Cooldowns
+                _ => true,// If standard, allow everything
+            };
         }
 
         #endregion

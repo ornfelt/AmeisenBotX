@@ -56,7 +56,7 @@ namespace AmeisenBotX.Core.Engines.Quest.Objects.Objectives
                     }
                 }
 
-                return Math.Min(100.0 * ((float)amount) / ((float)CollectOrKillAmount), 100.0);
+                return Math.Min(100.0 * amount / CollectOrKillAmount, 100.0);
             }
         }
 

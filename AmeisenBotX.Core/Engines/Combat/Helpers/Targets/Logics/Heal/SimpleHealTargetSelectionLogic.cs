@@ -8,10 +8,10 @@ namespace AmeisenBotX.Core.Engines.Combat.Helpers.Targets.Logics.Heal
     {
         public override bool SelectTarget(out IEnumerable<IWowUnit> possibleTargets)
         {
-            List<IWowUnit> healableUnits = new(Bot.Objects.Partymembers)
-            {
-                Bot.Player
-            };
+            List<IWowUnit> healableUnits =
+            [
+.. Bot.Objects.Partymembers,                 Bot.Player
+            ];
 
             // healableUnits.AddRange(Bot.ObjectManager.PartyPets);
 

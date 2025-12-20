@@ -147,6 +147,7 @@ namespace AmeisenBotX.Wow548
 
             Mpq = new(wowDirectory);
             Dbc = new(Mpq);
+            Mpq.PreloadAsync();
         }
 
         public event Action<string>? OnBattlegroundStatus;
@@ -726,7 +727,7 @@ namespace AmeisenBotX.Wow548
 
             return double.TryParse(str.Split(',')[1], out double timeRemaining)
                 ? (str.Split(',')[0], (int)Math.Round(timeRemaining, 0))
-                : ((string, int))(string.Empty, 0);
+                : (string.Empty, 0);
         }
 
         public int GetUnspentTalentPoints()
@@ -770,6 +771,8 @@ namespace AmeisenBotX.Wow548
             end.Z += heightAdjust;
             return Hook.TraceLine(start, end, (uint)WowWorldFrameHitFlag.HitTestLOS);
         }
+
+        public bool TraceLine(Vector3 start, Vector3 end, uint flags) => Hook.TraceLine(start, end, flags);
 
         public bool IsRuneReady(int runeId)
         {

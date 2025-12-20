@@ -23,8 +23,10 @@ namespace AmeisenBotX
             this.bot = bot;
 
             // Watchdog for late AI initialization
-            timer = new DispatcherTimer();
-            timer.Interval = TimeSpan.FromSeconds(1);
+            timer = new DispatcherTimer
+            {
+                Interval = TimeSpan.FromSeconds(1)
+            };
             timer.Tick += ConnectionTick;
             timer.Start();
 
@@ -34,7 +36,7 @@ namespace AmeisenBotX
 
         private void ConnectionTick(object? sender, EventArgs e)
         {
-            var analyzer = bot.CombatAi?.Analyzer as AmeisenBotX.Core.Engines.Movement.AI.CombatStateAnalyzer;
+            CombatStateAnalyzer? analyzer = bot.CombatAi?.Analyzer;
 
             if (analyzer != null && !isSubscribed)
             {
@@ -73,14 +75,14 @@ namespace AmeisenBotX
 
                 // Clear brain canvas and show no target message
                 BrainCanvas.Children.Clear();
-                TextBlock noTarget = new TextBlock
+                TextBlock noTarget = new()
                 {
                     Text = "🎯 No Target",
                     Foreground = Brushes.Gray,
                     FontSize = 16
                 };
-                Canvas.SetLeft(noTarget, BrainCanvas.ActualWidth / 2 - 40);
-                Canvas.SetTop(noTarget, BrainCanvas.ActualHeight / 2 - 10);
+                Canvas.SetLeft(noTarget, (BrainCanvas.ActualWidth / 2) - 40);
+                Canvas.SetTop(noTarget, (BrainCanvas.ActualHeight / 2) - 10);
                 BrainCanvas.Children.Add(noTarget);
 
                 StrategyText.Text = "---";
@@ -101,7 +103,7 @@ namespace AmeisenBotX
             }
 
             // Directly draw brain as fallback
-            var brain = analyzer.Learner?.Brain;
+            MultiHeadNeuralNetwork? brain = analyzer.Learner?.Brain;
             if (brain != null)
             {
                 BrainCanvas.Children.Clear();
@@ -116,9 +118,7 @@ namespace AmeisenBotX
 
                 // Color code probability
                 float prob = analyzer.CurrentWinProbability;
-                if (prob > 0.7f) WinProbText.Foreground = System.Windows.Media.Brushes.LightGreen;
-                else if (prob > 0.4f) WinProbText.Foreground = System.Windows.Media.Brushes.Yellow;
-                else WinProbText.Foreground = System.Windows.Media.Brushes.Red;
+                WinProbText.Foreground = prob > 0.7f ? Brushes.LightGreen : prob > 0.4f ? Brushes.Yellow : Brushes.Red;
             }
             else
             {
@@ -133,8 +133,7 @@ namespace AmeisenBotX
 
             if (isSubscribed && bot.CombatAi != null && bot.CombatAi.Analyzer != null)
             {
-                var analyzer = bot.CombatAi.Analyzer as AmeisenBotX.Core.Engines.Movement.AI.CombatStateAnalyzer;
-                if (analyzer != null)
+                if (bot.CombatAi.Analyzer is AmeisenBotX.Core.Engines.Movement.AI.CombatStateAnalyzer analyzer)
                 {
                     analyzer.OnAnalysisUpdated -= OnAnalysisResult;
                 }
@@ -151,13 +150,11 @@ namespace AmeisenBotX
                 StatusText.Text = reason;
 
                 // Color code probability
-                if (prob > 0.7f) WinProbText.Foreground = Brushes.LightGreen;
-                else if (prob > 0.4f) WinProbText.Foreground = Brushes.Yellow;
-                else WinProbText.Foreground = Brushes.Red;
+                WinProbText.Foreground = prob > 0.7f ? Brushes.LightGreen : prob > 0.4f ? Brushes.Yellow : Brushes.Red;
 
                 // Redraw Brain
-                var analyzer = bot.CombatAi.Analyzer as AmeisenBotX.Core.Engines.Movement.AI.CombatStateAnalyzer;
-                var brain = analyzer?.Learner?.Brain;
+                CombatStateAnalyzer analyzer = bot.CombatAi.Analyzer;
+                MultiHeadNeuralNetwork? brain = analyzer?.Learner?.Brain;
                 if (brain != null)
                 {
                     BrainCanvas.Children.Clear();
@@ -170,7 +167,10 @@ namespace AmeisenBotX
         {
             double canvasWidth = BrainCanvas.ActualWidth;
             double canvasHeight = BrainCanvas.ActualHeight;
-            if (canvasWidth == 0 || canvasHeight == 0) return;
+            if (canvasWidth == 0 || canvasHeight == 0)
+            {
+                return;
+            }
 
             // Get layer activations and deltas
             double[] a0 = brain.InputLayer ?? new double[20];
@@ -194,22 +194,22 @@ namespace AmeisenBotX
             };
 
             // === LAYER 0: INPUTS (20 neurons) ===
-            var p0 = DrawInputLayer(a0, colX[0], canvasHeight, labelWidth);
+            List<Point> p0 = DrawInputLayer(a0, colX[0], canvasHeight, labelWidth);
 
             // === HIDDEN LAYERS (ALL nodes) ===
-            var p1 = DrawFullLayer(a1, colX[1], canvasHeight, "Hidden 1", 64);
-            var p2 = DrawFullLayer(a2, colX[2], canvasHeight, "Hidden 2", 64);
-            var p3 = DrawFullLayer(a3, colX[3], canvasHeight, "Hidden 3", 32);
+            List<Point> p1 = DrawFullLayer(a1, colX[1], canvasHeight, "Hidden 1", 64);
+            List<Point> p2 = DrawFullLayer(a2, colX[2], canvasHeight, "Hidden 2", 64);
+            List<Point> p3 = DrawFullLayer(a3, colX[3], canvasHeight, "Hidden 3", 32);
 
             // === SPLIT HEADS (New Layer) ===
             // We stack them in the 4th column
             // StratHead (32) gets top 70%, WinHead (16) gets bottom 30%
             double headSplitY = canvasHeight * 0.70;
-            var pStratHead = DrawFullLayer(aS1, colX[4], headSplitY, "Strat Head", 32, 0);
-            var pWinHead = DrawFullLayer(aW1, colX[4], canvasHeight - headSplitY, "Win Head", 16, headSplitY);
+            List<Point> pStratHead = DrawFullLayer(aS1, colX[4], headSplitY, "Strat Head", 32, 0);
+            List<Point> pWinHead = DrawFullLayer(aW1, colX[4], canvasHeight - headSplitY, "Win Head", 16, headSplitY);
 
             // === OUTPUTS (7 nodes) ===
-            var pOut = DrawOutputLayer(aS2, winProb, colX[5], canvasHeight);
+            List<Point> pOut = DrawOutputLayer(aS2, winProb, colX[5], canvasHeight);
 
             // Draw connections using REAL node positions
             // We use a density factor to avoid drawing 4000+ lines in WPF (performance)
@@ -226,8 +226,8 @@ namespace AmeisenBotX
             // pOut has 7 points. First 6 are Strategy, Last 1 is Win.
             if (pOut.Count >= 7)
             {
-                var pOutStrat = pOut.GetRange(0, 6);
-                var pOutWin = pOut.GetRange(6, 1);
+                List<Point> pOutStrat = pOut.GetRange(0, 6);
+                List<Point> pOutWin = pOut.GetRange(6, 1);
 
                 DrawConnectionLines(pStratHead, pOutStrat, 1.0); // Full connect
                 DrawConnectionLines(pWinHead, pOutWin, 1.0); // Full connect
@@ -236,18 +236,24 @@ namespace AmeisenBotX
 
         private void DrawConnectionLines(List<Point> fromPoints, List<Point> toPoints, double density)
         {
-            if (fromPoints == null || toPoints == null) return;
-
-            var random = new Random(1234); // Seed for stability
-
-            foreach (var p1 in fromPoints)
+            if (fromPoints == null || toPoints == null)
             {
-                foreach (var p2 in toPoints)
+                return;
+            }
+
+            Random random = new(1234); // Seed for stability
+
+            foreach (Point p1 in fromPoints)
+            {
+                foreach (Point p2 in toPoints)
                 {
                     // Randomly skip lines based on density, unless density is 1.0
-                    if (density < 1.0 && random.NextDouble() > density) continue;
+                    if (density < 1.0 && random.NextDouble() > density)
+                    {
+                        continue;
+                    }
 
-                    Line line = new Line
+                    Line line = new()
                     {
                         X1 = p1.X,
                         Y1 = p1.Y,
@@ -263,20 +269,20 @@ namespace AmeisenBotX
 
         private List<Point> DrawInputLayer(double[] activations, double x, double canvasHeight, double labelWidth)
         {
-            var points = new List<Point>();
+            List<Point> points = [];
             int count = activations.Length;
             double nodeSize = Math.Min(14, (canvasHeight - 40) / count * 0.7);
-            double yStep = (canvasHeight - 20) / (count);
+            double yStep = (canvasHeight - 20) / count;
 
             for (int i = 0; i < count; i++)
             {
-                double y = 10 + yStep * (i + 0.5);
+                double y = 10 + (yStep * (i + 0.5));
                 double val = Math.Clamp(Math.Abs(activations[i]), 0, 1);
 
                 // Neuron: white→orange fade
-                byte r = 255, g = (byte)(255 - val * 110), b = (byte)(255 - val * 255);
-                Ellipse el = new Ellipse { Width = nodeSize, Height = nodeSize, Fill = new SolidColorBrush(Color.FromRgb(r, g, b)), Stroke = Brushes.Orange, StrokeThickness = 1 };
-                Canvas.SetLeft(el, x - nodeSize / 2); Canvas.SetTop(el, y - nodeSize / 2);
+                byte r = 255, g = (byte)(255 - (val * 110)), b = (byte)(255 - (val * 255));
+                Ellipse el = new() { Width = nodeSize, Height = nodeSize, Fill = new SolidColorBrush(Color.FromRgb(r, g, b)), Stroke = Brushes.Orange, StrokeThickness = 1 };
+                Canvas.SetLeft(el, x - (nodeSize / 2)); Canvas.SetTop(el, y - (nodeSize / 2));
                 BrainCanvas.Children.Add(el);
 
                 // Track center point for connections (right side of ellipse for inputs?)
@@ -285,7 +291,7 @@ namespace AmeisenBotX
 
                 // Full label with value
                 string valStr = $"{activations[i]:F2}";
-                TextBlock tb = new TextBlock { Text = $"{InputLabels[i]} {valStr}", Foreground = Brushes.White, FontSize = 12, FontWeight = FontWeights.SemiBold };
+                TextBlock tb = new() { Text = $"{InputLabels[i]} {valStr}", Foreground = Brushes.White, FontSize = 12, FontWeight = FontWeights.SemiBold };
                 Canvas.SetLeft(tb, 4); Canvas.SetTop(tb, y - 8);
                 BrainCanvas.Children.Add(tb);
             }
@@ -294,26 +300,26 @@ namespace AmeisenBotX
 
         private List<Point> DrawFullLayer(double[] activations, double x, double height, string layerName, int expectedCount, double yOffset = 0)
         {
-            var points = new List<Point>();
+            List<Point> points = [];
             int count = Math.Min(activations.Length, expectedCount);
             // Use local height for spacing
             double nodeSize = Math.Min(10, Math.Max(4, (height - 20) / count * 0.6));
             double yStep = (height - 20) / count;
 
             // Layer title
-            TextBlock title = new TextBlock { Text = layerName, Foreground = Brushes.Orange, FontSize = 13, FontWeight = FontWeights.Bold };
+            TextBlock title = new() { Text = layerName, Foreground = Brushes.Orange, FontSize = 13, FontWeight = FontWeights.Bold };
             Canvas.SetLeft(title, x - 25); Canvas.SetTop(title, yOffset + 1);
             BrainCanvas.Children.Add(title);
 
             for (int i = 0; i < count; i++)
             {
-                double y = yOffset + 15 + yStep * (i + 0.5);
+                double y = yOffset + 15 + (yStep * (i + 0.5));
                 double val = Math.Clamp(activations[i], 0, 1);
 
                 // Neuron color
-                byte r = 255, g = (byte)(255 - val * 110), b = (byte)(255 - val * 255);
-                Ellipse el = new Ellipse { Width = nodeSize, Height = nodeSize, Fill = new SolidColorBrush(Color.FromRgb(r, g, b)), Stroke = Brushes.DarkOrange, StrokeThickness = 0.5 };
-                Canvas.SetLeft(el, x - nodeSize / 2); Canvas.SetTop(el, y - nodeSize / 2);
+                byte r = 255, g = (byte)(255 - (val * 110)), b = (byte)(255 - (val * 255));
+                Ellipse el = new() { Width = nodeSize, Height = nodeSize, Fill = new SolidColorBrush(Color.FromRgb(r, g, b)), Stroke = Brushes.DarkOrange, StrokeThickness = 0.5 };
+                Canvas.SetLeft(el, x - (nodeSize / 2)); Canvas.SetTop(el, y - (nodeSize / 2));
                 BrainCanvas.Children.Add(el);
 
                 points.Add(new Point(x, y));
@@ -323,13 +329,13 @@ namespace AmeisenBotX
 
         private List<Point> DrawOutputLayer(double[] strategy, double winProb, double x, double canvasHeight)
         {
-            var points = new List<Point>();
+            List<Point> points = [];
             int totalOutputs = 7; // 6 strategies + 1 winprob
             double yStep = (canvasHeight - 30) / totalOutputs;
             double nodeSize = 18;
 
             // Title
-            TextBlock title = new TextBlock { Text = "Outputs", Foreground = Brushes.Orange, FontSize = 13, FontWeight = FontWeights.Bold };
+            TextBlock title = new() { Text = "Outputs", Foreground = Brushes.Orange, FontSize = 13, FontWeight = FontWeights.Bold };
             Canvas.SetLeft(title, x - 15); Canvas.SetTop(title, 1);
             BrainCanvas.Children.Add(title);
 
@@ -337,38 +343,38 @@ namespace AmeisenBotX
             for (int i = 0; i < 6 && i < strategy.Length; i++)
             {
                 // Align Y with mesh generation: 20 + yStep*(i+0.5)
-                double y = 20 + yStep * (i + 0.5);
+                double y = 20 + (yStep * (i + 0.5));
                 double val = strategy[i];
 
                 // Color: intensity based on activation
-                Color fillColor = (i == 5 && val > 0.3) ? Color.FromRgb(255, 50, 50) : Color.FromRgb((byte)(50 + val * 205), (byte)(50 + val * 150), (byte)(50 + val * 50));
+                Color fillColor = (i == 5 && val > 0.3) ? Color.FromRgb(255, 50, 50) : Color.FromRgb((byte)(50 + (val * 205)), (byte)(50 + (val * 150)), (byte)(50 + (val * 50)));
                 Brush strokeColor = (i == 5) ? Brushes.Red : Brushes.Orange;
 
-                Ellipse el = new Ellipse { Width = nodeSize, Height = nodeSize, Fill = new SolidColorBrush(fillColor), Stroke = strokeColor, StrokeThickness = 2 };
-                Canvas.SetLeft(el, x - nodeSize / 2); Canvas.SetTop(el, y - nodeSize / 2);
+                Ellipse el = new() { Width = nodeSize, Height = nodeSize, Fill = new SolidColorBrush(fillColor), Stroke = strokeColor, StrokeThickness = 2 };
+                Canvas.SetLeft(el, x - (nodeSize / 2)); Canvas.SetTop(el, y - (nodeSize / 2));
                 BrainCanvas.Children.Add(el);
 
                 points.Add(new Point(x, y));
 
                 // Full label
-                var textColor = (i == 5 && val > 0.3) ? Brushes.Red : Brushes.White;
-                var fontWeight = val > 0.3 ? FontWeights.Bold : FontWeights.Normal;
-                TextBlock tb = new TextBlock { Text = $"{StrategyLabelsFull[i]} {val:P0}", Foreground = textColor, FontSize = 13, FontWeight = fontWeight };
-                Canvas.SetLeft(tb, x + nodeSize / 2 + 18); Canvas.SetTop(tb, y - 10);
+                SolidColorBrush textColor = (i == 5 && val > 0.3) ? Brushes.Red : Brushes.White;
+                FontWeight fontWeight = val > 0.3 ? FontWeights.Bold : FontWeights.Normal;
+                TextBlock tb = new() { Text = $"{StrategyLabelsFull[i]} {val:P0}", Foreground = textColor, FontSize = 13, FontWeight = fontWeight };
+                Canvas.SetLeft(tb, x + (nodeSize / 2) + 18); Canvas.SetTop(tb, y - 10);
                 BrainCanvas.Children.Add(tb);
             }
 
             // WinProb (7th output)
             // Align Y with mesh generation: 20 + yStep*(6+0.5)
-            double winY = 20 + yStep * (6 + 0.5);
-            byte wg = (byte)(255 - winProb * 110), wb = (byte)(255 - winProb * 255);
-            Ellipse winEl = new Ellipse { Width = 24, Height = 24, Fill = new SolidColorBrush(Color.FromRgb(255, wg, wb)), Stroke = Brushes.Gold, StrokeThickness = 3 };
+            double winY = 20 + (yStep * (6 + 0.5));
+            byte wg = (byte)(255 - (winProb * 110)), wb = (byte)(255 - (winProb * 255));
+            Ellipse winEl = new() { Width = 24, Height = 24, Fill = new SolidColorBrush(Color.FromRgb(255, wg, wb)), Stroke = Brushes.Gold, StrokeThickness = 3 };
             Canvas.SetLeft(winEl, x - 12); Canvas.SetTop(winEl, winY - 12);
             BrainCanvas.Children.Add(winEl);
 
             points.Add(new Point(x, winY));
 
-            TextBlock winTb = new TextBlock { Text = $"🏆 Win Prob {winProb:P0}", Foreground = Brushes.Gold, FontSize = 14, FontWeight = FontWeights.Bold };
+            TextBlock winTb = new() { Text = $"🏆 Win Prob {winProb:P0}", Foreground = Brushes.Gold, FontSize = 14, FontWeight = FontWeights.Bold };
             Canvas.SetLeft(winTb, x + 30); Canvas.SetTop(winTb, winY - 10);
             BrainCanvas.Children.Add(winTb);
 

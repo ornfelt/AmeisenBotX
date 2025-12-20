@@ -101,8 +101,8 @@ namespace AmeisenBotX.Core.Managers.Character
 
         public bool IsAbleToUseItem(IWowInventoryItem item)
         {
-            return string.Equals(item.Type, "Armor", StringComparison.OrdinalIgnoreCase) && IsAbleToUseArmor((WowArmor)item)
-                   || string.Equals(item.Type, "Weapon", StringComparison.OrdinalIgnoreCase) && IsAbleToUseWeapon((WowWeapon)item);
+            return (string.Equals(item.Type, "Armor", StringComparison.OrdinalIgnoreCase) && IsAbleToUseArmor((WowArmor)item))
+                   || (string.Equals(item.Type, "Weapon", StringComparison.OrdinalIgnoreCase) && IsAbleToUseWeapon((WowWeapon)item));
         }
 
         public bool IsAbleToUseWeapon(WowWeapon item)

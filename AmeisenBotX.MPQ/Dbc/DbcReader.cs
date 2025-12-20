@@ -53,7 +53,9 @@ namespace AmeisenBotX.MPQ.Dbc
         public T GetRecordAtRow(int index)
         {
             if (index < 0 || index >= RecordCount)
+            {
                 throw new IndexOutOfRangeException();
+            }
 
             byte* rowPtr = _recordsStartPtr + (index * RecordSize);
             return *(T*)rowPtr;
@@ -61,13 +63,15 @@ namespace AmeisenBotX.MPQ.Dbc
 
         public string GetString(uint offset)
         {
-            if (offset == 0 || offset >= StringBlockSize) return string.Empty;
-            return Marshal.PtrToStringUTF8((IntPtr)(_stringBlockPtr + offset));
+            return offset == 0 || offset >= StringBlockSize ? string.Empty : Marshal.PtrToStringUTF8((IntPtr)(_stringBlockPtr + offset));
         }
 
         public void Dispose()
         {
-            if (_handle.IsAllocated) _handle.Free();
+            if (_handle.IsAllocated)
+            {
+                _handle.Free();
+            }
         }
     }
 }

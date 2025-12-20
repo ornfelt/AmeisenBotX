@@ -9,7 +9,7 @@ namespace AmeisenBotX.Core.Managers.Character.Inventory.Objects
         {
             if (Subtype.ToLowerInvariant().EndsWith('s'))
             {
-                Subtype = Subtype.Remove(Subtype.Length - 1);
+                Subtype = Subtype[..^1];
             }
 
             ArmorType = Enum.TryParse(Subtype, true, out WowArmorType armorType)

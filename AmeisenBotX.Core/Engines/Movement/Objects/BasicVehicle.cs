@@ -1,216 +1,403 @@
 ﻿using AmeisenBotX.Common.Math;
 using AmeisenBotX.Core.Engines.Movement.Enums;
 using AmeisenBotX.Wow.Objects;
+using AmeisenBotX.Wow.Objects.Flags;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Movement.Objects
 {
-    public class BasicVehicle(AmeisenBotInterfaces bot, AmeisenBotConfig config)
+    public class BasicVehicle(AmeisenBotInterfaces bot)
     {
         public delegate void MoveCharacter(Vector3 positionToGoTo);
+        public delegate void JumpCharacter();
 
-        public DateTime LastUpdate { get; private set; }
-
+        public DateTime LastUpdate { get; private set; } = DateTime.UtcNow;
         public Vector3 Velocity { get; private set; }
 
         private AmeisenBotInterfaces Bot { get; } = bot;
 
-        private AmeisenBotConfig Config { get; } = config;
+        private static readonly Random _rng = new Random();
 
-        public Vector3 AvoidObstacles(float maxSteering, float maxVelocity, float multiplier)
+        // CTM State
+        private DateTime _lastMovePacket = DateTime.MinValue;
+        private Vector3 _lastSentDirection = Vector3.Zero;
+        private Vector3 _lastSentPosition = Vector3.Zero;
+
+        // Solver Vars
+        private int _wallStuckCounter = 0;
+        private Vector3 _targetRandomizer = Vector3.Zero;
+
+        public void Update(MoveCharacter moveCharacter, JumpCharacter jumpCharacter, MovementAction movementAction, Vector3 targetPosition, float rotation, float maxSteering, float maxVelocity, float seperationDistance)
         {
-            Vector3 acceleration = GetObjectForceAroundMe<IWowGameobject>(maxSteering, maxVelocity)
-                                 + GetNearestBlacklistForce(maxSteering, maxVelocity, 12.0f);
+            // --------------------------------------------------------------------------------
+            // 1. DIRECT MOVE / FALLBACK (Shortcut forced by Engine)
+            // --------------------------------------------------------------------------------
+            if (movementAction == MovementAction.DirectMove)
+            {
+                if (IsSafeShortcut(targetPosition))
+                {
+                    float dist2D = Bot.Player.Position.DistanceTo2D(targetPosition);
+                    float zDiff = Bot.Player.Position.Z - targetPosition.Z;
 
-            return acceleration.Truncated(maxSteering) * multiplier;
-        }
+                    // Edge Jump: Wenn wir auf eine Kante zulaufen (> 1.5m tief)
+                    if (dist2D < 6.0f && zDiff > 1.5f && Velocity.Length() > 4.0f)
+                    {
+                        jumpCharacter?.Invoke();
+                    }
 
-        public Vector3 Evade(Vector3 position, float maxSteering, float maxVelocity, float multiplier, float targetRotation, float targetVelocity = 2.0f)
-        {
-            Vector3 positionAhead = CalculateFuturePosition(position, targetRotation, targetVelocity);
-            return Flee(positionAhead, maxSteering, maxVelocity, multiplier);
-        }
+                    moveCharacter?.Invoke(targetPosition);
 
-        public Vector3 Flee(Vector3 position, float maxSteering, float maxVelocity, float multiplier)
-        {
-            Vector3 desired = Bot.Player.Position - position;
-            desired.Normalize2D(desired.GetMagnitude2D());
+                    // Fake Velocity Update damit Physics nicht einschlafen
+                    Velocity = (targetPosition - Bot.Player.Position).Normalized() * maxVelocity;
+                    return;
+                }
 
-            float adjustedMaxVelocity = maxVelocity;
-            float adjustedMaxSteering = maxSteering;
+                // Fallback: Wenn DirectMove unsicher ist, springen wir unten in die normale Physik,
+                // damit Avoidance greift und wir nicht gegen die Wand laufen.
+            }
+
+            // --------------------------------------------------------------------------------
+            // 2. AUTO-SHORTCUT (Smart Drop Detection)
+            // --------------------------------------------------------------------------------
+            bool isMoveOrFollow = (movementAction == MovementAction.Move || movementAction == MovementAction.Follow || movementAction == MovementAction.Chase);
+            float distToTarget3D = Bot.Player.Position.DistanceTo(targetPosition);
+
+            if (isMoveOrFollow)
+            {
+                float zDiff = Bot.Player.Position.Z - targetPosition.Z;
+                bool isDrop = (zDiff > 1.6f); // Nur bei deutlichem Drop (> 1.6m)
+
+                // Wenn wir nah an einer Klippe sind (< 20m) und runter können -> Shortcut!
+                if (isDrop && distToTarget3D < 20.0f && IsSafeShortcut(targetPosition))
+                {
+                    if (Velocity.Length() > 4.0f && distToTarget3D < 5.0f) jumpCharacter?.Invoke();
+
+                    moveCharacter?.Invoke(targetPosition);
+                    Velocity = (targetPosition - Bot.Player.Position).Normalized() * maxVelocity;
+                    return;
+                }
+            }
+
+            // --------------------------------------------------------------------------------
+            // 3. ARRIVAL & STOP LOGIC (Anti-Stuck & Anti-Jitter)
+            // --------------------------------------------------------------------------------
+            float distToTarget2D = Bot.Player.Position.DistanceTo2D(targetPosition);
+            bool isArriving = isMoveOrFollow && distToTarget2D < 4.0f;
+
+            if (isArriving)
+            {
+                float heightDiff = Math.Abs(Bot.Player.Position.Z - targetPosition.Z);
+
+                // STOP CONDITION:
+                // 1. 3D Distanz extrem nah (< 0.6m)
+                // 2. ODER: 2D Distanz sehr nah (< 0.4m) und Höhe erreichbar (< 2.0m)
+                // Das ist stateless. Sobald wir uns bewegen (oder das Ziel), wird condition false und er läuft los.
+                if (distToTarget3D < 0.6f || (distToTarget2D < 0.4f && heightDiff < 2.0f))
+                {
+                    Velocity = Vector3.Zero;
+                    _targetRandomizer = Vector3.Zero;
+                    return; // Hartes Return -> Bot steht still.
+                }
+            }
+
+            // Humanizer Randomizer (Nur berechnen wenn wir weit weg sind)
+            if (!isArriving && _targetRandomizer == Vector3.Zero && distToTarget3D > 15.0f)
+            {
+                _targetRandomizer = new Vector3((float)_rng.NextDouble() - 0.5f, (float)_rng.NextDouble() - 0.5f, 0) * 0.5f;
+            }
+            Vector3 finalTarget = targetPosition + _targetRandomizer;
+
+            // --------------------------------------------------------------------------------
+            // 4. PHYSICS UPDATE
+            // --------------------------------------------------------------------------------
+            var now = DateTime.UtcNow;
+            float dt = (float)(now - LastUpdate).TotalSeconds;
+            LastUpdate = now;
+
+            if (dt <= 0.0f) dt = 0.001f;
+            if (dt > 0.1f) dt = 0.1f;
 
             if (Bot.Player.IsMounted)
             {
-                adjustedMaxVelocity *= 2;
-                adjustedMaxSteering *= 2;
+                maxVelocity *= 2.0f;
+                maxSteering *= 1.5f;
             }
 
-            desired *= adjustedMaxVelocity;
-            Vector3 steering = desired - Velocity;
-            steering.Truncate(adjustedMaxSteering);
+            // Force Calculation
+            Vector3 force = GetForce(movementAction, finalTarget, rotation, maxSteering, maxVelocity, seperationDistance, distToTarget3D);
 
-            return steering * multiplier;
-        }
-
-        public Vector3 Pursuit(Vector3 position, float maxSteering, float maxVelocity, float multiplier, float targetRotation, float targetVelocity = 2.0f)
-        {
-            Vector3 positionAhead = CalculateFuturePosition(position, targetRotation, targetVelocity);
-            return Seek(positionAhead, maxSteering, maxVelocity, multiplier);
-        }
-
-        public Vector3 Seek(Vector3 position, float maxSteering, float maxVelocity, float multiplier)
-        {
-            Vector3 desiredVelocity = (position - Bot.Player.Position).Normalized() * maxVelocity;
-
-            const float slowRad = 3.5f;
-            float distance = Bot.Player.DistanceTo(position);
-
-            if (distance < slowRad)
+            // ANTI-OVERSHOOT (Huhn-Fix)
+            // Wenn wir nah sind (< 4m) und vom Ziel WEG gucken -> Sofort bremsen!
+            if (Velocity.LengthSquared() > 0.1f && isMoveOrFollow && distToTarget3D < 4.0f)
             {
-                desiredVelocity *= distance / slowRad;
+                Vector3 toTarget = (finalTarget - Bot.Player.Position).Normalized();
+                Vector3 currentDir = Velocity.Normalized();
+
+                if (currentDir.Dot(toTarget) < -0.1f) // Winkel > 90 Grad weg vom Ziel
+                {
+                    Velocity *= 0.8f; // Hard Brake
+                    force += toTarget * maxSteering * 2.5f; // Snap Turn
+                }
             }
 
-            return (desiredVelocity - Velocity).Truncated(maxSteering) * multiplier;
-        }
-
-        public Vector3 Seperate(float seperationDistance, float maxVelocity, float multiplier)
-        {
-            return GetObjectForceAroundMe<IWowPlayer>(seperationDistance, maxVelocity) * multiplier;
-        }
-
-        public Vector3 Unstuck(float maxSteering, float maxVelocity, float multiplier)
-        {
-            Vector3 positionBehindMe = BotMath.CalculatePositionBehind(Bot.Player.Position, Bot.Player.Rotation, 8.0f);
-            return Seek(positionBehindMe, maxSteering, maxVelocity, multiplier);
-        }
-
-        public void Update(MoveCharacter moveCharacter, MovementAction movementAction, Vector3 targetPosition, float rotation, float maxSteering, float maxVelocity, float seperationDistance)
-        {
-            if (movementAction == MovementAction.DirectMove)
+            // ACTIVE CORNERING (Kurvenhilfe)
+            if (Velocity.LengthSquared() > 2.0f)
             {
-                moveCharacter?.Invoke(targetPosition);
-                return;
+                Vector3 velDir = Velocity.Normalized();
+                Vector3 forceDir = force.Normalized();
+                float cornerIntensity = 1.0f - velDir.Dot(forceDir);
+
+                if (cornerIntensity > 0.25f)
+                {
+                    Velocity *= (1.0f - (cornerIntensity * 0.1f));
+                    maxSteering *= (1.0f + (cornerIntensity * 2.5f));
+                }
             }
 
-            // adjust max steering based on time passed since last Update() call
-            float timedelta = (float)(DateTime.UtcNow - LastUpdate).TotalSeconds;
-            float maxSteeringNormalized = maxSteering * timedelta;
+            // WALL UNSTUCK
+            if (force.Length() > 0.5f && Velocity.Length() < 0.3f)
+            {
+                _wallStuckCounter++;
+                if (_wallStuckCounter > 5) // > 100ms an der Wand
+                {
+                    Vector3 jiggle = new Vector3((float)_rng.NextDouble() - 0.5f, (float)_rng.NextDouble() - 0.5f, 0).Normalized() * maxVelocity * 3.0f;
+                    force += jiggle;
 
-            Vector3 totalforce = GetForce(movementAction, targetPosition, rotation, maxSteeringNormalized, maxVelocity, seperationDistance);
-            Velocity += totalforce;
+                    if (_wallStuckCounter > 20 && jumpCharacter != null)
+                    {
+                        jumpCharacter.Invoke();
+                        _wallStuckCounter = 0;
+                    }
+                }
+            }
+            else _wallStuckCounter = 0;
+
+            // INTEGRATION
+            force.Truncate(maxSteering);
+            Velocity += force * dt;
             Velocity.Truncate(maxVelocity);
 
-            moveCharacter?.Invoke(Bot.Player.Position + Velocity);
-            LastUpdate = DateTime.UtcNow;
-        }
-
-        public Vector3 Wander(float multiplier, float maxSteering, float maxVelocity)
-        {
-            // TODO: implement some sort of radius where the target wanders around. maybe add a very
-            // weak force keeping it inside a given circle...
-            // TODO: implement some sort of delay so that the target is not constantly walking
-            Random rnd = new();
-            Vector3 currentPosition = Bot.Player.Position;
-
-            Vector3 newRandomPosition = new();
-            newRandomPosition += CalculateFuturePosition(currentPosition, Bot.Player.Rotation, ((float)rnd.NextDouble() * 4.0f) + 4.0f);
-
-            // rotate the vector by random amount of degrees
-            newRandomPosition.Rotate(rnd.Next(-14, 14));
-
-            return Seek(newRandomPosition, maxSteering, maxVelocity, multiplier);
-        }
-
-        private static Vector3 CalculateFuturePosition(Vector3 position, float targetRotation, float targetVelocity)
-        {
-            float rotation = targetRotation;
-            float x = position.X + (MathF.Cos(rotation) * targetVelocity);
-            float y = position.Y + (MathF.Sin(rotation) * targetVelocity);
-
-            return new()
+            // --------------------------------------------------------------------------------
+            // 5. CTM OUTPUT (Smart Projection)
+            // --------------------------------------------------------------------------------
+            if (moveCharacter != null && Velocity.LengthSquared() > 0.1f)
             {
-                X = x,
-                Y = y,
-                Z = position.Z
-            };
-        }
+                Vector3 currentDir = Velocity.Normalized();
+                float intentionDot = currentDir.Dot(force.Normalized());
+                float turnFactor = 1.0f - intentionDot;
+                if (turnFactor < 0.001f) turnFactor = 0f;
 
-        private Vector3 GetForce(MovementAction movementAction, Vector3 targetPosition, float rotation, float maxSteering, float maxVelocity, float seperationDistance)
-        {
-            return movementAction switch
-            {
-                MovementAction.Move => Seek(targetPosition, maxSteering, maxVelocity, 0.9f)
-                                     + AvoidObstacles(maxSteering, maxVelocity, 0.05f)
-                                     + Seperate(seperationDistance, maxVelocity, 0.05f),
+                Vector3 outputPoint;
+                int dynamicDelay;
 
-                MovementAction.Follow => Seek(targetPosition, maxSteering, maxVelocity, 0.9f)
-                                       + AvoidObstacles(maxSteering, maxVelocity, 0.05f)
-                                       + Seperate(seperationDistance, maxVelocity, 0.05f),
-
-                MovementAction.Chase => Pursuit(targetPosition, maxSteering, maxVelocity, 1.0f, rotation),
-                MovementAction.Flee => Flee(targetPosition, maxSteering, maxVelocity, 1.0f).ZeroZ(),
-                MovementAction.Evade => Evade(targetPosition, maxSteering, maxVelocity, 1.0f, rotation),
-                MovementAction.Wander => Wander(maxSteering, maxVelocity, 1.0f).ZeroZ(),
-                MovementAction.Unstuck => Unstuck(maxSteering, maxVelocity, 1.0f),
-
-                _ => Vector3.Zero,
-            };
-        }
-
-        private Vector3 GetNearestBlacklistForce(float maxSteering, float maxVelocity, float maxDistance = 8.0f)
-        {
-            Vector3 force = new();
-
-            if (Bot.Db.TryGetBlacklistPosition((int)Bot.Objects.MapId, Bot.Player.Position, maxDistance, out IEnumerable<Vector3> nodes))
-            {
-                Vector3 nearestNode = nodes.FirstOrDefault();
-                if (nearestNode != default)
+                if (isArriving)
                 {
-                    force += Flee(nearestNode, 0.5f, maxSteering, maxVelocity);
+                    // Einparken: Ziel exakt ansteuern, hohe Frequenz
+                    outputPoint = finalTarget;
+                    dynamicDelay = 50;
+                }
+                else
+                {
+                    // Reisen: Projektion basierend auf Speed
+                    float currentSpeed = Velocity.Length();
+                    float projectionDist = (currentSpeed * 0.6f) + 4.0f;
+
+                    if (turnFactor > 0.1f) projectionDist = 2.5f; // Kurven eng nehmen
+                    if (projectionDist > 12.0f) projectionDist = 12.0f;
+
+                    outputPoint = Bot.Player.Position + (currentDir * projectionDist);
+
+                    if (turnFactor > 0.05f) dynamicDelay = 60; // Kurven oft senden
+                    else dynamicDelay = 400; // Geradeaus selten senden
+                }
+
+                double msSinceLast = (now - _lastMovePacket).TotalMilliseconds;
+                bool urgentUpdate = (turnFactor > 0.05f && msSinceLast > 40) || (Velocity.Length() < 2.0f && msSinceLast > 100);
+                float distFromLastClick = outputPoint.DistanceTo(_lastSentPosition);
+
+                if (msSinceLast > dynamicDelay || urgentUpdate)
+                {
+                    // Deadzone 0.8m -> Verhindert Spam am selben Fleck
+                    if (distFromLastClick > 0.8f || isArriving)
+                    {
+                        moveCharacter.Invoke(outputPoint);
+                        _lastSentDirection = currentDir;
+                        _lastSentPosition = outputPoint;
+                        _lastMovePacket = now;
+                    }
                 }
             }
-
-            return force;
         }
 
-        private Vector3 GetObjectForceAroundMe<T>(float maxSteering, float maxVelocity, float maxDistance = 3.0f) where T : IWowObject
+        private bool IsSafeShortcut(Vector3 target)
         {
+            Vector3 myPos = Bot.Player.Position;
+            float heightDiff = myPos.Z - target.Z;
+
+            if (heightDiff < -1.6f) return false;
+            if (heightDiff > 40.0f) return false;
+            if (Math.Abs(target.Z) < 0.1f) return false;
+            if (myPos.DistanceTo2D(target) > 25.0f) return false;
+
+            Vector3 start = myPos + new Vector3(0, 0, 1.8f);
+            float targetZOffset = 1.0f;
+            if (target.Z > myPos.Z) targetZOffset = 1.5f;
+            Vector3 end = target + new Vector3(0, 0, targetZOffset);
+
+            bool hitWall = Bot.Wow.TraceLine(start, end, (uint)WowWorldFrameHitFlag.HitTestGroundAndStructures);
+            return !hitWall;
+        }
+
+        private Vector3 GetForce(MovementAction action, Vector3 target, float rotation, float maxSteering, float maxVel, float sepDist, float distToTarget)
+        {
+            Vector3 f = Vector3.Zero;
+
+            // DYNAMIC SEPARATION (Wichtig gegen Hühnerhaufen)
+            // Wenn wir nah am Ziel sind (< 4m), schalten wir Separation fast aus.
+            // Sonst schubsen sich die Bots am Zielpunkt gegenseitig weg und zittern.
+            float sepMult = (distToTarget < 4.0f) ? 0.0f : 1.0f;
+
+            switch (action)
+            {
+                case MovementAction.DirectMove:
+                    f += Seek(target, maxSteering, maxVel, 1.0f);
+                    f += AvoidObstacles(maxSteering, maxVel, 1.0f);
+                    break;
+
+                case MovementAction.Move:
+                case MovementAction.Follow:
+                    // Soft Arrival ab 5m
+                    if (distToTarget > 5.0f) f += Seek(target, maxSteering, maxVel, 1.0f);
+                    else f += Arrive(target, maxSteering, maxVel, 5.0f);
+
+                    f += AvoidObstacles(maxSteering, maxVel, 1.0f);
+                    f += Seperate(sepDist, maxVel, sepMult);
+                    break;
+
+                case MovementAction.Chase:
+                    f += Seek(target, maxSteering, maxVel, 1.0f);
+                    f += AvoidObstacles(maxSteering, maxVel, 0.4f);
+                    break;
+
+                case MovementAction.Flee:
+                    f += Flee(target, maxSteering, maxVel, 1.0f).ZeroZ();
+                    f += AvoidObstacles(maxSteering, maxVel, 1.2f);
+                    break;
+
+                case MovementAction.Evade:
+                    f += Evade(target, maxSteering, maxVel, 1.0f, rotation);
+                    break;
+
+                case MovementAction.Wander:
+                    f += Wander(maxSteering, maxVel, 1.0f).ZeroZ();
+                    f += AvoidObstacles(maxSteering, maxVel, 2.0f);
+                    break;
+
+                case MovementAction.Unstuck:
+                    f += Unstuck(maxSteering, maxVel, 1.0f);
+                    break;
+            }
+            return f;
+        }
+
+        public Vector3 Seek(Vector3 target, float maxSteer, float maxVel, float mult)
+        {
+            Vector3 desired = (target - Bot.Player.Position).Normalized() * maxVel;
+            return (desired - Velocity) * mult;
+        }
+
+        public Vector3 Arrive(Vector3 target, float maxSteer, float maxVel, float slowRad)
+        {
+            Vector3 toTarget = target - Bot.Player.Position;
+            float dist = toTarget.Length();
+            if (dist < 0.2f) return -Velocity;
+            Vector3 desired = toTarget.Normalized();
+            if (dist < slowRad) desired *= maxVel * (dist / slowRad);
+            else desired *= maxVel;
+            return desired - Velocity;
+        }
+
+        public Vector3 Flee(Vector3 target, float maxSteer, float maxVel, float mult)
+        {
+            Vector3 desired = (Bot.Player.Position - target).Normalized() * maxVel;
+            return (desired - Velocity) * mult;
+        }
+
+        public Vector3 Wander(float maxSteer, float maxVel, float mult)
+        {
+            if (_rng.NextDouble() < 0.02)
+                _targetRandomizer = new Vector3((float)_rng.NextDouble() - 0.5f, (float)_rng.NextDouble() - 0.5f, 0);
+            Vector3 circleCenter = Velocity.Normalized();
+            if (circleCenter.LengthSquared() < 0.1f) circleCenter = Bot.Player.RotationVector;
+            circleCenter *= 6.0f;
+            Vector3 displacement = _targetRandomizer * 3.0f;
+            return (circleCenter + displacement) * mult;
+        }
+
+        public Vector3 Evade(Vector3 pos, float steer, float vel, float mult, float rot, float tVel = 2.0f)
+        {
+            float x = pos.X + (MathF.Cos(rot) * tVel);
+            float y = pos.Y + (MathF.Sin(rot) * tVel);
+            return Flee(new Vector3(x, y, pos.Z), steer, vel, mult);
+        }
+
+        public Vector3 Unstuck(float steer, float vel, float mult)
+        {
+            return Arrive(BotMath.CalculatePositionBehind(Bot.Player.Position, Bot.Player.Rotation, 10f), steer, vel, 0f);
+        }
+
+        public Vector3 AvoidObstacles(float steer, float vel, float mult)
+        {
+            return (GetObjectForceAroundMe<IWowGameobject>(steer, vel, 3.5f)
+                  + GetNearestBlacklistForce(steer, vel, 6.0f)) * mult;
+        }
+
+        public Vector3 Seperate(float dist, float vel, float mult)
+        {
+            return GetObjectForceAroundMe<IWowPlayer>(vel, vel, dist) * mult;
+        }
+
+        private Vector3 GetNearestBlacklistForce(float steer, float vel, float dist)
+        {
+            if (Bot.Db.TryGetBlacklistPosition((int)Bot.Objects.MapId, Bot.Player.Position, dist, out IEnumerable<Vector3> nodes))
+            {
+                foreach (var node in nodes) return Flee(node, steer, vel, 2.0f);
+            }
+            return Vector3.Zero;
+        }
+
+        private Vector3 GetObjectForceAroundMe<T>(float steer, float vel, float radius) where T : IWowObject
+        {
+            Vector3 force = Vector3.Zero;
             int count = 0;
-            Vector3 force = new();
-            Vector3 vehiclePosition = Bot.Player.Position;
-            List<(Vector3, float)> objectDistances = [];
+            Vector3 myPos = Bot.Player.Position;
+            float radiusSq = radius * radius;
+            Vector3 forward = Velocity.Normalized();
+            if (forward.LengthSquared() < 0.1f) forward = Bot.Player.RotationVector;
 
-            // we need to know every objects position and distance to later apply a force pushing us
-            // back from it that is relational to the objects distance.
-
-            foreach (T obj in Bot.Objects.All.OfType<T>())
+            foreach (var obj in Bot.Objects.All)
             {
-                float distance = obj.Position.GetDistance(vehiclePosition);
-
-                if (distance < maxDistance)
+                if (obj is T)
                 {
-                    objectDistances.Add((obj.Position, distance));
+                    float distSq = myPos.DistanceToSquared(obj.Position);
+                    if (distSq < radiusSq && distSq > 0.001f)
+                    {
+                        Vector3 toObject = obj.Position - myPos;
+                        if (forward.Dot(toObject.Normalized()) > -0.2f)
+                        {
+                            float dist = MathF.Sqrt(distSq);
+                            Vector3 fleeDir = -toObject;
+                            fleeDir /= dist;
+                            float strength = (1.0f - (dist / radius)) * vel;
+                            force += fleeDir * strength;
+                            count++;
+                        }
+                    }
                 }
             }
-
-            if (objectDistances.Count == 0)
-            {
-                return Vector3.Zero;
-            }
-
-            // get the biggest distance to normalize the fleeing forces
-            float normalizingMultiplier = objectDistances.Max(e => e.Item2);
-
-            for (int i = 0; i < objectDistances.Count; ++i)
-            {
-                force += Flee(objectDistances[i].Item1, objectDistances[i].Item2 * normalizingMultiplier, maxSteering, maxVelocity);
-                count++;
-            }
-
-            // return the average force
-            return force / count;
+            if (count > 0) return (force / count) * 3.0f;
+            return Vector3.Zero;
         }
     }
 }

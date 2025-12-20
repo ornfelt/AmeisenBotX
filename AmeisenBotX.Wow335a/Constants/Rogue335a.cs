@@ -11,5 +11,6 @@
         public const string SliceAndDice = "Slice and Dice";
         public const string Sprint = "Sprint";
         public const string Stealth = "Stealth";
+        public const string SinisterStrike = "Sinister Strike";
     }
 }

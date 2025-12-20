@@ -44,8 +44,12 @@ namespace AmeisenBotX.Core.Logic.Idle.Actions
 
             if (Bot.Db.TryGetPointsOfInterest(Bot.Objects.MapId, PoiType.Auctioneer, Bot.Player.Position, 256.0f, out IEnumerable<Vector3> auctioneers))
             {
-                var closest = auctioneers.MinBy(e => e.GetDistance(Bot.Player.Position));
-                if (closest == default) return false;
+                Vector3 closest = auctioneers.MinBy(e => e.GetDistance(Bot.Player.Position));
+                if (closest == default)
+                {
+                    return false;
+                }
+
                 CurrentAuctioneer = Bot.PathfindingHandler.GetRandomPointAround((int)Bot.Objects.MapId, closest, 2.5f);
                 return true;
             }

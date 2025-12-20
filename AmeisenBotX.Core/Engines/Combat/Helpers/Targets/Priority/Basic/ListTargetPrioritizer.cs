@@ -6,7 +6,7 @@ namespace AmeisenBotX.Core.Engines.Combat.Helpers.Targets.Priority.Basic
 {
     public class ListTargetPrioritizer(IEnumerable<int> priorityDisplayIds = null) : ITargetPrioritizer
     {
-        public IEnumerable<int> PriorityDisplayIds { get; set; } = priorityDisplayIds ?? new List<int>();
+        public IEnumerable<int> PriorityDisplayIds { get; set; } = priorityDisplayIds ?? [];
 
         public bool HasPriority(IWowUnit unit)
         {

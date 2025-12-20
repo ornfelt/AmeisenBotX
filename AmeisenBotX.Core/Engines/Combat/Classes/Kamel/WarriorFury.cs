@@ -188,7 +188,7 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
                     double distance = Bot.Player.Position.GetDistance(Bot.Target.Position);
                     Spell spell = Bot.Character.SpellBook.GetSpellByName(spellName);
 
-                    if ((Bot.Player.Rage >= spell.Costs && IsSpellReady(spellName)))
+                    if (Bot.Player.Rage >= spell.Costs && IsSpellReady(spellName))
                     {
                         if ((spell.MinRange == 0 && spell.MaxRange == 0) || (spell.MinRange <= distance && spell.MaxRange >= distance))
                         {
@@ -267,7 +267,7 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
                         }
                     }
 
-                    if ((Bot.Player.HealthPercentage <= 30) || (Bot.Target.GetType() == typeof(IWowPlayer)) && CustomCastSpell(intimidatingShoutSpell))
+                    if ((Bot.Player.HealthPercentage <= 30) || ((Bot.Target.GetType() == typeof(IWowPlayer)) && CustomCastSpell(intimidatingShoutSpell)))
                     {
                         return;
                     }
@@ -329,10 +329,10 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
                 }
                 else//Range
                 {
-                    if ((Bot.Player.IsDazed
+                    if (Bot.Player.IsDazed
                         || Bot.Player.IsFleeing
                         || Bot.Player.IsInfluenced
-                        || Bot.Player.IsPossessed)
+                        || Bot.Player.IsPossessed
                         || Bot.Player.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == "Frost Nova")
                         || Bot.Player.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == "Frost Trap Aura")
                         || Bot.Player.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == "Hamstring")

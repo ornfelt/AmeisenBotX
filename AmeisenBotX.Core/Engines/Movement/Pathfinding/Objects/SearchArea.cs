@@ -41,7 +41,7 @@ namespace AmeisenBotX.Core.Engines.Movement.Pathfinding.Objects
                 float xj = Area[j].X;
                 float yj = Area[j].Y;
 
-                if (((yi > y) != (yj > y)) && (x < (xj - xi) * (y - yi) / (yj - yi) + xi))
+                if (((yi > y) != (yj > y)) && (x < ((xj - xi) * (y - yi) / (yj - yi)) + xi))
                 {
                     inside = !inside;
                 }
@@ -194,8 +194,8 @@ namespace AmeisenBotX.Core.Engines.Movement.Pathfinding.Objects
             int stepsTopToBottom = (int)MathF.Ceiling(MathF.Abs(top - bottom) / VisibilityRadius);
             int stepsLeftToRight = (int)MathF.Ceiling(MathF.Abs(left - right) / VisibilityRadius);
 
-            float leftStart = left - VisibilityRadius / 2;
-            float topStart = top + VisibilityRadius / 2;
+            float leftStart = left - (VisibilityRadius / 2);
+            float topStart = top + (VisibilityRadius / 2);
 
             bool directionToggle = false;
             List<Vector3> newSearchPath = [];

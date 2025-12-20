@@ -1,19 +1,17 @@
 using AmeisenBotX.Common.Math;
 using AmeisenBotX.Core.Engines.Quest.Objects.Objectives;
 using AmeisenBotX.Core.Engines.Quest.Objects.Quests;
-using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Quest.Quests.TheBarrens.Crossroads
 {
     internal class QPlainstriderMenace(AmeisenBotInterfaces bot) : BotQuest(bot, 844, "Plainstrider Menace", 10, 1,
-            () => (bot.GetClosestQuestGiverByNpcId(bot.Player.Position, new List<int> { 3338 }), new Vector3(-482.48f, -2670.19f, 97.52f)),
-            () => (bot.GetClosestQuestGiverByNpcId(bot.Player.Position, new List<int> { 3338 }), new Vector3(-482.48f, -2670.19f, 97.52f)),
+            () => (bot.GetClosestQuestGiverByNpcId(bot.Player.Position, [3338]), new Vector3(-482.48f, -2670.19f, 97.52f)),
+            () => (bot.GetClosestQuestGiverByNpcId(bot.Player.Position, [3338]), new Vector3(-482.48f, -2670.19f, 97.52f)),
             [
                     new QuestObjectiveChain(
                     [
                         new KillAndLootQuestObjective(bot, [3244, 3245, 3246], 7, 5087, [
-                            new()
-                            {
+                            [
                                 new Vector3(-306.33f, -1152.27f, 58.90f),
                                 new Vector3(-1754.28f, -2317.78f, 92.61f),
                                 new Vector3(-1926.47f, -2869.90f, 91.94f),
@@ -28,7 +26,7 @@ namespace AmeisenBotX.Core.Engines.Quest.Quests.TheBarrens.Crossroads
                                 new Vector3(1156.88f, -3365.88f, 91.81f),
                                 new Vector3(1251.53f, -3053.21f, 91.79f),
                                 new Vector3(578.88f, -1642.39f, 91.84f),
-                            },
+                            ],
                         ]),
                     ])
                 ])

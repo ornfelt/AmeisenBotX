@@ -155,11 +155,7 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis
             get
             {
                 // Access via the new Interface
-                if (Bot.CombatAi != null)
-                {
-                    return Bot.CombatAi.CurrentStrategy;
-                }
-                return AiCombatStrategy.Standard;
+                return Bot.CombatAi != null ? Bot.CombatAi.CurrentStrategy : AiCombatStrategy.Standard;
             }
         }
 

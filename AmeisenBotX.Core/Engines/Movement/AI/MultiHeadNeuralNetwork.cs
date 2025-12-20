@@ -211,7 +211,9 @@ namespace AmeisenBotX.Core.Engines.Movement.AI
                 // Strategy loss: Categorical Cross-Entropy
                 double[] dS2 = new double[StrategyOutputSize];
                 for (int i = 0; i < StrategyOutputSize; i++)
+                {
                     dS2[i] = aS2[i] - strategyTargets[i]; // Softmax + CCE gradient
+                }
 
                 // WinProb loss: MSE
                 double[] dW2 =
@@ -231,7 +233,9 @@ namespace AmeisenBotX.Core.Engines.Movement.AI
                 double[] dS1_to_a3 = BackpropDenseNoUpdate(a3, wS1, dS1);
                 double[] dW1_to_a3 = BackpropDenseNoUpdate(a3, wW1, dW1);
                 for (int i = 0; i < Backbone3Size; i++)
+                {
                     d3[i] = (dS1_to_a3[i] * StrategyLossWeight) + (dW1_to_a3[i] * WinProbLossWeight);
+                }
 
                 // Update strategy head layer 1
                 UpdateWeightsAdam(a3, wS1, bS1, dS1, m_wS1, v_wS1, m_bS1, v_bS1);
@@ -262,7 +266,10 @@ namespace AmeisenBotX.Core.Engines.Movement.AI
             {
                 double sum = b[j];
                 for (int i = 0; i < inSize; i++)
+                {
                     sum += input[i] * w[i, j];
+                }
+
                 output[j] = sum;
             }
         }
@@ -270,28 +277,47 @@ namespace AmeisenBotX.Core.Engines.Movement.AI
         private void ReLU(double[] x)
         {
             for (int i = 0; i < x.Length; i++)
+            {
                 x[i] = x[i] > 0 ? x[i] : 0;
+            }
         }
 
         private void ReLUBackward(double[] activated, double[] gradient)
         {
             for (int i = 0; i < activated.Length; i++)
-                if (activated[i] <= 0) gradient[i] = 0;
+            {
+                if (activated[i] <= 0)
+                {
+                    gradient[i] = 0;
+                }
+            }
         }
 
         private void Softmax(double[] x)
         {
             double max = x[0];
-            for (int i = 1; i < x.Length; i++) if (x[i] > max) max = x[i];
+            for (int i = 1; i < x.Length; i++)
+            {
+                if (x[i] > max)
+                {
+                    max = x[i];
+                }
+            }
+
             double sum = 0;
             for (int i = 0; i < x.Length; i++) { x[i] = Math.Exp(x[i] - max); sum += x[i]; }
-            for (int i = 0; i < x.Length; i++) x[i] /= sum;
+            for (int i = 0; i < x.Length; i++)
+            {
+                x[i] /= sum;
+            }
         }
 
         private void Sigmoid(double[] x)
         {
             for (int i = 0; i < x.Length; i++)
+            {
                 x[i] = 1.0 / (1.0 + Math.Exp(-Math.Clamp(x[i], -45, 45)));
+            }
         }
 
         private void BatchNorm(double[] input, double[] gamma, double[] beta, double[] mean, double[] var, double[] output)
@@ -300,7 +326,7 @@ namespace AmeisenBotX.Core.Engines.Movement.AI
             for (int i = 0; i < input.Length; i++)
             {
                 double normalized = (input[i] - mean[i]) / Math.Sqrt(var[i] + 1e-5);
-                output[i] = gamma[i] * normalized + beta[i];
+                output[i] = (gamma[i] * normalized) + beta[i];
             }
         }
 
@@ -330,8 +356,12 @@ namespace AmeisenBotX.Core.Engines.Movement.AI
 
             // Gradient w.r.t. input
             for (int i = 0; i < inSize; i++)
+            {
                 for (int j = 0; j < outSize; j++)
+                {
                     dIn[i] += dOut[j] * w[i, j];
+                }
+            }
 
             // Update weights with Adam
             UpdateWeightsAdam(input, wRef, bRef, dOut, mw, vw, mb, vb);
@@ -345,8 +375,13 @@ namespace AmeisenBotX.Core.Engines.Movement.AI
             int outSize = dOut.Length;
             double[] dIn = new double[inSize];
             for (int i = 0; i < inSize; i++)
+            {
                 for (int j = 0; j < outSize; j++)
+                {
                     dIn[i] += dOut[j] * w[i, j];
+                }
+            }
+
             return dIn;
         }
 
@@ -361,8 +396,8 @@ namespace AmeisenBotX.Core.Engines.Movement.AI
                 for (int j = 0; j < outSize; j++)
                 {
                     double g = dOut[j] * input[i];
-                    mw[i, j] = Beta1 * mw[i, j] + (1 - Beta1) * g;
-                    vw[i, j] = Beta2 * vw[i, j] + (1 - Beta2) * g * g;
+                    mw[i, j] = (Beta1 * mw[i, j]) + ((1 - Beta1) * g);
+                    vw[i, j] = (Beta2 * vw[i, j]) + ((1 - Beta2) * g * g);
                     double mHat = mw[i, j] / (1 - Math.Pow(Beta1, t));
                     double vHat = vw[i, j] / (1 - Math.Pow(Beta2, t));
                     w[i, j] -= LearningRate * mHat / (Math.Sqrt(vHat) + Epsilon);
@@ -372,8 +407,8 @@ namespace AmeisenBotX.Core.Engines.Movement.AI
             for (int j = 0; j < outSize; j++)
             {
                 double g = dOut[j];
-                mb[j] = Beta1 * mb[j] + (1 - Beta1) * g;
-                vb[j] = Beta2 * vb[j] + (1 - Beta2) * g * g;
+                mb[j] = (Beta1 * mb[j]) + ((1 - Beta1) * g);
+                vb[j] = (Beta2 * vb[j]) + ((1 - Beta2) * g * g);
                 double mHat = mb[j] / (1 - Math.Pow(Beta1, t));
                 double vHat = vb[j] / (1 - Math.Pow(Beta2, t));
                 b[j] -= LearningRate * mHat / (Math.Sqrt(vHat) + Epsilon);
@@ -386,15 +421,24 @@ namespace AmeisenBotX.Core.Engines.Movement.AI
             double[,] w = new double[inSize, outSize];
             double scale = Math.Sqrt(2.0 / inSize); // He init
             for (int i = 0; i < inSize; i++)
+            {
                 for (int j = 0; j < outSize; j++)
-                    w[i, j] = (rand.NextDouble() * 2 - 1) * scale;
+                {
+                    w[i, j] = ((rand.NextDouble() * 2) - 1) * scale;
+                }
+            }
+
             return w;
         }
 
         private double[] Fill(int size, double value)
         {
             double[] arr = new double[size];
-            for (int i = 0; i < size; i++) arr[i] = value;
+            for (int i = 0; i < size; i++)
+            {
+                arr[i] = value;
+            }
+
             return arr;
         }
 
@@ -431,20 +475,31 @@ namespace AmeisenBotX.Core.Engines.Movement.AI
             {
                 result[i] = new double[cols];
                 for (int j = 0; j < cols; j++)
+                {
                     result[i][j] = arr[i, j];
+                }
             }
             return result;
         }
 
         private static double[,] To2D(double[][] arr)
         {
-            if (arr == null || arr.Length == 0) return new double[0, 0];
+            if (arr == null || arr.Length == 0)
+            {
+                return new double[0, 0];
+            }
+
             int rows = arr.Length;
             int cols = arr[0].Length;
             double[,] result = new double[rows, cols];
             for (int i = 0; i < rows; i++)
+            {
                 for (int j = 0; j < cols; j++)
+                {
                     result[i, j] = arr[i][j];
+                }
+            }
+
             return result;
         }
 
@@ -452,7 +507,7 @@ namespace AmeisenBotX.Core.Engines.Movement.AI
         {
             lock (_lock)
             {
-                var data = new NetworkData
+                NetworkData data = new()
                 {
                     W1 = ToJagged(w1),
                     B1 = b1,
@@ -479,31 +534,110 @@ namespace AmeisenBotX.Core.Engines.Movement.AI
 
         public static MultiHeadNeuralNetwork? Load(string path)
         {
-            if (!File.Exists(path)) return null;
+            if (!File.Exists(path))
+            {
+                return null;
+            }
+
             try
             {
-                var data = JsonSerializer.Deserialize<NetworkData>(File.ReadAllText(path));
-                if (data == null) return null;
+                NetworkData? data = JsonSerializer.Deserialize<NetworkData>(File.ReadAllText(path));
+                if (data == null)
+                {
+                    return null;
+                }
 
-                var net = new MultiHeadNeuralNetwork();
-                if (data.W1 != null) net.w1 = To2D(data.W1);
-                if (data.B1 != null) net.b1 = data.B1;
-                if (data.W2 != null) net.w2 = To2D(data.W2);
-                if (data.B2 != null) net.b2 = data.B2;
-                if (data.W3 != null) net.w3 = To2D(data.W3);
-                if (data.B3 != null) net.b3 = data.B3;
-                if (data.WS1 != null) net.wS1 = To2D(data.WS1);
-                if (data.BS1 != null) net.bS1 = data.BS1;
-                if (data.WS2 != null) net.wS2 = To2D(data.WS2);
-                if (data.BS2 != null) net.bS2 = data.BS2;
-                if (data.WW1 != null) net.wW1 = To2D(data.WW1);
-                if (data.BW1 != null) net.bW1 = data.BW1;
-                if (data.WW2 != null) net.wW2 = To2D(data.WW2);
-                if (data.BW2 != null) net.bW2 = data.BW2;
-                if (data.BN1_Gamma != null) net.bn1_gamma = data.BN1_Gamma;
-                if (data.BN1_Beta != null) net.bn1_beta = data.BN1_Beta;
-                if (data.BN2_Gamma != null) net.bn2_gamma = data.BN2_Gamma;
-                if (data.BN2_Beta != null) net.bn2_beta = data.BN2_Beta;
+                MultiHeadNeuralNetwork net = new();
+                if (data.W1 != null)
+                {
+                    net.w1 = To2D(data.W1);
+                }
+
+                if (data.B1 != null)
+                {
+                    net.b1 = data.B1;
+                }
+
+                if (data.W2 != null)
+                {
+                    net.w2 = To2D(data.W2);
+                }
+
+                if (data.B2 != null)
+                {
+                    net.b2 = data.B2;
+                }
+
+                if (data.W3 != null)
+                {
+                    net.w3 = To2D(data.W3);
+                }
+
+                if (data.B3 != null)
+                {
+                    net.b3 = data.B3;
+                }
+
+                if (data.WS1 != null)
+                {
+                    net.wS1 = To2D(data.WS1);
+                }
+
+                if (data.BS1 != null)
+                {
+                    net.bS1 = data.BS1;
+                }
+
+                if (data.WS2 != null)
+                {
+                    net.wS2 = To2D(data.WS2);
+                }
+
+                if (data.BS2 != null)
+                {
+                    net.bS2 = data.BS2;
+                }
+
+                if (data.WW1 != null)
+                {
+                    net.wW1 = To2D(data.WW1);
+                }
+
+                if (data.BW1 != null)
+                {
+                    net.bW1 = data.BW1;
+                }
+
+                if (data.WW2 != null)
+                {
+                    net.wW2 = To2D(data.WW2);
+                }
+
+                if (data.BW2 != null)
+                {
+                    net.bW2 = data.BW2;
+                }
+
+                if (data.BN1_Gamma != null)
+                {
+                    net.bn1_gamma = data.BN1_Gamma;
+                }
+
+                if (data.BN1_Beta != null)
+                {
+                    net.bn1_beta = data.BN1_Beta;
+                }
+
+                if (data.BN2_Gamma != null)
+                {
+                    net.bn2_gamma = data.BN2_Gamma;
+                }
+
+                if (data.BN2_Beta != null)
+                {
+                    net.bn2_beta = data.BN2_Beta;
+                }
+
                 return net;
             }
             catch

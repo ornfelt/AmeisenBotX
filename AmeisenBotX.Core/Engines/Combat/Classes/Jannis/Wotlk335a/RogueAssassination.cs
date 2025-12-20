@@ -1,8 +1,12 @@
-﻿using AmeisenBotX.Core.Engines.Combat.Helpers.Aura.Objects;
+﻿using AmeisenBotX.Common.Math;
+using AmeisenBotX.Core.Engines.Combat.Helpers.Aura.Objects;
+using AmeisenBotX.Core.Engines.Movement.Enums;
 using AmeisenBotX.Core.Managers.Character.Comparators;
 using AmeisenBotX.Core.Managers.Character.Talents.Objects;
+using AmeisenBotX.Wow.Objects;
 using AmeisenBotX.Wow.Objects.Enums;
 using AmeisenBotX.Wow335a.Constants;
+using System;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 {
@@ -21,7 +25,7 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 
         public override string Description => "FCFS based CombatClass for the Assasination Rogue spec.";
 
-        public override string DisplayName2 => "[WIP] Rogue Assasination";
+        public override string DisplayName2 => "Rogue Assasination";
 
         public override bool HandlesMovement => false;
 
@@ -70,7 +74,7 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 
         public override string Version => "1.0";
 
-        public override bool WalkBehindEnemy => true;
+        public override bool WalkBehindEnemy => false;
 
         public override WowClass WowClass => WowClass.Rogue;
 
@@ -82,23 +86,45 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 
             if (TryFindTarget(TargetProviderDps, out _))
             {
-                if ((Bot.Player.HealthPercentage < 20
-                        && TryCastSpellRogue(Rogue335a.CloakOfShadows, 0, true)))
+                if (!Bot.Tactic.PreventMovement && Bot.Target != null)
+                {
+                    float dx = MathF.Cos(Bot.Target.Rotation);
+                    float dy = MathF.Sin(Bot.Target.Rotation);
+
+                    float backX = Bot.Target.Position.X - (dx * 1.5f);
+                    float backY = Bot.Target.Position.Y - (dy * 1.5f);
+
+                    Vector3 behindPos = new(backX, backY, Bot.Target.Position.Z);
+
+                    // try to stick behind the target
+                    if (Bot.Player.DistanceTo(behindPos) > Bot.Player.MeleeRangeTo(Bot.Target))
+                    {
+                        Bot.Movement.SetMovementAction(MovementAction.Chase, behindPos);
+                    }
+                }
+
+                if (Bot.Player.HealthPercentage < 20
+                    && TryCastSpellRogue(Rogue335a.CloakOfShadows, 0, true))
                 {
                     return;
                 }
 
                 if (Bot.Target != null)
                 {
-                    if ((Bot.Target.Position.GetDistance(Bot.Player.Position) > 16
-                            && TryCastSpellRogue(Rogue335a.Sprint, 0, true)))
+                    if (Bot.Target.Position.GetDistance(Bot.Player.Position) > 16
+                        && TryCastSpellRogue(Rogue335a.Sprint, 0, true))
                     {
                         return;
                     }
                 }
 
-                if (TryCastSpellRogue(Rogue335a.Eviscerate, Bot.Wow.TargetGuid, true, true, 5)
+                if (TryCastSpellRogue(Rogue335a.Eviscerate, Bot.Wow.TargetGuid, true, true, 3)
                     || TryCastSpellRogue(Rogue335a.Mutilate, Bot.Wow.TargetGuid, true))
+                {
+                    return;
+                }
+
+                if (TryCastSpellRogue(Rogue335a.SinisterStrike, Bot.Wow.TargetGuid, true))
                 {
                     return;
                 }

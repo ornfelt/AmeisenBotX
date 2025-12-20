@@ -21,7 +21,7 @@ namespace AmeisenBotX.Core.Managers.Character.Inventory.Objects
 
                 if (subType.EndsWith("s"))
                 {
-                    subType = subType.Remove(subType.Length - 1);
+                    subType = subType[..^1];
                 }
 
                 return subType;
@@ -33,7 +33,7 @@ namespace AmeisenBotX.Core.Managers.Character.Inventory.Objects
 
                 if (subType.EndsWith("s"))
                 {
-                    subType = subType.Remove(subType.Length - 1);
+                    subType = subType[..^1];
                 }
 
                 return subType;
@@ -45,7 +45,7 @@ namespace AmeisenBotX.Core.Managers.Character.Inventory.Objects
 
                 if (subType.EndsWith("s"))
                 {
-                    subType = subType.Remove(subType.Length - 1);
+                    subType = subType[..^1];
                 }
 
                 return subType;
@@ -57,7 +57,7 @@ namespace AmeisenBotX.Core.Managers.Character.Inventory.Objects
 
                 if (subType.EndsWith("s"))
                 {
-                    subType = subType.Remove(subType.Length - 1);
+                    subType = subType[..^1];
                 }
 
                 return subType;
@@ -75,18 +75,18 @@ namespace AmeisenBotX.Core.Managers.Character.Inventory.Objects
 
                 if (weaponType.EndsWith("s"))
                 {
-                    weaponType = weaponType.Remove(weaponType.Length - 1);
+                    weaponType = weaponType[..^1];
                 }
 
                 if (handedness.EndsWith("ed"))
                 {
-                    handedness = handedness.Remove(handedness.Length - 2);
+                    handedness = handedness[..^2];
                 }
 
                 return weaponType + handedness;
             }
 
-            return subType.EndsWith("s") ? subType.Remove(subType.Length - 1) : subType;
+            return subType.EndsWith("s") ? subType[..^1] : subType;
         }
     }
 }

@@ -139,7 +139,7 @@ namespace AmeisenBotX
                 Config.IdleActions = checkboxIdleActions.IsChecked.GetValueOrDefault(false);
                 Config.IgnoreCombatWhileMounted = checkboxIgnoreCombatMounted.IsChecked.GetValueOrDefault(false);
                 Config.ItemRepairThreshold = sliderRepair.Value;
-                Config.ItemSellBlacklist = new(textboxItemSellBlacklist.Text.Split(",", StringSplitOptions.RemoveEmptyEntries));
+                Config.ItemSellBlacklist = [.. textboxItemSellBlacklist.Text.Split(",", StringSplitOptions.RemoveEmptyEntries)];
                 Config.JobEngineMailHeader = textboxMailHeader.Text;
                 Config.JobEngineMailReceiver = textboxMailReceiver.Text;
                 Config.JobEngineMailText = textboxMailText.Text;

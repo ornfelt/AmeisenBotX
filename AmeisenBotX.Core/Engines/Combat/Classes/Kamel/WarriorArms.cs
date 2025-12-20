@@ -190,7 +190,7 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
                 double distance = Bot.Player.Position.GetDistance(Bot.Target.Position);
                 Spell spell = Bot.Character.SpellBook.GetSpellByName(spellName);
 
-                if ((Bot.Player.Rage >= spell.Costs && IsSpellReady(spellName)))
+                if (Bot.Player.Rage >= spell.Costs && IsSpellReady(spellName))
                 {
                     if ((spell.MinRange == 0 && spell.MaxRange == 0) || (spell.MinRange <= distance && spell.MaxRange >= distance))
                     {

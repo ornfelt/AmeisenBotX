@@ -6,8 +6,10 @@ using System.Text.RegularExpressions;
 
 namespace AmeisenBotX.MPQ
 {
-    public unsafe partial class MpqBridge : IDisposable
+    public partial class MpqBridge : IDisposable
     {
+        public bool IsReady => _areMpqsInitialized;
+
         private readonly string _wowFolder;
         private readonly string _cacheFolder;
 
@@ -27,34 +29,50 @@ namespace AmeisenBotX.MPQ
             );
 
             if (!Directory.Exists(_cacheFolder))
+            {
                 Directory.CreateDirectory(_cacheFolder);
+            }
+        }
+
+        public void PreloadAsync()
+        {
+            Task.Run(EnsureMpqsInitialized);
         }
 
         public Bitmap GetIcon(string internalPath)
         {
-            if (string.IsNullOrEmpty(internalPath)) return null;
+            if (string.IsNullOrEmpty(internalPath))
+            {
+                return null;
+            }
 
             string normalizedPath = internalPath.Replace("/", "\\").TrimStart('\\');
 
             if (normalizedPath.EndsWith(".blp", StringComparison.OrdinalIgnoreCase))
-                normalizedPath = normalizedPath.Substring(0, normalizedPath.Length - 4);
+            {
+                normalizedPath = normalizedPath[..^4];
+            }
 
             string cacheKey = normalizedPath.ToLower();
             string pngPath = Path.Combine(_cacheFolder, normalizedPath + ".png");
 
-            if (_ramCache.TryGetValue(cacheKey, out var memImage))
+            if (_ramCache.TryGetValue(cacheKey, out Bitmap? memImage))
+            {
                 return memImage;
+            }
 
-            var lockObj = _loadingLocks.GetOrAdd(cacheKey, _ => new object());
+            object lockObj = _loadingLocks.GetOrAdd(cacheKey, _ => new object());
 
             lock (lockObj)
             {
                 if (_ramCache.TryGetValue(cacheKey, out memImage))
+                {
                     return memImage;
+                }
 
                 if (File.Exists(pngPath))
                 {
-                    var diskImg = LoadFromDisk(pngPath);
+                    Bitmap diskImg = LoadFromDisk(pngPath);
                     if (diskImg != null)
                     {
                         _ramCache[cacheKey] = diskImg;
@@ -70,10 +88,10 @@ namespace AmeisenBotX.MPQ
                 {
                     try
                     {
-                        using var ms = new MemoryStream(blpData);
-                        using var blpFile = new BlpFile(ms);
+                        using MemoryStream ms = new(blpData);
+                        using BlpFile blpFile = new(ms);
 
-                        var bmp = blpFile.GetBitmap(0);
+                        Bitmap bmp = blpFile.GetBitmap(0);
 
                         EnsureDirectoryExists(pngPath);
                         bmp.Save(pngPath, ImageFormat.Png);
@@ -104,9 +122,12 @@ namespace AmeisenBotX.MPQ
         {
             lock (_mpqLock)
             {
-                if (_openArchives.Count == 0) return null;
+                if (_openArchives.Count == 0)
+                {
+                    return null;
+                }
 
-                foreach (var hMpq in _openArchives)
+                foreach (nint hMpq in _openArchives)
                 {
                     if (StormLib.SFileOpenFileEx(hMpq, searchPath, 0, out IntPtr hFile))
                     {
@@ -114,7 +135,10 @@ namespace AmeisenBotX.MPQ
                         {
                             uint fileSize = StormLib.SFileGetFileSize(hFile, out uint fileSizeHigh);
 
-                            if (fileSize == 0xFFFFFFFF || fileSize == 0) continue;
+                            if (fileSize is 0xFFFFFFFF or 0)
+                            {
+                                continue;
+                            }
 
                             byte[] buffer = new byte[fileSize];
 
@@ -138,18 +162,19 @@ namespace AmeisenBotX.MPQ
         {
             string dataPath = Path.Combine(_wowFolder, "Data");
 
-            if (!Directory.Exists(dataPath)) return;
+            if (!Directory.Exists(dataPath))
+            {
+                return;
+            }
 
-            var allMpqFiles = new List<string>();
+            List<string> allMpqFiles = [.. Directory.GetFiles(dataPath, "*.mpq")];
 
-            allMpqFiles.AddRange(Directory.GetFiles(dataPath, "*.mpq"));
-
-            foreach (var subDir in Directory.GetDirectories(dataPath))
+            foreach (string subDir in Directory.GetDirectories(dataPath))
             {
                 allMpqFiles.AddRange(Directory.GetFiles(subDir, "*.mpq"));
             }
 
-            var sortedMpqs = allMpqFiles
+            List<string> sortedMpqs = allMpqFiles
                 .Select(path => new { Path = path, Priority = CalculateMpqPriority(path) })
                 .OrderByDescending(x => x.Priority)
                 .Select(x => x.Path)
@@ -157,7 +182,7 @@ namespace AmeisenBotX.MPQ
 
             Console.WriteLine($"[MPQ] Opening {sortedMpqs.Count} archives...");
 
-            foreach (var file in sortedMpqs)
+            foreach (string? file in sortedMpqs)
             {
                 if (StormLib.SFileOpenArchive(file, 0, 0x100, out IntPtr hMpq))
                 {
@@ -171,7 +196,7 @@ namespace AmeisenBotX.MPQ
             try
             {
                 byte[] bytes = File.ReadAllBytes(path);
-                using var ms = new MemoryStream(bytes);
+                using MemoryStream ms = new(bytes);
                 return new Bitmap(ms);
             }
             catch { return null; }
@@ -180,7 +205,10 @@ namespace AmeisenBotX.MPQ
         private void EnsureDirectoryExists(string filePath)
         {
             string dir = Path.GetDirectoryName(filePath);
-            if (!Directory.Exists(dir)) Directory.CreateDirectory(dir);
+            if (!Directory.Exists(dir))
+            {
+                Directory.CreateDirectory(dir);
+            }
         }
 
         private int CalculateMpqPriority(string filePath)
@@ -188,29 +216,58 @@ namespace AmeisenBotX.MPQ
             string fileName = Path.GetFileName(filePath).ToLower();
             int score = 0;
 
-            if (filePath.Contains("enUS") || filePath.Contains("deDE")) score += 10000;
+            if (filePath.Contains("enUS") || filePath.Contains("deDE"))
+            {
+                score += 10000;
+            }
 
-            var match = MpqPatchRegex().Match(fileName);
+            Match match = MpqPatchRegex().Match(fileName);
             if (match.Success)
+            {
                 score += 1000 + int.Parse(match.Groups[1].Value);
+            }
             else if (fileName.StartsWith("patch.mpq"))
+            {
                 score += 900;
+            }
 
-            if (fileName.StartsWith("art")) score += 500;
-            if (fileName.StartsWith("lichking")) score += 400;
-            if (fileName.StartsWith("expansion")) score += 300;
-            if (fileName.StartsWith("common")) score += 100;
+            if (fileName.StartsWith("art"))
+            {
+                score += 500;
+            }
+
+            if (fileName.StartsWith("lichking"))
+            {
+                score += 400;
+            }
+
+            if (fileName.StartsWith("expansion"))
+            {
+                score += 300;
+            }
+
+            if (fileName.StartsWith("common"))
+            {
+                score += 100;
+            }
 
             return score;
         }
 
         private void EnsureMpqsInitialized()
         {
-            if (_areMpqsInitialized) return;
+            if (_areMpqsInitialized)
+            {
+                return;
+            }
 
             lock (_mpqLock)
             {
-                if (_areMpqsInitialized) return;
+                if (_areMpqsInitialized)
+                {
+                    return;
+                }
+
                 InitializeAllMpqs();
                 _areMpqsInitialized = true;
             }
@@ -220,13 +277,13 @@ namespace AmeisenBotX.MPQ
         {
             lock (_mpqLock)
             {
-                foreach (var hMpq in _openArchives)
+                foreach (nint hMpq in _openArchives)
                 {
                     StormLib.SFileCloseArchive(hMpq);
                 }
                 _openArchives.Clear();
 
-                foreach (var bmp in _ramCache.Values)
+                foreach (Bitmap bmp in _ramCache.Values)
                 {
                     bmp.Dispose();
                 }

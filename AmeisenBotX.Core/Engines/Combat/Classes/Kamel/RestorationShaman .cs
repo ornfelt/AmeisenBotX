@@ -203,11 +203,11 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
             // e.HealthPercentage <= 94 && !e.IsDead).OrderBy(e =>
             // e.HealthPercentage).ToList();//FirstOrDefault => tolist
 
-            List<IWowUnit> partyMemberToHeal = new(Bot.Objects.Partymembers)
-            {
-                //healableUnits.AddRange(Bot.ObjectManager.PartyPets);
+            List<IWowUnit> partyMemberToHeal =
+            [
+.. Bot.Objects.Partymembers,                 //healableUnits.AddRange(Bot.ObjectManager.PartyPets);
                 Bot.Player
-            };
+            ];
 
             partyMemberToHeal = [.. partyMemberToHeal.Where(e => e.HealthPercentage <= 94 && !e.IsDead).OrderBy(e => e.HealthPercentage)];
 

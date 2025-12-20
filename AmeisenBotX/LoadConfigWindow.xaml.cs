@@ -92,7 +92,7 @@ namespace AmeisenBotX
 
             if (args.Length > 1)
             {
-                string botnameParam = args[1];
+                string botnameParam = args[1].Trim();
 
                 if (comboboxSelectedConfig.Items.Contains(botnameParam))
                 {

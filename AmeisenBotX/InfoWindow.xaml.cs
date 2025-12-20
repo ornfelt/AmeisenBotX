@@ -107,15 +107,17 @@ namespace AmeisenBotX
                     }
 
                     List<SpellDisplay> sortedDisplays = [.. displays.OrderBy(s => {
-                            if (s.Spell.Rank?.Equals("Racial", StringComparison.OrdinalIgnoreCase) == true) return 2;
-                            if (s.Spell.Rank?.Equals("Passive", StringComparison.OrdinalIgnoreCase) == true) return 3;
-                            if (s.Spell.Rank?.Equals("Passive", StringComparison.OrdinalIgnoreCase) == true || s.Spell.Rank?.Equals("Racial Passive", StringComparison.OrdinalIgnoreCase) == true) return 4;
-                            return 1;
-                        })
+                            return s.Spell.Rank?.Equals("Racial", StringComparison.OrdinalIgnoreCase) == true
+                                ? 2
+                                : s.Spell.Rank?.Equals("Passive", StringComparison.OrdinalIgnoreCase) == true
+                                ? 3
+                                : s.Spell.Rank?.Equals("Passive", StringComparison.OrdinalIgnoreCase) == true || s.Spell.Rank?.Equals("Racial Passive", StringComparison.OrdinalIgnoreCase) == true
+                                ? 4
+                                : 1; })
                         .ThenByDescending(s => s.Spell.TryGetRank(out int r) ? r : 0)
                         .ThenBy(s => s.Spell.SpellbookName)];
 
-                    foreach (var d in sortedDisplays)
+                    foreach (SpellDisplay d in sortedDisplays)
                     {
                         equipmentWrapPanel.Children.Add(d);
                     }

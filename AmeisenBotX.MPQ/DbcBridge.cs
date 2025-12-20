@@ -28,12 +28,17 @@ namespace AmeisenBotX.MPQ
 
         private DbcReader<T> GetOrLoad<T>(ref DbcReader<T> field, string path) where T : unmanaged
         {
-            if (field != null) return field;
+            if (field != null)
+            {
+                return field;
+            }
 
             byte[] data = _mpqBridge.ReadFileBytes(path);
 
             if (data == null)
+            {
                 throw new FileNotFoundException($"DBC file not found in MPQ: {path}");
+            }
 
             field = new DbcReader<T>(data);
             return field;
@@ -41,52 +46,49 @@ namespace AmeisenBotX.MPQ
 
         public string GetSpellName(int spellId)
         {
-            if (SpellDbc.TryGetRecord(spellId, out SpellRecord record))
-            {
-                return SpellDbc.GetString(record.NameOffset);
-            }
-            return $"Unknown Spell {spellId}";
+            return SpellDbc.TryGetRecord(spellId, out SpellRecord record) ? SpellDbc.GetString(record.NameOffset) : $"Unknown Spell {spellId}";
         }
 
         public string GetSpellIconPath(int spellId)
         {
             if (!SpellDbc.TryGetRecord(spellId, out SpellRecord spellRec))
+            {
                 return null;
+            }
 
             if (!IconDbc.TryGetRecord((int)spellRec.SpellIconID, out SpellIconRecord iconRec))
+            {
                 return null;
+            }
 
             string path = IconDbc.GetString(iconRec.PathOffset);
 
-            if (string.IsNullOrEmpty(path)) return null;
-
-            if (!path.Contains('\\'))
-                return "Interface\\Icons\\" + path;
-
-            return path;
+            return string.IsNullOrEmpty(path) ? null : !path.Contains('\\') ? "Interface\\Icons\\" + path : path;
         }
 
         public string GetItemIconPath(int itemId)
         {
             if (!ItemDbc.TryGetRecord(itemId, out ItemRecord itemRec))
+            {
                 return null;
+            }
 
             if (!ItemDisplayInfoDbc.TryGetRecord((int)itemRec.DisplayInfoID, out ItemDisplayInfoRecord displayRec))
+            {
                 return null;
+            }
 
             string iconName = ItemDisplayInfoDbc.GetString(displayRec.InventoryIconOffset);
 
-            if (string.IsNullOrEmpty(iconName)) return null;
-
-            return "Interface\\Icons\\" + iconName;
+            return string.IsNullOrEmpty(iconName) ? null : "Interface\\Icons\\" + iconName;
         }
 
         public IEnumerable<(int Id, string Name)> GetAllSpells()
         {
-            var dbc = SpellDbc;
+            DbcReader<SpellRecord> dbc = SpellDbc;
             for (int i = 0; i < dbc.RecordCount; i++)
             {
-                var record = dbc.GetRecordAtRow(i);
+                SpellRecord record = dbc.GetRecordAtRow(i);
                 string name = dbc.GetString(record.NameOffset);
                 yield return ((int)record.Id, name);
             }
@@ -94,10 +96,10 @@ namespace AmeisenBotX.MPQ
 
         public int GetSpellIdByName(string searchName)
         {
-            var dbc = SpellDbc;
+            DbcReader<SpellRecord> dbc = SpellDbc;
             for (int i = 0; i < dbc.RecordCount; i++)
             {
-                var record = dbc.GetRecordAtRow(i);
+                SpellRecord record = dbc.GetRecordAtRow(i);
                 string name = dbc.GetString(record.NameOffset);
 
                 if (name.Equals(searchName, StringComparison.OrdinalIgnoreCase))

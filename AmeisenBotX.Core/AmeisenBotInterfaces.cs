@@ -169,7 +169,7 @@ namespace AmeisenBotX.Core
                 }
             }
 
-            return Array.Empty<T>();
+            return [];
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

@@ -15,7 +15,7 @@ namespace AmeisenBotX.Core.Engines.Combat.Helpers.Targets.Validation
 
         public TargetValidationManager(IEnumerable<ITargetValidator> validators)
         {
-            Validators = new(validators);
+            Validators = [.. validators];
             BlacklistTargetValidator = new();
         }
 

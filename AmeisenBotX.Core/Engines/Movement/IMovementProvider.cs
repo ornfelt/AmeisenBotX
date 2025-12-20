@@ -5,6 +5,6 @@ namespace AmeisenBotX.Core.Engines.Movement
 {
     public interface IMovementProvider
     {
-        bool Get(out Vector3 position, out MovementAction type, out float rotation);
+        bool Get(out Vector3 position, out MovementAction type);
     }
 }

@@ -1,19 +1,17 @@
 using AmeisenBotX.Common.Math;
 using AmeisenBotX.Core.Engines.Quest.Objects.Objectives;
 using AmeisenBotX.Core.Engines.Quest.Objects.Quests;
-using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Quest.Quests.TheBarrens.Crossroads
 {
     internal class QTheZhevra(AmeisenBotInterfaces bot) : BotQuest(bot, 845, "The Zhevra", 10, 1,
-            () => (bot.GetClosestQuestGiverByNpcId(bot.Player.Position, new List<int> { 3338 }), new Vector3(-482.48f, -2670.19f, 97.52f)),
-            () => (bot.GetClosestQuestGiverByNpcId(bot.Player.Position, new List<int> { 3338 }), new Vector3(-482.48f, -2670.19f, 97.52f)),
+            () => (bot.GetClosestQuestGiverByNpcId(bot.Player.Position, [3338]), new Vector3(-482.48f, -2670.19f, 97.52f)),
+            () => (bot.GetClosestQuestGiverByNpcId(bot.Player.Position, [3338]), new Vector3(-482.48f, -2670.19f, 97.52f)),
             [
                     new QuestObjectiveChain(
                     [
                         new KillAndLootQuestObjective(bot, [3242, 3426, 3466, 5831], 4, 5086, [
-                            new()
-                            {
+                            [
                                 new Vector3(-2920.79f, -1940.51f, 92.13f),
                                 new Vector3(-3148.13f, -2116.10f, 91.79f),
                                 new Vector3(-1774.79f, -3592.18f, 92.24f),
@@ -25,7 +23,7 @@ namespace AmeisenBotX.Core.Engines.Quest.Quests.TheBarrens.Crossroads
                                 new Vector3(622.80f, -1673.04f, 91.79f),
                                 new Vector3(-282.78f, -1055.41f, 40.17f),
                                 new Vector3(-2486.04f, -1782.38f, 93.29f),
-                            },
+                            ],
                         ]),
                     ])
                 ])

@@ -1,19 +1,17 @@
 using AmeisenBotX.Common.Math;
 using AmeisenBotX.Core.Engines.Quest.Objects.Objectives;
 using AmeisenBotX.Core.Engines.Quest.Objects.Quests;
-using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Quest.Quests.Durotar.RazorHill
 {
     internal class QCarryYourWeight(AmeisenBotInterfaces bot) : BotQuest(bot, 791, "Carry Your Weight", 4, 1,
-            () => (bot.GetClosestQuestGiverByNpcId(bot.Player.Position, new List<int> { 3147 }), new Vector3(384.74f, -4600.13f, 76.17f)),
-            () => (bot.GetClosestQuestGiverByNpcId(bot.Player.Position, new List<int> { 3147 }), new Vector3(384.74f, -4600.13f, 76.17f)),
+            () => (bot.GetClosestQuestGiverByNpcId(bot.Player.Position, [3147]), new Vector3(384.74f, -4600.13f, 76.17f)),
+            () => (bot.GetClosestQuestGiverByNpcId(bot.Player.Position, [3147]), new Vector3(384.74f, -4600.13f, 76.17f)),
             [
                     new QuestObjectiveChain(
                     [
                         new KillAndLootQuestObjective(bot, [3119, 3120, 3128, 3129, 3192, 5808, 5809], 8, 4870, [
-                            new()
-                            {
+                            [
                                 new Vector3(-220.08f, -4908.83f, 26.92f),
                                 new Vector3(-273.24f, -4919.18f, 27.19f),
                                 new Vector3(-312.36f, -5070.01f, 21.63f),
@@ -25,16 +23,15 @@ namespace AmeisenBotX.Core.Engines.Quest.Quests.Durotar.RazorHill
                                 new Vector3(-48.03f, -5080.86f, 10.22f),
                                 new Vector3(17.51f, -4951.48f, 14.39f),
                                 new Vector3(-18.87f, -4917.26f, 16.75f),
-                            },
-                            new()
-                            {
+                            ],
+                            [
                                 new Vector3(-918.93f, -4494.03f, 29.65f),
                                 new Vector3(-986.97f, -4410.00f, 29.37f),
                                 new Vector3(-1030.65f, -4432.20f, 26.16f),
                                 new Vector3(-1083.06f, -4716.26f, 15.57f),
                                 new Vector3(-1054.21f, -4745.53f, 16.66f),
                                 new Vector3(-1005.58f, -4766.97f, 12.67f),
-                            },
+                            ],
                         ]),
                     ])
                 ])

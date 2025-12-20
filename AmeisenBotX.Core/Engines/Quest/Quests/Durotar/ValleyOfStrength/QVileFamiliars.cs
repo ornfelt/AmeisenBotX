@@ -1,19 +1,17 @@
 using AmeisenBotX.Common.Math;
 using AmeisenBotX.Core.Engines.Quest.Objects.Objectives;
 using AmeisenBotX.Core.Engines.Quest.Objects.Quests;
-using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Quest.Quests.Durotar.ValleyOfStrength
 {
     internal class QVileFamiliars(AmeisenBotInterfaces bot) : BotQuest(bot, 792, "Vile Familiars", 2, 1,
-            () => (bot.GetClosestQuestGiverByNpcId(bot.Player.Position, new List<int> { 3145 }), new Vector3(-629.05f, -4228.06f, 38.23f)),
-            () => (bot.GetClosestQuestGiverByNpcId(bot.Player.Position, new List<int> { 3145 }), new Vector3(-629.05f, -4228.06f, 38.23f)),
+            () => (bot.GetClosestQuestGiverByNpcId(bot.Player.Position, [3145]), new Vector3(-629.05f, -4228.06f, 38.23f)),
+            () => (bot.GetClosestQuestGiverByNpcId(bot.Player.Position, [3145]), new Vector3(-629.05f, -4228.06f, 38.23f)),
             [
                     new QuestObjectiveChain(
                     [
                         new KillAndLootQuestObjective(bot, [3101], 8, 0, [
-                            new()
-                            {
+                            [
                                 new Vector3(-117.28f, -4217.52f, 54.48f),
                                 new Vector3(-246.56f, -4279.26f, 61.64f),
                                 new Vector3(-253.59f, -4316.13f, 56.04f),
@@ -23,7 +21,7 @@ namespace AmeisenBotX.Core.Engines.Quest.Quests.Durotar.ValleyOfStrength
                                 new Vector3(-43.84f, -4274.30f, 68.29f),
                                 new Vector3(-43.41f, -4226.15f, 63.76f),
                                 new Vector3(-49.32f, -4222.96f, 62.27f),
-                            },
+                            ],
                         ]),
                     ])
                 ])

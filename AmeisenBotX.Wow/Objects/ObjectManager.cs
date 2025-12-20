@@ -70,16 +70,16 @@ namespace AmeisenBotX.Wow.Objects
         public ulong PartyleaderGuid { get; protected set; }
 
         ///<inheritdoc cref="IObjectProvider.PartymemberGuids"/>
-        public IEnumerable<ulong> PartymemberGuids { get; protected set; } = new List<ulong>();
+        public IEnumerable<ulong> PartymemberGuids { get; protected set; } = [];
 
         ///<inheritdoc cref="IObjectProvider.Partymembers"/>
-        public IEnumerable<IWowUnit> Partymembers { get; protected set; } = new List<IWowUnit>();
+        public IEnumerable<IWowUnit> Partymembers { get; protected set; } = [];
 
         ///<inheritdoc cref="IObjectProvider.PartyPetGuids"/>
-        public IEnumerable<ulong> PartyPetGuids { get; protected set; } = new List<ulong>();
+        public IEnumerable<ulong> PartyPetGuids { get; protected set; } = [];
 
         ///<inheritdoc cref="IObjectProvider.PartyPets"/>
-        public IEnumerable<IWowUnit> PartyPets { get; protected set; } = new List<IWowUnit>();
+        public IEnumerable<IWowUnit> PartyPets { get; protected set; } = [];
 
         ///<inheritdoc cref="IObjectProvider.Pet"/>
         public IWowUnit Pet { get; protected set; }
@@ -170,11 +170,15 @@ namespace AmeisenBotX.Wow.Objects
                     Camera = UpdateGlobalVar<RawCameraInfo>(cameraPointer);
                 }
 
-                // if (MemoryApi.Read(Memory.Offsets.ZoneText, out nint zoneNamePointer)) {
-                // ZoneName = UpdateGlobalVarString(zoneNamePointer); }
+                if (Memory.Read(Memory.Offsets.ZoneText, out nint zoneNamePointer))
+                {
+                    ZoneName = UpdateGlobalVarString(zoneNamePointer);
+                }
 
-                // if (MemoryApi.Read(Memory.Offsets.ZoneSubText, out nint zoneSubNamePointer)) {
-                // ZoneSubName = UpdateGlobalVarString(zoneSubNamePointer); }
+                if (Memory.Read(Memory.Offsets.ZoneSubText, out nint zoneSubNamePointer))
+                {
+                    ZoneSubName = UpdateGlobalVarString(zoneSubNamePointer);
+                }
 
                 if (TargetGuid == 0) { Target = null; }
                 if (PetGuid == 0) { Pet = null; }
@@ -186,8 +190,6 @@ namespace AmeisenBotX.Wow.Objects
                 Memory.Read(nint.Add(currentObjectManager, (int)Memory.Offsets.FirstObject), out nint activeObjectBaseAddress);
 
                 int c = 0;
-                Array.Clear(wowObjects, 0, MAX_OBJECT_COUNT);
-                Array.Clear(wowObjectPointers, 0, MAX_OBJECT_COUNT);
 
                 for (; (int)activeObjectBaseAddress > 0 && c < MAX_OBJECT_COUNT; ++c)
                 {
@@ -200,12 +202,13 @@ namespace AmeisenBotX.Wow.Objects
 
                 if (PlayerGuidIsVehicle)
                 {
-                    // get the object with last known "good" guid
-                    IWowPlayer lastKnownPlayer = wowObjects.OfType<IWowPlayer>().FirstOrDefault(e => e.Guid == Player.Guid);
-
-                    if (lastKnownPlayer != null)
+                    for (int i = 0; i < ObjectCount; i++)
                     {
-                        Player = lastKnownPlayer;
+                        if (wowObjects[i] is TPlayer p && p.Guid == Player.Guid)
+                        {
+                            Player = p;
+                            break;
+                        }
                     }
                 }
 

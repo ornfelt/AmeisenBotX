@@ -11,14 +11,19 @@ namespace AmeisenBotX.Core.Engines.Quest.Objects.Objectives
             get
             {
                 int count = QuestObjectives.Count;
-                if (count == 0) return 100.0;
+                if (count == 0)
+                {
+                    return 100.0;
+                }
 
                 int completedIndex = AlreadyCompletedIndex;
                 int completed = 0;
                 for (int i = 0; i < count; i++)
                 {
                     if (i <= completedIndex || QuestObjectives[i].Finished)
+                    {
                         completed++;
+                    }
                 }
                 return (double)completed / count * 100.0;
             }
@@ -33,7 +38,9 @@ namespace AmeisenBotX.Core.Engines.Quest.Objects.Objectives
                 for (int i = QuestObjectives.Count - 1; i >= 0; i--)
                 {
                     if (QuestObjectives[i].Finished)
+                    {
                         return i;
+                    }
                 }
                 return -1;
             }

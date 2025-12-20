@@ -85,14 +85,13 @@ namespace AmeisenBotX.Core.Engines.Movement.Providers.Combat
             ActionClassifier = new CombatActionClassifier(config);
         }
 
-        public bool Get(out Vector3 position, out MovementAction type, out float rotation)
+        public bool Get(out Vector3 position, out MovementAction type)
         {
             if (!AiSettings.Enabled || !AiSettings.CombatMovementEnabled)
             {
                 AmeisenBotX.Logging.AmeisenLogger.I.Log("CombatAI", $"AI Skipped: Settings Disabled (Enabled={AiSettings.Enabled}, Combat={AiSettings.CombatMovementEnabled})", AmeisenBotX.Logging.Enums.LogLevel.Master);
                 position = Vector3.Zero;
                 type = MovementAction.None;
-                rotation = 0f;
                 return false;
             }
 
@@ -111,7 +110,6 @@ namespace AmeisenBotX.Core.Engines.Movement.Providers.Combat
 
                 position = Vector3.Zero;
                 type = MovementAction.None;
-                rotation = 0f;
                 return false;
             }
 
@@ -120,7 +118,6 @@ namespace AmeisenBotX.Core.Engines.Movement.Providers.Combat
             {
                 position = fleeDestination;
                 type = MovementAction.Flee;
-                rotation = 0f;
                 return true;
             }
 
@@ -128,7 +125,6 @@ namespace AmeisenBotX.Core.Engines.Movement.Providers.Combat
             if (ShouldFlee(out position))
             {
                 type = MovementAction.Flee;
-                rotation = 0f;
                 return true;
             }
 
@@ -136,19 +132,17 @@ namespace AmeisenBotX.Core.Engines.Movement.Providers.Combat
             if (AiSettings.ReactToEnemyCasts && ShouldDodgeCast(out position))
             {
                 type = MovementAction.Move;
-                rotation = 0f;
                 return true;
             }
 
             // Priority 3: Tactical positioning based on role
-            if (TryGetTacticalPosition(out position, out type, out rotation))
+            if (TryGetTacticalPosition(out position, out type, out float rotation))
             {
                 return true;
             }
 
             position = Vector3.Zero;
             type = MovementAction.None;
-            rotation = 0f;
             return false;
         }
 
@@ -173,7 +167,7 @@ namespace AmeisenBotX.Core.Engines.Movement.Providers.Combat
                 return false;
 
             Vector3 fleeDirection = Bot.Player.Position - threatCenter;
-            fleeDirection.Normalize2D(1.0f);
+            fleeDirection.Normalize2D();
 
             fleePosition = Bot.Player.Position + fleeDirection * 10f;
             return true;
@@ -207,7 +201,7 @@ namespace AmeisenBotX.Core.Engines.Movement.Providers.Combat
             // Move perpendicular to the caster to dodge
             Vector3 toCaster = caster.Position - Bot.Player.Position;
             Vector3 perpendicular = new() { X = -toCaster.Y, Y = toCaster.X, Z = 0 };
-            perpendicular.Normalize2D(5f);
+            perpendicular.Normalize2D();
 
             dodgePosition = Bot.Player.Position + perpendicular;
             LastCastReaction = DateTime.UtcNow;
@@ -293,7 +287,7 @@ namespace AmeisenBotX.Core.Engines.Movement.Providers.Combat
                 if (distance < minRange && AiSettings.KitingAggressiveness > 0)
                 {
                     Vector3 awayFromTarget = Bot.Player.Position - Bot.Target.Position;
-                    awayFromTarget.Normalize2D(1.0f);
+                    awayFromTarget.Normalize2D();
                     position = Bot.Player.Position + awayFromTarget * (minRange - distance + 3f);
                     type = MovementAction.Move;
                     return true;
@@ -330,7 +324,7 @@ namespace AmeisenBotX.Core.Engines.Movement.Providers.Combat
             if (IWowUnit.IsValid(Bot.Target) && distance < 10f)
             {
                 Vector3 awayFromTarget = Bot.Player.Position - Bot.Target.Position;
-                awayFromTarget.Normalize2D(1.0f);
+                awayFromTarget.Normalize2D();
                 position = Bot.Player.Position + awayFromTarget * 8f;
                 type = MovementAction.Move;
                 return true;
@@ -439,7 +433,7 @@ namespace AmeisenBotX.Core.Engines.Movement.Providers.Combat
             }
 
             Vector3 fleeDirection = Bot.Player.Position - threatCenter;
-            fleeDirection.Normalize2D(1.0f);
+            fleeDirection.Normalize2D();
 
             fleePosition = Bot.Player.Position + fleeDirection * 15f;
             return true;
@@ -481,7 +475,7 @@ namespace AmeisenBotX.Core.Engines.Movement.Providers.Combat
         {
             // Tank should position so target faces away from party
             Vector3 targetToParty = partyCenter - Bot.Target.Position;
-            targetToParty.Normalize2D(1.0f);
+            targetToParty.Normalize2D();
 
             // Position on opposite side of target from party
             Vector3 idealPos = Bot.Target.Position - targetToParty * Bot.Player.MeleeRangeTo(Bot.Target) * 0.8f;

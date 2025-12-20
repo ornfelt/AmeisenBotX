@@ -12,8 +12,8 @@ namespace AmeisenBotX.Common.Math
 
         public static Vector3 CalculatePositionAround(Vector3 position, float rotation, float angle, float distance = 2.0f)
         {
-            float x = position.X + MathF.Cos(rotation + angle) * distance;
-            float y = position.Y + MathF.Sin(rotation + angle) * distance;
+            float x = position.X + (MathF.Cos(rotation + angle) * distance);
+            float y = position.Y + (MathF.Sin(rotation + angle) * distance);
             return new Vector3(x, y, position.Z);
         }
 
@@ -73,7 +73,7 @@ namespace AmeisenBotX.Common.Math
             float run = System.MathF.Abs(endPoint.X - startPoint.X);
             float rise = System.MathF.Abs(endPoint.Y - startPoint.Y);
 
-            return !toPercentage ? rise / run : (rise / run) * 100.0f;
+            return !toPercentage ? rise / run : rise / run * 100.0f;
         }
 
         public static bool IsFacing(Vector3 position, float rotation, Vector3 targetPosition, float maxAngleDiff = 1.5f)

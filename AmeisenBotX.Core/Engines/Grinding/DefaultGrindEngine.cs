@@ -212,7 +212,11 @@ namespace AmeisenBotX.Core.Engines.Grinding
                 select vendor.Position).ToList();
 
             Vector3 repairNpc = repairNpcsPos.MinBy(e => e.GetDistance(Bot.Player.Position));
-            if (repairNpc == default) return BtStatus.Failed;
+            if (repairNpc == default)
+            {
+                return BtStatus.Failed;
+            }
+
             if (repairNpc.GetDistance(Bot.Player.Position) > 5.0f)
             {
                 Bot.Movement.SetMovementAction(MovementAction.Move, repairNpc);

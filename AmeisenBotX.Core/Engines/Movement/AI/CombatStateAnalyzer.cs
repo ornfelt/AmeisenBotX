@@ -35,8 +35,8 @@ namespace AmeisenBotX.Core.Engines.Movement.AI
 
         // DPS / DTPS Tracking (Sliding Window)
         private const int DpsWindowSeconds = 5;
-        private readonly List<(DateTime time, int amount)> incomingDamageQueue = new();
-        private readonly List<(DateTime time, int amount)> outgoingDamageQueue = new();
+        private readonly List<(DateTime time, int amount)> incomingDamageQueue = [];
+        private readonly List<(DateTime time, int amount)> outgoingDamageQueue = [];
         private readonly Lock damageLock = new();
 
         public CombatStateAnalyzer(AmeisenBotInterfaces bot, AmeisenBotConfig config)
@@ -59,7 +59,11 @@ namespace AmeisenBotX.Core.Engines.Movement.AI
 
         public void Dispose()
         {
-            if (disposed) return;
+            if (disposed)
+            {
+                return;
+            }
+
             disposed = true;
 
             // Unsubscribe from events
@@ -106,7 +110,10 @@ namespace AmeisenBotX.Core.Engines.Movement.AI
                 DateTime cutoff = now.AddSeconds(-DpsWindowSeconds);
                 queue.RemoveAll(x => x.time < cutoff);
 
-                if (queue.Count == 0) return 0f;
+                if (queue.Count == 0)
+                {
+                    return 0f;
+                }
 
                 long total = queue.Sum(x => (long)x.amount);
                 // Divide by WindowSeconds (average over window) 
@@ -135,13 +142,13 @@ namespace AmeisenBotX.Core.Engines.Movement.AI
             CombatSnapshot current = CreateSnapshot();
 
             // 3. Neural Prediction (STRATEGY + PROBABILITY)
-            var prediction = learner.PredictStrategy(current);
-            CurrentStrategy = prediction.Strategy;
+            (AiCombatStrategy Strategy, float Confidence, float ExplicitWinProb) = learner.PredictStrategy(current);
+            CurrentStrategy = Strategy;
 
             // 4. Use Explicit Win Probability from Brain (Hybrid Output)
-            float score = prediction.ExplicitWinProb; // The direct regression output
+            float score = ExplicitWinProb; // The direct regression output
 
-            reason = $"AI: {CurrentStrategy} ({prediction.Confidence:P0}) [Prob: {score:F2}]";
+            reason = $"AI: {CurrentStrategy} ({Confidence:P0}) [Prob: {score:F2}]";
             lastAnalysisReason = reason; // Update backing field
             lastScore = score; // Update backing field
 
@@ -149,8 +156,7 @@ namespace AmeisenBotX.Core.Engines.Movement.AI
 
             // Only return valid score if in combat, otherwise -1 (Idle) for Bot Logic, 
             // but we still updated the Brain state for Visualization!
-            if (!bot.Player.IsInCombat) return -1.0f;
-            return score;
+            return !bot.Player.IsInCombat ? -1.0f : score;
         }
 
         public AiCombatStrategy CurrentStrategy { get; private set; } = AiCombatStrategy.Unknown;
@@ -167,7 +173,7 @@ namespace AmeisenBotX.Core.Engines.Movement.AI
             {
                 if (wasInCombat && currentFightStartSnapshot != null)
                 {
-                    var duration = (DateTime.UtcNow - combatStartTime).TotalSeconds;
+                    double duration = (DateTime.UtcNow - combatStartTime).TotalSeconds;
                     AmeisenLogger.I.Log("CombatAnalyzer", "Player Died! Recording LOSS/FLEE.", LogLevel.Master);
                     // Loss = Flee Strategy Target
                     learner.Learn(currentFightStartSnapshot, false, 0, duration);
@@ -202,7 +208,7 @@ namespace AmeisenBotX.Core.Engines.Movement.AI
             // COMBAT UPDATE (Escalation & Worst-Case Tracking)
             else if (inCombat && currentFightStartSnapshot != null)
             {
-                var current = CreateSnapshot();
+                CombatSnapshot current = CreateSnapshot();
 
                 // 1. Update Escalation (Max Danger)
                 if (current.EnemyCount > currentFightStartSnapshot.EnemyCount)
@@ -231,7 +237,7 @@ namespace AmeisenBotX.Core.Engines.Movement.AI
                     bool amAlive = !bot.Player.IsDead && bot.Player.Health > 0;
                     bool won = amAlive && bot.Player.HealthPercentage > 10;
 
-                    var duration = (DateTime.UtcNow - combatStartTime).TotalSeconds;
+                    double duration = (DateTime.UtcNow - combatStartTime).TotalSeconds;
                     float finalHp = (float)(bot.Player.HealthPercentage / 100.0);
 
                     AmeisenLogger.I.Log("CombatAnalyzer", $"Combat Ended. Result: {(won ? "WIN" : "LOSS")} (Alive={amAlive}, HP={bot.Player.HealthPercentage:F0}%, Dur={duration:F0}s). Learning Strategy...", LogLevel.Master);
@@ -255,7 +261,10 @@ namespace AmeisenBotX.Core.Engines.Movement.AI
             if (s.MyMaxPower > 0)
             {
                 float powerPct = (float)(s.MyPower / s.MyMaxPower);
-                if (powerPct < 0.2f) myPower *= 0.8f;
+                if (powerPct < 0.2f)
+                {
+                    myPower *= 0.8f;
+                }
             }
 
             // 2. Enemy Power
@@ -285,27 +294,40 @@ namespace AmeisenBotX.Core.Engines.Movement.AI
             {
                 // Fallback to HP Ratio
                 if (myPower + enemyPower > 0)
+                {
                     score = (float)(myPower / (myPower + enemyPower));
+                }
 
                 reason = (score > 0.5) ? "HP Adv" : "HP Disadv";
             }
 
             // Level / Elite Penalties (Secondary)
-            if (s.AvgLevelDelta > 2) score -= 0.1f;
-            if (s.EliteCount > 0) score -= 0.1f;
+            if (s.AvgLevelDelta > 2)
+            {
+                score -= 0.1f;
+            }
+
+            if (s.EliteCount > 0)
+            {
+                score -= 0.1f;
+            }
 
             return Math.Clamp(score, 0.0f, 1.0f);
         }
 
         private List<IWowUnit> GetCombatEnemies()
         {
-            var uniqueGuids = new HashSet<ulong>();
-            var result = new List<IWowUnit>();
+            HashSet<ulong> uniqueGuids = [];
+            List<IWowUnit> result = [];
 
             void AddUnits(IEnumerable<IWowUnit> units)
             {
-                if (units == null) return;
-                foreach (var u in units)
+                if (units == null)
+                {
+                    return;
+                }
+
+                foreach (IWowUnit u in units)
                 {
                     if (u != null && !u.IsDead && uniqueGuids.Add(u.Guid))
                     {
@@ -319,17 +341,20 @@ namespace AmeisenBotX.Core.Engines.Movement.AI
             AddUnits(bot.GetEnemiesOrNeutralsInCombatWithMe<IWowUnit>(bot.Player.Position, 60f));
 
             // 2. Explicit Target Check (Always include current target if hostile)
-            var target = bot.Objects.Target;
+            IWowUnit target = bot.Objects.Target;
             // IsValid is static on IWowUnit
             if (target != null && IWowUnit.IsValid(target) && !target.IsDead && bot.Db.GetReaction(bot.Player, target) == WowUnitReaction.Hostile)
             {
-                if (uniqueGuids.Add(target.Guid)) result.Add(target);
+                if (uniqueGuids.Add(target.Guid))
+                {
+                    result.Add(target);
+                }
             }
 
             // 3. Fallback: If 0 found but we are in combat, scan surrounding units targeting us
             if (result.Count == 0 && bot.Player.IsInCombat)
             {
-                var extra = bot.Objects.All.OfType<IWowUnit>()
+                IEnumerable<IWowUnit> extra = bot.Objects.All.OfType<IWowUnit>()
                     .Where(u => !u.IsDead
                              && u.IsInCombat
                              && u.TargetGuid == bot.Player.Guid
@@ -342,22 +367,24 @@ namespace AmeisenBotX.Core.Engines.Movement.AI
 
         private CombatSnapshot CreateSnapshot()
         {
-            var s = new CombatSnapshot();
-            s.Timestamp = DateTime.UtcNow;
+            CombatSnapshot s = new()
+            {
+                Timestamp = DateTime.UtcNow,
 
-            s.IsInstance = bot.Objects.MapId.IsDungeonMap();
+                IsInstance = bot.Objects.MapId.IsDungeonMap()
+            };
             try { s.IsPvp = bot.Objects.MapId.IsBattlegroundMap(); } catch { s.IsPvp = false; }
 
             // --- SELF ---
             s.MyHealth = bot.Player.Health;
             s.MyMaxHealth = bot.Player.MaxHealth;
 
-            var myPower = GetUnitPower(bot.Player);
-            s.MyPower = myPower.current;
-            s.MyMaxPower = myPower.max;
+            (double current, double max) = GetUnitPower(bot.Player);
+            s.MyPower = current;
+            s.MyMaxPower = max;
 
             // --- PARTY (Includes Self) ---
-            var members = bot.Objects.Partymembers.Where(p => !p.IsDead).ToList();
+            List<IWowUnit> members = bot.Objects.Partymembers.Where(p => !p.IsDead).ToList();
             s.PartyCount = members.Count; // Party members list usually doesn't include self
 
             // Add self to party total
@@ -370,18 +397,18 @@ namespace AmeisenBotX.Core.Engines.Movement.AI
                 s.TotalPartyMaxHealth += bot.Pet.MaxHealth;
             }
 
-            foreach (var m in members)
+            foreach (IWowUnit? m in members)
             {
                 s.TotalPartyCurrentHealth += m.Health;
                 s.TotalPartyMaxHealth += m.MaxHealth;
             }
             s.PartyCount++; // Add self count
 
-            s.HealerCount = members.Count(m => m.Class == WowClass.Priest || m.Class == WowClass.Druid || m.Class == WowClass.Shaman || m.Class == WowClass.Paladin);
-            s.TankCount = members.Count(m => m.Class == WowClass.Warrior || m.Class == WowClass.Paladin || m.Class == WowClass.Deathknight || m.Class == WowClass.Druid);
+            s.HealerCount = members.Count(m => m.Class is WowClass.Priest or WowClass.Druid or WowClass.Shaman or WowClass.Paladin);
+            s.TankCount = members.Count(m => m.Class is WowClass.Warrior or WowClass.Paladin or WowClass.Deathknight or WowClass.Druid);
 
             // --- ENEMIES ---
-            var enemies = GetCombatEnemies();
+            List<IWowUnit> enemies = GetCombatEnemies();
 
             s.EnemyCount = enemies.Count;
 
@@ -393,7 +420,7 @@ namespace AmeisenBotX.Core.Engines.Movement.AI
             double totalEnemyMax = 0;
             float levelSum = 0;
 
-            foreach (var e in enemies)
+            foreach (IWowUnit e in enemies)
             {
                 // Health Sums
                 totalEnemyCur += e.Health;
@@ -426,7 +453,7 @@ namespace AmeisenBotX.Core.Engines.Movement.AI
             s.TotalEnemyMaxHealth = totalEnemyMax > 0 ? totalEnemyMax : totalEnemyCur;
 
             // --- TARGET (Focus) ---
-            var target = bot.Objects.Target;
+            IWowUnit target = bot.Objects.Target;
             if (target != null && !target.IsDead)
             {
                 s.TargetHealth = target.Health;
@@ -476,13 +503,13 @@ namespace AmeisenBotX.Core.Engines.Movement.AI
 
         private (double current, double max) GetUnitPower(IWowUnit unit)
         {
-            switch (unit.Class)
+            return unit.Class switch
             {
-                case WowClass.Warrior: return (unit.Rage, unit.MaxRage);
-                case WowClass.Rogue: return (unit.Energy, unit.MaxEnergy);
-                case WowClass.Deathknight: return (unit.RunicPower, unit.MaxRunicPower);
-                default: return (unit.Mana, unit.MaxMana);
-            }
+                WowClass.Warrior => ((double current, double max))(unit.Rage, unit.MaxRage),
+                WowClass.Rogue => ((double current, double max))(unit.Energy, unit.MaxEnergy),
+                WowClass.Deathknight => ((double current, double max))(unit.RunicPower, unit.MaxRunicPower),
+                _ => ((double current, double max))(unit.Mana, unit.MaxMana),
+            };
         }
     }
 }

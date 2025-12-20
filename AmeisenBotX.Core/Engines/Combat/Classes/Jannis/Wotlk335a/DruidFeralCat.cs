@@ -152,11 +152,11 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 
         private bool NeedToHealMySelf()
         {
-            return Bot.Player.HealthPercentage < 60
+            return (Bot.Player.HealthPercentage < 60
                 && !Bot.Player.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == Druid335a.Rejuvenation)
-                && TryCastSpell(Druid335a.Rejuvenation, 0, true)
-|| Bot.Player.HealthPercentage < 40
-                && TryCastSpell(Druid335a.HealingTouch, 0, true);
+                && TryCastSpell(Druid335a.Rejuvenation, 0, true))
+|| (Bot.Player.HealthPercentage < 40
+                && TryCastSpell(Druid335a.HealingTouch, 0, true));
         }
     }
 }

@@ -41,8 +41,8 @@ namespace AmeisenBotX.Wow.Hook.Modules
                 nint endPointer = nint.Add(startPointer, 0xC);
                 nint resultPointer = nint.Add(endPointer, 0xC);
 
-                assembly = new List<string>()
-                {
+                assembly =
+                [
                     "X:",
                     $"TEST DWORD [{ExecuteAddress}], 1",
                     "JE @out",
@@ -64,7 +64,7 @@ namespace AmeisenBotX.Wow.Hook.Modules
                     $"MOV DWORD [{ExecuteAddress}], 0",
                     "@out:",
                     "RET"
-                };
+                ];
 
                 return true;
             }

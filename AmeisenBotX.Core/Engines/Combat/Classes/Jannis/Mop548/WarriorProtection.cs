@@ -226,8 +226,8 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Mop548
                         return;
                     }
 
-                    if (!Bot.Target.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == Warrior548.WeakenedAmor && e.StackCount < 3)
-                        && (TryCastSpell(Warrior548.SunderAmor, Bot.Wow.TargetGuid, true, Bot.Player.Rage - 15))
+                    if ((!Bot.Target.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == Warrior548.WeakenedAmor && e.StackCount < 3)
+                        && TryCastSpell(Warrior548.SunderAmor, Bot.Wow.TargetGuid, true, Bot.Player.Rage - 15))
                             || TryCastSpell(Warrior548.Devastate, Bot.Wow.TargetGuid, true, Bot.Player.Rage - 15))
                     {
                         return;

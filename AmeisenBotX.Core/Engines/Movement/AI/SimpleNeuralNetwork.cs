@@ -65,7 +65,7 @@ namespace AmeisenBotX.Core.Engines.Movement.AI
             previousWeightUpdates = new double[layerCount][][];
             deltaBuffers = new double[layerCount][];
 
-            var rand = new Random();
+            Random rand = new();
 
             for (int i = 0; i < layerCount; i++)
             {
@@ -97,7 +97,7 @@ namespace AmeisenBotX.Core.Engines.Movement.AI
                         previousWeightUpdates[i][j] = new double[prevCount];
                         for (int k = 0; k < prevCount; k++)
                         {
-                            weights[i][j][k] = (rand.NextDouble() * 2.0 - 1.0) * scale;
+                            weights[i][j][k] = ((rand.NextDouble() * 2.0) - 1.0) * scale;
                         }
                     }
                 }
@@ -120,7 +120,7 @@ namespace AmeisenBotX.Core.Engines.Movement.AI
                 for (int layer = 1; layer < layerSizes.Length; layer++)
                 {
                     bool isOutputLayer = layer == layerSizes.Length - 1;
-                    var activation = isOutputLayer ? OutputActivation : HiddenActivation;
+                    ActivationType activation = isOutputLayer ? OutputActivation : HiddenActivation;
 
                     for (int j = 0; j < layerSizes[layer]; j++)
                     {
@@ -225,9 +225,7 @@ namespace AmeisenBotX.Core.Engines.Movement.AI
 
         private double Sigmoid(double x)
         {
-            if (x < -45.0) return 0.0;
-            if (x > 45.0) return 1.0;
-            return 1.0 / (1.0 + Math.Exp(-x));
+            return x < -45.0 ? 0.0 : x > 45.0 ? 1.0 : 1.0 / (1.0 + Math.Exp(-x));
         }
 
         private double LeakyReLU(double x) => x > 0 ? x : 0.01 * x;
@@ -248,7 +246,7 @@ namespace AmeisenBotX.Core.Engines.Movement.AI
         {
             lock (_lock)
             {
-                var data = new NetworkData
+                NetworkData data = new()
                 {
                     LayerSizes = layerSizes,
                     Biases = biases,
@@ -264,17 +262,23 @@ namespace AmeisenBotX.Core.Engines.Movement.AI
 
         public static SimpleNeuralNetwork Load(string path)
         {
-            if (!File.Exists(path)) return null;
+            if (!File.Exists(path))
+            {
+                return null;
+            }
+
             try
             {
-                var data = JsonSerializer.Deserialize<NetworkData>(File.ReadAllText(path));
-                var net = new SimpleNeuralNetwork(data.LayerSizes);
-                net.biases = data.Biases;
-                net.weights = data.Weights;
-                net.HiddenActivation = (ActivationType)data.HiddenActivation;
-                net.OutputActivation = (ActivationType)data.OutputActivation;
-                net.LearningRate = data.LearningRate > 0 ? data.LearningRate : 0.01;
-                net.L2Regularization = data.L2Regularization;
+                NetworkData data = JsonSerializer.Deserialize<NetworkData>(File.ReadAllText(path));
+                SimpleNeuralNetwork net = new(data.LayerSizes)
+                {
+                    biases = data.Biases,
+                    weights = data.Weights,
+                    HiddenActivation = (ActivationType)data.HiddenActivation,
+                    OutputActivation = (ActivationType)data.OutputActivation,
+                    LearningRate = data.LearningRate > 0 ? data.LearningRate : 0.01,
+                    L2Regularization = data.L2Regularization
+                };
                 net.InitBuffers();
                 return net;
             }

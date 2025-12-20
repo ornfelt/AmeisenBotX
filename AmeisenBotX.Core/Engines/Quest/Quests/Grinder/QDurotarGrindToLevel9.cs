@@ -9,8 +9,7 @@ namespace AmeisenBotX.Core.Engines.Quest.Quests.Grinder
                     new QuestObjectiveChain(
                     [
                         new GrindingObjective(bot, 9, [
-                            new()
-                            {
+                            [
                                 new Vector3(-220.08f, -4908.83f, 26.92f),
                                 new Vector3(-273.24f, -4919.18f, 27.19f),
                                 new Vector3(-312.36f, -5070.01f, 21.63f),
@@ -22,7 +21,7 @@ namespace AmeisenBotX.Core.Engines.Quest.Quests.Grinder
                                 new Vector3(-48.03f, -5080.86f, 10.22f),
                                 new Vector3(17.51f, -4951.48f, 14.39f),
                                 new Vector3(-18.87f, -4917.26f, 16.75f),
-                            },
+                            ],
                         ]),
                     ])
                 ])

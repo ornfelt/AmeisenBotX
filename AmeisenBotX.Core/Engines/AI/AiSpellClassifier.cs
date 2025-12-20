@@ -145,14 +145,9 @@ namespace AmeisenBotX.Core.Engines.AI
 
         public static AiSpellCategory Classify(string spellName)
         {
-            if (string.IsNullOrWhiteSpace(spellName)) return AiSpellCategory.Unknown;
-
-            if (SpellCategories.TryGetValue(spellName, out AiSpellCategory category))
-            {
-                return category;
-            }
-
-            return AiSpellCategory.Unknown;
+            return string.IsNullOrWhiteSpace(spellName)
+                ? AiSpellCategory.Unknown
+                : SpellCategories.TryGetValue(spellName, out AiSpellCategory category) ? category : AiSpellCategory.Unknown;
         }
 
         public static void Register(string spellName, AiSpellCategory category)

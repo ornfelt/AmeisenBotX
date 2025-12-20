@@ -7,5 +7,7 @@ namespace AmeisenBotX.Core.Logic
         event Action OnWoWStarted;
 
         void Tick();
+
+        string State { get; }
     }
 }

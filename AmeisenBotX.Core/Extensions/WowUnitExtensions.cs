@@ -33,9 +33,11 @@ namespace AmeisenBotX.Core.Extensions
         public static bool HasAnyAuraByName(this IWowUnit unit, IAmeisenBotDb db, params string[] auraNames)
         {
             if (unit?.Auras == null || auraNames == null || auraNames.Length == 0)
+            {
                 return false;
+            }
 
-            var auraNameSet = new HashSet<string>(auraNames, StringComparer.Ordinal);
+            HashSet<string> auraNameSet = new(auraNames, StringComparer.Ordinal);
             return unit.Auras.Any(e => auraNameSet.Contains(db.GetSpellName(e.SpellId)));
         }
 

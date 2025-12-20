@@ -162,10 +162,10 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
         {
             if (TargetSelectEvent.Run())
             {
-                List<IWowUnit> CastBuff = new(Bot.Objects.Partymembers)
-                {
-                    Bot.Player
-                };
+                List<IWowUnit> CastBuff =
+                [
+.. Bot.Objects.Partymembers,                     Bot.Player
+                ];
 
                 CastBuff =
                 [
@@ -217,7 +217,7 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
                     double distance = Bot.Player.Position.GetDistance(Bot.Target.Position);
                     Spell spell = Bot.Character.SpellBook.GetSpellByName(spellName);
 
-                    if ((Bot.Player.Mana >= spell.Costs && IsSpellReady(spellName)))
+                    if (Bot.Player.Mana >= spell.Costs && IsSpellReady(spellName))
                     {
                         if ((spell.MinRange == 0 && spell.MaxRange == 0) || (spell.MinRange <= distance && spell.MaxRange >= distance))
                         {

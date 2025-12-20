@@ -47,7 +47,7 @@ namespace AmeisenBotX.Core.Logic.StaticDeathRoutes
         /// <inheritdoc cref="IStaticDeathRoute.Init(Vector3)"/>
         public void Init(Vector3 playerPosition)
         {
-            var closest = Path.MinBy(e => e.GetDistance(playerPosition));
+            Vector3 closest = Path.MinBy(e => e.GetDistance(playerPosition));
             CurrentNode = closest != default ? Path.IndexOf(closest) : 0;
         }
 

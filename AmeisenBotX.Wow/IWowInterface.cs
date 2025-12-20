@@ -298,6 +298,8 @@ namespace AmeisenBotX.Wow
         /// </summary>
         void Tick();
 
+        bool TraceLine(Vector3 start, Vector3 end, uint flags);
+
         bool UiIsVisible(params string[] elementNames);
 
         void UseContainerItem(int bagId, int bagSlot);

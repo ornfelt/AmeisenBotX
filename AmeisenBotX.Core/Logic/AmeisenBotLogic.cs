@@ -379,6 +379,8 @@ namespace AmeisenBotX.Core.Logic
 
         private TimegatedEvent UpdateFood { get; }
 
+        public string State => (Tree.OngoingNode != null ? Tree.OngoingNode.ToString() : Tree.RootNode?.ToString()).Split('.')[^1];
+
         public static NpcSubType DecideClassTrainer(WowClass wowClass)
         {
             return wowClass switch
@@ -864,12 +866,12 @@ namespace AmeisenBotX.Core.Logic
                     .OrderByDescending(e => e.ItemLevel);
             }
 
-            return Bot.Player.HealthPercentage < Config.EatUntilPercent
+            return (Bot.Player.HealthPercentage < Config.EatUntilPercent
                    && (Food.Any(e => Enum.IsDefined(typeof(WowFood), e.Id))
-                       || Food.Any(e => Enum.IsDefined(typeof(WowRefreshment), e.Id)))
-                || Bot.Player.MaxMana > 0 && Bot.Player.ManaPercentage < Config.DrinkUntilPercent
+                       || Food.Any(e => Enum.IsDefined(typeof(WowRefreshment), e.Id))))
+                || (Bot.Player.MaxMana > 0 && Bot.Player.ManaPercentage < Config.DrinkUntilPercent
                    && (Food.Any(e => Enum.IsDefined(typeof(WowWater), e.Id))
-                       || Food.Any(e => Enum.IsDefined(typeof(WowRefreshment), e.Id)));
+                       || Food.Any(e => Enum.IsDefined(typeof(WowRefreshment), e.Id))));
         }
 
         private bool NeedToFight()
@@ -877,10 +879,7 @@ namespace AmeisenBotX.Core.Logic
             if (PartymembersFightEvent.Run())
             {
                 ArePartymembersInFight = Bot.Objects.Partymembers.Any(e => e.IsInCombat && e.DistanceTo(Bot.Player) < Config.SupportRange)
-                    || Bot.Objects.All.OfType<IWowUnit>().Any(e => e.IsInCombat
-                        && (e.IsTaggedByMe || !e.IsTaggedByOther)
-                        && (e.TargetGuid == Bot.Player.Guid || Bot.Objects.Partymembers.Any(x => x.Guid == e.TargetGuid))
-                        && Bot.Wow.GetReaction(Bot.Player.BaseAddress, e.BaseAddress) == WowUnitReaction.Hostile);
+                    || Bot.GetEnemiesOrNeutralsInCombatWithParty<IWowUnit>(Bot.Player.Position, Config.SupportRange).Any();
             }
 
             return Bot.Player.IsInCombat

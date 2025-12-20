@@ -1,13 +1,12 @@
 using AmeisenBotX.Common.Math;
 using AmeisenBotX.Core.Engines.Quest.Objects.Objectives;
 using AmeisenBotX.Core.Engines.Quest.Objects.Quests;
-using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Quest.Quests.Durotar.ValleyOfStrength
 {
     internal class QGalgarCactusAppleSurprise(AmeisenBotInterfaces bot) : BotQuest(bot, 4402, "Galgar's Cactus Apple Surprise", 1, 1,
-            () => (bot.GetClosestQuestGiverByNpcId(bot.Player.Position, new List<int> { 9796 }), new Vector3(-561.63f, -4221.80f, 41.67f)),
-            () => (bot.GetClosestQuestGiverByNpcId(bot.Player.Position, new List<int> { 9796 }), new Vector3(-561.63f, -4221.80f, 41.67f)),
+            () => (bot.GetClosestQuestGiverByNpcId(bot.Player.Position, [9796]), new Vector3(-561.63f, -4221.80f, 41.67f)),
+            () => (bot.GetClosestQuestGiverByNpcId(bot.Player.Position, [9796]), new Vector3(-561.63f, -4221.80f, 41.67f)),
             [
                     new QuestObjectiveChain(
                     [

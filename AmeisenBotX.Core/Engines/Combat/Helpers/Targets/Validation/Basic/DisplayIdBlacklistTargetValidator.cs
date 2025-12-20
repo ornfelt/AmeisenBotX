@@ -6,7 +6,7 @@ namespace AmeisenBotX.Core.Engines.Combat.Helpers.Targets.Validation.Basic
 {
     public class DisplayIdBlacklistTargetValidator(IEnumerable<int> blacklistedGuids = null) : ITargetValidator
     {
-        public IEnumerable<int> Blacklist { get; set; } = blacklistedGuids ?? new List<int>();
+        public IEnumerable<int> Blacklist { get; set; } = blacklistedGuids ?? [];
 
         public bool IsValid(IWowUnit unit)
         {
