@@ -89,7 +89,10 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
 
         public void Load(Dictionary<string, JsonElement> objects)
         {
-            Configureables = objects["Configureables"].ToDyn();
+            if (objects.TryGetValue("Configureables", out JsonElement configElement))
+            {
+                Configureables = configElement.ToDyn();
+            }
         }
 
         public void OutOfCombatExecute()
@@ -108,11 +111,11 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
         {
             if (TargetProvider.Get(out IEnumerable<IWowUnit> targetToTarget))
             {
-                ulong guid = targetToTarget.First().Guid;
+                IWowUnit firstTarget = targetToTarget.FirstOrDefault();
 
-                if (Bot.Objects.Player.TargetGuid != guid)
+                if (firstTarget != null && Bot.Objects.Player.TargetGuid != firstTarget.Guid)
                 {
-                    Bot.Wow.ChangeTarget(guid);
+                    Bot.Wow.ChangeTarget(firstTarget.Guid);
                 }
             }
 
@@ -188,12 +191,9 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
 
         private bool IsOneOfAllRunesReady()
         {
-            return Bot.Wow.IsRuneReady(0)
-                       || Bot.Wow.IsRuneReady(1)
-                       && Bot.Wow.IsRuneReady(2)
-                       || Bot.Wow.IsRuneReady(3)
-                       && Bot.Wow.IsRuneReady(4)
-                       || Bot.Wow.IsRuneReady(5);
+            return (Bot.Wow.IsRuneReady(0) || Bot.Wow.IsRuneReady(1))
+                && (Bot.Wow.IsRuneReady(2) || Bot.Wow.IsRuneReady(3))
+                && (Bot.Wow.IsRuneReady(4) || Bot.Wow.IsRuneReady(5));
         }
     }
 }

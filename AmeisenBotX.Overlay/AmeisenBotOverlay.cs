@@ -1,6 +1,5 @@
 ﻿using GameOverlay.Drawing;
 using GameOverlay.Windows;
-using System;
 using System.Collections.Generic;
 
 namespace AmeisenBotX.Overlay
@@ -11,6 +10,7 @@ namespace AmeisenBotX.Overlay
         {
             LinesToRender = [];
             RectanglesToRender = [];
+            TextsToRender = [];
 
             OverlayWindow = new(mainWindowHandle)
             {
@@ -23,7 +23,11 @@ namespace AmeisenBotX.Overlay
 
             Gfx = new(OverlayWindow.Handle, OverlayWindow.Width, OverlayWindow.Height);
             Gfx.Setup();
+
+            Font = Gfx.CreateFont("Arial", 16);
         }
+
+        public Font Font { get; }
 
         public Graphics Gfx { get; }
 
@@ -32,6 +36,8 @@ namespace AmeisenBotX.Overlay
         private List<(SolidBrush, (Point, Point))> LinesToRender { get; }
 
         private List<(SolidBrush, (Point, Point))> RectanglesToRender { get; }
+
+        private List<(SolidBrush, string, Point)> TextsToRender { get; }
 
         public void AddLine(int x1, int y1, int x2, int y2, System.Drawing.Color color)
         {
@@ -82,8 +88,14 @@ namespace AmeisenBotX.Overlay
                     Gfx.FillRectangle(RectanglesToRender[i].Item1, RectanglesToRender[i].Item2.Item1.X, RectanglesToRender[i].Item2.Item1.Y, RectanglesToRender[i].Item2.Item2.X, RectanglesToRender[i].Item2.Item2.Y);
                 }
 
+                for (int i = 0; i < TextsToRender.Count; ++i)
+                {
+                    Gfx.DrawText(Font, TextsToRender[i].Item1, TextsToRender[i].Item3, TextsToRender[i].Item2);
+                }
+
                 LinesToRender.Clear();
                 RectanglesToRender.Clear();
+                TextsToRender.Clear();
 
                 Gfx.EndScene();
             }

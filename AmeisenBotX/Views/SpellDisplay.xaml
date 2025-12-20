@@ -6,11 +6,8 @@
              xmlns:local="clr-namespace:AmeisenBotX.Views"
              mc:Ignorable="d" Height="56" Width="340" Foreground="{x:Null}" Loaded="UserControl_Loaded">
     <Grid>
-        <Label x:Name="labelIcon" Content="💡" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="36" Padding="0" Margin="6,4,0,0" Width="46" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
-            <Label.Foreground>
-                <SolidColorBrush Color="{DynamicResource DarkForeground}" />
-            </Label.Foreground>
-        </Label>
+        <Image x:Name="imageIcon" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="6,4,0,0" Width="46">
+        </Image>
         <Label x:Name="labelSpellName" Content="SpellName" HorizontalAlignment="Left" Margin="57,4,0,0" VerticalAlignment="Top" FontSize="14" FontWeight="Bold" Padding="0" FontFamily="Bahnschrift Light">
             <Label.Foreground>
                 <SolidColorBrush Color="{DynamicResource DarkForeground}" />

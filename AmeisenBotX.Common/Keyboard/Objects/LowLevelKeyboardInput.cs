@@ -1,5 +1,4 @@
 ﻿using AmeisenBotX.Common.Keyboard.Enums;
-using System;
 using System.Runtime.InteropServices;
 
 namespace AmeisenBotX.Common.Keyboard.Objects

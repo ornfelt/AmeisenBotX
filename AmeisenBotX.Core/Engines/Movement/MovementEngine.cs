@@ -48,7 +48,7 @@ namespace AmeisenBotX.Core.Engines.Movement
 
         private List<(Vector3 position, float radius, DateTime until)> PlacesToAvoidList { get; set; } = [];
 
-        private BasicVehicle PlayerVehicle { get; set; } = new(bot);
+        private BasicVehicle PlayerVehicle { get; set; } = new(bot, config);
 
         private PreventMovementType PreventMovementType { get; set; }
 
@@ -324,7 +324,7 @@ namespace AmeisenBotX.Core.Engines.Movement
 
             if (filteredMounts != null && filteredMounts.Any())
             {
-                WowMount mount = filteredMounts.ElementAt(new Random().Next(0, filteredMounts.Count()));
+                WowMount mount = filteredMounts.ElementAt(Random.Shared.Next(0, filteredMounts.Count()));
                 PreventMovement(TimeSpan.FromSeconds(2));
                 Bot.Wow.CallCompanion(mount.Index, "MOUNT");
             }
@@ -336,7 +336,29 @@ namespace AmeisenBotX.Core.Engines.Movement
 
             if (node != Vector3.Zero)
             {
-                Bot.Character.MoveToPosition(node, MathF.Tau, 0.25f);
+                // Apply movement variation for more human-like movement
+                float turnSpeed = Config.MovementSettings.BaseTurnSpeed;
+                float arrivalDistance = Config.MovementSettings.BaseArrivalDistance;
+
+                if (Config.MovementSettings.EnableMovementVariation)
+                {
+                    // Randomize turn speed: base ± variation
+                    turnSpeed += ((float)Random.Shared.NextDouble() * 2.0f - 1.0f) * Config.MovementSettings.TurnSpeedVariation;
+
+                    // Randomize arrival distance: base + (0 to variation)
+                    arrivalDistance += (float)Random.Shared.NextDouble() * Config.MovementSettings.ArrivalDistanceVariation;
+                }
+
+                Bot.Character.MoveToPosition(node, turnSpeed, arrivalDistance);
+
+                // Random jump for human-like movement
+                if (Config.MovementSettings.EnableRandomJumps
+                    && !Bot.Player.IsInCombat
+                    && !Bot.Player.IsMounted
+                    && Random.Shared.NextDouble() < Config.MovementSettings.RandomJumpChance)
+                {
+                    Bot.Character.Jump();
+                }
 
                 if (Config.MovementSettings.EnableDistanceMovedJumpCheck)
                 {

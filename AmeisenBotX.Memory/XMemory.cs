@@ -9,6 +9,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading;
 using static AmeisenBotX.Memory.Win32.Win32Imports;
 
 namespace AmeisenBotX.Memory
@@ -24,9 +25,9 @@ namespace AmeisenBotX.Memory
         private const int INITIAL_POOL_SIZE = 16384;
 
         // lock needs to be static as FASM isn't thread safe
-        private static readonly object fasmLock = new();
+        private static readonly Lock fasmLock = new();
 
-        private readonly object allocLock = new();
+        private readonly Lock allocLock = new();
         private ulong rpmCalls;
         private ulong wpmCalls;
 
@@ -84,7 +85,7 @@ namespace AmeisenBotX.Memory
             if (!Initialized) { throw new InvalidOperationException("call Init() before you do anything with this class"); }
             if (size <= 0) { throw new ArgumentOutOfRangeException(nameof(size), "size must be > 0"); }
 #endif
-            lock (allocLock)
+            using (allocLock.EnterScope())
             {
                 for (int i = 0; i < AllocationPools.Count; ++i)
                 {
@@ -145,7 +146,7 @@ namespace AmeisenBotX.Memory
         ///<inheritdoc cref="IMemoryApi.FreeAllMemory"/>
         public void FreeAllMemory()
         {
-            lock (allocLock)
+            using (allocLock.EnterScope())
             {
                 if (AllocationPools != null)
                 {
@@ -171,7 +172,7 @@ namespace AmeisenBotX.Memory
             if (!Initialized) { throw new InvalidOperationException("call Init() before you do anything with this class"); }
             if (address == nint.Zero) { throw new ArgumentOutOfRangeException(nameof(address), "address must be > 0"); }
 #endif
-            lock (allocLock)
+            using (allocLock.EnterScope())
             {
                 for (int i = 0; i < AllocationPools.Count; ++i)
                 {
@@ -287,7 +288,7 @@ namespace AmeisenBotX.Memory
             if (!asm.Any()) { throw new ArgumentOutOfRangeException(nameof(asm), "asm must contain atleast one instruction"); }
             if (address == nint.Zero) { throw new ArgumentOutOfRangeException(nameof(address), "address must be > 0"); }
 #endif
-            lock (fasmLock)
+            using (fasmLock.EnterScope())
             {
                 fixed (byte* pBytes = stackalloc byte[FASM_MEMORY_SIZE])
                 {

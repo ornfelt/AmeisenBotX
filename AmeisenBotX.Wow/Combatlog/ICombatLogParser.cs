@@ -13,6 +13,8 @@ namespace AmeisenBotX.Wow.Combatlog
 
         event Action<ulong> OnUnitDied;
 
+        event Action<ulong, int, string> OnSpellCastSuccess;
+
         void Parse(long timestamp, List<string> args);
     }
 }

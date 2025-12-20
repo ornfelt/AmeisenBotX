@@ -3,14 +3,15 @@ using AmeisenBotX.Logging.Enums;
 using System;
 using System.IO;
 using System.Text;
+using System.Threading;
 
 namespace AmeisenBotX.Logging
 {
     public class AmeisenLogger
     {
-        private static readonly object padlock = new();
+        private static readonly Lock padlock = new();
 
-        private static readonly object stringBuilderLock = new();
+        private static readonly Lock stringBuilderLock = new();
 
         private static AmeisenLogger instance;
 
@@ -39,7 +40,7 @@ namespace AmeisenBotX.Logging
         {
             get
             {
-                lock (padlock)
+                using (padlock.EnterScope())
                 {
                     instance ??= new(true);
                     return instance;
@@ -96,7 +97,7 @@ namespace AmeisenBotX.Logging
         {
             if (Enabled && logLevel <= ActiveLogLevel)
             {
-                lock (stringBuilderLock)
+                using (stringBuilderLock.EnterScope())
                 {
                     OnLogRaw?.Invoke(tag, log, logLevel);
 
@@ -126,7 +127,7 @@ namespace AmeisenBotX.Logging
         {
             if (Enabled)
             {
-                lock (stringBuilderLock)
+                using (stringBuilderLock.EnterScope())
                 {
                     File.AppendAllText(LogFilePath, StringBuilder.ToString());
                     StringBuilder.Clear();

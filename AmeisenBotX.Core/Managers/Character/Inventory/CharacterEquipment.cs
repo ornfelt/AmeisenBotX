@@ -8,6 +8,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 
 namespace AmeisenBotX.Core.Managers.Character.Inventory
 {
@@ -15,7 +16,7 @@ namespace AmeisenBotX.Core.Managers.Character.Inventory
     {
         private readonly Dictionary<WowEquipmentSlot, IWowInventoryItem> items;
 
-        private readonly object queryLock = new();
+        private readonly Lock queryLock = new();
 
         public CharacterEquipment(IWowInterface wowInterface)
         {
@@ -29,14 +30,14 @@ namespace AmeisenBotX.Core.Managers.Character.Inventory
         {
             get
             {
-                lock (queryLock)
+                using (queryLock.EnterScope())
                 {
                     return items;
                 }
             }
             private init
             {
-                lock (queryLock)
+                using (queryLock.EnterScope())
                 {
                     items = value;
                 }
@@ -74,7 +75,7 @@ namespace AmeisenBotX.Core.Managers.Character.Inventory
 
                 if (rawEquipment != null && rawEquipment.Any())
                 {
-                    lock (queryLock)
+                    using (queryLock.EnterScope())
                     {
                         Items.Clear();
 

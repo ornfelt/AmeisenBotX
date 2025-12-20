@@ -3,6 +3,7 @@ using AmeisenBotX.Core.Managers.Character.Inventory.Objects;
 using AmeisenBotX.Core.Managers.Character.Spells.Objects;
 using AmeisenBotX.Views;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
@@ -74,7 +75,7 @@ namespace AmeisenBotX
 
                     foreach (IWowInventoryItem invItem in equipmentItems)
                     {
-                        equipmentWrapPanel.Children.Add(new ItemDisplay(invItem));
+                        equipmentWrapPanel.Children.Add(new ItemDisplay(invItem, AmeisenBot.Bot.GetIconByItemId(invItem.Id)));
                     }
 
                     break;
@@ -88,7 +89,7 @@ namespace AmeisenBotX
 
                     foreach (IWowInventoryItem invItem in inventoryItems)
                     {
-                        equipmentWrapPanel.Children.Add(new ItemDisplay(invItem));
+                        equipmentWrapPanel.Children.Add(new ItemDisplay(invItem, AmeisenBot.Bot.GetIconByItemId(invItem.Id)));
                     }
 
                     break;
@@ -98,9 +99,25 @@ namespace AmeisenBotX
                     buttonInventory.BorderBrush = new SolidColorBrush((Color)Application.Current.Resources["DarkBorder"]);
                     buttonSpells.BorderBrush = new SolidColorBrush((Color)Application.Current.Resources["DarkAccent1"]);
 
+                    List<SpellDisplay> displays = [];
+
                     foreach (Spell spell in AmeisenBot.Bot.Character.SpellBook.Spells.GroupBy(e => e.Name).Select(e => e.First()))
                     {
-                        equipmentWrapPanel.Children.Add(new SpellDisplay(spell));
+                        displays.Add(new SpellDisplay(spell, AmeisenBot.Bot.GetIconBySpellname(spell.Name)));
+                    }
+
+                    List<SpellDisplay> sortedDisplays = [.. displays.OrderBy(s => {
+                            if (s.Spell.Rank?.Equals("Racial", StringComparison.OrdinalIgnoreCase) == true) return 2;
+                            if (s.Spell.Rank?.Equals("Passive", StringComparison.OrdinalIgnoreCase) == true) return 3;
+                            if (s.Spell.Rank?.Equals("Passive", StringComparison.OrdinalIgnoreCase) == true || s.Spell.Rank?.Equals("Racial Passive", StringComparison.OrdinalIgnoreCase) == true) return 4;
+                            return 1;
+                        })
+                        .ThenByDescending(s => s.Spell.TryGetRank(out int r) ? r : 0)
+                        .ThenBy(s => s.Spell.SpellbookName)];
+
+                    foreach (var d in sortedDisplays)
+                    {
+                        equipmentWrapPanel.Children.Add(d);
                     }
 
                     break;

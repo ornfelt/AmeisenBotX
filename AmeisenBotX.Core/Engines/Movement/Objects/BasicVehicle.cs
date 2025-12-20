@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Movement.Objects
 {
-    public class BasicVehicle(AmeisenBotInterfaces bot)
+    public class BasicVehicle(AmeisenBotInterfaces bot, AmeisenBotConfig config)
     {
         public delegate void MoveCharacter(Vector3 positionToGoTo);
 
@@ -16,6 +16,8 @@ namespace AmeisenBotX.Core.Engines.Movement.Objects
         public Vector3 Velocity { get; private set; }
 
         private AmeisenBotInterfaces Bot { get; } = bot;
+
+        private AmeisenBotConfig Config { get; } = config;
 
         public Vector3 AvoidObstacles(float maxSteering, float maxVelocity, float multiplier)
         {
@@ -33,80 +35,23 @@ namespace AmeisenBotX.Core.Engines.Movement.Objects
 
         public Vector3 Flee(Vector3 position, float maxSteering, float maxVelocity, float multiplier)
         {
-            Vector3 currentPosition = Bot.Player.Position;
-            Vector3 desired = currentPosition;
-            float distanceToTarget = currentPosition.GetDistance(position);
-
-            desired -= position;
+            Vector3 desired = Bot.Player.Position - position;
             desired.Normalize2D(desired.GetMagnitude2D());
+
+            float adjustedMaxVelocity = maxVelocity;
+            float adjustedMaxSteering = maxSteering;
 
             if (Bot.Player.IsMounted)
             {
-                maxVelocity *= 2;
+                adjustedMaxVelocity *= 2;
+                adjustedMaxSteering *= 2;
             }
 
-            desired.Multiply(maxVelocity);
+            desired *= adjustedMaxVelocity;
+            Vector3 steering = desired - Velocity;
+            steering.Truncate(adjustedMaxSteering);
 
-            if (distanceToTarget > 20)
-            {
-                float slowdownMultiplier = 20 / distanceToTarget;
-
-                if (slowdownMultiplier < 0.1)
-                {
-                    slowdownMultiplier = 0;
-                }
-
-                desired.Multiply(slowdownMultiplier);
-            }
-
-            Vector3 steering = desired;
-            steering -= Velocity;
-
-            if (Bot.Player.IsInCombat)
-            {
-                float maxSteeringCombat = maxSteering;
-
-                if (Bot.Player.IsMounted)
-                {
-                    maxSteeringCombat *= 2;
-                }
-
-                steering.Truncate(maxSteeringCombat);
-            }
-            else
-            {
-                if (Bot.Player.IsMounted)
-                {
-                    maxSteering *= 2;
-                }
-
-                steering.Truncate(maxSteering);
-            }
-
-            Vector3 acceleration = new();
-            acceleration += steering;
-
-            if (Bot.Player.IsInCombat)
-            {
-                if (Bot.Player.IsMounted)
-                {
-                    maxVelocity *= 2;
-                }
-
-                acceleration.Truncate(maxVelocity);
-            }
-            else
-            {
-                if (Bot.Player.IsMounted)
-                {
-                    maxVelocity *= 2;
-                }
-
-                acceleration.Truncate(maxVelocity);
-            }
-
-            acceleration.Multiply(multiplier);
-            return acceleration;
+            return steering * multiplier;
         }
 
         public Vector3 Pursuit(Vector3 position, float maxSteering, float maxVelocity, float multiplier, float targetRotation, float targetVelocity = 2.0f)
@@ -204,7 +149,7 @@ namespace AmeisenBotX.Core.Engines.Movement.Objects
                                        + AvoidObstacles(maxSteering, maxVelocity, 0.05f)
                                        + Seperate(seperationDistance, maxVelocity, 0.05f),
 
-                MovementAction.Chase => Seek(targetPosition, maxSteering, maxVelocity, 1.0f),
+                MovementAction.Chase => Pursuit(targetPosition, maxSteering, maxVelocity, 1.0f, rotation),
                 MovementAction.Flee => Flee(targetPosition, maxSteering, maxVelocity, 1.0f).ZeroZ(),
                 MovementAction.Evade => Evade(targetPosition, maxSteering, maxVelocity, 1.0f, rotation),
                 MovementAction.Wander => Wander(maxSteering, maxVelocity, 1.0f).ZeroZ(),
@@ -220,7 +165,11 @@ namespace AmeisenBotX.Core.Engines.Movement.Objects
 
             if (Bot.Db.TryGetBlacklistPosition((int)Bot.Objects.MapId, Bot.Player.Position, maxDistance, out IEnumerable<Vector3> nodes))
             {
-                force += Flee(nodes.First(), 0.5f, maxSteering, maxVelocity);
+                Vector3 nearestNode = nodes.FirstOrDefault();
+                if (nearestNode != default)
+                {
+                    force += Flee(nearestNode, 0.5f, maxSteering, maxVelocity);
+                }
             }
 
             return force;

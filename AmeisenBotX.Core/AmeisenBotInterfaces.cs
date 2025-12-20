@@ -1,6 +1,7 @@
 ﻿using AmeisenBotX.Common.Math;
 using AmeisenBotX.Common.Storage;
 using AmeisenBotX.Common.Utils;
+using AmeisenBotX.Core.Engines.AI;
 using AmeisenBotX.Core.Engines.Battleground;
 using AmeisenBotX.Core.Engines.Combat.Classes;
 using AmeisenBotX.Core.Engines.Dungeon;
@@ -24,6 +25,7 @@ using AmeisenBotX.Wow.Objects;
 using AmeisenBotX.Wow.Objects.Enums;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Runtime.CompilerServices;
 
@@ -36,6 +38,8 @@ namespace AmeisenBotX.Core
         public ICharacterManager Character { get; set; }
 
         public IChatManager Chat { get; set; }
+
+        public ICombatAi CombatAi { get; set; }
 
         public ICombatClass CombatClass { get; set; }
 
@@ -177,6 +181,15 @@ namespace AmeisenBotX.Core
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public IEnumerable<T> GetEnemiesOrNeutralsInCombatWithParty<T>(Vector3 position, float distance) where T : IWowUnit
+        {
+            return GetNearEnemiesOrNeutrals<T>(position, distance)                      // is hostile
+                .Where(e => e.IsInCombat && (e.IsTaggedByMe || !e.IsTaggedByOther)      // needs to be in combat and tagged by us or no one else
+                         && (e.TargetGuid == Player.Guid                                // targets us
+                            || Objects.Partymembers.Any(x => x.Guid == e.TargetGuid))); // targets a party member
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public IEnumerable<T> GetEnemiesOrNeutralsTargetingMe<T>(Vector3 position, float distance) where T : IWowUnit
         {
             return GetNearEnemiesOrNeutrals<T>(position, distance)  // is hostile/neutral
@@ -204,7 +217,7 @@ namespace AmeisenBotX.Core
         {
             return Objects.All.OfType<T>()
                 .Where(e => !e.IsDead && !e.IsNotAttackable                      // is alive and attackable
-                         && Db.GetReaction(Player, e) == WowUnitReaction.Hostile // is hostile
+                         && (Db.GetReaction(Player, e) == WowUnitReaction.Hostile || Db.GetReaction(Player, e) == WowUnitReaction.Neutral || Db.GetReaction(Player, e) == WowUnitReaction.Unfriendly || Db.GetReaction(Player, e) == WowUnitReaction.Hated) // is hostile
                          && e.Position.GetDistance(position) < distance);        // is in range
         }
 
@@ -245,6 +258,24 @@ namespace AmeisenBotX.Core
         {
             obj = guid == 0 ? default : GetWowObjectByGuid<T>(guid);
             return obj != null;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public Bitmap GetIconBySpellname(string spellname)
+        {
+            return Wow.Mpq.GetIcon(Wow.Dbc.GetSpellIconPath(Wow.Dbc.GetSpellIdByName(spellname)));
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public Bitmap GetIconBySpellId(int spellId)
+        {
+            return Wow.Mpq.GetIcon(Wow.Dbc.GetSpellIconPath(spellId));
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public Bitmap GetIconByItemId(int itemId)
+        {
+            return Wow.Mpq.GetIcon(Wow.Dbc.GetItemIconPath(itemId));
         }
     }
 }

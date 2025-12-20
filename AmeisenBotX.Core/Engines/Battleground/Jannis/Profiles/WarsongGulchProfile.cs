@@ -440,7 +440,10 @@ namespace AmeisenBotX.Core.Engines.Battleground.Jannis.Profiles
                                                           or ((int)WowGameObjectDisplayId.WsgHordeFlag));
                 }
             }
-            catch { }
+            catch (Exception ex)
+            {
+                AmeisenBotX.Logging.AmeisenLogger.I.Log("WarsongGulch", $"Failed to update battleground info: {ex.Message}", AmeisenBotX.Logging.Enums.LogLevel.Warning);
+            }
         }
 
         private BtStatus UseNearestFlag(CtfBlackboard blackboard)

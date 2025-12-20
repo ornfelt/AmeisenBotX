@@ -23,8 +23,8 @@ namespace AmeisenBotX.Wow548.Objects
 
                 CenterPartyPosition = pos / Partymembers.Count();
 
-                PartyPetGuids = PartyPets.Select(e => e.Guid);
                 PartyPets = wowObjects.OfType<IWowUnit>().Where(e => PartymemberGuids.Contains(e.SummonedByGuid));
+                PartyPetGuids = PartyPets.Select(e => e.Guid);
             }
         }
 

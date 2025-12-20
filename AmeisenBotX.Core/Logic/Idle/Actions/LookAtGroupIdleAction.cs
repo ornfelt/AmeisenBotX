@@ -1,7 +1,5 @@
 ﻿using AmeisenBotX.Common.Math;
-using AmeisenBotX.Wow.Objects;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace AmeisenBotX.Core.Logic.Idle.Actions

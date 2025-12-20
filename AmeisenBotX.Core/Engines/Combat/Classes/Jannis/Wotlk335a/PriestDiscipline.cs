@@ -138,7 +138,12 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
         {
             if (TargetProviderHeal.Get(out IEnumerable<IWowUnit> unitsToHeal))
             {
-                IWowUnit target = unitsToHeal.First();
+                IWowUnit target = unitsToHeal.FirstOrDefault();
+
+                if (target == null)
+                {
+                    return false;
+                }
 
                 if (unitsToHeal.Count() > 3
                     && TryCastSpell(Priest335a.PrayerOfHealing, target.Guid, true))

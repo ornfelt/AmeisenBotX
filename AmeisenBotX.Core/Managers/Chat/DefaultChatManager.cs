@@ -61,7 +61,10 @@ namespace AmeisenBotX.Core.Managers.Chat
                     IOUtils.CreateDirectoryIfNotExists(dirName);
                     File.AppendAllText(protocolName, $"{chatMessage}\n");
                 }
-                catch { }
+                catch (Exception ex)
+                {
+                    AmeisenBotX.Logging.AmeisenLogger.I.Log("ChatManager", $"Failed to write chat protocol: {ex.Message}", AmeisenBotX.Logging.Enums.LogLevel.Warning);
+                }
             }
 
             OnNewChatMessage?.Invoke(chatMessage);

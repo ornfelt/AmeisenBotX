@@ -120,12 +120,10 @@ namespace AmeisenBotX.Core.Engines.Dungeon
             }
             else
             {
-                Random rnd = new();
-
                 LeaderFollowOffset = new()
                 {
-                    X = ((float)rnd.NextDouble() * (5.0f * 2)) - 5.0f,
-                    Y = ((float)rnd.NextDouble() * (5.0f * 2)) - 5.0f,
+                    X = ((float)Random.Shared.NextDouble() * (5.0f * 2)) - 5.0f,
+                    Y = ((float)Random.Shared.NextDouble() * (5.0f * 2)) - 5.0f,
                     Z = 0f
                 };
 
@@ -201,9 +199,9 @@ namespace AmeisenBotX.Core.Engines.Dungeon
                 {
                     Bot.Wow.LuaDoString("LFGTeleport(true);");
                 }
-                else
+                else if (Profile.Nodes.Count > 0)
                 {
-                    MoveToPosition(Profile.Nodes.First().Position);
+                    MoveToPosition(Profile.Nodes[0].Position);
                 }
             }
 
@@ -230,7 +228,7 @@ namespace AmeisenBotX.Core.Engines.Dungeon
                             .OrderBy(e => e.Position.GetDistance(node.Position))
                             .FirstOrDefault();
 
-                        if (nearestGameobject.Position.GetDistance(node.Position) < 5.0f && nearestGameobject != null && nearestGameobject.Bytes0 != 0)
+                        if (nearestGameobject != null && nearestGameobject.Position.GetDistance(node.Position) < 5.0f && nearestGameobject.Bytes0 != 0)
                         {
                             if (InteractionEvent.Run())
                             {

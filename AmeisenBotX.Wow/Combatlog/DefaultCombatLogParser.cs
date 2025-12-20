@@ -19,6 +19,8 @@ namespace AmeisenBotX.Wow.Combatlog
 
         public event Action<ulong> OnUnitDied;
 
+        public event Action<ulong, int, string> OnSpellCastSuccess;
+
         protected T CombatlogFields { get; } = new T();
 
         public void Parse(long timestamp, List<string> args)
@@ -82,6 +84,17 @@ namespace AmeisenBotX.Wow.Combatlog
                                 {
                                     AmeisenLogger.I.Log("CombatLogParser", $"OnHeal({entry.SourceGuid}, {entry.DestinationGuid}, {entry.Args[CombatlogFields.SpellSpellId]}, {entry.Args[CombatlogFields.SpellAmount]}, {entry.Args[CombatlogFields.SpellAmountOver]})");
                                     OnHeal?.Invoke(entry.SourceGuid, entry.DestinationGuid, spellSpellId2, spellAmount2, spellAmountOver2);
+                                }
+                                break;
+
+                            case CombatlogEntrySubtype.CAST_SUCCESS:
+                                if (int.TryParse(entry.Args[CombatlogFields.SpellSpellId], out int spellIdCast))
+                                {
+                                    string spellName = entry.Args.Count > CombatlogFields.SpellName ? entry.Args[CombatlogFields.SpellName] : "Unknown";
+                                    // Remove quotes if present
+                                    spellName = spellName.Trim('"');
+                                    AmeisenLogger.I.Log("CombatLogParser", $"OnSpellCastSuccess({entry.SourceGuid}, {spellIdCast}, {spellName})");
+                                    OnSpellCastSuccess?.Invoke(entry.SourceGuid, spellIdCast, spellName);
                                 }
                                 break;
                         }

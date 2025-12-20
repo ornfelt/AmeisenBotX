@@ -1,6 +1,5 @@
 ﻿using AmeisenBotX.Common.Math;
 using AmeisenBotX.Wow.Objects.Enums;
-using System;
 
 namespace AmeisenBotX.Wow.Objects
 {

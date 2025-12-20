@@ -4,6 +4,7 @@ using AmeisenBotX.Common.Keyboard.Objects;
 using AmeisenBotX.Common.Math;
 using AmeisenBotX.Common.Utils;
 using AmeisenBotX.Core;
+using AmeisenBotX.Core.Engines.Movement.Providers.Combat;
 using AmeisenBotX.Core.Logic;
 using AmeisenBotX.Core.Logic.Enums;
 using AmeisenBotX.Logging;
@@ -514,6 +515,33 @@ namespace AmeisenBotX
             progressbarHealth.Foreground = primaryBrush;
             progressbarSecondary.Foreground = secondaryBrush;
             labelCurrentClass.Foreground = primaryBrush;
+
+            if (AmeisenBot.Logic is AmeisenBotLogic logic)
+            {
+                var combatAi = logic.MovementManager.Providers.OfType<AiCombatMovementProvider>().FirstOrDefault();
+                if (combatAi != null)
+                {
+                    float prob = combatAi.CurrentWinProbability;
+
+                    if (prob < 0)
+                    {
+                        labelWinProbability.Content = "Idle";
+                        labelWinProbability.Foreground = DarkForegroundBrush;
+                        labelWinProbability.ToolTip = "Waiting for combat...";
+                    }
+                    else
+                    {
+                        labelWinProbability.Content = $"{prob:P0}";
+
+                        // Colors: Red (<30%), Yellow (<70%), Green (>70%)
+                        if (prob < 0.3f) labelWinProbability.Foreground = CurrentTickTimeBadBrush;
+                        else if (prob < 0.7f) labelWinProbability.Foreground = System.Windows.Media.Brushes.Yellow;
+                        else labelWinProbability.Foreground = CurrentTickTimeGoodBrush;
+
+                        labelWinProbability.ToolTip = combatAi.CurrentAnalysisReason;
+                    }
+                }
+            }
         }
 
         private void UpdateBottomLabels()
@@ -677,5 +705,11 @@ namespace AmeisenBotX
         {
             DragMove();
         }
+        private void ButtonAiDebug_Click(object sender, RoutedEventArgs e)
+        {
+            var win = new AiDebugWindow(AmeisenBot.Bot);
+            win.Show();
+        }
+
     }
 }

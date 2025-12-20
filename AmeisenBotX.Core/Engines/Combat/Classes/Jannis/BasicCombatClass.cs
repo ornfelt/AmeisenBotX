@@ -4,6 +4,7 @@ using AmeisenBotX.Common.Utils;
 using AmeisenBotX.Core.Engines.Combat.Helpers;
 using AmeisenBotX.Core.Engines.Combat.Helpers.Aura;
 using AmeisenBotX.Core.Engines.Combat.Helpers.Targets;
+using AmeisenBotX.Core.Engines.Movement.AI;
 using AmeisenBotX.Core.Engines.Movement.Enums;
 using AmeisenBotX.Core.Managers.Character.Comparators;
 using AmeisenBotX.Core.Managers.Character.Inventory.Objects;
@@ -26,8 +27,8 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis
                                                                                                                                                                                                                                                                                                                                                                                 [
             // potions
             118, 929, 1710, 2938, 3928, 4596, 5509, 13446, 22829, 33447,
-            // healthstones
-            5509, 5510, 5511, 5512, 9421, 19013, 22103, 36889, 36892,
+            // healthstones (5509 is Minor Healthstone, already in potions - start at 5510)
+            5510, 5511, 5512, 9421, 19013, 22103, 36889, 36892,
         ];
 
         private readonly int[] useableManaItems =
@@ -142,6 +143,23 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis
             else if (!Bot.Tactic.PreventMovement)
             {
                 Bot.Movement.SetMovementAction(MovementAction.Move, Bot.Target.Position);
+            }
+        }
+
+        /// <summary>
+        /// Gets the current Strategic Advice from the AI Brain (if active).
+        /// Returns Standard if AI is not running.
+        /// </summary>
+        protected AiCombatStrategy AiStrategy
+        {
+            get
+            {
+                // Access via the new Interface
+                if (Bot.CombatAi != null)
+                {
+                    return Bot.CombatAi.CurrentStrategy;
+                }
+                return AiCombatStrategy.Standard;
             }
         }
 
@@ -310,7 +328,9 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis
 
                 if (groupPlayers.Any())
                 {
-                    IWowPlayer player = groupPlayers.FirstOrDefault(e => (Bot.Db.GetUnitName(e, out string name) && !RessurrectionTargets.ContainsKey(name)) || RessurrectionTargets[name] < DateTime.UtcNow);
+                    IWowPlayer player = groupPlayers.FirstOrDefault(e =>
+                        Bot.Db.GetUnitName(e, out string name)
+                        && (!RessurrectionTargets.TryGetValue(name, out DateTime resTime) || resTime < DateTime.UtcNow));
 
                     if (player != null)
                     {

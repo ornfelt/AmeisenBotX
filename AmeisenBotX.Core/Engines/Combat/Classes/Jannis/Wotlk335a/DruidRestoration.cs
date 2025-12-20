@@ -215,7 +215,12 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
                     return true;
                 }
 
-                IWowUnit target = unitsToHeal.First();
+                IWowUnit target = unitsToHeal.FirstOrDefault();
+
+                if (target == null)
+                {
+                    return false;
+                }
 
                 if (target.HealthPercentage < 90.0
                     && target.HealthPercentage > 75.0

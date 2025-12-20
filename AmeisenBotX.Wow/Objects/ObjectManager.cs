@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace AmeisenBotX.Wow.Objects
@@ -24,7 +25,7 @@ namespace AmeisenBotX.Wow.Objects
     {
         protected const int MAX_OBJECT_COUNT = 4096;
 
-        protected readonly object queryLock = new();
+        protected readonly Lock queryLock = new();
 
         protected readonly nint[] wowObjectPointers = new nint[MAX_OBJECT_COUNT];
         protected readonly IWowObject[] wowObjects = new IWowObject[MAX_OBJECT_COUNT];
@@ -148,7 +149,7 @@ namespace AmeisenBotX.Wow.Objects
         ///<inheritdoc cref="IObjectProvider.UpdateWowObjects"/>
         public void UpdateWowObjects()
         {
-            lock (queryLock)
+            using (queryLock.EnterScope())
             {
                 IsWorldLoaded = UpdateGlobalVar<int>(Memory.Offsets.IsWorldLoaded) == 1;
 

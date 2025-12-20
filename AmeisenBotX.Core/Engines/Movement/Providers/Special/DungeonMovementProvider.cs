@@ -29,7 +29,7 @@ namespace AmeisenBotX.Core.Engines.Movement.Providers.Special
 
         private Dictionary<WowMapId, Func<IMovementProvider>> Providers { get; }
 
-        public bool Get(out Vector3 position, out MovementAction type)
+        public bool Get(out Vector3 position, out MovementAction type, out float rotation)
         {
             if (Providers.TryGetValue(Bot.Objects.MapId, out Func<IMovementProvider> getProvider))
             {
@@ -37,12 +37,13 @@ namespace AmeisenBotX.Core.Engines.Movement.Providers.Special
 
                 if (provider != null)
                 {
-                    return provider.Get(out position, out type);
+                    return provider.Get(out position, out type, out rotation);
                 }
             }
 
             type = MovementAction.None;
             position = Vector3.Zero;
+            rotation = 0f;
             return false;
         }
 

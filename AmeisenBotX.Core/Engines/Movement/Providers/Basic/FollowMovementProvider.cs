@@ -20,7 +20,7 @@ namespace AmeisenBotX.Core.Engines.Movement.Providers.Basic
 
         private Random Random { get; } = new();
 
-        public bool Get(out Vector3 position, out MovementAction type)
+        public bool Get(out Vector3 position, out MovementAction type, out float rotation)
         {
             if (!Bot.Player.IsDead
                 && !Bot.Player.IsInCombat
@@ -48,6 +48,7 @@ namespace AmeisenBotX.Core.Engines.Movement.Providers.Basic
 
                         type = MovementAction.Move;
                         position = pos;
+                        rotation = 0f;
                         return true;
                     }
                 }
@@ -55,6 +56,7 @@ namespace AmeisenBotX.Core.Engines.Movement.Providers.Basic
 
             type = MovementAction.None;
             position = Vector3.Zero;
+            rotation = 0f;
             return false;
         }
 

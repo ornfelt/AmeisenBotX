@@ -17,6 +17,7 @@ using AmeisenBotX.Core.Engines.Jobs.Profiles.Gathering;
 using AmeisenBotX.Core.Engines.Jobs.Profiles.Gathering.Jannis;
 using AmeisenBotX.Core.Engines.Movement;
 using AmeisenBotX.Core.Engines.Movement.Pathfinding;
+using AmeisenBotX.Core.Engines.Movement.Providers.Combat;
 using AmeisenBotX.Core.Engines.PvP;
 using AmeisenBotX.Core.Engines.Quest;
 using AmeisenBotX.Core.Engines.Quest.Profiles;
@@ -36,6 +37,7 @@ using AmeisenBotX.Core.Managers.Threat;
 using AmeisenBotX.Logging;
 using AmeisenBotX.Logging.Enums;
 using AmeisenBotX.Memory.Win32;
+using AmeisenBotX.MPQ;
 using AmeisenBotX.RconClient.Enums;
 using AmeisenBotX.RconClient.Messages;
 using AmeisenBotX.Wow;
@@ -124,12 +126,12 @@ namespace AmeisenBotX.Core
                 switch (wowVersion)
                 {
                     case WowVersion.WotLK335a:
-                        Bot.Wow = new WowInterface335a(new WowMemoryApi(new OffsetList335a()));
+                        Bot.Wow = new WowInterface335a(new WowMemoryApi(new OffsetList335a()), Path.GetDirectoryName(config.PathToWowExe));
                         Bot.CombatLog = new DefaultCombatlogParser<CombatlogFields335a>();
                         break;
 
                     case WowVersion.MoP548:
-                        Bot.Wow = new WowInterface548(new WowMemoryApi(new OffsetList548()));
+                        Bot.Wow = new WowInterface548(new WowMemoryApi(new OffsetList548()), Path.GetDirectoryName(config.PathToWowExe));
                         Bot.CombatLog = new DefaultCombatlogParser<CombatlogFields548>();
                         break;
                 }
@@ -191,6 +193,9 @@ namespace AmeisenBotX.Core
 
             Bot.PathfindingHandler = new AmeisenNavigationHandler(Config.NavmeshServerIp, Config.NameshServerPort);
             Bot.Movement = new MovementEngine(Bot, Config);
+
+            // Initialize Combat AI (Strategic Brain)
+            Bot.CombatAi = new AiCombatMovementProvider(Bot, Config);
 
             Logic = new AmeisenBotLogic(Config, Bot);
 
@@ -308,6 +313,8 @@ namespace AmeisenBotX.Core
         /// All currently loaded quest profiles.
         /// </summary>
         public IEnumerable<IQuestProfile> QuestProfiles { get; private set; }
+
+        public MpqBridge Mpq { get; private set; }
 
         private TimegatedEvent BagUpdateEvent { get; set; }
 
@@ -1007,7 +1014,9 @@ namespace AmeisenBotX.Core
 
                         if (Bot.Rcon.PendingActions.Count != 0)
                         {
-                            switch (Bot.Rcon.PendingActions.First())
+                            ActionType action = Bot.Rcon.PendingActions[0];
+                            Bot.Rcon.PendingActions.RemoveAt(0);
+                            switch (action)
                             {
                                 case ActionType.PauseResume:
                                     if (IsRunning)
@@ -1026,7 +1035,10 @@ namespace AmeisenBotX.Core
                         }
                     }
                 }
-                catch { }
+                catch (Exception ex)
+                {
+                    AmeisenLogger.I.Log("Rcon", $"Failed to send RCON data: {ex.Message}", LogLevel.Warning);
+                }
             }
         }
 
@@ -1073,6 +1085,7 @@ namespace AmeisenBotX.Core
             {
                 ExecutionMsStopwatch.Restart();
                 Logic.Tick();
+
                 CurrentExecutionMs = ExecutionMsStopwatch.ElapsedMilliseconds;
                 CurrentExecutionCount++;
             }

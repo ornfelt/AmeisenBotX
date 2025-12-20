@@ -185,6 +185,11 @@ namespace AmeisenBotX.Wow.Objects
 
         float Rotation { get; }
 
+        /// <summary>
+        /// The unit's current run speed in yards per second.
+        /// </summary>
+        float RunSpeed { get; }
+
         int RunicPower { get; }
 
         double RunicPowerPercentage { get; }

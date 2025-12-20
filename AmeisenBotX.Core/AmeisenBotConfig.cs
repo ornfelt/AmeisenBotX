@@ -1,4 +1,5 @@
 ﻿using AmeisenBotX.Common.Keyboard.Objects;
+using AmeisenBotX.Core.Engines.AI;
 using AmeisenBotX.Core.Engines.Movement.Settings;
 using AmeisenBotX.Memory.Win32;
 using System;
@@ -158,6 +159,8 @@ namespace AmeisenBotX.Core
         public string Mounts { get; set; } = string.Empty;
 
         public MovementSettings MovementSettings { get; set; } = new();
+
+        public AiSettings AiSettings { get; set; } = new();
 
         public int NameshServerPort { get; set; } = 47110;
 

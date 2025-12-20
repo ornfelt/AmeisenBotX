@@ -1,4 +1,5 @@
 ﻿using AmeisenBotX.Common.Math;
+using AmeisenBotX.MPQ;
 using AmeisenBotX.Wow.Events;
 using AmeisenBotX.Wow.Objects;
 using AmeisenBotX.Wow.Objects.Constants;
@@ -86,6 +87,10 @@ namespace AmeisenBotX.Wow
         /// Get the current version of wow.
         /// </summary>
         WowVersion WowVersion { get; }
+
+        public MpqBridge Mpq { get; }
+
+        public DbcBridge Dbc { get; }
 
         void AbandonQuestsNotIn(IEnumerable<string> enumerable);
 
@@ -275,7 +280,7 @@ namespace AmeisenBotX.Wow
         bool Setup();
 
         /// <summary>
-        /// Use this to diable the is world loaded check that is used to prevent the execution of
+        /// Use this to disable the is world loaded check that is used to prevent the execution of
         /// assembly code during loading screens. Used to disable the check in the login process as
         /// the world is not loaded in the main menu.
         /// </summary>

@@ -110,6 +110,8 @@ namespace AmeisenBotX.Wow548.Objects
 
         public float Rotation => Memory.Read(nint.Add(BaseAddress, (int)Memory.Offsets.WowUnitPosition + 0x10), out float rotation) ? rotation : 0.0f;
 
+        public float RunSpeed => Memory.Read(nint.Add(BaseAddress, (int)Memory.Offsets.WowUnitRunSpeed), out float runSpeed) ? runSpeed : 7.0f;
+
         public int RunicPower => 0;
 
         public double RunicPowerPercentage => BotMath.Percentage(RunicPower, MaxRunicPower);

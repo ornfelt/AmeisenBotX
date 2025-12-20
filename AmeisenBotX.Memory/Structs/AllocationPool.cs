@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 
 namespace AmeisenBotX.Memory.Structs
 {
@@ -66,15 +65,17 @@ namespace AmeisenBotX.Memory.Structs
                 }
                 else
                 {
+                    IList<int> keys = Allocations.Keys;
+                    IList<int> values = Allocations.Values;
+
                     for (int i = 0; i < Allocations.Count; ++i)
                     {
-                        KeyValuePair<int, int> allocation = Allocations.ElementAt(i);
-                        int allocationEnd = allocation.Key + allocation.Value;
+                        int allocationEnd = keys[i] + values[i];
 
                         // when there is a next element, use it as the limiter, if not use the
                         // whole remaining space
                         int memoryLeft = i + 1 < Allocations.Count
-                            ? Allocations.ElementAt(i + 1).Key - allocationEnd
+                            ? keys[i + 1] - allocationEnd
                             : Size - allocationEnd;
 
                         if (memoryLeft >= size)

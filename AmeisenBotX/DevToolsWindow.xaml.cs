@@ -132,7 +132,6 @@ namespace AmeisenBotX
 
         private void ClimbSteepSlopesChecked(object sender, RoutedEventArgs e)
         {
-            // Todo: find a better way, multi-level pointer redirection very messy
             AmeisenBot.Bot.Memory.Read<nint>(AmeisenBot.Bot.Memory.Offsets.PlayerBase, out nint PlayerBase1);
             AmeisenBot.Bot.Memory.Read<nint>(nint.Add(PlayerBase1, 0x34), out nint PlayerBase2);
             AmeisenBot.Bot.Memory.Read<nint>(nint.Add(PlayerBase2, 0x24), out nint PlayerBase);

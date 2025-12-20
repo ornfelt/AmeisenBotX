@@ -18,7 +18,7 @@ namespace AmeisenBotX.Wow.Hook
         private const int MEM_ALLOC_EXECUTION_SIZE = 4096;
         private const int MEM_ALLOC_GATEWAY_SIZE = 24;
         private const int MEM_ALLOC_ROUTINE_SIZE = 256;
-        private readonly object hookLock = new();
+        private readonly Lock hookLock = new();
 
         private int hookCalls;
 
@@ -362,7 +362,7 @@ namespace AmeisenBotX.Wow.Hook
                 return false;
             }
 
-            lock (hookLock)
+            using (hookLock.EnterScope())
             {
                 ++hookCalls;
 
@@ -412,7 +412,7 @@ namespace AmeisenBotX.Wow.Hook
         {
             if (IsWoWHooked)
             {
-                lock (hookLock)
+                using (hookLock.EnterScope())
                 {
                     AmeisenLogger.I.Log("HookManager", "Disposing EndScene hook", LogLevel.Verbose);
 

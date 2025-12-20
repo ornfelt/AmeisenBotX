@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Quest.Objects.Objectives
 {
@@ -7,7 +6,23 @@ namespace AmeisenBotX.Core.Engines.Quest.Objects.Objectives
     {
         public bool Finished => Progress == 100.0;
 
-        public double Progress => QuestObjectives.Count(e => QuestObjectives.IndexOf(e) <= AlreadyCompletedIndex || e.Finished) / (double)QuestObjectives.Count * 100.0;
+        public double Progress
+        {
+            get
+            {
+                int count = QuestObjectives.Count;
+                if (count == 0) return 100.0;
+
+                int completedIndex = AlreadyCompletedIndex;
+                int completed = 0;
+                for (int i = 0; i < count; i++)
+                {
+                    if (i <= completedIndex || QuestObjectives[i].Finished)
+                        completed++;
+                }
+                return (double)completed / count * 100.0;
+            }
+        }
 
         public List<IQuestObjective> QuestObjectives { get; } = questObjectives;
 
@@ -15,14 +30,26 @@ namespace AmeisenBotX.Core.Engines.Quest.Objects.Objectives
         {
             get
             {
-                IQuestObjective questObjective = QuestObjectives.LastOrDefault(e => e.Finished);
-                return QuestObjectives.IndexOf(questObjective);
+                for (int i = QuestObjectives.Count - 1; i >= 0; i--)
+                {
+                    if (QuestObjectives[i].Finished)
+                        return i;
+                }
+                return -1;
             }
         }
 
         public void Execute()
         {
-            QuestObjectives.FirstOrDefault(e => QuestObjectives.IndexOf(e) > AlreadyCompletedIndex && !e.Finished)?.Execute();
+            int completedIndex = AlreadyCompletedIndex;
+            for (int i = 0; i < QuestObjectives.Count; i++)
+            {
+                if (i > completedIndex && !QuestObjectives[i].Finished)
+                {
+                    QuestObjectives[i].Execute();
+                    return;
+                }
+            }
         }
     }
 }

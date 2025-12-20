@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace AmeisenBotX.Wow.Offsets
+﻿namespace AmeisenBotX.Wow.Offsets
 {
     public interface IOffsetList
     {
@@ -155,6 +153,21 @@ namespace AmeisenBotX.Wow.Offsets
         nint WowUnitIsAutoAttacking { get; }
 
         nint WowUnitPosition { get; }
+
+        /// <summary>
+        /// Offset to unit's current movement speed.
+        /// </summary>
+        nint WowUnitCurrentSpeed { get; }
+
+        /// <summary>
+        /// Offset to unit's walk speed.
+        /// </summary>
+        nint WowUnitWalkSpeed { get; }
+
+        /// <summary>
+        /// Offset to unit's run speed (forward).
+        /// </summary>
+        nint WowUnitRunSpeed { get; }
 
         nint ZoneId { get; }
 

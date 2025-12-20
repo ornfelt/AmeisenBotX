@@ -16,6 +16,8 @@
 
         int SpellAmountOver { get; }
 
+        int SpellName { get; } // Index of Spell Name
+
         int SpellSpellId { get; }
 
         int SwingDamageAmount { get; }

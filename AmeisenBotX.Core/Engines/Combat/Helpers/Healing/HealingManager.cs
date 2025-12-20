@@ -354,7 +354,8 @@ namespace AmeisenBotX.Core.Engines.Combat.Helpers.Healing
 
                 if (IncomingDamageBuffer[guid].Count > 0)
                 {
-                    TimeSpan totalTime = IncomingDamageBuffer[guid].First().Item1 - IncomingDamageBuffer[guid].Last().Item1;
+                    (DateTime, int)[] bufferArray = IncomingDamageBuffer[guid].ToArray();
+                    TimeSpan totalTime = bufferArray[0].Item1 - bufferArray[^1].Item1;
                     int totalSeconds = (int)totalTime.TotalSeconds;
 
                     IncomingDamage[guid] = totalSeconds > 0 ? IncomingDamageBuffer[guid].Sum(e => e.Item2) / totalSeconds : 0;

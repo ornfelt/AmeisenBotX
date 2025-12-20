@@ -102,6 +102,8 @@ namespace AmeisenBotX.Wow335a.Objects
 
         public float Rotation { get; set; }
 
+        public float RunSpeed { get; set; }
+
         public int RunicPower => RawWowUnit.Power7 / 10;
 
         public double RunicPowerPercentage => BotMath.Percentage(RunicPower, MaxRunicPower);
@@ -224,6 +226,11 @@ namespace AmeisenBotX.Wow335a.Objects
             if (Memory.Read(nint.Add(BaseAddress, (int)Memory.Offsets.WowUnitPosition + 0x10), out float rotation))
             {
                 Rotation = rotation;
+            }
+
+            if (Memory.Read(nint.Add(BaseAddress, (int)Memory.Offsets.WowUnitRunSpeed), out float runSpeed))
+            {
+                RunSpeed = runSpeed;
             }
 
             if (Memory.Read(nint.Add(BaseAddress, (int)Memory.Offsets.WowUnitIsAutoAttacking), out int isAutoAttacking))

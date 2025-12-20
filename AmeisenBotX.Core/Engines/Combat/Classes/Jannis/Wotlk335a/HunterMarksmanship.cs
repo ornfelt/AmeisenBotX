@@ -185,7 +185,7 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
                             return;
                         }
 
-                        if ((Bot.Objects.All.OfType<IWowUnit>().Where(e => target.Position.GetDistance(e.Position) < 16).Count() > 2 && TryCastSpell(Hunter335a.MultiShot, Bot.Wow.TargetGuid, true))
+                        if ((Bot.Objects.All.OfType<IWowUnit>().Count(e => target.Position.GetDistance(e.Position) < 16) > 2 && TryCastSpell(Hunter335a.MultiShot, Bot.Wow.TargetGuid, true))
                             || TryCastSpell(Hunter335a.ChimeraShot, Bot.Wow.TargetGuid, true)
                             || TryCastSpell(Hunter335a.AimedShot, Bot.Wow.TargetGuid, true)
                             || TryCastSpell(Hunter335a.ArcaneShot, Bot.Wow.TargetGuid, true)

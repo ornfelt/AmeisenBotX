@@ -6,6 +6,7 @@ using AmeisenBotX.Wow.Objects.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 
 namespace AmeisenBotX.Core.Managers.Character.Inventory
 {
@@ -13,7 +14,7 @@ namespace AmeisenBotX.Core.Managers.Character.Inventory
     {
         private readonly List<IWowInventoryItem> items;
 
-        private readonly object queryLock = new();
+        private readonly Lock queryLock = new();
 
         public CharacterInventory(IWowInterface wowInterface, AmeisenBotConfig config)
         {
@@ -28,14 +29,14 @@ namespace AmeisenBotX.Core.Managers.Character.Inventory
         {
             get
             {
-                lock (queryLock)
+                using (queryLock.EnterScope())
                 {
                     return items;
                 }
             }
             private init
             {
-                lock (queryLock)
+                using (queryLock.EnterScope())
                 {
                     items = value;
                 }
@@ -110,7 +111,7 @@ namespace AmeisenBotX.Core.Managers.Character.Inventory
                     return;
                 }
 
-                lock (queryLock)
+                using (queryLock.EnterScope())
                 {
                     Items.Clear();
 

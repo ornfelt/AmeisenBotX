@@ -18,6 +18,8 @@ namespace AmeisenBotX.Wow335a.Combatlog.Enums
 
         public int SpellAmountOver { get; } = 12;
 
+        public int SpellName { get; } = 9;
+
         public int SpellSpellId { get; } = 8;
 
         public int SwingDamageAmount { get; } = 8;

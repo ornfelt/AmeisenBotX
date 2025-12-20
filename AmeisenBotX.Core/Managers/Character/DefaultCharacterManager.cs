@@ -224,7 +224,11 @@ namespace AmeisenBotX.Core.Managers.Character
                     continue;
                 }
 
-                Wow.EquipItem(container.First().Name);
+                IWowInventoryItem bagToEquip = container.FirstOrDefault();
+                if (bagToEquip != null)
+                {
+                    Wow.EquipItem(bagToEquip.Name);
+                }
                 break;
             }
         }
@@ -279,7 +283,12 @@ namespace AmeisenBotX.Core.Managers.Character
                 }
                 else
                 {
-                    IWowInventoryItem itemToEquip = itemsLikeEquipped.First();
+                    IWowInventoryItem itemToEquip = itemsLikeEquipped.FirstOrDefault();
+
+                    if (itemToEquip == null)
+                    {
+                        continue;
+                    }
 
                     if ((!string.Equals(itemToEquip.Type, "Armor", StringComparison.OrdinalIgnoreCase) ||
                          !IsAbleToUseArmor((WowArmor)itemToEquip)) &&

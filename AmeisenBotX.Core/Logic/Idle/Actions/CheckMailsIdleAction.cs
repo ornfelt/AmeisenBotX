@@ -45,8 +45,8 @@ namespace AmeisenBotX.Core.Logic.Idle.Actions
 
             if (Bot.Db.TryGetPointsOfInterest(Bot.Objects.MapId, PoiType.Mailbox, Bot.Player.Position, 256.0f, out IEnumerable<Vector3> mailboxes))
             {
-                CurrentMailbox = mailboxes.OrderBy(e => e.GetDistance(Bot.Player.Position)).First();
-                return true;
+                CurrentMailbox = mailboxes.MinBy(e => e.GetDistance(Bot.Player.Position));
+                return CurrentMailbox != default;
             }
 
             return false;

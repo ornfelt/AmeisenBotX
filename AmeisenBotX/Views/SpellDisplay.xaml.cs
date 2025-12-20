@@ -1,4 +1,7 @@
 ﻿using AmeisenBotX.Core.Managers.Character.Spells.Objects;
+using AmeisenBotX.Utils;
+using System.Drawing;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -6,24 +9,34 @@ namespace AmeisenBotX.Views
 {
     public partial class SpellDisplay : UserControl
     {
-        public SpellDisplay(Spell spell)
+        public SpellDisplay(Spell spell, Bitmap icon = null)
         {
             Spell = spell;
+            Icon = icon;
             InitializeComponent();
         }
 
-        private Spell Spell { get; }
+        public Spell Spell { get; }
+
+        public Bitmap Icon { get; }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             labelSpellName.Content = Spell.Name;
             labelSpellRank.Content = Spell.Rank;
 
-            // labelIcon.Content = "❓";
+            string[] parts = [
+                Spell.Costs > 0 ? $"{Spell.Costs}" : null,
+                Spell.CastTime > 0 ? $"{Spell.CastTime}s" : "Instant",
+                Spell.MaxRange > 0 ? $"{Spell.MinRange}-{Spell.MaxRange}m" : null
+            ];
 
-            labelItemType.Content = $"{Spell.SpellbookName} - {Spell.Costs} - {Spell.CastTime}s - {Spell.MinRange}m => {Spell.MaxRange}m";
+            labelItemType.Content = $"{Spell.SpellbookName} » {string.Join(" · ", parts.Where(s => s != null))}";
 
-            // labelSpellName.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString(BotUtils.GetColorByQuality(WowItem.ItemQuality)));
+            if (Icon != null)
+            {
+                imageIcon.Source = Icon.ToImageSource();
+            }
         }
     }
 }

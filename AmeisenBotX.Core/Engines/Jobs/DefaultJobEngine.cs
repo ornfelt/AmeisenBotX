@@ -89,8 +89,8 @@ namespace AmeisenBotX.Core.Engines.Jobs
 
             if (CheckForPathRecovering)
             {
-                Vector3 closestNode = miningProfile.Path.OrderBy(e => e.GetDistance(Bot.Player.Position)).First();
-                CurrentNodeCounter = miningProfile.Path.IndexOf(closestNode) + 1;
+                Vector3 closestNode = miningProfile.Path.MinBy(e => e.GetDistance(Bot.Player.Position));
+                CurrentNodeCounter = closestNode != default ? miningProfile.Path.IndexOf(closestNode) + 1 : 0;
                 CheckForPathRecovering = false;
                 NodeTryCounter = 0;
             }

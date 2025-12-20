@@ -6,6 +6,7 @@ using AmeisenBotX.Common.Utils;
 using AmeisenBotX.Core.Engines.Movement;
 using AmeisenBotX.Core.Engines.Movement.Enums;
 using AmeisenBotX.Core.Engines.Movement.Providers.Basic;
+using AmeisenBotX.Core.Engines.Movement.Providers.Combat;
 using AmeisenBotX.Core.Engines.Movement.Providers.Special;
 using AmeisenBotX.Core.Logic.Enums;
 using AmeisenBotX.Core.Logic.Leafs;
@@ -66,12 +67,11 @@ namespace AmeisenBotX.Core.Logic
 
             MovementManager = new
             (
-                new List<IMovementProvider>()
-                {
+                [
                     new DungeonMovementProvider(bot),
-                    new SimpleCombatMovementProvider(bot),
+                    new AiCombatMovementProvider(bot, config),
                     new FollowMovementProvider(bot, config),
-                }
+                ]
             );
 
             // OPEN WORLD -----------------------------
@@ -353,7 +353,7 @@ namespace AmeisenBotX.Core.Logic
 
         private IWowUnit Merchant { get; set; }
 
-        private MovementManager MovementManager { get; }
+        public MovementManager MovementManager { get; }
 
         private TimegatedEvent PartymembersFightEvent { get; }
 
@@ -760,7 +760,7 @@ namespace AmeisenBotX.Core.Logic
 
             if (FirstLogin)
             {
-                FirstLogin = true;
+                FirstLogin = false;
                 SetCVars();
             }
 
@@ -817,14 +817,14 @@ namespace AmeisenBotX.Core.Logic
 
         private BtStatus Move()
         {
-            return MoveToPosition(MovementManager.Target);
+            return MoveToPosition(MovementManager.Target, MovementManager.Type, MovementManager.Rotation);
         }
 
-        private BtStatus MoveToPosition(Vector3 position, MovementAction movementAction = MovementAction.Move)
+        private BtStatus MoveToPosition(Vector3 position, MovementAction movementAction = MovementAction.Move, float rotation = 0f)
         {
             if (position != Vector3.Zero && Bot.Player.DistanceTo(position) > 3.0f)
             {
-                Bot.Movement.SetMovementAction(movementAction, position);
+                Bot.Movement.SetMovementAction(movementAction, position, rotation);
                 return BtStatus.Ongoing;
             }
 

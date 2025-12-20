@@ -32,75 +32,69 @@ namespace AmeisenBotX.Core.Managers.Threat
             float threat = 0.0f;
 
             // hostile players
-            IEnumerable<IWowUnit> hostilePlayers = Bot.Objects.All.OfType<IWowPlayer>().Where
+            List<IWowPlayer> hostilePlayers = Bot.Objects.All.OfType<IWowPlayer>().Where
             (
                 e => e.Type == WowObjectType.Player
                 && !e.IsDead
                 && Bot.Wow.GetReaction(e.BaseAddress, Bot.Player.BaseAddress) == WowUnitReaction.Hostile
                 && e.DistanceTo(position) < 60.0f
-            );
+            ).ToList();
 
-            if (hostilePlayers.Any())
+            foreach (IWowPlayer player in hostilePlayers)
             {
-                foreach (IWowPlayer player in hostilePlayers.Cast<IWowPlayer>())
+                float leveldiffMult = MathF.Max(0.0f, MathF.Tanh(player.Level - Bot.Player.Level));
+
+                // players are a big threat to us
+                threat += playerThreat * leveldiffMult;
+
+                if (threat >= 100.0f)
                 {
-                    float leveldiffMult = MathF.Max(0.0f, MathF.Tanh(player.Level - Bot.Player.Level));
-
-                    // players are a big threat to us
-                    threat += playerThreat * leveldiffMult;
-
-                    if (threat >= 100.0f)
-                    {
-                        return threat;
-                    }
+                    return threat;
                 }
             }
 
             // hostile npcs
-            IEnumerable<IWowUnit> hostileUnits = Bot.Objects.All.OfType<IWowUnit>().Where
+            List<IWowUnit> hostileUnits = Bot.Objects.All.OfType<IWowUnit>().Where
             (
                 e => e.Type == WowObjectType.Unit
                 && !e.IsDead
                 && Bot.Wow.GetReaction(e.BaseAddress, Bot.Player.BaseAddress) == WowUnitReaction.Hostile
                 && e.DistanceTo(position) < 50.0f
-            );
+            ).ToList();
 
-            if (hostileUnits.Any())
+            foreach (IWowUnit unit in hostileUnits)
             {
-                foreach (IWowUnit unit in hostileUnits)
+                // TODO: handle elites, handle level 80 good gear scaling
+                float leveldiffMult = MathF.Max(0.0f, MathF.Tanh(unit.Level - Bot.Player.Level));
+
+                if (leveldiffMult == 0.0f)
                 {
-                    // TODO: handle elites, handle level 80 good gear scaling
-                    float leveldiffMult = MathF.Max(0.0f, MathF.Tanh(unit.Level - Bot.Player.Level));
+                    // npc is far beyond our level
+                    continue;
+                }
 
-                    if (leveldiffMult == 0.0f)
+                float aggroRange = Bot.Player.AggroRangeTo(unit);
+                float distance = unit.DistanceTo(position);
+
+                if (distance < aggroRange)
+                {
+                    // more than 3 units will get us in trouble, we should avoid that
+                    threat += unitThreat * leveldiffMult;
+                }
+                else
+                {
+                    // measure how close we are until aggro
+                    float distanceUntilAggro = distance - aggroRange;
+
+                    if (distanceUntilAggro < unitAggroDistance)
                     {
-                        // npc is far beyond our level
-                        continue;
+                        threat += unitThreat * leveldiffMult * (distanceUntilAggro / unitAggroDistance);
                     }
+                }
 
-                    float aggroRange = Bot.Player.AggroRangeTo(unit);
-                    float distance = unit.DistanceTo(position);
-
-                    if (distance < aggroRange)
-                    {
-                        // more than 3 units will get us in trouble, we should avoid that
-                        threat += unitThreat * leveldiffMult;
-                    }
-                    else
-                    {
-                        // measure how close we are until aggro
-                        float distanceUntilAggro = distance - aggroRange;
-
-                        if (distanceUntilAggro < unitAggroDistance)
-                        {
-                            threat += unitThreat * leveldiffMult * (distanceUntilAggro / unitAggroDistance);
-                        }
-                    }
-
-                    if (threat >= 100.0f)
-                    {
-                        return threat;
-                    }
+                if (threat >= 100.0f)
+                {
+                    return threat;
                 }
             }
 

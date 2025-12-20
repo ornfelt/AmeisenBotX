@@ -361,7 +361,7 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Bia10
             }
 
             IWowPlayer player = groupPlayers.FirstOrDefault(e => Bot.Db.GetUnitName(e, out string name)
-                && !ResurrectionTargets.ContainsKey(name) || ResurrectionTargets[name] < DateTime.Now);
+                && (!ResurrectionTargets.TryGetValue(name, out DateTime resTime) || resTime < DateTime.Now));
 
             if (player == null)
             {

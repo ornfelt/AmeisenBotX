@@ -312,7 +312,10 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
 
         public void Load(Dictionary<string, JsonElement> objects)
         {
-            Configureables = objects["Configureables"].ToDyn();
+            if (objects.TryGetValue("Configureables", out JsonElement configElement))
+            {
+                Configureables = configElement.ToDyn();
+            }
         }
 
         public abstract void OutOfCombatExecute();
@@ -328,7 +331,8 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
 
             if (RevivePlayerEvent.Run() && partyMemberToHeal.Count > 0)
             {
-                Bot.Wow.ChangeTarget(partyMemberToHeal.FirstOrDefault().Guid);
+                IWowUnit deadMember = partyMemberToHeal.First();
+                Bot.Wow.ChangeTarget(deadMember.Guid);
                 CustomCastSpellMana(reviveSpellName);
             }
         }

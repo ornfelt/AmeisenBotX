@@ -1,5 +1,4 @@
 ﻿using AmeisenBotX.Wow.Offsets;
-using System;
 
 namespace AmeisenBotX.Wow335a.Offsets
 {
@@ -160,6 +159,12 @@ namespace AmeisenBotX.Wow335a.Offsets
         public nint WowUnitIsAutoAttacking { get; } = new(0xA20);
 
         public nint WowUnitPosition { get; } = new(0x798);
+
+        public nint WowUnitCurrentSpeed { get; } = new(0x848);
+
+        public nint WowUnitWalkSpeed { get; } = new(0x84C);
+
+        public nint WowUnitRunSpeed { get; } = new(0x850);
 
         public nint ZoneId { get; } = new(0xBD080C);
 

@@ -8,6 +8,8 @@ namespace AmeisenBotX.Core.Engines.Movement
     {
         public IEnumerable<IMovementProvider> Providers { get; set; } = providers;
 
+        public float Rotation { get; private set; }
+
         public Vector3 Target { get; private set; }
 
         public MovementAction Type { get; private set; }
@@ -16,16 +18,18 @@ namespace AmeisenBotX.Core.Engines.Movement
         {
             foreach (IMovementProvider provider in Providers)
             {
-                if (provider.Get(out Vector3 position, out MovementAction type))
+                if (provider.Get(out Vector3 position, out MovementAction type, out float rotation))
                 {
                     Target = position;
                     Type = type;
+                    Rotation = rotation;
                     return true;
                 }
             }
 
             Type = MovementAction.None;
             Target = Vector3.Zero;
+            Rotation = 0f;
             return false;
         }
     }

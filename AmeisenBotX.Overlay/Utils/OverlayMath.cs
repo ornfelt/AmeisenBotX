@@ -17,29 +17,61 @@ namespace AmeisenBotX.Overlay.Utils
         /// <param name="cameraInfo">Game camera info</param>
         /// <param name="position">World position</param>
         /// <param name="screenCoordinates">Screen Position</param>
-        /// <returns>True when coordinates are on th window, fals eif not</returns>
+        /// <returns>True when coordinates are on the window, false if not</returns>
         public static bool WorldToScreen(Rect clientRect, RawCameraInfo cameraInfo, Vector3 position, out Point screenCoordinates)
         {
             Vector3 diff = position - cameraInfo.Pos;
             Vector3 view = diff * cameraInfo.ViewMatrix.Inverse();
+
+            // Object is behind the camera
+            if (view.X <= 0.0f)
+            {
+                screenCoordinates = default;
+                return false;
+            }
 
             float windowWidth = clientRect.Right - clientRect.Left;
             float windowHeight = clientRect.Bottom - clientRect.Top;
 
             float screenX = windowWidth / 2.0f;
             float screenY = windowHeight / 2.0f;
-            float screenF = windowWidth / windowHeight;
+            float aspect = windowWidth / windowHeight;
 
-            float tmpX = screenX / MathF.Tan((screenF * (screenF >= 1.6f ? 55.0f : 44.0f) / 2.0f) * DEG_TO_RAD);
-            float tmpY = screenY / MathF.Tan((screenF * 35.0f / 2.0f) * DEG_TO_RAD);
+            // Try to use camera FOV if it looks valid, otherwise use the original heuristic
+            float fovHorizontal;
+            float fovVertical;
+
+            if (cameraInfo.Fov > 0.5f && cameraInfo.Fov < 2.5f)
+            {
+                // FOV looks like it's in radians (typical range 0.5-2.0 rad = ~30-115 degrees)
+                fovVertical = cameraInfo.Fov;
+                fovHorizontal = 2.0f * MathF.Atan(MathF.Tan(fovVertical / 2.0f) * aspect);
+            }
+            else
+            {
+                // Fallback to original heuristic (works "half decent")
+                fovHorizontal = (aspect * (aspect >= 1.6f ? 55.0f : 44.0f)) * DEG_TO_RAD;
+                fovVertical = (aspect * 35.0f) * DEG_TO_RAD;
+            }
+
+            // Calculate projection factors
+            float tmpX = screenX / MathF.Tan(fovHorizontal / 2.0f);
+            float tmpY = screenY / MathF.Tan(fovVertical / 2.0f);
+
+            // Project to screen
+            float projectedX = screenX + (-view.Y * tmpX / view.X);
+            float projectedY = screenY + (-view.Z * tmpY / view.X);
 
             screenCoordinates = new()
             {
-                X = (int)MathF.Abs(screenX + (-view.Y * tmpX / view.X)),
-                Y = (int)MathF.Abs(screenY + (-view.Z * tmpY / view.X))
+                X = (int)projectedX,
+                Y = (int)projectedY
             };
 
-            return screenCoordinates.X > 0 && screenCoordinates.Y > 0 && screenCoordinates.X < windowWidth && screenCoordinates.Y < windowHeight;
+            return screenCoordinates.X > 0
+                && screenCoordinates.Y > 0
+                && screenCoordinates.X < windowWidth
+                && screenCoordinates.Y < windowHeight;
         }
     }
 }

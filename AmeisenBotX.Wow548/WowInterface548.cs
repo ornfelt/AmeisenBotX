@@ -2,6 +2,7 @@
 using AmeisenBotX.Common.Utils;
 using AmeisenBotX.Logging;
 using AmeisenBotX.Logging.Enums;
+using AmeisenBotX.MPQ;
 using AmeisenBotX.Wow;
 using AmeisenBotX.Wow.Events;
 using AmeisenBotX.Wow.Hook.Modules;
@@ -29,7 +30,7 @@ namespace AmeisenBotX.Wow548
             NumberHandling = JsonNumberHandling.AllowReadingFromString
         };
 
-        public WowInterface548(WowMemoryApi memory)
+        public WowInterface548(WowMemoryApi memory, string wowDirectory)
         {
             Memory = memory;
             HookModules = [];
@@ -143,6 +144,9 @@ namespace AmeisenBotX.Wow548
 
             Hook = new(memory);
             Hook.OnGameInfoPush += ObjectManager.HookManagerOnGameInfoPush;
+
+            Mpq = new(wowDirectory);
+            Dbc = new(Mpq);
         }
 
         public event Action<string>? OnBattlegroundStatus;
@@ -166,6 +170,10 @@ namespace AmeisenBotX.Wow548
         private SimpleEventManager EventManager { get; }
 
         private EndSceneHook548 Hook { get; }
+
+        public MpqBridge Mpq { get; }
+
+        public DbcBridge Dbc { get; }
 
         private List<IHookModule> HookModules { get; }
 

@@ -162,6 +162,13 @@ namespace AmeisenBotX.Wow548.Offsets
 
         public nint WowUnitPosition { get; } = new(0x838);
 
+        // Movement speed offsets - estimated based on structure, may need verification
+        public nint WowUnitCurrentSpeed { get; } = new(0x8E8);
+
+        public nint WowUnitWalkSpeed { get; } = new(0x8EC);
+
+        public nint WowUnitRunSpeed { get; } = new(0x8F0);
+
         public nint ZoneId { get; private set; }
 
         public nint ZoneSubText { get; } = new(0x0);

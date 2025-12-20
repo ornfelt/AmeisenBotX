@@ -18,19 +18,21 @@ namespace AmeisenBotX.Core.Engines.Combat.Helpers
 
         public bool Tick(IEnumerable<IWowUnit> units)
         {
-            if (InterruptSpells != null && InterruptSpells.Count > 0 && units != null && units.Any())
+            if (InterruptSpells == null || InterruptSpells.Count == 0 || units == null)
             {
-                IWowUnit selectedUnit = units.FirstOrDefault(e => e != null && e.IsCasting);
+                return false;
+            }
 
-                if (selectedUnit != null)
+            IWowUnit selectedUnit = units.FirstOrDefault(e => e != null && e.IsCasting);
+
+            if (selectedUnit != null)
+            {
+                foreach (KeyValuePair<int, CastInterruptFunction> keyValuePair in InterruptSpells)
                 {
-                    foreach (KeyValuePair<int, CastInterruptFunction> keyValuePair in InterruptSpells)
+                    if (keyValuePair.Value(selectedUnit))
                     {
-                        if (keyValuePair.Value(selectedUnit))
-                        {
-                            AmeisenLogger.I.Log("Interrupt", $"Interrupted \"{selectedUnit}\" using CastInterruptFunction: \"{keyValuePair.Key}\"");
-                            return true;
-                        }
+                        AmeisenLogger.I.Log("Interrupt", $"Interrupted \"{selectedUnit}\" using CastInterruptFunction: \"{keyValuePair.Key}\"");
+                        return true;
                     }
                 }
             }

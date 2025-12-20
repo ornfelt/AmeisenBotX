@@ -124,7 +124,13 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
         {
             if (TargetProviderHeal.Get(out IEnumerable<IWowUnit> unitsToHeal))
             {
-                Bot.Wow.ChangeTarget(unitsToHeal.First().Guid);
+                IWowUnit unitToHeal = unitsToHeal.FirstOrDefault();
+                if (unitToHeal == null)
+                {
+                    return false;
+                }
+
+                Bot.Wow.ChangeTarget(unitToHeal.Guid);
 
                 if (Bot.Target != null)
                 {
