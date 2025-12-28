@@ -90,7 +90,7 @@ namespace AmeisenBotX.Test
         {
             List<WowBasicItem> items = ItemFactory.ParseItemList(testItemList);
             Assert.IsInstanceOfType(items, typeof(List<WowBasicItem>));
-            Assert.IsTrue(items.Count == 3);
+            Assert.AreEqual(3, items.Count);
 
             WowBasicItem item0 = ItemFactory.BuildSpecificItem(items[0]);
             WowBasicItem item1 = ItemFactory.BuildSpecificItem(items[1]);

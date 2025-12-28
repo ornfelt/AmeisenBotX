@@ -1,4 +1,4 @@
-﻿namespace AmeisenBotX.Core.Engines.Movement.Enums
+namespace AmeisenBotX.Core.Engines.Movement.Enums
 {
     public enum PreventMovementType
     {

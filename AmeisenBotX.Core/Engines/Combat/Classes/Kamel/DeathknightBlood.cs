@@ -1,4 +1,4 @@
-﻿using AmeisenBotX.Common.Utils;
+using AmeisenBotX.Common.Utils;
 using AmeisenBotX.Core.Engines.Combat.Helpers.Targets;
 using AmeisenBotX.Core.Engines.Combat.Helpers.Targets.Logics.Dps;
 using AmeisenBotX.Core.Engines.Movement.Enums;
@@ -6,6 +6,7 @@ using AmeisenBotX.Core.Managers.Character.Comparators;
 using AmeisenBotX.Core.Managers.Character.Talents.Objects;
 using AmeisenBotX.Wow.Objects;
 using AmeisenBotX.Wow.Objects.Enums;
+using AmeisenBotX.WowWotlk.Constants.Classes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -49,7 +50,10 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
 
         public WowClass WowClass => WowClass.Deathknight;
 
+        public WowSpecialization Specialization => WowSpecialization.DeathknightBlood;
+
         private AmeisenBotInterfaces Bot { get; } = bot;
+        private DateTime LastTargetSwitch = DateTime.MinValue;
 
         public void AttackTarget()
         {
@@ -115,7 +119,12 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
 
                 if (firstTarget != null && Bot.Objects.Player.TargetGuid != firstTarget.Guid)
                 {
-                    Bot.Wow.ChangeTarget(firstTarget.Guid);
+                    // Stickiness check
+                    if (!IWowUnit.IsValidAlive(Bot.Target) || (DateTime.UtcNow - LastTargetSwitch).TotalSeconds > 2)
+                    {
+                        Bot.Wow.ChangeTarget(firstTarget.Guid);
+                        LastTargetSwitch = DateTime.UtcNow;
+                    }
                 }
             }
 
@@ -134,21 +143,21 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
             //List<string> myBuffs = Bot.NewBot.GetBuffs(WowLuaUnit.Player.ToString());
             //myBuffs.Any(e => e.Equals("Chains of Ice"))
 
-            if (Bot.Wow.GetSpellCooldown("Death Grip") <= 0 && distanceToTarget <= 30)
+            if (Bot.Wow.GetSpellCooldown(DeathknightWotlk.DeathGrip) <= 0 && distanceToTarget <= 30)
             {
-                Bot.Wow.CastSpell("Death Grip");
+                Bot.Wow.CastSpell(DeathknightWotlk.DeathGrip);
                 return;
             }
             if (target.IsFleeing && distanceToTarget <= 30)
             {
-                Bot.Wow.CastSpell("Chains of Ice");
+                Bot.Wow.CastSpell(DeathknightWotlk.ChainsOfIce);
                 return;
             }
 
-            if (Bot.Wow.GetSpellCooldown("Army of the Dead") <= 0 &&
+            if (Bot.Wow.GetSpellCooldown(DeathknightWotlk.ArmyOfTheDead) <= 0 &&
                 IsOneOfAllRunesReady())
             {
-                Bot.Wow.CastSpell("Army of the Dead");
+                Bot.Wow.CastSpell(DeathknightWotlk.ArmyOfTheDead);
                 return;
             }
 
@@ -158,11 +167,11 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
                 .ToList();
 
             if ((unitsNearPlayer.Count > 2 &&
-                Bot.Wow.GetSpellCooldown("Blood Boil") <= 0 &&
+                Bot.Wow.GetSpellCooldown(DeathknightWotlk.BloodBoil) <= 0 &&
                 Bot.Wow.IsRuneReady(0)) ||
                 Bot.Wow.IsRuneReady(1))
             {
-                Bot.Wow.CastSpell("Blood Boil");
+                Bot.Wow.CastSpell(DeathknightWotlk.BloodBoil);
                 return;
             }
 
@@ -172,19 +181,58 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
                 .ToList();
 
             if (unitsNearTarget.Count > 2 &&
-                Bot.Wow.GetSpellCooldown("Death and Decay") <= 0 &&
+                Bot.Wow.GetSpellCooldown(DeathknightWotlk.DeathAndDecay) <= 0 &&
                 IsOneOfAllRunesReady())
             {
-                Bot.Wow.CastSpell("Death and Decay");
+                Bot.Wow.CastSpell(DeathknightWotlk.DeathAndDecay);
                 Bot.Wow.ClickOnTerrain(target.Position);
                 return;
             }
 
-            if ((Bot.Wow.GetSpellCooldown("Icy Touch") <= 0 &&
+            if ((Bot.Wow.GetSpellCooldown(DeathknightWotlk.IcyTouch) <= 0 &&
                 Bot.Wow.IsRuneReady(2)) ||
                 Bot.Wow.IsRuneReady(3))
             {
-                Bot.Wow.CastSpell("Icy Touch");
+                Bot.Wow.CastSpell(DeathknightWotlk.IcyTouch);
+                return;
+            }
+
+            // Plague Strike (Unholy Rune)
+            if (Bot.Wow.GetSpellCooldown(DeathknightWotlk.PlagueStrike) <= 0 &&
+               (Bot.Wow.IsRuneReady(4) || Bot.Wow.IsRuneReady(5)))
+            {
+                Bot.Wow.CastSpell(DeathknightWotlk.PlagueStrike);
+                return;
+            }
+
+            // Heart Strike (Blood Rune) - Primary Damage
+            if (Bot.Wow.GetSpellCooldown(DeathknightWotlk.HeartStrike) <= 0 &&
+               (Bot.Wow.IsRuneReady(0) || Bot.Wow.IsRuneReady(1)))
+            {
+                Bot.Wow.CastSpell(DeathknightWotlk.HeartStrike);
+                return;
+            }
+
+            // Death Strike (Frost + Unholy) - Survival/Damage
+            if (Bot.Wow.GetSpellCooldown(DeathknightWotlk.DeathStrike) <= 0 &&
+               (Bot.Wow.IsRuneReady(2) || Bot.Wow.IsRuneReady(3)) && // Frost
+               (Bot.Wow.IsRuneReady(4) || Bot.Wow.IsRuneReady(5)))   // Unholy
+            {
+                Bot.Wow.CastSpell(DeathknightWotlk.DeathStrike);
+                return;
+            }
+
+            // Rune Strike (Dump Runic Power)
+            if (playerRunePower >= 20 && Bot.Wow.GetSpellCooldown(DeathknightWotlk.RuneStrike) <= 0)
+            {
+                Bot.Wow.CastSpell(DeathknightWotlk.RuneStrike);
+                return;
+            }
+
+            // Death Coil (Range Dump)
+            if (playerRunePower >= 40 && Bot.Wow.GetSpellCooldown(DeathknightWotlk.DeathCoil) <= 0)
+            {
+                Bot.Wow.CastSpell(DeathknightWotlk.DeathCoil);
                 return;
             }
         }

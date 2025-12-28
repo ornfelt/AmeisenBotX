@@ -1,4 +1,4 @@
-﻿using AmeisenBotX.Core.Engines.Combat.Helpers.Targets.Priority.Special;
+using AmeisenBotX.Core.Engines.Combat.Helpers.Targets.Priority.Special;
 using AmeisenBotX.Core.Engines.Combat.Helpers.Targets.Validation.Basic;
 using AmeisenBotX.Core.Engines.Combat.Helpers.Targets.Validation.Special;
 using AmeisenBotX.Core.Engines.Combat.Helpers.Targets.Validation.Util;

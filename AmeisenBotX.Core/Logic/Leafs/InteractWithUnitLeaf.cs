@@ -1,4 +1,4 @@
-﻿using AmeisenBotX.BehaviorTree.Enums;
+using AmeisenBotX.BehaviorTree.Enums;
 using AmeisenBotX.BehaviorTree.Objects;
 using AmeisenBotX.Common.Utils;
 using AmeisenBotX.Wow.Objects;
@@ -8,7 +8,7 @@ namespace AmeisenBotX.Core.Logic.Leafs
 {
     public class InteractWithUnitLeaf : MoveToLeaf
     {
-        public InteractWithUnitLeaf(AmeisenBotInterfaces bot, Func<IWowUnit> getUnit, INode child = null, float maxDistance = 3.2f, int interactInterval = 1500) : base(bot, getUnit, null, maxDistance)
+        public InteractWithUnitLeaf(AmeisenBotInterfaces bot, Func<IWowUnit> getUnit, INode child = null, float maxDistance = 3.2f, int interactInterval = 1500, string name = null) : base(bot, getUnit, null, maxDistance, name)
         {
             Child = child;
             InteractionEvent = new(TimeSpan.FromMilliseconds(interactInterval));
@@ -27,7 +27,7 @@ namespace AmeisenBotX.Core.Logic.Leafs
 
             if (status == BtStatus.Success)
             {
-                Bot.Wow.InteractWithUnit(GetUnit());
+                Bot.Wow.InteractWithUnit(GetObj() as IWowUnit);
             }
 
             return Child?.Execute() ?? BtStatus.Success;

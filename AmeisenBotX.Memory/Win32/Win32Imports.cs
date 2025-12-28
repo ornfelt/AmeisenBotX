@@ -7,9 +7,18 @@ namespace AmeisenBotX.Memory.Win32
     {
         public const int GWL_STYLE = -16;
         public const int STARTF_USESHOWWINDOW = 1;
+        public const int STARTF_USEPOSITION = 4;
+        public const int STARTF_USESIZE = 2;
+        public const int SW_HIDE = 0;
+        public const int SW_SHOW = 5;
         public const int SW_SHOWMINNOACTIVE = 7;
         public const int SWP_NOACTIVATE = 0x10;
         public const int SWP_NOZORDER = 0x4;
+
+        public const uint EVENT_OBJECT_CREATE = 0x8000;
+        public const uint WINEVENT_OUTOFCONTEXT = 0;
+        public const uint WINEVENT_SKIPOWNPROCESS = 0x0002;
+
 
         [Flags]
         public enum AllocationType
@@ -163,6 +172,22 @@ namespace AmeisenBotX.Memory.Win32
             out ProcessInformation lpProcessInformation
         );
 
+        [LibraryImport("kernel32")]
+        internal static partial nint CreateRemoteThread(nint hProcess, nint lpThreadAttributes, nint dwStackSize, nint lpStartAddress, nint lpParameter, uint dwCreationFlags, out nint lpThreadId);
+
+        [LibraryImport("kernel32")]
+        internal static partial int WaitForSingleObject(nint hHandle, int dwMilliseconds);
+
+        [LibraryImport("kernel32")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        internal static partial bool GetExitCodeThread(nint hThread, out int lpExitCode);
+
+        [LibraryImport("kernel32", EntryPoint = "GetModuleHandleA", StringMarshalling = StringMarshalling.Utf8)]
+        internal static partial nint GetModuleHandle(string lpModuleName);
+
+        [LibraryImport("kernel32", EntryPoint = "GetProcAddress", StringMarshalling = StringMarshalling.Utf8)]
+        internal static partial nint GetProcAddress(nint hModule, string lpProcName);
+
         [LibraryImport("user32")]
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static partial bool GetClientRect(nint windowHandle, ref Rect rectangle);
@@ -172,6 +197,10 @@ namespace AmeisenBotX.Memory.Win32
 
         [LibraryImport("user32")]
         internal static partial nint GetParent(nint hWnd);
+
+        [LibraryImport("user32")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        internal static partial bool ShowWindow(nint hWnd, int nCmdShow);
 
         [LibraryImport("user32", EntryPoint = "GetWindowLongA")]
         internal static partial int GetWindowLong(nint windowHandle, int index);
@@ -306,5 +335,98 @@ namespace AmeisenBotX.Memory.Win32
             public nint hStdOutput;
             public nint hStdError;
         }
+
+        public delegate void WinEventProc(nint hWinEventHook, uint eventType, nint hwnd, int idObject, int idChild, uint dwEventThread, uint dwmsEventTime);
+
+        [LibraryImport("user32")]
+        public static partial nint SetWinEventHook(uint eventMin, uint eventMax, nint hmodWinEventProc, WinEventProc lpfnWinEventProc, uint idProcess, uint idThread, uint dwFlags);
+
+        [LibraryImport("user32")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static partial bool UnhookWinEvent(nint hWinEventHook);
+        [LibraryImport("ntdll")]
+        internal static partial int NtCreateThreadEx
+        (
+            out nint threadHandle,
+            ProcessAccessFlag desiredAccess,
+            nint objectAttributes,
+            nint processHandle,
+            nint startAddress,
+            nint parameter,
+            [MarshalAs(UnmanagedType.Bool)] bool createSuspended,
+            int stackZeroBits,
+            int sizeOfStackCommit,
+            int sizeOfStackReserve,
+            nint bytesBuffer
+        );
+
+        [LibraryImport("ntdll")]
+        internal static partial int NtWaitForSingleObject(nint handle, [MarshalAs(UnmanagedType.Bool)] bool alertable, nint timeout);
+
+        public enum ThreadInfoClass
+        {
+            ThreadBasicInformation = 0,
+        }
+
+        [StructLayout(LayoutKind.Sequential)]
+        public struct THREAD_BASIC_INFORMATION
+        {
+            public int ExitStatus;
+            public nint TebBaseAddress;
+            public ClientId ClientId;
+            public nint AffinityMask;
+            public int Priority;
+            public int BasePriority;
+        }
+
+        [LibraryImport("ntdll")]
+        internal static partial int NtQueryInformationThread
+        (
+            nint threadHandle,
+            ThreadInfoClass threadInformationClass,
+            out THREAD_BASIC_INFORMATION threadInformation,
+            int threadInformationLength,
+            out int returnLength
+        );
+        [StructLayout(LayoutKind.Sequential)]
+        public struct PROCESS_BASIC_INFORMATION
+        {
+            public nint ExitStatus;
+            public nint PebBaseAddress;
+            public nint AffinityMask;
+            public nint BasePriority;
+            public nint UniqueProcessId;
+            public nint InheritedFromUniqueProcessId;
+        }
+
+        public enum PROCESSINFOCLASS
+        {
+            ProcessBasicInformation = 0,
+            ProcessDebugPort = 7,
+            ProcessWow64Information = 26,
+            ProcessImageFileName = 27,
+            ProcessBreakOnTermination = 29
+        }
+
+        [LibraryImport("ntdll")]
+        internal static partial int NtQueryInformationProcess
+        (
+            nint processHandle,
+            PROCESSINFOCLASS processInformationClass,
+            out nint processInformation, // Use nint buffer or out struct for single value case (Wow64 uses nint ptr to PEB)
+            int processInformationLength,
+            out int returnLength
+        );
+
+        // Overload for retrieving PROCESS_BASIC_INFORMATION struct
+        [LibraryImport("ntdll")]
+        internal static partial int NtQueryInformationProcess
+        (
+            nint processHandle,
+            PROCESSINFOCLASS processInformationClass,
+            out PROCESS_BASIC_INFORMATION processInformation,
+            int processInformationLength,
+            out int returnLength
+        );
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace AmeisenBotX.Core.Engines.Test
+namespace AmeisenBotX.Core.Engines.Test
 {
     public interface ITestEngine
     {

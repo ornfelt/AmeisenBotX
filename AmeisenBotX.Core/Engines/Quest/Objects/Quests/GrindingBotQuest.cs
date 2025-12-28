@@ -1,4 +1,4 @@
-﻿using AmeisenBotX.Core.Engines.Quest.Objects.Objectives;
+using AmeisenBotX.Core.Engines.Quest.Objects.Objectives;
 using System.Collections.Generic;
 using System.Linq;
 

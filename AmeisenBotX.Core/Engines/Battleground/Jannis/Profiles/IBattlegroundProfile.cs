@@ -1,4 +1,4 @@
-﻿namespace AmeisenBotX.Core.Engines.Battleground.Jannis.Profiles
+namespace AmeisenBotX.Core.Engines.Battleground.Jannis.Profiles
 {
     public interface IBattlegroundProfile
     {

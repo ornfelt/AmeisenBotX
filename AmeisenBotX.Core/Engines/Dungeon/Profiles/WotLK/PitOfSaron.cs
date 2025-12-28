@@ -1,4 +1,4 @@
-﻿using AmeisenBotX.Common.Math;
+using AmeisenBotX.Common.Math;
 using AmeisenBotX.Core.Engines.Dungeon.Enums;
 using AmeisenBotX.Core.Engines.Dungeon.Objects;
 using AmeisenBotX.Wow.Objects.Enums;

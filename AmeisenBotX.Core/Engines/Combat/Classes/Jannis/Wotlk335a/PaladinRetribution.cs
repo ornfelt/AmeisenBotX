@@ -1,8 +1,8 @@
-﻿using AmeisenBotX.Core.Engines.Combat.Helpers.Aura.Objects;
+using AmeisenBotX.Core.Engines.Combat.Helpers.Aura.Objects;
 using AmeisenBotX.Core.Managers.Character.Comparators;
 using AmeisenBotX.Core.Managers.Character.Talents.Objects;
 using AmeisenBotX.Wow.Objects.Enums;
-using AmeisenBotX.Wow335a.Constants;
+using AmeisenBotX.WowWotlk.Constants.Classes;
 using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
@@ -11,16 +11,16 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
     {
         public PaladinRetribution(AmeisenBotInterfaces bot) : base(bot)
         {
-            MyAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, Paladin335a.BlessingOfMight, () => TryCastSpell(Paladin335a.BlessingOfMight, Bot.Wow.PlayerGuid, true)));
-            MyAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, Paladin335a.RetributionAura, () => TryCastSpell(Paladin335a.RetributionAura, 0, true)));
-            MyAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, Paladin335a.SealOfVengeance, () => TryCastSpell(Paladin335a.SealOfVengeance, 0, true)));
+            MyAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, PaladinWotlk.BlessingOfMight, () => TryCastSpell(PaladinWotlk.BlessingOfMight, Bot.Wow.PlayerGuid, true)));
+            MyAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, PaladinWotlk.RetributionAura, () => TryCastSpell(PaladinWotlk.RetributionAura, 0, true)));
+            MyAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, PaladinWotlk.SealOfVengeance, () => TryCastSpell(PaladinWotlk.SealOfVengeance, 0, true)));
 
             InterruptManager.InterruptSpells = new()
             {
-                { 0, (x) => TryCastSpell(Paladin335a.HammerOfJustice, x.Guid, true) }
+                { 0, (x) => TryCastSpell(PaladinWotlk.HammerOfJustice, x.Guid, true) }
             };
 
-            GroupAuraManager.SpellsToKeepActiveOnParty.Add((Paladin335a.BlessingOfMight, (spellName, guid) => TryCastSpell(spellName, guid, true)));
+            GroupAuraManager.SpellsToKeepActiveOnParty.Add((PaladinWotlk.BlessingOfMight, (spellName, guid) => TryCastSpell(spellName, guid, true)));
         }
 
         public override string Description => "FCFS based CombatClass for the Retribution Paladin spec.";
@@ -91,18 +91,18 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
             if (TryFindTarget(TargetProviderDps, out _))
             {
                 if ((Bot.Player.HealthPercentage < 20.0
-                        && TryCastSpell(Paladin335a.LayOnHands, Bot.Wow.PlayerGuid))
+                        && TryCastSpell(PaladinWotlk.LayOnHands, Bot.Wow.PlayerGuid))
                     || (Bot.Player.HealthPercentage < 60.0
-                        && TryCastSpell(Paladin335a.HolyLight, Bot.Wow.PlayerGuid, true)))
+                        && TryCastSpell(PaladinWotlk.HolyLight, Bot.Wow.PlayerGuid, true)))
                 {
                     return;
                 }
 
-                if (((Bot.Player.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == Paladin335a.SealOfVengeance) || Bot.Player.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == Paladin335a.SealOfWisdom))
-                        && TryCastSpell(Paladin335a.JudgementOfLight, Bot.Wow.TargetGuid, true))
-                    || TryCastSpell(Paladin335a.AvengingWrath, 0, true)
+                if (((Bot.Player.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == PaladinWotlk.SealOfVengeance) || Bot.Player.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == PaladinWotlk.SealOfWisdom))
+                        && TryCastSpell(PaladinWotlk.JudgementOfLight, Bot.Wow.TargetGuid, true))
+                    || TryCastSpell(PaladinWotlk.AvengingWrath, 0, true)
                     || (Bot.Player.ManaPercentage < 80.0
-                        && TryCastSpell(Paladin335a.DivinePlea, 0, true)))
+                        && TryCastSpell(PaladinWotlk.DivinePlea, 0, true)))
                 {
                     return;
                 }
@@ -110,12 +110,12 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
                 if (Bot.Target != null)
                 {
                     if ((Bot.Player.HealthPercentage < 20.0
-                            && TryCastSpell(Paladin335a.HammerOfWrath, Bot.Wow.TargetGuid, true))
-                        || TryCastSpell(Paladin335a.CrusaderStrike, Bot.Wow.TargetGuid, true)
-                        || TryCastSpell(Paladin335a.DivineStorm, Bot.Wow.TargetGuid, true)
-                        || TryCastSpell(Paladin335a.Consecration, Bot.Wow.TargetGuid, true)
-                        || TryCastSpell(Paladin335a.Exorcism, Bot.Wow.TargetGuid, true)
-                        || TryCastSpell(Paladin335a.HolyWrath, Bot.Wow.TargetGuid, true))
+                            && TryCastSpell(PaladinWotlk.HammerOfWrath, Bot.Wow.TargetGuid, true))
+                        || TryCastSpell(PaladinWotlk.CrusaderStrike, Bot.Wow.TargetGuid, true)
+                        || TryCastSpell(PaladinWotlk.DivineStorm, Bot.Wow.TargetGuid, true)
+                        || TryCastSpell(PaladinWotlk.Consecration, Bot.Wow.TargetGuid, true)
+                        || TryCastSpell(PaladinWotlk.Exorcism, Bot.Wow.TargetGuid, true)
+                        || TryCastSpell(PaladinWotlk.HolyWrath, Bot.Wow.TargetGuid, true))
                     {
                         return;
                     }

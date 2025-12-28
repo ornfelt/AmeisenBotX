@@ -1,4 +1,4 @@
-﻿using AmeisenBotX.Wow.Objects.Enums;
+using AmeisenBotX.Wow.Objects.Enums;
 using System;
 
 namespace AmeisenBotX.Core.Managers.Character.Inventory.Objects

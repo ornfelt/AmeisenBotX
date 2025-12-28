@@ -1,4 +1,4 @@
-﻿using AmeisenBotX.BehaviorTree.Enums;
+using AmeisenBotX.BehaviorTree.Enums;
 using System;
 
 namespace AmeisenBotX.BehaviorTree.Objects
@@ -8,6 +8,8 @@ namespace AmeisenBotX.BehaviorTree.Objects
     /// </summary>
     public class Selector(Func<bool> condition, INode nodeA, INode nodeB) : IComposite
     {
+        public string Name { get; } = null;
+
         public INode[] Children { get; } = [nodeA, nodeB];
 
         public Func<bool> Condition { get; } = condition;
@@ -25,6 +27,8 @@ namespace AmeisenBotX.BehaviorTree.Objects
 
     public class Selector<T>(Func<T, bool> condition, INode<T> nodeA, INode<T> nodeB) : IComposite<T>
     {
+        public string Name { get; } = null;
+
         public INode<T>[] Children { get; } = [nodeA, nodeB];
 
         public Func<T, bool> Condition { get; } = condition;

@@ -1,4 +1,4 @@
-﻿namespace AmeisenBotX.Core.Engines.PvP
+namespace AmeisenBotX.Core.Engines.PvP
 {
     public interface IPvpEngine
     {

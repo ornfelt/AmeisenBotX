@@ -1,5 +1,6 @@
-﻿using AmeisenBotX.Wow.Objects;
+using AmeisenBotX.Wow.Objects;
 using AmeisenBotX.Wow.Objects.Enums;
+using AmeisenBotX.WowWotlk.Constants.Dungeons;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,22 +41,25 @@ namespace AmeisenBotX.Core.Engines.Combat.Helpers.Targets.Validation.Special
 
         private bool DrakTharonKeepIsNovosChanneling(IWowUnit unit)
         {
-            return unit.CurrentlyChannelingSpellId == 47346;
+            return unit.CurrentlyChannelingSpellId == DrakTharonKeep.NovosChannelingSpellId;
         }
 
         private bool HallsOfReflectionIsTheLichKing(IWowUnit unit)
         {
-            return Bot.Db.GetUnitName(unit, out string name) && name == "The Lich King";
+            return Bot.Db.GetUnitName(unit, out string name) && name == HallsOfReflection.TheLichKing;
         }
 
         private bool TempleOfTheJadeSerpent(IWowUnit unit)
         {
-            return unit.Auras.Any(e => e.SpellId is 113315 or 106062); // Peril and Strafe || Wise Mari
+            // Note: Cataclysm+ dungeon - spell IDs kept for reference
+            return unit.Auras.Any(e => e.SpellId is 113315 or 106062);
         }
 
         private bool ThroneOfTidesIsLadyNazjarChanneling(IWowUnit unit)
         {
+            // Note: Cataclysm dungeon - spell ID kept for reference
             return unit.CurrentlyChannelingSpellId == 75683;
         }
     }
 }
+

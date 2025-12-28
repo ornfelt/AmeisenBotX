@@ -1,4 +1,4 @@
-﻿using AmeisenBotX.BehaviorTree.Enums;
+using AmeisenBotX.BehaviorTree.Enums;
 using System;
 
 namespace AmeisenBotX.BehaviorTree.Objects
@@ -9,6 +9,8 @@ namespace AmeisenBotX.BehaviorTree.Objects
     /// </summary>
     public class DualSelector(Func<bool> conditionA, Func<bool> conditionB, INode nodeNone, INode nodeA, INode nodeB, INode nodeBoth) : IComposite
     {
+        public string Name { get; } = null;
+
         public INode[] Children { get; } = [nodeNone, nodeA, nodeB, nodeBoth];
 
         public Func<bool> ConditionA { get; } = conditionA;
@@ -22,14 +24,21 @@ namespace AmeisenBotX.BehaviorTree.Objects
 
         public INode GetNodeToExecute()
         {
-            return ConditionA() && ConditionB()
-                ? Children[3]
-                : ConditionA() && !ConditionB() ? Children[1] : !ConditionA() && ConditionB() ? Children[2] : Children[0];
+            // Cache condition results to prevent multiple evaluations
+            bool a = ConditionA();
+            bool b = ConditionB();
+
+            return a && b ? Children[3]
+                 : a && !b ? Children[1]
+                 : !a && b ? Children[2]
+                 : Children[0];
         }
     }
 
     public class DualSelector<T>(Func<T, bool> conditionA, Func<T, bool> conditionB, INode<T> nodeNone, INode<T> nodeA, INode<T> nodeB, INode<T> nodeBoth) : IComposite<T>
     {
+        public string Name { get; } = null;
+
         public INode<T>[] Children { get; } = [nodeNone, nodeA, nodeB, nodeBoth];
 
         public Func<T, bool> ConditionA { get; } = conditionA;
@@ -43,11 +52,14 @@ namespace AmeisenBotX.BehaviorTree.Objects
 
         public INode<T> GetNodeToExecute(T blackboard)
         {
-            return ConditionA(blackboard) && ConditionB(blackboard)
-                ? Children[3]
-                : ConditionA(blackboard) && !ConditionB(blackboard)
-                    ? Children[1]
-                    : !ConditionA(blackboard) && ConditionB(blackboard) ? Children[2] : Children[0];
+            // Cache condition results to prevent multiple evaluations
+            bool a = ConditionA(blackboard);
+            bool b = ConditionB(blackboard);
+
+            return a && b ? Children[3]
+                 : a && !b ? Children[1]
+                 : !a && b ? Children[2]
+                 : Children[0];
         }
     }
 }

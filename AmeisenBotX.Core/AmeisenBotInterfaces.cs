@@ -1,4 +1,4 @@
-﻿using AmeisenBotX.Common.Math;
+using AmeisenBotX.Common.Math;
 using AmeisenBotX.Common.Storage;
 using AmeisenBotX.Common.Utils;
 using AmeisenBotX.Core.Engines.AI;
@@ -16,6 +16,7 @@ using AmeisenBotX.Core.Engines.Test;
 using AmeisenBotX.Core.Logic.Idle;
 using AmeisenBotX.Core.Managers.Character;
 using AmeisenBotX.Core.Managers.Chat;
+using AmeisenBotX.Core.Managers.Party;
 using AmeisenBotX.Core.Managers.Threat;
 using AmeisenBotX.RconClient;
 using AmeisenBotX.Wow;
@@ -31,61 +32,100 @@ using System.Runtime.CompilerServices;
 
 namespace AmeisenBotX.Core
 {
+    /// <summary>
+    /// Central access point for all bot subsystems.
+    /// Provides convenience properties and helper methods used throughout the bot logic.
+    /// </summary>
     public class AmeisenBotInterfaces
     {
+        #region Engine References
+
         public IBattlegroundEngine Battleground { get; set; }
-
-        public ICharacterManager Character { get; set; }
-
-        public IChatManager Chat { get; set; }
-
-        public ICombatAi CombatAi { get; set; }
-
-        public ICombatClass CombatClass { get; set; }
-
-        public ICombatlogParser CombatLog { get; set; }
-
-        public IAmeisenBotDb Db { get; set; }
-
         public IDungeonEngine Dungeon { get; set; }
-
         public IGrindingEngine Grinding { get; set; }
-
-        public IdleActionManager IdleActions { get; set; }
-
         public IJobEngine Jobs { get; set; }
-
-        public IWowUnit LastTarget => Objects.LastTarget;
-
-        public WowMemoryApi Memory => Wow.Memory;
-
         public IMovementEngine Movement { get; set; }
-
-        public IObjectProvider Objects => Wow.ObjectProvider;
-
-        public IPathfindingHandler PathfindingHandler { get; set; }
-
-        public IWowUnit Pet => Objects.Pet;
-
-        public IWowPlayer Player => Objects.Player;
-
         public IPvpEngine Pvp { get; set; }
-
         public IQuestEngine Quest { get; set; }
-
-        public AmeisenBotRconClient Rcon { get; set; }
-
-        public StorageManager Storage { get; set; }
-
         public ITacticEngine Tactic { get; set; }
-
-        public IWowUnit Target => Objects.Target;
-
         public ITestEngine Test { get; set; }
 
+        #endregion
+
+        #region Combat
+
+        public ICombatClass CombatClass { get; set; }
+        public ICombatAi CombatAi { get; set; }
+        public ICombatlogParser CombatLog { get; set; }
         public ThreatManager Threat { get; set; }
 
+        #endregion
+
+        #region Managers
+
+        public ICharacterManager Character { get; set; }
+        public IChatManager Chat { get; set; }
+        public IPartyManager Party { get; set; }
+        public IdleActionManager IdleActions { get; set; }
+        public IPathfindingHandler PathfindingHandler { get; set; }
+
+        #endregion
+
+        #region Core Accessors
+
+        /// <summary>WoW interface for memory reading, Lua execution, DBC access.</summary>
         public IWowInterface Wow { get; set; }
+
+        /// <summary>Memory API for low-level process manipulation.</summary>
+        public WowMemoryApi Memory => Wow.Memory;
+
+        /// <summary>Object manager for game objects.</summary>
+        public IObjectProvider Objects => Wow.ObjectProvider;
+
+        /// <summary>Database cache for reactions, spell names, etc.</summary>
+        public IAmeisenBotDb Db { get; set; }
+
+        /// <summary>Persistent storage manager.</summary>
+        public StorageManager Storage { get; set; }
+
+        /// <summary>Remote console client.</summary>
+        public AmeisenBotRconClient Rcon { get; set; }
+
+        /// <summary>Bot configuration.</summary>
+        public AmeisenBotConfig Config { get; set; }
+
+        /// <summary>Reference to the behavior tree for debugging.</summary>
+        public BehaviorTree.Tree BehaviorTree { get; set; }
+
+        #endregion
+
+        #region Quick Accessors
+
+        /// <summary>Current player character.</summary>
+        public IWowPlayer Player => Objects.Player;
+
+        /// <summary>Current target.</summary>
+        public IWowUnit Target => Objects.Target;
+
+        /// <summary>Last target.</summary>
+        public IWowUnit LastTarget => Objects.LastTarget;
+
+        /// <summary>Player's pet.</summary>
+        public IWowUnit Pet => Objects.Pet;
+
+        #endregion
+
+        #region State Flags
+
+        /// <summary>
+        /// Indicates if the bot is currently looting.
+        /// Movement providers should respect this state.
+        /// </summary>
+        public bool IsLooting { get; set; }
+
+        #endregion
+
+        #region Query Methods - AoE
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public IEnumerable<IWowDynobject> GetAoeSpells(Vector3 position, float extends = 2.0f)
@@ -121,10 +161,16 @@ namespace AmeisenBotX.Core
                 .FirstOrDefault();
         }
 
+        #endregion
+
+        #region Query Methods - NPC Finding
+
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public IWowUnit GetClosestTrainerByEntryId(int entryId)
         {
-            return Objects.All.OfType<IWowUnit>()
+            return Player == null
+                ? null
+                : Objects.All.OfType<IWowUnit>()
                 .Where(e => !e.IsDead && e.IsTrainer && Db.GetReaction(Player, e) != WowUnitReaction.Hostile && e.EntryId == entryId)
                 .OrderBy(e => e.Position.GetDistance(Player.Position))
                 .FirstOrDefault();
@@ -133,15 +179,26 @@ namespace AmeisenBotX.Core
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public IWowUnit GetClosestVendorByEntryId(int entryId)
         {
-            return Objects.All.OfType<IWowUnit>()
+            return Player == null
+                ? null
+                : Objects.All.OfType<IWowUnit>()
                 .Where(e => !e.IsDead && e.IsVendor && Db.GetReaction(Player, e) != WowUnitReaction.Hostile && e.EntryId == entryId)
                 .OrderBy(e => e.Position.GetDistance(Player.Position))
                 .FirstOrDefault();
         }
 
+        #endregion
+
+        #region Query Methods - Combat
+
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public IEnumerable<T> GetEnemiesInCombatWithMe<T>(Vector3 position, float distance) where T : IWowUnit
         {
+            if (Player == null)
+            {
+                return [];
+            }
+
             return GetNearEnemies<T>(position, distance)  // is hostile
                 .Where(e => e.IsInCombat                  // needs to be in combat
                          && e.TargetGuid == Player.Guid); // targets us
@@ -150,6 +207,11 @@ namespace AmeisenBotX.Core
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public IEnumerable<T> GetEnemiesInCombatWithParty<T>(Vector3 position, float distance) where T : IWowUnit
         {
+            if (Player == null)
+            {
+                return [];
+            }
+
             return GetNearEnemies<T>(position, distance)                                // is hostile
                 .Where(e => e.IsInCombat && (e.IsTaggedByMe || !e.IsTaggedByOther)      // needs to be in combat and tagged by us or no one else
                          && (e.TargetGuid == Player.Guid                                // targets us
@@ -175,6 +237,11 @@ namespace AmeisenBotX.Core
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public IEnumerable<T> GetEnemiesOrNeutralsInCombatWithMe<T>(Vector3 position, float distance) where T : IWowUnit
         {
+            if (Player == null)
+            {
+                return [];
+            }
+
             return GetNearEnemiesOrNeutrals<T>(position, distance) // is hostile/neutral
                 .Where(e => e.IsInCombat                           // needs to be in combat
                          && e.TargetGuid == Player.Guid);          // targets us
@@ -183,6 +250,11 @@ namespace AmeisenBotX.Core
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public IEnumerable<T> GetEnemiesOrNeutralsInCombatWithParty<T>(Vector3 position, float distance) where T : IWowUnit
         {
+            if (Player == null)
+            {
+                return [];
+            }
+
             return GetNearEnemiesOrNeutrals<T>(position, distance)                      // is hostile
                 .Where(e => e.IsInCombat && (e.IsTaggedByMe || !e.IsTaggedByOther)      // needs to be in combat and tagged by us or no one else
                          && (e.TargetGuid == Player.Guid                                // targets us
@@ -192,6 +264,11 @@ namespace AmeisenBotX.Core
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public IEnumerable<T> GetEnemiesOrNeutralsTargetingMe<T>(Vector3 position, float distance) where T : IWowUnit
         {
+            if (Player == null)
+            {
+                return [];
+            }
+
             return GetNearEnemiesOrNeutrals<T>(position, distance)  // is hostile/neutral
                 .Where(e => e.TargetGuid == Player.Guid); // targets us
         }
@@ -199,6 +276,11 @@ namespace AmeisenBotX.Core
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public IEnumerable<T> GetEnemiesTargetingMe<T>(Vector3 position, float distance) where T : IWowUnit
         {
+            if (Player == null)
+            {
+                return [];
+            }
+
             return GetNearEnemies<T>(position, distance)  // is hostile
                 .Where(e => e.TargetGuid == Player.Guid); // targets us
         }
@@ -213,17 +295,34 @@ namespace AmeisenBotX.Core
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public bool IsHostileReaction(IWowUnit unit)
+        {
+            if (Player == null)
+            {
+                return false;
+            }
+
+            WowUnitReaction reaction = Db.GetReaction(Player, unit);
+            return reaction is WowUnitReaction.Hostile or WowUnitReaction.Hated or WowUnitReaction.Unfriendly or WowUnitReaction.Neutral;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public IEnumerable<T> GetNearEnemies<T>(Vector3 position, float distance) where T : IWowUnit
         {
             return Objects.All.OfType<T>()
-                .Where(e => !e.IsDead && !e.IsNotAttackable                      // is alive and attackable
-                         && (Db.GetReaction(Player, e) == WowUnitReaction.Hostile || Db.GetReaction(Player, e) == WowUnitReaction.Neutral || Db.GetReaction(Player, e) == WowUnitReaction.Unfriendly || Db.GetReaction(Player, e) == WowUnitReaction.Hated) // is hostile
-                         && e.Position.GetDistance(position) < distance);        // is in range
+                .Where(e => !e.IsDead && !e.IsNotAttackable    // is alive and attackable
+                         && IsHostileReaction(e)               // is hostile
+                         && e.Position.GetDistance(position) < distance);  // is in range
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public IEnumerable<T> GetNearEnemiesOrNeutrals<T>(Vector3 position, float distance) where T : IWowUnit
         {
+            if (Player == null)
+            {
+                return [];
+            }
+
             return Objects.All.OfType<T>()
                 .Where(e => !e.IsDead && !e.IsNotAttackable                       // is alive and attackable
                          && Db.GetReaction(Player, e) != WowUnitReaction.Friendly // is hostile/neutral
@@ -233,9 +332,14 @@ namespace AmeisenBotX.Core
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public IEnumerable<T> GetNearFriends<T>(Vector3 position, float distance) where T : IWowUnit
         {
+            if (Player == null)
+            {
+                return [];
+            }
+
             return Objects.All.OfType<T>()
                 .Where(e => !e.IsDead && !e.IsNotAttackable                       // is alive and attackable
-                         && Db.GetReaction(Player, e) == WowUnitReaction.Friendly // is hostile
+                         && Db.GetReaction(Player, e) == WowUnitReaction.Friendly // is friendly
                          && e.Position.GetDistance(position) < distance);         // is in range
         }
 
@@ -260,6 +364,10 @@ namespace AmeisenBotX.Core
             return obj != null;
         }
 
+        #endregion
+
+        #region Query Methods - Icons
+
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public Bitmap GetIconBySpellname(string spellname)
         {
@@ -277,5 +385,7 @@ namespace AmeisenBotX.Core
         {
             return Wow.Mpq.GetIcon(Wow.Dbc.GetItemIconPath(itemId));
         }
+
+        #endregion
     }
 }

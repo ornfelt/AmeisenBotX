@@ -1,4 +1,4 @@
-﻿using AmeisenBotX.Common.Math;
+using AmeisenBotX.Common.Math;
 using AmeisenBotX.Common.Utils;
 using AmeisenBotX.Core.Engines.Jobs.Enums;
 using AmeisenBotX.Core.Engines.Jobs.Profiles;
@@ -6,6 +6,7 @@ using AmeisenBotX.Core.Engines.Movement.Enums;
 using AmeisenBotX.Core.Managers.Character.Inventory.Objects;
 using AmeisenBotX.Logging;
 using AmeisenBotX.Logging.Enums;
+using AmeisenBotX.Wow;
 using AmeisenBotX.Wow.Objects;
 using AmeisenBotX.Wow.Objects.Enums;
 using System;
@@ -24,7 +25,6 @@ namespace AmeisenBotX.Core.Engines.Jobs
             Config = config;
 
             MiningEvent = new(TimeSpan.FromSeconds(1));
-            BlacklistEvent = new(TimeSpan.FromSeconds(1));
             MailSentEvent = new(TimeSpan.FromSeconds(3));
 
             NodeBlacklist = [];
@@ -33,8 +33,6 @@ namespace AmeisenBotX.Core.Engines.Jobs
         public List<ulong> NodeBlacklist { get; set; }
 
         public IJobProfile Profile { get; set; }
-
-        private TimegatedEvent BlacklistEvent { get; }
 
         private AmeisenBotInterfaces Bot { get; }
 
@@ -167,23 +165,9 @@ namespace AmeisenBotX.Core.Engines.Jobs
 
                 IWowGameobject nearestNode = Bot.Objects.All.OfType<IWowGameobject>()
                     .Where(e => !NodeBlacklist.Contains(e.Guid)
-                             && Enum.IsDefined(typeof(WowOreId), e.DisplayId)
+                             && WowHarvestHelper.IsOre(e.DisplayId)
                              && miningProfile.OreTypes.Contains((WowOreId)e.DisplayId)
-                             && (((WowOreId)e.DisplayId) == WowOreId.Copper
-                             || (((WowOreId)e.DisplayId) == WowOreId.Tin && miningSkill >= 65)
-                             || (((WowOreId)e.DisplayId) == WowOreId.Silver && miningSkill >= 75)
-                             || (((WowOreId)e.DisplayId) == WowOreId.Iron && miningSkill >= 125)
-                             || (((WowOreId)e.DisplayId) == WowOreId.Gold && miningSkill >= 155)
-                             || (((WowOreId)e.DisplayId) == WowOreId.Mithril && miningSkill >= 175)
-                             || (((WowOreId)e.DisplayId) == WowOreId.DarkIron && miningSkill >= 230)
-                             || (((WowOreId)e.DisplayId) == WowOreId.SmallThorium && miningSkill >= 245)
-                             || (((WowOreId)e.DisplayId) == WowOreId.RichThorium && miningSkill >= 275)
-                             || (((WowOreId)e.DisplayId) == WowOreId.FelIron && miningSkill >= 300)
-                             || (((WowOreId)e.DisplayId) == WowOreId.Adamantite && miningSkill >= 325)
-                             || (((WowOreId)e.DisplayId) == WowOreId.Cobalt && miningSkill >= 350)
-                             || (((WowOreId)e.DisplayId) == WowOreId.Khorium && miningSkill >= 375)
-                             || (((WowOreId)e.DisplayId) == WowOreId.Saronite && miningSkill >= 400)
-                             || (((WowOreId)e.DisplayId) == WowOreId.Titanium && miningSkill >= 450)))
+                             && WowHarvestHelper.CanHarvestOre((WowOreId)e.DisplayId, miningSkill, Bot.Objects.MapId))
                     .OrderBy(x => x.Position.GetDistance(Bot.Player.Position))
                     .FirstOrDefault();
 

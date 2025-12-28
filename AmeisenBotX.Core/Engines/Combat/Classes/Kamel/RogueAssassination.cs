@@ -1,4 +1,4 @@
-﻿using AmeisenBotX.Core.Managers.Character.Comparators;
+using AmeisenBotX.Core.Managers.Character.Comparators;
 using AmeisenBotX.Core.Managers.Character.Talents.Objects;
 using AmeisenBotX.Wow.Objects.Enums;
 using System.Collections.Generic;

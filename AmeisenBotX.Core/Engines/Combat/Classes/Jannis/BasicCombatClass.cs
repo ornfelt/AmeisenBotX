@@ -1,4 +1,4 @@
-﻿using AmeisenBotX.Common.Math;
+using AmeisenBotX.Common.Math;
 using AmeisenBotX.Common.Storage;
 using AmeisenBotX.Common.Utils;
 using AmeisenBotX.Core.Engines.Combat.Helpers;
@@ -46,9 +46,9 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis
             CooldownManager = new(Bot.Character.SpellBook.Spells);
             RessurrectionTargets = [];
 
-            TargetProviderDps = new TargetManager(Bot, WowRole.Dps, TimeSpan.FromMilliseconds(250));
-            TargetProviderTank = new TargetManager(Bot, WowRole.Tank, TimeSpan.FromMilliseconds(250));
-            TargetProviderHeal = new TargetManager(Bot, WowRole.Heal, TimeSpan.FromMilliseconds(250));
+            TargetProviderDps = new TargetManager(Bot, WowRole.Dps, TimeSpan.FromMilliseconds(500));
+            TargetProviderTank = new TargetManager(Bot, WowRole.Tank, TimeSpan.FromMilliseconds(500));
+            TargetProviderHeal = new TargetManager(Bot, WowRole.Heal, TimeSpan.FromMilliseconds(500));
 
             MyAuraManager = new(Bot);
             TargetAuraManager = new(Bot);
@@ -113,6 +113,11 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis
 
         public abstract string Version { get; }
 
+        /// <summary>
+        /// Override to specify spec for item evaluation. Defaults to None (falls back to role-based weights).
+        /// </summary>
+        public virtual WowSpecialization Specialization => WowSpecialization.None;
+
         public abstract bool WalkBehindEnemy { get; }
 
         public abstract WowClass WowClass { get; }
@@ -126,6 +131,7 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis
         protected List<Func<bool, bool>> SpellAbortFunctions { get; }
 
         private ulong CurrentCastTargetGuid { get; set; }
+        private DateTime LastTargetSwitch { get; set; } = DateTime.MinValue;
 
         public virtual void AttackTarget()
         {
@@ -442,30 +448,54 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis
             });
         }
 
+        // 500ms minimum between target changes - prevents spam
+        private DateTime LastTargetChangeAttempt { get; set; } = DateTime.MinValue;
+        private static readonly TimeSpan MinTargetChangeInterval = TimeSpan.FromMilliseconds(500);
+
         protected bool TryFindTarget(ITargetProvider targetProvider, out IEnumerable<IWowUnit> targets)
         {
+            // GLOBAL THROTTLE: Max 20 target changes per second
+            if (DateTime.UtcNow - LastTargetChangeAttempt < MinTargetChangeInterval)
+            {
+                targets = null;
+                // If we have a valid target, return true to prevent loop
+                return Bot.Player.TargetGuid != 0;
+            }
+            LastTargetChangeAttempt = DateTime.UtcNow;
+
             if (targetProvider.Get(out targets))
             {
                 IWowUnit unit = targets.FirstOrDefault();
 
                 if (unit != null)
                 {
+                    // Already targeting this unit
                     if (Bot.Player.TargetGuid == unit.Guid)
                     {
-                        if (IWowUnit.IsValidAlive(Bot.Target))
-                        {
-                            return true;
-                        }
+                        // CRITICAL FIX: Don't check Bot.Target validity here!
+                        // Bot.Target can be null/stale even when TargetGuid is correct.
+                        // Just return true - we have the right target selected.
+                        return true;
                     }
-                    else
+
+                    // Stickiness check: Don't switch if we switched recently (<2s) AND current target is still valid
+                    if (Bot.Player.TargetGuid != 0 && (DateTime.UtcNow - LastTargetSwitch).TotalSeconds < 2)
                     {
-                        Bot.Wow.ChangeTarget(unit.Guid);
-                        return false;
+                        // We have a target and switched recently - keep it
+                        return true;
                     }
+
+                    // Change to new target
+                    Bot.Wow.ChangeTarget(unit.Guid);
+                    LastTargetSwitch = DateTime.UtcNow;
+                    return true; // Successfully set new target
                 }
             }
 
-            Bot.Wow.ChangeTarget(0);
+            // No valid targets found
+            // CRITICAL: Do NOT clear target here - this causes the loop!
+            // Only clear if we explicitly need to (handled elsewhere)
+            targets = null;
             return false;
         }
 

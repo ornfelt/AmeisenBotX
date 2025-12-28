@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -10,7 +10,7 @@ namespace AmeisenBotX.Core.Logic.Idle.Actions.Utils
         {
             Name = name;
             Actions = actions;
-            SelectedAction = Actions.ElementAt(new Random().Next(0, Actions.Count));
+            SelectedAction = Actions.ElementAt(Random.Shared.Next(0, Actions.Count));
         }
 
         public bool AutopilotOnly => Actions.Any(e => e.AutopilotOnly);
@@ -40,7 +40,7 @@ namespace AmeisenBotX.Core.Logic.Idle.Actions.Utils
 
         public override string ToString()
         {
-            return $"{(AutopilotOnly ? "(🤖) " : "")}{Name}";
+            return $"{(AutopilotOnly ? "(??) " : "")}{Name}";
         }
     }
 }

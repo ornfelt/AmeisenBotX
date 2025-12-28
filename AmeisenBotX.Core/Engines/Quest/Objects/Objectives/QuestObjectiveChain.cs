@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Quest.Objects.Objectives
 {

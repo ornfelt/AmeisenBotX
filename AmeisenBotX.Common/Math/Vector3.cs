@@ -37,7 +37,11 @@ namespace AmeisenBotX.Common.Math
 
         public Vector3(float[] values)
         {
-            if (values == null || values.Length < 3) throw new ArgumentException("Array must have at least 3 elements");
+            if (values == null || values.Length < 3)
+            {
+                throw new ArgumentException("Array must have at least 3 elements");
+            }
+
             X = values[0]; Y = values[1]; Z = values[2];
         }
 
@@ -116,9 +120,16 @@ namespace AmeisenBotX.Common.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 Lerp(Vector3 a, Vector3 b, float t)
         {
-            if (t < 0f) t = 0f;
-            else if (t > 1f) t = 1f;
-            return new Vector3(a.X + (b.X - a.X) * t, a.Y + (b.Y - a.Y) * t, a.Z + (b.Z - a.Z) * t);
+            if (t < 0f)
+            {
+                t = 0f;
+            }
+            else if (t > 1f)
+            {
+                t = 1f;
+            }
+
+            return new Vector3(a.X + ((b.X - a.X) * t), a.Y + ((b.Y - a.Y) * t), a.Z + ((b.Z - a.Z) * t));
         }
 
 
@@ -165,14 +176,23 @@ namespace AmeisenBotX.Common.Math
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public Vector3 Truncated(float max)
         {
-            if (LengthSquared() > max * max) return Normalized() * max;
-            return this;
+            return LengthSquared() > max * max ? Normalized() * max : this;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Rotate(float degrees)
         {
             float radians = degrees * (MathF.PI / 180f);
+            float ca = MathF.Cos(radians);
+            float sa = MathF.Sin(radians);
+            float oldX = X;
+            X = (ca * oldX) - (sa * Y);
+            Y = (sa * oldX) + (ca * Y);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void RotateRadians(float radians)
+        {
             float ca = MathF.Cos(radians);
             float sa = MathF.Sin(radians);
             float oldX = X;
@@ -189,7 +209,31 @@ namespace AmeisenBotX.Common.Math
         public void Add(Vector3 v) { X += v.X; Y += v.Y; Z += v.Z; }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void Add(float f) { X += f; Y += f; Z += f; }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void Subtract(Vector3 v) { X -= v.X; Y -= v.Y; Z -= v.Z; }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void Subtract(float f) { X -= f; Y -= f; Z -= f; }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void Divide(Vector3 v) { X /= v.X; Y /= v.Y; Z /= v.Z; }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void Divide(float f) { X /= f; Y /= f; Z /= f; }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void Limit(float max) => Truncate(MathF.Abs(max));
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public readonly float[] ToArray() => [X, Y, Z];
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Multiply(float n) { X *= n; Y *= n; Z *= n; }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void Multiply(Vector3 v) { X *= v.X; Y *= v.Y; Z *= v.Z; }
 
         public readonly float GetDistance(Vector3 v) => DistanceTo(v);
         public readonly float GetDistance2D(Vector3 v) => DistanceTo2D(v);
@@ -204,9 +248,9 @@ namespace AmeisenBotX.Common.Math
             unchecked
             {
                 int hash = 17;
-                hash = hash * 23 + X.GetHashCode();
-                hash = hash * 23 + Y.GetHashCode();
-                hash = hash * 23 + Z.GetHashCode();
+                hash = (hash * 23) + X.GetHashCode();
+                hash = (hash * 23) + Y.GetHashCode();
+                hash = (hash * 23) + Z.GetHashCode();
                 return hash;
             }
         }

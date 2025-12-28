@@ -1,5 +1,4 @@
-﻿using AmeisenBotX.Common.Math;
-using AmeisenBotX.Wow.Objects.Enums;
+﻿using AmeisenBotX.Wow.Objects.Enums;
 using AmeisenBotX.Wow.Objects.Raw.SubStructs;
 using System.Collections.Generic;
 

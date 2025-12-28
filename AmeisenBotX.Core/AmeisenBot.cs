@@ -17,7 +17,6 @@ using AmeisenBotX.Core.Engines.Jobs.Profiles.Gathering;
 using AmeisenBotX.Core.Engines.Jobs.Profiles.Gathering.Jannis;
 using AmeisenBotX.Core.Engines.Movement;
 using AmeisenBotX.Core.Engines.Movement.Pathfinding;
-using AmeisenBotX.Core.Engines.Movement.Providers.Combat;
 using AmeisenBotX.Core.Engines.PvP;
 using AmeisenBotX.Core.Engines.Quest;
 using AmeisenBotX.Core.Engines.Quest.Profiles;
@@ -46,12 +45,12 @@ using AmeisenBotX.Wow.Cache.Enums;
 using AmeisenBotX.Wow.Combatlog;
 using AmeisenBotX.Wow.Objects;
 using AmeisenBotX.Wow.Objects.Enums;
-using AmeisenBotX.Wow335a;
-using AmeisenBotX.Wow335a.Combatlog.Enums;
-using AmeisenBotX.Wow335a.Offsets;
-using AmeisenBotX.Wow548;
-using AmeisenBotX.Wow548.Combatlog.Enums;
-using AmeisenBotX.Wow548.Offsets;
+using AmeisenBotX.WowMop;
+using AmeisenBotX.WowMop.Combatlog.Enums;
+using AmeisenBotX.WowMop.Offsets;
+using AmeisenBotX.WowWotlk;
+using AmeisenBotX.WowWotlk.Combatlog.Enums;
+using AmeisenBotX.WowWotlk.Offsets;
 using Microsoft.CSharp;
 using System;
 using System.CodeDom.Compiler;
@@ -63,6 +62,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace AmeisenBotX.Core
@@ -178,7 +178,7 @@ namespace AmeisenBotX.Core
 
             Bot.Chat = new DefaultChatManager(Config, ProfileFolder);
             Bot.Tactic = new DefaultTacticEngine(Bot);
-            Bot.Character = new DefaultCharacterManager(Bot.Wow, Bot.Memory, Config);
+            Bot.Character = new DefaultCharacterManager(Bot, Config);
 
             Bot.Db = LocalAmeisenBotDb.FromJson(Path.Combine(ProfileFolder, "db.json"), Bot.Wow);
 
@@ -189,15 +189,21 @@ namespace AmeisenBotX.Core
             Bot.Grinding = new DefaultGrindEngine(Bot, Config);
             Bot.Pvp = new DefaultPvpEngine(Bot, Config);
             Bot.Threat = new ThreatManager(Bot, Config);
+            Bot.Party = new Managers.Party.PartyManager(Bot);
             Bot.Test = new DefaultTestEngine(Bot, Config);
 
             Bot.PathfindingHandler = new AmeisenNavigationHandler(Config.NavmeshServerIp, Config.NameshServerPort);
             Bot.Movement = new MovementEngine(Bot, Config);
 
-            // Initialize Combat AI (Strategic Brain)
-            Bot.CombatAi = new AiCombatMovementProvider(Bot, Config);
-
             Logic = new AmeisenBotLogic(Config, Bot);
+            InventoryOrganizer = new InventoryOrganizer(Bot, Config);
+            QuestItemUser = new QuestItemUserRoutine(Bot, Config);
+            UpgradeEquipper = new EquipUpgradesRoutine(Bot, Config);
+
+            BagUpdateEvent = new(TimeSpan.FromSeconds(1));
+            EquipmentUpdateEvent = new(TimeSpan.FromSeconds(1));
+
+            try { OnBagChanged(0, null); } catch { }
 
             AmeisenLogger.I.Log("AmeisenBot", "Finished setting up Bot", LogLevel.Verbose);
 
@@ -315,6 +321,21 @@ namespace AmeisenBotX.Core
         public IEnumerable<IQuestProfile> QuestProfiles { get; private set; }
 
         public MpqBridge Mpq { get; private set; }
+
+        /// <summary>
+        /// Inventory organizer for sorting and managing bag contents.
+        /// </summary>
+        public InventoryOrganizer InventoryOrganizer { get; private set; }
+
+        /// <summary>
+        /// Auto-uses usable quest items.
+        /// </summary>
+        public QuestItemUserRoutine QuestItemUser { get; private set; }
+
+        /// <summary>
+        /// Automatically equips better gear.
+        /// </summary>
+        public EquipUpgradesRoutine UpgradeEquipper { get; private set; }
 
         private TimegatedEvent BagUpdateEvent { get; set; }
 
@@ -644,6 +665,18 @@ namespace AmeisenBotX.Core
                 Bot.Character.UpdateBags();
 
                 Bot.Character.Inventory.Update();
+
+                // Organize inventory if enabled (max every 10s, handled internally)
+                if (Config.AutoDestroyTrash)
+                {
+                    InventoryOrganizer?.Update();
+                }
+
+                // Try to use any usable quest items
+                QuestItemUser?.Update();
+
+                // Check for upgrades
+                UpgradeEquipper?.Update();
             }
 
             // open dungeon reward bags automatically
@@ -665,7 +698,7 @@ namespace AmeisenBotX.Core
         {
             if (Config.TrainSpells && Bot.Target != null && !Bot.Target.IsClassTrainer && !Bot.Target.IsProfessionTrainer)
             {
-                TrainAllSpellsRoutine.Run(Bot, Config);
+                TrainAllSpellsRoutine.Run(Bot);
                 Bot.Character.LastLevelTrained = Bot.Player.Level;
             }
         }
@@ -737,8 +770,41 @@ namespace AmeisenBotX.Core
                         Bot.Wow.RollOnLoot(rollId, WowRollType.Need);
                         return;
                     }
+                    else if (Bot.Character.Skills.ContainsKey("Enchanting"))
+                    {
+                        bool canDisenchant = false;
+                        try
+                        {
+                            string command = $"myDisenchantCheck = tostring(select(8, GetLootRollItemInfo({rollId})))";
+                            if (Bot.Wow.ExecuteLuaAndRead((command, "myDisenchantCheck"), out string result))
+                            {
+                                canDisenchant = result is "true" or "1" or "True";
+                            }
+                        }
+                        catch
+                        {
+                            canDisenchant = false;
+                        }
+
+                        if (canDisenchant)
+                        {
+                            if (Config.AutoDestroyTrash && Bot.Character.Inventory.FreeBagSlots < 1)
+                            {
+                                Bot.Character.Inventory.TryDestroyTrash();
+                            }
+
+                            Bot.Wow.RollOnLoot(rollId, WowRollType.Disenchant);
+                            return;
+                        }
+                    }
                     else if (Config.RollGreedOnItems && item.Price > 0)
                     {
+                        // do i need to destroy trash?
+                        if (Config.AutoDestroyTrash && Bot.Character.Inventory.FreeBagSlots < 1)
+                        {
+                            Bot.Character.Inventory.TryDestroyTrash();
+                        }
+
                         Bot.Wow.RollOnLoot(rollId, WowRollType.Greed);
                         return;
                     }
@@ -756,7 +822,8 @@ namespace AmeisenBotX.Core
             }
             else
             {
-                Bot.Wow.LootEverything();
+                // Use smart looting: prioritize valuable items, manage bag space
+                SmartLootRoutine.Run(Bot, Config);
             }
         }
 
@@ -769,7 +836,7 @@ namespace AmeisenBotX.Core
 
             if (Config.AutoSell)
             {
-                SellItemsRoutine.Run(Bot, Config);
+                SellItemsRoutine.Run(Bot, Config, SellItemsRoutine.GetSellableItems(Bot, Config));
             }
         }
 
@@ -857,7 +924,7 @@ namespace AmeisenBotX.Core
         {
             if (Config.AutoAcceptQuests)
             {
-                Bot.Wow.AcceptQuests();
+                QuestTurnInRoutine.HandleQuestGossip(Bot, Config);
             }
         }
 
@@ -865,7 +932,15 @@ namespace AmeisenBotX.Core
         {
             if (Config.AutoAcceptQuests)
             {
-                Bot.Wow.ClickUiElement("QuestFrameCompleteQuestButton");
+                QuestTurnInRoutine.HandleQuestProgress(Bot, Config);
+            }
+        }
+
+        private void OnQuestComplete(long timestamp, List<string> args)
+        {
+            if (Config.AutoAcceptQuests)
+            {
+                QuestTurnInRoutine.HandleQuestComplete(Bot, Config);
             }
         }
 
@@ -878,6 +953,12 @@ namespace AmeisenBotX.Core
         {
             if (Config.AutoAcceptQuests)
             {
+                // Clear bag space for potential rewards from this quest later
+                if (Config.AutoDestroyTrash && Bot.Character.Inventory.FreeBagSlots < 2)
+                {
+                    TrashItemsRoutine.TryDeleteOneItem(Bot, Config);
+                }
+
                 Bot.Wow.LuaDoString("AcceptQuest();");
             }
         }
@@ -1079,27 +1160,84 @@ namespace AmeisenBotX.Core
             };
         }
 
+        /// <summary>
+        /// Primary tick handler with defensive coding.
+        /// Includes exception handling and humanization jitter.
+        /// The behavior tree handles all game state transitions (startup, login, loading screens, etc.)
+        /// </summary>
         private void StateMachineTimerTick()
         {
-            if (IsRunning)
+            if (!IsRunning)
             {
-                ExecutionMsStopwatch.Restart();
-                Logic.Tick();
+                return;
+            }
 
+            ExecutionMsStopwatch.Restart();
+
+            try
+            {
+                // Humanization: Add micro-jitter to timing (±3ms) - non-blocking
+                int jitterIterations = Random.Shared.Next(0, 3000);
+                if (jitterIterations > 0)
+                {
+                    Thread.SpinWait(jitterIterations);
+                }
+
+                // Pre-tick validation: ensure game state is safe
+                if (!ValidateGameState())
+                {
+                    HandleInvalidGameState();
+                    return;
+                }
+
+                // The behavior tree handles all state transitions:
+                // - Starting WoW process
+                // - Setting up interface
+                // - Login sequence
+                // - Loading screens
+                // - In-game logic
+                Logic.Tick();
+            }
+            catch (ObjectDisposedException)
+            {
+                // Game objects disposed during tick - expected during zoning
+                AmeisenLogger.I.Log("Tick", "Object disposed during tick, skipping", LogLevel.Debug);
+            }
+            catch (InvalidOperationException ex) when (ex.Message.Contains("Collection was modified"))
+            {
+                // LINQ enumeration interrupted - retry next tick
+                AmeisenLogger.I.Log("Tick", "Collection modified during enumeration", LogLevel.Warning);
+            }
+            catch (NullReferenceException ex)
+            {
+                // Defensive: log and continue rather than crash
+                AmeisenLogger.I.Log("Tick", $"NullRef in tick: {ex.Message}", LogLevel.Error);
+            }
+            catch (Exception ex)
+            {
+                // Last resort catch - log everything but don't crash
+                AmeisenLogger.I.Log("Tick", $"UNHANDLED in tick: {ex.GetType().Name}: {ex.Message}", LogLevel.Error);
+            }
+            finally
+            {
                 CurrentExecutionMs = ExecutionMsStopwatch.ElapsedMilliseconds;
                 CurrentExecutionCount++;
             }
         }
 
+
         private void SubscribeToWowEvents()
         {
-            BagUpdateEvent = new(TimeSpan.FromSeconds(1));
-            EquipmentUpdateEvent = new(TimeSpan.FromSeconds(1));
-
             // Request Events
             Bot.Wow.Events?.Subscribe("PARTY_INVITE_REQUEST", OnPartyInvitation);
             Bot.Wow.Events?.Subscribe("CONFIRM_SUMMON", OnSummonRequest);
             Bot.Wow.Events?.Subscribe("READY_CHECK", OnReadyCheck);
+
+            // Party Events (for PartyManager updates)
+            Bot.Wow.Events?.Subscribe("GROUP_ROSTER_UPDATE", (t, a) => Bot.Party?.Update());
+            Bot.Wow.Events?.Subscribe("PARTY_MEMBERS_CHANGED", (t, a) => Bot.Party?.Update());
+            Bot.Wow.Events?.Subscribe("UNIT_CONNECTION", (t, a) => Bot.Party?.ForceUpdate()); // Player comes online
+            Bot.Wow.Events?.Subscribe("PLAYER_ENTERING_WORLD", (t, a) => Bot.Party?.ForceUpdate()); // Initial scan
 
             // Loot/Item Events
             Bot.Wow.Events?.Subscribe("LOOT_OPENED", OnLootWindowOpened);
@@ -1122,12 +1260,15 @@ namespace AmeisenBotX.Core
             Bot.Wow.Events?.Subscribe("QUEST_DETAIL", OnShowQuestFrame);
             Bot.Wow.Events?.Subscribe("QUEST_ACCEPT_CONFIRM", OnQuestAcceptConfirm);
             Bot.Wow.Events?.Subscribe("QUEST_GREETING", OnQuestGreeting);
-            Bot.Wow.Events?.Subscribe("QUEST_COMPLETE", OnQuestProgress);
+            Bot.Wow.Events?.Subscribe("QUEST_COMPLETE", OnQuestComplete);
             Bot.Wow.Events?.Subscribe("QUEST_PROGRESS", OnQuestProgress);
             Bot.Wow.Events?.Subscribe("GOSSIP_SHOW", OnQuestGreeting);
 
             // Trading Events
             Bot.Wow.Events?.Subscribe("TRADE_ACCEPT_UPDATE", OnTradeAcceptUpdate);
+
+            // Inspect Events (for PartyManager spec detection)
+            Bot.Wow.Events?.Subscribe("INSPECT_TALENT_READY", (t, a) => Bot.Party?.OnInspectReady());
 
             // Chat Events
             Bot.Wow.Events?.Subscribe("CHAT_MSG_ADDON", (t, a) => Bot.Chat.TryParseMessage(WowChat.ADDON, t, a));
@@ -1164,5 +1305,85 @@ namespace AmeisenBotX.Core
             Bot.Wow.Events?.Subscribe("MERCHANT_SHOW", OnMerchantShow);
             Bot.Wow.Events?.Subscribe("TRAINER_SHOW", OnClassTrainerShow);
         }
+
+        /// <summary>
+        /// Validates that the game is in a safe state for bot execution.
+        /// </summary>
+        private bool ValidateGameState()
+        {
+            // 1. Startup Logic: If process doesn't exist, we MUST allow Tick() so the logic can start the process/attach.
+            if (Bot.Memory?.Process == null || Bot.Memory.Process.HasExited)
+            {
+                return true;
+            }
+
+            try
+            {
+                // 2. Login Logic (PRIORITY):
+                // Check Player BEFORE IsReady. If Player is null, we are likely at Login/CharSelect.
+                // IsReady might be false at Login, so we must not block here.
+                if (Bot.Player == null)
+                {
+                    return true;
+                }
+
+                // 3. WoW Interface Check:
+                // If we have a Player but WoW is not ready, something is wrong.
+                if (Bot.Wow == null || !Bot.Wow.IsReady)
+                {
+                    if (CurrentExecutionCount % 100 == 0)
+                    {
+                        AmeisenLogger.I.Log("ValidateState", "Bot.Wow.IsReady is false (with Player?)", LogLevel.Debug);
+                    }
+
+                    return false;
+                }
+
+                // 4. In-Game Safety:
+                // If we have a Player and WoW is Ready, ensure the World is loaded.
+                if (Bot.Objects == null || !Bot.Objects.IsWorldLoaded)
+                {
+                    if (CurrentExecutionCount % 100 == 0)
+                    {
+                        AmeisenLogger.I.Log("ValidateState", "World not loaded (Zoning?)", LogLevel.Debug);
+                    }
+
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                // If checking state throws exception (memory error?), allow Tick to handle recovery.
+                if (CurrentExecutionCount % 100 == 0)
+                {
+                    AmeisenLogger.I.Log("ValidateState", $"Exception during check: {ex.Message}", LogLevel.Debug);
+                }
+
+                return true;
+            }
+
+            return true;
+        }
+
+        private void HandleInvalidGameState()
+        {
+            // Stop any pending movement to prevent stuck state
+            Bot.Movement?.StopMovement();
+
+            // Clear any decision state caches
+            if (Logic is AmeisenBotLogic abl)
+            {
+                abl.Reset();
+            }
+
+            // Throttle log (spam reduction)
+            if (CurrentExecutionCount % 100 == 0)
+            {
+                AmeisenLogger.I.Log("Tick", "Game state invalid, waiting for recovery", LogLevel.Debug);
+            }
+        }
     }
 }
+
+
+

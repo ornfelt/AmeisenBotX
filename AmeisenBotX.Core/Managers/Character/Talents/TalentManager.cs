@@ -1,4 +1,4 @@
-﻿using AmeisenBotX.Core.Managers.Character.Talents.Objects;
+using AmeisenBotX.Core.Managers.Character.Talents.Objects;
 using AmeisenBotX.Wow;
 using System;
 using System.Collections.Generic;

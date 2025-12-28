@@ -1,4 +1,4 @@
-﻿using AmeisenBotX.Common.Math;
+using AmeisenBotX.Common.Math;
 using AmeisenBotX.Core.Engines.Movement.Enums;
 using AmeisenBotX.Core.Managers.Character.Inventory.Objects;
 using AmeisenBotX.Wow.Cache.Enums;
@@ -136,7 +136,7 @@ namespace AmeisenBotX.Core.Logic.Idle.Actions
 
         public override string ToString()
         {
-            return $"{(AutopilotOnly ? "(🤖) " : "")}Go Fishing";
+            return $"{(AutopilotOnly ? "(??) " : "")}Go Fishing";
         }
 
         private bool IsFishingRodEquipped()

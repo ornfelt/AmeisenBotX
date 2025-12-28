@@ -1,4 +1,4 @@
-﻿using AmeisenBotX.BehaviorTree.Enums;
+using AmeisenBotX.BehaviorTree.Enums;
 
 namespace AmeisenBotX.BehaviorTree.Objects
 {
@@ -7,6 +7,8 @@ namespace AmeisenBotX.BehaviorTree.Objects
     /// </summary>
     public class Inverter(INode child) : INode
     {
+        public string Name { get; } = null;
+
         public INode Child { get; } = child;
 
         public BtStatus Execute()
@@ -33,6 +35,8 @@ namespace AmeisenBotX.BehaviorTree.Objects
 
     public class Inverter<T>(INode<T> child) : INode<T>
     {
+        public string Name { get; } = null;
+
         public INode<T> Child { get; } = child;
 
         public BtStatus Execute(T blackboard)

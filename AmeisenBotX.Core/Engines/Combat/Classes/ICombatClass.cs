@@ -1,4 +1,4 @@
-﻿using AmeisenBotX.Core.Managers.Character.Comparators;
+using AmeisenBotX.Core.Managers.Character.Comparators;
 using AmeisenBotX.Core.Managers.Character.Talents.Objects;
 using AmeisenBotX.Wow.Objects.Enums;
 using System.Collections.Generic;
@@ -68,6 +68,12 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes
         /// Version of the combat class.
         /// </summary>
         string Version { get; }
+
+        /// <summary>
+        /// Specialization for stat weight lookup.
+        /// Used by ItemEvaluator to determine best items for this spec.
+        /// </summary>
+        WowSpecialization Specialization { get; }
 
         /// <summary>
         /// Only used when you dont handle movement yourself. If this is true, the bot will always

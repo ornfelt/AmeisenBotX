@@ -1,4 +1,4 @@
-﻿using AmeisenBotX.Common.Utils;
+using AmeisenBotX.Common.Utils;
 using AmeisenBotX.Core.Engines.Movement.Enums;
 using AmeisenBotX.Core.Managers.Character.Comparators;
 using AmeisenBotX.Core.Managers.Character.Inventory.Objects;
@@ -68,9 +68,9 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
         protected BasicKamelClass()
         {
             //Revive Spells
-            spellCoolDown.Add(ancestralSpiritSpell, DateTime.Now);
-            spellCoolDown.Add(redemptionSpell, DateTime.Now);
-            spellCoolDown.Add(resurrectionSpell, DateTime.Now);
+            spellCoolDown.Add(ancestralSpiritSpell, DateTime.UtcNow);
+            spellCoolDown.Add(redemptionSpell, DateTime.UtcNow);
+            spellCoolDown.Add(resurrectionSpell, DateTime.UtcNow);
 
             //Basic
             AutoAttackEvent = new(TimeSpan.FromSeconds(1));
@@ -78,16 +78,16 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
             RevivePlayerEvent = new(TimeSpan.FromSeconds(4));
 
             //Race (Troll)
-            spellCoolDown.Add(BerserkingSpell, DateTime.Now);
+            spellCoolDown.Add(BerserkingSpell, DateTime.UtcNow);
 
             //Race (Draenei)
-            spellCoolDown.Add(giftOfTheNaaruSpell, DateTime.Now);
+            spellCoolDown.Add(giftOfTheNaaruSpell, DateTime.UtcNow);
 
             //Race (Dwarf)
-            spellCoolDown.Add(StoneformSpell, DateTime.Now);
+            spellCoolDown.Add(StoneformSpell, DateTime.UtcNow);
 
             //Race (Human)
-            spellCoolDown.Add(EveryManforHimselfSpell, DateTime.Now);
+            spellCoolDown.Add(EveryManforHimselfSpell, DateTime.UtcNow);
 
             PriorityTargetDisplayIds = [];
         }
@@ -135,6 +135,11 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
         public abstract bool WalkBehindEnemy { get; }
 
         public abstract WowClass WowClass { get; }
+
+        /// <summary>
+        /// Override to specify spec for item evaluation. Defaults to None.
+        /// </summary>
+        public virtual WowSpecialization Specialization => WowSpecialization.None;
 
         //follow the target
         public void AttackTarget()
@@ -301,9 +306,9 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
 
         public bool IsSpellReady(string spellName)
         {
-            if (DateTime.Now > spellCoolDown[spellName])
+            if (DateTime.UtcNow > spellCoolDown[spellName])
             {
-                spellCoolDown[spellName] = DateTime.Now + TimeSpan.FromMilliseconds(Bot.Wow.GetSpellCooldown(spellName));
+                spellCoolDown[spellName] = DateTime.UtcNow + TimeSpan.FromMilliseconds(Bot.Wow.GetSpellCooldown(spellName));
                 return true;
             }
 

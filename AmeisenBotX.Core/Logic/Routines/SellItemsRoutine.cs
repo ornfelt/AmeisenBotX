@@ -1,49 +1,34 @@
-﻿using AmeisenBotX.Core.Managers.Character.Inventory.Objects;
-using AmeisenBotX.Wow.Objects.Enums;
-using System;
+using AmeisenBotX.Core.Managers.Character.Inventory.Objects;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace AmeisenBotX.Core.Logic.Routines
 {
+    /// <summary>
+    /// Smart sell routine using shared ItemEvaluator logic.
+    /// Sells everything that is disposable, keeps profession tools/materials/consumables.
+    /// </summary>
     public static class SellItemsRoutine
     {
-        public static void Run(AmeisenBotInterfaces bot, AmeisenBotConfig config)
+        public static void Run(AmeisenBotInterfaces bot, AmeisenBotConfig config, List<IWowInventoryItem> itemsToSell)
         {
-            // create a copy of items here to prevent updates while selling
-            foreach (IWowInventoryItem item in bot.Character.Inventory.Items
-                .Where(e => e is { Price: > 0 })
-                .ToList())
+            // Create a copy of items to prevent updates while selling
+            foreach (IWowInventoryItem item in itemsToSell)
             {
-                IWowInventoryItem itemToSell = item;
-
-                if (config.ItemSellBlacklist.Any(e => e.Equals(item.Name, StringComparison.OrdinalIgnoreCase))
-                    || (!config.SellGrayItems && item.ItemQuality == (int)WowItemQuality.Poor)
-                    || (!config.SellWhiteItems && item.ItemQuality == (int)WowItemQuality.Common)
-                    || (!config.SellGreenItems && item.ItemQuality == (int)WowItemQuality.Uncommon)
-                    || (!config.SellBlueItems && item.ItemQuality == (int)WowItemQuality.Rare)
-                    || (!config.SellPurpleItems && item.ItemQuality == (int)WowItemQuality.Epic))
-                {
-                    continue;
-                }
-
-                if (bot.Character.IsItemAnImprovement(itemToSell, out IWowInventoryItem itemToReplace)
-                    && itemToReplace != null)
-                {
-                    // equip item and sell the other after
-                    itemToSell = itemToReplace;
-                    bot.Wow.EquipItem(item.Name, itemToReplace.EquipSlot);
-                }
-
-                if (bot.Objects.Player.Class == WowClass.Hunter &&
-                    itemToSell.GetType() == typeof(WowProjectile))
-                {
-                    continue;
-                }
-
-                bot.Wow.UseContainerItem(itemToSell.BagId, itemToSell.BagSlot);
+                // Sell the item
+                bot.Wow.UseContainerItem(item.BagId, item.BagSlot);
                 bot.Wow.CofirmStaticPopup();
             }
-            bot.Wow.ClearTarget();
+
+        }
+
+        public static List<IWowInventoryItem> GetSellableItems(AmeisenBotInterfaces bot, AmeisenBotConfig config)
+        {
+            return bot.Character.Inventory.Items
+                .Where(items => items.Price > 0)
+                .Where(item => ItemEvaluator.CanDisposeItem(bot, config, item, DisposeMode.Sell))
+                .Where(item => !bot.Character.IsItemAnImprovement(item, out _))
+                .ToList();
         }
     }
 }

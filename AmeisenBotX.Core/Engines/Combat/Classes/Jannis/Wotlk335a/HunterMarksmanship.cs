@@ -1,11 +1,11 @@
-﻿using AmeisenBotX.Core.Engines.Combat.Helpers;
+using AmeisenBotX.Core.Engines.Combat.Helpers;
 using AmeisenBotX.Core.Engines.Combat.Helpers.Aura.Objects;
 using AmeisenBotX.Core.Engines.Movement.Enums;
 using AmeisenBotX.Core.Managers.Character.Comparators;
 using AmeisenBotX.Core.Managers.Character.Talents.Objects;
 using AmeisenBotX.Wow.Objects;
 using AmeisenBotX.Wow.Objects.Enums;
-using AmeisenBotX.Wow335a.Constants;
+using AmeisenBotX.WowWotlk.Constants.Classes;
 using System;
 using System.Linq;
 
@@ -19,24 +19,24 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
             (
                 Bot,
                 TimeSpan.FromSeconds(15),
-                () => TryCastSpell(Hunter335a.MendPet, 0, true),
-                () => TryCastSpell(Hunter335a.CallPet, 0),
-                () => TryCastSpell(Hunter335a.RevivePet, 0)
+                () => TryCastSpell(HunterWotlk.MendPet, 0, true),
+                () => TryCastSpell(HunterWotlk.CallPet, 0),
+                () => TryCastSpell(HunterWotlk.RevivePet, 0)
             );
 
             MyAuraManager.Jobs.Add(new KeepBestActiveAuraJob(bot.Db,
             [
-                (Hunter335a.AspectOfTheViper, () => Bot.Player.ManaPercentage < 25.0 && TryCastSpell(Hunter335a.AspectOfTheViper, 0, true)),
-                (Hunter335a.AspectOfTheDragonhawk, () => (!bot.Character.SpellBook.IsSpellKnown(Hunter335a.AspectOfTheViper) || Bot.Player.ManaPercentage > 80.0) && TryCastSpell(Hunter335a.AspectOfTheDragonhawk, 0, true)),
-                (Hunter335a.AspectOfTheHawk, () => TryCastSpell(Hunter335a.AspectOfTheHawk, 0, true))
+                (HunterWotlk.AspectOfTheViper, () => Bot.Player.ManaPercentage < 25.0 && TryCastSpell(HunterWotlk.AspectOfTheViper, 0, true)),
+                (HunterWotlk.AspectOfTheDragonhawk, () => (!bot.Character.SpellBook.IsSpellKnown(HunterWotlk.AspectOfTheViper) || Bot.Player.ManaPercentage > 80.0) && TryCastSpell(HunterWotlk.AspectOfTheDragonhawk, 0, true)),
+                (HunterWotlk.AspectOfTheHawk, () => TryCastSpell(HunterWotlk.AspectOfTheHawk, 0, true))
             ]));
 
-            TargetAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, Hunter335a.HuntersMark, () => TryCastSpell(Hunter335a.HuntersMark, Bot.Wow.TargetGuid, true)));
-            TargetAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, Hunter335a.SerpentSting, () => TryCastSpell(Hunter335a.SerpentSting, Bot.Wow.TargetGuid, true)));
+            TargetAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, HunterWotlk.HuntersMark, () => TryCastSpell(HunterWotlk.HuntersMark, Bot.Wow.TargetGuid, true)));
+            TargetAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, HunterWotlk.SerpentSting, () => TryCastSpell(HunterWotlk.SerpentSting, Bot.Wow.TargetGuid, true)));
 
             InterruptManager.InterruptSpells = new()
             {
-                { 0, (x) => TryCastSpell(Hunter335a.SilencingShot, x.Guid, true) }
+                { 0, (x) => TryCastSpell(HunterWotlk.SilencingShot, x.Guid, true) }
             };
         }
 
@@ -127,7 +127,7 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
                     }
 
                     if (Bot.Player.HealthPercentage < 15
-                        && TryCastSpell(Hunter335a.FeignDeath, 0))
+                        && TryCastSpell(HunterWotlk.FeignDeath, 0))
                     {
                         return;
                     }
@@ -135,13 +135,13 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
                     if (distanceToTarget < 5.0)
                     {
                         if (ReadyToDisengage
-                            && TryCastSpell(Hunter335a.Disengage, 0, true))
+                            && TryCastSpell(HunterWotlk.Disengage, 0, true))
                         {
                             ReadyToDisengage = false;
                             return;
                         }
 
-                        if (TryCastSpell(Hunter335a.FrostTrap, 0, true))
+                        if (TryCastSpell(HunterWotlk.FrostTrap, 0, true))
                         {
                             ReadyToDisengage = true;
                             SlowTargetWhenPossible = true;
@@ -149,13 +149,13 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
                         }
 
                         if (Bot.Player.HealthPercentage < 30
-                            && TryCastSpell(Hunter335a.Deterrence, 0, true))
+                            && TryCastSpell(HunterWotlk.Deterrence, 0, true))
                         {
                             return;
                         }
 
-                        if (TryCastSpell(Hunter335a.RaptorStrike, Bot.Wow.TargetGuid, true)
-                            || TryCastSpell(Hunter335a.MongooseBite, Bot.Wow.TargetGuid, true))
+                        if (TryCastSpell(HunterWotlk.RaptorStrike, Bot.Wow.TargetGuid, true)
+                            || TryCastSpell(HunterWotlk.MongooseBite, Bot.Wow.TargetGuid, true))
                         {
                             return;
                         }
@@ -163,32 +163,32 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
                     else
                     {
                         if (SlowTargetWhenPossible
-                            && TryCastSpell(Hunter335a.Disengage, 0, true))
+                            && TryCastSpell(HunterWotlk.Disengage, 0, true))
                         {
                             SlowTargetWhenPossible = false;
                             return;
                         }
 
                         if (target.HealthPercentage < 20
-                            && TryCastSpell(Hunter335a.KillShot, Bot.Wow.TargetGuid, true))
+                            && TryCastSpell(HunterWotlk.KillShot, Bot.Wow.TargetGuid, true))
                         {
                             return;
                         }
 
-                        TryCastSpell(Hunter335a.KillCommand, Bot.Wow.TargetGuid, true);
-                        TryCastSpell(Hunter335a.RapidFire, Bot.Wow.TargetGuid);
+                        TryCastSpell(HunterWotlk.KillCommand, Bot.Wow.TargetGuid, true);
+                        TryCastSpell(HunterWotlk.RapidFire, Bot.Wow.TargetGuid);
 
                         if (Bot.GetNearEnemies<IWowUnit>(Bot.Target.Position, 16.0f).Count() > 2
-                            && TryCastSpell(Hunter335a.MultiShot, Bot.Wow.TargetGuid, true))
+                            && TryCastSpell(HunterWotlk.MultiShot, Bot.Wow.TargetGuid, true))
                         {
                             return;
                         }
 
-                        if ((Bot.Objects.All.OfType<IWowUnit>().Count(e => target.Position.GetDistance(e.Position) < 16) > 2 && TryCastSpell(Hunter335a.MultiShot, Bot.Wow.TargetGuid, true))
-                            || TryCastSpell(Hunter335a.ChimeraShot, Bot.Wow.TargetGuid, true)
-                            || TryCastSpell(Hunter335a.AimedShot, Bot.Wow.TargetGuid, true)
-                            || TryCastSpell(Hunter335a.ArcaneShot, Bot.Wow.TargetGuid, true)
-                            || TryCastSpell(Hunter335a.SteadyShot, Bot.Wow.TargetGuid, true))
+                        if ((Bot.Objects.All.OfType<IWowUnit>().Count(e => target.Position.GetDistance(e.Position) < 16) > 2 && TryCastSpell(HunterWotlk.MultiShot, Bot.Wow.TargetGuid, true))
+                            || TryCastSpell(HunterWotlk.ChimeraShot, Bot.Wow.TargetGuid, true)
+                            || TryCastSpell(HunterWotlk.AimedShot, Bot.Wow.TargetGuid, true)
+                            || TryCastSpell(HunterWotlk.ArcaneShot, Bot.Wow.TargetGuid, true)
+                            || TryCastSpell(HunterWotlk.SteadyShot, Bot.Wow.TargetGuid, true))
                         {
                             return;
                         }

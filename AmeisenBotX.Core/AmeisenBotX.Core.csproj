@@ -37,8 +37,8 @@
     <ProjectReference Include="..\AmeisenBotX.Memory\AmeisenBotX.Memory.csproj" />
     <ProjectReference Include="..\AmeisenBotX.MPQ\AmeisenBotX.MPQ.csproj" />
     <ProjectReference Include="..\AmeisenBotX.RconClient\AmeisenBotX.RconClient.csproj" />
-    <ProjectReference Include="..\AmeisenBotX.Wow335a\AmeisenBotX.Wow335a.csproj" />
-    <ProjectReference Include="..\AmeisenBotX.Wow548\AmeisenBotX.Wow548.csproj" />
+    <ProjectReference Include="..\AmeisenBotX.WowWotlk\AmeisenBotX.WowWotlk.csproj" />
+    <ProjectReference Include="..\AmeisenBotX.WowMop\AmeisenBotX.WowMop.csproj" />
   </ItemGroup>
 
 </Project>

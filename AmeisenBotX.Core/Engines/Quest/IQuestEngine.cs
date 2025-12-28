@@ -1,4 +1,4 @@
-﻿using AmeisenBotX.Core.Engines.Quest.Profiles;
+using AmeisenBotX.Core.Engines.Quest.Profiles;
 using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Quest

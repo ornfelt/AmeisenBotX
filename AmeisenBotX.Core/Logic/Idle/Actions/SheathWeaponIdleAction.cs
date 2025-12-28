@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace AmeisenBotX.Core.Logic.Idle.Actions
 {
@@ -30,7 +30,7 @@ namespace AmeisenBotX.Core.Logic.Idle.Actions
 
         public override string ToString()
         {
-            return $"{(AutopilotOnly ? "(🤖) " : "")}Sheath Weapon";
+            return $"{(AutopilotOnly ? "(??) " : "")}Sheath Weapon";
         }
     }
 }

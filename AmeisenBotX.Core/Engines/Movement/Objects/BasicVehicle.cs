@@ -1,4 +1,4 @@
-﻿using AmeisenBotX.Common.Math;
+using AmeisenBotX.Common.Math;
 using AmeisenBotX.Core.Engines.Movement.Enums;
 using AmeisenBotX.Wow.Objects;
 using AmeisenBotX.Wow.Objects.Flags;
@@ -17,18 +17,34 @@ namespace AmeisenBotX.Core.Engines.Movement.Objects
 
         private AmeisenBotInterfaces Bot { get; } = bot;
 
-        private static readonly Random _rng = new Random();
-
         // CTM State
         private DateTime _lastMovePacket = DateTime.MinValue;
         private Vector3 _lastSentDirection = Vector3.Zero;
         private Vector3 _lastSentPosition = Vector3.Zero;
 
         // Solver Vars
-        private int _wallStuckCounter = 0;
         private Vector3 _targetRandomizer = Vector3.Zero;
 
-        public void Update(MoveCharacter moveCharacter, JumpCharacter jumpCharacter, MovementAction movementAction, Vector3 targetPosition, float rotation, float maxSteering, float maxVelocity, float seperationDistance)
+        // Wall avoidance throttling (TraceLine is expensive)
+        private DateTime _lastWallCheck = DateTime.MinValue;
+        private Vector3 _cachedWallForce = Vector3.Zero;
+        private const int WallCheckIntervalMs = 200;
+
+        public void Update(
+            MoveCharacter moveCharacter,
+            JumpCharacter jumpCharacter,
+            MovementAction movementAction,
+            Vector3 targetPosition,
+            float rotation,
+            float maxSteering,
+            float maxVelocity,
+            float seperationDistance,
+            float arrivalThreshold3D = 0.6f,
+            float arrivalThreshold2D = 0.5f,
+            float heightTolerance = 2.0f,
+            float arriveSlowdownRadius = 4.0f,
+            float separationDisableDistance = 4.0f,
+            float velocityDamping = 0.92f)
         {
             // --------------------------------------------------------------------------------
             // 1. DIRECT MOVE / FALLBACK (Shortcut forced by Engine)
@@ -60,18 +76,21 @@ namespace AmeisenBotX.Core.Engines.Movement.Objects
             // --------------------------------------------------------------------------------
             // 2. AUTO-SHORTCUT (Smart Drop Detection)
             // --------------------------------------------------------------------------------
-            bool isMoveOrFollow = (movementAction == MovementAction.Move || movementAction == MovementAction.Follow || movementAction == MovementAction.Chase);
+            bool isMoveOrFollow = movementAction is MovementAction.Move or MovementAction.Follow or MovementAction.Chase;
             float distToTarget3D = Bot.Player.Position.DistanceTo(targetPosition);
 
             if (isMoveOrFollow)
             {
                 float zDiff = Bot.Player.Position.Z - targetPosition.Z;
-                bool isDrop = (zDiff > 1.6f); // Nur bei deutlichem Drop (> 1.6m)
+                bool isDrop = zDiff > 1.6f; // Nur bei deutlichem Drop (> 1.6m)
 
-                // Wenn wir nah an einer Klippe sind (< 20m) und runter können -> Shortcut!
+                // Wenn wir nah an einer Klippe sind (< 20m) und runter k�nnen -> Shortcut!
                 if (isDrop && distToTarget3D < 20.0f && IsSafeShortcut(targetPosition))
                 {
-                    if (Velocity.Length() > 4.0f && distToTarget3D < 5.0f) jumpCharacter?.Invoke();
+                    if (Velocity.Length() > 4.0f && distToTarget3D < 5.0f)
+                    {
+                        jumpCharacter?.Invoke();
+                    }
 
                     moveCharacter?.Invoke(targetPosition);
                     Velocity = (targetPosition - Bot.Player.Position).Normalized() * maxVelocity;
@@ -83,17 +102,14 @@ namespace AmeisenBotX.Core.Engines.Movement.Objects
             // 3. ARRIVAL & STOP LOGIC (Anti-Stuck & Anti-Jitter)
             // --------------------------------------------------------------------------------
             float distToTarget2D = Bot.Player.Position.DistanceTo2D(targetPosition);
-            bool isArriving = isMoveOrFollow && distToTarget2D < 4.0f;
+            bool isArriving = isMoveOrFollow && distToTarget2D < arriveSlowdownRadius;
 
             if (isArriving)
             {
                 float heightDiff = Math.Abs(Bot.Player.Position.Z - targetPosition.Z);
 
-                // STOP CONDITION:
-                // 1. 3D Distanz extrem nah (< 0.6m)
-                // 2. ODER: 2D Distanz sehr nah (< 0.4m) und Höhe erreichbar (< 2.0m)
-                // Das ist stateless. Sobald wir uns bewegen (oder das Ziel), wird condition false und er läuft los.
-                if (distToTarget3D < 0.6f || (distToTarget2D < 0.4f && heightDiff < 2.0f))
+                // STOP CONDITION: Use configurable thresholds
+                if (distToTarget3D < arrivalThreshold3D || (distToTarget2D < arrivalThreshold2D && heightDiff < heightTolerance))
                 {
                     Velocity = Vector3.Zero;
                     _targetRandomizer = Vector3.Zero;
@@ -104,19 +120,26 @@ namespace AmeisenBotX.Core.Engines.Movement.Objects
             // Humanizer Randomizer (Nur berechnen wenn wir weit weg sind)
             if (!isArriving && _targetRandomizer == Vector3.Zero && distToTarget3D > 15.0f)
             {
-                _targetRandomizer = new Vector3((float)_rng.NextDouble() - 0.5f, (float)_rng.NextDouble() - 0.5f, 0) * 0.5f;
+                _targetRandomizer = new Vector3((float)Random.Shared.NextDouble() - 0.5f, (float)Random.Shared.NextDouble() - 0.5f, 0) * 0.5f;
             }
             Vector3 finalTarget = targetPosition + _targetRandomizer;
 
             // --------------------------------------------------------------------------------
             // 4. PHYSICS UPDATE
             // --------------------------------------------------------------------------------
-            var now = DateTime.UtcNow;
+            DateTime now = DateTime.UtcNow;
             float dt = (float)(now - LastUpdate).TotalSeconds;
             LastUpdate = now;
 
-            if (dt <= 0.0f) dt = 0.001f;
-            if (dt > 0.1f) dt = 0.1f;
+            if (dt <= 0.0f)
+            {
+                dt = 0.001f;
+            }
+
+            if (dt > 0.1f)
+            {
+                dt = 0.1f;
+            }
 
             if (Bot.Player.IsMounted)
             {
@@ -125,138 +148,85 @@ namespace AmeisenBotX.Core.Engines.Movement.Objects
             }
 
             // Force Calculation
-            Vector3 force = GetForce(movementAction, finalTarget, rotation, maxSteering, maxVelocity, seperationDistance, distToTarget3D);
-
-            // ANTI-OVERSHOOT (Huhn-Fix)
-            // Wenn wir nah sind (< 4m) und vom Ziel WEG gucken -> Sofort bremsen!
-            if (Velocity.LengthSquared() > 0.1f && isMoveOrFollow && distToTarget3D < 4.0f)
-            {
-                Vector3 toTarget = (finalTarget - Bot.Player.Position).Normalized();
-                Vector3 currentDir = Velocity.Normalized();
-
-                if (currentDir.Dot(toTarget) < -0.1f) // Winkel > 90 Grad weg vom Ziel
-                {
-                    Velocity *= 0.8f; // Hard Brake
-                    force += toTarget * maxSteering * 2.5f; // Snap Turn
-                }
-            }
-
-            // ACTIVE CORNERING (Kurvenhilfe)
-            if (Velocity.LengthSquared() > 2.0f)
-            {
-                Vector3 velDir = Velocity.Normalized();
-                Vector3 forceDir = force.Normalized();
-                float cornerIntensity = 1.0f - velDir.Dot(forceDir);
-
-                if (cornerIntensity > 0.25f)
-                {
-                    Velocity *= (1.0f - (cornerIntensity * 0.1f));
-                    maxSteering *= (1.0f + (cornerIntensity * 2.5f));
-                }
-            }
+            Vector3 force = GetForce(movementAction, finalTarget, rotation, maxSteering, maxVelocity, seperationDistance, distToTarget3D, separationDisableDistance, arriveSlowdownRadius);
 
             // WALL UNSTUCK
             if (force.Length() > 0.5f && Velocity.Length() < 0.3f)
             {
-                _wallStuckCounter++;
-                if (_wallStuckCounter > 5) // > 100ms an der Wand
-                {
-                    Vector3 jiggle = new Vector3((float)_rng.NextDouble() - 0.5f, (float)_rng.NextDouble() - 0.5f, 0).Normalized() * maxVelocity * 3.0f;
-                    force += jiggle;
-
-                    if (_wallStuckCounter > 20 && jumpCharacter != null)
-                    {
-                        jumpCharacter.Invoke();
-                        _wallStuckCounter = 0;
-                    }
-                }
+                // We are stuck? push away from nearest obstacles
+                force += AvoidObstacles(maxSteering, maxVelocity, 1.0f);
+                // Also add some random noise to maybe slide off the wall
+                force += Wander(maxSteering, maxVelocity, 2.0f);
             }
-            else _wallStuckCounter = 0;
 
-            // INTEGRATION
-            force.Truncate(maxSteering);
-            Velocity += force * dt;
+            // Apply force to velocity
+            Velocity += force;
+
+            // Apply stronger damping to reduce oscillation
+            Velocity *= velocityDamping;
+
+            // Dead zone: Ignore tiny movements that cause jitter
+            if (Velocity.Length() < 0.3f)
+            {
+                Velocity = Vector3.Zero;
+            }
+
+            // Truncate to max velocity
             Velocity.Truncate(maxVelocity);
 
-            // --------------------------------------------------------------------------------
-            // 5. CTM OUTPUT (Smart Projection)
-            // --------------------------------------------------------------------------------
-            if (moveCharacter != null && Velocity.LengthSquared() > 0.1f)
+            // Only send CTM if we have meaningful velocity
+            if (Velocity.Length() > 0.5f)
             {
-                Vector3 currentDir = Velocity.Normalized();
-                float intentionDot = currentDir.Dot(force.Normalized());
-                float turnFactor = 1.0f - intentionDot;
-                if (turnFactor < 0.001f) turnFactor = 0f;
-
-                Vector3 outputPoint;
-                int dynamicDelay;
-
-                if (isArriving)
-                {
-                    // Einparken: Ziel exakt ansteuern, hohe Frequenz
-                    outputPoint = finalTarget;
-                    dynamicDelay = 50;
-                }
-                else
-                {
-                    // Reisen: Projektion basierend auf Speed
-                    float currentSpeed = Velocity.Length();
-                    float projectionDist = (currentSpeed * 0.6f) + 4.0f;
-
-                    if (turnFactor > 0.1f) projectionDist = 2.5f; // Kurven eng nehmen
-                    if (projectionDist > 12.0f) projectionDist = 12.0f;
-
-                    outputPoint = Bot.Player.Position + (currentDir * projectionDist);
-
-                    if (turnFactor > 0.05f) dynamicDelay = 60; // Kurven oft senden
-                    else dynamicDelay = 400; // Geradeaus selten senden
-                }
-
-                double msSinceLast = (now - _lastMovePacket).TotalMilliseconds;
-                bool urgentUpdate = (turnFactor > 0.05f && msSinceLast > 40) || (Velocity.Length() < 2.0f && msSinceLast > 100);
-                float distFromLastClick = outputPoint.DistanceTo(_lastSentPosition);
-
-                if (msSinceLast > dynamicDelay || urgentUpdate)
-                {
-                    // Deadzone 0.8m -> Verhindert Spam am selben Fleck
-                    if (distFromLastClick > 0.8f || isArriving)
-                    {
-                        moveCharacter.Invoke(outputPoint);
-                        _lastSentDirection = currentDir;
-                        _lastSentPosition = outputPoint;
-                        _lastMovePacket = now;
-                    }
-                }
+                moveCharacter?.Invoke(Bot.Player.Position + Velocity);
             }
+            LastUpdate = DateTime.UtcNow;
         }
+
 
         private bool IsSafeShortcut(Vector3 target)
         {
             Vector3 myPos = Bot.Player.Position;
             float heightDiff = myPos.Z - target.Z;
 
-            if (heightDiff < -1.6f) return false;
-            if (heightDiff > 40.0f) return false;
-            if (Math.Abs(target.Z) < 0.1f) return false;
-            if (myPos.DistanceTo2D(target) > 25.0f) return false;
+            if (heightDiff < -1.6f)
+            {
+                return false;
+            }
+
+            if (heightDiff > 40.0f)
+            {
+                return false;
+            }
+
+            if (Math.Abs(target.Z) < 0.1f)
+            {
+                return false;
+            }
+
+            if (myPos.DistanceTo2D(target) > 25.0f)
+            {
+                return false;
+            }
 
             Vector3 start = myPos + new Vector3(0, 0, 1.8f);
             float targetZOffset = 1.0f;
-            if (target.Z > myPos.Z) targetZOffset = 1.5f;
+            if (target.Z > myPos.Z)
+            {
+                targetZOffset = 1.5f;
+            }
+
             Vector3 end = target + new Vector3(0, 0, targetZOffset);
 
             bool hitWall = Bot.Wow.TraceLine(start, end, (uint)WowWorldFrameHitFlag.HitTestGroundAndStructures);
             return !hitWall;
         }
 
-        private Vector3 GetForce(MovementAction action, Vector3 target, float rotation, float maxSteering, float maxVel, float sepDist, float distToTarget)
+        private Vector3 GetForce(MovementAction action, Vector3 target, float rotation, float maxSteering, float maxVel, float sepDist, float distToTarget, float separationDisableDistance, float arriveSlowdownRadius)
         {
             Vector3 f = Vector3.Zero;
 
-            // DYNAMIC SEPARATION (Wichtig gegen Hühnerhaufen)
-            // Wenn wir nah am Ziel sind (< 4m), schalten wir Separation fast aus.
-            // Sonst schubsen sich die Bots am Zielpunkt gegenseitig weg und zittern.
-            float sepMult = (distToTarget < 4.0f) ? 0.0f : 1.0f;
+            // DYNAMIC SEPARATION: Disable separation near target to prevent jitter
+            float sepMult = (distToTarget < separationDisableDistance) ? 0.0f : 1.0f;
 
             switch (action)
             {
@@ -267,12 +237,18 @@ namespace AmeisenBotX.Core.Engines.Movement.Objects
 
                 case MovementAction.Move:
                 case MovementAction.Follow:
-                    // Soft Arrival ab 5m
-                    if (distToTarget > 5.0f) f += Seek(target, maxSteering, maxVel, 1.0f);
-                    else f += Arrive(target, maxSteering, maxVel, 5.0f);
+                    // Soft Arrival using configurable slowdown radius
+                    if (distToTarget > arriveSlowdownRadius)
+                    {
+                        f += Seek(target, maxSteering, maxVel, 1.0f);
+                    }
+                    else
+                    {
+                        f += Arrive(target, maxSteering, maxVel, arriveSlowdownRadius);
+                    }
 
                     f += AvoidObstacles(maxSteering, maxVel, 1.0f);
-                    f += Seperate(sepDist, maxVel, sepMult);
+                    f += Separate(sepDist, maxVel, sepMult);
                     break;
 
                 case MovementAction.Chase:
@@ -311,10 +287,21 @@ namespace AmeisenBotX.Core.Engines.Movement.Objects
         {
             Vector3 toTarget = target - Bot.Player.Position;
             float dist = toTarget.Length();
-            if (dist < 0.2f) return -Velocity;
+            if (dist < 0.2f)
+            {
+                return -Velocity;
+            }
+
             Vector3 desired = toTarget.Normalized();
-            if (dist < slowRad) desired *= maxVel * (dist / slowRad);
-            else desired *= maxVel;
+            if (dist < slowRad)
+            {
+                desired *= maxVel * (dist / slowRad);
+            }
+            else
+            {
+                desired *= maxVel;
+            }
+
             return desired - Velocity;
         }
 
@@ -326,10 +313,17 @@ namespace AmeisenBotX.Core.Engines.Movement.Objects
 
         public Vector3 Wander(float maxSteer, float maxVel, float mult)
         {
-            if (_rng.NextDouble() < 0.02)
-                _targetRandomizer = new Vector3((float)_rng.NextDouble() - 0.5f, (float)_rng.NextDouble() - 0.5f, 0);
+            if (Random.Shared.NextDouble() < 0.02)
+            {
+                _targetRandomizer = new Vector3((float)Random.Shared.NextDouble() - 0.5f, (float)Random.Shared.NextDouble() - 0.5f, 0);
+            }
+
             Vector3 circleCenter = Velocity.Normalized();
-            if (circleCenter.LengthSquared() < 0.1f) circleCenter = Bot.Player.RotationVector;
+            if (circleCenter.LengthSquared() < 0.1f)
+            {
+                circleCenter = Bot.Player.RotationVector;
+            }
+
             circleCenter *= 6.0f;
             Vector3 displacement = _targetRandomizer * 3.0f;
             return (circleCenter + displacement) * mult;
@@ -353,7 +347,7 @@ namespace AmeisenBotX.Core.Engines.Movement.Objects
                   + GetNearestBlacklistForce(steer, vel, 6.0f)) * mult;
         }
 
-        public Vector3 Seperate(float dist, float vel, float mult)
+        public Vector3 Separate(float dist, float vel, float mult)
         {
             return GetObjectForceAroundMe<IWowPlayer>(vel, vel, dist) * mult;
         }
@@ -362,7 +356,10 @@ namespace AmeisenBotX.Core.Engines.Movement.Objects
         {
             if (Bot.Db.TryGetBlacklistPosition((int)Bot.Objects.MapId, Bot.Player.Position, dist, out IEnumerable<Vector3> nodes))
             {
-                foreach (var node in nodes) return Flee(node, steer, vel, 2.0f);
+                foreach (Vector3 node in nodes)
+                {
+                    return Flee(node, steer, vel, 2.0f);
+                }
             }
             return Vector3.Zero;
         }
@@ -374,9 +371,12 @@ namespace AmeisenBotX.Core.Engines.Movement.Objects
             Vector3 myPos = Bot.Player.Position;
             float radiusSq = radius * radius;
             Vector3 forward = Velocity.Normalized();
-            if (forward.LengthSquared() < 0.1f) forward = Bot.Player.RotationVector;
+            if (forward.LengthSquared() < 0.1f)
+            {
+                forward = Bot.Player.RotationVector;
+            }
 
-            foreach (var obj in Bot.Objects.All)
+            foreach (IWowObject obj in Bot.Objects.All)
             {
                 if (obj is T)
                 {
@@ -396,8 +396,7 @@ namespace AmeisenBotX.Core.Engines.Movement.Objects
                     }
                 }
             }
-            if (count > 0) return (force / count) * 3.0f;
-            return Vector3.Zero;
+            return count > 0 ? force / count * 1.15f : Vector3.Zero;
         }
     }
 }

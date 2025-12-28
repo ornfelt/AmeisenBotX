@@ -1,4 +1,4 @@
-﻿using AmeisenBotX.Core.Engines.Quest.Objects.Quests;
+using AmeisenBotX.Core.Engines.Quest.Objects.Quests;
 using AmeisenBotX.Core.Engines.Quest.Quests.Durotar.RazorHill;
 using AmeisenBotX.Core.Engines.Quest.Quests.Durotar.ValleyOfStrength;
 using AmeisenBotX.Core.Engines.Quest.Quests.TheBarrens.Crossroads;

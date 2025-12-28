@@ -1,4 +1,4 @@
-﻿using AmeisenBotX.Common.Math;
+using AmeisenBotX.Common.Math;
 using System;
 using System.Linq;
 
@@ -35,7 +35,7 @@ namespace AmeisenBotX.Core.Logic.Idle.Actions
 
         public override string ToString()
         {
-            return $"{(AutopilotOnly ? "(🤖) " : "")}Look at Group";
+            return $"{(AutopilotOnly ? "(??) " : "")}Look at Group";
         }
     }
 }

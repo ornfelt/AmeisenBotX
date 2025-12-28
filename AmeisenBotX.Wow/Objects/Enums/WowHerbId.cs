@@ -40,7 +40,10 @@
         Sungrass = 2315,
         TalandrasRose = 7865,
         Terocone = 6969,
+        TigerLily = 190172,
         WildSteelbloom = 371,
-        Wintersbite = 699
+        Wintersbite = 699,
+        Lichbloom = 190171,
+        Icethorn = 190169
     }
 }

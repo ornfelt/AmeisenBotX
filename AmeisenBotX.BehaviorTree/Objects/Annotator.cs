@@ -1,4 +1,4 @@
-﻿using AmeisenBotX.BehaviorTree.Enums;
+using AmeisenBotX.BehaviorTree.Enums;
 
 namespace AmeisenBotX.BehaviorTree.Objects
 {
@@ -8,6 +8,8 @@ namespace AmeisenBotX.BehaviorTree.Objects
     /// </summary>
     public class Annotator(INode annotationNode, INode child) : INode
     {
+        public string Name { get; } = null;
+
         public INode AnnotationNode { get; set; } = annotationNode;
 
         public INode Child { get; set; } = child;
@@ -26,6 +28,8 @@ namespace AmeisenBotX.BehaviorTree.Objects
 
     public class Annotator<T>(INode<T> annotationNode, INode<T> child) : INode<T>
     {
+        public string Name { get; } = null;
+
         public INode<T> AnnotationNode { get; set; } = annotationNode;
 
         public INode<T> Child { get; set; } = child;

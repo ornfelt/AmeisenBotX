@@ -1,10 +1,10 @@
-﻿using AmeisenBotX.Common.Utils;
+using AmeisenBotX.Common.Utils;
 using AmeisenBotX.Core.Engines.Combat.Helpers.Aura.Objects;
 using AmeisenBotX.Core.Managers.Character.Comparators;
 using AmeisenBotX.Core.Managers.Character.Talents.Objects;
 using AmeisenBotX.Wow.Objects;
 using AmeisenBotX.Wow.Objects.Enums;
-using AmeisenBotX.Wow335a.Constants;
+using AmeisenBotX.WowWotlk.Constants.Classes;
 using System;
 using System.Linq;
 
@@ -14,15 +14,15 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
     {
         public WarriorFury(AmeisenBotInterfaces bot) : base(bot)
         {
-            MyAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, Warrior335a.BattleShout, () => TryCastSpell(Warrior335a.BattleShout, 0, true)));
+            MyAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, WarriorWotlk.BattleShout, () => TryCastSpell(WarriorWotlk.BattleShout, 0, true)));
 
-            TargetAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, Warrior335a.Hamstring, () => Bot.Target?.Type == WowObjectType.Player && TryCastSpell(Warrior335a.Hamstring, Bot.Wow.TargetGuid, true)));
-            TargetAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, Warrior335a.Rend, () => Bot.Target?.Type == WowObjectType.Player && Bot.Player.Rage > 75 && TryCastSpell(Warrior335a.Rend, Bot.Wow.TargetGuid, true)));
+            TargetAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, WarriorWotlk.Hamstring, () => Bot.Target?.Type == WowObjectType.Player && TryCastSpell(WarriorWotlk.Hamstring, Bot.Wow.TargetGuid, true)));
+            TargetAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, WarriorWotlk.Rend, () => Bot.Target?.Type == WowObjectType.Player && Bot.Player.Rage > 75 && TryCastSpell(WarriorWotlk.Rend, Bot.Wow.TargetGuid, true)));
 
             InterruptManager.InterruptSpells = new()
             {
-                { 0, (x) => TryCastSpellWarrior(Warrior335a.IntimidatingShout, Warrior335a.BerserkerStance, x.Guid, true) },
-                { 1, (x) => TryCastSpellWarrior(Warrior335a.IntimidatingShout, Warrior335a.BattleStance, x.Guid, true) }
+                { 0, (x) => TryCastSpellWarrior(WarriorWotlk.IntimidatingShout, WarriorWotlk.BerserkerStance, x.Guid, true) },
+                { 1, (x) => TryCastSpellWarrior(WarriorWotlk.IntimidatingShout, WarriorWotlk.BattleStance, x.Guid, true) }
             };
 
             HeroicStrikeEvent = new(TimeSpan.FromSeconds(2));
@@ -102,73 +102,73 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
                         || Bot.Player.IsConfused
                         || Bot.Player.IsPossessed
                         || Bot.Player.IsFleeing)
-                        && TryCastSpell(Warrior335a.HeroicFury, 0))
+                        && TryCastSpell(WarriorWotlk.HeroicFury, 0))
                     {
                         return;
                     }
 
                     if (distanceToTarget > 4.0)
                     {
-                        if (TryCastSpellWarrior(Warrior335a.Charge, Warrior335a.BattleStance, Bot.Wow.TargetGuid, true)
-                            || (TryCastSpell(Warrior335a.BerserkerRage, Bot.Wow.TargetGuid, true) && TryCastSpellWarrior(Warrior335a.Intercept, Warrior335a.BerserkerStance, Bot.Wow.TargetGuid, true)))
+                        if (TryCastSpellWarrior(WarriorWotlk.Charge, WarriorWotlk.BattleStance, Bot.Wow.TargetGuid, true)
+                            || (TryCastSpell(WarriorWotlk.BerserkerRage, Bot.Wow.TargetGuid, true) && TryCastSpellWarrior(WarriorWotlk.Intercept, WarriorWotlk.BerserkerStance, Bot.Wow.TargetGuid, true)))
                         {
                             return;
                         }
                     }
                     else
                     {
-                        if (HeroicStrikeEvent.Ready && !Bot.Player.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == Warrior335a.Recklessness))
+                        if (HeroicStrikeEvent.Ready && !Bot.Player.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == WarriorWotlk.Recklessness))
                         {
-                            if ((Bot.Player.Rage > 50 && Bot.GetNearEnemies<IWowUnit>(Bot.Player.Position, 8.0f).Count() > 2 && TryCastSpellWarrior(Warrior335a.Cleave, Warrior335a.BerserkerStance, 0, true))
-                                || (Bot.Player.Rage > 50 && TryCastSpellWarrior(Warrior335a.HeroicStrike, Warrior335a.BerserkerStance, Bot.Wow.TargetGuid, true)))
+                            if ((Bot.Player.Rage > 50 && Bot.GetNearEnemies<IWowUnit>(Bot.Player.Position, 8.0f).Count() > 2 && TryCastSpellWarrior(WarriorWotlk.Cleave, WarriorWotlk.BerserkerStance, 0, true))
+                                || (Bot.Player.Rage > 50 && TryCastSpellWarrior(WarriorWotlk.HeroicStrike, WarriorWotlk.BerserkerStance, Bot.Wow.TargetGuid, true)))
                             {
                                 HeroicStrikeEvent.Run();
                                 return;
                             }
                         }
 
-                        if (TryCastSpellWarrior(Warrior335a.Bloodthirst, Warrior335a.BerserkerStance, Bot.Wow.TargetGuid, true)
-                            || TryCastSpellWarrior(Warrior335a.Whirlwind, Warrior335a.BerserkerStance, Bot.Wow.TargetGuid, true))
+                        if (TryCastSpellWarrior(WarriorWotlk.Bloodthirst, WarriorWotlk.BerserkerStance, Bot.Wow.TargetGuid, true)
+                            || TryCastSpellWarrior(WarriorWotlk.Whirlwind, WarriorWotlk.BerserkerStance, Bot.Wow.TargetGuid, true))
                         {
                             return;
                         }
 
                         // dont prevent BT or WW with GCD
-                        if (CooldownManager.GetSpellCooldown(Warrior335a.Bloodthirst) <= 1200
-                            || CooldownManager.GetSpellCooldown(Warrior335a.Whirlwind) <= 1200)
+                        if (CooldownManager.GetSpellCooldown(WarriorWotlk.Bloodthirst) <= 1200
+                            || CooldownManager.GetSpellCooldown(WarriorWotlk.Whirlwind) <= 1200)
                         {
                             return;
                         }
 
-                        if (Bot.Player.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == $"{Warrior335a.Slam}!")
-                           && TryCastSpell(Warrior335a.Slam, Bot.Wow.TargetGuid, true))
+                        if (Bot.Player.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == $"{WarriorWotlk.Slam}!")
+                           && TryCastSpell(WarriorWotlk.Slam, Bot.Wow.TargetGuid, true))
                         {
                             return;
                         }
 
-                        if (TryCastSpell(Warrior335a.BerserkerRage, 0))
+                        if (TryCastSpell(WarriorWotlk.BerserkerRage, 0))
                         {
                             return;
                         }
 
-                        if (TryCastSpell(Warrior335a.Bloodrage, Bot.Wow.TargetGuid, true, Bot.Player.Health))
+                        if (TryCastSpell(WarriorWotlk.Bloodrage, Bot.Wow.TargetGuid, true, Bot.Player.Health))
                         {
                             return;
                         }
 
-                        if (TryCastSpell(Warrior335a.Recklessness, Bot.Wow.TargetGuid, true))
+                        if (TryCastSpell(WarriorWotlk.Recklessness, Bot.Wow.TargetGuid, true))
                         {
                             return;
                         }
 
-                        if (TryCastSpell(Warrior335a.DeathWish, Bot.Wow.TargetGuid, true))
+                        if (TryCastSpell(WarriorWotlk.DeathWish, Bot.Wow.TargetGuid, true))
                         {
                             return;
                         }
 
                         if (Bot.Player.Rage > 25
                            && Bot.Target.HealthPercentage < 20
-                           && TryCastSpellWarrior(Warrior335a.Execute, Warrior335a.BerserkerStance, Bot.Wow.TargetGuid, true))
+                           && TryCastSpellWarrior(WarriorWotlk.Execute, WarriorWotlk.BerserkerStance, Bot.Wow.TargetGuid, true))
                         {
                             return;
                         }

@@ -1,8 +1,8 @@
-﻿using AmeisenBotX.Core.Engines.Combat.Helpers.Aura.Objects;
+using AmeisenBotX.Core.Engines.Combat.Helpers.Aura.Objects;
 using AmeisenBotX.Core.Managers.Character.Comparators;
 using AmeisenBotX.Core.Managers.Character.Talents.Objects;
 using AmeisenBotX.Wow.Objects.Enums;
-using AmeisenBotX.Wow335a.Constants;
+using AmeisenBotX.WowWotlk.Constants.Classes;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 {
@@ -10,16 +10,16 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
     {
         public PriestShadow(AmeisenBotInterfaces bot) : base(bot)
         {
-            MyAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, Priest335a.Shadowform, () => TryCastSpell(Priest335a.Shadowform, Bot.Wow.PlayerGuid, true)));
-            MyAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, Priest335a.PowerWordFortitude, () => TryCastSpell(Priest335a.PowerWordFortitude, Bot.Wow.PlayerGuid, true)));
-            MyAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, Priest335a.VampiricEmbrace, () => TryCastSpell(Priest335a.VampiricEmbrace, Bot.Wow.PlayerGuid, true)));
+            MyAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, PriestWotlk.Shadowform, () => TryCastSpell(PriestWotlk.Shadowform, Bot.Wow.PlayerGuid, true)));
+            MyAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, PriestWotlk.PowerWordFortitude, () => TryCastSpell(PriestWotlk.PowerWordFortitude, Bot.Wow.PlayerGuid, true)));
+            MyAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, PriestWotlk.VampiricEmbrace, () => TryCastSpell(PriestWotlk.VampiricEmbrace, Bot.Wow.PlayerGuid, true)));
 
-            TargetAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, Priest335a.VampiricTouch, () => TryCastSpell(Priest335a.VampiricTouch, Bot.Wow.TargetGuid, true)));
-            TargetAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, Priest335a.DevouringPlague, () => TryCastSpell(Priest335a.DevouringPlague, Bot.Wow.TargetGuid, true)));
-            TargetAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, Priest335a.ShadowWordPain, () => TryCastSpell(Priest335a.ShadowWordPain, Bot.Wow.TargetGuid, true)));
-            TargetAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, Priest335a.MindBlast, () => TryCastSpell(Priest335a.MindBlast, Bot.Wow.TargetGuid, true)));
+            TargetAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, PriestWotlk.VampiricTouch, () => TryCastSpell(PriestWotlk.VampiricTouch, Bot.Wow.TargetGuid, true)));
+            TargetAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, PriestWotlk.DevouringPlague, () => TryCastSpell(PriestWotlk.DevouringPlague, Bot.Wow.TargetGuid, true)));
+            TargetAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, PriestWotlk.ShadowWordPain, () => TryCastSpell(PriestWotlk.ShadowWordPain, Bot.Wow.TargetGuid, true)));
+            TargetAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, PriestWotlk.MindBlast, () => TryCastSpell(PriestWotlk.MindBlast, Bot.Wow.TargetGuid, true)));
 
-            GroupAuraManager.SpellsToKeepActiveOnParty.Add((Priest335a.PowerWordFortitude, (spellName, guid) => TryCastSpell(spellName, guid, true)));
+            GroupAuraManager.SpellsToKeepActiveOnParty.Add((PriestWotlk.PowerWordFortitude, (spellName, guid) => TryCastSpell(spellName, guid, true)));
         }
 
         public override string Description => "FCFS based CombatClass for the Shadow Priest spec.";
@@ -88,30 +88,30 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
             if (TryFindTarget(TargetProviderDps, out _))
             {
                 if (Bot.Player.ManaPercentage < 90
-                    && TryCastSpell(Priest335a.Shadowfiend, Bot.Wow.TargetGuid))
+                    && TryCastSpell(PriestWotlk.Shadowfiend, Bot.Wow.TargetGuid))
                 {
                     return;
                 }
 
                 if (Bot.Player.ManaPercentage < 30
-                    && TryCastSpell(Priest335a.HymnOfHope, 0))
+                    && TryCastSpell(PriestWotlk.HymnOfHope, 0))
                 {
                     return;
                 }
 
                 if (Bot.Player.HealthPercentage < 70
-                    && TryCastSpell(Priest335a.FlashHeal, Bot.Wow.TargetGuid, true))
+                    && TryCastSpell(PriestWotlk.FlashHeal, Bot.Wow.TargetGuid, true))
                 {
                     return;
                 }
 
                 if (!Bot.Player.IsCasting
-                    && TryCastSpell(Priest335a.MindFlay, Bot.Wow.TargetGuid, true))
+                    && TryCastSpell(PriestWotlk.MindFlay, Bot.Wow.TargetGuid, true))
                 {
                     return;
                 }
 
-                if (TryCastSpell(Priest335a.Smite, Bot.Wow.TargetGuid, true))
+                if (TryCastSpell(PriestWotlk.Smite, Bot.Wow.TargetGuid, true))
                 {
                     return;
                 }
@@ -122,7 +122,7 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
         {
             base.OutOfCombatExecute();
 
-            if (HandleDeadPartymembers(Priest335a.Resurrection))
+            if (HandleDeadPartymembers(PriestWotlk.Resurrection))
             {
                 return;
             }

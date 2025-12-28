@@ -1,4 +1,4 @@
-﻿namespace AmeisenBotX.Core.Engines.Battleground
+namespace AmeisenBotX.Core.Engines.Battleground
 {
     public interface IBattlegroundEngine
     {

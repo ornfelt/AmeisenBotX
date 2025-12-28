@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace AmeisenBotX.Core.Engines.Quest.Objects.Objectives
 {

@@ -1,4 +1,4 @@
-﻿using AmeisenBotX.Wow.Objects;
+using AmeisenBotX.Wow.Objects;
 using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Helpers.Targets.Validation.Basic

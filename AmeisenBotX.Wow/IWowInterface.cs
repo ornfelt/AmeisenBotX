@@ -106,6 +106,13 @@ namespace AmeisenBotX.Wow
 
         void AcceptSummon();
 
+        /// <summary>
+        /// Apply bot-optimized CVars for maximum performance.
+        /// Version-specific implementation for each WoW client version.
+        /// </summary>
+        /// <param name="maxFps">Target FPS for EndScene hook stability</param>
+        void ApplyBotCVars(int maxFps);
+
         void CallCompanion(int index, string type);
 
         /// <summary>
@@ -114,6 +121,8 @@ namespace AmeisenBotX.Wow
         /// <param name="spellName">Name of the spell to cast</param>
         /// <param name="castOnSelf">True if we should cast it on our own character</param>
         void CastSpell(string spellName, bool castOnSelf = false);
+
+        bool CanCastSpell(int spellId);
 
         void CastSpellById(int spellId);
 
@@ -205,6 +214,21 @@ namespace AmeisenBotX.Wow
         (string, int) GetUnitCastingInfo(WowLuaUnit target);
 
         int GetUnspentTalentPoints();
+
+        /// <summary>
+        /// Request talent information for a unit. Call this before GetInspectedUnitSpec.
+        /// Must wait for INSPECT_TALENT_READY event before reading results.
+        /// </summary>
+        /// <param name="unit">The unit to inspect (party1, party2, etc.)</param>
+        void InspectUnit(string unit);
+
+        /// <summary>
+        /// Get the primary talent tree index (1, 2, or 3) for the currently inspected unit.
+        /// Returns which tree has the most talent points.
+        /// Must be called after InspectUnit and waiting for INSPECT_TALENT_READY.
+        /// </summary>
+        /// <returns>(primaryTree, pointsInTree1, pointsInTree2, pointsInTree3) or (0,0,0,0) if failed</returns>
+        (int primaryTree, int tree1, int tree2, int tree3) GetInspectedUnitTalentSpec();
 
         void InteractWithObject(IWowObject obj);
 

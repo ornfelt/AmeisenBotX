@@ -1,4 +1,4 @@
-﻿using AmeisenBotX.Common.Math;
+using AmeisenBotX.Common.Math;
 using AmeisenBotX.Core.Engines.Movement.Enums;
 using AmeisenBotX.Wow.Cache.Enums;
 using AmeisenBotX.Wow.Objects;
@@ -98,7 +98,7 @@ namespace AmeisenBotX.Core.Logic.Idle.Actions
 
         public override string ToString()
         {
-            return $"{(AutopilotOnly ? "(🤖) " : "")}Go to Auctionhouse";
+            return $"{(AutopilotOnly ? "(??) " : "")}Go to Auctionhouse";
         }
     }
 }

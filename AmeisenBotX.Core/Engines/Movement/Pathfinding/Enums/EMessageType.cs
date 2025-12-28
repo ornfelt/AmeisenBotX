@@ -1,4 +1,4 @@
-﻿namespace AmeisenBotX.Core.Engines.Movement.Pathfinding.Enums
+namespace AmeisenBotX.Core.Engines.Movement.Pathfinding.Enums
 {
     public enum EMessageType
     {

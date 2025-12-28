@@ -47,7 +47,7 @@ namespace AmeisenBotX.Test
         {
             for (int i = 0; i < 16; ++i)
             {
-                Assert.IsTrue(BotUtils.FastRandomString().Length > 0);
+                Assert.IsGreaterThan(0, BotUtils.FastRandomString().Length);
             }
         }
 

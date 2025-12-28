@@ -1,4 +1,4 @@
-﻿using AmeisenBotX.Common.Math;
+using AmeisenBotX.Common.Math;
 using AmeisenBotX.Wow.Objects;
 using System;
 
@@ -18,34 +18,41 @@ namespace AmeisenBotX.Core.Logic.Routines
                 bot.Wow.ChangeTarget(selectedUnit.Guid);
             }
 
+            if (bot.Target == null || bot.Player.DistanceTo(bot.Target) > 6.0f)
+            {
+                return false;
+            }
+
             if (!BotMath.IsFacing(bot.Objects.Player.Position, bot.Objects.Player.Rotation, selectedUnit.Position, 0.5f))
             {
                 bot.Wow.FacePosition(bot.Objects.Player.BaseAddress, bot.Player.Position, selectedUnit.Position);
             }
 
-            if (!bot.Wow.UiIsVisible("GossipFrame"))
+            if (!bot.Wow.UiIsVisible("GossipFrame", "ClassTrainerFrame"))
             {
                 bot.Wow.InteractWithUnit(selectedUnit);
             }
 
-            if (!selectedUnit.IsGossip)
+            if (selectedUnit.IsGossip && bot.Wow.UiIsVisible("GossipFrame"))
             {
-                return false;
+                string[] gossipTypes = bot.Wow.GetGossipTypes();
+
+                for (int i = 0; i < gossipTypes.Length; ++i)
+                {
+                    if (!gossipTypes[i].Equals("trainer", StringComparison.OrdinalIgnoreCase))
+                    {
+                        continue;
+                    }
+
+                    // +1 is due to implicit conversion between lua array (indexed at 1 not 0) and c# array
+                    bot.Wow.SelectGossipOptionSimple(i + 1);
+                    break;
+                }
             }
 
-            // gossip 1 train skills gossip 2 unlearn talents quest gossip from trainer??
-
-            string[] gossipTypes = bot.Wow.GetGossipTypes();
-
-            for (int i = 0; i < gossipTypes.Length; ++i)
+            if (bot.Wow.UiIsVisible("ClassTrainerFrame"))
             {
-                if (!gossipTypes[i].Equals("trainer", StringComparison.OrdinalIgnoreCase))
-                {
-                    continue;
-                }
-
-                // +1 is due to implicit conversion between lua array (indexed at 1 not 0) and c# array
-                bot.Wow.SelectGossipOptionSimple(i + 1);
+                TrainAllSpellsRoutine.Run(bot);
                 return true;
             }
 

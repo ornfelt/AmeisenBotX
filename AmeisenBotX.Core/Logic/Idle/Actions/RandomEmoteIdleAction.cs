@@ -1,4 +1,4 @@
-﻿using AmeisenBotX.Wow.Objects;
+using AmeisenBotX.Wow.Objects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -78,7 +78,7 @@ namespace AmeisenBotX.Core.Logic.Idle.Actions
 
         public override string ToString()
         {
-            return $"{(AutopilotOnly ? "(🤖) " : "")}Random Emote";
+            return $"{(AutopilotOnly ? "(??) " : "")}Random Emote";
         }
     }
 }

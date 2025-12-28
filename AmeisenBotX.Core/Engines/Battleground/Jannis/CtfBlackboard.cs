@@ -1,4 +1,4 @@
-﻿using AmeisenBotX.BehaviorTree.Interfaces;
+using AmeisenBotX.BehaviorTree.Interfaces;
 using AmeisenBotX.Common.Math;
 using AmeisenBotX.Wow.Objects;
 using System;

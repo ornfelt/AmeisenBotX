@@ -1,4 +1,4 @@
-﻿using AmeisenBotX.Common.Keyboard.Enums;
+using AmeisenBotX.Common.Keyboard.Enums;
 using AmeisenBotX.Common.Math;
 using AmeisenBotX.Common.Utils;
 using AmeisenBotX.Core.Managers.Character.Comparators;
@@ -21,15 +21,16 @@ namespace AmeisenBotX.Core.Managers.Character
 {
     public class DefaultCharacterManager : ICharacterManager
     {
-        public DefaultCharacterManager(IWowInterface wowInterface, WowMemoryApi memory, AmeisenBotConfig config)
+        public DefaultCharacterManager(AmeisenBotInterfaces bot, AmeisenBotConfig config)
         {
-            Wow = wowInterface;
-            MemoryApi = memory;
+            Wow = bot.Wow;
+            MemoryApi = bot.Memory;
 
             Inventory = new(Wow, config);
             Equipment = new(Wow);
             SpellBook = new(Wow);
             TalentManager = new(Wow);
+            Professions = new(bot);
             LastLevelTrained = 0;
             ItemComparator = new ItemLevelComparator();
             Skills = [];
@@ -60,6 +61,8 @@ namespace AmeisenBotX.Core.Managers.Character
 
         private IWowInterface Wow { get; }
 
+        public ProfessionManager Professions { get; }
+
         public Dictionary<int, int> GetConsumables()
         {
             return Inventory.Items.OfType<WowConsumable>()
@@ -74,29 +77,20 @@ namespace AmeisenBotX.Core.Managers.Character
 
         public bool IsAbleToUseArmor(WowArmor item)
         {
-            return item?.ArmorType switch
+            if (item?.ArmorType == null)
             {
-                WowArmorType.Plate => Skills.Any(e =>
-                    e.Key.Equals("Plate Mail", StringComparison.OrdinalIgnoreCase)),
-                WowArmorType.Mail => Skills.Any(e =>
-                    e.Key.Equals("Mail", StringComparison.OrdinalIgnoreCase)),
-                WowArmorType.Leather => Skills.Any(e =>
-                    e.Key.Equals("Leather", StringComparison.OrdinalIgnoreCase)),
-                WowArmorType.Cloth => Skills.Any(e =>
-                    e.Key.Equals("Cloth", StringComparison.OrdinalIgnoreCase)),
-                WowArmorType.Totem => Skills.Any(e =>
-                    e.Key.Equals("Totem", StringComparison.OrdinalIgnoreCase)),
-                WowArmorType.Libram => Skills.Any(e =>
-                    e.Key.Equals("Libram", StringComparison.OrdinalIgnoreCase)),
-                WowArmorType.Idol => Skills.Any(e =>
-                    e.Key.Equals("Idol", StringComparison.OrdinalIgnoreCase)),
-                WowArmorType.Sigil => Skills.Any(e =>
-                    e.Key.Equals("Sigil", StringComparison.OrdinalIgnoreCase)),
-                WowArmorType.Shield => Skills.Any(e =>
-                    e.Key.Equals("Shield", StringComparison.OrdinalIgnoreCase)),
-                WowArmorType.Misc => true,
-                _ => false,
-            };
+                return false;
+            }
+
+            // Misc armor is always usable
+            if (item.ArmorType == WowArmorType.Misc)
+            {
+                return true;
+            }
+
+            // Get the WoW-enforced skill name for this armor type
+            string skillName = WowClassHelper.GetArmorSkillName(item.ArmorType);
+            return skillName != null && Skills.Any(e => e.Key.Equals(skillName, StringComparison.OrdinalIgnoreCase));
         }
 
         public bool IsAbleToUseItem(IWowInventoryItem item)
@@ -107,42 +101,20 @@ namespace AmeisenBotX.Core.Managers.Character
 
         public bool IsAbleToUseWeapon(WowWeapon item)
         {
-            return item?.WeaponType switch
+            if (item?.WeaponType == null)
             {
-                WowWeaponType.Bow => Skills.Any(e =>
-                    e.Key.Equals("Bows", StringComparison.OrdinalIgnoreCase)),
-                WowWeaponType.Crossbow => Skills.Any(e =>
-                    e.Key.Equals("Crossbows", StringComparison.OrdinalIgnoreCase)),
-                WowWeaponType.Gun => Skills.Any(e =>
-                    e.Key.Equals("Guns", StringComparison.OrdinalIgnoreCase)),
-                WowWeaponType.Wand => Skills.Any(e =>
-                    e.Key.Equals("Wands", StringComparison.OrdinalIgnoreCase)),
-                WowWeaponType.Thrown => Skills.Any(e =>
-                    e.Key.Equals("Thrown", StringComparison.OrdinalIgnoreCase)),
-                WowWeaponType.Axe => Skills.Any(e =>
-                    e.Key.Equals("Axes", StringComparison.OrdinalIgnoreCase)),
-                WowWeaponType.AxeTwoHand => Skills.Any(e =>
-                    e.Key.Equals("Two-Handed Axes", StringComparison.OrdinalIgnoreCase)),
-                WowWeaponType.Mace => Skills.Any(e =>
-                    e.Key.Equals("Maces", StringComparison.OrdinalIgnoreCase)),
-                WowWeaponType.MaceTwoHand => Skills.Any(e =>
-                    e.Key.Equals("Two-Handed Maces", StringComparison.OrdinalIgnoreCase)),
-                WowWeaponType.Sword => Skills.Any(e =>
-                    e.Key.Equals("Swords", StringComparison.OrdinalIgnoreCase)),
-                WowWeaponType.SwordTwoHand => Skills.Any(e =>
-                    e.Key.Equals("Two-Handed Swords", StringComparison.OrdinalIgnoreCase)),
-                WowWeaponType.Dagger => Skills.Any(e =>
-                    e.Key.Equals("Daggers", StringComparison.OrdinalIgnoreCase)),
-                WowWeaponType.Fist => Skills.Any(e =>
-                    e.Key.Equals("Fist Weapons", StringComparison.OrdinalIgnoreCase)),
-                WowWeaponType.Polearm => Skills.Any(e =>
-                    e.Key.Equals("Polearms", StringComparison.OrdinalIgnoreCase)),
-                WowWeaponType.Staff => Skills.Any(e =>
-                    e.Key.Equals("Staves", StringComparison.OrdinalIgnoreCase)),
-                WowWeaponType.FishingPole => true,
-                WowWeaponType.Misc => true,
-                _ => false,
-            };
+                return false;
+            }
+
+            // Misc and fishing poles are always usable
+            if (item.WeaponType is WowWeaponType.Misc or WowWeaponType.FishingPole)
+            {
+                return true;
+            }
+
+            // Get the WoW-enforced skill name for this weapon type
+            string skillName = WowClassHelper.GetWeaponSkillName(item.WeaponType);
+            return skillName != null && Skills.Any(e => e.Key.Equals(skillName, StringComparison.OrdinalIgnoreCase));
         }
 
         public bool IsItemAnImprovement(IWowInventoryItem item, out IWowInventoryItem itemToReplace)

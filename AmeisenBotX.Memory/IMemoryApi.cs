@@ -114,6 +114,22 @@ namespace AmeisenBotX.Memory
         public bool InjectAssembly(IEnumerable<string> asm, nint address, bool patchMemProtection = false);
 
         /// <summary>
+        /// Injects a DLL into the target process and executes an export function.
+        /// </summary>
+        /// <param name="dllPath">Path to DLL</param>
+        /// <param name="entryPoint">Name of the export to call (e.g., Init)</param>
+        /// <param name="argument">Optional string argument to pass to the entry point</param>
+        /// <returns>True if successful</returns>
+        public bool InjectDll(string dllPath, string entryPoint, string argument = null);
+
+        /// <summary>
+        /// Unloads a DLL from the target process using FreeLibrary.
+        /// </summary>
+        /// <param name="dllName">Name of the DLL (e.g. "AmeisenBotX.Bridge.dll")</param>
+        /// <returns>True if successful (or not found), false on failure</returns>
+        public bool EjectDll(string dllName);
+
+        /// <summary>
         /// Change and area of memory, by unprotecting it temporarily.
         /// </summary>
         /// <typeparam name="T"></typeparam>
@@ -150,6 +166,14 @@ namespace AmeisenBotX.Memory
         public bool ReadBytes(nint address, int size, out byte[] bytes);
 
         /// <summary>
+        /// Read bytes from the processes memory into a span.
+        /// </summary>
+        /// <param name="address">Address to read from</param>
+        /// <param name="buffer">Target buffer</param>
+        /// <returns>True if reading was successful, false if not</returns>
+        public bool ReadBytes(nint address, Span<byte> buffer);
+
+        /// <summary>
         /// Read a string from the processes memory.
         /// </summary>
         /// <param name="address">Address to read from</param>
@@ -180,6 +204,18 @@ namespace AmeisenBotX.Memory
         public void SetForegroundWindow(nint windowHandle);
 
         /// <summary>
+        /// Minimize a window without activating it.
+        /// </summary>
+        /// <param name="windowHandle">Window handle to minimize</param>
+        public void MinimizeWindow(nint windowHandle);
+
+        /// <summary>
+        /// Hide a window completely (invisible, not on taskbar).
+        /// </summary>
+        /// <param name="windowHandle">Window handle to hide</param>
+        public void HideWindow(nint windowHandle);
+
+        /// <summary>
         /// Makes the processes main window a parent of the supplied main window handle.
         /// </summary>
         /// <param name="mainWindowHandle">Master window</param>
@@ -198,13 +234,33 @@ namespace AmeisenBotX.Memory
         public void SetWindowPosition(nint windowHandle, Rect rect, bool resizeWindow = true);
 
         /// <summary>
+        /// Show a window (SW_SHOW).
+        /// </summary>
+        /// <param name="windowHandle">Window handle to show</param>
+        public void ShowWindow(nint windowHandle);
+
+
+
+        /// <summary>
+        /// Hides a module by unlinking it from the PEB.
+        /// </summary>
+        public bool HideModule(string moduleName);
+
+        /// <summary>
+        /// Erases the PE header of a loaded module.
+        /// </summary>
+        public bool ErasePEHeader(string moduleName);
+
+        /// <summary>
         /// Start a process but dont focus its window.
         /// </summary>
         /// <param name="processCmd">Command to run</param>
         /// <param name="processHandle">The native process handle of the started process</param>
         /// <param name="threadHandle">The native thread handle of the started process</param>
+        /// <param name="startHidden">If true, starts the process completely hidden (SW_HIDE). Window must be shown manually later.</param>
+        /// <param name="windowRect">Optional initial window position/size. If specified, window starts at this location.</param>
         /// <returns>Process object</returns>
-        public Process StartProcessNoActivate(string processCmd, out nint processHandle, out nint threadHandle);
+        public Process StartProcessNoActivate(string processCmd, out nint processHandle, out nint threadHandle, bool startHidden = false, Rect? windowRect = null);
 
         /// <summary>
         /// Suspend the main thread of the process.
@@ -227,6 +283,14 @@ namespace AmeisenBotX.Memory
         /// <param name="bytes">Bytes to write</param>
         /// <returns>True if successful, false if not</returns>
         bool WriteBytes(nint address, byte[] bytes);
+
+        /// <summary>
+        /// Write bytes to the processes memory from a read-only span.
+        /// </summary>
+        /// <param name="address">Address to write to</param>
+        /// <param name="buffer">Bytes to write</param>
+        /// <returns>True if successful, false if not</returns>
+        public bool WriteBytes(nint address, ReadOnlySpan<byte> buffer);
 
         /// <summary>
         /// Set a memory region to 0.

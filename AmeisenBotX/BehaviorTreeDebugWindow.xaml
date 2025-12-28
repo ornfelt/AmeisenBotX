@@ -1,0 +1,80 @@
+<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="AmeisenBotX.BehaviorTreeDebugWindow"
+        Title="🌳 Behavior Tree Debugger" Height="700" Width="500" WindowStyle="None" AllowsTransparency="True" BorderThickness="1" ResizeMode="CanResizeWithGrip" MouseLeftButtonDown="Window_MouseLeftButtonDown">
+    <Window.BorderBrush>
+        <SolidColorBrush Color="{DynamicResource DarkAccent1}" />
+    </Window.BorderBrush>
+    <Window.Background>
+        <SolidColorBrush Color="{DynamicResource DarkBackground}" />
+    </Window.Background>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <Border Background="#252526" Padding="10">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                
+                <!-- Title Row -->
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="🌳 Behavior Tree " Foreground="#CCCCCC" FontSize="16" FontWeight="Bold"/>
+                    <TextBlock x:Name="ModeText" Text="Autopilot" Foreground="#4EC9B0" FontSize="16" FontWeight="Bold" Margin="0,0,20,0"/>
+                    <TextBlock Text="Status: " Foreground="#CCCCCC" FontSize="14"/>
+                    <TextBlock x:Name="StatusText" Text="Idle" Foreground="#AAAAAA" FontSize="14"/>
+                </StackPanel>
+                
+                <!-- Current Goal (large, prominent) -->
+                <Border Grid.Row="1" Background="#3E3E42" CornerRadius="6" Padding="12,8" Margin="0,10,0,0">
+                    <StackPanel>
+                        <TextBlock Text="🎯 CURRENT GOAL" Foreground="#569CD6" FontSize="11" FontWeight="Bold" Margin="0,0,0,4"/>
+                        <TextBlock x:Name="CurrentGoalText" Text="Waiting..." Foreground="#FFFFFF" FontSize="22" FontWeight="Bold"/>
+                        <TextBlock x:Name="CurrentGoalSubText" Text="" Foreground="#808080" FontSize="12" Margin="0,2,0,0"/>
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </Border>
+
+        <!-- Current Execution Path -->
+        <Border Grid.Row="1" Background="#1E1E1E" Padding="10">
+            <StackPanel>
+                <TextBlock Text="📍 Recent Execution:" Foreground="#007ACC" FontSize="13" FontWeight="Bold" Margin="0,0,0,5"/>
+                <TextBlock x:Name="ExecutionPathText" Text="⏳ Waiting..." Foreground="#D4D4D4" FontSize="12" TextWrapping="Wrap"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Tree Nodes List -->
+        <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto">
+            <StackPanel x:Name="TreePanel" Margin="5">
+                <!-- Nodes will be added dynamically -->
+            </StackPanel>
+        </ScrollViewer>
+
+        <!-- Toolbar Buttons -->
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top">
+            <Button x:Name="ButtonClear" Content="🗑️" Click="ButtonClear_Click" BorderThickness="1,0,0,0" Padding="1,1,1,3" Width="28" Height="27" FontFamily="Segoe UI Emoji" Style="{DynamicResource ButtonStyleDark}" FontSize="14" ToolTip="Clear history">
+                <Button.Foreground>
+                    <SolidColorBrush Color="{DynamicResource DarkForeground}" />
+                </Button.Foreground>
+            </Button>
+            <Button x:Name="ButtonPause" Content="⏸️" Click="ButtonPause_Click" BorderThickness="1,0,0,0" Padding="1,1,1,3" Width="28" Height="27" FontFamily="Segoe UI Emoji" Style="{DynamicResource ButtonStyleDark}" FontSize="14" ToolTip="Pause updates">
+                <Button.Foreground>
+                    <SolidColorBrush Color="{DynamicResource DarkForeground}" />
+                </Button.Foreground>
+            </Button>
+            <Button x:Name="buttonExit" Content="❌" Click="ButtonExit_Click" BorderThickness="1,0,0,0" Padding="1,1,1,3" Width="28" Height="27" FontFamily="Verdana" Style="{DynamicResource ButtonStyleDark}" FontSize="14" ToolTip="Close">
+                <Button.Foreground>
+                    <SolidColorBrush Color="{DynamicResource DarkForeground}" />
+                </Button.Foreground>
+            </Button>
+        </StackPanel>
+    </Grid>
+</Window>

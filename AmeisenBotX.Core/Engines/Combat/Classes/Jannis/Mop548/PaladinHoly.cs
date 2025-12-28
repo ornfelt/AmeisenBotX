@@ -1,4 +1,4 @@
-﻿using AmeisenBotX.Common.Utils;
+using AmeisenBotX.Common.Utils;
 using AmeisenBotX.Core.Engines.Combat.Helpers.Healing;
 using AmeisenBotX.Core.Engines.Movement.Enums;
 using AmeisenBotX.Core.Managers.Character.Comparators;
@@ -6,7 +6,7 @@ using AmeisenBotX.Core.Managers.Character.Spells.Objects;
 using AmeisenBotX.Core.Managers.Character.Talents.Objects;
 using AmeisenBotX.Wow.Objects;
 using AmeisenBotX.Wow.Objects.Enums;
-using AmeisenBotX.Wow548.Constants;
+using AmeisenBotX.WowMop.Constants;
 using System;
 using System.Collections.Generic;
 using System.Linq;

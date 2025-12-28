@@ -4,7 +4,6 @@ using AmeisenBotX.Wow.Objects.Enums;
 using AmeisenBotX.Wow.Objects.Raw;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading;

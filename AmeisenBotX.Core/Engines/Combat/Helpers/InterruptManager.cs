@@ -1,4 +1,4 @@
-﻿using AmeisenBotX.Logging;
+using AmeisenBotX.Logging;
 using AmeisenBotX.Wow.Objects;
 using System.Collections.Generic;
 using System.Linq;

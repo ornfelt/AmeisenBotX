@@ -111,7 +111,7 @@ namespace AmeisenBotX.MPQ.Blp
 
                 data = new byte[mippmapSize[MipmapLevel]];
                 str.Position = (int)mipmapOffsets[MipmapLevel];
-                str.Read(data, 0, data.Length);
+                str.ReadExactly(data);
                 return data;
             }
             return null;
@@ -135,41 +135,41 @@ namespace AmeisenBotX.MPQ.Blp
         {
             str = _str;
             byte[] buffer = new byte[4];
-            str.Read(buffer, 0, 4);
+            str.ReadExactly(buffer, 0, 4);
 
             if (new ASCIIEncoding().GetString(buffer) != "BLP2")
             {
                 throw new Exception("Invalid BLP Format");
             }
 
-            str.Read(buffer, 0, 4);
+            str.ReadExactly(buffer, 0, 4);
             type = BitConverter.ToUInt32(buffer, 0);
             if (type != 1)
             {
                 throw new Exception("Invalid BLP-Type! Should be 1 but " + type + " was found");
             }
 
-            str.Read(buffer, 0, 4);
+            str.ReadExactly(buffer, 0, 4);
             encoding = buffer[0];
             alphaDepth = buffer[1];
             alphaEncoding = buffer[2];
             hasMipmaps = buffer[3];
 
-            str.Read(buffer, 0, 4);
+            str.ReadExactly(buffer, 0, 4);
             width = BitConverter.ToInt32(buffer, 0);
 
-            str.Read(buffer, 0, 4);
+            str.ReadExactly(buffer, 0, 4);
             height = BitConverter.ToInt32(buffer, 0);
 
             for (int i = 0; i < 16; i++)
             {
-                _str.Read(buffer, 0, 4);
+                _str.ReadExactly(buffer, 0, 4);
                 mipmapOffsets[i] = BitConverter.ToUInt32(buffer, 0);
             }
 
             for (int i = 0; i < 16; i++)
             {
-                str.Read(buffer, 0, 4);
+                str.ReadExactly(buffer, 0, 4);
                 mippmapSize[i] = BitConverter.ToUInt32(buffer, 0);
             }
 
@@ -178,7 +178,7 @@ namespace AmeisenBotX.MPQ.Blp
                 for (int i = 0; i < 256; i++)
                 {
                     byte[] color = new byte[4];
-                    str.Read(color, 0, 4);
+                    str.ReadExactly(color, 0, 4);
                     paletteBGRA[i].blue = color[0];
                     paletteBGRA[i].green = color[1];
                     paletteBGRA[i].red = color[2];

@@ -1,4 +1,4 @@
-﻿namespace AmeisenBotX.Core.Engines.Battleground.KamelBG.Enums
+namespace AmeisenBotX.Core.Engines.Battleground.KamelBG.Enums
 {
     public enum Vehicle
     {

@@ -1,4 +1,4 @@
-﻿namespace AmeisenBotX.Core.Engines.Dungeon.Enums
+namespace AmeisenBotX.Core.Engines.Dungeon.Enums
 {
     public enum DungeonFactionType
     {

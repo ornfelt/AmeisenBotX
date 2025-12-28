@@ -1,4 +1,4 @@
-﻿using AmeisenBotX.Common.Utils;
+using AmeisenBotX.Common.Utils;
 using AmeisenBotX.Core.Engines.Combat.Helpers.Healing.Enums;
 using AmeisenBotX.Core.Managers.Character.Spells.Objects;
 using AmeisenBotX.Logging;
@@ -47,8 +47,9 @@ namespace AmeisenBotX.Core.Engines.Combat.Helpers.Healing
             float healthWeight = 0.7f,
             float incomingDamageWeight = 0.3f,
             int targetDyingSeconds = 4,
-            float overhealingStopThreshold = 0.8f,
-            float maxOverheal = 0.75f
+            float overhealingStopThreshold = 0.4f,
+            float maxOverheal = 0.3f,
+            float minHealthPercentGain = 0.15f
         )
         {
             Bot = bot;
@@ -61,6 +62,7 @@ namespace AmeisenBotX.Core.Engines.Combat.Helpers.Healing
             TargetDyingSeconds = targetDyingSeconds;
             OverhealingStopThreshold = overhealingStopThreshold;
             MaxOverheal = maxOverheal;
+            MinHealthPercentGain = minHealthPercentGain;
 
             HealingSpells = [];
             MeasurementEvent = new(TimeSpan.FromSeconds(1));
@@ -80,6 +82,8 @@ namespace AmeisenBotX.Core.Engines.Combat.Helpers.Healing
         public float IncomingDamageMod { get; set; }
 
         public float MaxOverheal { get; set; }
+
+        public float MinHealthPercentGain { get; set; }
 
         public float OverhealingStopThreshold { get; set; }
 
@@ -127,6 +131,7 @@ namespace AmeisenBotX.Core.Engines.Combat.Helpers.Healing
             if (s.TryGetValue("DamageWeight", out j)) { IncomingDamageMod = j.To<float>(); }
             if (s.TryGetValue("OverhealingStopThreshold", out j)) { OverhealingStopThreshold = j.To<float>(); }
             if (s.TryGetValue("MaxOverheal", out j)) { MaxOverheal = j.To<float>(); }
+            if (s.TryGetValue("MinHealthPercentGain", out j)) { MinHealthPercentGain = j.To<float>(); }
             if (s.TryGetValue("TargetDyingSeconds", out j)) { TargetDyingSeconds = j.To<int>(); }
         }
 
@@ -140,6 +145,7 @@ namespace AmeisenBotX.Core.Engines.Combat.Helpers.Healing
                 { "DamageWeight", IncomingDamageMod },
                 { "OverhealingStopThreshold", OverhealingStopThreshold },
                 { "MaxOverheal", MaxOverheal },
+                { "MinHealthPercentGain", MinHealthPercentGain },
                 { "TargetDyingSeconds", TargetDyingSeconds },
             };
         }
@@ -162,12 +168,13 @@ namespace AmeisenBotX.Core.Engines.Combat.Helpers.Healing
                 if (SpellHealing.ContainsKey(castingSpell))
                 {
                     int missingHealth = target.MaxHealth - target.Health;
-                    int maxAllowedHeal = (int)(SpellHealing[castingSpell] * (1.0f + OverhealingStopThreshold));
+                    int averageHeal = SpellHealing[castingSpell];
 
-                    // if the cast would be more than x% overheal, stop it
-                    if (missingHealth < maxAllowedHeal)
+                    // Smart Overheal Logic
+                    // We check if the heal is worth it (Efficiency OR Significance)
+                    if (!IsHealWorthIt(missingHealth, target.MaxHealth, averageHeal, OverhealingStopThreshold))
                     {
-                        AmeisenLogger.I.Log("HealingManager", $"Abort cast due to overhealing: {missingHealth} < {maxAllowedHeal}", LogLevel.Verbose);
+                        AmeisenLogger.I.Log("HealingManager", $"Abort cast: {castingSpell} on {target.Guid}. Missing: {missingHealth}, Heal: {averageHeal}. Not Efficient & Not Significant.", LogLevel.Verbose);
                         return true;
                     }
                 }
@@ -217,7 +224,7 @@ namespace AmeisenBotX.Core.Engines.Combat.Helpers.Healing
             }
 
             // is there anyone that we could heal with max allowed overheal
-            IEnumerable<IWowUnit> targetsNeedToBeHealed = healableTargets.Where(e => SpellHealing.Any(x => (e.MaxHealth - e.Health) >= x.Value * (1.0f + MaxOverheal)));
+            IEnumerable<IWowUnit> targetsNeedToBeHealed = healableTargets.Where(e => SpellHealing.Any(x => IsHealWorthIt(e.MaxHealth - e.Health, e.MaxHealth, x.Value, MaxOverheal)));
 
             if (targetsNeedToBeHealed.Any())
             {
@@ -392,6 +399,42 @@ namespace AmeisenBotX.Core.Engines.Combat.Helpers.Healing
 
             // AmeisenLogger.I.Log("HealingManager", $"SpellHealing:
             // {JsonSerializer.Serialize(SpellHealing)}", LogLevel.Verbose);
+        }
+
+        /// <summary>
+        /// Determines if a heal is worth casting based on Efficiency OR Significance.
+        /// </summary>
+        /// <param name="missingHealth">Current missing health of the target</param>
+        /// <param name="maxHealth">Max health of the target</param>
+        /// <param name="averageHeal">Expected healing amount</param>
+        /// <param name="allowedOverhealRatio">Allowed overheal percentage (0.0 - 1.0)</param>
+        /// <returns>True if the heal should be cast/kept</returns>
+        private bool IsHealWorthIt(int missingHealth, int maxHealth, int averageHeal, float allowedOverhealRatio)
+        {
+            if (averageHeal <= 0)
+            {
+                return false;
+            }
+
+            // 1. Efficiency Check
+            // Do we utilize enough of the heal?
+            // e.g. Heal=1000, AllowedOverheal=0.3. We need 700 effective. Missing >= 700?
+            bool isEfficient = missingHealth >= averageHeal * (1.0f - allowedOverhealRatio);
+
+            if (isEfficient)
+            {
+                return true;
+            }
+
+            // 2. Significance Check
+            // If the heal is inefficient (will overheal a lot), is it still vital?
+            // This handles low-level scaling (Heal > Potentially MaxHealth) and emergency top-ups.
+            // Check if we are restoring a significant chunk of the target's HP bar.
+            // We clamp the effective heal to the missing health (we can't heal more than missing).
+            int effectiveHeal = Math.Min(missingHealth, averageHeal);
+            bool isSignificant = (float)effectiveHeal / maxHealth >= MinHealthPercentGain;
+
+            return isSignificant;
         }
     }
 }

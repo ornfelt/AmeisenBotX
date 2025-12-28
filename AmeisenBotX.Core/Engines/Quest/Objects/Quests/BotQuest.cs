@@ -1,4 +1,4 @@
-﻿using AmeisenBotX.Common.Math;
+using AmeisenBotX.Common.Math;
 using AmeisenBotX.Common.Utils;
 using AmeisenBotX.Core.Engines.Movement.Enums;
 using AmeisenBotX.Core.Engines.Quest.Objects.Objectives;
@@ -90,9 +90,9 @@ namespace AmeisenBotX.Core.Engines.Quest.Objects.Quests
                     else
                     {
                         Bot.Wow.SelectQuestByNameOrGossipId(Name, GossipId, true);
-                        Thread.Sleep(1000);
+                        Thread.Sleep(Random.Shared.Next(800, 1200));
                         Bot.Wow.AcceptQuest();
-                        Thread.Sleep(250);
+                        Thread.Sleep(Random.Shared.Next(200, 400));
 
                         if (Bot.Wow.GetQuestLogIdByTitle(Name, out _))
                         {
@@ -139,9 +139,9 @@ namespace AmeisenBotX.Core.Engines.Quest.Objects.Quests
                     else if (ActionEvent.Run())
                     {
                         Bot.Wow.SelectQuestByNameOrGossipId(Name, GossipId, false);
-                        Thread.Sleep(1000);
+                        Thread.Sleep(Random.Shared.Next(800, 1200));
                         Bot.Wow.CompleteQuest();
-                        Thread.Sleep(1000);
+                        Thread.Sleep(Random.Shared.Next(800, 1200));
 
                         bool selectedReward = false;
                         // TODO: This only works for the english locale!
@@ -178,8 +178,6 @@ namespace AmeisenBotX.Core.Engines.Quest.Objects.Quests
                                         if (Bot.Character.IsItemAnImprovement(item, out _))
                                         {
                                             Bot.Wow.SelectQuestReward(i);
-                                            Bot.Wow.SelectQuestReward(i);
-                                            Bot.Wow.SelectQuestReward(i);
                                             selectedReward = true;
                                             break;
                                         }
@@ -197,7 +195,7 @@ namespace AmeisenBotX.Core.Engines.Quest.Objects.Quests
                             Bot.Wow.SelectQuestReward(1);
                         }
 
-                        Thread.Sleep(250);
+                        Thread.Sleep(Random.Shared.Next(200, 400));
                         Returned = true;
                         return true;
                     }

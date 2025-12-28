@@ -1,10 +1,10 @@
-﻿using AmeisenBotX.Common.Math;
+using AmeisenBotX.Common.Math;
 using AmeisenBotX.Common.Storage;
 using AmeisenBotX.Common.Utils;
 using AmeisenBotX.Core.Engines.Movement.Enums;
 using AmeisenBotX.Wow.Objects;
 using AmeisenBotX.Wow.Objects.Enums;
-using AmeisenBotX.Wow335a.Constants.Raids.Wotlk.Naxxramas;
+using AmeisenBotX.WowWotlk.Constants.Raids;
 using System;
 using System.Collections.Generic;
 
@@ -95,7 +95,7 @@ namespace AmeisenBotX.Core.Engines.Tactic.Bosses.Naxxramas10
                 allowAttacking = true;
 
                 // Locust Swarm
-                if (anubrekhan.CurrentlyCastingSpellId == AnubRekhan335a.LocustSwarmSpellId)
+                if (anubrekhan.CurrentlyCastingSpellId == Naxxramas.AnubRekhanWotlk.LocustSwarmSpellId)
                 {
                     LocustSwarmActivated = DateTime.UtcNow;
                     Bot.CombatClass.BlacklistedTargetDisplayIds = AnubRekhanDisplayId;
@@ -110,7 +110,7 @@ namespace AmeisenBotX.Core.Engines.Tactic.Bosses.Naxxramas10
 
                 if (!isMelee)
                 {
-                    if (anubrekhan.CurrentlyCastingSpellId == AnubRekhan335a.ImpaleSpellId)
+                    if (anubrekhan.CurrentlyCastingSpellId == Naxxramas.AnubRekhanWotlk.ImpaleSpellId)
                     {
                         if (ImpaleDodgePos == Vector3.Zero)
                         {
@@ -179,7 +179,7 @@ namespace AmeisenBotX.Core.Engines.Tactic.Bosses.Naxxramas10
                     Bot.CombatClass.BlacklistedTargetDisplayIds = AddsDisplayIds;
 
                     // Locust Swarm
-                    if (anubrekhan.CurrentlyCastingSpellId == AnubRekhan335a.LocustSwarmSpellId)
+                    if (anubrekhan.CurrentlyCastingSpellId == Naxxramas.AnubRekhanWotlk.LocustSwarmSpellId)
                     {
                         TankIsKiting = true;
                     }
@@ -197,7 +197,7 @@ namespace AmeisenBotX.Core.Engines.Tactic.Bosses.Naxxramas10
                             }
                             else
                             {
-                                if (anubrekhan.CurrentlyCastingSpellId == AnubRekhan335a.ImpaleSpellId)
+                                if (anubrekhan.CurrentlyCastingSpellId == Naxxramas.AnubRekhanWotlk.ImpaleSpellId)
                                 {
                                     if (ImpaleDodgePos == Vector3.Zero)
                                     {

@@ -1,8 +1,8 @@
-﻿using AmeisenBotX.Core.Engines.Combat.Helpers.Aura.Objects;
+using AmeisenBotX.Core.Engines.Combat.Helpers.Aura.Objects;
 using AmeisenBotX.Core.Managers.Character.Comparators;
 using AmeisenBotX.Core.Managers.Character.Talents.Objects;
 using AmeisenBotX.Wow.Objects.Enums;
-using AmeisenBotX.Wow335a.Constants;
+using AmeisenBotX.WowWotlk.Constants.Classes;
 using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
@@ -11,20 +11,20 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
     {
         public DruidFeralCat(AmeisenBotInterfaces bot) : base(bot)
         {
-            MyAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, Druid335a.MarkOfTheWild, () => TryCastSpell(Druid335a.MarkOfTheWild, Bot.Wow.PlayerGuid, true, 0, true)));
-            MyAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, Druid335a.CatForm, () => TryCastSpell(Druid335a.CatForm, 0, true)));
-            MyAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, Druid335a.SavageRoar, () => TryCastSpellRogue(Druid335a.SavageRoar, Bot.Wow.TargetGuid, true, true, 1)));
+            MyAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, DruidWotlk.MarkOfTheWild, () => TryCastSpell(DruidWotlk.MarkOfTheWild, Bot.Wow.PlayerGuid, true, 0, true)));
+            MyAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, DruidWotlk.CatForm, () => TryCastSpell(DruidWotlk.CatForm, 0, true)));
+            MyAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, DruidWotlk.SavageRoar, () => TryCastSpellRogue(DruidWotlk.SavageRoar, Bot.Wow.TargetGuid, true, true, 1)));
 
-            TargetAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, Druid335a.Rip, () => Bot.Player.ComboPoints == 5 && TryCastSpellRogue(Druid335a.Rip, Bot.Wow.TargetGuid, true, true, 5)));
-            TargetAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, Druid335a.Rake, () => TryCastSpell(Druid335a.Rake, Bot.Wow.TargetGuid, true)));
-            TargetAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, Druid335a.MangleCat, () => TryCastSpell(Druid335a.MangleCat, Bot.Wow.TargetGuid, true)));
+            TargetAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, DruidWotlk.Rip, () => Bot.Player.ComboPoints == 5 && TryCastSpellRogue(DruidWotlk.Rip, Bot.Wow.TargetGuid, true, true, 5)));
+            TargetAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, DruidWotlk.Rake, () => TryCastSpell(DruidWotlk.Rake, Bot.Wow.TargetGuid, true)));
+            TargetAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, DruidWotlk.MangleCat, () => TryCastSpell(DruidWotlk.MangleCat, Bot.Wow.TargetGuid, true)));
 
             InterruptManager.InterruptSpells = new()
             {
-                { 0, (x) => TryCastSpell(Druid335a.FaerieFire, x.Guid, true) },
+                { 0, (x) => TryCastSpell(DruidWotlk.FaerieFire, x.Guid, true) },
             };
 
-            GroupAuraManager.SpellsToKeepActiveOnParty.Add((Druid335a.MarkOfTheWild, (spellName, guid) => TryCastSpell(spellName, guid, true)));
+            GroupAuraManager.SpellsToKeepActiveOnParty.Add((DruidWotlk.MarkOfTheWild, (spellName, guid) => TryCastSpell(spellName, guid, true)));
         }
 
         public override string Description => "FCFS based CombatClass for the Feral (Cat) Druid spec.";
@@ -96,24 +96,24 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
                 double distanceToTarget = Bot.Player.Position.GetDistance(Bot.Target.Position);
 
                 if (distanceToTarget > 9.0
-                    && TryCastSpell(Druid335a.FeralChargeBear, Bot.Wow.TargetGuid, true))
+                    && TryCastSpell(DruidWotlk.FeralChargeBear, Bot.Wow.TargetGuid, true))
                 {
                     return;
                 }
 
                 if (distanceToTarget > 8.0
-                    && TryCastSpell(Druid335a.Dash, 0))
+                    && TryCastSpell(DruidWotlk.Dash, 0))
                 {
                     return;
                 }
 
                 if (Bot.Player.HealthPercentage < 40
-                    && TryCastSpell(Druid335a.SurvivalInstincts, 0, true))
+                    && TryCastSpell(DruidWotlk.SurvivalInstincts, 0, true))
                 {
                     return;
                 }
 
-                if (TryCastSpell(Druid335a.Berserk, 0))
+                if (TryCastSpell(DruidWotlk.Berserk, 0))
                 {
                     return;
                 }
@@ -124,16 +124,16 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
                 }
 
                 if ((Bot.Player.EnergyPercentage > 70
-                        && TryCastSpell(Druid335a.Berserk, 0))
+                        && TryCastSpell(DruidWotlk.Berserk, 0))
                     || (Bot.Player.Energy < 30
-                        && TryCastSpell(Druid335a.TigersFury, 0))
+                        && TryCastSpell(DruidWotlk.TigersFury, 0))
                     || (Bot.Player.HealthPercentage < 70
-                        && TryCastSpell(Druid335a.Barkskin, 0, true))
+                        && TryCastSpell(DruidWotlk.Barkskin, 0, true))
                     || (Bot.Player.HealthPercentage < 35
-                        && TryCastSpell(Druid335a.SurvivalInstincts, 0, true))
+                        && TryCastSpell(DruidWotlk.SurvivalInstincts, 0, true))
                     || (Bot.Player.ComboPoints == 5
-                        && TryCastSpellRogue(Druid335a.FerociousBite, Bot.Wow.TargetGuid, true, true, 5))
-                    || TryCastSpell(Druid335a.Shred, Bot.Wow.TargetGuid, true))
+                        && TryCastSpellRogue(DruidWotlk.FerociousBite, Bot.Wow.TargetGuid, true, true, 5))
+                    || TryCastSpell(DruidWotlk.Shred, Bot.Wow.TargetGuid, true))
                 {
                     return;
                 }
@@ -153,10 +153,10 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
         private bool NeedToHealMySelf()
         {
             return (Bot.Player.HealthPercentage < 60
-                && !Bot.Player.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == Druid335a.Rejuvenation)
-                && TryCastSpell(Druid335a.Rejuvenation, 0, true))
+                && !Bot.Player.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == DruidWotlk.Rejuvenation)
+                && TryCastSpell(DruidWotlk.Rejuvenation, 0, true))
 || (Bot.Player.HealthPercentage < 40
-                && TryCastSpell(Druid335a.HealingTouch, 0, true));
+                && TryCastSpell(DruidWotlk.HealingTouch, 0, true));
         }
     }
 }

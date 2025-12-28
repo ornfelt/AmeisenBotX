@@ -3,19 +3,14 @@ using AmeisenBotX.MPQ.Dbc.Records;
 
 namespace AmeisenBotX.MPQ
 {
-    public class DbcBridge : IDisposable
+    public class DbcBridge(MpqBridge mpqBridge) : IDisposable
     {
-        private readonly MpqBridge _mpqBridge;
+        private readonly MpqBridge _mpqBridge = mpqBridge;
 
         private DbcReader<SpellRecord> _spellDbc;
         private DbcReader<SpellIconRecord> _iconDbc;
         private DbcReader<ItemRecord> _itemDbc;
         private DbcReader<ItemDisplayInfoRecord> _itemDisplayInfoDbc;
-
-        public DbcBridge(MpqBridge mpqBridge)
-        {
-            _mpqBridge = mpqBridge;
-        }
 
         private DbcReader<SpellRecord> SpellDbc => GetOrLoad(ref _spellDbc, "DBFilesClient\\Spell.dbc");
 
@@ -33,13 +28,7 @@ namespace AmeisenBotX.MPQ
                 return field;
             }
 
-            byte[] data = _mpqBridge.ReadFileBytes(path);
-
-            if (data == null)
-            {
-                throw new FileNotFoundException($"DBC file not found in MPQ: {path}");
-            }
-
+            byte[] data = _mpqBridge.ReadFileBytes(path) ?? throw new FileNotFoundException($"DBC file not found in MPQ: {path}");
             field = new DbcReader<T>(data);
             return field;
         }
@@ -114,6 +103,7 @@ namespace AmeisenBotX.MPQ
         {
             _spellDbc?.Dispose();
             _iconDbc?.Dispose();
+            _itemDbc?.Dispose();
             _itemDbc?.Dispose();
             _itemDisplayInfoDbc?.Dispose();
         }

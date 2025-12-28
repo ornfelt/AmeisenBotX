@@ -1,4 +1,4 @@
-﻿using AmeisenBotX.Core.Managers.Character.Inventory.Objects;
+using AmeisenBotX.Core.Managers.Character.Inventory.Objects;
 using AmeisenBotX.Logging;
 using AmeisenBotX.Logging.Enums;
 using AmeisenBotX.Wow;
@@ -125,6 +125,15 @@ namespace AmeisenBotX.Core.Managers.Character.Inventory
             {
                 AmeisenLogger.I.Log("CharacterManager", $"Failed to parse Inventory JSON:\n{resultJson}\n{e}", LogLevel.Error);
             }
+        }
+
+        public IWowInventoryItem GetItem(int id) => Items.FirstOrDefault(e => e.Id == id);
+
+        public IWowInventoryItem GetItem(string name) => Items.FirstOrDefault(e => e.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
+
+        public int GetItemCount(int id)
+        {
+            return Items.Where(e => e.Id == id).Sum(e => e.Count);
         }
     }
 }

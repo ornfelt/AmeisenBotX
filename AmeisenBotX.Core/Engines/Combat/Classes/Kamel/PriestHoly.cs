@@ -1,8 +1,9 @@
-﻿using AmeisenBotX.Core.Managers.Character.Comparators;
+using AmeisenBotX.Core.Managers.Character.Comparators;
 using AmeisenBotX.Core.Managers.Character.Spells.Objects;
 using AmeisenBotX.Core.Managers.Character.Talents.Objects;
 using AmeisenBotX.Wow.Objects;
 using AmeisenBotX.Wow.Objects.Enums;
+using AmeisenBotX.WowWotlk.Constants.Classes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,87 +12,40 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
 {
     internal class PriestHoly : BasicKamelClass
     {
-        private const string CircleOfHealingSpell = "Circle of Healing";
-
-        private const string DesperatePrayerSpell = "Desperate Prayer";
-
-        private const string DivineHymnSpell = "Divine Hymn";
-
-        //Buffs
-        private const string DivineSpiritSpell = "Divine Spirit";
-
-        //Spells Race
-        private const string EveryManforHimselfSpell = "Every Man for Himself";
-
-        private const string FadeSpell = "Fade";
-
-        private const string FearWardSpell = "Fear Ward";
-
-        private const string FlashHealSpell = "Flash Heal";
-
-        private const string GreaterHealSpell = "Greater Heal";
-
-        private const string GuardianSpiritSpell = "Guardian Spirit";
-
-        private const string HolyFireSpell = "Holy Fire";
-
-        private const string HymnofHopeSpell = "Hymn of Hope";
-
-        private const string InnerFireSpell = "Inner Fire";
-
-        private const string PowerWordFortitudeSpell = "Power Word: Fortitude";
-
-        private const string PowerWordShieldSpell = "Power Word: Shield";
-
-        private const string PrayerofFortitude = "Prayer of Fortitude";
-
-        private const string PrayerofHealingSpell = "Prayer of Healing";
-
-        private const string PrayerofMendingSpell = "Prayer of Mending";
-
-        private const string PrayerofShadowProtection = "Prayer of Shadow Protection";
-
-        private const string RenewSpell = "Renew";
-
-        private const string ShadowProtectionSpell = "Shadow Protection";
-
-        //Spells / dmg
-        private const string SmiteSpell = "Smite";
+        // All spell constants moved to AmeisenBotX.WowWotlk.Constants.PriestWotlk
 
         public PriestHoly(AmeisenBotInterfaces bot) : base()
         {
             Bot = bot;
 
-            //Spells Race
-            //spellCoolDown.Add(EveryManforHimselfSpell, DateTime.Now);
-
             //Spells / dmg
-            spellCoolDown.Add(SmiteSpell, DateTime.Now);
-            spellCoolDown.Add(HolyFireSpell, DateTime.Now);
+            spellCoolDown.Add(PriestWotlk.Smite, DateTime.Now);
+            spellCoolDown.Add(PriestWotlk.HolyFire, DateTime.Now);
 
             //Spells
-            spellCoolDown.Add(RenewSpell, DateTime.Now);
-            spellCoolDown.Add(FlashHealSpell, DateTime.Now);
-            spellCoolDown.Add(GreaterHealSpell, DateTime.Now);
-            spellCoolDown.Add(PowerWordShieldSpell, DateTime.Now);
-            spellCoolDown.Add(CircleOfHealingSpell, DateTime.Now);
-            spellCoolDown.Add(DesperatePrayerSpell, DateTime.Now);
-            spellCoolDown.Add(FadeSpell, DateTime.Now);
-            spellCoolDown.Add(PrayerofHealingSpell, DateTime.Now);
-            spellCoolDown.Add(PrayerofMendingSpell, DateTime.Now);
-            spellCoolDown.Add(GuardianSpiritSpell, DateTime.Now);
-            spellCoolDown.Add(HymnofHopeSpell, DateTime.Now);
-            spellCoolDown.Add(DivineHymnSpell, DateTime.Now);
+            spellCoolDown.Add(PriestWotlk.Renew, DateTime.Now);
+            spellCoolDown.Add(PriestWotlk.FlashHeal, DateTime.Now);
+            spellCoolDown.Add(PriestWotlk.GreaterHeal, DateTime.Now);
+            spellCoolDown.Add(PriestWotlk.PowerWordShield, DateTime.Now);
+            spellCoolDown.Add(PriestWotlk.CircleOfHealing, DateTime.Now);
+            spellCoolDown.Add(PriestWotlk.DesperatePrayer, DateTime.Now);
+            spellCoolDown.Add(PriestWotlk.Fade, DateTime.Now);
+            spellCoolDown.Add(PriestWotlk.PrayerOfHealing, DateTime.Now);
+            spellCoolDown.Add(PriestWotlk.PrayerOfMending, DateTime.Now);
+            spellCoolDown.Add(PriestWotlk.GuardianSpirit, DateTime.Now);
+            spellCoolDown.Add(PriestWotlk.HymnOfHope, DateTime.Now);
+            spellCoolDown.Add(PriestWotlk.DivineHymn, DateTime.Now);
 
             //Buffs
-            spellCoolDown.Add(DivineSpiritSpell, DateTime.Now);
-            spellCoolDown.Add(InnerFireSpell, DateTime.Now);
-            spellCoolDown.Add(FearWardSpell, DateTime.Now);
-            spellCoolDown.Add(PowerWordFortitudeSpell, DateTime.Now);
-            spellCoolDown.Add(ShadowProtectionSpell, DateTime.Now);
-            spellCoolDown.Add(PrayerofFortitude, DateTime.Now);
-            spellCoolDown.Add(PrayerofShadowProtection, DateTime.Now);
+            spellCoolDown.Add(PriestWotlk.DivineSpirit, DateTime.Now);
+            spellCoolDown.Add(PriestWotlk.InnerFire, DateTime.Now);
+            spellCoolDown.Add(PriestWotlk.FearWard, DateTime.Now);
+            spellCoolDown.Add(PriestWotlk.PowerWordFortitude, DateTime.Now);
+            spellCoolDown.Add(PriestWotlk.ShadowProtection, DateTime.Now);
+            spellCoolDown.Add(PriestWotlk.PrayerOfFortitude, DateTime.Now);
+            spellCoolDown.Add(PriestWotlk.PrayerOfShadowProtection, DateTime.Now);
         }
+
 
         public override string Author => "Lukas";
 
@@ -182,7 +136,7 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
 
                 CastBuff =
                 [
-                    .. CastBuff.Where(e => (!e.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == "Prayer of Fortitude") || !e.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == "Prayer of Shadow Protection")) && !e.IsDead).OrderBy(e => e.HealthPercentage),
+                    .. CastBuff.Where(e => (!e.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == PriestWotlk.PrayerOfFortitude) || !e.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == PriestWotlk.PrayerOfShadowProtection)) && !e.IsDead).OrderBy(e => e.HealthPercentage),
                 ];
 
                 if (CastBuff != null)
@@ -200,11 +154,11 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
                         {
                             return;
                         }
-                        if (!Bot.Target.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == "Prayer of Fortitude") && CustomCastSpell(PrayerofFortitude))
+                        if (!Bot.Target.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == PriestWotlk.PrayerOfFortitude) && CustomCastSpell(PriestWotlk.PrayerOfFortitude))
                         {
                             return;
                         }
-                        if (!Bot.Target.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == "Prayer of Shadow Protection") && CustomCastSpell(PrayerofShadowProtection))
+                        if (!Bot.Target.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == PriestWotlk.PrayerOfShadowProtection) && CustomCastSpell(PriestWotlk.PrayerOfShadowProtection))
                         {
                             return;
                         }
@@ -215,22 +169,18 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
             //{
             //    return;
             //}
-            if (!Bot.Player.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == "Divine Spirit") && CustomCastSpell(DivineSpiritSpell, true))
+            if (!Bot.Player.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == PriestWotlk.DivineSpirit) && CustomCastSpell(PriestWotlk.DivineSpirit, true))
             {
                 return;
             }
-            if (!Bot.Player.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == "Inner Fire") && CustomCastSpell(InnerFireSpell, true))
+            if (!Bot.Player.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == PriestWotlk.InnerFire) && CustomCastSpell(PriestWotlk.InnerFire, true))
             {
                 return;
             }
-            if (!Bot.Player.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == "Fear Ward") && CustomCastSpell(FearWardSpell, true))
+            if (!Bot.Player.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == PriestWotlk.FearWard) && CustomCastSpell(PriestWotlk.FearWard, true))
             {
                 return;
             }
-            //if (!Bot.Player.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == "Shadow Protection") && CustomCastSpell(ShadowProtectionSpell))
-            //{
-            //    return;
-            //}
         }
 
         private bool CustomCastSpell(string spellName, bool castOnSelf = false)
@@ -307,67 +257,67 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
                             return;
                         }
 
-                        if (UseSpellOnlyInCombat && (Bot.Player.IsConfused || Bot.Player.IsSilenced || Bot.Player.IsDazed) && CustomCastSpell(EveryManforHimselfSpell))
+                        if (UseSpellOnlyInCombat && (Bot.Player.IsConfused || Bot.Player.IsSilenced || Bot.Player.IsDazed) && CustomCastSpell(RacialsWotlk.EveryManForHimself))
                         {
                             return;
                         }
 
-                        if (UseSpellOnlyInCombat && Bot.Player.ManaPercentage <= 20 && CustomCastSpell(HymnofHopeSpell))
+                        if (UseSpellOnlyInCombat && Bot.Player.ManaPercentage <= 20 && CustomCastSpell(PriestWotlk.HymnOfHope))
                         {
                             return;
                         }
 
-                        if (partyMemberToHeal.Count >= 5 && Bot.Target.HealthPercentage < 50 && CustomCastSpell(DivineHymnSpell))
+                        if (partyMemberToHeal.Count >= 5 && Bot.Target.HealthPercentage < 50 && CustomCastSpell(PriestWotlk.DivineHymn))
                         {
                             return;
                         }
 
-                        if (UseSpellOnlyInCombat && Bot.Player.HealthPercentage < 50 && CustomCastSpell(FadeSpell))
+                        if (UseSpellOnlyInCombat && Bot.Player.HealthPercentage < 50 && CustomCastSpell(PriestWotlk.Fade))
                         {
                             return;
                         }
 
-                        if (UseSpellOnlyInCombat && Bot.Target.HealthPercentage < 30 && CustomCastSpell(GuardianSpiritSpell))
+                        if (UseSpellOnlyInCombat && Bot.Target.HealthPercentage < 30 && CustomCastSpell(PriestWotlk.GuardianSpirit))
                         {
                             return;
                         }
 
-                        if (UseSpellOnlyInCombat && Bot.Target.HealthPercentage < 30 && CustomCastSpell(DesperatePrayerSpell))
+                        if (UseSpellOnlyInCombat && Bot.Target.HealthPercentage < 30 && CustomCastSpell(PriestWotlk.DesperatePrayer))
                         {
                             return;
                         }
 
-                        if (Bot.Target.HealthPercentage < 55 && CustomCastSpell(GreaterHealSpell))
+                        if (Bot.Target.HealthPercentage < 55 && CustomCastSpell(PriestWotlk.GreaterHeal))
                         {
                             return;
                         }
 
-                        if (Bot.Target.HealthPercentage < 80 && CustomCastSpell(FlashHealSpell))
+                        if (Bot.Target.HealthPercentage < 80 && CustomCastSpell(PriestWotlk.FlashHeal))
                         {
                             return;
                         }
 
-                        if (partyMemberToHeal.Count >= 3 && Bot.Target.HealthPercentage < 80 && CustomCastSpell(CircleOfHealingSpell))
+                        if (partyMemberToHeal.Count >= 3 && Bot.Target.HealthPercentage < 80 && CustomCastSpell(PriestWotlk.CircleOfHealing))
                         {
                             return;
                         }
 
-                        if (UseSpellOnlyInCombat && partyMemberToHeal.Count >= 2 && Bot.Target.HealthPercentage < 80 && CustomCastSpell(PrayerofMendingSpell))
+                        if (UseSpellOnlyInCombat && partyMemberToHeal.Count >= 2 && Bot.Target.HealthPercentage < 80 && CustomCastSpell(PriestWotlk.PrayerOfMending))
                         {
                             return;
                         }
 
-                        if (UseSpellOnlyInCombat && partyMemberToHeal.Count >= 3 && Bot.Target.HealthPercentage < 80 && CustomCastSpell(PrayerofHealingSpell))
+                        if (UseSpellOnlyInCombat && partyMemberToHeal.Count >= 3 && Bot.Target.HealthPercentage < 80 && CustomCastSpell(PriestWotlk.PrayerOfHealing))
                         {
                             return;
                         }
 
-                        if (!Bot.Target.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == "Renew") && Bot.Target.HealthPercentage < 90 && CustomCastSpell(RenewSpell))
+                        if (!Bot.Target.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == PriestWotlk.Renew) && Bot.Target.HealthPercentage < 90 && CustomCastSpell(PriestWotlk.Renew))
                         {
                             return;
                         }
 
-                        if (UseSpellOnlyInCombat && !Bot.Target.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == "Weakened Soul") && !Bot.Target.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == "Power Word: Shield") && Bot.Target.HealthPercentage < 90 && CustomCastSpell(PowerWordShieldSpell))
+                        if (UseSpellOnlyInCombat && !Bot.Target.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == PriestWotlk.WeakenedSoul) && !Bot.Target.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == PriestWotlk.PowerWordShield) && Bot.Target.HealthPercentage < 90 && CustomCastSpell(PriestWotlk.PowerWordShield))
                         {
                             return;
                         }
@@ -396,11 +346,11 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
                             Bot.Wow.StopClickToMove();
                             Bot.Movement.Reset();
                         }
-                        if (UseSpellOnlyInCombat && Bot.Player.ManaPercentage >= 80 && CustomCastSpell(HolyFireSpell))
+                        if (UseSpellOnlyInCombat && Bot.Player.ManaPercentage >= 80 && CustomCastSpell(PriestWotlk.HolyFire))
                         {
                             return;
                         }
-                        if (UseSpellOnlyInCombat && Bot.Player.ManaPercentage >= 80 && CustomCastSpell(SmiteSpell))
+                        if (UseSpellOnlyInCombat && Bot.Player.ManaPercentage >= 80 && CustomCastSpell(PriestWotlk.Smite))
                         {
                             return;
                         }

@@ -1,9 +1,10 @@
-﻿using AmeisenBotX.Common.Utils;
+using AmeisenBotX.Common.Utils;
 using AmeisenBotX.Core.Managers.Character.Comparators;
 using AmeisenBotX.Core.Managers.Character.Spells.Objects;
 using AmeisenBotX.Core.Managers.Character.Talents.Objects;
 using AmeisenBotX.Wow.Objects;
 using AmeisenBotX.Wow.Objects.Enums;
+using AmeisenBotX.WowWotlk.Constants.Classes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,69 +13,35 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
 {
     internal class PaladinProtection : BasicKamelClass
     {
-        //Spell
-        private const string avengersShieldSpell = "Avenger's Shield";
-
-        private const string AvengingWrathSpell = "Avenging Wrath";
-
-        //Buff
-        private const string blessingofKingsSpell = "Blessing of Kings";
-
-        private const string consecrationSpell = "Consecration";
-
-        private const string devotionAuraSpell = "Devotion Aura";
-
-        private const string DivinePleaSpell = "Divine Plea";
-
-        private const string divineProtectionSpell = "Divine Protection";
-
-        //Spells Race
-        private const string EveryManforHimselfSpell = "Every Man for Himself";
-
-        private const string exorcismSpell = "Exorcism";
-        private const string hammerofJusticeSpell = "Hammer of Justice";
-        private const string hammeroftheRighteousSpell = "Hammer of the Righteous";
-        private const string hammerofWrathSpell = "Hammer of Wrath";
-        private const string handofReckoningSpell = "Hand of Reckoning";
-        private const string holyLightSpell = "Holy Light";
-        private const string holyShieldSpell = "Holy Shield";
-        private const string judgementofLightSpell = "Judgement of Light";
-        private const string layonHandsSpell = "Lay on Hands";
-        private const string righteousFurySpell = "Righteous Fury";
-        private const string SacredShieldSpell = "Sacred Shield";
-        private const string sealofLightSpell = "Seal of Light";
-        private const string sealofWisdomSpell = "Seal of Wisdom";
+        // All spell constants moved to AmeisenBotX.WowWotlk.Constants.PaladinWotlk
 
         public PaladinProtection(AmeisenBotInterfaces bot) : base()
         {
             Bot = bot;
 
-            //Spells Race
-            //spellCoolDown.Add(EveryManforHimselfSpell, DateTime.Now);
-
             //Spell
-            spellCoolDown.Add(avengersShieldSpell, DateTime.Now);
-            spellCoolDown.Add(consecrationSpell, DateTime.Now);
-            spellCoolDown.Add(judgementofLightSpell, DateTime.Now);
-            spellCoolDown.Add(holyShieldSpell, DateTime.Now);
-            spellCoolDown.Add(hammeroftheRighteousSpell, DateTime.Now);
-            spellCoolDown.Add(hammerofWrathSpell, DateTime.Now);
-            spellCoolDown.Add(exorcismSpell, DateTime.Now);
-            spellCoolDown.Add(divineProtectionSpell, DateTime.Now);
-            spellCoolDown.Add(handofReckoningSpell, DateTime.Now);
-            spellCoolDown.Add(hammerofJusticeSpell, DateTime.Now);
-            spellCoolDown.Add(layonHandsSpell, DateTime.Now);
-            spellCoolDown.Add(holyLightSpell, DateTime.Now);
-            spellCoolDown.Add(AvengingWrathSpell, DateTime.Now);
-            spellCoolDown.Add(DivinePleaSpell, DateTime.Now);
-            spellCoolDown.Add(SacredShieldSpell, DateTime.Now);
+            spellCoolDown.Add(PaladinWotlk.AvengersShield, DateTime.Now);
+            spellCoolDown.Add(PaladinWotlk.Consecration, DateTime.Now);
+            spellCoolDown.Add(PaladinWotlk.JudgementOfLight, DateTime.Now);
+            spellCoolDown.Add(PaladinWotlk.HolyShield, DateTime.Now);
+            spellCoolDown.Add(PaladinWotlk.HammerOfTheRighteous, DateTime.Now);
+            spellCoolDown.Add(PaladinWotlk.HammerOfWrath, DateTime.Now);
+            spellCoolDown.Add(PaladinWotlk.Exorcism, DateTime.Now);
+            spellCoolDown.Add(PaladinWotlk.DivineProtection, DateTime.Now);
+            spellCoolDown.Add(PaladinWotlk.HandOfReckoning, DateTime.Now);
+            spellCoolDown.Add(PaladinWotlk.HammerOfJustice, DateTime.Now);
+            spellCoolDown.Add(PaladinWotlk.LayOnHands, DateTime.Now);
+            spellCoolDown.Add(PaladinWotlk.HolyLight, DateTime.Now);
+            spellCoolDown.Add(PaladinWotlk.AvengingWrath, DateTime.Now);
+            spellCoolDown.Add(PaladinWotlk.DivinePlea, DateTime.Now);
+            spellCoolDown.Add(PaladinWotlk.SacredShield, DateTime.Now);
 
             //Buff
-            spellCoolDown.Add(blessingofKingsSpell, DateTime.Now);
-            spellCoolDown.Add(sealofLightSpell, DateTime.Now);
-            spellCoolDown.Add(sealofWisdomSpell, DateTime.Now);
-            spellCoolDown.Add(devotionAuraSpell, DateTime.Now);
-            spellCoolDown.Add(righteousFurySpell, DateTime.Now);
+            spellCoolDown.Add(PaladinWotlk.BlessingOfKings, DateTime.Now);
+            spellCoolDown.Add(PaladinWotlk.SealOfLight, DateTime.Now);
+            spellCoolDown.Add(PaladinWotlk.SealOfWisdom, DateTime.Now);
+            spellCoolDown.Add(PaladinWotlk.DevotionAura, DateTime.Now);
+            spellCoolDown.Add(PaladinWotlk.RighteousFury, DateTime.Now);
 
             //Time event
             ShieldEvent = new(TimeSpan.FromSeconds(8));
@@ -169,7 +136,7 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
 
                 CastBuff =
                 [
-                    .. CastBuff.Where(e => !e.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == "Blessing of Kings") && !e.IsDead).OrderBy(e => e.HealthPercentage),
+                    .. CastBuff.Where(e => !e.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == PaladinWotlk.BlessingOfKings) && !e.IsDead).OrderBy(e => e.HealthPercentage),
                 ];
 
                 if (CastBuff != null)
@@ -187,22 +154,22 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
                         {
                             return;
                         }
-                        if (!Bot.Target.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == "Blessing of Kings") && CustomCastSpell(blessingofKingsSpell))
+                        if (!Bot.Target.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == PaladinWotlk.BlessingOfKings) && CustomCastSpell(PaladinWotlk.BlessingOfKings))
                         {
                             return;
                         }
                     }
                 }
             }
-            if (!Bot.Player.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == "Seal of Wisdom") && CustomCastSpell(sealofWisdomSpell))
+            if (!Bot.Player.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == PaladinWotlk.SealOfWisdom) && CustomCastSpell(PaladinWotlk.SealOfWisdom))
             {
                 return;
             }
-            if (!Bot.Player.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == "Devotion Aura") && CustomCastSpell(devotionAuraSpell))
+            if (!Bot.Player.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == PaladinWotlk.DevotionAura) && CustomCastSpell(PaladinWotlk.DevotionAura))
             {
                 return;
             }
-            if (!Bot.Player.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == "Righteous Fury") && CustomCastSpell(righteousFurySpell))
+            if (!Bot.Player.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == PaladinWotlk.RighteousFury) && CustomCastSpell(PaladinWotlk.RighteousFury))
             {
                 return;
             }
@@ -233,9 +200,6 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
 
         private void StartAttack()
         {
-            // IWowUnit wowUnit =
-            // Bot.ObjectManager.GetClosestWowUnitByDisplayId(AnubRhekanDisplayId, false);
-
             if (Bot.Wow.TargetGuid != 0)
             {
                 if (Bot.Wow.TargetGuid != Bot.Wow.PlayerGuid)
@@ -256,74 +220,74 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
                         Bot.Wow.StartAutoAttack();
                     }
 
-                    if ((Bot.Player.IsConfused || Bot.Player.IsSilenced || Bot.Player.IsDazed) && CustomCastSpell(EveryManforHimselfSpell))
+                    if ((Bot.Player.IsConfused || Bot.Player.IsSilenced || Bot.Player.IsDazed) && CustomCastSpell(RacialsWotlk.EveryManForHimself))
                     {
                         return;
                     }
 
-                    if (CustomCastSpell(AvengingWrathSpell))
+                    if (CustomCastSpell(PaladinWotlk.AvengingWrath))
                     {
                         return;
                     }
 
-                    if (Bot.Player.ManaPercentage <= 20 && CustomCastSpell(DivinePleaSpell))
+                    if (Bot.Player.ManaPercentage <= 20 && CustomCastSpell(PaladinWotlk.DivinePlea))
                     {
                         return;
                     }
 
-                    if (ShieldEvent.Run() && CustomCastSpell(SacredShieldSpell))
+                    if (ShieldEvent.Run() && CustomCastSpell(PaladinWotlk.SacredShield))
                     {
                         return;
                     }
 
-                    if (Bot.Player.HealthPercentage <= 15 && CustomCastSpell(layonHandsSpell))
+                    if (Bot.Player.HealthPercentage <= 15 && CustomCastSpell(PaladinWotlk.LayOnHands))
                     {
                         return;
                     }
-                    if (Bot.Player.HealthPercentage <= 25 && CustomCastSpell(holyLightSpell))
+                    if (Bot.Player.HealthPercentage <= 25 && CustomCastSpell(PaladinWotlk.HolyLight))
                     {
                         return;
                     }
-                    if (Bot.Player.HealthPercentage <= 50 && CustomCastSpell(divineProtectionSpell))
+                    if (Bot.Player.HealthPercentage <= 50 && CustomCastSpell(PaladinWotlk.DivineProtection))
                     {
                         return;
                     }
-                    if (Bot.Target.HealthPercentage <= 20 && CustomCastSpell(hammerofWrathSpell))
+                    if (Bot.Target.HealthPercentage <= 20 && CustomCastSpell(PaladinWotlk.HammerOfWrath))
                     {
                         return;
                     }
-                    if ((Bot.Target.HealthPercentage <= 20 || Bot.Player.HealthPercentage <= 30 || Bot.Target.IsCasting) && CustomCastSpell(hammerofJusticeSpell))
+                    if ((Bot.Target.HealthPercentage <= 20 || Bot.Player.HealthPercentage <= 30 || Bot.Target.IsCasting) && CustomCastSpell(PaladinWotlk.HammerOfJustice))
                     {
                         return;
                     }
-                    if (Bot.Db.GetUnitName(Bot.Target, out string name) && name != "Anub'Rekhan" && CustomCastSpell(handofReckoningSpell))
+                    if (Bot.Db.GetUnitName(Bot.Target, out string name) && name != "Anub'Rekhan" && CustomCastSpell(PaladinWotlk.HandOfReckoning))
                     {
                         return;
                     }
-                    if (CustomCastSpell(avengersShieldSpell))
+                    if (CustomCastSpell(PaladinWotlk.AvengersShield))
                     {
                         return;
                     }
-                    if (CustomCastSpell(consecrationSpell))
+                    if (CustomCastSpell(PaladinWotlk.Consecration))
                     {
                         return;
                     }
-                    if (CustomCastSpell(judgementofLightSpell))
+                    if (CustomCastSpell(PaladinWotlk.JudgementOfLight))
                     {
                         return;
                     }
-                    if (CustomCastSpell(holyShieldSpell))
+                    if (CustomCastSpell(PaladinWotlk.HolyShield))
                     {
                         return;
                     }
-                    if (CustomCastSpell(exorcismSpell))
+                    if (CustomCastSpell(PaladinWotlk.Exorcism))
                     {
                         return;
                     }
                 }
                 else//Range
                 {
-                    if (CustomCastSpell(avengersShieldSpell))
+                    if (CustomCastSpell(PaladinWotlk.AvengersShield))
                     {
                         return;
                     }

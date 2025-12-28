@@ -1,4 +1,4 @@
-﻿using AmeisenBotX.Core.Engines.Jobs.Enums;
+using AmeisenBotX.Core.Engines.Jobs.Enums;
 
 namespace AmeisenBotX.Core.Engines.Jobs.Profiles
 {

@@ -1,4 +1,4 @@
-﻿using AmeisenBotX.Core.Engines.Quest.Objects.Quests;
+using AmeisenBotX.Core.Engines.Quest.Objects.Quests;
 using AmeisenBotX.Core.Engines.Quest.Quests.Grinder;
 using System.Collections.Generic;
 

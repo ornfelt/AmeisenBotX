@@ -1,4 +1,4 @@
-﻿using AmeisenBotX.BehaviorTree;
+using AmeisenBotX.BehaviorTree;
 using AmeisenBotX.BehaviorTree.Enums;
 using AmeisenBotX.BehaviorTree.Objects;
 using AmeisenBotX.Common.Math;

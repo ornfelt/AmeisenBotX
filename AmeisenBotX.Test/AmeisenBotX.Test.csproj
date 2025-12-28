@@ -2,8 +2,10 @@
 
   <PropertyGroup>
     <TargetFramework>net10.0-windows7.0</TargetFramework>
-
+    <OutputPath>$(MSBuildThisFileDirectory)..\build-test\$(Configuration)\</OutputPath>
     <IsPackable>false</IsPackable>
+
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -19,6 +21,12 @@
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.0.1" />
     <PackageReference Include="MSTest.TestAdapter" Version="4.0.2" />
     <PackageReference Include="MSTest.TestFramework" Version="4.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AmeisenBotX.Common\AmeisenBotX.Common.csproj" />
+    <ProjectReference Include="..\AmeisenBotX.MPQ\AmeisenBotX.MPQ.csproj" />
+    <ProjectReference Include="..\AmeisenBotX.Bridge\AmeisenBotX.Bridge.csproj" />
   </ItemGroup>
 
   <ItemGroup>

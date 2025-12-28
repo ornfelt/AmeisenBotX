@@ -1,8 +1,8 @@
-﻿using AmeisenBotX.Core.Engines.Combat.Helpers.Aura.Objects;
+using AmeisenBotX.Core.Engines.Combat.Helpers.Aura.Objects;
 using AmeisenBotX.Core.Managers.Character.Comparators;
 using AmeisenBotX.Core.Managers.Character.Talents.Objects;
 using AmeisenBotX.Wow.Objects.Enums;
-using AmeisenBotX.Wow335a.Constants;
+using AmeisenBotX.WowWotlk.Constants.Classes;
 using System;
 using System.Linq;
 
@@ -12,9 +12,9 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
     {
         public MageArcane(AmeisenBotInterfaces bot) : base(bot)
         {
-            MyAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, Mage335a.ArcaneIntellect, () => TryCastSpell(Mage335a.ArcaneIntellect, Bot.Wow.PlayerGuid, true)));
-            MyAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, Mage335a.MageArmor, () => TryCastSpell(Mage335a.MageArmor, 0, true)));
-            MyAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, Mage335a.ManaShield, () => TryCastSpell(Mage335a.ManaShield, 0, true)));
+            MyAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, MageWotlk.ArcaneIntellect, () => TryCastSpell(MageWotlk.ArcaneIntellect, Bot.Wow.PlayerGuid, true)));
+            MyAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, MageWotlk.MageArmor, () => TryCastSpell(MageWotlk.MageArmor, 0, true)));
+            MyAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, MageWotlk.ManaShield, () => TryCastSpell(MageWotlk.ManaShield, 0, true)));
 
             // TargetAuraManager.DispellBuffs = () =>
             // Bot.NewBot.LuaHasUnitStealableBuffs(WowLuaUnit.Target) && TryCastSpell(spellSteal,
@@ -22,10 +22,10 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 
             InterruptManager.InterruptSpells = new()
             {
-                { 0, (x) => TryCastSpell(Mage335a.Counterspell, x.Guid, true) }
+                { 0, (x) => TryCastSpell(MageWotlk.Counterspell, x.Guid, true) }
             };
 
-            GroupAuraManager.SpellsToKeepActiveOnParty.Add((Mage335a.ArcaneIntellect, (spellName, guid) => TryCastSpell(spellName, guid, true)));
+            GroupAuraManager.SpellsToKeepActiveOnParty.Add((MageWotlk.ArcaneIntellect, (spellName, guid) => TryCastSpell(spellName, guid, true)));
         }
 
         public override string Description => "FCFS based CombatClass for the Arcane Mage spec.";
@@ -99,13 +99,13 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
             {
                 if (Bot.Target != null)
                 {
-                    if ((Bot.Player.HealthPercentage < 16.0 && TryCastSpell(Mage335a.IceBlock, 0))
-                        || (Bot.Player.ManaPercentage < 40.0 && TryCastSpell(Mage335a.Evocation, 0, true))
-                        || TryCastSpell(Mage335a.MirrorImage, Bot.Wow.TargetGuid, true)
-                        || (Bot.Player.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == Mage335a.MissileBarrage) && TryCastSpell(Mage335a.ArcaneMissiles, Bot.Wow.TargetGuid, true))
-                        || TryCastSpell(Mage335a.ArcaneBarrage, Bot.Wow.TargetGuid, true)
-                        || TryCastSpell(Mage335a.ArcaneBlast, Bot.Wow.TargetGuid, true)
-                        || TryCastSpell(Mage335a.Fireball, Bot.Wow.TargetGuid, true))
+                    if ((Bot.Player.HealthPercentage < 16.0 && TryCastSpell(MageWotlk.IceBlock, 0))
+                        || (Bot.Player.ManaPercentage < 40.0 && TryCastSpell(MageWotlk.Evocation, 0, true))
+                        || TryCastSpell(MageWotlk.MirrorImage, Bot.Wow.TargetGuid, true)
+                        || (Bot.Player.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == MageWotlk.MissileBarrage) && TryCastSpell(MageWotlk.ArcaneMissiles, Bot.Wow.TargetGuid, true))
+                        || TryCastSpell(MageWotlk.ArcaneBarrage, Bot.Wow.TargetGuid, true)
+                        || TryCastSpell(MageWotlk.ArcaneBlast, Bot.Wow.TargetGuid, true)
+                        || TryCastSpell(MageWotlk.Fireball, Bot.Wow.TargetGuid, true))
                     {
                         return;
                     }

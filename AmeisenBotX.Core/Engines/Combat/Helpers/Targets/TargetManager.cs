@@ -1,4 +1,4 @@
-﻿using AmeisenBotX.Common.Utils;
+using AmeisenBotX.Common.Utils;
 using AmeisenBotX.Core.Engines.Combat.Helpers.Targets.Logics;
 using AmeisenBotX.Core.Engines.Combat.Helpers.Targets.Logics.Dps;
 using AmeisenBotX.Core.Engines.Combat.Helpers.Targets.Logics.Heal;

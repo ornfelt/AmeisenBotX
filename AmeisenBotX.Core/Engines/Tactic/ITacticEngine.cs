@@ -1,4 +1,4 @@
-﻿namespace AmeisenBotX.Core.Engines.Tactic
+namespace AmeisenBotX.Core.Engines.Tactic
 {
     public interface ITacticEngine
     {

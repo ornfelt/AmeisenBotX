@@ -177,9 +177,9 @@ namespace AmeisenBotX
             double[] a1 = brain.Backbone1 ?? new double[64];
             double[] a2 = brain.Backbone2 ?? new double[64];
             double[] a3 = brain.Backbone3 ?? new double[32];
-            double[] aS1 = brain.StrategyHead ?? new double[32]; // FIX: Added missing variable
+            double[] aS1 = brain.StrategyHead ?? new double[32];
             double[] aS2 = brain.StrategyOutput ?? new double[6];
-            double[] aW1 = brain.WinProbHead ?? new double[16];   // FIX: Added missing variable
+            double[] aW1 = brain.WinProbHead ?? new double[16];
             double winProb = brain.WinProbOutput;
 
             // Column X positions - spread across width

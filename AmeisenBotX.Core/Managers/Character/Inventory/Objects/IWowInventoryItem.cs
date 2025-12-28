@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Managers.Character.Inventory.Objects
 {

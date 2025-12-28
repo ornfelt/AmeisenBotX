@@ -1,4 +1,4 @@
-﻿using AmeisenBotX.Common.Utils;
+using AmeisenBotX.Common.Utils;
 using AmeisenBotX.Core.Engines.Quest.Objects.Quests;
 using AmeisenBotX.Core.Engines.Quest.Profiles;
 using System;

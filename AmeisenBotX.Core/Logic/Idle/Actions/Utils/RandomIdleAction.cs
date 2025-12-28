@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -16,7 +16,7 @@ namespace AmeisenBotX.Core.Logic.Idle.Actions.Utils
         {
         }
 
-        private Random Rnd { get; } = new();
+        private Random Rnd { get; } = Random.Shared;
 
         public override bool Enter()
         {
@@ -39,7 +39,7 @@ namespace AmeisenBotX.Core.Logic.Idle.Actions.Utils
 
         public override string ToString()
         {
-            return $"{(AutopilotOnly ? "(🤖) " : "")}{Name}";
+            return $"{(AutopilotOnly ? "(??) " : "")}{Name}";
         }
     }
 }

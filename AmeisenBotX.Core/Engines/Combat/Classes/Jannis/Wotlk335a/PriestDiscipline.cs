@@ -1,9 +1,9 @@
-﻿using AmeisenBotX.Core.Engines.Combat.Helpers.Aura.Objects;
+using AmeisenBotX.Core.Engines.Combat.Helpers.Aura.Objects;
 using AmeisenBotX.Core.Managers.Character.Comparators;
 using AmeisenBotX.Core.Managers.Character.Talents.Objects;
 using AmeisenBotX.Wow.Objects;
 using AmeisenBotX.Wow.Objects.Enums;
-using AmeisenBotX.Wow335a.Constants;
+using AmeisenBotX.WowWotlk.Constants.Classes;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -13,18 +13,18 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
     {
         public PriestDiscipline(AmeisenBotInterfaces bot) : base(bot)
         {
-            MyAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, Priest335a.PowerWordFortitude, () => TryCastSpell(Priest335a.PowerWordFortitude, Bot.Wow.PlayerGuid, true)));
-            MyAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, Priest335a.InnerFire, () => TryCastSpell(Priest335a.InnerFire, 0, true)));
+            MyAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, PriestWotlk.PowerWordFortitude, () => TryCastSpell(PriestWotlk.PowerWordFortitude, Bot.Wow.PlayerGuid, true)));
+            MyAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, PriestWotlk.InnerFire, () => TryCastSpell(PriestWotlk.InnerFire, 0, true)));
 
             SpellUsageHealDict = new Dictionary<int, string>()
             {
-                { 0, Priest335a.FlashHeal },
-                { 400, Priest335a.FlashHeal },
-                { 3000, Priest335a.Penance },
-                { 5000, Priest335a.GreaterHeal },
+                { 0, PriestWotlk.FlashHeal },
+                { 400, PriestWotlk.FlashHeal },
+                { 3000, PriestWotlk.Penance },
+                { 5000, PriestWotlk.GreaterHeal },
             };
 
-            GroupAuraManager.SpellsToKeepActiveOnParty.Add((Priest335a.PowerWordFortitude, (spellName, guid) => TryCastSpell(spellName, guid, true)));
+            GroupAuraManager.SpellsToKeepActiveOnParty.Add((PriestWotlk.PowerWordFortitude, (spellName, guid) => TryCastSpell(spellName, guid, true)));
         }
 
         public override string Description => "FCFS based CombatClass for the Discipline Priest spec.";
@@ -100,23 +100,23 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 
             if ((!Bot.Objects.PartymemberGuids.Any() || Bot.Player.ManaPercentage > 50) && TryFindTarget(TargetProviderDps, out _))
             {
-                if (Bot.Target.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == Priest335a.ShadowWordPain)
-                    && TryCastSpell(Priest335a.ShadowWordPain, Bot.Wow.TargetGuid, true))
+                if (Bot.Target.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == PriestWotlk.ShadowWordPain)
+                    && TryCastSpell(PriestWotlk.ShadowWordPain, Bot.Wow.TargetGuid, true))
                 {
                     return;
                 }
 
-                if (TryCastSpell(Priest335a.Smite, Bot.Wow.TargetGuid, true))
+                if (TryCastSpell(PriestWotlk.Smite, Bot.Wow.TargetGuid, true))
                 {
                     return;
                 }
 
-                if (TryCastSpell(Priest335a.HolyShock, Bot.Wow.TargetGuid, true))
+                if (TryCastSpell(PriestWotlk.HolyShock, Bot.Wow.TargetGuid, true))
                 {
                     return;
                 }
 
-                if (TryCastSpell(Priest335a.Consecration, Bot.Wow.TargetGuid, true))
+                if (TryCastSpell(PriestWotlk.Consecration, Bot.Wow.TargetGuid, true))
                 {
                     return;
                 }
@@ -128,7 +128,7 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
             base.OutOfCombatExecute();
 
             if (NeedToHealSomeone()
-                || HandleDeadPartymembers(Priest335a.Resurrection))
+                || HandleDeadPartymembers(PriestWotlk.Resurrection))
             {
                 return;
             }
@@ -146,7 +146,7 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
                 }
 
                 if (unitsToHeal.Count() > 3
-                    && TryCastSpell(Priest335a.PrayerOfHealing, target.Guid, true))
+                    && TryCastSpell(PriestWotlk.PrayerOfHealing, target.Guid, true))
                 {
                     return true;
                 }
@@ -154,30 +154,30 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
                 if (target.Guid != Bot.Wow.PlayerGuid
                     && target.HealthPercentage < 70
                     && Bot.Player.HealthPercentage < 70
-                    && TryCastSpell(Priest335a.BindingHeal, target.Guid, true))
+                    && TryCastSpell(PriestWotlk.BindingHeal, target.Guid, true))
                 {
                     return true;
                 }
 
                 if (Bot.Player.ManaPercentage < 50
-                    && TryCastSpell(Priest335a.HymnOfHope, 0))
+                    && TryCastSpell(PriestWotlk.HymnOfHope, 0))
                 {
                     return true;
                 }
 
                 if (Bot.Player.HealthPercentage < 20
-                    && TryCastSpell(Priest335a.DesperatePrayer, 0))
+                    && TryCastSpell(PriestWotlk.DesperatePrayer, 0))
                 {
                     return true;
                 }
 
                 if ((target.HealthPercentage < 98 && target.HealthPercentage > 80
-                        && !target.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == Priest335a.WeakenedSoul)
-                        && !target.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == Priest335a.PowerWordShield)
-                        && TryCastSpell(Priest335a.PowerWordShield, target.Guid, true))
+                        && !target.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == PriestWotlk.WeakenedSoul)
+                        && !target.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == PriestWotlk.PowerWordShield)
+                        && TryCastSpell(PriestWotlk.PowerWordShield, target.Guid, true))
                     || (target.HealthPercentage < 90 && target.HealthPercentage > 80
-                        && !target.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == Priest335a.Renew)
-                        && TryCastSpell(Priest335a.Renew, target.Guid, true)))
+                        && !target.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == PriestWotlk.Renew)
+                        && TryCastSpell(PriestWotlk.Renew, target.Guid, true)))
                 {
                     return true;
                 }

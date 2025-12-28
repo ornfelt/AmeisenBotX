@@ -1,4 +1,4 @@
-﻿namespace AmeisenBotX.Core.Logic.Enums
+namespace AmeisenBotX.Core.Logic.Enums
 {
     public enum BotMode
     {

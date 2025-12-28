@@ -1,4 +1,4 @@
-﻿namespace AmeisenBotX.BehaviorTree.Objects
+namespace AmeisenBotX.BehaviorTree.Objects
 {
     public interface IComposite : INode
     {

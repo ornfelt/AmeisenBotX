@@ -1,4 +1,4 @@
-﻿namespace AmeisenBotX.Core.Objects.Enums
+namespace AmeisenBotX.Core.Objects.Enums
 {
     public enum NpcType
     {

@@ -372,8 +372,8 @@ namespace AmeisenBotX.Test
                 true
             );
 
-            Assert.AreEqual(true, tree.ResumeOngoingNodes);
-            Assert.AreEqual(null, tree.OngoingNode);
+            Assert.IsTrue(tree.ResumeOngoingNodes);
+            Assert.IsNull(tree.OngoingNode);
 
             tree.Tick();
 
@@ -381,7 +381,7 @@ namespace AmeisenBotX.Test
             Assert.AreEqual(1, treeResult1);
             Assert.AreEqual(0, treeResult2);
 
-            Assert.AreNotEqual(null, tree.OngoingNode);
+            Assert.IsNotNull(tree.OngoingNode);
 
             tree.Tick();
 
@@ -389,7 +389,7 @@ namespace AmeisenBotX.Test
             Assert.AreEqual(1, treeResult1);
             Assert.AreEqual(0, treeResult2);
 
-            Assert.AreNotEqual(null, tree.OngoingNode);
+            Assert.IsNotNull(tree.OngoingNode);
 
             tree.Tick();
 
@@ -397,7 +397,7 @@ namespace AmeisenBotX.Test
             Assert.AreEqual(1, treeResult1);
             Assert.AreEqual(1, treeResult2);
 
-            Assert.AreNotEqual(null, tree.OngoingNode);
+            Assert.IsNotNull(tree.OngoingNode);
 
             tree.Tick();
 
@@ -405,7 +405,7 @@ namespace AmeisenBotX.Test
             Assert.AreEqual(1, treeResult1);
             Assert.AreEqual(2, treeResult2);
 
-            Assert.AreNotEqual(null, tree.OngoingNode);
+            Assert.IsNotNull(tree.OngoingNode);
 
             tree.Tick();
 
@@ -413,7 +413,7 @@ namespace AmeisenBotX.Test
             Assert.AreEqual(1, treeResult1);
             Assert.AreEqual(3, treeResult2);
 
-            Assert.AreNotEqual(null, tree.OngoingNode);
+            Assert.IsNotNull(tree.OngoingNode);
 
             tree.Tick();
 
@@ -421,7 +421,7 @@ namespace AmeisenBotX.Test
             Assert.AreEqual(1, treeResult1);
             Assert.AreEqual(4, treeResult2);
 
-            Assert.AreNotEqual(null, tree.OngoingNode);
+            Assert.IsNotNull(tree.OngoingNode);
 
             tree.Tick();
 
@@ -429,7 +429,7 @@ namespace AmeisenBotX.Test
             Assert.AreEqual(1, treeResult1);
             Assert.AreEqual(5, treeResult2);
 
-            Assert.AreNotEqual(null, tree.OngoingNode);
+            Assert.IsNotNull(tree.OngoingNode);
 
             tree.Tick();
 
@@ -437,7 +437,7 @@ namespace AmeisenBotX.Test
             Assert.AreEqual(1, treeResult1);
             Assert.AreEqual(5, treeResult2);
 
-            Assert.AreEqual(null, tree.OngoingNode);
+            Assert.IsNull(tree.OngoingNode);
         }
 
         [TestMethod]

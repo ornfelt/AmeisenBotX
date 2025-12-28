@@ -1,4 +1,4 @@
-﻿using AmeisenBotX.Core.Engines.Jobs.Profiles;
+using AmeisenBotX.Core.Engines.Jobs.Profiles;
 using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Jobs

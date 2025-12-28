@@ -1,4 +1,4 @@
-﻿using AmeisenBotX.Common.Utils;
+using AmeisenBotX.Common.Utils;
 using System;
 
 namespace AmeisenBotX.Core.Engines.Combat.Helpers

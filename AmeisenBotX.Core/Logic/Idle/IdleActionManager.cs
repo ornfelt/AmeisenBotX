@@ -1,4 +1,4 @@
-﻿using AmeisenBotX.Core.Logic.Idle.Actions;
+using AmeisenBotX.Core.Logic.Idle.Actions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +25,7 @@ namespace AmeisenBotX.Core.Logic.Idle
 
         private int MinActionCooldown { get; } = 12 * 1000;
 
-        private Random Rnd { get; } = new();
+        private Random Rnd { get; } = Random.Shared;
 
         public void Reset()
         {

@@ -1,4 +1,4 @@
-﻿using AmeisenBotX.Common.Math;
+using AmeisenBotX.Common.Math;
 using AmeisenBotX.Wow.Objects;
 using System;
 using System.Collections.Generic;
@@ -44,7 +44,7 @@ namespace AmeisenBotX.Core.Logic.Idle.Actions
 
         public override string ToString()
         {
-            return $"{(AutopilotOnly ? "(🤖) " : "")}Look at NPCs";
+            return $"{(AutopilotOnly ? "(??) " : "")}Look at NPCs";
         }
     }
 }

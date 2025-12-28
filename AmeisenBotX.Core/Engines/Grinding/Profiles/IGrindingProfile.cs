@@ -1,4 +1,4 @@
-﻿using AmeisenBotX.Core.Engines.Grinding.Objects;
+using AmeisenBotX.Core.Engines.Grinding.Objects;
 using AmeisenBotX.Core.Objects;
 using System.Collections.Generic;
 

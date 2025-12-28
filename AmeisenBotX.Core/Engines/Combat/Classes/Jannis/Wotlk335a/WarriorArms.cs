@@ -1,10 +1,10 @@
-﻿using AmeisenBotX.Common.Utils;
+using AmeisenBotX.Common.Utils;
 using AmeisenBotX.Core.Engines.Combat.Helpers.Aura.Objects;
 using AmeisenBotX.Core.Managers.Character.Comparators;
 using AmeisenBotX.Core.Managers.Character.Talents.Objects;
 using AmeisenBotX.Wow.Objects;
 using AmeisenBotX.Wow.Objects.Enums;
-using AmeisenBotX.Wow335a.Constants;
+using AmeisenBotX.WowWotlk.Constants.Classes;
 using System;
 using System.Linq;
 
@@ -14,15 +14,15 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
     {
         public WarriorArms(AmeisenBotInterfaces bot) : base(bot)
         {
-            MyAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, Warrior335a.BattleShout, () => TryCastSpell(Warrior335a.BattleShout, 0, true)));
+            MyAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, WarriorWotlk.BattleShout, () => TryCastSpell(WarriorWotlk.BattleShout, 0, true)));
 
-            TargetAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, Warrior335a.Hamstring, () => Bot.Target?.Type == WowObjectType.Player && TryCastSpell(Warrior335a.Hamstring, Bot.Wow.TargetGuid, true)));
-            TargetAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, Warrior335a.Rend, () => Bot.Target?.Type == WowObjectType.Player && Bot.Player.Rage > 75 && TryCastSpell(Warrior335a.Rend, Bot.Wow.TargetGuid, true)));
+            TargetAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, WarriorWotlk.Hamstring, () => Bot.Target?.Type == WowObjectType.Player && TryCastSpell(WarriorWotlk.Hamstring, Bot.Wow.TargetGuid, true)));
+            TargetAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, WarriorWotlk.Rend, () => Bot.Target?.Type == WowObjectType.Player && Bot.Player.Rage > 75 && TryCastSpell(WarriorWotlk.Rend, Bot.Wow.TargetGuid, true)));
 
             InterruptManager.InterruptSpells = new()
             {
-                { 0, (x) => TryCastSpellWarrior(Warrior335a.IntimidatingShout, Warrior335a.BerserkerStance, x.Guid, true) },
-                { 1, (x) => TryCastSpellWarrior(Warrior335a.IntimidatingShout, Warrior335a.BattleStance, x.Guid, true) }
+                { 0, (x) => TryCastSpellWarrior(WarriorWotlk.IntimidatingShout, WarriorWotlk.BerserkerStance, x.Guid, true) },
+                { 1, (x) => TryCastSpellWarrior(WarriorWotlk.IntimidatingShout, WarriorWotlk.BattleStance, x.Guid, true) }
             };
 
             HeroicStrikeEvent = new(TimeSpan.FromSeconds(2));
@@ -104,8 +104,8 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 
                     if (distanceToTarget > 3.0)
                     {
-                        if (TryCastSpellWarrior(Warrior335a.Charge, Warrior335a.BattleStance, Bot.Wow.TargetGuid, true)
-                            || TryCastSpellWarrior(Warrior335a.Intercept, Warrior335a.BerserkerStance, Bot.Wow.TargetGuid, true))
+                        if (TryCastSpellWarrior(WarriorWotlk.Charge, WarriorWotlk.BattleStance, Bot.Wow.TargetGuid, true)
+                            || TryCastSpellWarrior(WarriorWotlk.Intercept, WarriorWotlk.BerserkerStance, Bot.Wow.TargetGuid, true))
                         {
                             return;
                         }
@@ -113,15 +113,15 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
                     else
                     {
                         if ((Bot.Target.HealthPercentage < 20 || Bot.Target.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == "Sudden Death"))
-                           && TryCastSpellWarrior(Warrior335a.Execute, Warrior335a.BattleStance, Bot.Wow.TargetGuid, true))
+                           && TryCastSpellWarrior(WarriorWotlk.Execute, WarriorWotlk.BattleStance, Bot.Wow.TargetGuid, true))
                         {
                             return;
                         }
 
-                        if ((Bot.Objects.All.OfType<IWowUnit>().Count(e => Bot.Target.Position.GetDistance(e.Position) < 8) > 2 && TryCastSpell(Warrior335a.Bladestorm, 0, true))
-                            || TryCastSpellWarrior(Warrior335a.Overpower, Warrior335a.BattleStance, Bot.Wow.TargetGuid, true)
-                            || TryCastSpellWarrior(Warrior335a.MortalStrike, Warrior335a.BattleStance, Bot.Wow.TargetGuid, true)
-                            || (HeroicStrikeEvent.Run() && TryCastSpellWarrior(Warrior335a.HeroicStrike, Warrior335a.BattleStance, Bot.Wow.TargetGuid, true)))
+                        if ((Bot.Objects.All.OfType<IWowUnit>().Count(e => Bot.Target.Position.GetDistance(e.Position) < 8) > 2 && TryCastSpell(WarriorWotlk.Bladestorm, 0, true))
+                            || TryCastSpellWarrior(WarriorWotlk.Overpower, WarriorWotlk.BattleStance, Bot.Wow.TargetGuid, true)
+                            || TryCastSpellWarrior(WarriorWotlk.MortalStrike, WarriorWotlk.BattleStance, Bot.Wow.TargetGuid, true)
+                            || (HeroicStrikeEvent.Run() && TryCastSpellWarrior(WarriorWotlk.HeroicStrike, WarriorWotlk.BattleStance, Bot.Wow.TargetGuid, true)))
                         {
                             return;
                         }

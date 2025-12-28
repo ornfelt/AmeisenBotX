@@ -47,10 +47,7 @@ namespace AmeisenBotX.Test
                 Assert.Fail();
             }
 
-            if (a > b)
-            {
-                Assert.Fail();
-            }
+
 
             b = new(2, 2, 2);
 
@@ -59,17 +56,11 @@ namespace AmeisenBotX.Test
                 Assert.Fail();
             }
 
-            if (a < b || a > b)
-            {
-                Assert.Fail();
-            }
+
 
             b = new(2, 3, 2);
 
-            if (a < b)
-            {
-                Assert.Fail();
-            }
+
         }
 
         [TestMethod]

@@ -1,7 +1,8 @@
-﻿using AmeisenBotX.Common.Utils;
+using AmeisenBotX.Common.Utils;
 using AmeisenBotX.Core.Managers.Character.Comparators;
 using AmeisenBotX.Core.Managers.Character.Talents.Objects;
 using AmeisenBotX.Wow.Objects.Enums;
+using AmeisenBotX.WowWotlk.Constants.Classes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,90 +11,45 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
 {
     internal class ShamanEnhancement : BasicKamelClass
     {
-        private const string earthbindTotem = "Earthbind Totem";
-
-        private const string earthElementalTotem = "Earth Elemental Totem";
-
-        private const string earthShockSpell = "Earth Shock";
-
-        private const string feralSpiritSpell = "Feral Spirit";
-
-        //Totem
-        private const string fireElementalTotem = "Fire Elemental Totem";
-
-        private const string flameShockSpell = "Flame Shock";
-
-        private const string flametongueBuff = "Flametongue";
-
-        private const string flametongueSpell = "Flametongue Weapon";
-
-        private const string frostShockSpell = "Frost Shock";
-
-        private const string groundingTotem = "Grounding Totem";
-
-        //Heal Spells
-        private const string healingWaveSpell = "Healing Wave";
-
-        private const string lavaLashSpell = "Lava Lash";
-
-        //Attack Spells
-        private const string lightningBoltSpell = "Lightning Bolt";
-
-        //Shield
-        private const string lightningShieldSpell = "Lightning Shield";
-
-        private const string purgeSpell = "Purge";
-
-        //Buff
-        private const string shamanisticRageSpell = "Shamanistic Rage";
-
-        private const string stormstrikeSpell = "Stormstrike";
-
-        //Weapon Enhancement
-        private const string windfuryBuff = "Windfury";
-
-        private const string windfurySpell = "Windfury Weapon";
-
-        //Stunns|Interrupting
-        private const string windShearSpell = "Wind Shear";
+        // All spell constants moved to AmeisenBotX.WowWotlk.Constants.ShamanWotlk
 
         public ShamanEnhancement(AmeisenBotInterfaces bot) : base()
         {
             Bot = bot;
 
             //Shield
-            spellCoolDown.Add(lightningShieldSpell, DateTime.Now);
+            spellCoolDown.Add(ShamanWotlk.LightningShield, DateTime.Now);
 
             //Weapon Enhancement
-            spellCoolDown.Add(windfuryBuff, DateTime.Now);
-            spellCoolDown.Add(flametongueBuff, DateTime.Now);
-            spellCoolDown.Add(flametongueSpell, DateTime.Now);
-            spellCoolDown.Add(windfurySpell, DateTime.Now);
+            spellCoolDown.Add(ShamanWotlk.WindfuryBuff, DateTime.Now);
+            spellCoolDown.Add(ShamanWotlk.FlametongueBuff, DateTime.Now);
+            spellCoolDown.Add(ShamanWotlk.FlametongueWeapon, DateTime.Now);
+            spellCoolDown.Add(ShamanWotlk.WindfuryWeapon, DateTime.Now);
 
             //Heal Spells
-            spellCoolDown.Add(healingWaveSpell, DateTime.Now);
+            spellCoolDown.Add(ShamanWotlk.HealingWave, DateTime.Now);
 
             //Totem
-            spellCoolDown.Add(fireElementalTotem, DateTime.Now);
-            spellCoolDown.Add(earthElementalTotem, DateTime.Now);
-            spellCoolDown.Add(groundingTotem, DateTime.Now);
-            spellCoolDown.Add(earthbindTotem, DateTime.Now);
+            spellCoolDown.Add(ShamanWotlk.FireElementalTotem, DateTime.Now);
+            spellCoolDown.Add(ShamanWotlk.EarthElementalTotem, DateTime.Now);
+            spellCoolDown.Add(ShamanWotlk.GroundingTotem, DateTime.Now);
+            spellCoolDown.Add(ShamanWotlk.EarthbindTotem, DateTime.Now);
 
             //Attack Spells
-            spellCoolDown.Add(lightningBoltSpell, DateTime.Now);
-            spellCoolDown.Add(lavaLashSpell, DateTime.Now);
-            spellCoolDown.Add(stormstrikeSpell, DateTime.Now);
-            spellCoolDown.Add(flameShockSpell, DateTime.Now);
-            spellCoolDown.Add(frostShockSpell, DateTime.Now);
-            spellCoolDown.Add(earthShockSpell, DateTime.Now);
-            spellCoolDown.Add(feralSpiritSpell, DateTime.Now);
+            spellCoolDown.Add(ShamanWotlk.LightningBolt, DateTime.Now);
+            spellCoolDown.Add(ShamanWotlk.LavaLash, DateTime.Now);
+            spellCoolDown.Add(ShamanWotlk.Stormstrike, DateTime.Now);
+            spellCoolDown.Add(ShamanWotlk.FlameShock, DateTime.Now);
+            spellCoolDown.Add(ShamanWotlk.FrostShock, DateTime.Now);
+            spellCoolDown.Add(ShamanWotlk.EarthShock, DateTime.Now);
+            spellCoolDown.Add(ShamanWotlk.FeralSpirit, DateTime.Now);
 
             //Stunns|Interrupting
-            spellCoolDown.Add(windShearSpell, DateTime.Now);
-            spellCoolDown.Add(purgeSpell, DateTime.Now);
+            spellCoolDown.Add(ShamanWotlk.WindShear, DateTime.Now);
+            spellCoolDown.Add(ShamanWotlk.Purge, DateTime.Now);
 
             //Buff
-            spellCoolDown.Add(shamanisticRageSpell, DateTime.Now);
+            spellCoolDown.Add(ShamanWotlk.ShamanisticRage, DateTime.Now);
 
             //Event
             EnhancementEvent = new(TimeSpan.FromSeconds(2));
@@ -181,7 +137,7 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
 
         private void Shield()
         {
-            if (!Bot.Player.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == "Lightning Shield") && CustomCastSpellMana(lightningShieldSpell))
+            if (!Bot.Player.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == ShamanWotlk.LightningShield) && CustomCastSpellMana(ShamanWotlk.LightningShield))
             {
                 return;
             }
@@ -206,49 +162,50 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
                         Bot.Wow.StartAutoAttack();
                     }
 
-                    if (Bot.Player.Auras.FirstOrDefault(e => Bot.Db.GetSpellName(e.SpellId) == "Maelstrom Weapon").StackCount >= 5
-                    && ((Bot.Player.HealthPercentage >= 50 && CustomCastSpellMana(lightningBoltSpell)) || CustomCastSpellMana(healingWaveSpell)))
+                    if (Bot.Player.Auras.FirstOrDefault(e => Bot.Db.GetSpellName(e.SpellId) == ShamanWotlk.MaelstromWeapon).StackCount >= 5
+                    && ((Bot.Player.HealthPercentage >= 50 && CustomCastSpellMana(ShamanWotlk.LightningBolt)) || CustomCastSpellMana(ShamanWotlk.HealingWave)))
                     {
                         return;
                     }
-                    if (Bot.Target.IsCasting && CustomCastSpellMana(windShearSpell))
+                    if (Bot.Target.IsCasting && CustomCastSpellMana(ShamanWotlk.WindShear))
                     {
                         return;
                     }
+                    // Note: Enemy buff checks kept as inline strings
                     if (PurgeEvent.Run() &&
                         (Bot.Target.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == "Mana Shield")
-                      || Bot.Target.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == "Power Word: Shield")
-                      || Bot.Target.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == "Renew")
-                      || Bot.Target.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == "Riptide")
-                      || Bot.Target.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == "Earth Shield")) && CustomCastSpellMana(purgeSpell))
+                      || Bot.Target.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == PriestWotlk.PowerWordShield)
+                      || Bot.Target.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == PriestWotlk.Renew)
+                      || Bot.Target.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == ShamanWotlk.Riptide)
+                      || Bot.Target.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == ShamanWotlk.EarthShield)) && CustomCastSpellMana(ShamanWotlk.Purge))
                     {
                         return;
                     }
-                    if (TotemItemCheck() && CustomCastSpellMana(fireElementalTotem))
+                    if (TotemItemCheck() && CustomCastSpellMana(ShamanWotlk.FireElementalTotem))
                     {
                         return;
                     }
-                    if (TotemItemCheck() && CustomCastSpellMana(earthElementalTotem))
+                    if (TotemItemCheck() && CustomCastSpellMana(ShamanWotlk.EarthElementalTotem))
                     {
                         return;
                     }
-                    if (CustomCastSpellMana(lavaLashSpell))
+                    if (CustomCastSpellMana(ShamanWotlk.LavaLash))
                     {
                         return;
                     }
-                    if (CustomCastSpellMana(stormstrikeSpell))
+                    if (CustomCastSpellMana(ShamanWotlk.Stormstrike))
                     {
                         return;
                     }
-                    if (CustomCastSpellMana(feralSpiritSpell))
+                    if (CustomCastSpellMana(ShamanWotlk.FeralSpirit))
                     {
                         return;
                     }
-                    if (!Bot.Target.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == "Flame Shock") && CustomCastSpellMana(flameShockSpell))
+                    if (!Bot.Target.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == ShamanWotlk.FlameShock) && CustomCastSpellMana(ShamanWotlk.FlameShock))
                     {
                         return;
                     }
-                    if (CustomCastSpellMana(frostShockSpell))
+                    if (CustomCastSpellMana(ShamanWotlk.FrostShock))
                     {
                         return;
                     }
@@ -264,12 +221,12 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
         {
             if (EnhancementEvent.Run())
             {
-                if (CheckForWeaponEnchantment(WowEquipmentSlot.INVSLOT_MAINHAND, windfuryBuff, windfurySpell))
+                if (CheckForWeaponEnchantment(WowEquipmentSlot.INVSLOT_MAINHAND, ShamanWotlk.WindfuryBuff, ShamanWotlk.WindfuryWeapon))
                 {
                     return;
                 }
 
-                if (CheckForWeaponEnchantment(WowEquipmentSlot.INVSLOT_OFFHAND, flametongueBuff, flametongueSpell))
+                if (CheckForWeaponEnchantment(WowEquipmentSlot.INVSLOT_OFFHAND, ShamanWotlk.FlametongueBuff, ShamanWotlk.FlametongueWeapon))
                 {
                     return;
                 }

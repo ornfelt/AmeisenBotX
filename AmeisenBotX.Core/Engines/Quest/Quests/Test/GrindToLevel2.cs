@@ -1,4 +1,4 @@
-﻿using AmeisenBotX.Common.Math;
+using AmeisenBotX.Common.Math;
 using AmeisenBotX.Core.Engines.Quest.Objects.Objectives;
 using AmeisenBotX.Core.Engines.Quest.Objects.Quests;
 

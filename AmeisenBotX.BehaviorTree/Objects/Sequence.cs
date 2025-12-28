@@ -1,4 +1,4 @@
-﻿using AmeisenBotX.BehaviorTree.Enums;
+using AmeisenBotX.BehaviorTree.Enums;
 
 namespace AmeisenBotX.BehaviorTree.Objects
 {
@@ -8,9 +8,17 @@ namespace AmeisenBotX.BehaviorTree.Objects
     /// </summary>
     public class Sequence(params INode[] children) : IComposite
     {
+        public string Name { get; } = null;
+
         public INode[] Children { get; } = children;
 
         public int Counter { get; private set; }
+
+        /// <summary>
+        /// Resets the sequence counter. Call this when the sequence is preempted
+        /// by a higher-priority branch to prevent stale state.
+        /// </summary>
+        public void Reset() => Counter = 0;
 
         public BtStatus Execute()
         {
@@ -52,9 +60,17 @@ namespace AmeisenBotX.BehaviorTree.Objects
 
     public class Sequence<T>(params INode<T>[] children) : IComposite<T>
     {
+        public string Name { get; } = null;
+
         public INode<T>[] Children { get; } = children;
 
         public int Counter { get; private set; }
+
+        /// <summary>
+        /// Resets the sequence counter. Call this when the sequence is preempted
+        /// by a higher-priority branch to prevent stale state.
+        /// </summary>
+        public void Reset() => Counter = 0;
 
         public BtStatus Execute(T blackboard)
         {

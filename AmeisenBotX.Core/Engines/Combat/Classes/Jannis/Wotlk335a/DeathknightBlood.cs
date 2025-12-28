@@ -1,10 +1,10 @@
-﻿using AmeisenBotX.Common.Utils;
+using AmeisenBotX.Common.Utils;
 using AmeisenBotX.Core.Engines.Combat.Helpers.Aura.Objects;
 using AmeisenBotX.Core.Managers.Character.Comparators;
 using AmeisenBotX.Core.Managers.Character.Talents.Objects;
 using AmeisenBotX.Wow.Objects;
 using AmeisenBotX.Wow.Objects.Enums;
-using AmeisenBotX.Wow335a.Constants;
+using AmeisenBotX.WowWotlk.Constants.Classes;
 using System;
 using System.Linq;
 
@@ -14,16 +14,16 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
     {
         public DeathknightBlood(AmeisenBotInterfaces bot) : base(bot)
         {
-            MyAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, Deathknight335a.BloodPresence, () => TryCastSpellDk(Deathknight335a.BloodPresence, 0)));
-            MyAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, Deathknight335a.HornOfWinter, () => TryCastSpellDk(Deathknight335a.HornOfWinter, 0, true)));
+            MyAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, DeathknightWotlk.BloodPresence, () => TryCastSpellDk(DeathknightWotlk.BloodPresence, 0)));
+            MyAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, DeathknightWotlk.HornOfWinter, () => TryCastSpellDk(DeathknightWotlk.HornOfWinter, 0, true)));
 
-            TargetAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, Deathknight335a.FrostFever, () => TryCastSpellDk(Deathknight335a.IcyTouch, Bot.Wow.TargetGuid, false, false, false, true)));
-            TargetAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, Deathknight335a.BloodPlague, () => TryCastSpellDk(Deathknight335a.PlagueStrike, Bot.Wow.TargetGuid, false, false, false, true)));
+            TargetAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, DeathknightWotlk.FrostFever, () => TryCastSpellDk(DeathknightWotlk.IcyTouch, Bot.Wow.TargetGuid, false, false, false, true)));
+            TargetAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, DeathknightWotlk.BloodPlague, () => TryCastSpellDk(DeathknightWotlk.PlagueStrike, Bot.Wow.TargetGuid, false, false, false, true)));
 
             InterruptManager.InterruptSpells = new()
             {
-                { 0, (x) => TryCastSpellDk(Deathknight335a.MindFreeze, x.Guid, true) },
-                { 1, (x) => TryCastSpellDk(Deathknight335a.Strangulate, x.Guid, false, true) }
+                { 0, (x) => TryCastSpellDk(DeathknightWotlk.MindFreeze, x.Guid, true) },
+                { 1, (x) => TryCastSpellDk(DeathknightWotlk.Strangulate, x.Guid, false, true) }
             };
 
             BloodBoilEvent = new(TimeSpan.FromSeconds(2));
@@ -97,39 +97,39 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
             if (TryFindTarget(TargetProviderDps, out _))
             {
                 if (Bot.Target.TargetGuid != Bot.Wow.PlayerGuid
-                    && TryCastSpellDk(Deathknight335a.DarkCommand, Bot.Wow.TargetGuid))
+                    && TryCastSpellDk(DeathknightWotlk.DarkCommand, Bot.Wow.TargetGuid))
                 {
                     return;
                 }
 
                 if (Bot.Target.Position.GetDistance(Bot.Player.Position) > 6.0
-                    && TryCastSpellDk(Deathknight335a.DeathGrip, Bot.Wow.TargetGuid, false, false, true))
+                    && TryCastSpellDk(DeathknightWotlk.DeathGrip, Bot.Wow.TargetGuid, false, false, true))
                 {
                     return;
                 }
 
-                if (!Bot.Target.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == Deathknight335a.ChainsOfIce)
+                if (!Bot.Target.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == DeathknightWotlk.ChainsOfIce)
                     && Bot.Target.Position.GetDistance(Bot.Player.Position) > 2.0
-                    && TryCastSpellDk(Deathknight335a.ChainsOfIce, Bot.Wow.TargetGuid, false, false, true))
+                    && TryCastSpellDk(DeathknightWotlk.ChainsOfIce, Bot.Wow.TargetGuid, false, false, true))
                 {
                     return;
                 }
 
-                if (TryCastSpellDk(Deathknight335a.EmpowerRuneWeapon, 0))
+                if (TryCastSpellDk(DeathknightWotlk.EmpowerRuneWeapon, 0))
                 {
                     return;
                 }
 
                 int nearEnemies = Bot.GetNearEnemies<IWowUnit>(Bot.Player.Position, 12.0f).Count();
 
-                if ((Bot.Player.HealthPercentage < 70.0 && TryCastSpellDk(Deathknight335a.RuneTap, 0, false, false, true))
-                    || (Bot.Player.HealthPercentage < 60.0 && (TryCastSpellDk(Deathknight335a.IceboundFortitude, 0, true) || TryCastSpellDk(Deathknight335a.AntiMagicShell, 0, true)))
-                    || (Bot.Player.HealthPercentage < 50.0 && TryCastSpellDk(Deathknight335a.VampiricBlood, 0, false, false, true))
-                    || (nearEnemies > 2 && (TryCastAoeSpellDk(Deathknight335a.DeathAndDecay, 0) || (BloodBoilEvent.Run() && TryCastSpellDk(Deathknight335a.BloodBoil, 0))))
-                    || TryCastSpellDk(Deathknight335a.UnbreakableArmor, 0, false, false, true)
-                    || TryCastSpellDk(Deathknight335a.DeathStrike, Bot.Wow.TargetGuid, false, false, true, true)
-                    || TryCastSpellDk(Deathknight335a.HeartStrike, Bot.Wow.TargetGuid, false, false, true)
-                    || TryCastSpellDk(Deathknight335a.DeathCoil, Bot.Wow.TargetGuid, true))
+                if ((Bot.Player.HealthPercentage < 70.0 && TryCastSpellDk(DeathknightWotlk.RuneTap, 0, false, false, true))
+                    || (Bot.Player.HealthPercentage < 60.0 && (TryCastSpellDk(DeathknightWotlk.IceboundFortitude, 0, true) || TryCastSpellDk(DeathknightWotlk.AntiMagicShell, 0, true)))
+                    || (Bot.Player.HealthPercentage < 50.0 && TryCastSpellDk(DeathknightWotlk.VampiricBlood, 0, false, false, true))
+                    || (nearEnemies > 2 && (TryCastAoeSpellDk(DeathknightWotlk.DeathAndDecay, 0) || (BloodBoilEvent.Run() && TryCastSpellDk(DeathknightWotlk.BloodBoil, 0))))
+                    || TryCastSpellDk(DeathknightWotlk.UnbreakableArmor, 0, false, false, true)
+                    || TryCastSpellDk(DeathknightWotlk.DeathStrike, Bot.Wow.TargetGuid, false, false, true, true)
+                    || TryCastSpellDk(DeathknightWotlk.HeartStrike, Bot.Wow.TargetGuid, false, false, true)
+                    || TryCastSpellDk(DeathknightWotlk.DeathCoil, Bot.Wow.TargetGuid, true))
                 {
                     return;
                 }

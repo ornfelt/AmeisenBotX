@@ -1,4 +1,4 @@
-﻿using AmeisenBotX.Common.Keyboard.Objects;
+using AmeisenBotX.Common.Keyboard.Objects;
 using AmeisenBotX.Core.Engines.AI;
 using AmeisenBotX.Core.Engines.Movement.Settings;
 using AmeisenBotX.Memory.Win32;
@@ -84,6 +84,11 @@ namespace AmeisenBotX.Core
 
         public int EventPullMs { get; set; } = 500;
 
+        // Potion Thresholds
+        public int HealthPotionThreshold { get; set; } = 40;
+
+        public int ManaPotionThreshold { get; set; } = 20;
+
         public bool FollowGroupLeader { get; set; } = false;
 
         public bool FollowGroupMembers { get; set; } = false;
@@ -108,7 +113,7 @@ namespace AmeisenBotX.Core
 
         public double ItemRepairThreshold { get; set; } = 25.0;
 
-        public List<string> ItemSellBlacklist { get; set; }
+        public List<string> ItemSellBlacklist { get; set; } = [];
 
         public string JobEngineMailHeader { get; set; } = string.Empty;
 
@@ -154,7 +159,7 @@ namespace AmeisenBotX.Core
 
         public float MerchantNpcSearchRadius { get; set; } = 50.0f;
 
-        public int MinFollowDistance { get; set; } = 6;
+        public int MinFollowDistance { get; set; } = 5;
 
         public string Mounts { get; set; } = string.Empty;
 

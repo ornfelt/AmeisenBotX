@@ -11,13 +11,21 @@ namespace AmeisenBotX.Wow.Objects
 
         int DisplayId { get; }
 
+        short DynamicFlags { get; }
+
         int Faction { get; }
 
         BitVector32 Flags { get; }
 
         WowGameObjectType GameObjectType { get; }
 
+        bool IsSparkling { get; }
+
         int Level { get; }
+
+        bool Locked { get; }
+
+        string Name { get; }
 
         public new WowObjectType Type => WowObjectType.GameObject;
     }

@@ -4,7 +4,7 @@ using AmeisenBotX.Common.Keyboard.Objects;
 using AmeisenBotX.Common.Math;
 using AmeisenBotX.Common.Utils;
 using AmeisenBotX.Core;
-using AmeisenBotX.Core.Engines.Movement.Providers.Combat;
+
 using AmeisenBotX.Core.Logic;
 using AmeisenBotX.Core.Logic.Enums;
 using AmeisenBotX.Logging;
@@ -683,6 +683,12 @@ namespace AmeisenBotX
         private void ButtonAiDebug_Click(object sender, RoutedEventArgs e)
         {
             AiDebugWindow win = new(AmeisenBot.Bot);
+            win.Show();
+        }
+
+        private void ButtonBtDebug_Click(object sender, RoutedEventArgs e)
+        {
+            BehaviorTreeDebugWindow win = new(AmeisenBot.Bot);
             win.Show();
         }
 

@@ -1,8 +1,8 @@
-﻿using AmeisenBotX.Core.Engines.Combat.Helpers.Aura.Objects;
+using AmeisenBotX.Core.Engines.Combat.Helpers.Aura.Objects;
 using AmeisenBotX.Core.Managers.Character.Comparators;
 using AmeisenBotX.Core.Managers.Character.Talents.Objects;
 using AmeisenBotX.Wow.Objects.Enums;
-using AmeisenBotX.Wow335a.Constants;
+using AmeisenBotX.WowWotlk.Constants.Classes;
 using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
@@ -11,12 +11,12 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
     {
         public MageFire(AmeisenBotInterfaces bot) : base(bot)
         {
-            MyAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, Mage335a.ArcaneIntellect, () => TryCastSpell(Mage335a.ArcaneIntellect, Bot.Wow.PlayerGuid, true)));
-            MyAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, Mage335a.MoltenArmor, () => TryCastSpell(Mage335a.MoltenArmor, 0, true)));
-            MyAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, Mage335a.ManaShield, () => TryCastSpell(Mage335a.ManaShield, 0, true)));
+            MyAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, MageWotlk.ArcaneIntellect, () => TryCastSpell(MageWotlk.ArcaneIntellect, Bot.Wow.PlayerGuid, true)));
+            MyAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, MageWotlk.MoltenArmor, () => TryCastSpell(MageWotlk.MoltenArmor, 0, true)));
+            MyAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, MageWotlk.ManaShield, () => TryCastSpell(MageWotlk.ManaShield, 0, true)));
 
-            TargetAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, Mage335a.Scorch, () => TryCastSpell(Mage335a.Scorch, Bot.Wow.TargetGuid, true)));
-            TargetAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, Mage335a.LivingBomb, () => TryCastSpell(Mage335a.LivingBomb, Bot.Wow.TargetGuid, true)));
+            TargetAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, MageWotlk.Scorch, () => TryCastSpell(MageWotlk.Scorch, Bot.Wow.TargetGuid, true)));
+            TargetAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, MageWotlk.LivingBomb, () => TryCastSpell(MageWotlk.LivingBomb, Bot.Wow.TargetGuid, true)));
 
             // TargetAuraManager.DispellBuffs = () =>
             // Bot.NewBot.LuaHasUnitStealableBuffs(WowLuaUnit.Target) && TryCastSpell(spellSteal,
@@ -24,10 +24,10 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 
             InterruptManager.InterruptSpells = new()
             {
-                { 0, (x) => TryCastSpell(Mage335a.Counterspell, x.Guid, true) }
+                { 0, (x) => TryCastSpell(MageWotlk.Counterspell, x.Guid, true) }
             };
 
-            GroupAuraManager.SpellsToKeepActiveOnParty.Add((Mage335a.ArcaneIntellect, (spellName, guid) => TryCastSpell(spellName, guid, true)));
+            GroupAuraManager.SpellsToKeepActiveOnParty.Add((MageWotlk.ArcaneIntellect, (spellName, guid) => TryCastSpell(spellName, guid, true)));
         }
 
         public override string Description => "FCFS based CombatClass for the Fire Mage spec.";
@@ -95,11 +95,11 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
             {
                 if (Bot.Target != null)
                 {
-                    if (TryCastSpell(Mage335a.MirrorImage, Bot.Wow.TargetGuid, true)
-                        || (Bot.Player.HealthPercentage < 16 && TryCastSpell(Mage335a.IceBlock, 0, true))
-                        || (Bot.Player.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId).ToLower() == Mage335a.Hotstreak.ToLower()) && TryCastSpell(Mage335a.Pyroblast, Bot.Wow.TargetGuid, true))
-                        || (Bot.Player.ManaPercentage < 40 && TryCastSpell(Mage335a.Evocation, Bot.Wow.TargetGuid, true))
-                        || TryCastSpell(Mage335a.Fireball, Bot.Wow.TargetGuid, true))
+                    if (TryCastSpell(MageWotlk.MirrorImage, Bot.Wow.TargetGuid, true)
+                        || (Bot.Player.HealthPercentage < 16 && TryCastSpell(MageWotlk.IceBlock, 0, true))
+                        || (Bot.Player.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId).ToLower() == MageWotlk.Hotstreak.ToLower()) && TryCastSpell(MageWotlk.Pyroblast, Bot.Wow.TargetGuid, true))
+                        || (Bot.Player.ManaPercentage < 40 && TryCastSpell(MageWotlk.Evocation, Bot.Wow.TargetGuid, true))
+                        || TryCastSpell(MageWotlk.Fireball, Bot.Wow.TargetGuid, true))
                     {
                         return;
                     }

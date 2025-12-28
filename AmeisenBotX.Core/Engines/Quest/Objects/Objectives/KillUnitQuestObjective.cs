@@ -1,4 +1,4 @@
-﻿using AmeisenBotX.Core.Engines.Movement.Enums;
+using AmeisenBotX.Core.Engines.Movement.Enums;
 using AmeisenBotX.Wow.Objects;
 using AmeisenBotX.Wow.Objects.Enums;
 using System;

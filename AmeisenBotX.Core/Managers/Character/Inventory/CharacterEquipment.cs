@@ -1,4 +1,4 @@
-﻿using AmeisenBotX.Core.Managers.Character.Inventory.Objects;
+using AmeisenBotX.Core.Managers.Character.Inventory.Objects;
 using AmeisenBotX.Logging;
 using AmeisenBotX.Logging.Enums;
 using AmeisenBotX.Wow;

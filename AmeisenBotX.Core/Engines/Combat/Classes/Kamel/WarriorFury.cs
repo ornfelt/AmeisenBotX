@@ -1,9 +1,10 @@
-﻿using AmeisenBotX.Common.Utils;
+using AmeisenBotX.Common.Utils;
 using AmeisenBotX.Core.Managers.Character.Comparators;
 using AmeisenBotX.Core.Managers.Character.Spells.Objects;
 using AmeisenBotX.Core.Managers.Character.Talents.Objects;
 using AmeisenBotX.Wow.Objects;
 using AmeisenBotX.Wow.Objects.Enums;
+using AmeisenBotX.WowWotlk.Constants.Classes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,80 +13,43 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
 {
     internal class WarriorFury : BasicKamelClass
     {
-        private const string battleShoutSpell = "Battle Shout";
-        private const string battleStanceSpell = "Battle Stance";
-        private const string berserkerRageSpell = "Berserker Rage";
-        private const string berserkerStanceSpell = "Berserker Stance";
-        private const string bloodrageSpell = "Bloodrage";
-
-        //Spells
-        private const string bloodthirstSpell = "Bloodthirst";
-
-        private const string chargeSpell = "Charge";
-        private const string cleaveSpell = "Cleave";
-        private const string commandingShoutSpell = "Commanding Shout";
-        private const string deathWishSpell = "Death Wish";
-
-        //Stances
-        private const string defensiveStanceSpell = "Defensive Stance";
-
-        private const string disarmSpell = "Disarm";
-        private const string enragedregenerationSpell = "Enraged Regeneration";
-        private const string executeSpell = "Execute";
-        private const string hamstringSpell = "Hamstring";
-        private const string heroicFurySpell = "Heroic Fury";
-        private const string heroicStrikeSpell = "Heroic Strike";
-        private const string heroicThrowSpell = "Heroic Throw";
-        private const string interceptSpell = "Intercept";
-        private const string intimidatingShoutSpell = "Intimidating Shout";
-        private const string pummelSpell = "Pummel";
-        private const string recklessnessSpell = "Recklessness";
-        private const string rendSpell = "Rend";
-
-        //Buffs||Defensive||Enrage
-        private const string retaliationSpell = "Retaliation";
-
-        private const string ShatteringThrowSpell = "Shattering Throw";
-        private const string ShootSpell = "Shoot";
-        private const string slamSpell = "Slam";
-        private const string victoryRushSpell = "Victory Rush";
-        private const string whirlwindSpell = "Whirlwind";
+        // All spell constants moved to AmeisenBotX.WowWotlk.Constants.WarriorWotlk
 
         public WarriorFury(AmeisenBotInterfaces bot) : base()
         {
             Bot = bot;
-            spellCoolDown.Add(ShootSpell, DateTime.Now);
+            spellCoolDown.Add(WarriorWotlk.Shoot, DateTime.Now);
             //Stances
-            spellCoolDown.Add(defensiveStanceSpell, DateTime.Now);
-            spellCoolDown.Add(battleStanceSpell, DateTime.Now);
-            spellCoolDown.Add(berserkerStanceSpell, DateTime.Now);
+            spellCoolDown.Add(WarriorWotlk.DefensiveStance, DateTime.Now);
+            spellCoolDown.Add(WarriorWotlk.BattleStance, DateTime.Now);
+            spellCoolDown.Add(WarriorWotlk.BerserkerStance, DateTime.Now);
             //Spells
-            spellCoolDown.Add(heroicStrikeSpell, DateTime.Now);
-            spellCoolDown.Add(interceptSpell, DateTime.Now);
-            spellCoolDown.Add(heroicThrowSpell, DateTime.Now);
-            spellCoolDown.Add(ShatteringThrowSpell, DateTime.Now);
-            spellCoolDown.Add(executeSpell, DateTime.Now);
-            spellCoolDown.Add(pummelSpell, DateTime.Now);
-            spellCoolDown.Add(bloodthirstSpell, DateTime.Now);
-            spellCoolDown.Add(slamSpell, DateTime.Now);
-            spellCoolDown.Add(whirlwindSpell, DateTime.Now);
-            spellCoolDown.Add(disarmSpell, DateTime.Now);
-            spellCoolDown.Add(rendSpell, DateTime.Now);
-            spellCoolDown.Add(hamstringSpell, DateTime.Now);
-            spellCoolDown.Add(victoryRushSpell, DateTime.Now);
-            spellCoolDown.Add(chargeSpell, DateTime.Now);
-            spellCoolDown.Add(cleaveSpell, DateTime.Now);
+            spellCoolDown.Add(WarriorWotlk.HeroicStrike, DateTime.Now);
+            spellCoolDown.Add(WarriorWotlk.Intercept, DateTime.Now);
+            spellCoolDown.Add(WarriorWotlk.HeroicThrow, DateTime.Now);
+            spellCoolDown.Add(WarriorWotlk.ShatteringThrow, DateTime.Now);
+            spellCoolDown.Add(WarriorWotlk.Execute, DateTime.Now);
+            spellCoolDown.Add(WarriorWotlk.Pummel, DateTime.Now);
+            spellCoolDown.Add(WarriorWotlk.Bloodthirst, DateTime.Now);
+            spellCoolDown.Add(WarriorWotlk.Slam, DateTime.Now);
+            spellCoolDown.Add(WarriorWotlk.Whirlwind, DateTime.Now);
+            spellCoolDown.Add(WarriorWotlk.Disarm, DateTime.Now);
+            spellCoolDown.Add(WarriorWotlk.Rend, DateTime.Now);
+            spellCoolDown.Add(WarriorWotlk.Hamstring, DateTime.Now);
+            spellCoolDown.Add(WarriorWotlk.VictoryRush, DateTime.Now);
+            spellCoolDown.Add(WarriorWotlk.Charge, DateTime.Now);
+            spellCoolDown.Add(WarriorWotlk.Cleave, DateTime.Now);
             //Buffs||Defensive||Enrage
-            spellCoolDown.Add(intimidatingShoutSpell, DateTime.Now);
-            spellCoolDown.Add(retaliationSpell, DateTime.Now);
-            spellCoolDown.Add(enragedregenerationSpell, DateTime.Now);
-            spellCoolDown.Add(bloodrageSpell, DateTime.Now);
-            spellCoolDown.Add(commandingShoutSpell, DateTime.Now);
-            spellCoolDown.Add(recklessnessSpell, DateTime.Now);
-            spellCoolDown.Add(heroicFurySpell, DateTime.Now);
-            spellCoolDown.Add(berserkerRageSpell, DateTime.Now);
-            spellCoolDown.Add(deathWishSpell, DateTime.Now);
-            spellCoolDown.Add(battleShoutSpell, DateTime.Now);
+            spellCoolDown.Add(WarriorWotlk.IntimidatingShout, DateTime.Now);
+            spellCoolDown.Add(WarriorWotlk.Retaliation, DateTime.Now);
+            spellCoolDown.Add(WarriorWotlk.EnragedRegeneration, DateTime.Now);
+            spellCoolDown.Add(WarriorWotlk.Bloodrage, DateTime.Now);
+            spellCoolDown.Add(WarriorWotlk.CommandingShout, DateTime.Now);
+            spellCoolDown.Add(WarriorWotlk.Recklessness, DateTime.Now);
+            spellCoolDown.Add(WarriorWotlk.HeroicFury, DateTime.Now);
+            spellCoolDown.Add(WarriorWotlk.BerserkerRage, DateTime.Now);
+            spellCoolDown.Add(WarriorWotlk.DeathWish, DateTime.Now);
+            spellCoolDown.Add(WarriorWotlk.BattleShout, DateTime.Now);
 
             //Time event
             HeroicStrikeEvent = new(TimeSpan.FromSeconds(2));
@@ -174,11 +138,11 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
             StartAttack();
         }
 
-        private bool CustomCastSpell(string spellName, string stance = "Berserker Stance")
+        private bool CustomCastSpell(string spellName, string stance = WarriorWotlk.BerserkerStance)
         {
             if (!Bot.Character.SpellBook.IsSpellKnown(stance))
             {
-                stance = "Battle Stance";
+                stance = WarriorWotlk.BattleStance;
             }
 
             if (Bot.Character.SpellBook.IsSpellKnown(spellName))
@@ -229,85 +193,85 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
                         Bot.Wow.StartAutoAttack();
                     }
 
-                    if (CustomCastSpell(bloodrageSpell))
+                    if (CustomCastSpell(WarriorWotlk.Bloodrage))
                     {
                         return;
                     }
 
-                    if (CustomCastSpell(berserkerRageSpell))
+                    if (CustomCastSpell(WarriorWotlk.BerserkerRage))
                     {
                         return;
                     }
 
-                    if (CustomCastSpell(deathWishSpell))
+                    if (CustomCastSpell(WarriorWotlk.DeathWish))
                     {
                         return;
                     }
 
-                    if (Bot.Target.IsCasting && CustomCastSpell(pummelSpell))
+                    if (Bot.Target.IsCasting && CustomCastSpell(WarriorWotlk.Pummel))
                     {
                         return;
                     }
 
-                    if (Bot.Target.GetType() == typeof(IWowPlayer) && !Bot.Target.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == "Hamstring") && CustomCastSpell(hamstringSpell))
+                    if (Bot.Target.GetType() == typeof(IWowPlayer) && !Bot.Target.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == WarriorWotlk.Hamstring) && CustomCastSpell(WarriorWotlk.Hamstring))
                     {
                         return;
                     }
 
-                    if (Bot.Target.HealthPercentage <= 20 && CustomCastSpell(executeSpell))
+                    if (Bot.Target.HealthPercentage <= 20 && CustomCastSpell(WarriorWotlk.Execute))
                     {
                         return;
                     }
 
-                    if (Bot.Player.HealthPercentage <= 50 && (Bot.Player.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == "Bloodrage") || Bot.Player.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == "Recklessness") || Bot.Player.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == "Berserker Rage")))
+                    if (Bot.Player.HealthPercentage <= 50 && (Bot.Player.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == WarriorWotlk.Bloodrage) || Bot.Player.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == WarriorWotlk.Recklessness) || Bot.Player.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == WarriorWotlk.BerserkerRage)))
                     {
-                        if (CustomCastSpell(enragedregenerationSpell))
+                        if (CustomCastSpell(WarriorWotlk.EnragedRegeneration))
                         {
                             return;
                         }
                     }
 
-                    if ((Bot.Player.HealthPercentage <= 30) || ((Bot.Target.GetType() == typeof(IWowPlayer)) && CustomCastSpell(intimidatingShoutSpell)))
+                    if ((Bot.Player.HealthPercentage <= 30) || ((Bot.Target.GetType() == typeof(IWowPlayer)) && CustomCastSpell(WarriorWotlk.IntimidatingShout)))
                     {
                         return;
                     }
 
-                    if (Bot.Player.HealthPercentage <= 60 && CustomCastSpell(retaliationSpell, battleStanceSpell))
+                    if (Bot.Player.HealthPercentage <= 60 && CustomCastSpell(WarriorWotlk.Retaliation, WarriorWotlk.BattleStance))
                     {
                         return;
                     }
 
-                    if (Bot.Target.GetType() == typeof(IWowPlayer) && CustomCastSpell(disarmSpell, defensiveStanceSpell))
+                    if (Bot.Target.GetType() == typeof(IWowPlayer) && CustomCastSpell(WarriorWotlk.Disarm, WarriorWotlk.DefensiveStance))
                     {
                         return;
                     }
 
-                    if (Bot.Player.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == "Slam!") && CustomCastSpell(slamSpell) && CustomCastSpell(recklessnessSpell))
+                    if (Bot.Player.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == "Slam!") && CustomCastSpell(WarriorWotlk.Slam) && CustomCastSpell(WarriorWotlk.Recklessness))
                     {
                         return;
                     }
 
-                    if (CustomCastSpell(whirlwindSpell))
+                    if (CustomCastSpell(WarriorWotlk.Whirlwind))
                     {
                         return;
                     }
 
-                    if (CustomCastSpell(bloodthirstSpell))
+                    if (CustomCastSpell(WarriorWotlk.Bloodthirst))
                     {
                         return;
                     }
 
-                    if (VictoryRushEvent.Run() && CustomCastSpell(victoryRushSpell))
+                    if (VictoryRushEvent.Run() && CustomCastSpell(WarriorWotlk.VictoryRush))
                     {
                         return;
                     }
 
-                    if (RendEvent.Run() && !Bot.Target.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == "Rend") && CustomCastSpell(rendSpell))
+                    if (RendEvent.Run() && !Bot.Target.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == WarriorWotlk.Rend) && CustomCastSpell(WarriorWotlk.Rend))
                     {
                         return;
                     }
 
-                    if (HeroicStrikeEvent.Run() && Bot.Player.Rage >= 60 && CustomCastSpell(heroicStrikeSpell))
+                    if (HeroicStrikeEvent.Run() && Bot.Player.Rage >= 60 && CustomCastSpell(WarriorWotlk.HeroicStrike))
                     {
                         return;
                     }
@@ -316,13 +280,13 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
 
                     if (unitsNearPlayer != null)
                     {
-                        if (unitsNearPlayer.Count() >= 3 && Bot.Player.Rage >= 50 && CustomCastSpell(cleaveSpell))
+                        if (unitsNearPlayer.Count() >= 3 && Bot.Player.Rage >= 50 && CustomCastSpell(WarriorWotlk.Cleave))
                         {
                             return;
                         }
                     }
 
-                    if (!Bot.Player.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == "Battle Shout") && CustomCastSpell(battleShoutSpell))
+                    if (!Bot.Player.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == WarriorWotlk.BattleShout) && CustomCastSpell(WarriorWotlk.BattleShout))
                     {
                         return;
                     }
@@ -343,7 +307,7 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
                         || Bot.Player.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == "Slow")
                         || Bot.Player.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == "Entangling Roots"))
                     {
-                        if (CustomCastSpell(heroicFurySpell))
+                        if (CustomCastSpell(WarriorWotlk.HeroicFury))
                         {
                             return;
                         }
@@ -357,25 +321,25 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
                             Bot.Movement.Reset();
                         }
 
-                        if (CustomCastSpell(ShootSpell))
+                        if (CustomCastSpell(WarriorWotlk.Shoot))
                         {
                             return;
                         }
 
-                        if (CustomCastSpell(ShatteringThrowSpell, battleStanceSpell))
+                        if (CustomCastSpell(WarriorWotlk.ShatteringThrow, WarriorWotlk.BattleStance))
                         {
                             return;
                         }
                     }
-                    if (CustomCastSpell(interceptSpell))
+                    if (CustomCastSpell(WarriorWotlk.Intercept))
                     {
                         return;
                     }
-                    if (CustomCastSpell(chargeSpell, battleStanceSpell))
+                    if (CustomCastSpell(WarriorWotlk.Charge, WarriorWotlk.BattleStance))
                     {
                         return;
                     }
-                    if (CustomCastSpell(heroicThrowSpell))
+                    if (CustomCastSpell(WarriorWotlk.HeroicThrow))
                     {
                         return;
                     }

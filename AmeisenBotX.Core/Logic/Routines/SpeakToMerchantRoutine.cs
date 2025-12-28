@@ -1,4 +1,4 @@
-﻿using AmeisenBotX.Common.Math;
+using AmeisenBotX.Common.Math;
 using AmeisenBotX.Wow.Objects;
 using System;
 
@@ -6,7 +6,7 @@ namespace AmeisenBotX.Core.Logic.Routines
 {
     public static class SpeakToMerchantRoutine
     {
-        public static bool Run(AmeisenBotInterfaces bot, IWowUnit selectedUnit)
+        public static bool Run(AmeisenBotInterfaces bot, IWowUnit selectedUnit, AmeisenBotConfig config, System.Collections.Generic.List<AmeisenBotX.Core.Managers.Character.Inventory.Objects.IWowInventoryItem> itemsToSell)
         {
             if (bot == null || selectedUnit == null)
             {
@@ -16,6 +16,11 @@ namespace AmeisenBotX.Core.Logic.Routines
             if (bot.Wow.TargetGuid != selectedUnit.Guid)
             {
                 bot.Wow.ChangeTarget(selectedUnit.Guid);
+                return false;
+            }
+
+            if (bot.Target == null || bot.Player.DistanceTo(bot.Target) > 6.0f)
+            {
                 return false;
             }
 
@@ -42,6 +47,7 @@ namespace AmeisenBotX.Core.Logic.Routines
                             || gossipTypes[i].Equals("repair", StringComparison.OrdinalIgnoreCase))
                         {
                             bot.Wow.SelectGossipOption(i + 1);
+                            break;
                         }
                     }
                 }
@@ -52,6 +58,8 @@ namespace AmeisenBotX.Core.Logic.Routines
                 }
             }
 
+            bot.Wow.RepairAllItems();
+            SellItemsRoutine.Run(bot, config, itemsToSell);
             return true;
         }
     }

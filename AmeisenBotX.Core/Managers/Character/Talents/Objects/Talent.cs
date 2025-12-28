@@ -1,4 +1,4 @@
-﻿namespace AmeisenBotX.Core.Managers.Character.Talents.Objects
+namespace AmeisenBotX.Core.Managers.Character.Talents.Objects
 {
     public class Talent
     {

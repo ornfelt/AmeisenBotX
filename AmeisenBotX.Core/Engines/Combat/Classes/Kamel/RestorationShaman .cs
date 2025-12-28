@@ -1,8 +1,9 @@
-﻿using AmeisenBotX.Common.Utils;
+using AmeisenBotX.Common.Utils;
 using AmeisenBotX.Core.Managers.Character.Comparators;
 using AmeisenBotX.Core.Managers.Character.Talents.Objects;
 using AmeisenBotX.Wow.Objects;
 using AmeisenBotX.Wow.Objects.Enums;
+using AmeisenBotX.WowWotlk.Constants.Classes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,87 +12,41 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
 {
     internal class RestorationShaman : BasicKamelClass
     {
-        private const string Bloodlust = "Bloodlust";
-
-        private const string CalloftheElementsSpell = "Call of the Elements";
-
-        private const string chainHealSpell = "Chain Heal";
-
-        private const string earthlivingBuff = "Earthliving ";
-
-        private const string earthlivingWeaponSpell = "Earthliving Weapon";
-
-        private const string earthShieldSpell = "Earth Shield";
-
-        private const string earthShockSpell = "Earth Shock";
-
-        private const string flameShockSpell = "Flame Shock";
-
-        //Race (Draenei)
-        private const string giftOfTheNaaruSpell = "Gift of the Naaru";
-
-        //Spells
-        private const string healingWaveSpell = "Healing Wave";
-
-        private const string heroismSpell = "Heroism";
-        private const string lesserHealingWaveSpell = "Lesser Healing Wave";
-
-        //Spells / DMG
-        private const string LightningBoltSpell = "Lightning Bolt";
-
-        private const string LightningShieldSpell = "Lightning Shield";
-        private const string ManaSpringTotemSpell = "Mana Spring Totem";
-        private const string ManaTideTotemSpell = "Mana Tide Totem";
-
-        //CD|Buffs
-        private const string naturesswiftSpell = "Nature's Swiftness";
-
-        private const string riptideSpell = "Riptide";
-        private const string StrengthofEarthTotemSpell = "Strength of Earth Totem";
-        private const string tidalForceSpell = "Tidal Force";
-        private const string watershieldSpell = "Water shield";
-
-        //Totem
-        private const string WindfuryTotemSpell = "Windfury Totem";
-
-        private const string windShearSpell = "Wind Shear";
+        // All spell constants moved to AmeisenBotX.WowWotlk.Constants.ShamanWotlk
 
         public RestorationShaman(AmeisenBotInterfaces bot) : base()
         {
             Bot = bot;
 
-            //Race
-            //spellCoolDown.Add(giftOfTheNaaruSpell, DateTime.Now);
-
             //Spells / DMG
-            spellCoolDown.Add(LightningBoltSpell, DateTime.Now);
-            spellCoolDown.Add(flameShockSpell, DateTime.Now);
-            spellCoolDown.Add(earthShockSpell, DateTime.Now);
+            spellCoolDown.Add(ShamanWotlk.LightningBolt, DateTime.Now);
+            spellCoolDown.Add(ShamanWotlk.FlameShock, DateTime.Now);
+            spellCoolDown.Add(ShamanWotlk.EarthShock, DateTime.Now);
 
             //Spells
-            spellCoolDown.Add(healingWaveSpell, DateTime.Now);
-            spellCoolDown.Add(lesserHealingWaveSpell, DateTime.Now);
-            spellCoolDown.Add(riptideSpell, DateTime.Now);
-            spellCoolDown.Add(watershieldSpell, DateTime.Now);
-            spellCoolDown.Add(LightningShieldSpell, DateTime.Now);
-            spellCoolDown.Add(chainHealSpell, DateTime.Now);
-            spellCoolDown.Add(earthlivingBuff, DateTime.Now);
-            spellCoolDown.Add(earthlivingWeaponSpell, DateTime.Now);
-            spellCoolDown.Add(windShearSpell, DateTime.Now);
+            spellCoolDown.Add(ShamanWotlk.HealingWave, DateTime.Now);
+            spellCoolDown.Add(ShamanWotlk.LesserHealingWave, DateTime.Now);
+            spellCoolDown.Add(ShamanWotlk.Riptide, DateTime.Now);
+            spellCoolDown.Add(ShamanWotlk.WaterShield, DateTime.Now);
+            spellCoolDown.Add(ShamanWotlk.LightningShield, DateTime.Now);
+            spellCoolDown.Add(ShamanWotlk.ChainHeal, DateTime.Now);
+            spellCoolDown.Add(ShamanWotlk.EarthlivingBuff, DateTime.Now);
+            spellCoolDown.Add(ShamanWotlk.EarthlivingWeapon, DateTime.Now);
+            spellCoolDown.Add(ShamanWotlk.WindShear, DateTime.Now);
 
             //CD|Buffs
-            spellCoolDown.Add(naturesswiftSpell, DateTime.Now);
-            spellCoolDown.Add(heroismSpell, DateTime.Now);
-            spellCoolDown.Add(Bloodlust, DateTime.Now);
-            spellCoolDown.Add(tidalForceSpell, DateTime.Now);
-            spellCoolDown.Add(earthShieldSpell, DateTime.Now);
+            spellCoolDown.Add(ShamanWotlk.NaturesSwiftness, DateTime.Now);
+            spellCoolDown.Add(ShamanWotlk.Heroism, DateTime.Now);
+            spellCoolDown.Add(ShamanWotlk.Bloodlust, DateTime.Now);
+            spellCoolDown.Add(ShamanWotlk.TidalForce, DateTime.Now);
+            spellCoolDown.Add(ShamanWotlk.EarthShield, DateTime.Now);
 
             //Totem
-            spellCoolDown.Add(WindfuryTotemSpell, DateTime.Now);
-            spellCoolDown.Add(StrengthofEarthTotemSpell, DateTime.Now);
-            spellCoolDown.Add(ManaSpringTotemSpell, DateTime.Now);
-            spellCoolDown.Add(ManaTideTotemSpell, DateTime.Now);
-            spellCoolDown.Add(CalloftheElementsSpell, DateTime.Now);
+            spellCoolDown.Add(ShamanWotlk.WindfuryTotem, DateTime.Now);
+            spellCoolDown.Add(ShamanWotlk.StrengthOfEarthTotem, DateTime.Now);
+            spellCoolDown.Add(ShamanWotlk.ManaSpringTotem, DateTime.Now);
+            spellCoolDown.Add(ShamanWotlk.ManaTideTotem, DateTime.Now);
+            spellCoolDown.Add(ShamanWotlk.CallOfTheElements, DateTime.Now);
 
             //Time event
             EarthShieldEvent = new(TimeSpan.FromSeconds(7));
@@ -180,7 +135,7 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
         {
             RevivePartyMember(ancestralSpiritSpell);
 
-            if (CheckForWeaponEnchantment(WowEquipmentSlot.INVSLOT_MAINHAND, earthlivingBuff, earthlivingWeaponSpell))
+            if (CheckForWeaponEnchantment(WowEquipmentSlot.INVSLOT_MAINHAND, ShamanWotlk.EarthlivingBuff, ShamanWotlk.EarthlivingWeapon))
             {
                 return;
             }
@@ -191,7 +146,7 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
 
         private void Shield()
         {
-            if (!Bot.Player.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == "Water Shield") && CustomCastSpellMana(watershieldSpell))
+            if (!Bot.Player.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == ShamanWotlk.WaterShield) && CustomCastSpellMana(ShamanWotlk.WaterShield))
             {
                 return;
             }
@@ -199,10 +154,6 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
 
         private void StartHeal()
         {
-            // List<IWowUnit> partyMemberToHeal = Bot.ObjectManager.Partymembers.Where(e =>
-            // e.HealthPercentage <= 94 && !e.IsDead).OrderBy(e =>
-            // e.HealthPercentage).ToList();//FirstOrDefault => tolist
-
             List<IWowUnit> partyMemberToHeal =
             [
 .. Bot.Objects.Partymembers,                 //healableUnits.AddRange(Bot.ObjectManager.PartyPets);
@@ -239,52 +190,48 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
                             return;
                         }
 
-                        if (UseSpellOnlyInCombat && Bot.Player.HealthPercentage < 20 && CustomCastSpellMana(heroismSpell))
+                        if (UseSpellOnlyInCombat && Bot.Player.HealthPercentage < 20 && CustomCastSpellMana(ShamanWotlk.Heroism))
                         {
                             return;
                         }
 
-                        if (UseSpellOnlyInCombat && Bot.Target.HealthPercentage < 20 && CustomCastSpellMana(naturesswiftSpell) && CustomCastSpellMana(healingWaveSpell))
+                        if (UseSpellOnlyInCombat && Bot.Target.HealthPercentage < 20 && CustomCastSpellMana(ShamanWotlk.NaturesSwiftness) && CustomCastSpellMana(ShamanWotlk.HealingWave))
                         {
                             return;
                         }
 
-                        if (UseSpellOnlyInCombat && Bot.Target.HealthPercentage < 40 && CustomCastSpellMana(tidalForceSpell))
+                        if (UseSpellOnlyInCombat && Bot.Target.HealthPercentage < 40 && CustomCastSpellMana(ShamanWotlk.TidalForce))
                         {
                             return;
                         }
 
-                        //if (partyMemberToHeal.Count >= 3 && Bot.Target.HealthPercentage < 40 && CustomCastSpell(Bloodlust))
-                        //{
-                        //    return;
-                        //}
                         //Race Draenei
-                        if (Bot.Player.Race == WowRace.Draenei && Bot.Target.HealthPercentage < 50 && CustomCastSpellMana(giftOfTheNaaruSpell))
+                        if (Bot.Player.Race == WowRace.Draenei && Bot.Target.HealthPercentage < 50 && CustomCastSpellMana(RacialsWotlk.GiftOfTheNaaru))
                         {
                             return;
                         }
 
-                        if (Bot.Target.HealthPercentage <= 50 && CustomCastSpellMana(healingWaveSpell))
+                        if (Bot.Target.HealthPercentage <= 50 && CustomCastSpellMana(ShamanWotlk.HealingWave))
                         {
                             return;
                         }
 
-                        if (Bot.Target.HealthPercentage <= 75 && CustomCastSpellMana(lesserHealingWaveSpell))
+                        if (Bot.Target.HealthPercentage <= 75 && CustomCastSpellMana(ShamanWotlk.LesserHealingWave))
                         {
                             return;
                         }
 
-                        if (partyMemberToHeal.Count >= 4 && Bot.Target.HealthPercentage >= 80 && CustomCastSpellMana(chainHealSpell))
+                        if (partyMemberToHeal.Count >= 4 && Bot.Target.HealthPercentage >= 80 && CustomCastSpellMana(ShamanWotlk.ChainHeal))
                         {
                             return;
                         }
 
-                        if (UseSpellOnlyInCombat && EarthShieldEvent.Run() && !Bot.Target.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == "Earth Shield") && !Bot.Target.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == "Water Shield") && Bot.Target.HealthPercentage < 90 && CustomCastSpellMana(earthShieldSpell))
+                        if (UseSpellOnlyInCombat && EarthShieldEvent.Run() && !Bot.Target.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == ShamanWotlk.EarthShield) && !Bot.Target.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == ShamanWotlk.WaterShield) && Bot.Target.HealthPercentage < 90 && CustomCastSpellMana(ShamanWotlk.EarthShield))
                         {
                             return;
                         }
 
-                        if (!Bot.Target.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == "Riptide") && Bot.Target.HealthPercentage < 90 && CustomCastSpellMana(riptideSpell))
+                        if (!Bot.Target.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == ShamanWotlk.Riptide) && Bot.Target.HealthPercentage < 90 && CustomCastSpellMana(ShamanWotlk.Riptide))
                         {
                             return;
                         }
@@ -292,7 +239,7 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
 
                     if (TotemcastEvent.Run() && TotemItemCheck())
                     {
-                        if (Bot.Player.ManaPercentage <= 10 && CustomCastSpellMana(ManaTideTotemSpell))
+                        if (Bot.Player.ManaPercentage <= 10 && CustomCastSpellMana(ShamanWotlk.ManaTideTotem))
                         {
                             return;
                         }
@@ -306,10 +253,10 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
                 if (TotemcastEvent.Run() && TotemItemCheck())
                 {
                     if (Bot.Player.ManaPercentage >= 50
-                        && !Bot.Player.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == "Windfury Totem")
+                        && !Bot.Player.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == ShamanWotlk.WindfuryTotem)
                         && !Bot.Player.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == "Stoneskin")
                         && !Bot.Player.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == "Flametongue Totem")
-                        && CustomCastSpellMana(CalloftheElementsSpell))
+                        && CustomCastSpellMana(ShamanWotlk.CallOfTheElements))
                     {
                         return;
                     }
@@ -335,18 +282,14 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
                             Bot.Wow.StopClickToMove();
                             Bot.Movement.Reset();
                         }
-                        if (UseSpellOnlyInCombat && Bot.Target.IsCasting && CustomCastSpellMana(windShearSpell))
+                        if (UseSpellOnlyInCombat && Bot.Target.IsCasting && CustomCastSpellMana(ShamanWotlk.WindShear))
                         {
                             return;
                         }
-                        if (UseSpellOnlyInCombat && Bot.Player.ManaPercentage >= 80 && CustomCastSpellMana(flameShockSpell))
+                        if (UseSpellOnlyInCombat && Bot.Player.ManaPercentage >= 80 && CustomCastSpellMana(ShamanWotlk.FlameShock))
                         {
                             return;
                         }
-                        //if (UseSpellOnlyInCombat && Bot.Player.ManaPercentage >= 90 && CustomCastSpell(earthShockSpell))
-                        //{
-                        //    return;
-                        //}
                     }
                 }
             }

@@ -1,4 +1,4 @@
-﻿using AmeisenBotX.Common.Math;
+using AmeisenBotX.Common.Math;
 using AmeisenBotX.Core.Engines.Grinding.Objects;
 using AmeisenBotX.Core.Objects;
 using AmeisenBotX.Core.Objects.Enums;

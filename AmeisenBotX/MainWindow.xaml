@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AmeisenBotX"
         mc:Ignorable="d"
-        Title="AmeisenBot" Height="280" Width="420" MinHeight="280" MinWidth="450" Closing="Window_Closing" WindowStyle="None" BorderThickness="1" ResizeMode="CanResizeWithGrip" MouseLeftButtonDown="Window_MouseLeftButtonDown" Loaded="Window_Loaded" Icon="icon.png" AllowsTransparency="False">
+        Title="AmeisenBot" Height="280" Width="420" MinHeight="280" MinWidth="480" Closing="Window_Closing" WindowStyle="None" BorderThickness="1" ResizeMode="CanResizeWithGrip" MouseLeftButtonDown="Window_MouseLeftButtonDown" Loaded="Window_Loaded" Icon="icon.png" AllowsTransparency="False">
     <Window.BorderBrush>
         <SolidColorBrush Color="{DynamicResource DarkAccent1}" />
     </Window.BorderBrush>
@@ -30,6 +30,11 @@
             </Button.Foreground>
         </Button>
         <Button x:Name="buttonAiDebug" Content="🧠" Margin="0,0,167,0" Click="ButtonAiDebug_Click" BorderThickness="1,0,1,0" Padding="1,1,1,3" HorizontalAlignment="Right" Width="28" Height="27" VerticalAlignment="Top" FontFamily="Segoe UI Emoji" Style="{DynamicResource ButtonStyleDark}" FontSize="14" ToolTip="Open AI Brain Visualization">
+            <Button.Foreground>
+                <SolidColorBrush Color="{DynamicResource DarkForeground}" />
+            </Button.Foreground>
+        </Button>
+        <Button x:Name="buttonBtDebug" Content="🌳" Margin="0,0,194,0" Click="ButtonBtDebug_Click" BorderThickness="1,0,1,0" Padding="1,1,1,3" HorizontalAlignment="Right" Width="28" Height="27" VerticalAlignment="Top" FontFamily="Segoe UI Emoji" Style="{DynamicResource ButtonStyleDark}" FontSize="14" ToolTip="Open Behavior Tree Debugger">
             <Button.Foreground>
                 <SolidColorBrush Color="{DynamicResource DarkForeground}" />
             </Button.Foreground>

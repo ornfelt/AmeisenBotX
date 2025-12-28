@@ -1,4 +1,4 @@
-﻿using AmeisenBotX.Common.Math;
+using AmeisenBotX.Common.Math;
 using AmeisenBotX.Core.Managers.Character.Comparators;
 using AmeisenBotX.Core.Managers.Character.Inventory;
 using AmeisenBotX.Core.Managers.Character.Inventory.Objects;
@@ -15,6 +15,8 @@ namespace AmeisenBotX.Core.Managers.Character
         CharacterEquipment Equipment { get; }
 
         CharacterInventory Inventory { get; }
+
+        ProfessionManager Professions { get; }
 
         IItemComparator ItemComparator { get; set; }
 

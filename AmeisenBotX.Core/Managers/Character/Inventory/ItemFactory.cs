@@ -1,4 +1,4 @@
-﻿using AmeisenBotX.Core.Managers.Character.Inventory.Objects;
+using AmeisenBotX.Core.Managers.Character.Inventory.Objects;
 using System;
 using System.Collections.Generic;
 using System.Globalization;

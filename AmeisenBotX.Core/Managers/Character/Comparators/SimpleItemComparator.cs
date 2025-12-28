@@ -1,4 +1,4 @@
-﻿using AmeisenBotX.Core.Managers.Character.Comparators.Objects;
+using AmeisenBotX.Core.Managers.Character.Comparators.Objects;
 using AmeisenBotX.Core.Managers.Character.Inventory.Objects;
 using System.Collections.Generic;
 

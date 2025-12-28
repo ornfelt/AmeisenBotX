@@ -1,4 +1,4 @@
-﻿using AmeisenBotX.Common.Storage;
+using AmeisenBotX.Common.Storage;
 using AmeisenBotX.Core.Engines.Tactic.Bosses.Naxxramas10;
 using AmeisenBotX.Core.Engines.Tactic.Bosses.TheObsidianSanctum10;
 using AmeisenBotX.Core.Engines.Tactic.Dungeon.ForgeOfSouls;
