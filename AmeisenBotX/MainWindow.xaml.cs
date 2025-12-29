@@ -146,6 +146,8 @@ namespace AmeisenBotX
 
         private Brush TextAccentBrush { get; }
 
+        private bool PortraitCapturedThisSession { get; set; }
+
         /// <summary>
         /// Used to resize the wow window when autoposition is enabled
         /// </summary>
@@ -384,6 +386,12 @@ namespace AmeisenBotX
                     if (LabelUpdateEvent.Run())
                     {
                         UpdateBottomLabels();
+
+                        // Auto-capture portrait on first login if it doesn't exist
+                        if (!PortraitCapturedThisSession)
+                        {
+                            CapturePortraitIfMissing();
+                        }
                     }
 
                     labelCombatState.Content = AmeisenBot.Bot.Player.IsInCombat;
@@ -495,6 +503,129 @@ namespace AmeisenBotX
             }
         }
 
+        /// <summary>
+        /// Captures the player portrait if it doesn't exist yet.
+        /// Called on first login to generate the portrait.png for the profile.
+        /// </summary>
+        private void CapturePortraitIfMissing()
+        {
+            try
+            {
+                string portraitPath = Path.Combine(Path.GetDirectoryName(ConfigPath), "portrait.png");
+
+                if (!File.Exists(portraitPath))
+                {
+                    nint hwnd = AmeisenBot?.Bot?.Memory?.Process?.MainWindowHandle ?? nint.Zero;
+
+                    if (hwnd != nint.Zero && AmeisenBot?.Bot?.Wow != null)
+                    {
+                        using var portrait = Core.Utils.PortraitCapture.CapturePortrait(
+                            hwnd,
+                            AmeisenBot.Bot.Wow.LuaDoString,
+                            unit: "player",
+                            outputSize: 128);
+
+                        if (portrait != null)
+                        {
+                            portrait.Save(portraitPath, System.Drawing.Imaging.ImageFormat.Png);
+                            AmeisenLogger.I.Log("PortraitCapture", $"Auto-captured portrait: {portraitPath}", LogLevel.Debug);
+                        }
+                    }
+                }
+
+                PortraitCapturedThisSession = true;
+            }
+            catch (Exception ex)
+            {
+                AmeisenLogger.I.Log("PortraitCapture", $"Auto-capture failed: {ex.Message}", LogLevel.Warning);
+                PortraitCapturedThisSession = true; // Don't retry
+            }
+        }
+
+        /// <summary>
+        /// Updates the portrait before exiting to keep it fresh.
+        /// </summary>
+        private void UpdatePortraitOnExit()
+        {
+            try
+            {
+                nint hwnd = AmeisenBot?.Bot?.Memory?.Process?.MainWindowHandle ?? nint.Zero;
+
+                if (hwnd != nint.Zero && AmeisenBot?.Bot?.Wow != null)
+                {
+                    using var portrait = Core.Utils.PortraitCapture.CapturePortrait(
+                        hwnd,
+                        AmeisenBot.Bot.Wow.LuaDoString,
+                        unit: "player",
+                        outputSize: 128);
+
+                    if (portrait != null)
+                    {
+                        string portraitPath = Path.Combine(Path.GetDirectoryName(ConfigPath), "portrait.png");
+                        portrait.Save(portraitPath, System.Drawing.Imaging.ImageFormat.Png);
+                        AmeisenLogger.I.Log("PortraitCapture", $"Updated portrait on exit: {portraitPath}", LogLevel.Debug);
+                    }
+                }
+
+                // Save character stats
+                SaveProfileStats();
+            }
+            catch (Exception ex)
+            {
+                AmeisenLogger.I.Log("PortraitCapture", $"Exit update failed: {ex.Message}", LogLevel.Warning);
+            }
+        }
+
+        /// <summary>
+        /// Saves character stats (name, level, class, realm) to the profile folder.
+        /// </summary>
+        private void SaveProfileStats()
+        {
+            try
+            {
+                var player = AmeisenBot?.Bot?.Player;
+                if (player == null) return;
+
+                // Get player name from database
+                string playerName = AmeisenBot.Bot.Db.GetUnitName(player, out string name) ? name : "Unknown";
+
+                var stats = new Models.ProfileStats
+                {
+                    CharacterName = playerName,
+                    Level = player.Level,
+                    Class = player.Class.ToString(),
+                    Realm = AmeisenBot.Config?.Realm ?? "",
+                    Zone = AmeisenBot.Bot.Objects?.ZoneName ?? "",
+                    LastPlayed = DateTime.Now,
+                    Faction = GetPlayerFaction()
+                };
+
+                string profileFolder = Path.GetDirectoryName(ConfigPath);
+                stats.Save(profileFolder);
+
+                AmeisenLogger.I.Log("ProfileStats", $"Saved stats: {stats.CharacterName} Lv{stats.Level} {stats.Class}", LogLevel.Debug);
+            }
+            catch (Exception ex)
+            {
+                AmeisenLogger.I.Log("ProfileStats", $"Failed to save stats: {ex.Message}", LogLevel.Warning);
+            }
+        }
+
+        /// <summary>
+        /// Gets the player's faction as a string.
+        /// </summary>
+        private string GetPlayerFaction()
+        {
+            try
+            {
+                return AmeisenBot?.Bot?.Player?.IsAlliance() == true ? "Alliance" : "Horde";
+            }
+            catch
+            {
+                return "";
+            }
+        }
+
         private void StartPause()
         {
             if (AmeisenBot.IsRunning)
@@ -583,6 +714,9 @@ namespace AmeisenBotX
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            // Update portrait before exit
+            UpdatePortraitOnExit();
+
             SaveBotWindowPosition();
 
             KeyboardHook.Disable();
