@@ -39,8 +39,8 @@ namespace AmeisenBotX.Core.Logic.Harvest
             [
                 new MiningHarvestModule(Bot),
                 new HerbalismHarvestModule(Bot),
-                new ChestHarvestModule(Bot),
-                new QuestObjectHarvestModule(Bot)
+                new QuestObjectHarvestModule(Bot),  // Prioritize Quest Objects (Sparkling)
+                new ChestHarvestModule(Bot)         // Then Loot Chests (Non-Sparkling)
             ];
 
             // Load only modules that apply to this character
@@ -67,160 +67,129 @@ namespace AmeisenBotX.Core.Logic.Harvest
         }
 
         /// <summary>
-        /// Find the best GameObject to harvest based on loaded modules.
-        /// MUCH faster than monolithic checks - only evaluates relevant objects!
+        /// Find the best GameObject to harvest using optimized 3-stage pipeline:
+        /// Stage 1: Global pre-filter (IsUsable, blacklist, Euclidean range) - CHEAPEST
+        /// Stage 2: Module evaluation (Matches + CanHarvest + Priority) - MEDIUM
+        /// Stage 3: Pathfinding validation (top N candidates) - EXPENSIVE
         /// </summary>
         /// <param name="searchCenter">Center point for search radius.</param>
-        /// <param name="maxRadius">Maximum search distance.</param>
+        /// <param name="maxRadius">Maximum search distance (default 30 yards).</param>
         /// <param name="blacklist">GUIDs to exclude from search.</param>
-        /// <returns>Best harvest target, or null if none found.</returns>
-        /// <summary>
-        /// Find the best GameObject to harvest based on loaded modules.
-        /// Uses 2-pass filtering:
-        /// 1. fast Euclidean checks to get candidates
-        /// 2. Pathfinding checks on top candidates to ensure reachability + true distance
-        /// </summary>
-        /// <param name="searchCenter">Center point for search radius.</param>
-        /// <param name="maxRadius">Maximum search distance.</param>
-        /// <param name="blacklist">GUIDs to exclude from search (can include path blacklist).</param>
         /// <returns>Best harvest target, or null if none found.</returns>
         public IWowGameobject FindBestTarget(Vector3 searchCenter, float maxRadius, HashSet<ulong> blacklist)
         {
             // Fast exit if no modules loaded
-            if (LoadedModules.Count == 0 || Bot?.Objects == null)
+            if (LoadedModules.Count == 0 || Bot?.Objects == null || Bot?.Player == null)
             {
                 return null;
             }
 
-            // Defensive null check on blacklist
             blacklist ??= [];
+            Vector3 playerPos = Bot.Player.Position;
 
             try
             {
-                // Filter gameobjects - only check if ANY loaded module can harvest
-                var initialCandidates = Bot.Objects.All.OfType<IWowGameobject>()
-                    .Where(e => e != null
-                        && e.Position.GetDistance(searchCenter) <= maxRadius
-                        && !blacklist.Contains(e.Guid))
-                    .Where(e => LoadedModules.Any(m => m.CanHarvest(e)))
-                    .Select(e => new
+                // ═══════════════════════════════════════════════════════════════
+                // STAGE 1: Global Pre-Filter (CHEAPEST - no module calls)
+                // ═══════════════════════════════════════════════════════════════
+                var stage1Candidates = Bot.Objects.All.OfType<IWowGameobject>()
+                    .Where(g => g != null)
+                    .Where(g => g.IsUsable)                                    // Universal interactability
+                    .Where(g => !blacklist.Contains(g.Guid))                   // Blacklist check  
+                    .Where(g => g.Position.GetDistance(searchCenter) <= maxRadius);  // Range check
+
+                // ═══════════════════════════════════════════════════════════════
+                // STAGE 2: Module Evaluation (MEDIUM - type + skill checks)
+                // ═══════════════════════════════════════════════════════════════
+                var stage2Candidates = stage1Candidates
+                    .Select(g => new { Obj = g, Module = GetMatchingModule(g) })
+                    .Where(x => x.Module != null)
+                    .Select(x => new
                     {
-                        GameObject = e,
-                        Priority = GetHighestPriority(e),
-                        EuclideanDist = e.Position.GetDistance(Bot.Player?.Position ?? searchCenter)
+                        x.Obj,
+                        Priority = x.Module.GetPriority(x.Obj),
+                        EucDist = x.Obj.Position.GetDistance(playerPos)
                     })
                     .Where(x => x.Priority > 0)
                     .OrderByDescending(x => x.Priority)
-                    .ThenBy(x => x.EuclideanDist)
+                    .ThenBy(x => x.EucDist)
                     .ToList();
 
-                if (initialCandidates.Count == 0)
+                if (stage2Candidates.Count == 0)
                 {
                     return null;
                 }
 
-                // 2. Pathfinding Pass
-                // Only verify the top N candidates to allow for performance optimization
-                // e.g. if the closest node is unreachable, check the next one, etc.
-                int candidatesToCheck = 5;
-                var topCandidates = initialCandidates.Take(candidatesToCheck).ToList();
+                // ═══════════════════════════════════════════════════════════════
+                // STAGE 3: Pathfinding Validation (EXPENSIVE - top N only)
+                // ═══════════════════════════════════════════════════════════════
+                const int MAX_CANDIDATES_TO_CHECK = 5;
+                var topCandidates = stage2Candidates.Take(MAX_CANDIDATES_TO_CHECK);
 
-                List<(IWowGameobject GameObject, int Priority, float PathDistance)> validCandidates = [];
+                List<(IWowGameobject Obj, int Priority, float PathDist)> validCandidates = [];
 
                 foreach (var candidate in topCandidates)
                 {
-                    // Calculate path distance
-                    // Use IPathfindingHandler to get path points approx
-                    // Note: We need MapId. Assuming Player MapId is sufficient for nearby objects.
-                    IEnumerable<Vector3> path = Bot.PathfindingHandler.GetPath((int)Bot.Objects.MapId, Bot.Player.Position, candidate.GameObject.Position);
+                    IEnumerable<Vector3> path = Bot.PathfindingHandler.GetPath(
+                        (int)Bot.Objects.MapId,
+                        playerPos,
+                        candidate.Obj.Position);
 
                     if (path != null && path.Any())
                     {
-                        // Calculate real distance along the path
+                        // Calculate real distance along path
                         float pathDist = 0f;
-                        Vector3 prev = Bot.Player.Position;
+                        Vector3 prev = playerPos;
                         foreach (Vector3 point in path)
                         {
                             pathDist += prev.GetDistance(point);
                             prev = point;
                         }
 
-                        validCandidates.Add((candidate.GameObject, candidate.Priority, pathDist));
+                        validCandidates.Add((candidate.Obj, candidate.Priority, pathDist));
                     }
-                    else
-                    {
-                        // Pathfinding failed - unreachable
-                        // Implicitly filtered out
-                        // AmeisenLogger.I.Log("HarvestManager", $"Unreachable harvest target: {candidate.GameObject.Name}");
-                    }
+                    // Unreachable candidates are implicitly filtered out
                 }
 
-                // If no top candidates were reachable, fallback or return null?
-                // If we found ANY reachable candidates in the top N, pick the best one.
                 if (validCandidates.Count > 0)
                 {
-                    (IWowGameobject GameObject, int Priority, float PathDistance) = validCandidates
+                    return validCandidates
                         .OrderByDescending(x => x.Priority)
-                        .ThenBy(x => x.PathDistance)
-                        .First();
-
-                    return GameObject;
+                        .ThenBy(x => x.PathDist)
+                        .First().Obj;
                 }
-
-                // Optional: If top N failed, maybe we should try the rest? 
-                // For now, let's assume if the top 5 closest are unreachable, we probably can't reach anything or should wait.
-                // Or we loop the next batch. 
-                // Let's rely on the module blacklisting the unreachable ones if we return "null" and it tries to approach? 
-                // Ah, if we return null here, the module does nothing.
-                // But we just filtered them out here. 
-
-                // Improved Logic: If top candidates failed pathing, we effectively "ignore" them for this tick.
-                // The next tick will likely do the same unless we blacklist them effectively.
-                // However, doing full pathfinding on ALL candidates is too heavy.
-                // Strategy: Return null. Use "PathBlacklist" in the module to permanently ignore them if move fails.
-                // But here we are Pre-Checking.
 
                 return null;
             }
             catch (Exception ex)
             {
-                AmeisenLogger.I.Log("HarvestManager", $"Error finding harvest target: {ex.Message}", Logging.Enums.LogLevel.Error);
+                AmeisenLogger.I.Log("HarvestManager", $"Error in FindBestTarget: {ex.Message}", Logging.Enums.LogLevel.Error);
                 return null;
             }
         }
 
         /// <summary>
-        /// Get the highest priority score from all loaded modules for a GameObject.
+        /// Find the first module that matches AND can harvest this object.
+        /// Returns null if no module can handle it.
         /// </summary>
-        private int GetHighestPriority(IWowGameobject gobject)
+        private IHarvestModule GetMatchingModule(IWowGameobject gobject)
         {
-            if (gobject == null)
-            {
-                return 0;
-            }
-
-            int maxPriority = 0;
-
             foreach (IHarvestModule module in LoadedModules)
             {
                 try
                 {
-                    if (module.CanHarvest(gobject))
+                    if (module.Matches(gobject) && module.CanHarvest(gobject))
                     {
-                        int priority = module.GetPriority(gobject);
-                        if (priority > maxPriority)
-                        {
-                            maxPriority = priority;
-                        }
+                        AmeisenLogger.I.Log("HarvestManager", $"Module '{module.Name}' matched object '{gobject.Name}' (DisplayId={gobject.DisplayId})", Logging.Enums.LogLevel.Debug);
+                        return module;
                     }
                 }
-                catch (Exception ex)
+                catch
                 {
-                    AmeisenLogger.I.Log("HarvestManager", $"Error getting priority from {module.Name}: {ex.Message}", Logging.Enums.LogLevel.Warning);
+                    // Ignore module errors
                 }
             }
-
-            return maxPriority;
+            return null;
         }
     }
 }

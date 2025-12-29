@@ -11,10 +11,11 @@ namespace AmeisenBotX.Views
 {
     public partial class ItemDisplay : UserControl
     {
-        public ItemDisplay(IWowInventoryItem wowItem, Bitmap icon = null)
+        public ItemDisplay(IWowInventoryItem wowItem, Bitmap icon = null, double? itemScore = null)
         {
             WowItem = wowItem;
             Icon = icon;
+            ItemScore = itemScore;
             InitializeComponent();
         }
 
@@ -22,10 +23,14 @@ namespace AmeisenBotX.Views
 
         private Bitmap Icon { get; }
 
+        private double? ItemScore { get; }
+
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             labelItemName.Content = WowItem.Name;
-            labelItemId.Content = WowItem.Id;
+            labelItemId.Content = ItemScore.HasValue 
+                ? $"Id: {WowItem.Id} | Val: {ItemScore.Value:F1}"
+                : $"Id: {WowItem.Id}";
 
             labelItemType.Content = $"{WowItem.Type} - {WowItem.Subtype} - iLvl {WowItem.ItemLevel} - {WowItem.Durability}/{WowItem.MaxDurability}";
             labelItemCount.Content = WowItem.Count > 1 ? WowItem.Count : string.Empty;

@@ -1,5 +1,6 @@
 using AmeisenBotX.Wow;
 using AmeisenBotX.Wow.Objects;
+using AmeisenBotX.Wow.Objects.Enums;
 using System;
 
 namespace AmeisenBotX.Core.Logic.Harvest.Modules
@@ -25,6 +26,19 @@ namespace AmeisenBotX.Core.Logic.Harvest.Modules
             return bot != null;
         }
 
+        /// <summary>
+        /// Fast type check - is this a sparkling quest object?
+        /// </summary>
+        public bool Matches(IWowGameobject gobject)
+        {
+            return gobject != null && gobject.IsSparkling;
+        }
+
+        /// <summary>
+        /// Check if we should interact with this sparkling object.
+        /// Excludes profession nodes we can't harvest.
+        /// NOTE: IsUsable checked globally, Matches() already passed.
+        /// </summary>
         public bool CanHarvest(IWowGameobject gobject)
         {
             if (gobject == null)
@@ -32,28 +46,24 @@ namespace AmeisenBotX.Core.Logic.Harvest.Modules
                 return false;
             }
 
-            if (!gobject.IsSparkling)
+            // Check if this is a profession node
+            bool isOre = WowHarvestHelper.IsOre(gobject.DisplayId);
+            bool isHerb = WowHarvestHelper.IsHerb(gobject.DisplayId, gobject.EntryId);
+
+            // Profession nodes (ore/herb) should be handled by specialized modules
+            // (MiningHarvestModule, HerbalismHarvestModule) which have proper skill checks.
+            // This module only handles non-profession sparkling objects (quest items, etc.)
+            if (isOre || isHerb)
             {
                 return false;
             }
 
-            // Exclude sparkles that are profession nodes we can't harvest
-            if (Bot?.Character?.Skills != null)
+            // Additional safety: Goober type objects are usually profession nodes
+            // that might not be in the WowOreId/WowHerbId enums.
+            // Only match explicit quest-related sparkling objects (chests, quest items).
+            if (gobject.GameObjectType == WowGameObjectType.Goober)
             {
-                int miningSkill = Bot.Character.Skills.TryGetValue("Mining", out (int val, int max) m) ? m.val : 0;
-                int herbalismSkill = Bot.Character.Skills.TryGetValue("Herbalism", out (int val, int max) h) ? h.val : 0;
-
-                // Check if it's a mining node we can't mine
-                if (WowHarvestHelper.IsOre(gobject.DisplayId) && miningSkill < 1)
-                {
-                    return false;
-                }
-
-                // Check if it's a herb node we can't pick
-                if (WowHarvestHelper.IsHerb(gobject.DisplayId, gobject.EntryId) && herbalismSkill < 1)
-                {
-                    return false;
-                }
+                return false;
             }
 
             return true;

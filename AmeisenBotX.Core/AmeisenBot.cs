@@ -160,6 +160,7 @@ namespace AmeisenBotX.Core
                 new CheckMailsIdleAction(Bot),
                 new FishingIdleAction(Bot),
                 new SheathWeaponIdleAction(Bot),
+                new CraftBandagesIdleAction(Bot, Config),
                 new OpenMapIdleAction(Bot),
                 new FcfsIdleAction
                 (
@@ -196,7 +197,7 @@ namespace AmeisenBotX.Core
             Bot.Movement = new MovementEngine(Bot, Config);
 
             Logic = new AmeisenBotLogic(Config, Bot);
-            InventoryOrganizer = new InventoryOrganizer(Bot, Config);
+            // InventoryOrganizer merged into Bot.Character.Inventory
             QuestItemUser = new QuestItemUserRoutine(Bot, Config);
             UpgradeEquipper = new EquipUpgradesRoutine(Bot, Config);
 
@@ -322,10 +323,7 @@ namespace AmeisenBotX.Core
 
         public MpqBridge Mpq { get; private set; }
 
-        /// <summary>
-        /// Inventory organizer for sorting and managing bag contents.
-        /// </summary>
-        public InventoryOrganizer InventoryOrganizer { get; private set; }
+        // InventoryOrganizer functionality is now in Bot.Character.Inventory
 
         /// <summary>
         /// Auto-uses usable quest items.
@@ -658,19 +656,13 @@ namespace AmeisenBotX.Core
         {
             if (BagUpdateEvent.Run())
             {
-                Bot.Character.Inventory.Update();
+                Bot.Character.Inventory.Update(); // Updates data AND organization/selling
                 Bot.Character.Equipment.Update();
 
                 Bot.Character.UpdateGear();
                 Bot.Character.UpdateBags();
 
-                Bot.Character.Inventory.Update();
-
-                // Organize inventory if enabled (max every 10s, handled internally)
-                if (Config.AutoDestroyTrash)
-                {
-                    InventoryOrganizer?.Update();
-                }
+                // Double update removed, organization is handled inside Inventory.Update()
 
                 // Try to use any usable quest items
                 QuestItemUser?.Update();

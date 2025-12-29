@@ -744,34 +744,36 @@ namespace AmeisenBotX.Memory
 #endif
             if (Process.MainWindowHandle != nint.Zero && mainWindowHandle != nint.Zero)
             {
-                // Retry loop - sometimes window isn't ready for parenting immediately
-                int maxAttempts = 60; // 3 seconds max (60 * 50ms)
+                // Hide window immediately to prevent cursor flickering during parenting
+                Win32Imports.ShowWindow(Process.MainWindowHandle, SW_HIDE);
+
+                // Retry loop with exponential backoff - most systems parent quickly
+                int maxAttempts = 20; // 1 second max with backoff
                 for (int attempt = 0; attempt < maxAttempts; attempt++)
                 {
-                    // Try to parent the window FIRST (while it might be hidden/minimized)
                     SetParent(Process.MainWindowHandle, mainWindowHandle);
 
-                    // Verify it worked by checking the parent
                     nint currentParent = GetParent(Process.MainWindowHandle);
                     if (currentParent == mainWindowHandle)
                     {
-                        // Success! Apply styles and position while still potentially hidden
+                        // Success - apply styles and position while still hidden
                         int style = GetWindowLong(Process.MainWindowHandle, GWL_STYLE);
                         style &= ~(int)WindowStyle.WS_CAPTION & ~(int)WindowStyle.WS_THICKFRAME & ~(int)WindowStyle.WS_BORDER;
                         _ = SetWindowLong(Process.MainWindowHandle, GWL_STYLE, style);
 
                         ResizeParentWindow(offsetX, offsetY, width, height);
 
-                        // NOW show the window - it will appear already in position
+                        // NOW show the window - appears already in correct position
                         Win32Imports.ShowWindow(Process.MainWindowHandle, SW_SHOW);
                         return;
                     }
 
-                    // Not parented yet, wait and retry
-                    Thread.Sleep(50);
+                    // Exponential backoff: 25ms, 30ms, 35ms... up to 120ms
+                    Thread.Sleep(25 + (attempt * 5));
                 }
 
-                // Final attempt fallback
+                // Final fallback - show anyway even if parenting failed
+                AmeisenLogger.I.Log("XMemory", "SetupAutoPosition: Failed to parent window after retries", LogLevel.Warning);
                 int finalStyle = GetWindowLong(Process.MainWindowHandle, GWL_STYLE);
                 finalStyle &= ~(int)WindowStyle.WS_CAPTION & ~(int)WindowStyle.WS_THICKFRAME & ~(int)WindowStyle.WS_BORDER;
                 _ = SetWindowLong(Process.MainWindowHandle, GWL_STYLE, finalStyle);

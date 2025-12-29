@@ -26,7 +26,7 @@ namespace AmeisenBotX.Core.Managers.Character
             Wow = bot.Wow;
             MemoryApi = bot.Memory;
 
-            Inventory = new(Wow, config);
+            Inventory = new(bot, config); // Pass 'bot' interface for full access
             Equipment = new(Wow);
             SpellBook = new(Wow);
             TalentManager = new(Wow);
@@ -39,7 +39,7 @@ namespace AmeisenBotX.Core.Managers.Character
 
         public CharacterEquipment Equipment { get; }
 
-        public CharacterInventory Inventory { get; }
+        public InventoryManager Inventory { get; }
 
         public IItemComparator ItemComparator { get; set; }
 

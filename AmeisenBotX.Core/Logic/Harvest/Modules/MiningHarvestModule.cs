@@ -41,6 +41,18 @@ namespace AmeisenBotX.Core.Logic.Harvest.Modules
                 : Bot.Character.Skills.TryGetValue("Smelting", out (int val, int max) smelting) ? smelting.val : 0;
         }
 
+        /// <summary>
+        /// Fast type check - is this an ore node?
+        /// </summary>
+        public bool Matches(IWowGameobject gobject)
+        {
+            return gobject != null && WowHarvestHelper.IsOre(gobject.DisplayId);
+        }
+
+        /// <summary>
+        /// Skill check - do we have the mining skill to harvest this ore?
+        /// NOTE: IsUsable checked globally, Matches() already passed.
+        /// </summary>
         public bool CanHarvest(IWowGameobject gobject)
         {
             if (gobject == null)
@@ -50,11 +62,6 @@ namespace AmeisenBotX.Core.Logic.Harvest.Modules
 
             int miningSkill = GetMiningSkill();
             if (miningSkill <= 0)
-            {
-                return false;
-            }
-
-            if (!WowHarvestHelper.IsOre(gobject.DisplayId))
             {
                 return false;
             }

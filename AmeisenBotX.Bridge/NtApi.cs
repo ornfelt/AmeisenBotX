@@ -258,17 +258,5 @@ public static unsafe partial class NtApi
     /// Checks if an NTSTATUS indicates success.
     /// </summary>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static bool NT_SUCCESS(int status) => status >= 0;
-    
-    /// <summary>
-    /// Gets a human-readable description of an NTSTATUS code.
-    /// </summary>
-    public static string GetStatusDescription(int status) => status switch
-    {
-        STATUS_SUCCESS => "Success",
-        STATUS_OBJECT_NAME_NOT_FOUND => "Object name not found",
-        STATUS_ACCESS_DENIED => "Access denied",
-        STATUS_OBJECT_NAME_COLLISION => "Object name collision",
-        _ => $"NTSTATUS 0x{status:X8}"
-    };
+    public static bool NT_SUCCESS(int status) => status >= 0;    
 }

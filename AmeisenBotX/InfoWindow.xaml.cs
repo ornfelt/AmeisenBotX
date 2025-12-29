@@ -1,6 +1,7 @@
 ﻿using AmeisenBotX.Core;
 using AmeisenBotX.Core.Managers.Character.Inventory.Objects;
 using AmeisenBotX.Core.Managers.Character.Spells.Objects;
+using AmeisenBotX.Core.Logic.Routines;
 using AmeisenBotX.Views;
 using System;
 using System.Collections.Generic;
@@ -71,11 +72,15 @@ namespace AmeisenBotX
                     buttonInventory.BorderBrush = new SolidColorBrush((Color)Application.Current.Resources["DarkBorder"]);
                     buttonSpells.BorderBrush = new SolidColorBrush((Color)Application.Current.Resources["DarkBorder"]);
 
-                    IWowInventoryItem[] equipmentItems = [.. AmeisenBot.Bot.Character.Equipment.Items.Values];
+                    // Calculate score and sort descending
+                    var equipmentList = AmeisenBot.Bot.Character.Equipment.Items.Values
+                        .Select(i => new { Item = i, Score = ItemEvaluator.CalculateSortScore(AmeisenBot.Bot, AmeisenBot.Config, i) })
+                        .OrderByDescending(x => x.Score)
+                        .ToList();
 
-                    foreach (IWowInventoryItem invItem in equipmentItems)
+                    foreach (var entry in equipmentList)
                     {
-                        equipmentWrapPanel.Children.Add(new ItemDisplay(invItem, AmeisenBot.Bot.GetIconByItemId(invItem.Id)));
+                        equipmentWrapPanel.Children.Add(new ItemDisplay(entry.Item, AmeisenBot.Bot.GetIconByItemId(entry.Item.Id), entry.Score));
                     }
 
                     break;
@@ -85,11 +90,15 @@ namespace AmeisenBotX
                     buttonInventory.BorderBrush = new SolidColorBrush((Color)Application.Current.Resources["DarkAccent1"]);
                     buttonSpells.BorderBrush = new SolidColorBrush((Color)Application.Current.Resources["DarkBorder"]);
 
-                    IWowInventoryItem[] inventoryItems = [.. AmeisenBot.Bot.Character.Inventory.Items];
+                    // Calculate score and sort descending
+                    var inventoryList = AmeisenBot.Bot.Character.Inventory.Items
+                        .Select(i => new { Item = i, Score = ItemEvaluator.CalculateSortScore(AmeisenBot.Bot, AmeisenBot.Config, i) })
+                        .OrderByDescending(x => x.Score)
+                        .ToList();
 
-                    foreach (IWowInventoryItem invItem in inventoryItems)
+                    foreach (var entry in inventoryList)
                     {
-                        equipmentWrapPanel.Children.Add(new ItemDisplay(invItem, AmeisenBot.Bot.GetIconByItemId(invItem.Id)));
+                        equipmentWrapPanel.Children.Add(new ItemDisplay(entry.Item, AmeisenBot.Bot.GetIconByItemId(entry.Item.Id), entry.Score));
                     }
 
                     break;

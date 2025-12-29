@@ -169,6 +169,8 @@ namespace AmeisenBotX.Wow
 
         string GetEquipmentItems();
 
+        int GetContainerNumSlots(int bagId);
+
         /// <summary>
         /// Returns the number of unused bag slots.
         /// </summary>

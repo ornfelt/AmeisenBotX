@@ -59,8 +59,20 @@ public class EquipUpgradesRoutine
                 continue;
             }
 
+            // Check Level Requirement
+            if (newItem.RequiredLevel > Bot.Player.Level)
+            {
+                continue;
+            }
+
+            // Check if we can actually use this item (Class/Skill restriction)
+            if (ItemEvaluator.IsUnusableEquipment(Bot, newItem))
+            {
+                continue;
+            }
+
             // Evaluate the new item
-            double newScore = ItemEvaluator.EvaluateItem(Bot, Config, newItem).Score;
+            double newScore = ItemEvaluator.CalculateEquipScore(Bot, Config, newItem);
 
             if (newScore <= 0)
             {
@@ -84,7 +96,7 @@ public class EquipUpgradesRoutine
             {
                 if (Bot.Character.Equipment.Items.TryGetValue(slot, out IWowInventoryItem currentItem))
                 {
-                    double currentScore = ItemEvaluator.EvaluateItem(Bot, Config, currentItem).Score;
+                    double currentScore = ItemEvaluator.CalculateEquipScore(Bot, Config, currentItem);
                     if (currentScore < lowestCurrentScore)
                     {
                         lowestCurrentScore = currentScore;

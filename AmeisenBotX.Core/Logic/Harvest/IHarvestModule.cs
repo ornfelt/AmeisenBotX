@@ -21,8 +21,19 @@ namespace AmeisenBotX.Core.Logic.Harvest
         bool ShouldLoad(AmeisenBotInterfaces bot);
 
         /// <summary>
-        /// Check if a GameObject can be harvested by this module.
-        /// Only called if module is loaded.
+        /// Fast type check - does this object match this module's target type?
+        /// Called in Stage 1 filtering. Should be CHEAP (no skill lookups).
+        /// Examples: IsOre, IsHerb, IsSparkling, GameObjectType == Chest
+        /// </summary>
+        /// <param name="gobject">GameObject to check.</param>
+        /// <returns>True if object type matches this module.</returns>
+        bool Matches(IWowGameobject gobject);
+
+        /// <summary>
+        /// Full harvest check - can we actually harvest this object?
+        /// Called in Stage 2 after Matches() passes. Can be more expensive.
+        /// Checks skills, inventory space, etc.
+        /// NOTE: IsUsable is checked globally in HarvestManager, not here.
         /// </summary>
         /// <param name="gobject">GameObject to evaluate.</param>
         /// <returns>True if this module can harvest the object.</returns>

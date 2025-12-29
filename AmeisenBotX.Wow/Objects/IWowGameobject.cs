@@ -21,6 +21,11 @@ namespace AmeisenBotX.Wow.Objects
 
         bool IsSparkling { get; }
 
+        /// <summary>
+        /// Whether the object can be interacted with (not in-use, not locked, not non-selectable).
+        /// </summary>
+        bool IsUsable { get; }
+
         int Level { get; }
 
         bool Locked { get; }

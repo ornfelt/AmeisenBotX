@@ -55,6 +55,7 @@ namespace AmeisenBotX.Core.Logic
             GatherService = new GatherService(bot, config);
             CombatService = new CombatService(bot, config);
             EatService = new EatService(bot, config);
+            FirstAidService = new FirstAidService(bot, config);
             FollowService = new FollowService(bot, config);
             NpcService = new NpcService(bot, config);
             EquipUpgrades = new EquipUpgradesRoutine(Bot, Config);
@@ -140,6 +141,10 @@ namespace AmeisenBotX.Core.Logic
             );
 
 
+            // First Aid
+            Func<bool> checkFirstAid = () => { FirstAidService.CheckState(); return FirstAidService.ShouldBandage; };
+            INode firstAidNode = new Leaf(() => FirstAidService.Execute(), "FirstAid");
+
             // Eat/Drink
             Func<bool> checkEat = () => { EatService.CheckEatState(); return EatService.ShouldEat; };
             INode eatNode = new Leaf(() => EatService.ExecuteEat(), "Eat");
@@ -164,6 +169,7 @@ namespace AmeisenBotX.Core.Logic
                 (() => Bot.Player.IsGhost, openworldGhostNode),
                 (() => !Bot.Player.IsMounted && checkCombat(), combatNode),
                 (checkRepairSell, interactWithMerchantNode),
+                (checkFirstAid, firstAidNode),
                 (checkEat, eatNode)
             );
 
@@ -174,6 +180,7 @@ namespace AmeisenBotX.Core.Logic
                 (() => Bot.Player.IsDead, new Leaf(Dead, "Grind.Dead")),
                 (() => Bot.Player.IsGhost, openworldGhostNode),
                 (checkCombat, combatNode),
+                (checkFirstAid, firstAidNode),
                 (checkEat, eatNode),
                 (checkRepairSell, interactWithMerchantNode),
                 (checkClassTrainer, interactWithClassTrainerNode),
@@ -187,6 +194,7 @@ namespace AmeisenBotX.Core.Logic
                (() => Bot.Player.IsDead, new Leaf(Dead, "Quest.Dead")),
                (() => Bot.Player.IsGhost, openworldGhostNode),
                (checkCombat, combatNode),
+               (checkFirstAid, firstAidNode),
                (checkEat, eatNode),
                (checkRepairSell, interactWithMerchantNode),
                (checkLoot, lootNode)
@@ -198,6 +206,7 @@ namespace AmeisenBotX.Core.Logic
                 (() => Bot.Player.IsDead, new Leaf(Dead, "PvP.Dead")),
                 (() => Bot.Player.IsGhost, openworldGhostNode),
                 (checkCombat, combatNode),
+                (checkFirstAid, firstAidNode),
                 (checkEat, eatNode),
                 (checkRepairSell, interactWithMerchantNode),
                 (checkLoot, lootNode)
@@ -222,6 +231,7 @@ namespace AmeisenBotX.Core.Logic
                 (checkLoot, lootNode),
                 (checkLoot, lootNode), // Loot has priority over gather to finish jobs
                 (() => GatherService.HasValidTarget(), collectGobjectsNode),
+                (checkFirstAid, firstAidNode),
                 (checkEat, eatNode),
                 (() => NpcService.NeedToTalkToQuestgiver(), new InteractWithUnitLeaf(Bot, () => NpcService.QuestGiverToTalkTo, name: "OpenWorld.Questgiver")),
                 (checkClassTrainer, interactWithClassTrainerNode),
@@ -243,6 +253,7 @@ namespace AmeisenBotX.Core.Logic
                 // graveyard might get lost while we are a ghost
                 (() => Bot.Player.IsDead, new Leaf(Dead, "BG.Dead")),
                 (checkCombat, combatNode),
+                (checkFirstAid, firstAidNode),
                 (checkEat, eatNode)
             );
 
@@ -266,6 +277,7 @@ namespace AmeisenBotX.Core.Logic
                         )
                     ),
                     (checkLoot, lootNode),
+                    (checkFirstAid, firstAidNode),
                     (checkEat, eatNode)
                 );
 
@@ -288,6 +300,7 @@ namespace AmeisenBotX.Core.Logic
                     )
                 ),
                 (checkLoot, lootNode),
+                (checkFirstAid, firstAidNode),
                 (checkEat, eatNode)
             );
 
@@ -363,6 +376,7 @@ namespace AmeisenBotX.Core.Logic
         public LootService LootService { get; }
         public GatherService GatherService { get; }
         public CombatService CombatService { get; }
+        public FirstAidService FirstAidService { get; }
         public EatService EatService { get; }
         public FollowService FollowService { get; }
         public NpcService NpcService { get; }
@@ -454,6 +468,10 @@ namespace AmeisenBotX.Core.Logic
                {
                    Bot.Wow.ApplyBotCVars(Config.MaxFps);
                }
+
+               // CRITICAL: Update character data including Skills for harvest modules
+               Bot.Character.UpdateAll();
+
                UpdateInventoryState();
                UpdateTrainState();
                Reset();
@@ -465,6 +483,7 @@ namespace AmeisenBotX.Core.Logic
             LootService.Reset();
             GatherService.Reset();
             CombatService.Reset();
+            FirstAidService.Reset();
             EatService.Reset();
             // FollowService has no state
             NpcService.Reset();

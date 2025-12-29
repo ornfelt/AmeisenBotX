@@ -109,35 +109,109 @@ namespace AmeisenBotX.Core.Logic.Routines
         }
 
         /// <summary>
-        /// Calculates a score for a single item (higher = more valuable to keep).
+        /// Calculates a comprehensive score for Sorting and UI.
+        /// Agnostic of Class/Spec - focuses on objective Value (Quality, iLvl, Price).
+        /// </summary>
+        public static double CalculateSortScore(AmeisenBotInterfaces bot, AmeisenBotConfig config, IWowInventoryItem item)
+        {
+            // 1. Protected Items (Hearthstone, etc) -> Top Priority (10,000+)
+            if (IsProtectedItem(bot, config, item))
+            {
+                if (CriticalItemNames.Contains(item.Name) || CriticalItemIds.Contains(item.Id))
+                    return 20_000; // Super Critical (Heartshtone always #1)
+                
+                // Protected items sorted by Quality -> Name
+                return 10_000 + (item.ItemQuality * 1000) + (item.ItemLevel);
+            }
+
+            double score = 0;
+
+            // 2. Item Quality (The Primary Bracket)
+            // Gap of 1000 ensures hierarchy (Max iLvl is ~284, plus type bonus ~400, leaves room).
+            // Poor(0)=0, Common(1)=1000, Green(2)=2000, Blue(3)=3000, Epic(4)=4000
+            score += item.ItemQuality * 1000;
+
+            // 3. Item Type Bonus (Secondary Bracket within Quality)
+            // Range 0-400
+            string type = item.Type?.ToLowerInvariant() ?? "";
+            string sub = item.Subtype?.ToLowerInvariant() ?? "";
+            
+            if (type is "armor" or "weapon")
+                score += 400;
+            else if (type is "container" or "bag")
+                score += 350;
+            else if (type is "recipe")
+                score += 300;
+            else if (type is "gem" || sub.Contains("enchant"))
+                score += 250;
+            else if (type is "trade goods" or "tradeskill")
+                score += 200;
+            else if (type is "quest") 
+                score += 150;
+            else if (type is "consumable")
+                score += 100;
+            else if (type is "key" or "miscellaneous")
+                score += 50;
+
+            // 4. Item Level (Power differentiation)
+            // Adds 0-300 points usually.
+            score += item.ItemLevel;
+
+            // 5. Vendor Price (Economy differentiation)
+            // Logarithmic: 1g = 1pt, 100g = 2pts. Small tie-breaker.
+            if (item.Price > 0)
+            {
+                score += Math.Log10(item.Price);
+            }
+
+            // 6. Stack Completeness (Organization)
+            // Adds 0-1 point.
+            if (item.MaxStack > 1)
+            {
+                score += ((double)item.Count / item.MaxStack);
+            }
+
+            return score;
+        }
+
+        /// <summary>
+        /// Calculates score for Auto-Equip decisions.
+        /// Heavily weighted by Class/Spec suitability.
+        /// </summary>
+        public static double CalculateEquipScore(AmeisenBotInterfaces bot, AmeisenBotConfig config, IWowInventoryItem item)
+        {
+            // ===== BASE SCORE FROM STATS & TYPE =====
+            double score = 0;
+
+            // 1. Quality & iLvl Base (Ensure higher level items generally win)
+            score += item.ItemQuality * 20;
+            score += item.ItemLevel;
+
+            // 2. Class Compatibility (Can we use it? Is it our armor type?)
+            score += GetClassCompatibilityScore(bot, item);
+
+            // 3. Stat Weights (The meat of the decision)
+            score += GetStatValueScore(bot, item);
+
+            // 4. Weapon DPS (Crucial for weapons)
+            if (item is WowWeapon weapon)
+            {
+                // DPS is usually the most important stat for weapons
+                // Approximate DPS from stats isn't easy, but usually iLvl covers it.
+                // If we could access Min/Max damage/Speed, we'd add it here.
+                // For now, iLvl + Stats is the proxy.
+            }
+
+            return Math.Max(0, score);
+        }
+
+        /// <summary>
+        /// Deprecated wrapper for backwards compatibility or default generic value.
+        /// Prefer CalculateSortScore for UI/Sorting and CalculateEquipScore for Upgrades.
         /// </summary>
         public static double CalculateItemScore(AmeisenBotInterfaces bot, AmeisenBotConfig config, IWowInventoryItem item)
         {
-            // ===== PROTECTED ITEMS (Score 1000+) =====
-            if (IsProtectedItem(bot, config, item))
-            {
-                return 1000 + (item.ItemQuality * 100);
-            }
-
-            // ===== BASE SCORE FROM QUALITY =====
-            double score = item.ItemQuality * 10.0;
-
-            // ===== ITEM TYPE MODIFIERS =====
-            score += GetItemTypeScore(bot, item);
-
-            // ===== CLASS/SPEC COMPATIBILITY =====
-            score += GetClassCompatibilityScore(bot, item);
-
-            // ===== STAT VALUE =====
-            score += GetStatValueScore(bot, item);
-
-            // ===== PROFESSION RELEVANCE =====
-            score += GetProfessionRelevanceScore(bot, item);
-
-            // ===== SELL VALUE (favor keeping expensive items) =====
-            score += Math.Log10(Math.Max(1, item.Price)) * 2;
-
-            return Math.Max(0, score);
+            return CalculateSortScore(bot, config, item);
         }
 
         /// <summary>
@@ -145,10 +219,11 @@ namespace AmeisenBotX.Core.Logic.Routines
         /// </summary>
         public static bool CanDisposeItem(AmeisenBotInterfaces bot, AmeisenBotConfig config, IWowInventoryItem item, DisposeMode mode)
         {
-            double score = CalculateItemScore(bot, config, item);
+            // Use SortScore for disposal because it handles protected items (score 10,000+) correctly
+            double score = CalculateSortScore(bot, config, item);
 
-            // Protected items (score >= 1000) are never disposed
-            return score < 1000 && mode switch
+            // Protected items (score >= 10,000) are never disposed
+            return score < 10_000 && mode switch
             {
                 // Trash: gray items only (they don't need to have vendor value)
                 DisposeMode.Trash => item.ItemQuality <= (int)WowItemQuality.Poor,
@@ -165,16 +240,17 @@ namespace AmeisenBotX.Core.Logic.Routines
         /// </summary>
         public static bool ShouldKeepItem(AmeisenBotInterfaces bot, AmeisenBotConfig config, IWowInventoryItem item)
         {
-            return CalculateItemScore(bot, config, item) >= 1000;
+            return CalculateSortScore(bot, config, item) >= 10_000;
         }
 
         /// <summary>
         /// Compares two items for the same slot - returns true if newItem is better.
+        /// MUST use CalculateEquipScore for combat relevance.
         /// </summary>
         public static bool IsUpgrade(AmeisenBotInterfaces bot, AmeisenBotConfig config, IWowInventoryItem newItem, IWowInventoryItem currentItem)
         {
-            double newScore = CalculateItemScore(bot, config, newItem);
-            double currentScore = CalculateItemScore(bot, config, currentItem);
+            double newScore = CalculateEquipScore(bot, config, newItem);
+            double currentScore = CalculateEquipScore(bot, config, currentItem);
             return newScore > currentScore;
         }
 

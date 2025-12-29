@@ -153,7 +153,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        <SolidColorBrush x:Key="OptionMark.Static.Background" Color="#FFFFFFFF" />
+        <SolidColorBrush x:Key="OptionMark.Static.Background" Color="#FF212121" />
         <SolidColorBrush x:Key="OptionMark.Static.Border" Color="#FF707070" />
         <Style x:Key="OptionMarkFocusVisual">
             <Setter Property="Control.Template">

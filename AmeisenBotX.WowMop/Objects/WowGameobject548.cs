@@ -30,7 +30,16 @@ namespace AmeisenBotX.WowMop.Objects
 
         public bool IsSparkling => (DynamicFlags & GO_DYNFLAG_SPARKLE) != 0;
 
-        public bool Locked => Flags[1];
+        // GameObject state flags
+        private const int GO_FLAG_IN_USE = 0x01;         // Object is currently being used
+        private const int GO_FLAG_NOT_SELECTABLE = 0x10; // Cannot be selected/interacted
+
+        /// <summary>
+        /// Whether the object can be interacted with (not in-use, not non-selectable).
+        /// </summary>
+        public bool IsUsable => !Flags[GO_FLAG_IN_USE] && !Flags[GO_FLAG_NOT_SELECTABLE];
+
+        public bool Locked => Flags[2]; // 0x2 -> locked
 
         public int Level => GetGameobjectDescriptor().Level;
 

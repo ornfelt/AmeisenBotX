@@ -35,6 +35,18 @@ namespace AmeisenBotX.Core.Logic.Harvest.Modules
                 : Bot.Character.Skills.TryGetValue("Herbalism", out (int val, int max) skill) ? skill.val : 0;
         }
 
+        /// <summary>
+        /// Fast type check - is this a herb node?
+        /// </summary>
+        public bool Matches(IWowGameobject gobject)
+        {
+            return gobject != null && WowHarvestHelper.IsHerb(gobject.DisplayId, gobject.EntryId);
+        }
+
+        /// <summary>
+        /// Skill check - do we have the herbalism skill to harvest this herb?
+        /// NOTE: IsUsable checked globally, Matches() already passed.
+        /// </summary>
         public bool CanHarvest(IWowGameobject gobject)
         {
             if (gobject == null)
@@ -43,7 +55,13 @@ namespace AmeisenBotX.Core.Logic.Harvest.Modules
             }
 
             int herbalismSkill = GetHerbalismSkill();
-            return herbalismSkill > 0 && WowHarvestHelper.TryGetHerbId(gobject.DisplayId, gobject.EntryId, out WowHerbId herbId) && WowHarvestHelper.CanHarvestHerb(herbId, herbalismSkill);
+            if (herbalismSkill <= 0)
+            {
+                return false;
+            }
+
+            return WowHarvestHelper.TryGetHerbId(gobject.DisplayId, gobject.EntryId, out WowHerbId herbId)
+                && WowHarvestHelper.CanHarvestHerb(herbId, herbalismSkill);
         }
 
         public int GetPriority(IWowGameobject gobject)

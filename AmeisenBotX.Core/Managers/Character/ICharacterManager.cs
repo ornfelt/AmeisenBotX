@@ -14,7 +14,7 @@ namespace AmeisenBotX.Core.Managers.Character
     {
         CharacterEquipment Equipment { get; }
 
-        CharacterInventory Inventory { get; }
+        InventoryManager Inventory { get; }
 
         ProfessionManager Professions { get; }
 

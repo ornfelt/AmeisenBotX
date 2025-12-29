@@ -194,13 +194,12 @@ namespace AmeisenBotX
 
         private void ButtonConfig_Click(object sender, RoutedEventArgs e)
         {
-            ConfigEditorWindow configWindow = new(DataPath, AmeisenBot, AmeisenBot.Config, AmeisenBot.AccountName);
-            configWindow.ShowDialog();
-
-            if (configWindow.SaveConfig)
+            Views.Config.DynamicConfigWindow configWindow = new(AmeisenBot.Config);
+            if (configWindow.ShowDialog() == true)
             {
-                AmeisenBot.ReloadConfig(configWindow.Config);
-                File.WriteAllText(AmeisenBot.Config.Path, JsonSerializer.Serialize(configWindow.Config, Options));
+                // Changes are already bound to the object, so we just reload and save
+                AmeisenBot.ReloadConfig(AmeisenBot.Config);
+                File.WriteAllText(AmeisenBot.Config.Path, JsonSerializer.Serialize(AmeisenBot.Config, Options));
 
                 KeyboardHook.Clear();
                 LoadHotkeys();
@@ -279,14 +278,38 @@ namespace AmeisenBotX
 
         private void ButtonToggleRendering_Click(object sender, RoutedEventArgs e)
         {
-            // ((BasicCombatClass)AmeisenBot.Bot.CombatClass).TargetProviderTank.Get(out IEnumerable<IWowUnit> units);
-            // WowCreatureType type = AmeisenBot.Bot.Objects.Target.ReadType(AmeisenBot.Bot.Memory);
-            // bool x = AmeisenBot.Bot.Player.IsSwimming;
-            // bool y = AmeisenBot.Bot.Player.IsFlying;
-
-            foreach (IWowDynobject aoe in AmeisenBot.Bot.Objects.All.OfType<IWowDynobject>().Where(e => e.Caster == 1))
+            try
             {
-                Vector3 pos = aoe.Position;
+                nint wowHwnd = AmeisenBot.Bot.Memory.Process?.MainWindowHandle ?? nint.Zero;
+
+                if (wowHwnd == nint.Zero)
+                {
+                    AmeisenLogger.I.Log("PortraitCapture", "WoW window not available", LogLevel.Warning);
+                    return;
+                }
+
+                // Capture portrait using the full workflow helper
+                using var portrait = Core.Utils.PortraitCapture.CapturePortrait(
+                    wowHwnd,
+                    AmeisenBot.Bot.Wow.LuaDoString,
+                    unit: "player",
+                    outputSize: 128,
+                    renderDelayMs: 100);
+
+                if (portrait != null)
+                {
+                    string portraitPath = Path.Combine(Path.GetDirectoryName(ConfigPath), "portrait.png");
+                    portrait.Save(portraitPath, System.Drawing.Imaging.ImageFormat.Png);
+                    AmeisenLogger.I.Log("PortraitCapture", $"Saved: {portraitPath}", LogLevel.Debug);
+                }
+                else
+                {
+                    AmeisenLogger.I.Log("PortraitCapture", "Capture failed", LogLevel.Warning);
+                }
+            }
+            catch (Exception ex)
+            {
+                AmeisenLogger.I.Log("PortraitCapture", $"Error: {ex.Message}", LogLevel.Error);
             }
         }
 

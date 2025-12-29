@@ -19,33 +19,28 @@ namespace AmeisenBotX.Core.Logic.Startup
     /// - Memory attachment
     /// - Bridge DLL injection with IPC verification
     /// </summary>
-    public class WowLauncher
+    public class WowLauncher(AmeisenBotConfig config, AmeisenBotInterfaces bot)
     {
-        private readonly AmeisenBotConfig Config;
-        private readonly AmeisenBotInterfaces Bot;
 
         // Hook delegate (keep alive to prevent GC)
         private Win32Imports.WinEventProc _winEventProc;
+
+        // Signal for hook-driven window detection
+        private volatile bool _windowCreated;
 
         /// <summary>
         /// Event fired when WoW has been successfully started and attached.
         /// </summary>
         public event Action OnWoWStarted;
 
-        public WowLauncher(AmeisenBotConfig config, AmeisenBotInterfaces bot)
-        {
-            Config = config;
-            Bot = bot;
-        }
-
         /// <summary>
         /// Start WoW process, attach memory, inject bridge DLL.
         /// </summary>
         public BtStatus StartWow()
         {
-            if (!File.Exists(Config.PathToWowExe))
+            if (!File.Exists(config.PathToWowExe))
             {
-                AmeisenLogger.I.Log("WowLauncher", $"WoW executable not found: {Config.PathToWowExe}", LogLevel.Error);
+                AmeisenLogger.I.Log("WowLauncher", $"WoW executable not found: {config.PathToWowExe}", LogLevel.Error);
                 return BtStatus.Failed;
             }
 
@@ -55,8 +50,8 @@ namespace AmeisenBotX.Core.Logic.Startup
             Rect? startRect = DetermineStartPosition();
 
             // Start process
-            Process p = Bot.Memory.StartProcessNoActivate(
-                $"\"{Config.PathToWowExe}\" -windowed -d3d9",
+            Process p = bot.Memory.StartProcessNoActivate(
+                $"\"{config.PathToWowExe}\" -windowed -d3d9",
                 out nint processHandle,
                 out nint mainThreadHandle,
                 startHidden: false,
@@ -77,19 +72,19 @@ namespace AmeisenBotX.Core.Logic.Startup
             // Set process priority
             TrySetProcessPriority(p, ProcessPriorityClass.High);
 
-            Thread.Sleep(Random.Shared.Next(100, 200));
+            // Memory attachment needs no artificial delay
 
             AmeisenLogger.I.Log("WowLauncher", $"Attaching XMemory to {p.ProcessName} ({p.Id})");
 
             // Initialize memory
-            if (!Bot.Memory.Init(p, processHandle, mainThreadHandle))
+            if (!bot.Memory.Init(p, processHandle, mainThreadHandle))
             {
                 AmeisenLogger.I.Log("WowLauncher", "Failed to attach XMemory", LogLevel.Error);
                 p.Kill();
                 return BtStatus.Failed;
             }
 
-            Bot.Memory.Offsets.Init(Bot.Memory.Process.MainModule.BaseAddress);
+            bot.Memory.Offsets.Init(bot.Memory.Process.MainModule.BaseAddress);
 
             // Inject bridge DLL
             if (!InjectBridgeDll(p))
@@ -97,8 +92,9 @@ namespace AmeisenBotX.Core.Logic.Startup
                 AmeisenLogger.I.Log("WowLauncher", "Bridge injection failed or verification timed out", LogLevel.Warning);
             }
 
-            // Ensure window is visible
-            EnsureWindowVisible();
+            // Ensure window is visible (only if not using AutoPosition - it handles showing)
+            if (!config.AutoPositionWow)
+                EnsureWindowVisible();
 
             OnWoWStarted?.Invoke();
             return BtStatus.Success;
@@ -106,14 +102,14 @@ namespace AmeisenBotX.Core.Logic.Startup
 
         private Rect? DetermineStartPosition()
         {
-            if (Config.AutoPositionWow)
+            if (config.AutoPositionWow)
             {
                 // Force off-screen start to prevent center flash
                 return new Rect { Left = -32000, Top = -32000, Right = -31200, Bottom = -31400 };
             }
 
-            return Config.SaveWowWindowPosition && Config.WowWindowRect.Right > 0 && Config.WowWindowRect.Bottom > 0
-                ? Config.WowWindowRect
+            return config.SaveWowWindowPosition && config.WowWindowRect.Right > 0 && config.WowWindowRect.Bottom > 0
+                ? config.WowWindowRect
                 : null;
         }
 
@@ -140,24 +136,31 @@ namespace AmeisenBotX.Core.Logic.Startup
                 int maxWaitMs = (int)TimingConfig.WowWindowWaitTimeout.TotalMilliseconds;
                 int waited = 0;
 
+                _windowCreated = false;
+
                 while (waited < maxWaitMs)
                 {
                     p.Refresh();
                     if (p.MainWindowHandle != nint.Zero)
                     {
-                        // Window exists - apply positioning
-                        if (Config.AutoPositionWow)
+                        // Window exists - apply positioning if not using AutoPosition
+                        // (AutoPosition handles hiding/showing in SetupAutoPosition)
+                        if (!config.AutoPositionWow && startRect.HasValue)
                         {
-                            Bot.Memory.HideWindow(p.MainWindowHandle);
-                        }
-                        else if (startRect.HasValue)
-                        {
-                            Bot.Memory.SetWindowPosition(p.MainWindowHandle, startRect.Value);
+                            bot.Memory.SetWindowPosition(p.MainWindowHandle, startRect.Value);
                         }
                         return true;
                     }
-                    Thread.Sleep(100);
-                    waited += 10;
+                    
+                    // If hook detected window, check again immediately without sleep
+                    if (_windowCreated)
+                    {
+                        _windowCreated = false; // Reset and continue checking
+                        continue;
+                    }
+                    
+                    Thread.Sleep(50);
+                    waited += 50;
                 }
 
                 return false;
@@ -173,18 +176,10 @@ namespace AmeisenBotX.Core.Logic.Startup
 
         private void WindowHookProc(nint hWinEventHook, uint eventType, nint hwnd, int idObject, int idChild, uint dwEventThread, uint dwmsEventTime)
         {
+            // Only signal window creation - actual positioning is handled in WaitForWindow/SetupAutoPosition
             if (eventType == Win32Imports.EVENT_OBJECT_CREATE && idObject == 0 && idChild == 0)
             {
-                AmeisenLogger.I.Log("WowLauncher", $"Hook detected window creation: {hwnd}");
-
-                if (Config.AutoPositionWow)
-                {
-                    Bot.Memory.HideWindow(hwnd);
-                }
-                else if (Config.SaveWowWindowPosition && Config.WowWindowRect.Right > 0)
-                {
-                    Bot.Memory.SetWindowPosition(hwnd, Config.WowWindowRect);
-                }
+                _windowCreated = true;
             }
         }
 
@@ -193,8 +188,8 @@ namespace AmeisenBotX.Core.Logic.Startup
             string bridgePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "AmeisenBotX.Bridge.Native.dll");
 
             // Generate unique IPC name
-            string user = !string.IsNullOrEmpty(Config.Username) ? Config.Username : "Bot";
-            string uniqueId = $"{user}_{Process.GetCurrentProcess().Id}";
+            string user = !string.IsNullOrEmpty(config.Username) ? config.Username : "Bot";
+            string uniqueId = $"{user}_{Environment.ProcessId}";
             string ipcName = $"Local\\WM_IPC_{uniqueId}";
             // Pass IPC name first, then bot name/ID
             string bridgeArg = $"{ipcName}|{user}";
@@ -208,14 +203,14 @@ namespace AmeisenBotX.Core.Logic.Startup
                 using MemoryMappedViewAccessor accessor = signalMmf.CreateViewAccessor(0, 4);
                 accessor.Write(0, 0); // Clear state
 
-                if (!Bot.Memory.InjectDll(bridgePath, "Init", bridgeArg))
+                if (!bot.Memory.InjectDll(bridgePath, "Init", bridgeArg))
                 {
                     AmeisenLogger.I.Log("WowLauncher", "Failed to inject AmeisenBotX.Bridge", LogLevel.Warning);
                     return false;
                 }
 
-                // Poll for IPC verification (BridgeEntry writes 1)
-                for (int i = 0; i < 40; i++)
+                // Poll for IPC verification with exponential backoff
+                for (int i = 0; i < 20; i++)
                 {
                     // Check for signal '1' from BridgeEntry
                     if (accessor.ReadInt32(0) == 1)
@@ -223,7 +218,7 @@ namespace AmeisenBotX.Core.Logic.Startup
                         AmeisenLogger.I.Log("WowLauncher", $"Bridge injected and verified via IPC ({ipcName})");
                         return true;
                     }
-                    Thread.Sleep(50);
+                    Thread.Sleep(10 + (i * 5)); // Backoff: 10ms, 15ms, 20ms...
                 }
 
                 AmeisenLogger.I.Log("WowLauncher", "Bridge injected but IPC verification timed out", LogLevel.Warning);
@@ -238,9 +233,9 @@ namespace AmeisenBotX.Core.Logic.Startup
 
         private void EnsureWindowVisible()
         {
-            if (Bot.Memory.Process.MainWindowHandle != nint.Zero)
+            if (bot.Memory.Process.MainWindowHandle != nint.Zero)
             {
-                Bot.Memory.ShowWindow(Bot.Memory.Process.MainWindowHandle);
+                bot.Memory.ShowWindow(bot.Memory.Process.MainWindowHandle);
             }
         }
 
@@ -264,7 +259,7 @@ namespace AmeisenBotX.Core.Logic.Startup
         {
             try
             {
-                string configWtfPath = Path.Combine(Directory.GetParent(Config.PathToWowExe).FullName, "wtf", "config.wtf");
+                string configWtfPath = Path.Combine(Directory.GetParent(config.PathToWowExe).FullName, "wtf", "config.wtf");
 
                 if (File.Exists(configWtfPath))
                 {
@@ -336,7 +331,7 @@ namespace AmeisenBotX.Core.Logic.Startup
         /// </summary>
         public BtStatus ChangeRealmlist()
         {
-            if (!Config.AutoChangeRealmlist)
+            if (!config.AutoChangeRealmlist)
             {
                 return BtStatus.Success;
             }
@@ -344,14 +339,14 @@ namespace AmeisenBotX.Core.Logic.Startup
             try
             {
                 AmeisenLogger.I.Log("WowLauncher", "Changing Realmlist");
-                string configWtfPath = Path.Combine(Directory.GetParent(Config.PathToWowExe).FullName, "wtf", "config.wtf");
+                string configWtfPath = Path.Combine(Directory.GetParent(config.PathToWowExe).FullName, "wtf", "config.wtf");
 
                 if (File.Exists(configWtfPath))
                 {
                     bool editedFile = false;
                     List<string> content = [.. File.ReadAllLines(configWtfPath)];
 
-                    if (!content.Any(e => e.Contains($"SET REALMLIST {Config.Realmlist}", StringComparison.OrdinalIgnoreCase)))
+                    if (!content.Any(e => e.Contains($"SET REALMLIST {config.Realmlist}", StringComparison.OrdinalIgnoreCase)))
                     {
                         bool found = false;
 
@@ -360,7 +355,7 @@ namespace AmeisenBotX.Core.Logic.Startup
                             if (content[i].Contains("SET REALMLIST", StringComparison.OrdinalIgnoreCase))
                             {
                                 editedFile = true;
-                                content[i] = $"SET REALMLIST {Config.Realmlist}";
+                                content[i] = $"SET REALMLIST {config.Realmlist}";
                                 found = true;
                                 break;
                             }
@@ -369,7 +364,7 @@ namespace AmeisenBotX.Core.Logic.Startup
                         if (!found)
                         {
                             editedFile = true;
-                            content.Add($"SET REALMLIST {Config.Realmlist}");
+                            content.Add($"SET REALMLIST {config.Realmlist}");
                         }
                     }
 

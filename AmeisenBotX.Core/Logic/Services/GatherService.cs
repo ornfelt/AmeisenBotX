@@ -224,6 +224,14 @@ namespace AmeisenBotX.Core.Logic.Services
                 return BtStatus.Ongoing;
             }
 
+            // Ensure we are fully stopped before interacting
+            // Interaction while moving causes the action to be cancelled immediately
+            if (Bot.Movement.CurrentSpeed > 0.1f)
+            {
+                Bot.Movement.SetMovementAction(MovementAction.None, Bot.Player.Position);
+                return BtStatus.Ongoing;
+            }
+
             // Interact
             Bot.Wow.InteractWithObject(CollectGobject);
 
