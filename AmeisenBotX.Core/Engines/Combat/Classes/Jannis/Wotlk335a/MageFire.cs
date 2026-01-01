@@ -7,6 +7,7 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 {
+    [CombatClassMetadata("[WotLK335a] Mage Fire", "Jannis")]
     public class MageFire : BasicCombatClass
     {
         public MageFire(AmeisenBotInterfaces bot) : base(bot)

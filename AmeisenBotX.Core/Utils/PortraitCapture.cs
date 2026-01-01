@@ -48,7 +48,10 @@ namespace AmeisenBotX.Core.Utils
             int len = Rng.Next(8, 12);
             Span<char> name = stackalloc char[len];
             for (int i = 0; i < len; i++)
+            {
                 name[i] = chars[Rng.Next(chars.Length)];
+            }
+
             return new string(name);
         }
 
@@ -130,25 +133,33 @@ namespace AmeisenBotX.Core.Utils
         public static Bitmap Capture(nint hwnd, int outputSize = PortraitSize)
         {
             if (hwnd == nint.Zero)
+            {
                 return null;
+            }
 
             try
             {
                 if (!GetClientRect(hwnd, out RECT clientRect))
+                {
                     return null;
+                }
 
                 POINT topLeft = new() { X = 0, Y = 0 };
                 if (!ClientToScreen(hwnd, ref topLeft))
+                {
                     return null;
+                }
 
                 int clientWidth = clientRect.Right - clientRect.Left;
                 int clientHeight = clientRect.Bottom - clientRect.Top;
 
                 if (clientWidth <= 0 || clientHeight <= 0)
+                {
                     return null;
+                }
 
                 // Calculate aspect ratio stretch factor
-                float horizontalStretch = ((float)clientWidth / clientHeight) / NativeAspectRatio;
+                float horizontalStretch = (float)clientWidth / clientHeight / NativeAspectRatio;
 
                 // Frame is ScreenPercentage of height, stretched horizontally
                 int captureHeight = Math.Max(16, (int)(clientHeight * ScreenPercentage));
@@ -197,7 +208,9 @@ namespace AmeisenBotX.Core.Utils
             int renderDelayMs = 100)
         {
             if (hwnd == nint.Zero || executeLua == null)
+            {
                 return null;
+            }
 
             try
             {
@@ -206,7 +219,9 @@ namespace AmeisenBotX.Core.Utils
 
                 // Wait for WoW to render the frame
                 if (renderDelayMs > 0)
+                {
                     System.Threading.Thread.Sleep(renderDelayMs);
+                }
 
                 // Capture
                 Bitmap portrait = Capture(hwnd, outputSize);

@@ -93,6 +93,19 @@ namespace AmeisenBotX.WowWotlk.Objects
         public BitVector32 NpcFlags => RawWowUnit.NpcFlags;
 
         public WowPowerType PowerType => (WowPowerType)RawWowUnit.PowerType;
+        
+        public WowQuestGiverStatus QuestGiverStatus
+        {
+            get
+            {
+                // Offset 0xBC is commonly where the client caches Quest Status for units in 3.3.5a
+                if (Memory.Read(nint.Add(BaseAddress, 0xBC), out byte status))
+                {
+                   return (WowQuestGiverStatus)status;
+                }
+                return WowQuestGiverStatus.None;
+            }
+        }
 
         public WowRace Race => (WowRace)RawWowUnit.Race;
 

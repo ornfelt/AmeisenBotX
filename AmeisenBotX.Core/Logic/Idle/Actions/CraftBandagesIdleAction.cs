@@ -1,5 +1,4 @@
 using AmeisenBotX.Common.Utils;
-using AmeisenBotX.Core.Managers.Character.Inventory.Objects;
 using System;
 using System.Linq;
 
@@ -53,7 +52,7 @@ namespace AmeisenBotX.Core.Logic.Idle.Actions
             }
 
             // Find best craftable bandage
-            foreach (var (recipe, cloth, count) in Recipes)
+            foreach ((string recipe, string cloth, int count) in Recipes)
             {
                 if (Bot.Character.SpellBook.IsSpellKnown(recipe))
                 {
@@ -78,13 +77,18 @@ namespace AmeisenBotX.Core.Logic.Idle.Actions
         public void Execute()
         {
             if (string.IsNullOrEmpty(RecipeToCraft))
+            {
                 return;
+            }
 
             if (CraftThrottle.Run())
             {
                 // Simple verify we still can content
-                if (!Bot.Character.SpellBook.IsSpellKnown(RecipeToCraft)) return;
-                
+                if (!Bot.Character.SpellBook.IsSpellKnown(RecipeToCraft))
+                {
+                    return;
+                }
+
                 // Cast the spell (this usually crafts one item)
                 Bot.Wow.CastSpell(RecipeToCraft);
             }

@@ -26,7 +26,7 @@ namespace AmeisenBotX.WowWotlk.Objects
                     pos += vec;
                 }
 
-                CenterPartyPosition = pos / Partymembers.Count();
+                CenterPartyPosition = Partymembers.Any() ? pos / Partymembers.Count() : Vector3.Zero;
 
                 PartyPets = wowObjects.OfType<IWowUnit>().Where(e => PartymemberGuids.Contains(e.SummonedByGuid));
                 PartyPetGuids = PartyPets.Select(e => e.Guid);

@@ -1,0 +1,54 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    
+    <!-- ============================================
+         AmeisenBotX Unified Theme - Spacing
+         ============================================ -->
+    
+    <!-- Spacing Values (Thickness for margins/padding) -->
+    <Thickness x:Key="SpacingNone">0</Thickness>
+    <Thickness x:Key="SpacingXS">2</Thickness>
+    <Thickness x:Key="SpacingS">4</Thickness>
+    <Thickness x:Key="SpacingM">8</Thickness>
+    <Thickness x:Key="SpacingL">12</Thickness>
+    <Thickness x:Key="SpacingXL">16</Thickness>
+    <Thickness x:Key="SpacingXXL">24</Thickness>
+    
+    <!-- Horizontal-only Spacing -->
+    <Thickness x:Key="SpacingHorizontalS">4,0</Thickness>
+    <Thickness x:Key="SpacingHorizontalM">8,0</Thickness>
+    <Thickness x:Key="SpacingHorizontalL">12,0</Thickness>
+    
+    <!-- Vertical-only Spacing -->
+    <Thickness x:Key="SpacingVerticalS">0,4</Thickness>
+    <Thickness x:Key="SpacingVerticalM">0,8</Thickness>
+    <Thickness x:Key="SpacingVerticalL">0,12</Thickness>
+    
+    <!-- Corner Radius -->
+    <CornerRadius x:Key="RadiusNone">0</CornerRadius>
+    <CornerRadius x:Key="RadiusS">2</CornerRadius>
+    <CornerRadius x:Key="RadiusM">4</CornerRadius>
+    <CornerRadius x:Key="RadiusL">6</CornerRadius>
+    <CornerRadius x:Key="RadiusXL">8</CornerRadius>
+    <CornerRadius x:Key="RadiusRound">100</CornerRadius>
+    
+    <!-- Border Thickness -->
+    <Thickness x:Key="BorderThin">1</Thickness>
+    <Thickness x:Key="BorderMedium">2</Thickness>
+    <Thickness x:Key="BorderThick">3</Thickness>
+    
+    <!-- Common Sizes -->
+    <sys:Double x:Key="IconSizeS">12</sys:Double>
+    <sys:Double x:Key="IconSizeM">16</sys:Double>
+    <sys:Double x:Key="IconSizeL">24</sys:Double>
+    <sys:Double x:Key="IconSizeXL">32</sys:Double>
+    
+    <sys:Double x:Key="ButtonHeightS">24</sys:Double>
+    <sys:Double x:Key="ButtonHeightM">32</sys:Double>
+    <sys:Double x:Key="ButtonHeightL">40</sys:Double>
+    
+    <sys:Double x:Key="InputHeight">24</sys:Double>
+    <sys:Double x:Key="TitleBarHeight">28</sys:Double>
+    
+</ResourceDictionary>

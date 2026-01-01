@@ -1,7 +1,6 @@
-using System;
+using AmeisenBotX.Core;
 using System.ComponentModel;
 using System.Reflection;
-using AmeisenBotX.Core;
 
 namespace AmeisenBotX.ViewModels.Config
 {
@@ -46,19 +45,19 @@ namespace AmeisenBotX.ViewModels.Config
 
         private static string GetDisplayName(PropertyInfo property)
         {
-            var attr = property.GetCustomAttribute<DisplayNameAttribute>();
+            DisplayNameAttribute attr = property.GetCustomAttribute<DisplayNameAttribute>();
             return attr != null ? attr.DisplayName : property.Name;
         }
 
         private static string GetDescription(PropertyInfo property)
         {
-            var attr = property.GetCustomAttribute<DescriptionAttribute>();
+            DescriptionAttribute attr = property.GetCustomAttribute<DescriptionAttribute>();
             return attr != null ? attr.Description : string.Empty;
         }
 
         private static string GetCategory(PropertyInfo property)
         {
-            var attr = property.GetCustomAttribute<CategoryAttribute>();
+            CategoryAttribute attr = property.GetCustomAttribute<CategoryAttribute>();
             return attr != null ? attr.Category : "General";
         }
     }

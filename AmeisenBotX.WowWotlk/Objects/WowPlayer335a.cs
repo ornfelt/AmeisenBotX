@@ -12,6 +12,18 @@ namespace AmeisenBotX.WowWotlk.Objects
     [Serializable]
     public class WowPlayer335a : WowUnit335a, IWowPlayer
     {
+        // Spell IDs
+        private const int GhostSpellId = 8326;
+
+        // Player state flag offsets
+        private const int SwimFlagsOffset = 0xA30;
+        private const int FlyFlagsPointerOffset = 0xD8;
+        private const int FlyFlagsOffset = 0x44;
+
+        // Player state flag masks
+        private const uint SwimmingFlag = 0x200000;
+        private const uint FlyingFlag = 0x2000000;
+
         private VisibleItemEnchantment[] itemEnchantments;
 
         private QuestlogEntry[] questlogEntries;
@@ -164,15 +176,15 @@ namespace AmeisenBotX.WowWotlk.Objects
                 ];
             }
 
-            if (Memory.Read(nint.Add(BaseAddress, 0xA30), out uint swimFlags))
+            if (Memory.Read(nint.Add(BaseAddress, SwimFlagsOffset), out uint swimFlags))
             {
-                IsSwimming = (swimFlags & 0x200000) != 0;
+                IsSwimming = (swimFlags & SwimmingFlag) != 0;
             }
 
-            if (Memory.Read(nint.Add(BaseAddress, 0xD8), out nint flyFlagsPointer)
-                && Memory.Read(nint.Add(flyFlagsPointer, 0x44), out uint flyFlags))
+            if (Memory.Read(nint.Add(BaseAddress, FlyFlagsPointerOffset), out nint flyFlagsPointer)
+                && Memory.Read(nint.Add(flyFlagsPointer, FlyFlagsOffset), out uint flyFlags))
             {
-                IsFlying = (flyFlags & 0x2000000) != 0;
+                IsFlying = (flyFlags & FlyingFlag) != 0;
             }
 
             if (Memory.Read(Memory.Offsets.BreathTimer, out int breathTimer))
@@ -185,7 +197,7 @@ namespace AmeisenBotX.WowWotlk.Objects
                 ComboPoints = comboPoints;
             }
 
-            IsGhost = HasBuffById(8326);
+            IsGhost = HasBuffById(GhostSpellId);
         }
     }
 }

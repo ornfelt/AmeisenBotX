@@ -118,10 +118,12 @@ namespace AmeisenBotX.Core.Logic.Routines
             if (IsProtectedItem(bot, config, item))
             {
                 if (CriticalItemNames.Contains(item.Name) || CriticalItemIds.Contains(item.Id))
+                {
                     return 20_000; // Super Critical (Heartshtone always #1)
-                
+                }
+
                 // Protected items sorted by Quality -> Name
-                return 10_000 + (item.ItemQuality * 1000) + (item.ItemLevel);
+                return 10_000 + (item.ItemQuality * 1000) + item.ItemLevel;
             }
 
             double score = 0;
@@ -135,23 +137,39 @@ namespace AmeisenBotX.Core.Logic.Routines
             // Range 0-400
             string type = item.Type?.ToLowerInvariant() ?? "";
             string sub = item.Subtype?.ToLowerInvariant() ?? "";
-            
+
             if (type is "armor" or "weapon")
+            {
                 score += 400;
+            }
             else if (type is "container" or "bag")
+            {
                 score += 350;
+            }
             else if (type is "recipe")
+            {
                 score += 300;
+            }
             else if (type is "gem" || sub.Contains("enchant"))
+            {
                 score += 250;
+            }
             else if (type is "trade goods" or "tradeskill")
+            {
                 score += 200;
-            else if (type is "quest") 
+            }
+            else if (type is "quest")
+            {
                 score += 150;
+            }
             else if (type is "consumable")
+            {
                 score += 100;
+            }
             else if (type is "key" or "miscellaneous")
+            {
                 score += 50;
+            }
 
             // 4. Item Level (Power differentiation)
             // Adds 0-300 points usually.
@@ -168,7 +186,7 @@ namespace AmeisenBotX.Core.Logic.Routines
             // Adds 0-1 point.
             if (item.MaxStack > 1)
             {
-                score += ((double)item.Count / item.MaxStack);
+                score += (double)item.Count / item.MaxStack;
             }
 
             return score;

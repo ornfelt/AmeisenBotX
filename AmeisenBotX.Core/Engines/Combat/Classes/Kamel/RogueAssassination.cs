@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
 {
+    [CombatClassMetadata("Rogue Assassination", "Lukas")]
     internal class RogueAssassination : BasicKamelClass
     {
         public RogueAssassination(AmeisenBotInterfaces bot) : base()

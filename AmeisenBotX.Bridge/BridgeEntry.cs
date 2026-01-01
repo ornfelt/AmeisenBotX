@@ -28,14 +28,16 @@ public static partial class BridgeEntry
             MessageBeep(0);
 
             // 1. Read the IPC name from the pointer
-            var initData = Marshal.PtrToStringAnsi(parameter);
+            string? initData = Marshal.PtrToStringAnsi(parameter);
             if (string.IsNullOrEmpty(initData))
+            {
                 return -1;
+            }
 
             // Format: "IpcName|BotName"
-            var parts = initData.Split('|');
-            var ipcName = parts[0];
-            var botName = parts.Length > 1 ? parts[1] : "UnknownBot";
+            string[] parts = initData.Split('|');
+            string ipcName = parts[0];
+            string botName = parts.Length > 1 ? parts[1] : "UnknownBot";
 
             // 2. Initialize Logger
             BridgeLogger.Init(botName);
@@ -66,10 +68,10 @@ public static partial class BridgeEntry
     {
         try
         {
-            var ntPath = NtApi.ToNtPath(signalName);
-            
+            string ntPath = NtApi.ToNtPath(signalName);
+
             // Open the signal section created by the injector
-            var status = NtApi.OpenSection(ntPath, out var sectionHandle);
+            int status = NtApi.OpenSection(ntPath, out nint sectionHandle);
             if (!NtApi.NT_SUCCESS(status))
             {
                 BridgeLogger.Log($"[BridgeEntry] Failed to open signal section: 0x{status:X}");
@@ -79,7 +81,7 @@ public static partial class BridgeEntry
             try
             {
                 // Map it
-                status = NtApi.MapViewOfSection(sectionHandle, 4, out var baseAddress);
+                status = NtApi.MapViewOfSection(sectionHandle, 4, out nint baseAddress);
                 if (!NtApi.NT_SUCCESS(status))
                 {
                     BridgeLogger.Log($"[BridgeEntry] Failed to map signal section: 0x{status:X}");

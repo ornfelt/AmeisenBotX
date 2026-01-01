@@ -2,6 +2,7 @@ using AmeisenBotX.Common.Math;
 using AmeisenBotX.Common.Storage;
 using AmeisenBotX.Common.Utils;
 using AmeisenBotX.Core.Engines.AI;
+using AmeisenBotX.Core.Engines.Autopilot;
 using AmeisenBotX.Core.Engines.Battleground;
 using AmeisenBotX.Core.Engines.Combat.Classes;
 using AmeisenBotX.Core.Engines.Dungeon;
@@ -40,6 +41,7 @@ namespace AmeisenBotX.Core
     {
         #region Engine References
 
+        public IAutopilotEngine Autopilot { get; set; }
         public IBattlegroundEngine Battleground { get; set; }
         public IDungeonEngine Dungeon { get; set; }
         public IGrindingEngine Grinding { get; set; }
@@ -362,6 +364,22 @@ namespace AmeisenBotX.Core
         {
             obj = guid == 0 ? default : GetWowObjectByGuid<T>(guid);
             return obj != null;
+        }
+
+        /// <summary>
+        /// Checks if the unit is a quest objective target (for Kill/Collect quests).
+        /// Used by target selection to prioritize quest mobs like WoW's UI does.
+        /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public bool IsQuestTarget(IWowUnit unit)
+        {
+            return Autopilot?.QuestPulse?.IsQuestTarget(unit) ?? false;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public float GetQuestTargetWeight(IWowUnit unit)
+        {
+            return Autopilot?.QuestPulse?.GetQuestTargetWeight(unit) ?? 0f;
         }
 
         #endregion

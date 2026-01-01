@@ -742,8 +742,21 @@ namespace AmeisenBotX.Memory
 #if DEBUG
             if (!Initialized) { throw new InvalidOperationException("call Init() before you do anything with this class"); }
 #endif
+            if (Process == null)
+            {
+                return;
+            }
+
             if (Process.MainWindowHandle != nint.Zero && mainWindowHandle != nint.Zero)
             {
+                // Optimization: If already parented, just resize and return
+                if (GetParent(Process.MainWindowHandle) == mainWindowHandle)
+                {
+                    ResizeParentWindow(offsetX, offsetY, width, height);
+                    return;
+                }
+
+                // Hide window immediately to prevent cursor flickering during parenting
                 // Hide window immediately to prevent cursor flickering during parenting
                 Win32Imports.ShowWindow(Process.MainWindowHandle, SW_HIDE);
 

@@ -8,6 +8,7 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 {
+    [CombatClassMetadata("[WotLK335a] Shaman Elemental", "Jannis")]
     public class ShamanElemental : BasicCombatClass
     {
         public ShamanElemental(AmeisenBotInterfaces bot) : base(bot)

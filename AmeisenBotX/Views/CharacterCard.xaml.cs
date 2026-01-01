@@ -48,6 +48,21 @@ namespace AmeisenBotX.Views
         {
             Profile = profile;
 
+            // Set Watermark (Folder Name)
+            try
+            {
+                if (profile.IsNewConfig)
+                {
+                    ProfileWatermark.Visibility = Visibility.Collapsed;
+                }
+                else
+                {
+                    ProfileWatermark.Visibility = Visibility.Visible;
+                    ProfileWatermark.Text = new DirectoryInfo(Path.GetDirectoryName(profile.ConfigPath)).Name.ToUpper();
+                }
+            }
+            catch { ProfileWatermark.Text = ""; }
+
             // Hide context menu for New Config card
             if (profile.IsNewConfig)
             {
@@ -64,14 +79,14 @@ namespace AmeisenBotX.Views
                 LevelBadge.Visibility = Visibility.Collapsed;
                 StatsPanel.Visibility = Visibility.Collapsed;
                 LastPlayedText.Visibility = Visibility.Collapsed;
-                FactionIndicator.Visibility = Visibility.Collapsed;
+                FactionSpotlight.Visibility = Visibility.Collapsed;
             }
             else
             {
                 if (profile.HasStats)
                 {
                     ProfileName.Text = profile.Stats.CharacterName;
-                    
+
                     // Show level badge
                     LevelBadge.Visibility = Visibility.Visible;
                     LevelText.Text = profile.Stats.Level.ToString();
@@ -79,7 +94,7 @@ namespace AmeisenBotX.Views
                     // Show class with WoW class color
                     string classText = profile.Stats.Class ?? "";
                     string zoneText = profile.Stats.Zone ?? "";
-                    
+
                     if (!string.IsNullOrEmpty(classText))
                     {
                         ClassText.Text = classText;
@@ -108,6 +123,15 @@ namespace AmeisenBotX.Views
 
                     // Show faction indicator
                     ApplyFactionStyle(profile.Stats.Faction);
+
+                    // Override portrait ring with Class Color if available
+                    if (!string.IsNullOrEmpty(classText) && Enum.TryParse<WowClass>(classText, true, out WowClass cClass))
+                    {
+                        if (WowColors.GetClassPrimaryBrush(cClass) is SolidColorBrush cBrush)
+                        {
+                            SetPortraitRingColor(cBrush.Color);
+                        }
+                    }
                 }
                 else
                 {
@@ -115,7 +139,7 @@ namespace AmeisenBotX.Views
                     LevelBadge.Visibility = Visibility.Collapsed;
                     StatsPanel.Visibility = Visibility.Collapsed;
                     LastPlayedText.Visibility = Visibility.Collapsed;
-                    FactionIndicator.Visibility = Visibility.Collapsed;
+                    FactionSpotlight.Visibility = Visibility.Collapsed;
                 }
 
                 // Handle portrait
@@ -142,20 +166,30 @@ namespace AmeisenBotX.Views
         /// </summary>
         private void ApplyFactionStyle(string faction)
         {
-            if (string.IsNullOrEmpty(faction)) return;
+            if (string.IsNullOrEmpty(faction))
+            {
+                return;
+            }
 
             Color factionColor = faction == "Alliance" ? AllianceColor : HordeColor;
 
-            // Show faction indicator bar at top
-            FactionIndicator.Background = new SolidColorBrush(factionColor);
-            FactionIndicator.Visibility = Visibility.Visible;
+            // Show faction spotlight at bottom
+            // Use same color for start and end, but fade opacity to 0
+            FactionSpotlightStart.Color = Color.FromArgb(60, factionColor.R, factionColor.G, factionColor.B);
+            FactionSpotlightEnd.Color = Color.FromArgb(0, factionColor.R, factionColor.G, factionColor.B);
+            FactionSpotlight.Visibility = Visibility.Visible;
 
             // Tint portrait border with faction color
-            PortraitGradient1.Color = factionColor;
+            SetPortraitRingColor(factionColor);
+        }
+
+        private void SetPortraitRingColor(Color color)
+        {
+            PortraitGradient1.Color = color;
             PortraitGradient2.Color = Color.FromRgb(
-                (byte)(factionColor.R * 0.7),
-                (byte)(factionColor.G * 0.7),
-                (byte)(factionColor.B * 0.7));
+                (byte)(color.R * 0.7),
+                (byte)(color.G * 0.7),
+                (byte)(color.B * 0.7));
         }
 
         /// <summary>
@@ -163,11 +197,9 @@ namespace AmeisenBotX.Views
         /// </summary>
         private static Brush GetClassBrush(string className)
         {
-            if (Enum.TryParse<WowClass>(className, true, out var wowClass))
-            {
-                return WowColors.GetClassPrimaryBrush(wowClass);
-            }
-            return new SolidColorBrush(Color.FromRgb(136, 136, 136));
+            return Enum.TryParse<WowClass>(className, true, out WowClass wowClass)
+                ? WowColors.GetClassPrimaryBrush(wowClass)
+                : new SolidColorBrush(Color.FromRgb(136, 136, 136));
         }
 
         private void LoadPortrait(string path)

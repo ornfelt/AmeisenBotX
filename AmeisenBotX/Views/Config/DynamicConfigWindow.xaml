@@ -4,30 +4,16 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="clr-namespace:AmeisenBotX.ViewModels.Config"
+        xmlns:local="clr-namespace:AmeisenBotX.Views.Config"
+        xmlns:themes="clr-namespace:AmeisenBotX.Themes"
         mc:Ignorable="d"
         Title="AmeisenBotX Configuration" Height="600" Width="400" MinWidth="400"
-        WindowStyle="None" AllowsTransparency="True" BorderThickness="1" ResizeMode="CanResizeWithGrip" 
-        MouseLeftButtonDown="Window_MouseLeftButtonDown"
-        FontFamily="Bahnschrift Light" FontSize="14">
-    
-    <Window.BorderBrush>
-        <SolidColorBrush Color="{DynamicResource DarkAccent1}" />
-    </Window.BorderBrush>
-    
-    <Window.Background>
-        <SolidColorBrush Color="{DynamicResource DarkBackground}" />
-    </Window.Background>
-
-    <WindowChrome.WindowChrome>
-        <WindowChrome CaptionHeight="0" ResizeBorderThickness="5" />
-    </WindowChrome.WindowChrome>
+        ResizeMode="CanResizeWithGrip" 
+        Style="{DynamicResource StandardWindowStyle}"
+        themes:WindowAssist.Icon="⚙️">
 
     <Window.Resources>
-        <!-- Local Brushes Mapped -->
-        <SolidColorBrush x:Key="DarkForegroundBrush" Color="{DynamicResource DarkForeground}" />
-        <SolidColorBrush x:Key="DarkBackgroundBrush" Color="{DynamicResource DarkBackground}" />
-        <SolidColorBrush x:Key="DarkBorderBrush" Color="{DynamicResource DarkBorder}" />
-        <SolidColorBrush x:Key="DarkAccent1Brush" Color="{DynamicResource DarkAccent1}" />
+        <!-- Row hover effect brush -->
         <SolidColorBrush x:Key="RowHoverBrush" Color="#1FFFFFFF" />
 
         <!-- Expander Toggle Button Template -->
@@ -39,13 +25,13 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <Path x:Name="arrow" Data="M 1,1.5 L 4.5,5 L 8,1.5" HorizontalAlignment="Center" VerticalAlignment="Center" 
-                          Stroke="{StaticResource DarkAccent1Brush}" StrokeThickness="2" Margin="10,0,0,0" RenderTransformOrigin="0.5,0.5">
+                          Stroke="{DynamicResource AccentBrush}" StrokeThickness="2" Margin="10,0,0,0" RenderTransformOrigin="0.5,0.5">
                         <Path.RenderTransform>
                             <RotateTransform Angle="-90"/>
                         </Path.RenderTransform>
                     </Path>
                     <ContentPresenter Grid.Column="1" Margin="10,5,0,5" HorizontalAlignment="Left" VerticalAlignment="Center"
-                                      TextBlock.Foreground="White" TextBlock.FontWeight="Bold"/>
+                                      TextBlock.Foreground="{DynamicResource TextPrimaryBrush}" TextBlock.FontWeight="Bold"/>
                 </Grid>
             </Border>
             <ControlTemplate.Triggers>
@@ -64,7 +50,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Expander}">
-                        <Border BorderBrush="{StaticResource DarkBorderBrush}" BorderThickness="0,0,0,1">
+                        <Border BorderBrush="{DynamicResource BorderSubtleBrush}" BorderThickness="0,0,0,1">
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
@@ -74,9 +60,9 @@
                                 <ToggleButton IsChecked="{Binding IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
                                               Template="{StaticResource ExpanderToggleButton}"
                                               Content="{TemplateBinding Header}"
-                                              Background="#FF2A2A2A" BorderBrush="{StaticResource DarkBorderBrush}" BorderThickness="0,1,0,1"/>
+                                              Background="{DynamicResource BackgroundElevatedBrush}" BorderBrush="{DynamicResource BorderSubtleBrush}" BorderThickness="0,1,0,1"/>
                                 
-                                <Border Name="ContentSite" Grid.Row="1" Background="{StaticResource DarkBackgroundBrush}" Padding="10,5">
+                                <Border Name="ContentSite" Grid.Row="1" Background="{DynamicResource BackgroundBrush}" Padding="10,5">
                                     <ContentPresenter />
                                 </Border>
                             </Grid>
@@ -93,7 +79,7 @@
 
         <!-- Common Style for Property Rows (Hover Effect) -->
         <Style x:Key="PropertyRowBorderStyle" TargetType="{x:Type Border}">
-            <Setter Property="BorderBrush" Value="#33FFFFFF"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource BorderSubtleBrush}"/>
             <Setter Property="BorderThickness" Value="0,1,0,0"/>
             <Setter Property="Padding" Value="5"/>
             <Setter Property="Margin" Value="0,-1,0,0"/>
@@ -111,8 +97,7 @@
                 <Grid>
                    <CheckBox IsChecked="{Binding Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                           Content="{Binding Name}" 
-                          Style="{DynamicResource CheckBoxStyleDark}" 
-                          Foreground="{StaticResource DarkForegroundBrush}"
+                          Foreground="{DynamicResource TextPrimaryBrush}"
                           Margin="0" FontFamily="Bahnschrift Light" VerticalAlignment="Center"/> 
                 </Grid>
             </Border>
@@ -126,13 +111,33 @@
                         <ColumnDefinition Width="2*"/>
                         <ColumnDefinition Width="3*"/>
                     </Grid.ColumnDefinitions>
-                    <Label Content="{Binding Name}" Foreground="{StaticResource DarkForegroundBrush}" Padding="0" FontFamily="Bahnschrift Light" VerticalAlignment="Center"/>
+                    <Label Content="{Binding Name}" Foreground="{DynamicResource TextPrimaryBrush}" Padding="0" FontFamily="Bahnschrift Light" VerticalAlignment="Center"/>
                     <TextBox Grid.Column="1" Text="{Binding Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                             Style="{DynamicResource TextBoxStyleDark}"
-                             Foreground="{StaticResource DarkForegroundBrush}"
-                             BorderBrush="{StaticResource DarkBorderBrush}"
-                             Background="{StaticResource DarkBackgroundBrush}"
+                             Foreground="{DynamicResource TextPrimaryBrush}"
+                             BorderBrush="{DynamicResource BorderSubtleBrush}"
+                             Background="{DynamicResource BackgroundBrush}"
                              FontFamily="Bahnschrift Light" Height="24" VerticalContentAlignment="Center"/>
+                </Grid>
+            </Border>
+        </DataTemplate>
+
+        <!-- Template for Password Properties -->
+        <DataTemplate DataType="{x:Type vm:PasswordConfigProperty}">
+             <Border Style="{StaticResource PropertyRowBorderStyle}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="3*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="{Binding Name}" Foreground="{DynamicResource TextPrimaryBrush}" Padding="0" FontFamily="Bahnschrift Light" VerticalAlignment="Center"/>
+                    <PasswordBox Grid.Column="1" 
+                                 local:PasswordBoxHelper.Attach="True"
+                                 local:PasswordBoxHelper.Password="{Binding Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                 Foreground="{DynamicResource TextPrimaryBrush}"
+                                 Background="{DynamicResource BackgroundBrush}"
+                                 BorderBrush="{DynamicResource BorderSubtleBrush}"
+                                 BorderThickness="1"
+                                 FontFamily="Bahnschrift Light" Height="24" VerticalContentAlignment="Center"/>
                 </Grid>
             </Border>
         </DataTemplate>
@@ -145,14 +150,13 @@
                         <ColumnDefinition Width="2*"/>
                         <ColumnDefinition Width="3*"/>
                     </Grid.ColumnDefinitions>
-                    <Label Content="{Binding Name}" Foreground="{StaticResource DarkForegroundBrush}" Padding="0" FontFamily="Bahnschrift Light" VerticalAlignment="Center"/>
+                    <Label Content="{Binding Name}" Foreground="{DynamicResource TextPrimaryBrush}" Padding="0" FontFamily="Bahnschrift Light" VerticalAlignment="Center"/>
                     
                     <!-- Standard Text Input -->
                     <TextBox x:Name="valBox" Grid.Column="1" Text="{Binding Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                             Style="{DynamicResource TextBoxStyleDark}"
-                             Foreground="{StaticResource DarkForegroundBrush}"
-                             BorderBrush="{StaticResource DarkBorderBrush}" 
-                             Background="{StaticResource DarkBackgroundBrush}"
+                             Foreground="{DynamicResource TextPrimaryBrush}"
+                             BorderBrush="{DynamicResource BorderSubtleBrush}" 
+                             Background="{DynamicResource BackgroundBrush}"
                              FontFamily="Bahnschrift Light" Height="24" VerticalContentAlignment="Center"/>
 
                     <!-- Slider Input -->
@@ -161,14 +165,13 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="50"/>
                         </Grid.ColumnDefinitions>
-                        <Slider Value="{Binding Value}" Minimum="{Binding Minimum}" Maximum="{Binding Maximum}" 
-                                Style="{DynamicResource SliderStyleDark}" VerticalAlignment="Center"/>
+                        <Slider Value="{Binding Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Minimum="{Binding Minimum}" Maximum="{Binding Maximum}" 
+                                VerticalAlignment="Center"/>
                         <TextBox Grid.Column="1" Text="{Binding Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                                  Margin="5,0,0,0"
-                                 Style="{DynamicResource TextBoxStyleDark}"
-                                 Foreground="{StaticResource DarkForegroundBrush}"
-                                 BorderBrush="{StaticResource DarkBorderBrush}" 
-                                 Background="{StaticResource DarkBackgroundBrush}"
+                                 Foreground="{DynamicResource TextPrimaryBrush}"
+                                 BorderBrush="{DynamicResource BorderSubtleBrush}" 
+                                 Background="{DynamicResource BackgroundBrush}"
                                  FontFamily="Bahnschrift Light" Height="24" VerticalContentAlignment="Center"/>
                     </Grid>
                 </Grid>
@@ -189,13 +192,12 @@
                         <ColumnDefinition Width="2*"/>
                         <ColumnDefinition Width="3*"/>
                     </Grid.ColumnDefinitions>
-                    <Label Content="{Binding Name}" Foreground="{StaticResource DarkForegroundBrush}" Padding="0" FontFamily="Bahnschrift Light" VerticalAlignment="Center"/>
+                    <Label Content="{Binding Name}" Foreground="{DynamicResource TextPrimaryBrush}" Padding="0" FontFamily="Bahnschrift Light" VerticalAlignment="Center"/>
                     
                     <TextBox x:Name="valBox" Grid.Column="1" Text="{Binding Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                             Style="{DynamicResource TextBoxStyleDark}"
-                             Foreground="{StaticResource DarkForegroundBrush}"
-                             BorderBrush="{StaticResource DarkBorderBrush}" 
-                             Background="{StaticResource DarkBackgroundBrush}"
+                             Foreground="{DynamicResource TextPrimaryBrush}"
+                             BorderBrush="{DynamicResource BorderSubtleBrush}" 
+                             Background="{DynamicResource BackgroundBrush}"
                              FontFamily="Bahnschrift Light" Height="24" VerticalContentAlignment="Center"/>
 
                     <Grid x:Name="sliderGrid" Grid.Column="1" Visibility="Collapsed">
@@ -203,14 +205,13 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="50"/>
                         </Grid.ColumnDefinitions>
-                        <Slider Value="{Binding Value}" Minimum="{Binding Minimum}" Maximum="{Binding Maximum}" 
-                                Style="{DynamicResource SliderStyleDark}" VerticalAlignment="Center"/>
+                        <Slider Value="{Binding Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Minimum="{Binding Minimum}" Maximum="{Binding Maximum}" 
+                                VerticalAlignment="Center"/>
                         <TextBox Grid.Column="1" Text="{Binding Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                                  Margin="5,0,0,0"
-                                 Style="{DynamicResource TextBoxStyleDark}"
-                                 Foreground="{StaticResource DarkForegroundBrush}"
-                                 BorderBrush="{StaticResource DarkBorderBrush}" 
-                                 Background="{StaticResource DarkBackgroundBrush}"
+                                 Foreground="{DynamicResource TextPrimaryBrush}"
+                                 BorderBrush="{DynamicResource BorderSubtleBrush}" 
+                                 Background="{DynamicResource BackgroundBrush}"
                                  FontFamily="Bahnschrift Light" Height="24" VerticalContentAlignment="Center"/>
                     </Grid>
                 </Grid>
@@ -230,13 +231,12 @@
                         <ColumnDefinition Width="2*"/>
                         <ColumnDefinition Width="3*"/>
                     </Grid.ColumnDefinitions>
-                    <Label Content="{Binding Name}" Foreground="{StaticResource DarkForegroundBrush}" Padding="0" FontFamily="Bahnschrift Light" VerticalAlignment="Center"/>
+                    <Label Content="{Binding Name}" Foreground="{DynamicResource TextPrimaryBrush}" Padding="0" FontFamily="Bahnschrift Light" VerticalAlignment="Center"/>
                     
                     <TextBox x:Name="valBox" Grid.Column="1" Text="{Binding Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                             Style="{DynamicResource TextBoxStyleDark}"
-                             Foreground="{StaticResource DarkForegroundBrush}"
-                             BorderBrush="{StaticResource DarkBorderBrush}" 
-                             Background="{StaticResource DarkBackgroundBrush}"
+                             Foreground="{DynamicResource TextPrimaryBrush}"
+                             BorderBrush="{DynamicResource BorderSubtleBrush}" 
+                             Background="{DynamicResource BackgroundBrush}"
                              FontFamily="Bahnschrift Light" Height="24" VerticalContentAlignment="Center"/>
 
                     <Grid x:Name="sliderGrid" Grid.Column="1" Visibility="Collapsed">
@@ -244,14 +244,13 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="50"/>
                         </Grid.ColumnDefinitions>
-                        <Slider Value="{Binding Value}" Minimum="{Binding Minimum}" Maximum="{Binding Maximum}" 
-                                Style="{DynamicResource SliderStyleDark}" VerticalAlignment="Center"/>
+                        <Slider Value="{Binding Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Minimum="{Binding Minimum}" Maximum="{Binding Maximum}" 
+                                VerticalAlignment="Center"/>
                         <TextBox Grid.Column="1" Text="{Binding Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                                  Margin="5,0,0,0"
-                                 Style="{DynamicResource TextBoxStyleDark}"
-                                 Foreground="{StaticResource DarkForegroundBrush}"
-                                 BorderBrush="{StaticResource DarkBorderBrush}" 
-                                 Background="{StaticResource DarkBackgroundBrush}"
+                                 Foreground="{DynamicResource TextPrimaryBrush}"
+                                 BorderBrush="{DynamicResource BorderSubtleBrush}" 
+                                 Background="{DynamicResource BackgroundBrush}"
                                  FontFamily="Bahnschrift Light" Height="24" VerticalContentAlignment="Center"/>
                     </Grid>
                 </Grid>
@@ -272,12 +271,11 @@
                         <ColumnDefinition Width="2*"/>
                         <ColumnDefinition Width="3*"/>
                     </Grid.ColumnDefinitions>
-                    <Label Content="{Binding Name}" Foreground="{StaticResource DarkForegroundBrush}" Padding="0" FontFamily="Bahnschrift Light" VerticalAlignment="Center"/>
+                    <Label Content="{Binding Name}" Foreground="{DynamicResource TextPrimaryBrush}" Padding="0" FontFamily="Bahnschrift Light" VerticalAlignment="Center"/>
                     <ComboBox Grid.Column="1" ItemsSource="{Binding Options}" SelectedItem="{Binding Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                              Style="{DynamicResource ComboBoxStyleDark}"
-                              Foreground="{StaticResource DarkForegroundBrush}"
-                              BorderBrush="{StaticResource DarkBorderBrush}"
-                              Background="{StaticResource DarkBackgroundBrush}"
+                              Foreground="{DynamicResource TextPrimaryBrush}"
+                              BorderBrush="{DynamicResource BorderSubtleBrush}"
+                              Background="{DynamicResource BackgroundBrush}"
                               FontFamily="Bahnschrift Light" Height="24"/>
                 </Grid>
             </Border>
@@ -292,19 +290,80 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
-                    <Label Content="{Binding Name}" Foreground="{StaticResource DarkForegroundBrush}" Padding="0" FontFamily="Bahnschrift Light" VerticalAlignment="Center"/>
+                    <Label Content="{Binding Name}" Foreground="{DynamicResource TextPrimaryBrush}" Padding="0" FontFamily="Bahnschrift Light" VerticalAlignment="Center"/>
                     <TextBox Grid.Column="1" Text="{Binding Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                             Style="{DynamicResource TextBoxStyleDark}"
-                             Foreground="{StaticResource DarkForegroundBrush}"
-                             BorderBrush="{StaticResource DarkBorderBrush}"
-                             Background="{StaticResource DarkBackgroundBrush}"
+                             Foreground="{DynamicResource TextPrimaryBrush}"
+                             BorderBrush="{DynamicResource BorderSubtleBrush}"
+                             Background="{DynamicResource BackgroundBrush}"
                              VerticalAlignment="Center" Height="24" VerticalContentAlignment="Center" FontFamily="Bahnschrift Light"/>
-                    <Button Grid.Column="2" Command="{Binding BrowseCommand}" Content="..." Width="28" Margin="5,0,0,0" Height="24"
-                            Style="{DynamicResource ButtonStyleDark}"
-                            Foreground="{StaticResource DarkForegroundBrush}"
-                            BorderBrush="{StaticResource DarkBorderBrush}"
-                            Background="{StaticResource DarkBackgroundBrush}"
-                            FontFamily="Verdana"/>
+                    <Button Grid.Column="2" Command="{Binding BrowseCommand}" Content="📁" Width="28" Margin="4,0,0,0" Height="28"
+                            Style="{DynamicResource IconButtonStyle}"
+                            ToolTip="Browse..."/>
+                </Grid>
+            </Border>
+        </DataTemplate>
+
+        <!-- Template for Image Path Properties -->
+        <DataTemplate DataType="{x:Type vm:ImageConfigProperty}">
+            <Border Style="{StaticResource PropertyRowBorderStyle}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    
+                    <!-- Top Row: Label + Input + Buttons -->
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="{Binding Name}" Foreground="{DynamicResource TextPrimaryBrush}" Padding="0" FontFamily="Bahnschrift Light" VerticalAlignment="Center"/>
+                        <TextBox Grid.Column="1" Text="{Binding Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                 Foreground="{DynamicResource TextPrimaryBrush}"
+                                 BorderBrush="{DynamicResource BorderSubtleBrush}"
+                                 Background="{DynamicResource BackgroundBrush}"
+                                 VerticalAlignment="Center" Height="24" VerticalContentAlignment="Center" FontFamily="Bahnschrift Light"/>
+                        <Button Grid.Column="2" Command="{Binding BrowseCommand}" Content="📁" Width="28" Margin="4,0,0,0" Height="28"
+                                Style="{DynamicResource IconButtonStyle}"
+                                ToolTip="Browse..."/>
+                        <Button Grid.Column="3" Command="{Binding ClearCommand}" Content="🗑️" Width="28" Margin="4,0,0,0" Height="28"
+                                ToolTip="Clear (use auto-generated)">
+                            <Button.Style>
+                                <Style TargetType="Button" BasedOn="{StaticResource IconButtonStyle}">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding HasValue}" Value="False">
+                                            <Setter Property="IsEnabled" Value="False"/>
+                                            <Setter Property="Opacity" Value="0.5"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                    </Grid>
+
+                    <!-- Bottom Row: Image Preview (Only if value is not empty) -->
+                    <Border Grid.Row="1" Margin="0,5,0,0" BorderBrush="{DynamicResource BorderSubtleBrush}" BorderThickness="1" 
+                            HorizontalAlignment="Center" Background="#11FFFFFF">
+                        <Border.Style>
+                            <Style TargetType="Border">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Value}" Value="">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding Value}" Value="{x:Null}">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
+                        
+                        <!-- Use ImageSourceConverter typically implicit for strings in WPF if it's a valid path -->
+                        <!-- Limitation: If path is invalid, Image might show nothing or error. -->
+                        <Image Source="{Binding Value}" MaxHeight="100" MaxWidth="150" Stretch="Uniform" />
+                    </Border>
                 </Grid>
             </Border>
         </DataTemplate>
@@ -317,90 +376,98 @@
                         <ColumnDefinition Width="2*"/>
                         <ColumnDefinition Width="3*"/>
                     </Grid.ColumnDefinitions>
-                    <Label Content="{Binding Name}" Foreground="{StaticResource DarkForegroundBrush}" Padding="0" FontFamily="Bahnschrift Light" VerticalAlignment="Center"/>
+                    <Label Content="{Binding Name}" Foreground="{DynamicResource TextPrimaryBrush}" Padding="0" FontFamily="Bahnschrift Light" VerticalAlignment="Center"/>
                     <ComboBox Grid.Column="1" ItemsSource="{Binding Options}" SelectedItem="{Binding Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                              Style="{DynamicResource ComboBoxStyleDark}"
-                              Foreground="{StaticResource DarkForegroundBrush}"
-                              BorderBrush="{StaticResource DarkBorderBrush}"
-                              Background="{StaticResource DarkBackgroundBrush}"
+                              Foreground="{DynamicResource TextPrimaryBrush}"
+                              BorderBrush="{DynamicResource BorderSubtleBrush}"
+                              Background="{DynamicResource BackgroundBrush}"
+                              FontFamily="Bahnschrift Light" Height="24"/>
+                </Grid>
+            </Border>
+        </DataTemplate>
+
+        <!-- Template for Object Selection Properties (ComboBox) -->
+        <DataTemplate DataType="{x:Type vm:ObjectSelectionConfigProperty}">
+            <Border Style="{StaticResource PropertyRowBorderStyle}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="3*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="{Binding Name}" Foreground="{DynamicResource TextPrimaryBrush}" Padding="0" FontFamily="Bahnschrift Light" VerticalAlignment="Center"/>
+                    <ComboBox Grid.Column="1" ItemsSource="{Binding Options}" SelectedItem="{Binding Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                              DisplayMemberPath="DisplayName"
+                              Foreground="{DynamicResource TextPrimaryBrush}"
+                              BorderBrush="{DynamicResource BorderSubtleBrush}"
+                              Background="{DynamicResource BackgroundBrush}"
                               FontFamily="Bahnschrift Light" Height="24"/>
                 </Grid>
             </Border>
         </DataTemplate>
 
     </Window.Resources>
+    
+    <themes:WindowAssist.HeaderContent>
+        <StackPanel Orientation="Horizontal">
+            <Button Click="ButtonSave_Click" 
+                    Style="{DynamicResource StandardToolbarButtonStyle}" 
+                    FontSize="16" ToolTip="Save &amp; Close">
+                <Viewbox Width="16" Height="16">
+                    <Path Fill="{Binding Path=(TextElement.Foreground), RelativeSource={RelativeSource AncestorType=Button}}" 
+                          Data="M15,9H5V5H15M12,19A3,3 0 0,1 9,16A3,3 0 0,1 12,13A3,3 0 0,1 15,16A3,3 0 0,1 12,19M17,3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V7L17,3Z" />
+                </Viewbox>
+            </Button>
+                    
+            <Button Click="ButtonClose_Click" 
+                    Style="{DynamicResource StandardExitButtonStyle}"/>
+        </StackPanel>
+    </themes:WindowAssist.HeaderContent>
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/> <!-- Header -->
-            <RowDefinition Height="Auto"/> <!-- Search -->
-            <RowDefinition Height="*"/>    <!-- Settings Body -->
-            <RowDefinition Height="Auto"/> <!-- Footer -->
-        </Grid.RowDefinitions>
+    <Window.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/> <!-- Search -->
+                <RowDefinition Height="*"/>    <!-- Settings Body -->
+                <RowDefinition Height="Auto"/> <!-- Footer -->
+            </Grid.RowDefinitions>
 
-        <!-- HEADER (Matching MainWindow Title Bar) -->
-        <Grid Grid.Row="0" Margin="0,0,0,10">
-            <Rectangle Height="28" VerticalAlignment="Top" Fill="#00000000" IsHitTestVisible="False"/> <!-- Drag Handle Area -->
-            
-            <Label Content="Configuration" HorizontalAlignment="Left" VerticalAlignment="Top" 
-                   FontSize="16" Margin="5,0,0,0" FontFamily="Bahnschrift Light" Foreground="{StaticResource DarkForegroundBrush}"/>
-            
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Height="28">
-                <Button Content="💾" Click="ButtonSave_Click" 
-                        Width="28" Height="27"
-                        Style="{DynamicResource ButtonStyleDark}" 
-                        Foreground="{StaticResource DarkForegroundBrush}"
-                        FontFamily="Segoe UI Emoji" FontSize="14"
-                        BorderThickness="1,0,0,1" Margin="0,0,-1,0" 
-                        ToolTip="Save &amp; Close"/>
-                <Button Content="X" Click="ButtonClose_Click" 
-                        Width="28" Height="27"
-                        Style="{DynamicResource ButtonStyleDark}" 
-                        Foreground="{StaticResource DarkForegroundBrush}"
-                        FontFamily="Verdana" FontSize="14"
-                        BorderThickness="1,0,0,1" />
-            </StackPanel>
+            <!-- SEARCH BAR -->
+            <Border Grid.Row="0" Margin="16,10,16,10" Padding="0,0,0,5">
+                <Grid>
+                    <Label Content="🔍" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="{DynamicResource TextPrimaryBrush}" Margin="5,0,0,0"/>
+                    <TextBox Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" 
+                             Margin="30,0,0,0"
+                             Height="28" VerticalContentAlignment="Center"
+                             Foreground="{DynamicResource TextPrimaryBrush}"
+                             BorderBrush="{DynamicResource BorderSubtleBrush}" 
+                             Background="{DynamicResource BackgroundBrush}"
+                             Tag="Search settings..."
+                             FontFamily="Bahnschrift Light"/>
+                </Grid>
+            </Border>
 
-             <Rectangle VerticalAlignment="Top" Height="1" Fill="{StaticResource DarkBorderBrush}" Margin="0,27,0,0"/>
+            <!-- CONTENT -->
+            <ScrollViewer Grid.Row="1" Margin="5,0,5,5" BorderThickness="0">
+                <ItemsControl ItemsSource="{Binding PropertiesView}">
+                    <ItemsControl.GroupStyle>
+                        <GroupStyle>
+                            <GroupStyle.ContainerStyle>
+                                <Style TargetType="{x:Type GroupItem}">
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="{x:Type GroupItem}">
+                                                <Expander Style="{StaticResource ModernExpanderStyle}" IsExpanded="True" Header="{Binding Name}" Margin="0,5,0,5">
+                                                    <ItemsPresenter />
+                                                </Expander>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </GroupStyle.ContainerStyle>
+                        </GroupStyle>
+                    </ItemsControl.GroupStyle>
+                </ItemsControl>
+            </ScrollViewer>
         </Grid>
-
-        <!-- SEARCH BAR -->
-        <Border Grid.Row="1" Margin="10,0,10,10" Padding="0,0,0,5">
-            <Grid>
-                <Label Content="🔍" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="{StaticResource DarkForegroundBrush}" Margin="5,0,0,0"/>
-                <TextBox Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" 
-                         Margin="30,0,0,0"
-                         Height="25" VerticalContentAlignment="Center"
-                         Style="{DynamicResource TextBoxStyleDark}"
-                         Foreground="{StaticResource DarkForegroundBrush}"
-                         BorderBrush="{StaticResource DarkBorderBrush}" 
-                         Background="{StaticResource DarkBackgroundBrush}"
-                         Tag="Search settings..."
-                         FontFamily="Bahnschrift Light"/>
-            </Grid>
-        </Border>
-
-        <!-- CONTENT -->
-        <ScrollViewer Grid.Row="2" Margin="5,0,5,5" BorderThickness="0">
-            <ItemsControl ItemsSource="{Binding PropertiesView}">
-                <ItemsControl.GroupStyle>
-                    <GroupStyle>
-                        <GroupStyle.ContainerStyle>
-                            <Style TargetType="{x:Type GroupItem}">
-                                <Setter Property="Template">
-                                    <Setter.Value>
-                                        <ControlTemplate TargetType="{x:Type GroupItem}">
-                                            <Expander Style="{StaticResource ModernExpanderStyle}" IsExpanded="True" Header="{Binding Name}" Margin="0,5,0,5">
-                                                <ItemsPresenter />
-                                            </Expander>
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                            </Style>
-                        </GroupStyle.ContainerStyle>
-                    </GroupStyle>
-                </ItemsControl.GroupStyle>
-            </ItemsControl>
-        </ScrollViewer>
-    </Grid>
+    </Window.Content>
 </Window>

@@ -1,4 +1,5 @@
-﻿using AmeisenBotX.Common.Math;
+﻿using AmeisenBotX.Core.Engines.Autopilot;
+using AmeisenBotX.Common.Math;
 using AmeisenBotX.Common.Storage;
 using AmeisenBotX.Common.Utils;
 using AmeisenBotX.Core.Engines.Battleground;
@@ -195,6 +196,9 @@ namespace AmeisenBotX.Core
 
             Bot.PathfindingHandler = new AmeisenNavigationHandler(Config.NavmeshServerIp, Config.NameshServerPort);
             Bot.Movement = new MovementEngine(Bot, Config);
+
+            // Autopilot Engine (must be initialized after Quest/Movement/etc)
+            Bot.Autopilot = new AutopilotEngine(Bot, Config, Bot.Wow.Dbc);
 
             Logic = new AmeisenBotLogic(Config, Bot);
             // InventoryOrganizer merged into Bot.Character.Inventory
@@ -500,7 +504,9 @@ namespace AmeisenBotX.Core
         private static T LoadClassByName<T>(IEnumerable<T> profiles, string profileName)
         {
             AmeisenLogger.I.Log("AmeisenBot", $"Loading {typeof(T).Name,-24} {profileName}", LogLevel.Verbose);
-            return profiles.FirstOrDefault(e => e.ToString().Equals(profileName, StringComparison.OrdinalIgnoreCase));
+            return profiles.FirstOrDefault(e => e.ToString().Equals(profileName, StringComparison.OrdinalIgnoreCase))
+                ?? profiles.FirstOrDefault(e => e.GetType().Name.Equals(profileName, StringComparison.OrdinalIgnoreCase))
+                ?? profiles.FirstOrDefault(e => e.GetType().FullName.EndsWith(profileName, StringComparison.OrdinalIgnoreCase));
         }
 
         private ICombatClass CompileCustomCombatClass()
@@ -560,6 +566,36 @@ namespace AmeisenBotX.Core
 
             CombatClasses = combatClassTypes.Where(x => !x.IsAbstract && x.GetConstructor(new Type[] { typeof(AmeisenBotInterfaces) }) != null)
                 .Select(x => (ICombatClass)Activator.CreateInstance(x, Bot));
+        }
+
+        public static IEnumerable<CombatClassDescriptor> GetAvailableCombatClassDescriptors()
+        {
+            string combatClassNamespace = "AmeisenBotX.Core.Engines.Combat.Classes";
+
+            IEnumerable<Type> combatClassTypes = AppDomain.CurrentDomain.GetAssemblies()
+                .SelectMany(x => x.GetTypes())
+                .Where(x => x.GetInterfaces().Contains(typeof(ICombatClass))
+                         && x.Namespace != null
+                         && x.Namespace.Contains(combatClassNamespace)
+                         && !x.IsAbstract
+                         && x.GetConstructor(new Type[] { typeof(AmeisenBotInterfaces) }) != null);
+
+            List<CombatClassDescriptor> descriptors = [];
+
+            foreach (Type type in combatClassTypes)
+            {
+                CombatClassMetadataAttribute attr = (CombatClassMetadataAttribute)Attribute.GetCustomAttribute(type, typeof(CombatClassMetadataAttribute));
+
+                descriptors.Add(new CombatClassDescriptor
+                {
+                    TypeName = type.Name,
+                    FullTypeName = type.FullName,
+                    DisplayName = attr?.DisplayName ?? type.Name,
+                    Author = attr?.Author ?? "Unknown"
+                });
+            }
+
+            return descriptors;
         }
 
         private void InitGrindingProfiles()
@@ -938,7 +974,7 @@ namespace AmeisenBotX.Core
 
         private void OnReadyCheck(long timestamp, List<string> args)
         {
-            Bot.Wow.CofirmReadyCheck(true);
+            Bot.Wow.ConfirmReadyCheck(true);
         }
 
         private void OnShowQuestFrame(long timestamp, List<string> args)

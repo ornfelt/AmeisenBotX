@@ -1,5 +1,4 @@
 using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
 
 namespace AmeisenBotX.Bridge;
 
@@ -28,13 +27,13 @@ public sealed unsafe class SharedMemoryRing : IDisposable
     public SharedMemoryRing(string name, bool isBotSide)
     {
         _isBotSide = isBotSide;
-        
-        var ntPath = NtApi.ToNtPath(name);
-        NtApi.RtlInitUnicodeString(out var objectName, ntPath);
-        
+
+        string ntPath = NtApi.ToNtPath(name);
+        NtApi.RtlInitUnicodeString(out NtApi.UNICODE_STRING objectName, ntPath);
+
         // Setup ObjectAttributes with OBJ_OPENIF
         // Note: We bypass NtApi.OBJECT_ATTRIBUTES.Create to set specific flags
-        var objAttr = new NtApi.OBJECT_ATTRIBUTES
+        NtApi.OBJECT_ATTRIBUTES objAttr = new()
         {
             Length = sizeof(NtApi.OBJECT_ATTRIBUTES),
             ObjectName = &objectName,
@@ -43,7 +42,7 @@ public sealed unsafe class SharedMemoryRing : IDisposable
 
         NtApi.LARGE_INTEGER maxSize = BridgeProtocol.TotalSize;
 
-        var status = NtApi.NtCreateSection(
+        int status = NtApi.NtCreateSection(
             out _sectionHandle,
             NtApi.SECTION_ALL_ACCESS,
             &objAttr,
@@ -53,25 +52,27 @@ public sealed unsafe class SharedMemoryRing : IDisposable
             nint.Zero);
 
         if (!NtApi.NT_SUCCESS(status))
+        {
             ThrowHelper.ThrowNtStatus("create/open section", status);
+        }
 
         // Check if we created it (Success) or opened existing (Exists)
-        var createdNew = status != NtApi.STATUS_OBJECT_NAME_EXISTS;
+        bool createdNew = status != NtApi.STATUS_OBJECT_NAME_EXISTS;
 
-        status = NtApi.MapViewOfSection(_sectionHandle, (nuint)BridgeProtocol.TotalSize, out var baseAddr);
+        status = NtApi.MapViewOfSection(_sectionHandle, BridgeProtocol.TotalSize, out nint baseAddr);
         if (!NtApi.NT_SUCCESS(status))
         {
             NtApi.Close(_sectionHandle);
             ThrowHelper.ThrowNtStatus("map view", status);
         }
-        
+
         _basePtr = (byte*)baseAddr;
         _header = (BridgeHeader*)_basePtr;
 
         if (createdNew)
         {
             // We created it -> Initialize
-            Unsafe.InitBlockUnaligned(_basePtr, 0, (uint)BridgeProtocol.HeaderSize);
+            Unsafe.InitBlockUnaligned(_basePtr, 0, BridgeProtocol.HeaderSize);
             _header->Magic = BridgeProtocol.MagicNumber;
             _header->Version = BridgeProtocol.ProtocolVersion;
             _header->Status = BridgeStatus.Ready;
@@ -80,17 +81,25 @@ public sealed unsafe class SharedMemoryRing : IDisposable
         {
             // We opened it -> Validate
             if (_header->Magic != BridgeProtocol.MagicNumber)
+            {
                 throw new InvalidOperationException("Invalid magic number in shared memory");
+            }
 
             if (_header->Version != BridgeProtocol.ProtocolVersion)
+            {
                 throw new InvalidOperationException($"Version mismatch: expected {BridgeProtocol.ProtocolVersion}, got {_header->Version}");
+            }
         }
 
         // Update connection status
         if (_isBotSide)
+        {
             _header->Status |= BridgeStatus.BotConnected;
+        }
         else
+        {
             _header->Status |= BridgeStatus.ImplantConnected;
+        }
 
         _botRing = _basePtr + BridgeProtocol.HeaderSize;
         _implantRing = _botRing + BridgeProtocol.RingBufferSize;
@@ -109,20 +118,24 @@ public sealed unsafe class SharedMemoryRing : IDisposable
     public bool TryWrite(ReadOnlySpan<byte> data)
     {
         if (data.Length > BridgeProtocol.MaxPayloadSize + sizeof(MessageHeader))
+        {
             return false;
+        }
 
-        var ring = _isBotSide ? _botRing : _implantRing;
-        ref var writeSeq = ref (_isBotSide ? ref _header->BotSeq : ref _header->ImplantSeq);
-        ref var readSeq = ref (_isBotSide ? ref _header->ImplantSeq : ref _header->BotSeq);
+        byte* ring = _isBotSide ? _botRing : _implantRing;
+        ref uint writeSeq = ref (_isBotSide ? ref _header->BotSeq : ref _header->ImplantSeq);
+        ref uint readSeq = ref (_isBotSide ? ref _header->ImplantSeq : ref _header->BotSeq);
 
-        var available = (uint)BridgeProtocol.RingBufferSize - (writeSeq - readSeq);
+        uint available = BridgeProtocol.RingBufferSize - (writeSeq - readSeq);
         if (available < data.Length + sizeof(uint))
+        {
             return false;
+        }
 
         // Write length prefix
-        var writePos = writeSeq % (uint)BridgeProtocol.RingBufferSize;
+        uint writePos = writeSeq % BridgeProtocol.RingBufferSize;
         WriteWrapping(ring, writePos, (uint)data.Length);
-        writePos = (writePos + sizeof(uint)) % (uint)BridgeProtocol.RingBufferSize;
+        writePos = (writePos + sizeof(uint)) % BridgeProtocol.RingBufferSize;
 
         // Write data using Unsafe.CopyBlock for better codegen
         fixed (byte* pData = data)
@@ -143,21 +156,25 @@ public sealed unsafe class SharedMemoryRing : IDisposable
     {
         bytesRead = 0;
 
-        var ring = _isBotSide ? _implantRing : _botRing;
-        ref var readSeq = ref (_isBotSide ? ref _header->ImplantSeq : ref _header->BotSeq);
-        ref var writeSeq = ref (_isBotSide ? ref _header->BotSeq : ref _header->ImplantSeq);
+        byte* ring = _isBotSide ? _implantRing : _botRing;
+        ref uint readSeq = ref (_isBotSide ? ref _header->ImplantSeq : ref _header->BotSeq);
+        ref uint writeSeq = ref (_isBotSide ? ref _header->BotSeq : ref _header->ImplantSeq);
 
-        var available = writeSeq - readSeq;
+        uint available = writeSeq - readSeq;
         if (available < sizeof(uint))
+        {
             return false;
+        }
 
         // Read length prefix
-        var readPos = readSeq % (uint)BridgeProtocol.RingBufferSize;
-        var length = ReadWrapping(ring, readPos);
-        readPos = (readPos + sizeof(uint)) % (uint)BridgeProtocol.RingBufferSize;
+        uint readPos = readSeq % BridgeProtocol.RingBufferSize;
+        uint length = ReadWrapping(ring, readPos);
+        readPos = (readPos + sizeof(uint)) % BridgeProtocol.RingBufferSize;
 
         if (available < sizeof(uint) + length || length > (uint)buffer.Length)
+        {
             return false;
+        }
 
         // Read data
         fixed (byte* pBuffer = buffer)
@@ -182,8 +199,8 @@ public sealed unsafe class SharedMemoryRing : IDisposable
         else
         {
             // Wrap around - copy byte by byte
-            var src = (byte*)&value;
-            var remaining = (uint)BridgeProtocol.RingBufferSize - pos;
+            byte* src = (byte*)&value;
+            uint remaining = BridgeProtocol.RingBufferSize - pos;
             Unsafe.CopyBlockUnaligned(ring + pos, src, remaining);
             Unsafe.CopyBlockUnaligned(ring, src + remaining, sizeof(uint) - remaining);
         }
@@ -192,7 +209,7 @@ public sealed unsafe class SharedMemoryRing : IDisposable
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private static void WriteWrapping(byte* ring, uint pos, byte* data, int length)
     {
-        var len = (uint)length;
+        uint len = (uint)length;
         if (pos + len <= BridgeProtocol.RingBufferSize)
         {
             Unsafe.CopyBlockUnaligned(ring + pos, data, len);
@@ -200,7 +217,7 @@ public sealed unsafe class SharedMemoryRing : IDisposable
         else
         {
             // Wrap around
-            var firstPart = (uint)BridgeProtocol.RingBufferSize - pos;
+            uint firstPart = BridgeProtocol.RingBufferSize - pos;
             Unsafe.CopyBlockUnaligned(ring + pos, data, firstPart);
             Unsafe.CopyBlockUnaligned(ring, data + firstPart, len - firstPart);
         }
@@ -213,11 +230,11 @@ public sealed unsafe class SharedMemoryRing : IDisposable
         {
             return Unsafe.ReadUnaligned<uint>(ring + pos);
         }
-        
+
         // Wrap around - read byte by byte
         uint value = 0;
-        var dst = (byte*)&value;
-        var remaining = (uint)BridgeProtocol.RingBufferSize - pos;
+        byte* dst = (byte*)&value;
+        uint remaining = BridgeProtocol.RingBufferSize - pos;
         Unsafe.CopyBlockUnaligned(dst, ring + pos, remaining);
         Unsafe.CopyBlockUnaligned(dst + remaining, ring, sizeof(uint) - remaining);
         return value;
@@ -226,7 +243,7 @@ public sealed unsafe class SharedMemoryRing : IDisposable
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private static void ReadWrapping(byte* ring, uint pos, byte* dest, int length)
     {
-        var len = (uint)length;
+        uint len = (uint)length;
         if (pos + len <= BridgeProtocol.RingBufferSize)
         {
             Unsafe.CopyBlockUnaligned(dest, ring + pos, len);
@@ -234,7 +251,7 @@ public sealed unsafe class SharedMemoryRing : IDisposable
         else
         {
             // Wrap around
-            var firstPart = (uint)BridgeProtocol.RingBufferSize - pos;
+            uint firstPart = BridgeProtocol.RingBufferSize - pos;
             Unsafe.CopyBlockUnaligned(dest, ring + pos, firstPart);
             Unsafe.CopyBlockUnaligned(dest + firstPart, ring, len - firstPart);
         }
@@ -242,14 +259,22 @@ public sealed unsafe class SharedMemoryRing : IDisposable
 
     public void Dispose()
     {
-        if (_disposed) return;
+        if (_disposed)
+        {
+            return;
+        }
+
         _disposed = true;
 
         if (_basePtr is not null)
+        {
             NtApi.UnmapViewOfSection((nint)_basePtr);
+        }
 
         if (_sectionHandle != nint.Zero)
+        {
             NtApi.Close(_sectionHandle);
+        }
     }
 }
 

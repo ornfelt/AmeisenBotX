@@ -10,6 +10,7 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
 {
+    [CombatClassMetadata("Priest Holy", "Lukas")]
     internal class PriestHoly : BasicKamelClass
     {
         // All spell constants moved to AmeisenBotX.WowWotlk.Constants.PriestWotlk

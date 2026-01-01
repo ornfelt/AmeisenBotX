@@ -52,7 +52,7 @@ public readonly struct BridgeResult<T>
 
     /// <summary>Gets the value or a default if failed.</summary>
     public T GetValueOrDefault(T defaultValue = default!) => _isSuccess ? _value! : defaultValue;
-    
+
     public static implicit operator BridgeResult<T>(T value) => new(value);
     public static implicit operator BridgeResult<T>(BridgeError error) => new(error);
 }
@@ -85,7 +85,7 @@ public readonly struct BridgeResult
 
     /// <summary>Creates a failed result.</summary>
     public static BridgeResult Failure(BridgeError error) => new(false, error);
-    
+
     public static implicit operator BridgeResult(BridgeError error) => new(false, error);
 }
 

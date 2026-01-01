@@ -10,6 +10,7 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 {
+    [CombatClassMetadata("[WotLK335a] Warlock Demonology", "Jannis")]
     public class WarlockDemonology : BasicCombatClass
     {
         public WarlockDemonology(AmeisenBotInterfaces bot) : base(bot)

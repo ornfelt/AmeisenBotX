@@ -17,7 +17,7 @@ namespace AmeisenBotX.Core.Logic.Routines
             {
                 // Sell the item
                 bot.Wow.UseContainerItem(item.BagId, item.BagSlot);
-                bot.Wow.CofirmStaticPopup();
+                bot.Wow.ConfirmStaticPopup();
             }
 
         }

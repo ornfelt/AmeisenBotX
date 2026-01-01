@@ -4,39 +4,36 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AmeisenBotX.Views"
+        xmlns:themes="clr-namespace:AmeisenBotX.Themes"
         mc:Ignorable="d"
-        Title="Confirm" Height="140" Width="420" WindowStyle="None" AllowsTransparency="True" BorderThickness="1" Icon="/icon.png" MouseLeftButtonDown="Window_MouseLeftButtonDown" Loaded="Window_Loaded">
-    <Window.BorderBrush>
-        <SolidColorBrush Color="{DynamicResource DarkAccent1}" />
-    </Window.BorderBrush>
-    <Window.Background>
-        <SolidColorBrush Color="{DynamicResource DarkBackground}" />
-    </Window.Background>
-    <Grid>
-        <TextBlock x:Name="messageLabel" HorizontalAlignment="Left" Margin="15,38,0,0" VerticalAlignment="Top" Width="397" Height="64" Text="Message..." TextAlignment="Center" FontSize="16" FontFamily="Bahnschrift Light">
-            <TextBlock.Foreground>
-                <SolidColorBrush Color="{DynamicResource DarkForeground}" />
-            </TextBlock.Foreground>
-        </TextBlock>
-        <Button x:Name="buttonOkay" Content="✔️ Okay" HorizontalAlignment="Left" Margin="60,0,0,10" VerticalAlignment="Bottom" Width="128" Click="ButtonOkay_Click" Style="{DynamicResource ButtonStyleDark}" FontFamily="Bahnschrift Light">
-            <Button.Foreground>
-                <SolidColorBrush Color="{DynamicResource DarkForeground}" />
-            </Button.Foreground>
-        </Button>
-        <Button x:Name="buttonCancel" Content="❌Cancel" Margin="0,0,60,10" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="128" Click="ButtonCancel_Click" Style="{DynamicResource ButtonStyleDark}" FontFamily="Bahnschrift Light">
-            <Button.Foreground>
-                <SolidColorBrush Color="{DynamicResource DarkForeground}" />
-            </Button.Foreground>
-        </Button>
-        <Label x:Name="messageTitle" Content="Title" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" Margin="0,-2,0,0" FontFamily="Bahnschrift Light">
-            <Label.Foreground>
-                <SolidColorBrush Color="{DynamicResource DarkForeground}" />
-            </Label.Foreground>
-        </Label>
-        <Rectangle Margin="0,27,0,0" Height="1" VerticalAlignment="Top">
-            <Rectangle.Fill>
-                <SolidColorBrush Color="{DynamicResource DarkBorder}" />
-            </Rectangle.Fill>
-        </Rectangle>
-    </Grid>
+        Title="Confirm" Height="160" Width="420" 
+        Icon="/icon.png" Loaded="Window_Loaded"
+        Style="{DynamicResource StandardWindowStyle}"
+        themes:WindowAssist.Icon="❓">
+
+
+
+    <Window.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            
+            <!-- Message -->
+            <TextBlock Grid.Row="0" x:Name="messageLabel" Text="Message..." 
+                       HorizontalAlignment="Center" VerticalAlignment="Center" 
+                       TextAlignment="Center" FontSize="16" TextWrapping="Wrap" Margin="16"/>
+
+            <!-- Buttons -->
+            <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,16">
+                <Button x:Name="buttonOkay" Content="✔️ Okay" Click="ButtonOkay_Click" 
+                        Style="{DynamicResource ButtonStyleAccent}"
+                        Width="120" Height="35" Margin="0,0,16,0"/>
+                <Button x:Name="buttonCancel" Content="❌ Cancel" Click="ButtonCancel_Click" 
+                        Style="{DynamicResource SecondaryButtonStyle}"
+                        Width="120" Height="35"/>
+            </StackPanel>
+        </Grid>
+    </Window.Content>
 </Window>

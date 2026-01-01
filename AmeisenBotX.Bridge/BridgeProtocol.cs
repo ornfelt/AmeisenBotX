@@ -56,7 +56,7 @@ public unsafe struct BridgeHeader
     public readonly bool IsValid => Magic == BridgeProtocol.MagicNumber && Version == BridgeProtocol.ProtocolVersion;
 
     /// <summary>Checks if both sides are connected.</summary>
-    public readonly bool IsFullyConnected => (Status & (BridgeStatus.BotConnected | BridgeStatus.ImplantConnected)) == 
+    public readonly bool IsFullyConnected => (Status & (BridgeStatus.BotConnected | BridgeStatus.ImplantConnected)) ==
                                               (BridgeStatus.BotConnected | BridgeStatus.ImplantConnected);
 }
 

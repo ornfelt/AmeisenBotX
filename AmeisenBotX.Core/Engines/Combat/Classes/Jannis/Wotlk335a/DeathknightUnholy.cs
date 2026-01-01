@@ -7,6 +7,7 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 {
+    [CombatClassMetadata("[WotLK335a] Deathknight Unholy", "Jannis")]
     public class DeathknightUnholy : BasicCombatClass
     {
         public DeathknightUnholy(AmeisenBotInterfaces bot) : base(bot)

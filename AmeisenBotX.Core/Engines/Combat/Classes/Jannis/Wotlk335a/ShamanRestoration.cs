@@ -19,6 +19,7 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
     /// Features: Chain Heal prioritization, Earth Shield on tank, Riptide pre-hotting,
     /// Nature's Swiftness emergency heals, and intelligent totem management.
     /// </summary>
+    [CombatClassMetadata("[WotLK335a] Shaman Restoration", "Jannis")]
     public class ShamanRestoration : BasicCombatClass
     {
         public ShamanRestoration(AmeisenBotInterfaces bot) : base(bot)

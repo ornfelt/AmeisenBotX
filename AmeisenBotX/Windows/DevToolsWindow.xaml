@@ -1,0 +1,176 @@
+﻿<Window x:Class="AmeisenBotX.Windows.DevToolsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:themes="clr-namespace:AmeisenBotX.Themes"
+        mc:Ignorable="d"
+        Title="AmeisenBotX - Developer Tools" Height="600" Width="900" 
+        Icon="/icon.png" 
+        Loaded="Window_Loaded"
+        Style="{DynamicResource StandardWindowStyle}"
+        themes:WindowAssist.Icon="⚒">
+
+    <themes:WindowAssist.HeaderContent>
+        <StackPanel Orientation="Horizontal">
+            <Button x:Name="buttonRefresh" Click="ButtonRefresh_Click" 
+                    Style="{DynamicResource StandardToolbarButtonStyle}"
+                    Content="⟳" ToolTip="Refresh" FontWeight="Bold"/>
+            <Button x:Name="buttonExit" Click="ButtonExit_Click" 
+                    Style="{DynamicResource StandardExitButtonStyle}"/>
+        </StackPanel>
+    </themes:WindowAssist.HeaderContent>
+
+    <!-- Main Content -->
+    <Window.Content>
+        <TabControl x:Name="tabcontrolMain" Margin="8" 
+                    SelectionChanged="TabControlMain_SelectionChanged">
+            <!-- POI Tab -->
+            <TabItem x:Name="tabitemCachePoi" Header="💡 POI">
+                <Border Style="{DynamicResource TabContentBorderStyle}">
+                    <ListView x:Name="listviewCachePoi"/>
+                </Border>
+            </TabItem>
+            
+            <!-- Ore Tab -->
+            <TabItem x:Name="tabitemCacheOre" Header="⛏️ Ore">
+                <Border Style="{DynamicResource TabContentBorderStyle}">
+                    <ListView x:Name="listviewCacheOre"/>
+                </Border>
+            </TabItem>
+            
+            <!-- Herb Tab -->
+            <TabItem x:Name="tabitemCacheHerb" Header="🌿 Herb">
+                <Border Style="{DynamicResource TabContentBorderStyle}">
+                    <ListView x:Name="listviewCacheHerb"/>
+                </Border>
+            </TabItem>
+            
+            <!-- Names Tab -->
+            <TabItem x:Name="tabitemCacheNames" Header="📦 Names">
+                <Border Style="{DynamicResource TabContentBorderStyle}">
+                    <ListView x:Name="listviewCacheNames"/>
+                </Border>
+            </TabItem>
+            
+            <!-- Reactions Tab -->
+            <TabItem x:Name="tabitemCacheReactions" Header="😀 Reactions">
+                <Border Style="{DynamicResource TabContentBorderStyle}">
+                    <ListView x:Name="listviewCacheReactions"/>
+                </Border>
+            </TabItem>
+            
+            <!-- Spellnames Tab -->
+            <TabItem x:Name="tabitemCacheSpellnames" Header="✨ Spellnames">
+                <Border Style="{DynamicResource TabContentBorderStyle}">
+                    <ListView x:Name="listviewCacheSpellnames"/>
+                </Border>
+            </TabItem>
+            
+            <!-- WowObjects Tab -->
+            <TabItem x:Name="tabitemNearWowObjects" Header="🗺️ WowObjects" KeyDown="ListViewNearWowObjects_KeyDown">
+                <Border Style="{DynamicResource TabContentBorderStyle}">
+                    <TabControl x:Name="tabControlNearWowObjects" Margin="4">
+                        <TabItem Header="Items">
+                            <ListView x:Name="listViewItems"/>
+                        </TabItem>
+                        <TabItem Header="Containers">
+                            <ListView x:Name="listViewContainers"/>
+                        </TabItem>
+                        <TabItem Header="Units">
+                            <ListView x:Name="listViewUnits"/>
+                        </TabItem>
+                        <TabItem Header="Players">
+                            <ListView x:Name="listViewPlayers"/>
+                        </TabItem>
+                        <TabItem Header="GameObjects">
+                            <ListView x:Name="listViewGameObjects"/>
+                        </TabItem>
+                        <TabItem Header="DynamicObjects">
+                            <ListView x:Name="listViewDynamicObjects"/>
+                        </TabItem>
+                        <TabItem Header="Corpses">
+                            <ListView x:Name="listViewCorpses"/>
+                        </TabItem>
+                        <TabItem Header="AiGroups">
+                            <ListView x:Name="listViewAiGroups"/>
+                        </TabItem>
+                        <TabItem Header="AreaTriggers">
+                            <ListView x:Name="listViewAreaTriggers"/>
+                        </TabItem>
+                    </TabControl>
+                </Border>
+            </TabItem>
+            
+            <!-- LUA Tab -->
+            <TabItem x:Name="tabitemLua" Header="⚗️ LUA">
+                <Border Style="{DynamicResource TabContentBorderStyle}">
+                    <Grid>
+                        <Label Content="LUA to Execute:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0"/>
+                        <TextBox x:Name="textboxLuaCode" Margin="10,35,10,0" TextWrapping="Wrap" 
+                                 Height="126" VerticalAlignment="Top"/>
+                        <Button x:Name="buttonLuaExecute_Copy" Content="LuaDoString" Margin="325,10,0,0" 
+                                HorizontalAlignment="Left" Width="160" Height="20" VerticalAlignment="Top" 
+                                FontSize="11" Click="ButtonLuaExecute_Copy_Click"/>
+                        <Button x:Name="buttonLuaExecute" Content="ExecuteLuaAndRead" Margin="490,10,0,0" 
+                                HorizontalAlignment="Left" Width="160" Height="20" VerticalAlignment="Top" 
+                                FontSize="11" Click="ButtonLuaExecute_Click"/>
+                        <TextBox x:Name="textboxLuaResult" IsReadOnly="True" Margin="10,180,10,10" TextWrapping="Wrap"/>
+                    </Grid>
+                </Border>
+            </TabItem>
+            
+            <!-- Events Tab -->
+            <TabItem x:Name="tabitemEvent" Header="🧮 Events">
+                <Border Style="{DynamicResource TabContentBorderStyle}">
+                    <Grid>
+                        <Label Content="Event Name:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0"/>
+                        <TextBox x:Name="textboxEventName" HorizontalAlignment="Left" Height="18" Margin="95,12,0,0" 
+                                 VerticalAlignment="Top" Width="225"/>
+                        <Button x:Name="buttonEventSubscribe" Content="Subscribe" Margin="325,10,0,0" 
+                                HorizontalAlignment="Left" Width="120" Height="20" VerticalAlignment="Top" 
+                                FontSize="11" Click="ButtonEventSubscribe_Click"/>
+                        <Button x:Name="buttonEventUnsubscribe" Content="Unsubscribe" Margin="450,10,0,0" 
+                                HorizontalAlignment="Left" Width="120" Height="20" VerticalAlignment="Top" 
+                                FontSize="11" Click="ButtonEventUnsubscribe_Click"/>
+                        <Button x:Name="buttonEventClear" Content="Clear" Margin="575,10,0,0" 
+                                HorizontalAlignment="Left" Width="75" Height="20" VerticalAlignment="Top" 
+                                FontSize="11" Click="ButtonEventClear_Click"/>
+                        <TextBox x:Name="textboxEventResult" IsReadOnly="True" Margin="10,39,10,10" TextWrapping="Wrap"/>
+                    </Grid>
+                </Border>
+            </TabItem>
+            
+            <!-- Logs Tab -->
+            <TabItem x:Name="tabitemLogs" Header="📜 Logs">
+                <Border Style="{DynamicResource TabContentBorderStyle}">
+                    <Grid>
+                        <ComboBox x:Name="comboboxLoglevels" HorizontalAlignment="Left" Margin="10,10,0,0" 
+                                  VerticalAlignment="Top" Width="120"/>
+                        <TextBox x:Name="textboxLogs" IsReadOnly="True" Margin="10,37,10,10" 
+                                 TextWrapping="NoWrap" FontFamily="Consolas"/>
+                    </Grid>
+                </Border>
+            </TabItem>
+            
+            <!-- Client Patches Tab -->
+            <TabItem x:Name="tabitemClientPatches" Header="ClientPatches">
+                <Border Style="{DynamicResource TabContentBorderStyle}">
+                    <Grid>
+                        <TextBlock Text="Warning: This alters client memory, as such it may introduce bugs or even crashes, also parasitic sub-program 'Warden' will return incorrect memory CRC checks so unless emulated which is outside the scope of this project its detectable!"
+                                   TextWrapping="Wrap" Margin="10,10,10,10" Foreground="#FF990F0F"/>
+                        <CheckBox Content="ClimbSteepSlopes" HorizontalAlignment="Left" Margin="25,65,0,0" 
+                                  VerticalAlignment="Top" Checked="ClimbSteepSlopesChecked" 
+                                  Unchecked="ClimbSteepSlopesUnchecked"/>
+                        <CheckBox Content="DisableM2Collisions" HorizontalAlignment="Left" Margin="203,65,0,0" 
+                                  VerticalAlignment="Top" Checked="DisableM2CollisionsChecked" 
+                                  Unchecked="DisableM2CollisionsUnchecked"/>
+                        <CheckBox Content="DisableWMOCollisions" HorizontalAlignment="Left" Margin="203,85,0,0" 
+                                  VerticalAlignment="Top" Checked="DisableWMOCollisionsChecked" 
+                                  Unchecked="DisableWMOCollisionsUnchecked"/>
+                    </Grid>
+                </Border>
+            </TabItem>
+        </TabControl>
+    </Window.Content>
+</Window>

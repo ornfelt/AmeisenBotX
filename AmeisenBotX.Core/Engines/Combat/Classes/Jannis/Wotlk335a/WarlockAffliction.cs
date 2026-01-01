@@ -15,6 +15,7 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
     /// Features: Shadow Trance (Nightfall) proc usage, Dark Pact for mana, Soulshatter for aggro, 
     /// Health Funnel for pet, and optimized DoT management.
     /// </summary>
+    [CombatClassMetadata("[WotLK335a] Warlock Affliction", "Jannis")]
     public class WarlockAffliction : BasicCombatClass
     {
         public WarlockAffliction(AmeisenBotInterfaces bot) : base(bot)

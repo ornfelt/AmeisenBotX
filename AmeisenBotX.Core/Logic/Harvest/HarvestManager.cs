@@ -92,7 +92,7 @@ namespace AmeisenBotX.Core.Logic.Harvest
                 // ═══════════════════════════════════════════════════════════════
                 // STAGE 1: Global Pre-Filter (CHEAPEST - no module calls)
                 // ═══════════════════════════════════════════════════════════════
-                var stage1Candidates = Bot.Objects.All.OfType<IWowGameobject>()
+                IEnumerable<IWowGameobject> stage1Candidates = Bot.Objects.All.OfType<IWowGameobject>()
                     .Where(g => g != null)
                     .Where(g => g.IsUsable)                                    // Universal interactability
                     .Where(g => !blacklist.Contains(g.Guid))                   // Blacklist check  
@@ -151,15 +151,12 @@ namespace AmeisenBotX.Core.Logic.Harvest
                     // Unreachable candidates are implicitly filtered out
                 }
 
-                if (validCandidates.Count > 0)
-                {
-                    return validCandidates
+                return validCandidates.Count > 0
+                    ? validCandidates
                         .OrderByDescending(x => x.Priority)
                         .ThenBy(x => x.PathDist)
-                        .First().Obj;
-                }
-
-                return null;
+                        .First().Obj
+                    : null;
             }
             catch (Exception ex)
             {

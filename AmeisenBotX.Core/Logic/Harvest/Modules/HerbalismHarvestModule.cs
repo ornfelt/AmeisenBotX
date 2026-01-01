@@ -55,12 +55,7 @@ namespace AmeisenBotX.Core.Logic.Harvest.Modules
             }
 
             int herbalismSkill = GetHerbalismSkill();
-            if (herbalismSkill <= 0)
-            {
-                return false;
-            }
-
-            return WowHarvestHelper.TryGetHerbId(gobject.DisplayId, gobject.EntryId, out WowHerbId herbId)
+            return herbalismSkill > 0 && WowHarvestHelper.TryGetHerbId(gobject.DisplayId, gobject.EntryId, out WowHerbId herbId)
                 && WowHarvestHelper.CanHarvestHerb(herbId, herbalismSkill);
         }
 

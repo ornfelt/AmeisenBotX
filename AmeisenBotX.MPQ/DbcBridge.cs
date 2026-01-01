@@ -11,14 +11,17 @@ namespace AmeisenBotX.MPQ
         private DbcReader<SpellIconRecord> _iconDbc;
         private DbcReader<ItemRecord> _itemDbc;
         private DbcReader<ItemDisplayInfoRecord> _itemDisplayInfoDbc;
+        private DbcReader<WorldMapAreaRecord> _worldMapAreaDbc;
 
         private DbcReader<SpellRecord> SpellDbc => GetOrLoad(ref _spellDbc, "DBFilesClient\\Spell.dbc");
 
         private DbcReader<SpellIconRecord> IconDbc => GetOrLoad(ref _iconDbc, "DBFilesClient\\SpellIcon.dbc");
 
         private DbcReader<ItemRecord> ItemDbc => GetOrLoad(ref _itemDbc, "DBFilesClient\\Item.dbc");
-
+        
         private DbcReader<ItemDisplayInfoRecord> ItemDisplayInfoDbc => GetOrLoad(ref _itemDisplayInfoDbc, "DBFilesClient\\ItemDisplayInfo.dbc");
+
+        private DbcReader<WorldMapAreaRecord> WorldMapAreaDbc => GetOrLoad(ref _worldMapAreaDbc, "DBFilesClient\\WorldMapArea.dbc");
 
 
         private DbcReader<T> GetOrLoad<T>(ref DbcReader<T> field, string path) where T : unmanaged
@@ -97,6 +100,46 @@ namespace AmeisenBotX.MPQ
                 }
             }
             return -1;
+        }
+
+        public bool TryGetWorldMapArea(int mapId, out WorldMapAreaRecord result)
+        {
+            // Scan for the record matching the MapID. 
+            // Note: WorldMapArea.dbc can have multiple entries per MapID (subzones).
+            // For QuestPOI, we usually operate on the "base" map or zone map.
+            // We'll iterate and find the first match where the AreaID matches the current zone logic, 
+            // or just the first match for that MapID if we assume 1-to-1 for main continents (which isn't true).
+            // Ideally we pass AreaID too.
+            
+            DbcReader<WorldMapAreaRecord> dbc = WorldMapAreaDbc;
+            for (int i = 0; i < dbc.RecordCount; i++)
+            {
+                WorldMapAreaRecord record = dbc.GetRecordAtRow(i);
+                if (record.MapId == mapId && record.AreaId != 0) // Basic filter
+                {
+                   result = record;
+                   return true;
+                }
+            }
+            result = default;
+            return false;
+        }
+
+        public bool TryGetWorldMapAreaByAreaID(int areaId, out WorldMapAreaRecord result)
+        {
+            DbcReader<WorldMapAreaRecord> dbc = WorldMapAreaDbc;
+            for (int i = 0; i < dbc.RecordCount; i++)
+            {
+                WorldMapAreaRecord record = dbc.GetRecordAtRow(i);
+                // In some DBs AreaID is 0 for root maps, check carefully
+                if (record.AreaId == areaId)
+                {
+                    result = record;
+                    return true;
+                }
+            }
+            result = default;
+            return false;
         }
 
         public void Dispose()

@@ -4,34 +4,48 @@
              Width="130" Height="165" Cursor="Hand">
     
     <UserControl.Resources>
-        <!-- Hover scale animation -->
+        <!-- Hover scale animation with Glass Glow -->
         <Storyboard x:Key="HoverIn">
             <DoubleAnimation Storyboard.TargetName="CardScale" Storyboard.TargetProperty="ScaleX" 
-                             To="1.03" Duration="0:0:0.15"/>
+                             To="1.03" Duration="0:0:0.15">
+                <DoubleAnimation.EasingFunction>
+                    <QuadraticEase EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
             <DoubleAnimation Storyboard.TargetName="CardScale" Storyboard.TargetProperty="ScaleY" 
-                             To="1.03" Duration="0:0:0.15"/>
+                             To="1.03" Duration="0:0:0.15">
+                <DoubleAnimation.EasingFunction>
+                    <QuadraticEase EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
             <ColorAnimation Storyboard.TargetName="CardBorder" Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)"
-                            To="#FFFF6500" Duration="0:0:0.15"/>
+                            To="{StaticResource Accent}" Duration="0:0:0.15"/>
             <DoubleAnimation Storyboard.TargetName="GlowEffect" Storyboard.TargetProperty="Opacity"
-                             To="0.6" Duration="0:0:0.15"/>
+                             To="0.8" Duration="0:0:0.15"/>
+            <!-- Illuminate background slightly -->
+            <ColorAnimation Storyboard.TargetName="CardBorder" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
+                            To="#252525" Duration="0:0:0.15"/>
         </Storyboard>
+        
         <Storyboard x:Key="HoverOut">
             <DoubleAnimation Storyboard.TargetName="CardScale" Storyboard.TargetProperty="ScaleX" 
-                             To="1.0" Duration="0:0:0.15"/>
+                             To="1.0" Duration="0:0:0.2"/>
             <DoubleAnimation Storyboard.TargetName="CardScale" Storyboard.TargetProperty="ScaleY" 
-                             To="1.0" Duration="0:0:0.15"/>
+                             To="1.0" Duration="0:0:0.2"/>
             <ColorAnimation Storyboard.TargetName="CardBorder" Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)"
-                            To="#FF404040" Duration="0:0:0.15"/>
+                            To="{StaticResource BorderSubtle}" Duration="0:0:0.2"/>
             <DoubleAnimation Storyboard.TargetName="GlowEffect" Storyboard.TargetProperty="Opacity"
-                             To="0" Duration="0:0:0.15"/>
+                             To="0" Duration="0:0:0.2"/>
+            <ColorAnimation Storyboard.TargetName="CardBorder" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
+                            To="#1A1A1A" Duration="0:0:0.2"/>
         </Storyboard>
         
         <!-- Context Menu -->
-        <ContextMenu x:Key="CardContextMenu" 
-                     Background="#FF2A2A2A" BorderBrush="#FF505050" BorderThickness="1">
+        <ContextMenu x:Key="CardContextMenu" Style="{DynamicResource ContextMenuStyleDark}">
             <MenuItem x:Name="menuOpenFolder" Header="📁 Open Folder" Click="MenuOpenFolder_Click"/>
-            <Separator Background="#FF404040"/>
-            <MenuItem x:Name="menuDelete" Header="🗑️ Delete" Click="MenuDelete_Click" Foreground="#FFFF6666"/>
+            <Separator Style="{DynamicResource SeparatorStyleDark}"/>
+            <MenuItem x:Name="menuDelete" Header="🗑️ Delete" Click="MenuDelete_Click" 
+                      Foreground="{DynamicResource ErrorBrush}"/>
         </ContextMenu>
     </UserControl.Resources>
     
@@ -44,17 +58,20 @@
         </EventTrigger>
     </UserControl.Triggers>
     
-    <Border x:Name="CardBorder" CornerRadius="6" Margin="4" BorderThickness="2" 
-            Background="#FF1A1A1A" RenderTransformOrigin="0.5,0.5"
+    <Border x:Name="CardBorder" CornerRadius="8" Margin="6" BorderThickness="1" 
+            RenderTransformOrigin="0.5,0.5"
             ContextMenu="{StaticResource CardContextMenu}">
+        <Border.Background>
+            <SolidColorBrush Color="{DynamicResource Surface}"/>
+        </Border.Background>
         <Border.BorderBrush>
-            <SolidColorBrush x:Name="CardBorderBrush" Color="#FF404040"/>
+            <SolidColorBrush Color="{DynamicResource BorderSubtle}"/>
         </Border.BorderBrush>
         <Border.RenderTransform>
             <ScaleTransform x:Name="CardScale" ScaleX="1" ScaleY="1"/>
         </Border.RenderTransform>
         <Border.Effect>
-            <DropShadowEffect x:Name="GlowEffect" Color="#FFFF6500" BlurRadius="12" 
+            <DropShadowEffect x:Name="GlowEffect" Color="{DynamicResource Accent}" BlurRadius="16" 
                               ShadowDepth="0" Opacity="0"/>
         </Border.Effect>
         
@@ -66,22 +83,41 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             
+            
+            <!-- Watermark (Background) -->
+            <TextBlock x:Name="ProfileWatermark" Grid.RowSpan="4"
+                       Text="PROFILE"
+                       FontSize="11" FontFamily="Bahnschrift SemiBold" FontWeight="Regular"
+                       Foreground="{DynamicResource TextPrimaryBrush}" Opacity="0.15"
+                       VerticalAlignment="Top" HorizontalAlignment="Left"
+                       Margin="1,1,0,0" IsHitTestVisible="False"/>
+
             <!-- Faction indicator (subtle top border) -->
-            <Border x:Name="FactionIndicator" Grid.Row="0" Height="3" VerticalAlignment="Top" 
-                    Margin="-6,-6,-6,0" CornerRadius="4,4,0,0" Visibility="Collapsed"/>
+            <!-- Faction "Spotlight" Gradient (Bottom Glow) -->
+            <!-- Faction "Spotlight" Gradient (Bottom Glow) -->
+            <Rectangle x:Name="FactionSpotlight" Grid.RowSpan="4" VerticalAlignment="Bottom" HorizontalAlignment="Center"
+                       Width="80" Height="40" Margin="0" RadiusX="20" RadiusY="20" 
+                       Visibility="Collapsed" IsHitTestVisible="False">
+                <Rectangle.Fill>
+                    <RadialGradientBrush GradientOrigin="0.5,1" Center="0.5,1" RadiusX="0.5" RadiusY="0.9">
+                        <GradientStop x:Name="FactionSpotlightStart" Color="{DynamicResource Accent}" Offset="0"/>
+                        <GradientStop x:Name="FactionSpotlightEnd" Color="Transparent" Offset="1"/>
+                    </RadialGradientBrush>
+                </Rectangle.Fill>
+            </Rectangle>
             
             <!-- Portrait Container -->
-            <Grid Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Grid Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,16,0,0">
                 <!-- Portrait border with accent -->
                 <Ellipse x:Name="PortraitBorder" Width="68" Height="68" StrokeThickness="2">
                     <Ellipse.Stroke>
                         <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                            <GradientStop x:Name="PortraitGradient1" Color="#FFFF6500" Offset="0"/>
-                            <GradientStop x:Name="PortraitGradient2" Color="#FFFF3300" Offset="1"/>
+                            <GradientStop x:Name="PortraitGradient1" Color="{DynamicResource Accent}" Offset="0"/>
+                            <GradientStop x:Name="PortraitGradient2" Color="{DynamicResource AccentHover}" Offset="1"/>
                         </LinearGradientBrush>
                     </Ellipse.Stroke>
                     <Ellipse.Fill>
-                        <SolidColorBrush Color="#FF2A2A2A"/>
+                        <SolidColorBrush Color="{StaticResource BackgroundElevated}"/>
                     </Ellipse.Fill>
                 </Ellipse>
                 
@@ -95,59 +131,64 @@
                 <!-- Fallback icon (shown when no portrait) -->
                 <TextBlock x:Name="FallbackIcon" Text="👤" FontSize="26" 
                            HorizontalAlignment="Center" VerticalAlignment="Center"
-                           Foreground="#FF666666" Visibility="Collapsed"/>
+                           Foreground="{DynamicResource TextMutedBrush}" Visibility="Collapsed"/>
                 
                 <!-- New Config + icon -->
                 <Grid x:Name="NewConfigIcon" Visibility="Collapsed">
-                    <Ellipse Width="62" Height="62" Fill="#FF2A2A2A"/>
+                    <Ellipse Width="62" Height="62" Fill="{DynamicResource BackgroundElevatedBrush}"/>
                     <TextBlock Text="➕" FontSize="22" 
                                HorizontalAlignment="Center" VerticalAlignment="Center"
-                               Foreground="#FFFF6500"/>
+                               Foreground="{DynamicResource AccentBrush}"/>
                 </Grid>
                 
-                <!-- Level badge (bottom-right of portrait) -->
-                <Border x:Name="LevelBadge" Width="22" Height="22" CornerRadius="11"
+                <!-- Level badge (Blizzlike style) -->
+                <Border x:Name="LevelBadge" Width="24" Height="24" CornerRadius="12"
                         HorizontalAlignment="Right" VerticalAlignment="Bottom"
-                        Margin="0,0,-2,-2" Visibility="Collapsed">
-                    <Border.Background>
-                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                            <GradientStop Color="#FFFF6500" Offset="0"/>
-                            <GradientStop Color="#FFCC4400" Offset="1"/>
+                        BorderThickness="1"
+                        Margin="0,0,-4,-4" Visibility="Collapsed">
+                    <Border.BorderBrush>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                            <GradientStop Color="#FFFFD700" Offset="0"/>
+                            <GradientStop Color="#FFAFAB00" Offset="1"/>
                         </LinearGradientBrush>
+                    </Border.BorderBrush>
+                    <Border.Background>
+                        <SolidColorBrush Color="#E6000000"/>
                     </Border.Background>
-                    <TextBlock x:Name="LevelText" Text="80" FontSize="10" FontWeight="Bold"
-                               Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBlock x:Name="LevelText" Text="80" FontSize="11" FontWeight="Bold"
+                               Foreground="#FFFFD700" HorizontalAlignment="Center" VerticalAlignment="Center"
+                               Margin="0"/>
                 </Border>
             </Grid>
             
             <!-- Character Name / Profile Name -->
             <TextBlock x:Name="ProfileName" Grid.Row="1" 
                        Text="Profile Name" 
-                       FontFamily="Bahnschrift" FontSize="13" FontWeight="SemiBold"
-                       Foreground="White" 
+                       FontFamily="Bahnschrift SemiBold" FontSize="15" 
+                       Foreground="{DynamicResource TextPrimaryBrush}" 
                        HorizontalAlignment="Center" 
                        TextTrimming="CharacterEllipsis"
-                       Margin="0,3,0,0"/>
+                       Margin="0,4,0,0"/>
             
             <!-- Stats Line (Class - Zone) -->
             <StackPanel x:Name="StatsPanel" Grid.Row="2" Orientation="Horizontal" 
-                        HorizontalAlignment="Center" Visibility="Collapsed" Margin="0,1,0,0">
+                        HorizontalAlignment="Center" Visibility="Collapsed" Margin="0,2,0,0">
                 <TextBlock x:Name="ClassText" Text="" 
-                           FontFamily="Bahnschrift Light" FontSize="10"
-                           Foreground="#FF888888"/>
+                           FontFamily="Bahnschrift" FontSize="11"
+                           Foreground="{DynamicResource TextSecondaryBrush}"/>
                 <TextBlock x:Name="ZoneSeparator" Text=" • " 
-                           FontFamily="Bahnschrift Light" FontSize="10"
-                           Foreground="#FF666666" Visibility="Collapsed"/>
+                           FontFamily="Bahnschrift" FontSize="11"
+                           Foreground="{DynamicResource TextMutedBrush}" Visibility="Collapsed"/>
                 <TextBlock x:Name="ZoneText" Text="" 
-                           FontFamily="Bahnschrift Light" FontSize="10"
-                           Foreground="#FF888888"/>
+                           FontFamily="Bahnschrift" FontSize="11"
+                           Foreground="{DynamicResource TextSecondaryBrush}"/>
             </StackPanel>
             
             <!-- Last Played -->
             <TextBlock x:Name="LastPlayedText" Grid.Row="3" 
                        Text="" 
-                       FontFamily="Bahnschrift Light" FontSize="9"
-                       Foreground="#FF555555" 
+                       FontFamily="Bahnschrift Light" FontSize="11"
+                       Foreground="#BBBBBB" 
                        HorizontalAlignment="Center" 
                        Visibility="Collapsed"
                        Margin="0,2,0,0"/>

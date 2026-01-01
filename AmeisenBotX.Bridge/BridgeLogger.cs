@@ -13,16 +13,16 @@ public static class BridgeLogger
         try
         {
             // Path: AppData\Roaming\AmeisenBotX\profiles\{BOTNAME}\log\AmeisenBot.Implant.{Date}.txt
-            var appData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            string appData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
 
             // Sanitize botName for path
-            var safeName = string.Join("_", botName.Split(Path.GetInvalidFileNameChars()));
+            string safeName = string.Join("_", botName.Split(Path.GetInvalidFileNameChars()));
 
-            var logDir = Path.Combine(appData, "AmeisenBotX", "profiles", safeName, "log");
+            string logDir = Path.Combine(appData, "AmeisenBotX", "profiles", safeName, "log");
             Directory.CreateDirectory(logDir);
 
-            var fileName = $"AmeisenBot.Implant.{DateTime.Now:dd.MM.yyyy-HH.mm}.txt";
-            var fullPath = Path.Combine(logDir, fileName);
+            string fileName = $"AmeisenBot.Implant.{DateTime.Now:dd.MM.yyyy-HH.mm}.txt";
+            string fullPath = Path.Combine(logDir, fileName);
 
             _writer = new StreamWriter(fullPath, true) { AutoFlush = true };
             Log($"Bridge Logger Initialized for {botName}");
@@ -32,7 +32,7 @@ public static class BridgeLogger
             // Fallback to local directory if AppData fails
             try
             {
-                var fallbackPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Bridge_Fallback.log");
+                string fallbackPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Bridge_Fallback.log");
                 _writer = new StreamWriter(fallbackPath, true) { AutoFlush = true };
                 Log($"[Fallback] Bridge Logger Initialized (AppData failed). BotName: {botName}");
             }
@@ -42,7 +42,10 @@ public static class BridgeLogger
 
     public static void Log(string message)
     {
-        if (_writer == null) return;
+        if (_writer == null)
+        {
+            return;
+        }
 
         lock (_lock)
         {

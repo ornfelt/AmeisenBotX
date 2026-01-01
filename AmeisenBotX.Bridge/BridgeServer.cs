@@ -62,17 +62,17 @@ public sealed unsafe class BridgeServer : IDisposable
     {
         try
         {
-            var opCode = (BridgeOpCode)e.Header.OpCode;
+            BridgeOpCode opCode = (BridgeOpCode)e.Header.OpCode;
             BridgeLogger.Log($"[BridgeServer] Received {opCode} (MsgID: {e.Header.MessageId})");
 
             // Rent a buffer for the response to avoid allocations in handlers
             // Max payload size is safe upper bound
-            var responseBuffer = ArrayPool<byte>.Shared.Rent(BridgeProtocol.MaxPayloadSize);
+            byte[] responseBuffer = ArrayPool<byte>.Shared.Rent(BridgeProtocol.MaxPayloadSize);
             try
             {
-                var responseSpan = responseBuffer.AsSpan();
-                var success = false;
-                var responseSize = 0;
+                Span<byte> responseSpan = responseBuffer.AsSpan();
+                bool success = false;
+                int responseSize = 0;
 
                 try
                 {
@@ -116,15 +116,15 @@ public sealed unsafe class BridgeServer : IDisposable
 
     private void SendResponse(uint messageId, bool success, ReadOnlySpan<byte> payload)
     {
-        var header = MessageHeader.CreateResponse(messageId, payload.Length, success);
-        var totalSize = sizeof(MessageHeader) + payload.Length;
-        
+        MessageHeader header = MessageHeader.CreateResponse(messageId, payload.Length, success);
+        int totalSize = sizeof(MessageHeader) + payload.Length;
+
         // Stackalloc for small responses
         byte[]? rented = null;
-        Span<byte> buffer = totalSize <= 2048 
-            ? stackalloc byte[totalSize] 
+        Span<byte> buffer = totalSize <= 2048
+            ? stackalloc byte[totalSize]
             : (rented = ArrayPool<byte>.Shared.Rent(totalSize)).AsSpan(0, totalSize);
-            
+
         try
         {
             Unsafe.WriteUnaligned(ref MemoryMarshal.GetReference(buffer), header);
@@ -134,7 +134,9 @@ public sealed unsafe class BridgeServer : IDisposable
         finally
         {
             if (rented is not null)
+            {
                 ArrayPool<byte>.Shared.Return(rented);
+            }
         }
     }
 
@@ -158,19 +160,19 @@ public sealed unsafe class BridgeServer : IDisposable
 
     private static bool HandleGetUnitName(ReadOnlySpan<byte> request, Span<byte> response, out int responseSize)
     {
-        var guid = BridgeMarshaller.Read<ulong>(request);
+        ulong guid = BridgeMarshaller.Read<ulong>(request);
 
         // TODO: Get actual unit name from WoW
-        var name = $"Unit_{guid:X}"; // Placeholder
+        string name = $"Unit_{guid:X}"; // Placeholder
         responseSize = BridgeMarshaller.WriteString(response, name);
         return true;
     }
 
     private static bool HandleCastSpellByName(ReadOnlySpan<byte> request, Span<byte> response, out int responseSize)
     {
-        var buffer = new BufferReader(request);
-        var spellName = buffer.ReadString();
-        var targetGuid = buffer.Read<ulong>();
+        BufferReader buffer = new(request);
+        string spellName = buffer.ReadString();
+        ulong targetGuid = buffer.Read<ulong>();
 
         BridgeLogger.Log($"[BridgeServer] CastSpell: {spellName} on {targetGuid:X}");
 
@@ -182,7 +184,7 @@ public sealed unsafe class BridgeServer : IDisposable
 
     private static bool HandleExecuteLua(ReadOnlySpan<byte> request, Span<byte> response, out int responseSize)
     {
-        var luaCode = BridgeMarshaller.ReadString(request);
+        string luaCode = BridgeMarshaller.ReadString(request);
 
         BridgeLogger.Log($"[BridgeServer] ExecuteLua: {luaCode}");
 
@@ -194,7 +196,11 @@ public sealed unsafe class BridgeServer : IDisposable
 
     public void Dispose()
     {
-        if (_disposed) return;
+        if (_disposed)
+        {
+            return;
+        }
+
         _disposed = true;
 
         _cts.Cancel();

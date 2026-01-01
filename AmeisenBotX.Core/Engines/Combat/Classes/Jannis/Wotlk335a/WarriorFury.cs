@@ -1,31 +1,18 @@
-using AmeisenBotX.Common.Utils;
-using AmeisenBotX.Core.Engines.Combat.Helpers.Aura.Objects;
 using AmeisenBotX.Core.Managers.Character.Comparators;
 using AmeisenBotX.Core.Managers.Character.Talents.Objects;
 using AmeisenBotX.Wow.Objects;
 using AmeisenBotX.Wow.Objects.Enums;
 using AmeisenBotX.WowWotlk.Constants.Classes;
-using System;
 using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 {
-    public class WarriorFury : BasicCombatClass
+    [CombatClassMetadata("[WotLK335a] Warrior Fury", "Jannis")]
+    public class WarriorFury : BaseWarriorCombatClass
     {
         public WarriorFury(AmeisenBotInterfaces bot) : base(bot)
         {
-            MyAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, WarriorWotlk.BattleShout, () => TryCastSpell(WarriorWotlk.BattleShout, 0, true)));
-
-            TargetAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, WarriorWotlk.Hamstring, () => Bot.Target?.Type == WowObjectType.Player && TryCastSpell(WarriorWotlk.Hamstring, Bot.Wow.TargetGuid, true)));
-            TargetAuraManager.Jobs.Add(new KeepActiveAuraJob(bot.Db, WarriorWotlk.Rend, () => Bot.Target?.Type == WowObjectType.Player && Bot.Player.Rage > 75 && TryCastSpell(WarriorWotlk.Rend, Bot.Wow.TargetGuid, true)));
-
-            InterruptManager.InterruptSpells = new()
-            {
-                { 0, (x) => TryCastSpellWarrior(WarriorWotlk.IntimidatingShout, WarriorWotlk.BerserkerStance, x.Guid, true) },
-                { 1, (x) => TryCastSpellWarrior(WarriorWotlk.IntimidatingShout, WarriorWotlk.BattleStance, x.Guid, true) }
-            };
-
-            HeroicStrikeEvent = new(TimeSpan.FromSeconds(2));
+            // Fury-specific setup (base class handles common auras, interrupts, HeroicStrikeEvent)
         }
 
         public override string Description => "FCFS based CombatClass for the Fury Warrior spec.";
@@ -33,8 +20,6 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
         public override string DisplayName2 => "Warrior Fury";
 
         public override bool HandlesMovement => false;
-
-        public override bool IsMelee => true;
 
         public override IItemComparator ItemComparator { get; set; } = new BasicStrengthComparator([WowArmorType.Shield], [WowWeaponType.Sword, WowWeaponType.Mace, WowWeaponType.Axe]);
 
@@ -76,17 +61,7 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
             Tree3 = [],
         };
 
-        public override bool UseAutoAttacks => true;
-
         public override string Version => "1.0";
-
-        public override bool WalkBehindEnemy => false;
-
-        public override WowClass WowClass => WowClass.Warrior;
-
-        public override WowVersion WowVersion => WowVersion.WotLK335a;
-
-        private TimegatedEvent HeroicStrikeEvent { get; }
 
         public override void Execute()
         {
@@ -98,19 +73,16 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
                 {
                     double distanceToTarget = Bot.Target.Position.GetDistance(Bot.Player.Position);
 
-                    if ((Bot.Player.IsDazed
-                        || Bot.Player.IsConfused
-                        || Bot.Player.IsPossessed
-                        || Bot.Player.IsFleeing)
-                        && TryCastSpell(WarriorWotlk.HeroicFury, 0))
+                    // Use base class helper for CC break
+                    if (TryBreakCrowdControl())
                     {
                         return;
                     }
 
                     if (distanceToTarget > 4.0)
                     {
-                        if (TryCastSpellWarrior(WarriorWotlk.Charge, WarriorWotlk.BattleStance, Bot.Wow.TargetGuid, true)
-                            || (TryCastSpell(WarriorWotlk.BerserkerRage, Bot.Wow.TargetGuid, true) && TryCastSpellWarrior(WarriorWotlk.Intercept, WarriorWotlk.BerserkerStance, Bot.Wow.TargetGuid, true)))
+                        // Use base class helper for gap closing
+                        if (TryCloseGap())
                         {
                             return;
                         }

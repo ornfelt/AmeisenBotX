@@ -110,6 +110,8 @@ namespace AmeisenBotX.Wow.Objects
         bool IsQuestgiver => NpcFlags[(int)WowUnitNpcFlag.Questgiver];
 
         bool IsReagentVendor => NpcFlags[(int)WowUnitNpcFlag.ReagentVendor];
+        
+        WowQuestGiverStatus QuestGiverStatus { get; }
 
         bool IsReferAFriendLinked { get; }
 

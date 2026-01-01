@@ -374,17 +374,17 @@ namespace AmeisenBotX.WowMop
             LuaDoString($"{elementName}:Click()");
         }
 
-        public void CofirmLootRoll()
+        public void ConfirmLootRoll()
         {
-            CofirmStaticPopup();
+            ConfirmStaticPopup();
         }
 
-        public void CofirmReadyCheck(bool isReady)
+        public void ConfirmReadyCheck(bool isReady)
         {
             LuaDoString($"ConfirmReadyCheck({isReady})");
         }
 
-        public void CofirmStaticPopup()
+        public void ConfirmStaticPopup()
         {
             LuaDoString($"EquipPendingItem(0);ConfirmBindOnUse();StaticPopup_Hide(\"AUTOEQUIP_BIND\");StaticPopup_Hide(\"EQUIP_BIND\");StaticPopup_Hide(\"USE_BIND\")");
         }
@@ -420,7 +420,7 @@ namespace AmeisenBotX.WowMop
                 LuaDoString($"EquipItemByName(\"{newItem}\", {itemSlot})");
             }
 
-            CofirmStaticPopup();
+            ConfirmStaticPopup();
         }
 
         public bool ExecuteLuaAndRead((string, string) p, out string result)
@@ -456,7 +456,7 @@ namespace AmeisenBotX.WowMop
 
         public int GetContainerNumSlots(int bagId)
         {
-            return ExecuteLuaAndRead(BotUtils.ObfuscateLua($"{{v:0}}=GetContainerNumSlots({bagId})"), out string result) 
+            return ExecuteLuaAndRead(BotUtils.ObfuscateLua($"{{v:0}}=GetContainerNumSlots({bagId})"), out string result)
                 && int.TryParse(result, out int slots) ? slots : 0;
         }
 

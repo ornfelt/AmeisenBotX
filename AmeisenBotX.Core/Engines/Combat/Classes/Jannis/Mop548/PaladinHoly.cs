@@ -14,6 +14,8 @@ using System.Text.Json;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Mop548
 {
+    /// </summary>
+    [CombatClassMetadata("[MoP548] Paladin Holy", "Jannis")]
     public class PaladinHoly : BasicCombatClass
     {
         public PaladinHoly(AmeisenBotInterfaces bot) : base(bot)

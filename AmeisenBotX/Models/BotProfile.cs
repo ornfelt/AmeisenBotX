@@ -27,17 +27,30 @@ namespace AmeisenBotX.Models
         /// </summary>
         public string GetLastPlayedRelative()
         {
-            if (LastPlayed == default) return null;
+            if (LastPlayed == default)
+            {
+                return null;
+            }
 
-            var diff = DateTime.Now - LastPlayed;
+            TimeSpan diff = DateTime.Now - LastPlayed;
 
-            if (diff.TotalMinutes < 1) return "Just now";
-            if (diff.TotalMinutes < 60) return $"{(int)diff.TotalMinutes}m ago";
-            if (diff.TotalHours < 24) return $"{(int)diff.TotalHours}h ago";
-            if (diff.TotalDays < 2) return "Yesterday";
-            if (diff.TotalDays < 7) return $"{(int)diff.TotalDays}d ago";
-            if (diff.TotalDays < 30) return $"{(int)(diff.TotalDays / 7)}w ago";
-            return LastPlayed.ToString("MMM d");
+            if (diff.TotalMinutes < 1)
+            {
+                return "Just now";
+            }
+
+            if (diff.TotalMinutes < 60)
+            {
+                return $"{(int)diff.TotalMinutes}m ago";
+            }
+
+            return diff.TotalHours < 24
+                ? $"{(int)diff.TotalHours}h ago"
+                : diff.TotalDays < 2
+                ? "Yesterday"
+                : diff.TotalDays < 7
+                ? $"{(int)diff.TotalDays}d ago"
+                : diff.TotalDays < 30 ? $"{(int)(diff.TotalDays / 7)}w ago" : LastPlayed.ToString("MMM d");
         }
 
         /// <summary>

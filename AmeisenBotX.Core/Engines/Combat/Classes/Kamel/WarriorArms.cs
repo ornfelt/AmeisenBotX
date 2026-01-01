@@ -1,6 +1,4 @@
 using AmeisenBotX.Common.Utils;
-using AmeisenBotX.Core.Managers.Character.Comparators;
-using AmeisenBotX.Core.Managers.Character.Spells.Objects;
 using AmeisenBotX.Core.Managers.Character.Talents.Objects;
 using AmeisenBotX.Wow.Objects;
 using AmeisenBotX.Wow.Objects.Enums;
@@ -11,50 +9,18 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
 {
-    internal class WarriorArms : BasicKamelClass
+    [CombatClassMetadata("Warrior Arms Beta", "Lukas")]
+    internal class WarriorArms : BaseKamelWarriorClass
     {
-        // All spell constants moved to AmeisenBotX.WowWotlk.Constants.WarriorWotlk
-
-        public WarriorArms(AmeisenBotInterfaces bot) : base()
+        public WarriorArms(AmeisenBotInterfaces bot) : base(bot)
         {
-            Bot = bot;
-            //Stances
-            spellCoolDown.Add(WarriorWotlk.DefensiveStance, DateTime.Now);
-            spellCoolDown.Add(WarriorWotlk.BattleStance, DateTime.Now);
-            spellCoolDown.Add(WarriorWotlk.BerserkerStance, DateTime.Now);
-            //Spells
-            spellCoolDown.Add(WarriorWotlk.HeroicStrike, DateTime.Now);
+            // Arms-specific spell cooldowns
             spellCoolDown.Add(WarriorWotlk.Bladestorm, DateTime.Now);
             spellCoolDown.Add(WarriorWotlk.Overpower, DateTime.Now);
             spellCoolDown.Add(WarriorWotlk.MortalStrike, DateTime.Now);
-            spellCoolDown.Add(WarriorWotlk.Intercept, DateTime.Now);
-            spellCoolDown.Add(WarriorWotlk.HeroicThrow, DateTime.Now);
-            spellCoolDown.Add(WarriorWotlk.Execute, DateTime.Now);
-            spellCoolDown.Add(WarriorWotlk.Pummel, DateTime.Now);
-            spellCoolDown.Add(WarriorWotlk.Slam, DateTime.Now);
-            spellCoolDown.Add(WarriorWotlk.Disarm, DateTime.Now);
-            spellCoolDown.Add(WarriorWotlk.Rend, DateTime.Now);
-            spellCoolDown.Add(WarriorWotlk.Hamstring, DateTime.Now);
-            spellCoolDown.Add(WarriorWotlk.VictoryRush, DateTime.Now);
-            spellCoolDown.Add(WarriorWotlk.Charge, DateTime.Now);
-            spellCoolDown.Add(WarriorWotlk.Cleave, DateTime.Now);
-            //Buffs||Defensive||Enrage
-            spellCoolDown.Add(WarriorWotlk.IntimidatingShout, DateTime.Now);
-            spellCoolDown.Add(WarriorWotlk.Retaliation, DateTime.Now);
-            spellCoolDown.Add(WarriorWotlk.EnragedRegeneration, DateTime.Now);
-            spellCoolDown.Add(WarriorWotlk.Bloodrage, DateTime.Now);
-            spellCoolDown.Add(WarriorWotlk.CommandingShout, DateTime.Now);
-            spellCoolDown.Add(WarriorWotlk.Recklessness, DateTime.Now);
-            spellCoolDown.Add(WarriorWotlk.HeroicFury, DateTime.Now);
-            spellCoolDown.Add(WarriorWotlk.BerserkerRage, DateTime.Now);
-            spellCoolDown.Add(WarriorWotlk.DeathWish, DateTime.Now);
-            spellCoolDown.Add(WarriorWotlk.BattleShout, DateTime.Now);
 
-            //Time event
-            HeroicStrikeEvent = new(TimeSpan.FromSeconds(2));
-            VictoryRushEvent = new(TimeSpan.FromSeconds(5));
+            // Arms-specific event timing
             RendEvent = new(TimeSpan.FromSeconds(3));
-            ExecuteEvent = new(TimeSpan.FromSeconds(1));
         }
 
         public override string Author => "Lukas";
@@ -65,20 +31,7 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
 
         public override string DisplayName => "Warrior Arms Beta";
 
-        public TimegatedEvent ExecuteEvent { get; private set; }
-
-        public override bool HandlesMovement => false;
-
-        public TimegatedEvent HeroicStrikeEvent { get; private set; }
-
-        public override bool IsMelee => true;
-
-        public override IItemComparator ItemComparator { get; set; } = new BasicStrengthComparator([WowArmorType.Shield], [WowWeaponType.Sword, WowWeaponType.Mace, WowWeaponType.Axe, WowWeaponType.Staff, WowWeaponType.Dagger]);
-
-        //Time event
         public TimegatedEvent RendEvent { get; private set; }
-
-        public override WowRole Role => WowRole.Dps;
 
         public override TalentTree Talents { get; } = new()
         {
@@ -120,56 +73,17 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
             Tree3 = [],
         };
 
-        public override bool UseAutoAttacks => true;
-
         public override string Version => "1.0";
 
-        public TimegatedEvent VictoryRushEvent { get; private set; }
-
-        public override bool WalkBehindEnemy => false;
-
-        public override WowClass WowClass => WowClass.Warrior;
-
-        public override void ExecuteCC()
-        {
-            StartAttack();
-        }
-
-        public override void OutOfCombatExecute()
-        {
-            Targetselection();
-            StartAttack();
-        }
-
+        /// <summary>
+        /// Arms-specific CustomCastSpell defaults to Battle Stance.
+        /// </summary>
         private bool CustomCastSpell(string spellName, string stance = WarriorWotlk.BattleStance)
         {
-            if (Bot.Character.SpellBook.IsSpellKnown(spellName))
-            {
-                double distance = Bot.Player.Position.GetDistance(Bot.Target.Position);
-                Spell spell = Bot.Character.SpellBook.GetSpellByName(spellName);
-
-                if (Bot.Player.Rage >= spell.Costs && IsSpellReady(spellName))
-                {
-                    if ((spell.MinRange == 0 && spell.MaxRange == 0) || (spell.MinRange <= distance && spell.MaxRange >= distance))
-                    {
-                        if (!Bot.Player.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == stance))
-                        {
-                            Bot.Wow.CastSpell(stance);
-                            return true;
-                        }
-                        else
-                        {
-                            Bot.Wow.CastSpell(spellName);
-                            return true;
-                        }
-                    }
-                }
-            }
-
-            return false;
+            return base.CustomCastSpell(spellName, stance);
         }
 
-        private void StartAttack()
+        protected override void StartAttack()
         {
             if (Bot.Wow.TargetGuid != 0 && Bot.Target != null)
             {
@@ -216,7 +130,6 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
                         return;
                     }
 
-                    // Note: "Enrage" is a buff from the Arms tree, keeping as inline string
                     if (Bot.Player.HealthPercentage <= 50 && Bot.Player.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == "Enrage") && CustomCastSpell(WarriorWotlk.EnragedRegeneration))
                     {
                         return;
@@ -237,7 +150,6 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
                         return;
                     }
 
-                    // Note: "Sudden Death" is a talent proc, keeping as inline string
                     if ((Bot.Target.HealthPercentage <= 20 && CustomCastSpell(WarriorWotlk.Execute)) || (Bot.Player.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == "Sudden Death") && CustomCastSpell(WarriorWotlk.Execute)))
                     {
                         return;
@@ -248,7 +160,6 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
                         return;
                     }
 
-                    // Note: "Taste for Blood" is a talent proc, keeping as inline string
                     if (Bot.Player.Auras.Any(e => Bot.Db.GetSpellName(e.SpellId) == "Taste for Blood") && CustomCastSpell(WarriorWotlk.Overpower))
                     {
                         return;
@@ -269,7 +180,7 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
                         return;
                     }
                 }
-                else//Range
+                else // Out of range
                 {
                     if (CustomCastSpell(WarriorWotlk.Intercept))
                     {

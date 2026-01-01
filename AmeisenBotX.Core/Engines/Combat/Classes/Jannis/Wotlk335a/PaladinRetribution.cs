@@ -7,6 +7,7 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 {
+    [CombatClassMetadata("[WotLK335a] Paladin Retribution", "Jannis")]
     public class PaladinRetribution : BasicCombatClass
     {
         public PaladinRetribution(AmeisenBotInterfaces bot) : base(bot)

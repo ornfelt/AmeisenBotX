@@ -1,0 +1,81 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <!-- ============================================
+         AmeisenBotX Unified Theme - Animations
+         ============================================ -->
+    
+    <!-- Animation Durations -->
+    <Duration x:Key="DurationFast">0:0:0.1</Duration>
+    <Duration x:Key="DurationNormal">0:0:0.15</Duration>
+    <Duration x:Key="DurationSlow">0:0:0.25</Duration>
+    
+    <!-- Easing Functions -->
+    <QuadraticEase x:Key="EaseIn" EasingMode="EaseIn"/>
+    <QuadraticEase x:Key="EaseOut" EasingMode="EaseOut"/>
+    <QuadraticEase x:Key="EaseInOut" EasingMode="EaseInOut"/>
+    
+    <!-- ============================================
+         Card Hover Animations
+         ============================================ -->
+    
+    <!-- Scale up on hover -->
+    <Storyboard x:Key="CardHoverIn">
+        <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleX"
+                         To="1.02" Duration="0:0:0.15">
+            <DoubleAnimation.EasingFunction>
+                <QuadraticEase EasingMode="EaseOut"/>
+            </DoubleAnimation.EasingFunction>
+        </DoubleAnimation>
+        <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleY"
+                         To="1.02" Duration="0:0:0.15">
+            <DoubleAnimation.EasingFunction>
+                <QuadraticEase EasingMode="EaseOut"/>
+            </DoubleAnimation.EasingFunction>
+        </DoubleAnimation>
+    </Storyboard>
+    
+    <Storyboard x:Key="CardHoverOut">
+        <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleX"
+                         To="1.0" Duration="0:0:0.15">
+            <DoubleAnimation.EasingFunction>
+                <QuadraticEase EasingMode="EaseOut"/>
+            </DoubleAnimation.EasingFunction>
+        </DoubleAnimation>
+        <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleY"
+                         To="1.0" Duration="0:0:0.15">
+            <DoubleAnimation.EasingFunction>
+                <QuadraticEase EasingMode="EaseOut"/>
+            </DoubleAnimation.EasingFunction>
+        </DoubleAnimation>
+    </Storyboard>
+    
+    <!-- ============================================
+         Glow Effect Animations
+         ============================================ -->
+    
+    <Storyboard x:Key="GlowIn">
+        <DoubleAnimation Storyboard.TargetProperty="Effect.Opacity"
+                         To="0.6" Duration="0:0:0.15"/>
+    </Storyboard>
+    
+    <Storyboard x:Key="GlowOut">
+        <DoubleAnimation Storyboard.TargetProperty="Effect.Opacity"
+                         To="0" Duration="0:0:0.15"/>
+    </Storyboard>
+    
+    <!-- ============================================
+         Fade Animations
+         ============================================ -->
+    
+    <Storyboard x:Key="FadeIn">
+        <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                         From="0" To="1" Duration="0:0:0.2"/>
+    </Storyboard>
+    
+    <Storyboard x:Key="FadeOut">
+        <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                         From="1" To="0" Duration="0:0:0.2"/>
+    </Storyboard>
+    
+</ResourceDictionary>

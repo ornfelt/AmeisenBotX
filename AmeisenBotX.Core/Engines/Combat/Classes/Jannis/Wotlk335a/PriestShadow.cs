@@ -6,6 +6,7 @@ using AmeisenBotX.WowWotlk.Constants.Classes;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 {
+    [CombatClassMetadata("[WotLK335a] Priest Shadow", "Jannis")]
     public class PriestShadow : BasicCombatClass
     {
         public PriestShadow(AmeisenBotInterfaces bot) : base(bot)

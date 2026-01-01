@@ -100,6 +100,8 @@ namespace AmeisenBotX.WowMop.Objects
 
         public new Vector3 Position => Memory.Read(nint.Add(BaseAddress, (int)Memory.Offsets.WowUnitPosition), out Vector3 position) ? position : Vector3.Zero;
 
+        public WowQuestGiverStatus QuestGiverStatus => WowQuestGiverStatus.None; // Offset unknown for 5.4.8
+
         public WowPowerType PowerType => (WowPowerType)GetUnitDescriptor().PowerType;
 
         public WowRace Race => (WowRace)GetUnitDescriptor().Race;

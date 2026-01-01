@@ -204,6 +204,16 @@ namespace AmeisenBotX.Core
         [DisplayName("Grinding Profile")]
         public string GrindingProfile { get; set; } = string.Empty;
 
+        // UseCustomPortrait is now implicit - derived from whether CustomPortraitPath has a value
+        [JsonIgnore]
+        [Browsable(false)]
+        public bool UseCustomPortrait => !string.IsNullOrWhiteSpace(CustomPortraitPath);
+
+        [Category("Profiles")]
+        [DisplayName("Custom Portrait")]
+        [Description("Custom portrait image for this profile. If set, auto-capture is disabled.")]
+        public string CustomPortraitPath { get; set; } = string.Empty;
+
         [Browsable(false)]
         public Dictionary<string, Keybind> Hotkeys { get; set; } = [];
 
@@ -275,6 +285,10 @@ namespace AmeisenBotX.Core
         public bool MapRenderOres { get; set; } = true;
 
         [Category("Map")]
+        [DisplayName("Render Quest POIs")]
+        public bool MapRenderQuestPois { get; set; } = true;
+
+        [Category("Map")]
         [DisplayName("Render Player Extra")]
         public bool MapRenderPlayerExtra { get; set; } = false;
 
@@ -318,8 +332,9 @@ namespace AmeisenBotX.Core
         [DisplayName("Min Follow Distance")]
         public int MinFollowDistance { get; set; } = 5;
 
-        [Category("General")]
-        [DisplayName("Mounts")]
+        [Category("Mounts")]
+        [DisplayName("Mount Names")]
+        [Description("Comma-separated list of specific mount names to use.")]
         public string Mounts { get; set; } = string.Empty;
 
         [Category("Movement")]

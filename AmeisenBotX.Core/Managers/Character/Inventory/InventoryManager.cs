@@ -3,7 +3,6 @@ using AmeisenBotX.Core.Logic.Routines;
 using AmeisenBotX.Core.Managers.Character.Inventory.Objects;
 using AmeisenBotX.Logging;
 using AmeisenBotX.Logging.Enums;
-using AmeisenBotX.Wow;
 using AmeisenBotX.Wow.Objects;
 using AmeisenBotX.Wow.Objects.Enums;
 using System;
@@ -49,7 +48,7 @@ namespace AmeisenBotX.Core.Managers.Character.Inventory
             Bot = bot ?? throw new ArgumentNullException(nameof(bot));
             Config = config ?? throw new ArgumentNullException(nameof(config));
             Items = [];
-            
+
             // Initialize Organizers
             BagMonitor = new BagSpaceMonitor(bot, config);
             OrganizeEvent = new(TimeSpan.FromSeconds(10));
@@ -251,7 +250,10 @@ namespace AmeisenBotX.Core.Managers.Character.Inventory
 
         private void OrganizeInventory()
         {
-            if (Items.Count < 2) return;
+            if (Items.Count < 2)
+            {
+                return;
+            }
 
             // Stack similar first
             StackSimilarItems();
@@ -276,7 +278,7 @@ namespace AmeisenBotX.Core.Managers.Character.Inventory
 
             // 2. Iterate through slots linearly to find first mismatch
             int currentItemIndex = 0;
-            
+
             for (int bag = 0; bag <= 4; bag++) // Backpack (0) to Bag 4
             {
                 int numSlots = Bot.Wow.GetContainerNumSlots(bag);
@@ -303,12 +305,12 @@ namespace AmeisenBotX.Core.Managers.Character.Inventory
 
                     // MISMATCH: The item that SHOULD be here (targetItem) is currently at (targetItem.BagId, targetItem.BagSlot).
                     // We verify that the target position is actually different (it is, per condition above).
-                    
+
                     // SWAP: Move item FROM current location TO desired location
                     AmeisenLogger.I.Log("Sort", $"Swapping {targetItem.Name} from {targetItem.BagId}:{targetItem.BagSlot} to {bag}:{slot}");
-                    
+
                     Bot.Wow.LuaDoString($"ClearCursor(); PickupContainerItem({targetItem.BagId}, {targetItem.BagSlot}); PickupContainerItem({bag}, {slot}); ClearCursor();");
-                    
+
                     return true; // Performed one swap, return to wait for next tick
                 }
             }
@@ -352,7 +354,10 @@ namespace AmeisenBotX.Core.Managers.Character.Inventory
 
         private void TryAutoSellAtNearbyVendor()
         {
-            if (Bot.Player == null || Bot.Player.IsDead || Bot.Player.IsInCombat) return;
+            if (Bot.Player == null || Bot.Player.IsDead || Bot.Player.IsInCombat)
+            {
+                return;
+            }
 
             IWowUnit nearestVendor = Bot.Objects.All
                 .OfType<IWowUnit>()
@@ -365,11 +370,18 @@ namespace AmeisenBotX.Core.Managers.Character.Inventory
 
             if (!IsNearVendor)
             {
-                if (wasNearVendor) LastVendorSoldTo = 0;
+                if (wasNearVendor)
+                {
+                    LastVendorSoldTo = 0;
+                }
+
                 return;
             }
 
-            if (nearestVendor.Guid == LastVendorSoldTo) return;
+            if (nearestVendor.Guid == LastVendorSoldTo)
+            {
+                return;
+            }
 
             LastVendorSoldTo = nearestVendor.Guid;
             string vendorName = Bot.Db.GetUnitName(nearestVendor, out string name) ? name : "Unknown";

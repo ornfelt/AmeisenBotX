@@ -1,0 +1,37 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <!-- ============================================
+         AmeisenBotX Unified Theme
+         ============================================
+         
+         This is the main theme entry point.
+         It merges all theme-related resource dictionaries
+         in the correct order (dependencies first).
+         
+         Usage in App.xaml:
+         <ResourceDictionary Source="Themes/Theme.xaml"/>
+         
+         ============================================ -->
+    
+    <ResourceDictionary.MergedDictionaries>
+        <!-- 1. Colors (base - no dependencies) -->
+        <ResourceDictionary Source="Colors.xaml"/>
+        
+        <!-- 2. Typography (depends on Colors for text brushes) -->
+        <ResourceDictionary Source="Typography.xaml"/>
+        
+        <!-- 3. Spacing (base - no dependencies) -->
+        <ResourceDictionary Source="Spacing.xaml"/>
+        
+        <!-- 4. Animations (base - no dependencies) -->
+        <ResourceDictionary Source="Animations.xaml"/>
+        
+        <!-- 5. Controls (depends on Colors, Typography, Spacing) -->
+        <ResourceDictionary Source="Controls.xaml"/>
+        
+        <!-- 6. Components (depends on all above) -->
+        <ResourceDictionary Source="Components.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+    
+</ResourceDictionary>

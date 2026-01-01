@@ -8,6 +8,7 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 {
+    [CombatClassMetadata("[WotLK335a] Druid Feral Bear", "Jannis")]
     public class DruidFeralBear : BasicCombatClass
     {
         public DruidFeralBear(AmeisenBotInterfaces bot) : base(bot)

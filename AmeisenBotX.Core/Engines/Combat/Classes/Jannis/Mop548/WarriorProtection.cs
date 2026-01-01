@@ -11,6 +11,7 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Mop548
 {
+    [CombatClassMetadata("[MoP548] Warrior Protection", "Jannis")]
     public class WarriorProtection : BasicCombatClass
     {
         public WarriorProtection(AmeisenBotInterfaces bot) : base(bot)

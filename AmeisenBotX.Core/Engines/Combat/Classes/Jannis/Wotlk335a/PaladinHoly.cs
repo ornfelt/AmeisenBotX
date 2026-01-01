@@ -19,6 +19,8 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
     /// Optimized Holy Paladin for WotLK 3.3.5.
     /// Features: Intelligent healing, Sacred Shield, Hand of Sacrifice, Beacon management, and mana conservation.
     /// </summary>
+    /// </summary>
+    [CombatClassMetadata("[WotLK335a] Paladin Holy", "Jannis")]
     public class PaladinHoly : BasicCombatClass
     {
         public PaladinHoly(AmeisenBotInterfaces bot) : base(bot)

@@ -14,6 +14,10 @@ namespace AmeisenBotX.WowWotlk.Objects
     {
         private const short GO_DYNFLAG_SPARKLE = 0x08;
 
+        // Memory offsets for reading gameobject name
+        private const int GoCachePointerOffset = 0x1A4;
+        private const int GoNameOffset = 0x90;
+
         public byte Bytes0 { get; set; }
 
         public ulong CreatedBy { get; set; }
@@ -67,8 +71,8 @@ namespace AmeisenBotX.WowWotlk.Objects
                 Level = objPtr.Level;
                 Position = position;
 
-                Name = Memory.Read(nint.Add(BaseAddress, 0x1A4), out nint cachePtr)
-                    && Memory.Read(nint.Add(cachePtr, 0x90), out nint namePtr)
+                Name = Memory.Read(nint.Add(BaseAddress, GoCachePointerOffset), out nint cachePtr)
+                    && Memory.Read(nint.Add(cachePtr, GoNameOffset), out nint namePtr)
                     && Memory.ReadString(namePtr, Encoding.UTF8, out string n)
                     ? n
                     : "Unknown";

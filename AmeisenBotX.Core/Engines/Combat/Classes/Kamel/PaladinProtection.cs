@@ -11,6 +11,7 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
 {
+    [CombatClassMetadata("Paladin Protection", "Lukas")]
     internal class PaladinProtection : BasicKamelClass
     {
         // All spell constants moved to AmeisenBotX.WowWotlk.Constants.PaladinWotlk

@@ -17,8 +17,10 @@ public static unsafe class BridgeMarshaller
     public static int Write<T>(Span<byte> buffer, T value) where T : unmanaged
     {
         if (buffer.Length < sizeof(T))
+        {
             ThrowBufferTooSmall();
-            
+        }
+
         Unsafe.WriteUnaligned(ref MemoryMarshal.GetReference(buffer), value);
         return sizeof(T);
     }
@@ -30,8 +32,10 @@ public static unsafe class BridgeMarshaller
     public static T Read<T>(ReadOnlySpan<byte> buffer) where T : unmanaged
     {
         if (buffer.Length < sizeof(T))
+        {
             ThrowBufferTooSmall();
-            
+        }
+
         return Unsafe.ReadUnaligned<T>(ref MemoryMarshal.GetReference(buffer));
     }
 
@@ -47,11 +51,13 @@ public static unsafe class BridgeMarshaller
             return sizeof(ushort);
         }
 
-        var maxBytes = Encoding.UTF8.GetMaxByteCount(value.Length);
+        int maxBytes = Encoding.UTF8.GetMaxByteCount(value.Length);
         if (buffer.Length < sizeof(ushort) + maxBytes)
+        {
             ThrowBufferTooSmall();
+        }
 
-        var bytesWritten = Encoding.UTF8.GetBytes(value, buffer[sizeof(ushort)..]);
+        int bytesWritten = Encoding.UTF8.GetBytes(value, buffer[sizeof(ushort)..]);
         Unsafe.WriteUnaligned(ref MemoryMarshal.GetReference(buffer), (ushort)bytesWritten);
         return sizeof(ushort) + bytesWritten;
     }
@@ -63,10 +69,12 @@ public static unsafe class BridgeMarshaller
     public static string ReadString(ReadOnlySpan<byte> buffer)
     {
         if (buffer.Length < sizeof(ushort))
+        {
             ThrowBufferTooSmall();
+        }
 
-        var length = Unsafe.ReadUnaligned<ushort>(ref MemoryMarshal.GetReference(buffer));
-        
+        ushort length = Unsafe.ReadUnaligned<ushort>(ref MemoryMarshal.GetReference(buffer));
+
         return length switch
         {
             0 => string.Empty,
@@ -82,8 +90,10 @@ public static unsafe class BridgeMarshaller
     public static int WriteBool(Span<byte> buffer, bool value)
     {
         if (buffer.IsEmpty)
+        {
             ThrowBufferTooSmall();
-            
+        }
+
         MemoryMarshal.GetReference(buffer) = value ? (byte)1 : (byte)0;
         return 1;
     }
@@ -95,8 +105,10 @@ public static unsafe class BridgeMarshaller
     public static bool ReadBool(ReadOnlySpan<byte> buffer)
     {
         if (buffer.IsEmpty)
+        {
             ThrowBufferTooSmall();
-            
+        }
+
         return MemoryMarshal.GetReference(buffer) != 0;
     }
 
@@ -107,7 +119,9 @@ public static unsafe class BridgeMarshaller
     public static int WriteBytes(Span<byte> buffer, ReadOnlySpan<byte> value)
     {
         if (buffer.Length < sizeof(int) + value.Length)
+        {
             ThrowBufferTooSmall();
+        }
 
         Unsafe.WriteUnaligned(ref MemoryMarshal.GetReference(buffer), value.Length);
         value.CopyTo(buffer[sizeof(int)..]);
@@ -121,10 +135,12 @@ public static unsafe class BridgeMarshaller
     public static byte[] ReadBytes(ReadOnlySpan<byte> buffer)
     {
         if (buffer.Length < sizeof(int))
+        {
             ThrowBufferTooSmall();
+        }
 
-        var length = Unsafe.ReadUnaligned<int>(ref MemoryMarshal.GetReference(buffer));
-        
+        int length = Unsafe.ReadUnaligned<int>(ref MemoryMarshal.GetReference(buffer));
+
         return length switch
         {
             0 => [],
@@ -140,8 +156,10 @@ public static unsafe class BridgeMarshaller
     public static int WriteRaw(Span<byte> buffer, ReadOnlySpan<byte> value)
     {
         if (buffer.Length < value.Length)
+        {
             ThrowBufferTooSmall();
-            
+        }
+
         value.CopyTo(buffer);
         return value.Length;
     }
@@ -153,8 +171,10 @@ public static unsafe class BridgeMarshaller
     public static int WriteStruct<T>(Span<byte> buffer, in T value) where T : unmanaged
     {
         if (buffer.Length < sizeof(T))
+        {
             ThrowBufferTooSmall();
-            
+        }
+
         Unsafe.WriteUnaligned(ref MemoryMarshal.GetReference(buffer), value);
         return sizeof(T);
     }
@@ -166,8 +186,10 @@ public static unsafe class BridgeMarshaller
     public static T ReadStruct<T>(ReadOnlySpan<byte> buffer) where T : unmanaged
     {
         if (buffer.Length < sizeof(T))
+        {
             ThrowBufferTooSmall();
-            
+        }
+
         return Unsafe.ReadUnaligned<T>(ref MemoryMarshal.GetReference(buffer));
     }
 
@@ -265,7 +287,7 @@ public ref struct BufferReader
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public T Read<T>() where T : unmanaged
     {
-        var value = BridgeMarshaller.Read<T>(Unread);
+        T value = BridgeMarshaller.Read<T>(Unread);
         _position += Unsafe.SizeOf<T>();
         return value;
     }
@@ -273,8 +295,8 @@ public ref struct BufferReader
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public string ReadString()
     {
-        var length = BridgeMarshaller.Read<ushort>(Unread);
-        var value = BridgeMarshaller.ReadString(Unread);
+        ushort length = BridgeMarshaller.Read<ushort>(Unread);
+        string value = BridgeMarshaller.ReadString(Unread);
         _position += sizeof(ushort) + length;
         return value;
     }
@@ -282,8 +304,8 @@ public ref struct BufferReader
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public byte[] ReadBytes()
     {
-        var length = BridgeMarshaller.Read<int>(Unread);
-        var value = BridgeMarshaller.ReadBytes(Unread);
+        int length = BridgeMarshaller.Read<int>(Unread);
+        byte[] value = BridgeMarshaller.ReadBytes(Unread);
         _position += sizeof(int) + length;
         return value;
     }

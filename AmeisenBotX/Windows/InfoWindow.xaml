@@ -1,0 +1,47 @@
+﻿<Window x:Class="AmeisenBotX.Windows.InfoWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        xmlns:themes="clr-namespace:AmeisenBotX.Themes"
+        mc:Ignorable="d" 
+        Title="AmeisenBotX - Info" Height="480" Width="740" MinHeight="120" MinWidth="740" 
+        Icon="/icon.png" 
+        Loaded="Window_Loaded"
+        Style="{DynamicResource StandardWindowStyle}"
+        themes:WindowAssist.Icon="⚔️">
+
+    <themes:WindowAssist.HeaderContent>
+        <StackPanel Orientation="Horizontal">
+            <!-- Stats (iLvl) -->
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,16,0">
+                <TextBlock Text="Avg iLvl:" VerticalAlignment="Center" Margin="0,0,4,0" Foreground="{DynamicResource TextSecondaryBrush}"/>
+                <TextBlock x:Name="labelAvgItemLvl" Text="0" VerticalAlignment="Center" FontWeight="Bold" Foreground="{DynamicResource TextPrimaryBrush}"/>
+            </StackPanel>
+
+            <!-- Buttons -->
+            <Button x:Name="buttonEquipment" Content="Equipment" Click="ButtonEquipment_Click" 
+                    Style="{DynamicResource SecondaryButtonStyle}"
+                    Width="80" Height="26" Margin="0,0,2,0" FontSize="12"/>
+            <Button x:Name="buttonInventory" Content="Inventory" Click="ButtonInventory_Click"
+                    Style="{DynamicResource SecondaryButtonStyle}"
+                    Width="80" Height="26" Margin="0,0,2,0" FontSize="12"/>
+            <Button x:Name="buttonSpells" Content="Spells" Click="ButtonSpells_Click"
+                    Style="{DynamicResource SecondaryButtonStyle}"
+                    Width="80" Height="26" Margin="0,0,8,0" FontSize="12"/>
+            
+            <Button x:Name="buttonRefresh" Content="⟳" Click="ButtonRefresh_Click" 
+                    Style="{DynamicResource StandardToolbarButtonStyle}"
+                    ToolTip="Refresh" FontWeight="Bold"/>
+
+            <Button x:Name="buttonExit" Click="ButtonExit_Click" 
+                    Style="{DynamicResource StandardExitButtonStyle}"/>
+        </StackPanel>
+    </themes:WindowAssist.HeaderContent>
+
+    <Window.Content>
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+            <WrapPanel x:Name="equipmentWrapPanel" Background="{DynamicResource BackgroundAltBrush}"/>
+        </ScrollViewer>
+    </Window.Content>
+</Window>

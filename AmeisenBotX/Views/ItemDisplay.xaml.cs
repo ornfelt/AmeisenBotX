@@ -28,7 +28,7 @@ namespace AmeisenBotX.Views
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             labelItemName.Content = WowItem.Name;
-            labelItemId.Content = ItemScore.HasValue 
+            labelItemId.Content = ItemScore.HasValue
                 ? $"Id: {WowItem.Id} | Val: {ItemScore.Value:F1}"
                 : $"Id: {WowItem.Id}";
 

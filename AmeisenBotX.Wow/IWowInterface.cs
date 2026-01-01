@@ -142,11 +142,11 @@ namespace AmeisenBotX.Wow
         /// <param name="elementName">UI element name, find it using ingame command "/fstack"</param>
         void ClickUiElement(string elementName);
 
-        void CofirmLootRoll();
+        void ConfirmLootRoll();
 
-        void CofirmReadyCheck(bool isReady);
+        void ConfirmReadyCheck(bool isReady);
 
-        void CofirmStaticPopup();
+        void ConfirmStaticPopup();
 
         void CompleteQuest();
 

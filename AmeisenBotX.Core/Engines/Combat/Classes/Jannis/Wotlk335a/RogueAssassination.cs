@@ -16,6 +16,7 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
     /// Supports both leveling (Sinister Strike fallback) and max-level gameplay (Mutilate/Envenom).
     /// Features: Stealth openers, Hunger for Blood management, defensive cooldowns, and AoE support.
     /// </summary>
+    [CombatClassMetadata("[WotLK335a] Rogue Assassination", "Jannis")]
     public class RogueAssassination : BasicCombatClass
     {
         // Cooldown tracking for Vanish offensive usage

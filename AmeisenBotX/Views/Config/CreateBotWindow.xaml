@@ -1,0 +1,263 @@
+<Window x:Class="AmeisenBotX.Views.Config.CreateBotWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:AmeisenBotX.ViewModels.Config"
+        xmlns:themes="clr-namespace:AmeisenBotX.Themes"
+        mc:Ignorable="d"
+        Title="Create New Bot" Height="580" Width="650"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterOwner"
+        Style="{DynamicResource StandardWindowStyle}"
+        themes:WindowAssist.Icon="✨">
+    
+    <themes:WindowAssist.HeaderContent>
+         <Button Click="ButtonCancel_Click" 
+                Style="{DynamicResource StandardExitButtonStyle}"/>
+    </themes:WindowAssist.HeaderContent>
+
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVisibility"/>
+        
+        <!-- Section Header Style -->
+        <Style x:Key="SectionHeaderStyle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{DynamicResource AccentBrush}"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Margin" Value="0,15,0,8"/>
+        </Style>
+        
+        <!-- Required Field Indicator -->
+        <Style x:Key="RequiredIndicatorStyle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#FF6B6B"/>
+            <Setter Property="Text" Value=" *"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+        
+        <!-- Consistent form input heights -->
+        <Style TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
+            <Setter Property="Height" Value="28"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+        <Style TargetType="PasswordBox" BasedOn="{StaticResource {x:Type PasswordBox}}">
+            <Setter Property="Height" Value="28"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+        <Style TargetType="ComboBox" BasedOn="{StaticResource {x:Type ComboBox}}">
+            <Setter Property="Height" Value="28"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Main Content -->
+        <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto">
+            <StackPanel Margin="30,20,30,20">
+                
+                <!-- Header -->
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                    <TextBlock Text="✨" FontSize="24" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                    <StackPanel>
+                        <TextBlock Text="Create New Bot Profile" 
+                                   FontSize="20" FontWeight="Bold" 
+                                   Foreground="{DynamicResource TextPrimaryBrush}"/>
+                        <TextBlock Text="Configure your bot's basic settings to get started" 
+                                   FontSize="12" Opacity="0.7"
+                                   Foreground="{DynamicResource TextSecondaryBrush}"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <!-- Divider -->
+                <Border Height="1" Background="{DynamicResource BorderSubtleBrush}" Margin="0,10,0,5"/>
+
+                <!-- 1. Profile Section -->
+                <TextBlock Style="{StaticResource SectionHeaderStyle}">
+                    <Run Text="📁"/>
+                    <Run Text="Profile"/>
+                </TextBlock>
+                
+                <StackPanel Margin="0,0,0,5">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Bot Name" Style="{DynamicResource StandardFormLabelStyle}"/>
+                        <TextBlock Style="{StaticResource RequiredIndicatorStyle}"/>
+                    </StackPanel>
+                    <TextBox Text="{Binding BotName, UpdateSourceTrigger=PropertyChanged}" 
+                             ToolTip="Unique name for this profile (used as folder name)"/>
+                </StackPanel>
+
+                <!-- 2. Auto-Start WoW Section -->
+                <CheckBox IsChecked="{Binding AutoStartWow}" Margin="0,15,0,8">
+                    <CheckBox.Content>
+                        <TextBlock Foreground="{DynamicResource AccentBrush}" FontSize="13" FontWeight="SemiBold">
+                            <Run Text="🎮"/>
+                            <Run Text="Auto-Start WoW"/>
+                        </TextBlock>
+                    </CheckBox.Content>
+                </CheckBox>
+                
+                <Grid Margin="0,0,0,5" Visibility="{Binding AutoStartWow, Converter={StaticResource BoolToVisibility}}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0">
+                        <TextBlock Text="WoW Executable" Style="{DynamicResource StandardFormLabelStyle}"/>
+                        <TextBox Text="{Binding WowPath, UpdateSourceTrigger=PropertyChanged}" 
+                                 ToolTip="Full path to Wow.exe"/>
+                    </StackPanel>
+                    <Button Grid.Column="1" Content="📁" Click="ButtonBrowse_Click"
+                            Style="{DynamicResource IconButtonStyle}"
+                            Width="32" Height="28" Margin="8,18,0,0" VerticalAlignment="Bottom"
+                            ToolTip="Browse for Wow.exe"/>
+                </Grid>
+
+                <!-- 3. Server Section -->
+                <CheckBox IsChecked="{Binding AutoChangeRealmlist}" Margin="0,15,0,8">
+                    <CheckBox.Content>
+                        <TextBlock Foreground="{DynamicResource AccentBrush}" FontSize="13" FontWeight="SemiBold">
+                            <Run Text="🌐"/>
+                            <Run Text="Server &amp; Realmlist"/>
+                        </TextBlock>
+                    </CheckBox.Content>
+                </CheckBox>
+                
+                <Grid Margin="0,0,0,5" Visibility="{Binding AutoChangeRealmlist, Converter={StaticResource BoolToVisibility}}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="15"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <StackPanel Grid.Column="0">
+                        <TextBlock Text="Realm Name" Style="{DynamicResource StandardFormLabelStyle}"/>
+                        <TextBox Text="{Binding Realm}" ToolTip="Name of the realm to connect to"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="2">
+                        <TextBlock Text="Realmlist" Style="{DynamicResource StandardFormLabelStyle}"/>
+                        <TextBox Text="{Binding Realmlist}" ToolTip="Login server address (auto-detected from WoW folder)"/>
+                    </StackPanel>
+                </Grid>
+
+                <!-- Auto-Login Toggle with Account Fields -->
+                <CheckBox IsChecked="{Binding AutoLogin}" Margin="0,15,0,8">
+                    <CheckBox.Content>
+                        <TextBlock Foreground="{DynamicResource AccentBrush}" FontSize="13" FontWeight="SemiBold">
+                            <Run Text="🔐"/>
+                            <Run Text="Auto-Login"/>
+                        </TextBlock>
+                    </CheckBox.Content>
+                </CheckBox>
+                
+                <Grid Margin="0,0,0,5" Visibility="{Binding AutoLogin, Converter={StaticResource BoolToVisibility}}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="15"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="15"/>
+                        <ColumnDefinition Width="80"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0">
+                        <TextBlock Text="Username" Style="{DynamicResource StandardFormLabelStyle}"/>
+                        <TextBox Text="{Binding Username}" ToolTip="WoW account username"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="2">
+                        <TextBlock Text="Password" Style="{DynamicResource StandardFormLabelStyle}"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            
+                            <PasswordBox x:Name="txtPassword" PasswordChar="•"
+                                         ToolTip="WoW account password (stored locally)"
+                                         PasswordChanged="TxtPassword_PasswordChanged"/>
+                            
+                            <TextBox x:Name="txtVisiblePassword" Visibility="Collapsed"
+                                     Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}"
+                                     ToolTip="WoW account password (stored locally)"/>
+                            
+                            <ToggleButton x:Name="btnShowPassword" Grid.Column="1" 
+                                          Width="24" Height="24" Margin="5,0,0,0"
+                                          Click="BtnShowPassword_Click"
+                                          ToolTip="Show/Hide Password"
+                                          Background="Transparent" BorderThickness="0">
+                                <TextBlock Text="👁️" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            </ToggleButton>
+                        </Grid>
+                    </StackPanel>
+                    
+                    <StackPanel Grid.Column="4">
+                        <TextBlock Text="Char Slot" Style="{DynamicResource StandardFormLabelStyle}"/>
+                        <TextBox Text="{Binding CharacterSlot}" ToolTip="Character slot index (0 = first character)"/>
+                    </StackPanel>
+                </Grid>
+
+                <!-- 4. Combat Section -->
+                <TextBlock Style="{StaticResource SectionHeaderStyle}">
+                    <Run Text="⚔️"/>
+                    <Run Text="Combat"/>
+                </TextBlock>
+                
+                <StackPanel Margin="0,0,0,5">
+                    <TextBlock Text="Combat Class" Style="{DynamicResource StandardFormLabelStyle}"/>
+                    <ComboBox ItemsSource="{Binding CombatClasses}" 
+                              SelectedItem="{Binding SelectedCombatClass}"
+                              DisplayMemberPath="DisplayName"
+                              ToolTip="Select a built-in combat rotation"/>
+                </StackPanel>
+
+                <!-- 5. Options Section -->
+                <TextBlock Style="{StaticResource SectionHeaderStyle}">
+                    <Run Text="⚙️"/>
+                    <Run Text="Options"/>
+                </TextBlock>
+                
+                <StackPanel Margin="0,0,0,10">
+                    <CheckBox Content="Auto-position WoW window" IsChecked="{Binding AutoPositionWow}"
+                              ToolTip="Automatically move and resize the WoW window when bot starts"/>
+                    <CheckBox Content="Auto-repair equipment" IsChecked="{Binding AutoRepair}" Margin="0,5,0,0"
+                              ToolTip="Automatically repair gear at vendors"/>
+                    <CheckBox Content="Auto-sell junk items" IsChecked="{Binding AutoSell}" Margin="0,5,0,0"
+                              ToolTip="Automatically sell gray items at vendors"/>
+                    <CheckBox Content="Use mounts when traveling" IsChecked="{Binding UseMounts}" Margin="0,5,0,0"
+                              ToolTip="Mount up for faster travel"/>
+                </StackPanel>
+
+
+            </StackPanel>
+        </ScrollViewer>
+
+        <!-- Footer Buttons -->
+        <Border Grid.Row="1" Background="{DynamicResource BackgroundAltBrush}" 
+                BorderBrush="{DynamicResource BorderBrush}" BorderThickness="0,1,0,0" Padding="20,15">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                
+                <!-- Validation Status -->
+                <TextBlock Grid.Column="0" Text="{Binding ValidationMessage}" 
+                           VerticalAlignment="Center" FontSize="12"/>
+                
+                <!-- Buttons -->
+                <StackPanel Grid.Column="1" Orientation="Horizontal">
+                    <Button Content="Cancel" Click="ButtonCancel_Click"
+                            Style="{DynamicResource SecondaryButtonStyle}"
+                            Width="90" Height="32" Margin="0,0,10,0"/>
+                    <Button Content="Create" Click="ButtonCreate_Click" IsEnabled="{Binding CanCreate}"
+                            Width="100" Height="32" Style="{DynamicResource ButtonStyleAccent}"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

@@ -42,6 +42,7 @@ namespace AmeisenBotX.Core.Engines.Combat.Helpers.Targets
             AllModules.Add(new TankAssistModule());       // Priority: 90
             AllModules.Add(new HealerProtectionModule()); // Priority: 75
             AllModules.Add(new FocusFireModule());        // Priority: 15 * count
+            AllModules.Add(new QuestPriorityModule());    // Priority: 50 (when active)
         }
 
         /// <summary>

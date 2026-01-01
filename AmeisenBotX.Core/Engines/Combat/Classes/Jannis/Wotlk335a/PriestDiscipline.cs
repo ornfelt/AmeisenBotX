@@ -9,6 +9,7 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 {
+    [CombatClassMetadata("[WotLK335a] Priest Discipline", "Jannis")]
     public class PriestDiscipline : BasicCombatClass
     {
         public PriestDiscipline(AmeisenBotInterfaces bot) : base(bot)

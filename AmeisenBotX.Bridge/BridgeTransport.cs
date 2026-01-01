@@ -37,26 +37,30 @@ public sealed unsafe class BridgeTransport : IDisposable
         responseSize = 0;
 
         if (payload.Length > BridgeProtocol.MaxPayloadSize)
+        {
             return false;
+        }
 
-        var msgId = Interlocked.Increment(ref _nextMessageId);
-        var header = MessageHeader.CreateRequest(msgId, opCode, payload.Length);
-        
-        var pending = new PendingRequest(response.Length);
+        uint msgId = Interlocked.Increment(ref _nextMessageId);
+        MessageHeader header = MessageHeader.CreateRequest(msgId, opCode, payload.Length);
+
+        PendingRequest pending = new(response.Length);
         if (!_pendingRequests.TryAdd(msgId, pending))
+        {
             return false;
+        }
 
         try
         {
             // Serialize message header + payload
-            var totalSize = sizeof(MessageHeader) + payload.Length;
-            
+            int totalSize = sizeof(MessageHeader) + payload.Length;
+
             // Stackalloc optimization for small messages
             byte[]? rented = null;
             Span<byte> buffer = totalSize <= 2048
-                ? stackalloc byte[totalSize] 
+                ? stackalloc byte[totalSize]
                 : (rented = ArrayPool<byte>.Shared.Rent(totalSize)).AsSpan(0, totalSize);
-            
+
             try
             {
                 Unsafe.WriteUnaligned(ref MemoryMarshal.GetReference(buffer), header);
@@ -71,14 +75,13 @@ public sealed unsafe class BridgeTransport : IDisposable
             finally
             {
                 if (rented is not null)
+                {
                     ArrayPool<byte>.Shared.Return(rented);
+                }
             }
 
             // Wait for response or timeout
-            if (!pending.WaitHandle.Wait(timeoutMs))
-                return false;
-                
-            return pending.TryGetResponse(destination: response, out responseSize);
+            return pending.WaitHandle.Wait(timeoutMs) && pending.TryGetResponse(destination: response, out responseSize);
         }
         finally
         {
@@ -94,16 +97,18 @@ public sealed unsafe class BridgeTransport : IDisposable
     public bool SendEvent(BridgeOpCode opCode, ReadOnlySpan<byte> payload)
     {
         if (payload.Length > BridgeProtocol.MaxPayloadSize)
+        {
             return false;
+        }
 
-        var header = MessageHeader.CreateEvent(opCode, payload.Length);
-        var totalSize = sizeof(MessageHeader) + payload.Length;
-        
+        MessageHeader header = MessageHeader.CreateEvent(opCode, payload.Length);
+        int totalSize = sizeof(MessageHeader) + payload.Length;
+
         byte[]? rented = null;
-        Span<byte> buffer = totalSize <= 2048 
-            ? stackalloc byte[totalSize] 
+        Span<byte> buffer = totalSize <= 2048
+            ? stackalloc byte[totalSize]
             : (rented = ArrayPool<byte>.Shared.Rent(totalSize)).AsSpan(0, totalSize);
-            
+
         try
         {
             Unsafe.WriteUnaligned(ref MemoryMarshal.GetReference(buffer), header);
@@ -113,7 +118,9 @@ public sealed unsafe class BridgeTransport : IDisposable
         finally
         {
             if (rented is not null)
+            {
                 ArrayPool<byte>.Shared.Return(rented);
+            }
         }
     }
 
@@ -125,27 +132,29 @@ public sealed unsafe class BridgeTransport : IDisposable
     private void ReceiveLoop()
     {
         // Reuse buffer for receiving messages
-        var buffer = new byte[sizeof(MessageHeader) + BridgeProtocol.MaxPayloadSize];
-        var spin = new SpinWait();
+        byte[] buffer = new byte[sizeof(MessageHeader) + BridgeProtocol.MaxPayloadSize];
+        SpinWait spin = new();
 
         while (!_cts.Token.IsCancellationRequested)
         {
             try
             {
-                if (_ring.TryRead(buffer, out var bytesRead))
+                if (_ring.TryRead(buffer, out int bytesRead))
                 {
                     spin.Reset();
-                    
-                    if (bytesRead < sizeof(MessageHeader))
-                        continue;
 
-                    var header = Unsafe.ReadUnaligned<MessageHeader>(ref buffer[0]);
-                    var payload = buffer.AsSpan(sizeof(MessageHeader), header.PayloadSize);
+                    if (bytesRead < sizeof(MessageHeader))
+                    {
+                        continue;
+                    }
+
+                    MessageHeader header = Unsafe.ReadUnaligned<MessageHeader>(ref buffer[0]);
+                    Span<byte> payload = buffer.AsSpan(sizeof(MessageHeader), header.PayloadSize);
 
                     if ((header.Flags & MessageFlags.Response) != 0)
                     {
                         // Handle Response: Set result on pending request
-                        if (_pendingRequests.TryGetValue(header.MessageId, out var pending))
+                        if (_pendingRequests.TryGetValue(header.MessageId, out PendingRequest? pending))
                         {
                             pending.SetResponse(payload, (header.Flags & MessageFlags.Error) == 0);
                         }
@@ -170,15 +179,22 @@ public sealed unsafe class BridgeTransport : IDisposable
 
     public void Dispose()
     {
-        if (_disposed) return;
+        if (_disposed)
+        {
+            return;
+        }
+
         _disposed = true;
 
         _cts.Cancel();
         _receiveThread.Join(1000);
         _cts.Dispose();
-        
-        foreach (var req in _pendingRequests.Values)
+
+        foreach (PendingRequest req in _pendingRequests.Values)
+        {
             req.Dispose();
+        }
+
         _pendingRequests.Clear();
     }
 
@@ -189,7 +205,7 @@ public sealed unsafe class BridgeTransport : IDisposable
     private sealed class PendingRequest : IDisposable
     {
         public ManualResetEventSlim WaitHandle { get; } = new(false);
-        
+
         private readonly object _lock = new();
         private byte[]? _buffer;
         private int _responseSize;
@@ -205,7 +221,10 @@ public sealed unsafe class BridgeTransport : IDisposable
             lock (_lock)
             {
                 // If buffer is null, we've already timed out/disposed
-                if (_buffer is null) return;
+                if (_buffer is null)
+                {
+                    return;
+                }
 
                 _success = success;
                 if (success && data.Length <= _buffer.Length)
@@ -224,13 +243,17 @@ public sealed unsafe class BridgeTransport : IDisposable
                 size = _responseSize;
                 if (_success && _responseSize > 0 && _buffer is not null)
                 {
-                    if (destination.Length < _responseSize) return false;
+                    if (destination.Length < _responseSize)
+                    {
+                        return false;
+                    }
+
                     _buffer.AsSpan(0, _responseSize).CopyTo(destination);
                 }
                 return _success;
             }
         }
-        
+
         public void Dispose()
         {
             byte[]? bufToReturn;
@@ -239,7 +262,7 @@ public sealed unsafe class BridgeTransport : IDisposable
                 bufToReturn = _buffer;
                 _buffer = null;
             }
-            
+
             if (bufToReturn is not null)
             {
                 ArrayPool<byte>.Shared.Return(bufToReturn);

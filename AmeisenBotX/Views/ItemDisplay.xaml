@@ -4,33 +4,22 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:AmeisenBotX.Views"
-             mc:Ignorable="d" Height="56" Width="340" Foreground="{x:Null}" Loaded="UserControl_Loaded">
+             mc:Ignorable="d" Height="56" Width="340" Loaded="UserControl_Loaded">
     <Grid>
         <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Margin="6,4,0,0" Height="46" Width="46">
-            <Image x:Name="imageIcon" HorizontalAlignment="Left" VerticalAlignment="Top" Height="46" Width="46"></Image>
-            <Label x:Name="labelItemCount" Content="2" HorizontalAlignment="Right" Margin="0,0,4,2" VerticalAlignment="Bottom" FontSize="14" Padding="0" FontFamily="Bahnschrift Light">
+            <Image x:Name="imageIcon" HorizontalAlignment="Left" VerticalAlignment="Top" Height="46" Width="46"/>
+            <Label x:Name="labelItemCount" Content="2" HorizontalAlignment="Right" Margin="0,0,4,2" 
+                   VerticalAlignment="Bottom" FontSize="14">
                 <Label.Effect>
                     <DropShadowEffect BlurRadius="0" ShadowDepth="0.1"/>
                 </Label.Effect>
-                <Label.Foreground>
-                    <SolidColorBrush Color="{DynamicResource DarkForeground}" />
-                </Label.Foreground>
             </Label>
         </Grid>
-        <Label x:Name="labelItemName" Content="ItemName" HorizontalAlignment="Left" Margin="57,4,0,0" VerticalAlignment="Top" FontSize="14" FontWeight="Bold" Padding="0" FontFamily="Bahnschrift Light">
-            <Label.Foreground>
-                <SolidColorBrush Color="{DynamicResource DarkForeground}" />
-            </Label.Foreground>
-        </Label>
-        <Label x:Name="labelItemType" Content="Type" HorizontalAlignment="Left" Margin="57,20,0,0" VerticalAlignment="Top" Padding="0" FontFamily="Bahnschrift Light">
-            <Label.Foreground>
-                <SolidColorBrush Color="{DynamicResource DarkForeground}" />
-            </Label.Foreground>
-        </Label>
-        <Label x:Name="labelItemId" Content="Id" HorizontalAlignment="Left" Margin="57,40,0,0" VerticalAlignment="Top" Padding="0" Background="{x:Null}" FontSize="10" FontFamily="Bahnschrift Light">
-            <Label.Foreground>
-                <SolidColorBrush Color="{DynamicResource DarkBorder}" />
-            </Label.Foreground>
-        </Label>
+        <Label x:Name="labelItemName" Content="ItemName" HorizontalAlignment="Left" Margin="57,4,0,0" 
+               VerticalAlignment="Top" FontSize="14" FontWeight="Bold"/>
+        <Label x:Name="labelItemType" Content="Type" HorizontalAlignment="Left" Margin="57,20,0,0" 
+               VerticalAlignment="Top"/>
+        <Label x:Name="labelItemId" Content="Id" HorizontalAlignment="Left" Margin="57,40,0,0" 
+               VerticalAlignment="Top" FontSize="10" Foreground="{DynamicResource TextSecondaryBrush}"/>
     </Grid>
 </UserControl>

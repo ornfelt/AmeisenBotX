@@ -1,0 +1,37 @@
+﻿<Window x:Class="AmeisenBotX.Windows.StateConfig.StateJobConfigWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:themes="clr-namespace:AmeisenBotX.Themes"
+        mc:Ignorable="d"
+        Title="Job Config" Height="140" Width="300" 
+        MouseLeftButtonDown="Window_MouseLeftButtonDown" 
+        Icon="/icon.png" Loaded="Window_Loaded"
+        Style="{DynamicResource StandardWindowStyle}"
+        themes:WindowAssist.Icon="💼">
+
+    <themes:WindowAssist.HeaderContent>
+        <StackPanel Orientation="Horizontal">
+            <Button x:Name="buttonDone" Content="✔️" Click="ButtonDone_Click" 
+                    Style="{DynamicResource StandardToolbarButtonStyle}"
+                    ToolTip="Save"/>
+            <Button x:Name="buttonExit" Click="ButtonExit_Click" 
+                    Style="{DynamicResource StandardExitButtonStyle}"/>
+        </StackPanel>
+    </themes:WindowAssist.HeaderContent>
+
+    <!-- Content -->
+    <Window.Content>
+        <StackPanel Margin="10">
+            <Label x:Name="labelProfile" Content="Profile" 
+                   FontFamily="{DynamicResource FontPrimary}" Padding="0,4,4,4"
+                   BorderBrush="{DynamicResource AccentBrush}" BorderThickness="0,0,0,1"
+                   Foreground="{DynamicResource TextPrimaryBrush}"/>
+            
+            <ComboBox x:Name="comboboxProfile" Margin="0,8,0,0" Height="24" 
+                      FontFamily="{DynamicResource FontPrimary}" 
+                      SelectionChanged="ComboboxProfile_SelectionChanged" />
+        </StackPanel>
+    </Window.Content>
+</Window>

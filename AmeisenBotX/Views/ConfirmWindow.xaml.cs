@@ -9,7 +9,7 @@ namespace AmeisenBotX.Views
         {
             InitializeComponent();
 
-            messageTitle.Content = title;
+            Title = title;
             messageLabel.Text = message;
 
             if (message.Length > 64)
@@ -44,11 +44,6 @@ namespace AmeisenBotX.Views
             Point mouse = transform.Transform(pointToScreen);
             Left = mouse.X - (Width / 2);
             Top = mouse.Y - (Height / 2);
-        }
-
-        private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            DragMove();
         }
     }
 }

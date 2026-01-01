@@ -19,14 +19,9 @@ using AmeisenBotX.Logging.Enums;
 using AmeisenBotX.Memory.Win32;
 using AmeisenBotX.Wow.Objects;
 using AmeisenBotX.Wow.Objects.Enums;
-using AmeisenBotX.Wow.Shared.Lua;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading;
 
 namespace AmeisenBotX.Core.Logic
 {
@@ -200,6 +195,21 @@ namespace AmeisenBotX.Core.Logic
                (checkLoot, lootNode)
            );
 
+            // Auto Mode - Uses AutopilotEngine for automatic questing and progression
+            INode autoNode = new StickySelector
+            (
+                TimeSpan.FromSeconds(30),
+                new SuccessLeaf(() => Bot.Autopilot?.Execute(), "Auto.Execute"),
+                (() => Bot.Player.IsDead, new Leaf(Dead, "Auto.Dead")),
+                (() => Bot.Player.IsGhost, openworldGhostNode),
+                (checkCombat, combatNode),
+                (checkFirstAid, firstAidNode),
+                (checkEat, eatNode),
+                (checkRepairSell, interactWithMerchantNode),
+                (checkClassTrainer, interactWithClassTrainerNode),
+                (checkLoot, lootNode)
+            );
+
             INode pvpNode = new Waterfall
             (
                 new SuccessLeaf(() => Bot.Pvp.Execute(), "PvP.Execute"),
@@ -322,6 +332,7 @@ namespace AmeisenBotX.Core.Logic
                             (() => Bot.Objects.MapId.IsDungeonMap(), dungeonNode),
                             (() => Bot.Objects.MapId.IsRaidMap(), raidNode),
                             // handle open world modes
+                            (() => Mode == BotMode.Auto, autoNode),
                             (() => Mode == BotMode.Grinding, grindingNode),
                             (() => Mode == BotMode.Jobs, jobsNode),
                             (() => Mode == BotMode.Questing, questingNode),

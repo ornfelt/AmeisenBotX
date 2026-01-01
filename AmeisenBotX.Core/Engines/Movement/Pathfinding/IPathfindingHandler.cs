@@ -14,5 +14,9 @@ namespace AmeisenBotX.Core.Engines.Movement.Pathfinding
         Vector3 MoveAlongSurface(int mapId, Vector3 origin, Vector3 target);
 
         void Stop();
+
+        bool IsConnected { get; }
+
+        double AverageLatency { get; }
     }
 }

@@ -49,14 +49,17 @@ namespace AmeisenBotX.Core.Logic.Harvest.Modules
             return IsStandardLootChest(gobject.Name);
         }
 
-        private readonly string[] KnownLootChestNames = 
+        private readonly string[] KnownLootChestNames =
         [
             "Chest", "Trunk", "Footlocker", "Lockbox", "Strongbox"
         ];
 
         private bool IsStandardLootChest(string name)
         {
-            if (string.IsNullOrEmpty(name)) return false;
+            if (string.IsNullOrEmpty(name))
+            {
+                return false;
+            }
 
             foreach (string safeName in KnownLootChestNames)
             {

@@ -1,0 +1,327 @@
+<Window x:Class="AmeisenBotX.Windows.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="AmeisenBot" Height="300" Width="480" MinHeight="300" MinWidth="480" 
+        Closing="Window_Closing" WindowStyle="None" BorderThickness="1" 
+        ResizeMode="CanResizeWithGrip" MouseLeftButtonDown="Window_MouseLeftButtonDown" 
+        Loaded="Window_Loaded" Icon="/icon.png" AllowsTransparency="False"
+        Background="{DynamicResource BackgroundBrush}"
+        BorderBrush="{DynamicResource AccentBrush}">
+    
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="0" ResizeBorderThickness="5" />
+    </WindowChrome.WindowChrome>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="32"/>      <!-- Title bar -->
+            <RowDefinition Height="*"/>       <!-- Main content -->
+            <RowDefinition Height="Auto"/>      <!-- Status bar -->
+        </Grid.RowDefinitions>
+        
+        <!-- ========== TITLE BAR ========== -->
+        <Border Grid.Row="0" Background="{DynamicResource BackgroundBrush}" 
+                BorderBrush="{DynamicResource BorderBrush}" BorderThickness="0,0,0,1">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>  <!-- Control buttons (left) -->
+                    <ColumnDefinition Width="*"/>     <!-- Bot name (center-left) -->
+                    <ColumnDefinition Width="Auto"/>  <!-- Window buttons (right) -->
+                </Grid.ColumnDefinitions>
+                
+                <!-- Left: Control Buttons (aligned to WoW window corner) -->
+                <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="8,0,0,0">
+                    <Button x:Name="buttonStartPause" Content="▶" Click="ButtonStartPause_Click" 
+                            Style="{DynamicResource StandardToolbarButtonStyle}"
+                            ToolTip="Start/Pause"/>
+                    <ToggleButton x:Name="buttonToggleAutopilot" Content="🤖" Click="ButtonToggleAutopilot_Click" 
+                            Style="{DynamicResource StandardToolbarToggleButtonStyle}"
+                            ToolTip="Toggle Autopilot"/>
+                    <ToggleButton x:Name="buttonToggleOverlay" Content="📍" Click="ButtonToggleOverlay_Click" 
+                            Style="{DynamicResource StandardToolbarToggleButtonStyle}"
+                            ToolTip="Toggle Overlay"/>
+                    <Button x:Name="buttonNotification" Content="💡" Click="ButtonNotification_Click" 
+                            Style="{DynamicResource StandardToolbarButtonStyle}"
+                            ToolTip="Notifications"/>
+                    <Button x:Name="buttonDebug" Content="🔧" Click="ButtonToggleRendering_Click" 
+                            Style="{DynamicResource StandardToolbarButtonStyle}"
+                            ToolTip="Debug Rendering"/>
+                    
+                    <Rectangle Width="1" Height="20" Fill="{DynamicResource BorderMutedBrush}" Margin="8,0"/>
+                    
+                    <!-- Bot Name (larger, prominent) -->
+                    <Label x:Name="labelPlayerName" Content="AmeisenBotX" 
+                           VerticalAlignment="Center" FontSize="18" FontFamily="Bahnschrift SemiBold"
+                           Foreground="{DynamicResource AccentBrush}" Padding="0"/>
+                </StackPanel>
+                
+                <!-- Right: Window buttons -->
+                <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
+                    <Button x:Name="buttonBtDebug" Content="🌳" Click="ButtonBtDebug_Click" 
+                            Style="{DynamicResource StandardToolbarButtonStyle}"
+                            ToolTip="Behavior Tree"/>
+                    <Button x:Name="buttonAiDebug" Content="🧠" Click="ButtonAiDebug_Click" 
+                            Style="{DynamicResource StandardToolbarButtonStyle}"
+                            ToolTip="AI Brain"/>
+                    <Button x:Name="buttonToggleRelationshipWindow" Content="🙂" Click="ButtonToggleRelationshipWindow_Click" 
+                            Style="{DynamicResource StandardToolbarButtonStyle}"
+                            ToolTip="Relationships"/>
+                    <Button x:Name="buttonToggleMapWindow" Content="🗺️" Click="ButtonToggleMapWindow_Click" 
+                            Style="{DynamicResource StandardToolbarButtonStyle}"
+                            ToolTip="Map/Radar"/>
+                    <Button x:Name="buttonToggleAutopilotDebugWindow" Content="🚀" Click="ButtonToggleAutopilotDebugWindow_Click" 
+                            Style="{DynamicResource StandardToolbarButtonStyle}"
+                            ToolTip="Autopilot Debug"/>
+                    <Button x:Name="buttonToggleInfoWindow" Content="⚔️" Click="ButtonToggleInfoWindow_Click" 
+                            Style="{DynamicResource StandardToolbarButtonStyle}"
+                            ToolTip="Character Info"/>
+                    <Button x:Name="buttonDevTools" Content="⚒" Click="ButtonDevTools_Click" 
+                            Style="{DynamicResource StandardToolbarButtonStyle}"
+                            ToolTip="Dev Tools"/>
+                    <Button x:Name="buttonConfig" Content="⚙️" Click="ButtonConfig_Click" 
+                            Style="{DynamicResource StandardToolbarButtonStyle}"
+                            Margin="0,0,4,0" ToolTip="Config"/>
+                    <Rectangle Width="1" Height="20" Fill="{DynamicResource BorderBrush}" Margin="4,0"/>
+                    <Button x:Name="buttonExit" Click="ButtonExit_Click" 
+                            Style="{DynamicResource StandardExitButtonStyle}"
+                            Margin="4,0,6,0"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+        
+        <!-- ========== MAIN CONTENT ========== -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>  <!-- Left panel -->
+                <ColumnDefinition Width="*"/>    <!-- WoW render area -->
+            </Grid.ColumnDefinitions>
+            
+            <!-- Left Panel: Character Info -->
+            <Border Grid.Column="0" Background="{DynamicResource BackgroundBrush}"
+                    BorderBrush="{DynamicResource BorderBrush}" BorderThickness="0,0,1,0">
+                <Grid Margin="8,8,8,8">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>  <!-- Health bars -->
+                        <RowDefinition Height="8"/>     <!-- Spacer -->
+                        <RowDefinition Height="Auto"/>  <!-- Character info -->
+                        <RowDefinition Height="8"/>     <!-- Spacer -->
+                        <RowDefinition Height="Auto"/>  <!-- Location info -->
+                        <RowDefinition Height="*"/>     <!-- Flex -->
+                        <RowDefinition Height="Auto"/>  <!-- State selector -->
+                        <RowDefinition Height="4"/>     <!-- Spacer -->
+                        <RowDefinition Height="Auto"/>  <!-- Combat info -->
+                    </Grid.RowDefinitions>
+                    
+                    <!-- Health/Mana/Exp Bars -->
+                    <StackPanel Grid.Row="0">
+                        <Grid Height="16">
+                            <ProgressBar x:Name="progressbarHealth" 
+                                         Foreground="{DynamicResource HealthGradientBrush}" Value="50"/>
+                            <Label x:Name="labelCurrentHealth" Content="0/0" 
+                                   HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                                   FontFamily="Consolas" FontSize="10" Padding="0">
+                                <Label.Effect>
+                                    <DropShadowEffect BlurRadius="3" ShadowDepth="0" Direction="0" Color="#000000"/>
+                                </Label.Effect>
+                            </Label>
+                        </Grid>
+                        <Grid Height="16" Margin="0,4,0,0">
+                            <ProgressBar x:Name="progressbarSecondary" 
+                                         Foreground="{DynamicResource ManaGradientBrush}" Value="50"/>
+                            <Label x:Name="labelCurrentSecondary" Content="0/0" 
+                                   HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                                   FontFamily="Consolas" FontSize="10" Padding="0">
+                                <Label.Effect>
+                                    <DropShadowEffect BlurRadius="3" ShadowDepth="0" Direction="0" Color="#000000"/>
+                                </Label.Effect>
+                            </Label>
+                        </Grid>
+                        <Grid Height="14" Margin="0,4,0,0">
+                            <ProgressBar x:Name="progressbarExp" 
+                                         Foreground="{DynamicResource ExpGradientBrush}" Value="50"/>
+                            <Label x:Name="labelCurrentExp" Content="52%" 
+                                   HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                                   FontFamily="Consolas" FontSize="9" Padding="0">
+                                <Label.Effect>
+                                    <DropShadowEffect BlurRadius="3" ShadowDepth="0" Direction="0" Color="#000000"/>
+                                </Label.Effect>
+                            </Label>
+                        </Grid>
+                    </StackPanel>
+                    
+                    <!-- Character Info -->
+                    <StackPanel Grid.Row="2" Margin="0,4">
+                        <Grid Margin="0,2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="44"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Content="Level:" Grid.Column="0" Foreground="{DynamicResource TextSecondaryBrush}" FontSize="11"/>
+                            <Label x:Name="labelCurrentLevel" Content="80 (iLvl 245)" Grid.Column="1" FontSize="11"/>
+                        </Grid>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="44"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Content="Race:" Grid.Column="0" Foreground="{DynamicResource TextSecondaryBrush}" FontSize="11"/>
+                            <Label x:Name="labelCurrentRace" Content="Human" Grid.Column="1" FontSize="11"/>
+                        </Grid>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="44"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Content="Class:" Grid.Column="0" Foreground="{DynamicResource TextSecondaryBrush}" FontSize="11"/>
+                            <Label x:Name="labelCurrentClass" Content="Paladin" Grid.Column="1" FontSize="11" 
+                                   Foreground="{DynamicResource AccentBrush}"/>
+                        </Grid>
+                    </StackPanel>
+                    
+                    <!-- Location Info -->
+                    <StackPanel Grid.Row="4" Margin="0,4">
+                        <Rectangle Height="1" Fill="{DynamicResource BorderMutedBrush}" Margin="0,0,0,4"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="36"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Content="Map:" Grid.Column="0" Foreground="{DynamicResource TextSecondaryBrush}" FontSize="10"/>
+                            <Label x:Name="labelMapName" Content="Eastern Kingdoms" Grid.Column="1" FontSize="10"/>
+                        </Grid>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="36"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Content="Zone:" Grid.Column="0" Foreground="{DynamicResource TextSecondaryBrush}" FontSize="10"/>
+                            <Label x:Name="labelZoneName" Content="Elwynn Forest" Grid.Column="1" FontSize="10"/>
+                        </Grid>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="36"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Content="Area:" Grid.Column="0" Foreground="{DynamicResource TextSecondaryBrush}" FontSize="10"/>
+                            <Label x:Name="labelZoneSubName" Content="Goldshire" Grid.Column="1" FontSize="10"/>
+                        </Grid>
+                    </StackPanel>
+                    
+                    <!-- State Selector -->
+                    <Grid Grid.Row="6" Margin="0,4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="32"/>
+                        </Grid.ColumnDefinitions>
+                        <ComboBox x:Name="comboboxStateOverride" Grid.Column="0" Text="None" 
+                                  SelectionChanged="ComboboxStateOverride_SelectionChanged"/>
+                        <Button x:Name="buttonStateConfig" Grid.Column="1" Content="⚙️" 
+                                Click="ButtonStateConfig_Click" Height="28" Width="28" 
+                                Style="{DynamicResource IconButtonStyle}"
+                                Margin="4,0,0,0" IsEnabled="False"/>
+                    </Grid>
+                    
+                    <!-- Combat State -->
+                    <Grid Grid.Row="8">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Ellipse x:Name="combatIndicator" Grid.Column="0" Width="8" Height="8" 
+                                 Fill="{DynamicResource SuccessBrush}" Margin="0,0,6,0"/>
+                        <Label x:Name="labelCombatState" Grid.Column="1" Content="Idle" FontSize="10"
+                               Foreground="{DynamicResource TextSecondaryBrush}"/>
+                    </Grid>
+                </Grid>
+            </Border>
+            
+            <!-- Right Panel: WoW Render Area -->
+            <Border Grid.Column="1" Background="{DynamicResource BackgroundAltBrush}">
+                <Grid>
+                    <Rectangle x:Name="wowRect"/>
+                </Grid>
+            </Border>
+        </Grid>
+        
+        <!-- ========== STATUS BAR ========== -->
+        <Border Grid.Row="2" x:Name="StatusBarBorder" SizeChanged="StatusBarBorder_SizeChanged" Background="{DynamicResource BackgroundAltBrush}"
+                BorderBrush="{DynamicResource BorderBrush}" BorderThickness="0,1,0,0">
+            <WrapPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="8,4">
+                    <!-- Tick Time -->
+                    <Border Style="{DynamicResource StatusPillBorderStyle}">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Tick" Style="{DynamicResource StatusLabelStyle}"/>
+                            <TextBlock x:Name="labelCurrentTickTime" Text="0.00" Style="{DynamicResource StatusValueStyle}" Foreground="{DynamicResource SuccessBrush}"/>
+                            <TextBlock Text=" ms" Style="{DynamicResource StatusLabelStyle}" Margin="0"/>
+                        </StackPanel>
+                    </Border>
+                    
+                    <!-- Navmesh Status -->
+                    <Border Style="{DynamicResource StatusPillBorderStyle}">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Nav" Style="{DynamicResource StatusLabelStyle}"/>
+                            <TextBlock x:Name="labelNavStatus" Text="DC" Style="{DynamicResource StatusValueStyle}" Foreground="{DynamicResource ErrorBrush}"/>
+                            <TextBlock x:Name="labelNavUnit" Text=" ms" Style="{DynamicResource StatusLabelStyle}" Margin="0" Visibility="Collapsed"/>
+                        </StackPanel>
+                    </Border>
+                    
+                    <!-- Objects -->
+                    <Border Style="{DynamicResource StatusPillBorderStyle}">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Objects" Style="{DynamicResource StatusLabelStyle}"/>
+                            <TextBlock x:Name="labelCurrentObjectCount" Text="0" Style="{DynamicResource StatusValueStyle}"/>
+                        </StackPanel>
+                    </Border>
+                    
+                    <!-- Hooks -->
+                    <Border Style="{DynamicResource StatusPillBorderStyle}">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Hooks" Style="{DynamicResource StatusLabelStyle}"/>
+                            <TextBlock x:Name="labelHookCallCount" Text="0" Style="{DynamicResource StatusValueStyle}"/>
+                        </StackPanel>
+                    </Border>
+                    
+                    <!-- Memory Read/Write -->
+                    <Border Style="{DynamicResource StatusPillBorderStyle}">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Memory" Style="{DynamicResource StatusLabelStyle}"/>
+                            <TextBlock x:Name="labelRpmCallCount" Text="0" Style="{DynamicResource StatusValueStyle}" Foreground="{DynamicResource AccentBrush}"/>
+                            <TextBlock Text=" R" Style="{DynamicResource StatusLabelStyle}" FontSize="9"/>
+                            <TextBlock x:Name="labelWpmCallCount" Text="0" Style="{DynamicResource StatusValueStyle}" Foreground="{DynamicResource ManaBarBrush}"/>
+                            <TextBlock Text=" W" Style="{DynamicResource StatusLabelStyle}" FontSize="9" Margin="0"/>
+                        </StackPanel>
+                    </Border>
+                    
+                    <!-- Behavior Tree State -->
+                    <Border Style="{DynamicResource StatusPillBorderStyle}" Margin="0">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="State" Style="{DynamicResource StatusLabelStyle}"/>
+                            <TextBlock x:Name="labelBtState" Text="Idle" Style="{DynamicResource StatusValueStyle}" Foreground="{DynamicResource AccentBrush}"/>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+                
+                <!-- Right Side: Class, PID pills -->
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="8,4,8,4">
+                    <!-- Combat Class Pill -->
+                    <Border Background="{DynamicResource AccentSubtleBrush}" CornerRadius="3" Padding="6,4" Margin="0,0,8,0">
+                        <TextBlock x:Name="labelCurrentCombatclass" Text="No CombatClass" 
+                                   FontSize="10" FontWeight="SemiBold" Foreground="{DynamicResource AccentBrush}" VerticalAlignment="Center"/>
+                    </Border>
+                    
+                    <!-- PID Pill -->
+                    <Border Style="{DynamicResource StatusPillBorderStyle}" Margin="0">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="PID" Style="{DynamicResource StatusLabelStyle}"/>
+                            <TextBlock x:Name="labelPID" Text="0" Style="{DynamicResource StatusValueStyle}" FontSize="10"/>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </WrapPanel>
+        </Border>
+    </Grid>
+</Window>

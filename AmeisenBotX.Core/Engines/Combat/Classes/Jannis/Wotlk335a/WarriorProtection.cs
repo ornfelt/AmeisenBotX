@@ -16,6 +16,7 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
     /// Optimized Protection Warrior for WotLK 3.3.5.
     /// Features: Heroic Throw pull, Vigilance, Intervene for party protection, better defensive management.
     /// </summary>
+    [CombatClassMetadata("[WotLK335a] Warrior Protection", "Jannis")]
     public class WarriorProtection : BasicCombatClass
     {
         public WarriorProtection(AmeisenBotInterfaces bot) : base(bot)

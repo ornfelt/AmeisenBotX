@@ -94,7 +94,9 @@ namespace AmeisenBotX.Core.Logic.Startup
 
             // Ensure window is visible (only if not using AutoPosition - it handles showing)
             if (!config.AutoPositionWow)
+            {
                 EnsureWindowVisible();
+            }
 
             OnWoWStarted?.Invoke();
             return BtStatus.Success;
@@ -151,14 +153,14 @@ namespace AmeisenBotX.Core.Logic.Startup
                         }
                         return true;
                     }
-                    
+
                     // If hook detected window, check again immediately without sleep
                     if (_windowCreated)
                     {
                         _windowCreated = false; // Reset and continue checking
                         continue;
                     }
-                    
+
                     Thread.Sleep(50);
                     waited += 50;
                 }

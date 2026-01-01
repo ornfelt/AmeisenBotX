@@ -18,7 +18,11 @@ namespace AmeisenBotX.Core.Logic.Services
 
         public void CheckState()
         {
-            if (!CheckThrottle.Ready) return;
+            if (!CheckThrottle.Ready)
+            {
+                return;
+            }
+
             CheckThrottle.Run();
 
             if (!Config.UseFirstAid || Bot.Player.IsInCombat || Bot.Player.IsDead || Bot.Player.IsGhost)
@@ -53,8 +57,11 @@ namespace AmeisenBotX.Core.Logic.Services
 
         public BtStatus Execute()
         {
-            if (Bot.Player.IsInCombat) return BtStatus.Failed;
-            
+            if (Bot.Player.IsInCombat)
+            {
+                return BtStatus.Failed;
+            }
+
             // If we are channeling (First Aid is a channel), waiting is success/ongoing
             if (Bot.Player.IsCasting)
             {
@@ -63,7 +70,9 @@ namespace AmeisenBotX.Core.Logic.Services
 
             // Re-check conditions
             if (Bot.Player.Auras.Any(a => a.SpellId == 11196 || Bot.Db.GetSpellName(a.SpellId) == "Recently Bandaged"))
+            {
                 return BtStatus.Success; // Done
+            }
 
             if (GetBestBandage(out IWowInventoryItem bandage))
             {
@@ -74,9 +83,9 @@ namespace AmeisenBotX.Core.Logic.Services
                     {
                         Bot.Wow.ChangeTarget(Bot.Player.Guid);
                     }
-                    
+
                     Bot.Wow.UseItemByName(bandage.Name);
-                    
+
                     return BtStatus.Ongoing;
                 }
                 return BtStatus.Ongoing;

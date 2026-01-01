@@ -1,191 +1,266 @@
+using AmeisenBotX.Core;
+using AmeisenBotX.Core.Engines.Combat.Classes;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Data;
-using AmeisenBotX.Core;
 
 namespace AmeisenBotX.ViewModels.Config
 {
     public class DynamicConfigViewModel : INotifyPropertyChanged
     {
         private readonly AmeisenBotConfig _config;
+        private readonly System.Collections.Generic.IEnumerable<AmeisenBotX.Core.Engines.Combat.Classes.ICombatClass> _combatClasses;
         private string _searchText;
 
-        public DynamicConfigViewModel(AmeisenBotConfig config)
+        public DynamicConfigViewModel(AmeisenBotConfig config, System.Collections.Generic.IEnumerable<AmeisenBotX.Core.Engines.Combat.Classes.ICombatClass> combatClasses)
         {
             _config = config;
-            Properties = new ObservableCollection<ConfigPropertyViewModel>();
-            
-            // Populate properties via Reflection
-            foreach (var prop in typeof(AmeisenBotConfig).GetProperties(BindingFlags.Public | BindingFlags.Instance))
+            _combatClasses = combatClasses;
+            Properties = [];
+
+            // Build property list with pre-computed sorting
+            List<ConfigPropertyViewModel> propertyList = [];
+
+            foreach (PropertyInfo prop in typeof(AmeisenBotConfig).GetProperties(BindingFlags.Public | BindingFlags.Instance))
             {
-                // Skip attributes that shouldn't be edited
-                if (prop.GetCustomAttribute<System.Text.Json.Serialization.JsonIgnoreAttribute>() != null) continue;
-                if (!prop.CanWrite) continue;
-
-                ConfigPropertyViewModel viewModel = null;
-
-                if (prop.Name == "BuiltInCombatClassName")
+                if (prop.GetCustomAttribute<System.Text.Json.Serialization.JsonIgnoreAttribute>() != null)
                 {
-                    viewModel = new SelectionConfigProperty(_config, prop, GetCombatClasses());
+                    continue;
                 }
-                else if (prop.Name == "PathToWowExe" || prop.Name.EndsWith("Profile") || prop.Name.EndsWith("File"))
+
+                if (!prop.CanWrite)
                 {
-                    viewModel = new FileConfigProperty(_config, prop);
+                    continue;
                 }
-                else if (prop.PropertyType == typeof(bool))
-                    viewModel = new BoolConfigProperty(_config, prop);
-                else if (prop.PropertyType == typeof(string))
-                    viewModel = new StringConfigProperty(_config, prop);
-                else if (prop.PropertyType == typeof(int))
-                    viewModel = new IntConfigProperty(_config, prop);
-                else if (prop.PropertyType == typeof(float))
-                    viewModel = new FloatConfigProperty(_config, prop);
-                else if (prop.PropertyType == typeof(double))
-                    viewModel = new DoubleConfigProperty(_config, prop);
-                else if (prop.PropertyType.IsEnum)
-                    viewModel = new EnumConfigProperty(_config, prop);
-                
-                // Add more types here (List, etc) if needed
-                
-                if (viewModel != null)
+
+                ConfigPropertyViewModel viewModel = CreatePropertyViewModel(prop);
+                if (viewModel == null)
                 {
-                    string rawCategory = viewModel.Category ?? "";
-
-                    // Skip "Map" category as per user request
-                    if (string.Equals(rawCategory, "Map", StringComparison.OrdinalIgnoreCase))
-                    {
-                        continue;
-                    }
-
-                    if (CategoryPriorities.TryGetValue(rawCategory, out int order))
-                    {
-                        viewModel.CategoryOrder = order;
-                    }
-                    else
-                    {
-                        viewModel.CategoryOrder = 999;
-                    }
-
-                    if (CategoryEmojis.TryGetValue(rawCategory, out string emoji))
-                    {
-                        viewModel.Category = $"{emoji} {rawCategory}";
-                    }
-
-                    // HEURISTIC: Enable Slider for recognized numeric patterns
-                    if (viewModel is IntConfigProperty || viewModel is FloatConfigProperty || viewModel is DoubleConfigProperty)
-                    {
-                        if (prop.Name.Contains("Percent") || prop.Name.Contains("Threshold"))
-                        {
-                             viewModel.UseSlider = true;
-                             viewModel.Minimum = 0;
-                             viewModel.Maximum = 100;
-                        }
-                        else if (prop.Name.Contains("Distance") || prop.Name.Contains("Range") || prop.Name.Contains("Radius"))
-                        {
-                             viewModel.UseSlider = true;
-                             viewModel.Minimum = 0;
-                             viewModel.Maximum = 100;
-                             
-                             // Exceptions for search radii that might be larger
-                             if (prop.Name.Contains("Merchant") || prop.Name.Contains("Repair")) 
-                             {
-                                 viewModel.Maximum = 500;
-                             }
-                        }
-                        else if (prop.Name.Contains("Fps"))
-                        {
-                            viewModel.UseSlider = true;
-                            viewModel.Minimum = 10;
-                            viewModel.Maximum = 144;
-                        }
-                        else if (prop.Name.Contains("Slots"))
-                        {
-                            viewModel.UseSlider = true;
-                            viewModel.Minimum = 0;
-                            viewModel.Maximum = 20;
-                        }
-                    }
-
-                    Properties.Add(viewModel);
+                    continue;
                 }
+
+                // Skip "Map" category
+                string rawCategory = viewModel.Category ?? "";
+                if (rawCategory.Equals("Map", StringComparison.OrdinalIgnoreCase))
+                {
+                    continue;
+                }
+
+                // Apply category order and emoji
+                viewModel.CategoryOrder = CategoryPriorities.TryGetValue(rawCategory, out int order) ? order : 999;
+                if (CategoryEmojis.TryGetValue(rawCategory, out string emoji))
+                {
+                    viewModel.Category = $"{emoji} {rawCategory}";
+                }
+
+                // Apply slider heuristics for numeric properties
+                ApplySliderHeuristics(viewModel, prop);
+
+                propertyList.Add(viewModel);
             }
 
-            // Setup CollectionView for grouping and filtering
+            // Pre-sort: by category order, then by name
+            foreach (ConfigPropertyViewModel vm in propertyList.OrderBy(p => p.CategoryOrder).ThenBy(p => p.Name))
+            {
+                Properties.Add(vm);
+            }
+
+            // Setup CollectionView for grouping and filtering (no sorting needed - already sorted)
             PropertiesView = CollectionViewSource.GetDefaultView(Properties);
             PropertiesView.GroupDescriptions.Add(new PropertyGroupDescription(nameof(ConfigPropertyViewModel.Category)));
             PropertiesView.Filter = FilterProperties;
-            PropertiesView.SortDescriptions.Add(new SortDescription(nameof(ConfigPropertyViewModel.CategoryOrder), ListSortDirection.Ascending));
-            PropertiesView.SortDescriptions.Add(new SortDescription(nameof(ConfigPropertyViewModel.Name), ListSortDirection.Ascending));
         }
 
+        private ConfigPropertyViewModel CreatePropertyViewModel(PropertyInfo prop)
+        {
+            return prop.Name == "BuiltInCombatClassName"
+                ? new ObjectSelectionConfigProperty(_config, prop, GetCombatClasses())
+                : (prop.Name.Contains("Portrait") || prop.Name.Contains("Image")) && prop.PropertyType == typeof(string)
+                ? new ImageConfigProperty(_config, prop)
+                : prop.Name == "PathToWowExe" || prop.Name.EndsWith("Profile") || prop.Name.EndsWith("File")
+                ? new FileConfigProperty(_config, prop)
+                : prop.GetCustomAttribute<PasswordPropertyTextAttribute>()?.Password == true
+                ? new PasswordConfigProperty(_config, prop)
+                : prop.PropertyType switch
+                {
+                    Type t when t == typeof(bool) => new BoolConfigProperty(_config, prop),
+                    Type t when t == typeof(string) => new StringConfigProperty(_config, prop),
+                    Type t when t == typeof(int) => new IntConfigProperty(_config, prop),
+                    Type t when t == typeof(float) => new FloatConfigProperty(_config, prop),
+                    Type t when t == typeof(double) => new DoubleConfigProperty(_config, prop),
+                    Type t when t.IsEnum => new EnumConfigProperty(_config, prop),
+                    _ => null
+                };
+        }
+
+        private static void ApplySliderHeuristics(ConfigPropertyViewModel viewModel, PropertyInfo prop)
+        {
+            if (viewModel is not (IntConfigProperty or FloatConfigProperty or DoubleConfigProperty))
+            {
+                return;
+            }
+
+            if (prop.Name.Contains("Percent") || prop.Name.Contains("Threshold"))
+            {
+                viewModel.UseSlider = true;
+                viewModel.Minimum = 0;
+                viewModel.Maximum = 100;
+            }
+            else if (prop.Name.Contains("Distance") || prop.Name.Contains("Range") || prop.Name.Contains("Radius"))
+            {
+                viewModel.UseSlider = true;
+                viewModel.Minimum = 0;
+                viewModel.Maximum = prop.Name.Contains("Merchant") || prop.Name.Contains("Repair") ? 500 : 100;
+            }
+            else if (prop.Name.Contains("Fps"))
+            {
+                viewModel.UseSlider = true;
+                viewModel.Minimum = 10;
+                viewModel.Maximum = 144;
+            }
+            else if (prop.Name.Contains("Slots"))
+            {
+                viewModel.UseSlider = true;
+                viewModel.Minimum = 0;
+                viewModel.Maximum = 20;
+            }
+        }
+
+        // Category priorities: WoW gameplay flow first, bot/technical last
         private static readonly System.Collections.Generic.Dictionary<string, int> CategoryPriorities = new()
         {
-            { "Login", 0 },
-            { "Execution", 1 },
-            { "Profiles", 2 },
-            { "General", 3 },
-            { "Combat", 4 },
-            { "Regeneration", 5 },
-            { "Consumables", 6 },
-            { "Mounts", 7 },
-            { "Looting", 8 },
-            { "Inventory", 9 },
-            { "Navigation", 10 },
-            { "Questing", 11 },
-            { "Party", 12 },
-            { "Dungeon", 13 },
-            { "PvP", 14 },
-            { "Social", 15 },
-            { "Chat", 16 },
-            { "Productivity", 17 },
-            { "Map", 18 },
-            { "Performance", 19 },
-            { "Debug", 20 },
-            { "AI", 21 },
-            { "Remote Control", 99 }
+            // === Character & Core Gameplay ===
+            { "General", 0 },           // Basic character settings
+            { "Combat", 1 },            // How your character fights
+            { "Regeneration", 2 },      // Eating/drinking
+            { "Consumables", 3 },       // Potions/food
+            
+            // === Activities ===
+            { "Questing", 10 },         // Quest automation
+            { "Professions", 11 },      // Gathering/crafting
+            { "Productivity", 12 },     // Mail/AH automation
+            { "Dungeon", 13 },          // Dungeon settings
+            { "PvP", 14 },              // Battleground/arena
+            
+            // === Social ===
+            { "Party", 20 },            // Group settings
+            { "Social", 21 },           // Guild/friends
+            { "Chat", 22 },             // Chat automation
+            
+            // === World ===
+            { "Navigation", 30 },       // Pathfinding
+            { "Movement", 31 },         // Movement settings
+            { "Inventory", 32 },        // Bag/vendor management
+            { "Looting", 33 },          // What to loot
+            { "Mounts", 34 },           // Mount usage
+            
+            // === Bot Configuration (Advanced) ===
+            { "Login", 80 },            // Auto-login
+            { "Profiles", 81 },         // Profile paths
+            { "Execution", 82 },        // Bot execution settings
+            { "Performance", 83 },      // FPS/throttling
+            
+            // === Developer/Debug ===
+            { "Debug", 90 },            // Debug options
+            { "AI", 91 },               // AI settings
+            { "Map", 92 },              // Map overlay (hidden)
+            { "Remote Control", 99 }    // Remote control
         };
 
         private static readonly System.Collections.Generic.Dictionary<string, string> CategoryEmojis = new()
         {
-            { "Login", "🔐" },
-            { "Execution", "⚙️" },
-            { "Profiles", "📜" },
-            { "General", "🌐" },
+            // Character & Core
+            { "General", "⚙️" },
             { "Combat", "⚔️" },
-            { "Regeneration", "🌭" },
+            { "Regeneration", "🍖" },
             { "Consumables", "🧪" },
-            { "Mounts", "🐎" },
-            { "Looting", "💰" },
-            { "Inventory", "🎒" },
-            { "Navigation", "🧭" },
+            
+            // Activities
             { "Questing", "📜" },
-            { "Party", "👥" },
+            { "Professions", "⛏️" },
+            { "Productivity", "📬" },
             { "Dungeon", "🏰" },
-            { "PvP", "⚔️" },
+            { "PvP", "🗡️" },
+            
+            // Social
+            { "Party", "👥" },
             { "Social", "💬" },
             { "Chat", "🗨️" },
-            { "Productivity", "📈" },
-            { "Map", "🗺️" },
+            
+            // World
+            { "Navigation", "🧭" },
+            { "Movement", "🏃" },
+            { "Inventory", "🎒" },
+            { "Looting", "💰" },
+            { "Mounts", "🐎" },
+            
+            // Bot Config
+            { "Login", "🔐" },
+            { "Profiles", "📁" },
+            { "Execution", "▶️" },
             { "Performance", "🚀" },
+            
+            // Debug
             { "Debug", "🐞" },
             { "AI", "🧠" },
+            { "Map", "🗺️" },
             { "Remote Control", "📱" }
         };
 
-        private System.Collections.Generic.IEnumerable<string> GetCombatClasses()
+        private System.Collections.Generic.IEnumerable<IConfigItem> GetCombatClasses()
         {
-            var interfaceType = typeof(AmeisenBotX.Core.Engines.Combat.Classes.ICombatClass);
-            var types = interfaceType.Assembly.GetTypes()
-                .Where(p => interfaceType.IsAssignableFrom(p) && !p.IsInterface && !p.IsAbstract)
-                .Select(p => p.Name)
-                .OrderBy(x => x)
-                .ToList();
-            
-            // Ensure empty is an option if allowed, or at least return what we found
-            return types;
+            List<IConfigItem> list =
+            [
+                new CombatClassDisplayWrapper(null) // "None" option
+            ];
+
+            if (_combatClasses != null)
+            {
+                foreach (ICombatClass cc in _combatClasses)
+                {
+                    list.Add(new CombatClassDisplayWrapper(cc));
+                }
+            }
+
+            return list.OrderBy(x => x.DisplayName).ToList();
+        }
+
+        private class CombatClassDisplayWrapper : IConfigItem
+        {
+            private readonly AmeisenBotX.Core.Engines.Combat.Classes.ICombatClass _instance;
+
+            public CombatClassDisplayWrapper(AmeisenBotX.Core.Engines.Combat.Classes.ICombatClass instance)
+            {
+                _instance = instance;
+            }
+
+            public string DisplayName
+            {
+                get
+                {
+                    return _instance == null ? "None" : $"{_instance.DisplayName} ({_instance.Author})";
+                }
+            }
+
+            public string ConfigValue
+            {
+                get
+                {
+                    if (_instance == null)
+                    {
+                        return string.Empty;
+                    }
+                    // Use Type Name (e.g. "PaladinHoly") as the stable ID for config.
+                    // LoadClassByName has been updated to support this match.
+                    return _instance.GetType().Name;
+                }
+            }
+
+            public override string ToString() => DisplayName;
         }
 
         public ObservableCollection<ConfigPropertyViewModel> Properties { get; }
@@ -205,14 +280,9 @@ namespace AmeisenBotX.ViewModels.Config
 
         private bool FilterProperties(object obj)
         {
-            if (string.IsNullOrWhiteSpace(SearchText)) return true;
-            if (obj is ConfigPropertyViewModel vm)
-            {
-                return vm.Name.Contains(SearchText, StringComparison.OrdinalIgnoreCase) ||
+            return string.IsNullOrWhiteSpace(SearchText) || (obj is ConfigPropertyViewModel vm && (vm.Name.Contains(SearchText, StringComparison.OrdinalIgnoreCase) ||
                        vm.Category.Contains(SearchText, StringComparison.OrdinalIgnoreCase) ||
-                       vm.Description.Contains(SearchText, StringComparison.OrdinalIgnoreCase);
-            }
-            return false;
+                       vm.Description.Contains(SearchText, StringComparison.OrdinalIgnoreCase)));
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

@@ -61,12 +61,7 @@ namespace AmeisenBotX.Core.Logic.Harvest.Modules
             // Additional safety: Goober type objects are usually profession nodes
             // that might not be in the WowOreId/WowHerbId enums.
             // Only match explicit quest-related sparkling objects (chests, quest items).
-            if (gobject.GameObjectType == WowGameObjectType.Goober)
-            {
-                return false;
-            }
-
-            return true;
+            return gobject.GameObjectType != WowGameObjectType.Goober;
         }
 
         public int GetPriority(IWowGameobject gobject)

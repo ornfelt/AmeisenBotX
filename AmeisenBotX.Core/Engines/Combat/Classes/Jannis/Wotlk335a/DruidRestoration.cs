@@ -19,6 +19,7 @@ namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
     /// Features: Intelligent HoT stacking (Rejuv > Regrowth > Lifebloom), Wild Growth for AoE,
     /// Swiftmend for emergency, Nourish for direct heals with HoT bonus.
     /// </summary>
+    [CombatClassMetadata("[WotLK335a] Druid Restoration", "Jannis")]
     public class DruidRestoration : BasicCombatClass
     {
         public DruidRestoration(AmeisenBotInterfaces bot) : base(bot)

@@ -1,0 +1,30 @@
+﻿<Window x:Class="AmeisenBotX.Windows.RelationshipWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:themes="clr-namespace:AmeisenBotX.Themes"
+        mc:Ignorable="d"
+        Title="AmeisenBotX - Relationships" Height="450" Width="800" MinHeight="200" MinWidth="700" 
+        Icon="/icon.png" 
+        Loaded="Window_Loaded"
+        Style="{DynamicResource StandardWindowStyle}"
+        themes:WindowAssist.Icon="🙂">
+
+    <themes:WindowAssist.HeaderContent>
+        <StackPanel Orientation="Horizontal">
+            <Button x:Name="buttonRefresh" Content="⟳" Click="ButtonRefresh_Click" 
+                    Style="{DynamicResource StandardToolbarButtonStyle}"
+                    ToolTip="Refresh" FontWeight="Bold"/>
+
+            <Button x:Name="buttonExit" Click="ButtonExit_Click" 
+                    Style="{DynamicResource StandardExitButtonStyle}"/>
+        </StackPanel>
+    </themes:WindowAssist.HeaderContent>
+
+    <Window.Content>
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+            <WrapPanel x:Name="relationshipWrapPanel" Background="{DynamicResource BackgroundAltBrush}"/>
+        </ScrollViewer>
+    </Window.Content>
+</Window>

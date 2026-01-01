@@ -14,6 +14,7 @@ using System.Text.Json;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Kamel
 {
+    [CombatClassMetadata("[WIP] Blood Deathknight", "Lukas")]
     public class DeathknightBlood(AmeisenBotInterfaces bot) : ICombatClass
     {
         public string Author => "Kamel";

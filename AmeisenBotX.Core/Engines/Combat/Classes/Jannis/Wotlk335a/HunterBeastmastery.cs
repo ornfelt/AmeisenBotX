@@ -11,6 +11,7 @@ using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Combat.Classes.Jannis.Wotlk335a
 {
+    [CombatClassMetadata("[WotLK335a] Hunter Beastmastery", "Jannis")]
     public class HunterBeastmastery : BasicCombatClass
     {
         public HunterBeastmastery(AmeisenBotInterfaces bot) : base(bot)
