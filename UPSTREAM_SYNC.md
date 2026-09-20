@@ -3,10 +3,18 @@
 Upstream: <https://github.com/Jnnshschl/AmeisenBotX> branch `master`, cloned at
 `$USERPROFILE/Downloads/AmeisenBotX`, wired into this repo as the `upstream-local` remote.
 Fork point: `7f2e3bc8` - use bezier-curve as default path smoothing
-High-water mark: `9a1c0369` (every commit up to and including this one is decided)
+High-water mark: `1e0ef441` (every commit up to and including this one is decided)
 Upstream HEAD when last checked: `e23d5844` `ui overhaul and some new auto mode wip` (checked 2026-09-20)
-Remaining after the high-water mark: `4`
+Remaining after the high-water mark: `3`
 Local customizations: guarded by `USE_CUSTOM_CHANGES`, defined in `AmeisenBotX.Core/AmeisenBotX.Core.csproj`
+
+Build prerequisite (since `1e0ef441`): the NativeAOT `AmeisenBotX.Bridge` implant is published by a
+pre-build target and its link step calls `vswhere.exe`, which is not on PATH here. Prepend it first,
+or the build fails with `MSB3073 ... 'vswhere.exe' is not recognized`:
+
+```powershell
+$env:PATH = "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer;" + $env:PATH
+```
 
 Statuses: `applied` (cherry-picked clean), `adapted` (landed, conflicts resolved by hand),
 `partial` (part landed, part dropped - the notes say which), `skipped` (deliberately not landed),
@@ -16,6 +24,7 @@ Statuses: `applied` (cherry-picked clean), `adapted` (landed, conflicts resolved
 | --- | --- | --- | --- | --- | --- |
 | 1 | `7fb9071e` | add some ai stuff and icon reading | adapted | `DefaultGrindEngine.cs` | Upstream rewrote the three `ChangeTarget` calls in `ThreatsNearby()` from `FirstOrDefault().Guid` to a local `IWowUnit firstEnemy = ....First();`. Took upstream's text; the guarded `AmeisenLogger` lines above each call are pure additions and stayed put - no `#else` needed, no customization reshaped. `AmeisenBotX.Core.csproj` auto-merged: upstream's `net10.0-windows7.0` bump, System.CodeDom/System.Drawing.Common 10.0.1 and the new `AmeisenBotX.MPQ` project reference landed alongside the `UseCustomChanges` property groups, which survived intact. Guard count unchanged at 18. Both builds green. |
 | 2 | `9a1c0369` | cleanup, fixes here and there | applied | none | Clean cherry-pick. The single hunk in a guarded file is a brace-style reformat in the repair-npc routine of `DefaultGrindEngine` (`if (repairNpc == default) return BtStatus.Failed;` split across braces), nowhere near a customization - git auto-merged it. All 18 guards untouched, csproj toggle intact. Upstream deletes the Bia10, Shino and einTyp combat class families plus `CombatStrafer.cs`; none are referenced by a customization. **Inherited breakage:** upstream's `Vector3` rewrite drops `Divide`, `Limit`, `ToArray`, `RotateRadians`, `Subtract` and the comparison operators without updating `AmeisenBotX.Test/Vector3Tests.cs`, so the solution build fails with 14 errors in the test project - identically with the symbol on and off, and identically in upstream's own tree. Upstream fixes `Vector3Tests.cs` in the next commit, `1e0ef441`. `AmeisenBotX.csproj` (the bot and every library it pulls in) builds clean in both configurations, 64 warnings, 0 errors. |
+| 3 | `1e0ef441` | big refactoring, add implant logic to inejct into wow | applied | none | Clean cherry-pick despite 609 files, +23480/-5048. All four guarded files were touched, but only cosmetically: upstream stripped the UTF-8 BOM from line 1 and added the missing trailing newline in each of the three guarded `.cs` files, and renamed two project references in `AmeisenBotX.Core.csproj` (`AmeisenBotX.Wow335a` -> `AmeisenBotX.WowWotlk`, `AmeisenBotX.Wow548` -> `AmeisenBotX.WowMop`). Nothing landed near a guard; git auto-merged all of it and the `UseCustomChanges` property groups survived untouched. Guard count unchanged at 18. Verified mechanically: `git diff upstream-local/master~3 HEAD` over the three guarded sources is **72 + 7 + 18 insertions and zero deletions**, i.e. the fork now holds upstream's `1e0ef441` text verbatim plus the `#if` blocks. Upstream's new root `Directory.Build.props` was taken as written (output redirected to `build\$(Configuration)\`, global `AllowUnsafeBlocks`); `UseCustomChanges` deliberately stays per-csproj. **Resolves the inherited breakage from commit 2:** upstream updates `Vector3Tests.cs` for the rewritten `Vector3`, so the full solution builds again. **New local prerequisite:** the commit adds `AmeisenBotX.Bridge`, a NativeAOT `win-x86` shared library that `AmeisenBotX.csproj` publishes from a `BuildImplant` pre-build target. Its ILCompiler link step shells out to `vswhere.exe`, which is installed at `%ProgramFiles(x86)%\Microsoft Visual Studio\Installerswhere.exe` but is not on this machine's PATH, so a bare `dotnet build` fails with `MSB3073 ... 'vswhere.exe' is not recognized`. Prepending that directory to PATH makes both builds pass. Not a code defect and not caused by the port - record it so the next run does not re-diagnose it. |
 
 ## Guarded customizations
 
