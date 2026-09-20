@@ -8,8 +8,10 @@ using AmeisenBotX.Core.Engines.Movement.Enums;
 using AmeisenBotX.Core.Logic;
 using AmeisenBotX.Core.Objects;
 using AmeisenBotX.Core.Objects.Enums;
+#if USE_CUSTOM_CHANGES
 using AmeisenBotX.Logging;
 using AmeisenBotX.Logging.Enums;
+#endif
 using AmeisenBotX.Wow.Objects;
 using System;
 using System.Collections.Generic;
@@ -63,8 +65,12 @@ namespace AmeisenBotX.Core.Engines.Grinding
                                                         (
                                                             () => SelectTarget(),
                                                             new Leaf(FightTarget),
+#if USE_CUSTOM_CHANGES
+                                                            // Fall through to the next grind node instead of failing the tree.
                                                             new Leaf(MoveToNextGrindNode)
-                                                            //new Leaf(() => BtStatus.Failed)
+#else
+                                                            new Leaf(() => BtStatus.Failed)
+#endif
                                                         ),
                                                         new Leaf(MoveToNextGrindNode)
                                                     )
@@ -83,10 +89,13 @@ namespace AmeisenBotX.Core.Engines.Grinding
             );
         }
 
+#if USE_CUSTOM_CHANGES
+        // Targets we gave up on (stuck fighting them for too long) are never picked again.
         private static uint FightingTargetCounter = 0;
 
         private static List<ulong> BlackListedTargets = new List<ulong>();
 
+#endif
         public AmeisenBotInterfaces Bot { get; }
 
         public AmeisenBotConfig Config { get; }
@@ -136,6 +145,9 @@ namespace AmeisenBotX.Core.Engines.Grinding
                 return BtStatus.Failed;
             }
 
+#if USE_CUSTOM_CHANGES
+            // Blacklist a target we have been unable to kill for a long time, it is most
+            // likely unreachable.
             FightingTargetCounter++;
             if (FightingTargetCounter > 1000)
             {
@@ -145,6 +157,7 @@ namespace AmeisenBotX.Core.Engines.Grinding
                 return BtStatus.Failed;
             }
 
+#endif
             Bot.CombatClass?.Execute();
             return BtStatus.Success;
         }
@@ -318,8 +331,10 @@ namespace AmeisenBotX.Core.Engines.Grinding
 
             if (Bot.Player.Position.GetDistance(NextSpot.Position) < 5.0f)
             {
-                AmeisenLogger.I.Log("AmeisenBot", "Moving towards nextspot, pos: " + NextSpot.Position.X + " " + NextSpot.Position.Y + 
+#if USE_CUSTOM_CHANGES
+                AmeisenLogger.I.Log("AmeisenBot", "Moving towards nextspot, pos: " + NextSpot.Position.X + " " + NextSpot.Position.Y +
                     " " + NextSpot.Position.Z, LogLevel.Debug);
+#endif
                 GoingToNextSpot = false;
                 NextSpot = new GrindingSpot();
                 return BtStatus.Success;
@@ -366,15 +381,23 @@ namespace AmeisenBotX.Core.Engines.Grinding
 
         private bool NeedToRepair()
         {
+#if USE_CUSTOM_CHANGES
+            // Never interrupt grinding to repair.
             return false;
+#else
             return Bot.Character.Equipment.Items.Any(e => e.Value.MaxDurability > 0
                    && (e.Value.Durability / (double)e.Value.MaxDurability * 100.0) <= Config.ItemRepairThreshold);
+#endif
         }
 
         private bool NeedToSell()
         {
+#if USE_CUSTOM_CHANGES
+            // Never interrupt grinding to sell.
             return false;
+#else
             return Bot.Character.Inventory.FreeBagSlots < Config.BagSlotsToGoSell;
+#endif
         }
 
         private bool NeedToTrainSpells()
@@ -415,9 +438,12 @@ namespace AmeisenBotX.Core.Engines.Grinding
             }
 
             IWowUnit possibleTarget = Bot.GetNearEnemiesOrNeutrals<IWowUnit>(nearestGrindSpot.Position, nearestGrindSpot.Radius)
-                //.Where(e => UnitWithinGrindSpotLvlLimit(e, nearestGrindSpot) && ObjectWithinGrindSpotRadius(e, nearestGrindSpot))
+#if USE_CUSTOM_CHANGES
                 .Where(e => UnitWithinGrindSpotLvlLimit(e, nearestGrindSpot) && ObjectWithinGrindSpotRadius(e, nearestGrindSpot)
                 && !BlackListedTargets.Contains(e.Guid))
+#else
+                .Where(e => UnitWithinGrindSpotLvlLimit(e, nearestGrindSpot) && ObjectWithinGrindSpotRadius(e, nearestGrindSpot))
+#endif
                 .OrderBy(e => e.Position.GetDistance2D(Bot.Player.Position))
                 .FirstOrDefault();
 
@@ -426,7 +452,9 @@ namespace AmeisenBotX.Core.Engines.Grinding
                 return false;
             }
 
+#if USE_CUSTOM_CHANGES
             FightingTargetCounter = 0;
+#endif
             Bot.Wow.ChangeTarget(possibleTarget.Guid);
             return true;
         }
@@ -444,11 +472,18 @@ namespace AmeisenBotX.Core.Engines.Grinding
             }
 
             IEnumerable<IWowUnit> nearUnits = Bot.GetNearEnemiesOrNeutrals<IWowUnit>(nearestGrindSpot.Position, nearestGrindSpot.Radius)
+#if USE_CUSTOM_CHANGES
+                // Ignore trivial mobs and targets we already gave up on.
                 .Where(e => UnitWithinGrindSpotLvlLimit(e, nearestGrindSpot)
                                 && e.Level >= (Bot.Player.Level - 4)
                                 && !BlackListedTargets.Contains(e.Guid)
                                 && ObjectWithinGrindSpotRadius(e, nearestGrindSpot)
                                 && e.Health > 10)
+#else
+                .Where(e => UnitWithinGrindSpotLvlLimit(e, nearestGrindSpot)
+                                && ObjectWithinGrindSpotRadius(e, nearestGrindSpot)
+                                && e.Health > 10)
+#endif
                 .OrderBy(e => e.Position.GetDistance2D(Bot.Player.Position));
 
             return nearUnits.Any();
@@ -463,25 +498,33 @@ namespace AmeisenBotX.Core.Engines.Grinding
                 .OrderBy(e => e.Position.GetDistance2D(Bot.Player.Position))
                 .ToList();
             IEnumerable<IWowUnit> enemiesAround = Bot.GetNearEnemies<IWowUnit>(Bot.Player.Position, 40)
-                .Where(e => e.Level >= (Bot.Player.Level-4) && !BlackListedTargets.Contains(e.Guid))
+#if USE_CUSTOM_CHANGES
+                .Where(e => e.Level >= (Bot.Player.Level - 4) && !BlackListedTargets.Contains(e.Guid))
+#endif
                 .OrderBy(e => e.Position.GetDistance2D(Bot.Player.Position))
                 .ToList();
 
             if (enemiesFightingMe.Any())
             {
+#if USE_CUSTOM_CHANGES
                 AmeisenLogger.I.Log("AmeisenBot", "ThreatsNearby! (enemiesfightingme)", LogLevel.Debug);
+#endif
                 Bot.Wow.ChangeTarget(enemiesFightingMe.FirstOrDefault().Guid);
                 return true;
             }
             if (enemiesTargetingMe.Any())
             {
+#if USE_CUSTOM_CHANGES
                 AmeisenLogger.I.Log("AmeisenBot", "ThreatsNearby! (enemiestargetingme)", LogLevel.Debug);
+#endif
                 Bot.Wow.ChangeTarget(enemiesTargetingMe.FirstOrDefault().Guid);
                 return true;
             }
             if (enemiesAround.Any())
             {
+#if USE_CUSTOM_CHANGES
                 AmeisenLogger.I.Log("AmeisenBot", "ThreatsNearby! (enemiesAround)", LogLevel.Debug);
+#endif
                 Bot.Wow.ChangeTarget(enemiesAround.FirstOrDefault().Guid);
                 return true;
             }

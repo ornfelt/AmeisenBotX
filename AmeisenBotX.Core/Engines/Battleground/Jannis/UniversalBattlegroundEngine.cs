@@ -24,11 +24,13 @@ namespace AmeisenBotX.Core.Engines.Battleground.Jannis
 
             Bot.CombatClass?.OutOfCombatExecute();
             Profile?.Execute();
+#if USE_CUSTOM_CHANGES
+            // Stop moving while dead so the battleground auto-resurrect can happen.
             if (Bot.Player.IsGhost)
             {
                 Bot.Movement.StopMovement();
-                //Debug.WriteLine("Stopping movement since player is dead!");
             }
+#endif
         }
 
         public void Reset()

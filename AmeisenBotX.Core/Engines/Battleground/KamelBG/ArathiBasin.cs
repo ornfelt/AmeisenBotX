@@ -5,7 +5,6 @@ using AmeisenBotX.Core.Engines.Movement.Enums;
 using AmeisenBotX.Wow.Objects;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 
 namespace AmeisenBotX.Core.Engines.Battleground.KamelBG
@@ -72,11 +71,13 @@ namespace AmeisenBotX.Core.Engines.Battleground.KamelBG
 
         public void Execute()
         {
+#if USE_CUSTOM_CHANGES
+            // Stop moving while dead so the battleground auto-resurrect can happen.
             if (Bot.Player.IsGhost)
             {
                 Bot.Movement.StopMovement();
-                //Debug.WriteLine("Stopping movement since player is dead!");
             }
+#endif
             Combat();
 
             IWowGameobject FlagNode = Bot.Objects.All
@@ -115,9 +116,16 @@ namespace AmeisenBotX.Core.Engines.Battleground.KamelBG
 
                     Vector3 currentNode = Path[CurrentNodeCounter];
 
+#if USE_CUSTOM_CHANGES
+                    // Guard against a short/empty landmark list, FactionFlagState may still be null here.
                     if (AllBaseList?[CurrentNodeCounter]?.Contains("Uncontrolled") == true ||
                         AllBaseList?[CurrentNodeCounter]?.Contains("In Conflict") == true ||
                         AllBaseList?[CurrentNodeCounter]?.Contains(FactionFlagState) == true)
+#else
+                    if (AllBaseList[CurrentNodeCounter].Contains("Uncontrolled")
+                        || AllBaseList[CurrentNodeCounter].Contains("In Conflict")
+                        || AllBaseList[CurrentNodeCounter].Contains(FactionFlagState))
+#endif
                     {
                         Bot.Movement.SetMovementAction(MovementAction.Move, currentNode);
                     }
@@ -131,7 +139,11 @@ namespace AmeisenBotX.Core.Engines.Battleground.KamelBG
                             CurrentNodeCounter = 0;
                         }
                     }
+#if USE_CUSTOM_CHANGES
                     else if (AllBaseList?[CurrentNodeCounter]?.Contains(FactionFlagState) == true)
+#else
+                    else if (FactionFlagState != null && AllBaseList[CurrentNodeCounter].Contains(FactionFlagState))
+#endif
                     {
                         ++CurrentNodeCounter;
                         if (CurrentNodeCounter >= Path.Count)

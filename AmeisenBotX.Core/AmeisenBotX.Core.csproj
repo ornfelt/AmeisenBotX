@@ -4,6 +4,16 @@
     <TargetFramework>net8.0-windows7.0</TargetFramework>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <!-- Local customizations on top of upstream AmeisenBotX. Set to false to build
+         the tree as upstream wrote it. Override per build with -p:UseCustomChanges=false -->
+    <UseCustomChanges Condition="'$(UseCustomChanges)'==''">true</UseCustomChanges>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(UseCustomChanges)'=='true'">
+    <DefineConstants>$(DefineConstants);USE_CUSTOM_CHANGES</DefineConstants>
+  </PropertyGroup>
+
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <PlatformTarget>x86</PlatformTarget>
