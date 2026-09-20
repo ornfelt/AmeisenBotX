@@ -184,6 +184,16 @@ Decide from the argument:
    undo the earlier attempt unless the user asks - fix forward.
 7. **Abort** - `abort`. An interrupted cherry-pick is in the working tree and the user wants out:
    `git cherry-pick --abort`, leave the ledger row as `asked`, report.
+8. **Mirror** - `mirror <commit-id>`. The user answered "yes" to a pending mirror question from
+   step 6: port that commit's upstream fix into the `#if USE_CUSTOM_CHANGES` branch as well, in a
+   commit of its own, rebuild both configurations, and clear the question. Lands no new upstream
+   commit.
+9. **No-mirror** - `no-mirror <commit-id> <reason>`. The user answered "no": leave the `#if` branch
+   as it is, record `mirror declined: <reason>` in that row's `Notes`, clear the question. Writes
+   only the ledger.
+
+A bare `mirror` or `no-mirror` with no commit id means the newest row whose `Notes` say
+`mirror pending`. If more than one row is pending and no id was given, list them and ask which.
 
 **Before anything else**, check two things:
 
@@ -197,6 +207,11 @@ ls "$FORK/.git/CHERRY_PICK_HEAD" 2>/dev/null && echo "CHERRY-PICK IN PROGRESS"
 A cherry-pick already in progress means a previous run stopped on a conflict question. Do not start
 a new commit. Read the ledger's open question, and if the user's answer is in this invocation,
 resolve and continue that pick; otherwise re-state the question and stop.
+
+A ledger row whose `Notes` say `mirror pending` is the other kind of unanswered question. That one
+leaves no cherry-pick in progress - the commit landed fine - so the tree looks clean and it is easy
+to walk straight past. In Continue mode, settle every pending mirror before starting a new commit:
+if the user's answer is in this invocation, act on it; otherwise re-state the question and stop.
 
 ## Phase 0 - setup
 
@@ -293,13 +308,19 @@ Statuses: `applied` (cherry-picked clean), `adapted` (landed, conflicts resolved
 `partial` (part landed, part dropped - the notes say which), `skipped` (deliberately not landed),
 `asked` (waiting on an answer from the user, cherry-pick left in progress or aborted).
 
+A commit that landed but raised a step 6 mirror question keeps its real status - it is `applied` or
+`adapted`, not `asked`, because the commit itself is done. The pending question lives in the `Notes`
+column as `mirror pending` and under "Open questions", and it still blocks the next commit.
+
 | # | Commit | Subject | Status | Conflicts | Notes |
 | --- | --- | --- | --- | --- | --- |
 
 ## Open questions
 
-<one bullet per `asked` commit, and per skipped-but-arguable commit, with the question that was put
-to the user and what it is waiting on>
+<one bullet per `asked` commit, per `mirror pending` commit, and per skipped-but-arguable commit,
+with the question that was put to the user and what it is waiting on. A `mirror pending` bullet
+names the commit, the defect, the file and line in the `#if` branch that shares it, and the two
+answers: `mirror <commit-id>` or `no-mirror <commit-id> <reason>`>
 ```
 
 Rules for the ledger:
@@ -315,6 +336,12 @@ Rules for the ledger:
 - The `Notes` column carries the real information: how each conflict was resolved, whether a guard
   was moved or rewritten, whether a customization was dropped as obsolete, whether a new csproj
   needed the toggle, and whether either build broke.
+- `Notes` also carries the step 6 verdict for every commit that touched a guarded file, in exactly
+  one of four words: `mirror pending` (asked, unanswered - blocks the next commit), `mirrored` (the
+  fix went into the `#if` branch too, in its own commit), `mirror declined: <reason>` (the user said
+  no), or `mirror n/a: <reason>` (the change was a preference or could not apply, so nothing was
+  asked). A guarded file touched with no mirror verdict recorded means step 6 was skipped - go back
+  and do it rather than assuming it was fine.
 - The ledger is a hint that makes orientation cheap, not the source of truth. If it disagrees with
   the fork's working tree, the tree wins and the ledger gets corrected in the same run.
 
@@ -360,7 +387,10 @@ git -C "$UP" show <commit> -- <the guarded files>
 ```
 
 The second command is the one that predicts the run: it shows whether this commit collides with a
-customization at all. Cross-check against the files that carry guards:
+customization at all, and it is also the first look at the step 6 question - read it asking whether
+upstream is correcting a defect or changing a preference, because a correction in a file that
+carries guards is a mirror candidate even when the pick goes in clean. Cross-check against the files
+that carry guards:
 
 ```bash
 git -C "$FORK" grep -l "USE_CUSTOM_CHANGES"
@@ -379,7 +409,8 @@ git -C "$FORK" cherry-pick <commit>
 
 Three outcomes:
 
-- **Clean** - git committed it. Go to the build step. Status `applied`.
+- **Clean** - git committed it. Skip step 4 and go to step 6 - a clean pick still has to answer the
+  mirror question if it touched a guarded file. Status `applied`.
 - **Conflicts** - git stopped. Go to step 4. Status will be `adapted`.
 - **Empty** - "The previous cherry-pick is now empty". The change is already in the fork. Use
   `git cherry-pick --skip`, status `applied`, note says it was already present.
@@ -405,9 +436,10 @@ For each conflicted file, work out which of these it is:
 - **Conflict away from the guards** - upstream changed code the fork never touched, and git only
   failed because of nearby context. Take upstream's side. Resolve and move on.
 - **Upstream edits the `#else` branch** - upstream improved the code the fork replaced. Take
-  upstream's new text into the `#else` branch and leave the `#if` branch alone. The customization
-  still wins when the symbol is on, and the off-build now tracks upstream. This is the common,
-  clean case.
+  upstream's new text into the `#else` branch and leave the `#if` branch alone for now. The
+  customization still wins when the symbol is on, and the off-build now tracks upstream. This is the
+  common, clean case - but it is also exactly where a bug fix can end up applying only to the
+  configuration nobody runs, so step 6 asks whether it belongs in the `#if` branch too.
 - **Upstream edits the `#if` branch's subject** - upstream changed the same behavior the fork
   customized. Update **both** branches: upstream's text in `#else`, and the customization
   re-expressed on top of upstream's new shape in `#if`. Say in the notes what the customization now
@@ -462,7 +494,74 @@ rewritten SelectTarget went into the #else branch, the blacklist customization w
 re-expressed on top of it in the #if branch.
 ```
 
-### 6. Build both configurations
+### 6. Does the fix also belong in the `#if` branch?
+
+A guard splits the code in two, and a cherry-pick only ever patches upstream's half. So an upstream
+**bug fix** that lands in an `#else` branch fixes the configuration nobody runs and leaves the
+customization - the code that actually executes - carrying the bug. That is the single most likely
+way this sync quietly goes wrong, and no build catches it: both configurations still compile.
+
+Run this check on **every** commit that touched a guarded file, whether or not it conflicted. A
+clean cherry-pick is not evidence that the change was irrelevant to the `#if` branch; it usually
+just means git found enough context to place the hunk without asking. With commits this size, most
+of upstream's 609 files are nowhere near a guard - this narrows it to the ones that are:
+
+```bash
+# which guarded files did this commit touch?
+comm -12 <(git -C "$FORK" show --name-only --format= <commit> | sort -u) \
+         <(git -C "$FORK" grep -l "USE_CUSTOM_CHANGES" | sort -u)
+```
+
+For each one, read what upstream changed and then read the `#if` branch beside it, and decide which
+of these it is:
+
+- **A fix whose subject exists in the `#if` branch too** - upstream corrected something the fork
+  copied, inherited, or rewrote around, and the same defect is sitting in the customization. This is
+  an **ask**. Typical shapes: a null or bounds check added before a dereference, an inverted or
+  off-by-one condition, a wrong constant or id, a handle or state that was never reset, an exception
+  that was swallowed and should not be, a call that has to move above or below another to be
+  correct, a `BtStatus` returned from the wrong branch.
+- **A fix that cannot apply** - the `#if` branch already handles that case its own way, or the code
+  upstream fixed is code the fork deleted outright, or the fix is in a path the customization never
+  reaches. Say so in the notes and move on. No ask.
+- **Not a fix at all** - a tuning value, a feature, a preference, a refactor, a log line. The fork
+  chose its own value or shape on purpose. Leave the `#if` branch alone; that is what the guard is
+  for. No ask.
+
+The hard part is telling the first from the third, and the tie-break is intent: ask whether upstream
+was **correcting** something or **changing** something. Upstream widening its target-selection level
+window is a change - the fork's `Player.Level - 4` floor stands. Upstream adding a null-conditional
+to an `AllBaseList` lookup is a correction, and if the fork's rewritten `SelectTarget` dereferences
+the same thing unguarded, it needs the same check.
+
+**When it is a fix that applies: land the commit as normal, then ask before mirroring it.** Do not
+edit the `#if` branch on your own judgement, and do not hold the commit back waiting for an answer -
+the commit is upstream's and is correct on its own terms. Finish steps 5 and 7 as usual, record the
+commit with its real status, and add the mirror question on top:
+
+- put it under "Open questions" in the ledger, keyed to the commit;
+- append `mirror pending` to that row's `Notes`;
+- state it in the summary with: the defect upstream fixed, the exact place in the `#if` branch that
+  has the same defect (file and line), what the mirrored fix would look like, and a recommendation.
+
+Then stop. The next run answers it with `mirror <commit-id>` or `no-mirror <commit-id> <reason>`.
+
+A run may mirror in the same pass **only** when the user has already said yes in that invocation -
+for instance `apply <commit-id>` together with an explicit instruction to mirror, or a `mirror`
+argument naming the commit just landed. When mirroring:
+
+- edit the `#if` branch only; the `#else` branch keeps upstream's text exactly as cherry-picked;
+- keep the mirrored fix as close to upstream's wording as the customization's shape allows, so the
+  two branches stay comparable next time;
+- rebuild both configurations (step 7) - a mirror is a real code change and can break either side;
+- commit it **separately** from the cherry-pick, so a bad mirror can be reverted without losing the
+  upstream commit. Subject shape: `Mirror <commit> fix into the USE_CUSTOM_CHANGES branch`;
+- clear the open question and change `mirror pending` to `mirrored` in the row's `Notes`.
+
+If the answer was no, change `mirror pending` to `mirror declined: <reason>` and clear the question.
+Do not raise the same question again on a later run.
+
+### 7. Build both configurations
 
 ```powershell
 cd "$env:code_root_dir\Code2\C#\AmeisenBotX"
@@ -486,7 +585,7 @@ for a result of the port.
 If the off-build fails while the on-build passes, the fault is almost always an `#else` branch that
 was not updated with upstream's change. Go back to step 4 rather than deleting the guard.
 
-### 7. Record
+### 8. Record
 
 Update `UPSTREAM_SYNC.md`: add or update the row, fill the `Conflicts` column, move the high-water
 mark if this commit closed the gap, refresh `Upstream HEAD when last checked` and `Remaining`, and
@@ -502,7 +601,8 @@ exception is a commit that plainly cannot compile without its immediate follow-u
 the follow-up, and either take it in the same run or stop and ask, whichever keeps the run
 reviewable.
 
-Setup is its own run and lands no commits.
+Setup is its own run and lands no commits. So is a `mirror` run: porting a fix into the `#if` branch
+is its own commit and its own run, and it never picks up the next upstream commit afterwards.
 
 ## Verification
 
@@ -514,6 +614,8 @@ Setup is its own run and lands no commits.
 - `git -C "$FORK" log --oneline -3` so the summary shows the commit that was created.
 - `git -C "$FORK" grep -c "USE_CUSTOM_CHANGES"` - the guard count should only ever change for a
   reason the run can name.
+- Every guarded file the commit touched has a step 6 mirror verdict in the ledger row's `Notes`.
+  Silence there is not a pass; it means the check did not happen.
 - If either build was skipped or failed, say so plainly rather than reporting success.
 
 ## Output expectations
@@ -531,12 +633,28 @@ Every run ends with, in this order:
    "probably nothing visible". If a customization was reshaped, say what it does now.
 4. **Build result** - the exact commands run and whether each passed, with the error and warning
    counts for both configurations. Never report a build as passing without having run it.
-5. **Open question**, if the run is `asked` - the question, the options, and a recommendation.
-   State that the cherry-pick is still in progress and that `abort` backs it out.
-6. **A `Next:` line** so the following run - and the reader - knows the entry point:
+5. **Mirror verdict**, for every guarded file the commit touched - one line each saying whether
+   upstream's change was a fix that also applies to the `#if` branch, and which of `mirror pending`
+   / `mirrored` / `mirror declined` / `mirror n/a` was recorded. Do not leave this out because the
+   pick was clean; a clean pick is when it matters most.
+6. **Open question**, if the run is `asked` or a mirror is pending:
+   - for `asked` - the question, the options, and a recommendation. State that the cherry-pick is
+     still in progress and that `abort` backs it out.
+   - for `mirror pending` - the defect upstream fixed, the file and line in the `#if` branch that
+     has the same defect, what the mirrored fix would look like, and a recommendation. State that
+     the commit itself has landed and that the answer is `mirror <commit-id>` or
+     `no-mirror <commit-id> <reason>`.
+7. **A `Next:` line** so the following run - and the reader - knows the entry point:
 
    ```text
    Next: upstream 9a1c0369 "cleanup, fixes here and there" (143 files; touches DefaultGrindEngine.cs, expect a conflict)
+   ```
+
+   When a mirror is pending, that is the entry point instead:
+
+   ```text
+   Next: answer the mirror question on 7fb9071e (mirror 7fb9071e / no-mirror 7fb9071e <reason>),
+         then upstream 9a1c0369 "cleanup, fixes here and there"
    ```
 
 ## Rerunning
@@ -545,11 +663,15 @@ The bare form is designed to be run again and again, from a cold context each ti
 re-derives its position from `UPSTREAM_SYNC.md` plus `git log`, so a fresh session, a new day or a
 `/clear` in between changes nothing.
 
-Four stopping conditions:
+Five stopping conditions:
 
 - **Done with the commit** - landed or skipped, both builds green, ledger updated, report and stop.
   Do not start the next one.
 - **Blocked or unclear** - ask, record `asked`, leave the cherry-pick in progress, stop.
+- **Mirror pending** - the commit landed and both builds are green, but upstream's fix looks like it
+  belongs in the `#if` branch too. Record the commit with its real status plus `mirror pending`, ask,
+  and stop. The commit stays; only the mirror waits. A later `mirror <commit-id>` or
+  `no-mirror <commit-id> <reason>` settles it.
 - **Setup finished** - report the guarded tree and stop; the user reviews it before commits start
   landing on top.
 - **Nothing left** - the high-water mark is `upstream-local/master`. Say the fork is caught up and
