@@ -451,7 +451,8 @@ git -C "$FORK" commit --amend --no-edit
 
 Keep upstream's subject line verbatim - that is what makes the ledger and `git log` line up. Add a
 body paragraph only when conflicts were resolved, saying which files and how. **Never use double
-quotes (`"`) in the message** - where a quote is needed, use a single quote (`'`).
+quotes (`"`) in the message** - where a quote is needed, use a single quote (`'`). **Never add a
+`Co-Authored-By` trailer** - these commits carry upstream's authorship, not Claude's.
 
 ```text
 add some ai stuff and icon reading
